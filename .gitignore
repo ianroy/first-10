@@ -36,3 +36,4 @@ dist-ssr
 *.zip
 .vercel
 .env*
+supabase/.temp/
