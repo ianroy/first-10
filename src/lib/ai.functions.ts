@@ -42,63 +42,50 @@ const TASKS: Record<Kind, string> = {
     "Plan growth to the next 100 users. channels: 4-5 scalable channels a student can run (with how-to). referral_asks: 3 short scripts asking happy users to refer friends. onboarding_questions: 4-5 short questions to ask new users right after signup to find onboarding friction.",
 };
 
+const DEFAULT_MODEL = "anthropic/claude-sonnet-4.5";
+
+function parseJson(text: string) {
+  try {
+    return JSON.parse(text);
+  } catch {
+    const m = text.match(/\{[\s\S]*\}/);
+    if (m) return JSON.parse(m[0]);
+    throw new Error("The AI returned something unreadable. Please try again.");
+  }
+}
+
 async function callAI(system: string, user: string, kind: Kind) {
-  const key = process.env['LOVABLE_API_KEY'];
-  if (!key) throw new Error("AI is not configured.");
-  const res = await fetch("https://ai.gateway.lovable.dev/v1/responses", {
+  const key = process.env["OPENROUTER_API_KEY"];
+  if (!key) throw new Error("AI is not configured. Set OPENROUTER_API_KEY.");
+  const res = await fetch("https://openrouter.ai/api/v1/chat/completions", {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
-      "Lovable-API-Key": key,
       Authorization: `Bearer ${key}`,
-      "X-Lovable-AIG-SDK": "fetch",
+      "HTTP-Referer": process.env["APP_URL"] ?? "https://first-10-three.vercel.app",
+      "X-Title": "First Ten",
     },
     body: JSON.stringify({
-      model: "openai/gpt-6-astra",
-      instructions: system,
-      input: user,
-      reasoning: { effort: "low" },
-      store: false,
-      stream: true,
-      text: { format: { type: "json_schema", name: kind, strict: true, schema: SCHEMAS[kind] } },
+      model: process.env["OPENROUTER_MODEL"] ?? DEFAULT_MODEL,
+      messages: [
+        { role: "system", content: system },
+        { role: "user", content: user },
+      ],
+      response_format: { type: "json_schema", json_schema: { name: kind, strict: true, schema: SCHEMAS[kind] } },
+      provider: { require_parameters: true },
     }),
   });
-  if (!res.ok || !res.body) {
+  if (!res.ok) {
     let msg = "The AI couldn't respond right now. Please try again in a moment.";
     if (res.status === 429) msg = "The AI is busy. Please wait a minute and try again.";
-    if (res.status === 402) msg = "AI credits ran out. Add credits in Settings → Plans & credits.";
-    try {
-      const j = await res.json();
-      if (res.status === 402 || res.status === 403) msg = j?.message ?? j?.error?.message ?? msg;
-    } catch {}
+    if (res.status === 402) msg = "AI credits ran out. Add credits on OpenRouter.";
+    if (res.status === 401) msg = "The AI key is invalid. Check OPENROUTER_API_KEY.";
     throw new Error(msg);
   }
-  const reader = res.body.getReader();
-  const dec = new TextDecoder();
-  let buf = "";
-  let text = "";
-  for (;;) {
-    const { done, value } = await reader.read();
-    if (done) break;
-    buf += dec.decode(value, { stream: true });
-    const lines = buf.split("\n");
-    buf = lines.pop() ?? "";
-    for (const line of lines) {
-      if (!line.startsWith("data:")) continue;
-      const data = line.slice(5).trim();
-      if (!data || data === "[DONE]") continue;
-      try {
-        const ev = JSON.parse(data);
-        if (ev.type === "response.output_text.delta") text += ev.delta;
-        if (ev.type === "response.failed" || ev.type === "error")
-          throw new Error("The AI couldn't finish. Please try again.");
-      } catch (e) {
-        if (e instanceof Error && e.message.startsWith("The AI")) throw e;
-      }
-    }
-  }
+  const j = await res.json();
+  const text: string | undefined = j?.choices?.[0]?.message?.content;
   if (!text) throw new Error("The AI returned nothing. Please try again.");
-  return JSON.parse(text);
+  return parseJson(text);
 }
 
 export const generateAI = createServerFn({ method: "POST" })
