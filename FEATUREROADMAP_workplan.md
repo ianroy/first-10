@@ -40,10 +40,10 @@ Status boxes: `[ ]` todo · `[~]` in progress · `[x]` done · `[!]` blocked (sa
 ```yaml
 current_iteration: 1
 current_stage: R0        # R0 Research, R1 Foundations, R2 Core, R3 Growth (see §3)
-status: not_started      # not_started | in_progress | paused | blocked
+status: blocked          # not_started | in_progress | paused | blocked
 last_task_done: none
-next_task: R0-001
-resume_hint: "Create research/ directory and subreddit longlist."
+next_task: R0-002
+resume_hint: "R0-001 done (workspace, codebook). Discovery blocked: Reddit is unreachable from WebFetch, WebSearch and the built-in browser. Need Reddit URL export, Reddit API credentials, or Claude in Chrome. Agents wrote header-only batch files in research/reddit/batches/."
 last_updated: 2026-10-17
 open_questions:
   - Who is the primary user: Babson/college student founders only, or any first-time founder?  (decide in R0-009)
@@ -255,14 +255,14 @@ Stage: R0 → R1. Do R0 tasks first; R1 tasks that don't depend on research (mar
 
 ### R0: Research (writes to `research/` only)
 
-- [ ] **R0-001 Create research workspace and trim subreddit longlist** (S · deps: none · owner: agent)
+- [x] **R0-001 Create research workspace and trim subreddit longlist** (S · deps: none · owner: agent)
   - Goal: Create `research/reddit/{candidates.csv,threads.csv,codebook.md,patterns.md,feature-map.md}` and `research/synthesis.md` skeletons; verify which §4.2 subreddits exist and are active (posts in last 90 days); trim to ~25.
   - Done when: files exist with headers from §4.5; `research/reddit/subreddits.md` lists kept subreddits with member count and one-line reason; "(if present)" items resolved.
-  - Notes:
-- [ ] **R0-002 Discovery pass A: startup and founder subreddits** (M · deps: R0-001 · owner: agent)
+  - Notes: 2026-10-17 workspace and codebook created. Subreddit existence/activity not verified (Reddit unreachable); trim still to do.
+- [!] **R0-002 Discovery pass A: startup and founder subreddits** (M · deps: R0-001 · owner: agent)
   - Goal: Run query-bank items 1, 2, 5, 6 across startup/founder/builder subreddits; log ≥60 candidates.
   - Done when: `candidates.csv` has ≥60 rows with url, subreddit, query, why.
-  - Notes:
+  - Notes: 2026-10-17 BLOCKED. Four subagents tried (one per cluster). WebFetch refuses reddit.com/old.reddit.com/.json; WebSearch returns no Reddit URLs; built-in browser blocks reddit.com. No threads were invented. Unblock options: (a) Claude in Chrome on user's browser, (b) user exports URLs, (c) Reddit API script-app credentials.
 - [ ] **R0-003 Discovery pass B: interview, outreach, student subreddits** (M · deps: R0-001 · owner: agent)
   - Goal: Run query-bank items 3, 4, 7, 8, 9, 10 across the remaining clusters; log ≥60 more candidates.
   - Done when: `candidates.csv` has ≥120 rows total, deduplicated by thread id.

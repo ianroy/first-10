@@ -54,11 +54,27 @@ function parseJson(text: string) {
   }
 }
 
+async function fetchWithRetry(url: string, init: RequestInit, tries = 3) {
+  let res!: Response;
+  for (let i = 0; i < tries; i++) {
+    try {
+      res = await fetch(url, init);
+    } catch (e) {
+      if (i === tries - 1) throw new Error("The AI timed out. Please try again.");
+      continue;
+    }
+    if (res.status !== 429 && res.status < 500) return res;
+    if (i < tries - 1) await new Promise((r) => setTimeout(r, 800 * 2 ** i));
+  }
+  return res;
+}
+
 async function callAI(system: string, user: string, kind: Kind) {
   const key = process.env["OPENROUTER_API_KEY"];
   if (!key) throw new Error("AI is not configured. Set OPENROUTER_API_KEY.");
-  const res = await fetch("https://openrouter.ai/api/v1/chat/completions", {
+  const res = await fetchWithRetry("https://openrouter.ai/api/v1/chat/completions", {
     method: "POST",
+    signal: AbortSignal.timeout(60_000),
     headers: {
       "Content-Type": "application/json",
       Authorization: `Bearer ${key}`,
