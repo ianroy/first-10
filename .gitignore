@@ -34,3 +34,5 @@ dist-ssr
 # Env
 .env
 *.zip
+.vercel
+.env*
