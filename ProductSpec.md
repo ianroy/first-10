@@ -97,7 +97,7 @@ Sign-in/confirmation links return to the same origin’s `/auth?callback=true&vi
 
 For the exact fictional presenter identity, the three explicit demo launch buttons select the reserved StudyLoop project in that user’s browser selection storage, clear query-cache results and navigate. Password login uses the same launch action. This resets the selected-project preference, not saved database content, and does not grant permissions. The fictional marker and username remain presentation/convenience signals; privileged access still requires trusted server verification. The public `/demo` keeps its separate no-login/no-live-AI behavior.
 
-The educator destination currently supplies private lesson planning. A four-team authored fictional teaching preview is pending integration in this documentation pass; it must remain labeled as example reasoning, not enrolled teams, live class progress or shared student submissions.
+The educator destination supplies private lesson planning and, for the reserved classroom demo project, an implemented four-team authored fictional teaching preview. The examples illustrate reasoning and remain explicitly labeled as fictional: they are not enrolled teams, live class progress or shared student submissions. The presenter plan’s capacity of 45 is a planning estimate, not observed enrollment or attendance.
 
 ### 2.2 First-session behavior
 

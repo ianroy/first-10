@@ -56,7 +56,7 @@ The dashboard brings together the next-step suggestion, stage progress, contact 
 
 `/auth` remains available when an account is already signed in. Continue the current workspace or use another login; opening the page alone does not send an existing session away. Student opens the private project dashboard, Educator opens the private lesson planner, and Admin requires the trusted server-assigned aggregate permission. New accounts receive private project and lesson-planning tools, not admin access. The public `/demo` remains available without signing in.
 
-The known fictional presenter gets explicit **Open student demo**, **Open educator demo** and **Open admin demo** buttons. These launches select the reserved StudyLoop project and clear cached query results; they do not reset or overwrite saved project content. The password remains private. Educator planning and any authored sample-team preview are not enrollment, live student progress or permission to inspect another account.
+The known fictional presenter gets explicit **Open student demo**, **Open educator demo** and **Open admin demo** buttons. These launches select the reserved StudyLoop project and clear cached query results; they do not reset or overwrite saved project content. The password remains private. The educator demo includes four authored fictional team examples alongside private lesson planning. These examples are not enrolled teams, live student progress or permission to inspect another account; planned class capacity remains an estimate.
 
 ### Save another idea and return later
 
