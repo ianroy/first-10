@@ -266,3 +266,26 @@ describe("instructor lesson planning", () => {
     );
   });
 });
+
+it("shows the authored class preview only for the known presenter project and guards its local drafts", async () => {
+  render(
+    <TeacherPlanner
+      projectId="f1d00000-0000-4000-8000-000000000010"
+      projectName="Fictional workshop"
+    />,
+  );
+  await screen.findByLabelText("Class / lesson name");
+  fireEvent.change(screen.getByLabelText("Local feedback draft for StudyLoop"), {
+    target: { value: "Local review practice" },
+  });
+  const options = navigation.blocker.mock.calls.at(-1)![0];
+  expect(options.shouldBlockFn()).toBe(true);
+  expect(options.enableBeforeUnload).toBe(true);
+  expect(gateway.save).not.toHaveBeenCalled();
+});
+it("does not expose fictional cohort cards in an ordinary project planner", async () => {
+  await open();
+  expect(
+    screen.queryByRole("navigation", { name: "Fictional team examples" }),
+  ).not.toBeInTheDocument();
+});

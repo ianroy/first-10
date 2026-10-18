@@ -3,7 +3,7 @@ import { RequireProject } from "@/components/RequireProject";
 import { TeacherPlanner } from "@/components/teaching/TeacherPlanner";
 
 export const Route = createFileRoute("/_authenticated/teacher")({
-  head: () => ({ meta: [{ title: "Instructor planner — First Ten" }] }),
+  head: () => ({ meta: [{ title: "Educator dashboard — First Ten" }] }),
   component: TeacherPage,
 });
 

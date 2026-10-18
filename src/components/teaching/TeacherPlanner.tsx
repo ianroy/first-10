@@ -27,6 +27,8 @@ import {
   AlertDialogTitle,
 } from "@/components/ui/alert-dialog";
 import { TeachingConcepts } from "./TeachingConcepts";
+import { DemoClassOverview } from "./DemoClassOverview";
+import { CLASSROOM_DEMO_PROJECT_ID } from "@/lib/demo/classroom";
 import { teachingKit } from "./resources";
 import { loadTeacherPlan, saveTeacherPlan } from "@/lib/teacher.functions";
 import {
@@ -183,6 +185,7 @@ export function TeacherPlanner({
   const [loaded, setLoaded] = useState(false);
   const [loadAttempt, setLoadAttempt] = useState(0);
   const [dirty, setDirty] = useState(false);
+  const [feedbackDirty, setFeedbackDirty] = useState(false);
   const [busy, setBusy] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [conflict, setConflict] = useState(false);
@@ -190,8 +193,8 @@ export function TeacherPlanner({
   const [latest, setLatest] = useState<TeacherPlanRecord | null>(null);
   const pendingSave = useRef<{ fingerprint: string; input: SaveTeacherPlanInput } | null>(null);
   const blocker = useBlocker({
-    shouldBlockFn: () => dirty || busy,
-    enableBeforeUnload: dirty || busy,
+    shouldBlockFn: () => dirty || feedbackDirty || busy,
+    enableBeforeUnload: dirty || feedbackDirty || busy,
     withResolver: true,
   });
 
@@ -372,16 +375,22 @@ export function TeacherPlanner({
   };
 
   return (
-    <AppShell title="Instructor planner">
+    <AppShell title="Educator dashboard">
       <div className="space-y-7 pb-10">
-        <header className="flex flex-col justify-between gap-5 xl:flex-row xl:items-end">
+        {projectId === CLASSROOM_DEMO_PROJECT_ID && (
+          <DemoClassOverview onDraftChange={setFeedbackDirty} />
+        )}
+        <header
+          id="private-lesson-plan"
+          className="flex flex-col justify-between gap-5 xl:flex-row xl:items-end"
+        >
           <div className="max-w-2xl">
             <p className="text-xs font-semibold uppercase tracking-[0.18em] text-primary">
               Teach the process · keep the thinking
             </p>
-            <h1 className="mt-3 text-3xl font-extrabold leading-tight sm:text-4xl">
-              A lesson worth learning from.
-            </h1>
+            <h2 className="mt-3 text-3xl font-extrabold leading-tight sm:text-4xl">
+              Your private lesson plan
+            </h2>
             <p className="mt-3 text-base leading-relaxed text-muted-foreground">
               Plan an experience where students act, examine evidence and explain their next choice.
             </p>
