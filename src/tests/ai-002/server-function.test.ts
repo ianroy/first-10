@@ -1,4 +1,4 @@
-import { beforeEach, describe, expect, it, vi } from "vitest";
+import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
 const h = vi.hoisted(() => ({ prepare: vi.fn(), write: vi.fn(), request: vi.fn(), demo: vi.fn() }));
 vi.mock("@tanstack/react-start", () => ({
   createServerFn: () => ({
@@ -66,7 +66,9 @@ const invoke = (kind: string, withOrigin?: boolean) =>
     data: { kind, projectId: project.id, withOrigin },
     context: { supabase: sb, userId: project.user_id },
   });
+afterEach(() => vi.unstubAllEnvs());
 beforeEach(() => {
+  vi.stubEnv("OPENROUTER_API_KEY", "synthetic-fixture-key");
   vi.clearAllMocks();
   h.prepare.mockResolvedValue(h.write);
   h.write.mockResolvedValue("fa028000-0000-4000-8000-000000000001");
@@ -86,6 +88,7 @@ describe("generateAI legacy response compatibility", () => {
       };
       h.request.mockResolvedValue(result);
       expect(validateAIOutput(kind, await invoke(kind))).toEqual(outputs[kind]);
+      expect(h.request.mock.calls[0]?.[0].key === "synthetic-fixture-key").toBe(true);
       expect(h.prepare).toHaveBeenCalledWith(
         expect.objectContaining({
           projectId: project.id,

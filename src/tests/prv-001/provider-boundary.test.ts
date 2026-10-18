@@ -1,4 +1,4 @@
-import { beforeEach, describe, expect, it, vi } from "vitest";
+import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
 const h = vi.hoisted(() => ({
   request: vi.fn(),
   write: vi.fn(),
@@ -58,7 +58,9 @@ const invoke = (kind: string) =>
     data: { kind, projectId },
     context: { supabase: sb, userId: "actor" },
   });
+afterEach(() => vi.unstubAllEnvs());
 beforeEach(() => {
+  vi.stubEnv("OPENROUTER_API_KEY", "synthetic-fixture-key");
   vi.clearAllMocks();
   h.tables = [];
   h.prepare.mockResolvedValue(h.write);
@@ -89,6 +91,7 @@ describe("PRV001 provider boundary", () => {
     async (kind) => {
       await invoke(kind);
       const args = h.request.mock.calls[0]?.[0];
+      expect(args.key === "synthetic-fixture-key").toBe(true);
       expect(args.user).toContain("Approved description");
       expect(args.user).not.toContain("WITHDRAWN_RAW_PROJECT");
       expect(args.user).toContain("PRIVACY LIMITS");
