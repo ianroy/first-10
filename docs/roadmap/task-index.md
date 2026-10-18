@@ -22,7 +22,7 @@ Protect data and money before expanding access or AI behavior.
 | OPS-002 Preview/deploy smoke checks without secret exposure | complete | 3/3 | agent | S | OPS-001 | — | scripts/smoke.mjs, .github/workflows/smoke.yml, package.json (4 more; inspect --task); locks: delivery-config |
 | F-009b Configure isolated preview environment and auth redirects | not_started | 0/3 | either | S | OPS-002 | — | docs/operations/preview-environment.md; locks: — |
 | SEC-002 Database policy test harness with distinct identities | complete | 3/3 | agent | S | SEC-001, OPS-001 | — | supabase/tests/**, scripts/test-policies.mjs, .github/workflows/policies.yml (1 more; inspect --task); locks: database-tests |
-| SEC-003 Harden existing project/contact relationships | in_progress | 0/3 | agent | S | SEC-002 | — | supabase/migrations/**, src/integrations/supabase/types.ts, supabase/tests/ownership.sql (3 more; inspect --task); locks: database-schema, generated-types |
+| SEC-003 Harden existing project/contact relationships | complete | 3/3 | agent | S | SEC-002 | — | supabase/migrations/**, src/integrations/supabase/types.ts, supabase/tests/ownership.sql (3 more; inspect --task); locks: database-schema, generated-types |
 | SEC-004 Project memberships and protected authorization helpers | not_started | 0/3 | agent | S | SEC-003 | — | supabase/migrations/**, src/integrations/supabase/types.ts, src/lib/permissions/** (4 more; inspect --task); locks: database-schema, generated-types |
 | SEC-005 Scoped invitation acceptance and revocation | not_started | 0/3 | agent | S | SEC-004 | — | supabase/migrations/**, src/lib/invitations.functions.ts, src/routes/invite.tsx (5 more; inspect --task); locks: database-schema, generated-types, route-integration |
 | SEC-006 Platform admin role and audited privileged boundary | not_started | 0/3 | agent | S | SEC-003 | — | supabase/migrations/**, src/lib/admin-auth.server.ts, src/lib/admin-audit.server.ts (4 more; inspect --task); locks: database-schema, generated-types |
@@ -48,16 +48,16 @@ Build truthful public materials from current capabilities while research continu
 | BR-002 Implement semantic brand tokens and component foundations | complete | 3/3 | agent | S | BR-001, OPS-001 | — | src/styles.css, src/components/ui/**, docs/brand/tokens.md (1 more; inspect --task); locks: design-system |
 | BR-003 Apply product voice and brand across authenticated journeys | not_started | 0/3 | agent | S | BR-002 | — | src/components/AppShell.tsx, src/components/RequireProject.tsx, src/routes/auth.tsx (7 more; inspect --task); locks: app-shell, route-integration |
 | WEB-001 Write the founder sales narrative and demo storyboard | complete | 3/3 | agent | S | VP-007, VAL-001 | — | docs/marketing/landing-brief.md, docs/marketing/claims.md; locks: — |
-| WEB-002 Build a deterministic interactive product demo | in_progress | 0/3 | agent | S | WEB-001, BR-002, F-007 | — | src/components/demo/**, src/lib/demo/**, public/demo/** (4 more; inspect --task); locks: route-integration |
+| WEB-002 Build a deterministic interactive product demo | complete | 3/3 | agent | S | WEB-001, BR-002, F-007 | — | src/components/demo/**, src/lib/demo/**, public/demo/** (4 more; inspect --task); locks: route-integration |
 | WEB-003 Publish product and technical stack schematics | complete | 3/3 | agent | S | DOC-001 | — | docs/architecture/system-overview.md, src/components/marketing/StackDiagram.tsx, public/diagrams/**; locks: — |
 | WEB-004 Build the public landing page and connected CTAs | not_started | 0/3 | agent | S | WEB-001, WEB-002, WEB-003, BR-002, EDU-002 | — | src/routes/index.tsx, src/components/marketing/**, public/marketing/** (2 more; inspect --task); locks: route-integration |
-| EDU-001 Author reusable lesson plans and assessment guidance | in_progress | 0/3 | agent | S | VAL-001, VP-008 | — | docs/teaching/**, public/teaching/**; locks: — |
-| EDU-002 Build a teaching subpage with usable resources | not_started | 0/3 | agent | S | EDU-001, BR-002, WEB-001 | — | src/routes/teach.tsx, src/components/teaching/**, public/teaching/** (2 more; inspect --task); locks: route-integration |
+| EDU-001 Author reusable lesson plans and assessment guidance | complete | 3/3 | agent | S | VAL-001, VP-008 | — | docs/teaching/**, public/teaching/**; locks: — |
+| EDU-002 Build a teaching subpage with usable resources | complete | 3/3 | agent | S | EDU-001, BR-002, WEB-001 | — | src/routes/teach.tsx, src/components/teaching/**, public/teaching/** (3 more; inspect --task); locks: route-integration |
 | EDU-004 Rehearse lesson materials with an instructor before the class pilot | not_started | 0/3 | human | S | EDU-001 | — | research/teaching-rehearsal.md, docs/teaching/**, public/teaching/**; locks: teaching-materials |
 | WEB-005 Verify public demo, teaching and brand journeys | not_started | 0/3 | agent | S | WEB-004, EDU-002, BR-003 | — | src/routes/public-pages.test.tsx, docs/marketing/release-check.md, src/tests/web-005/**; locks: — |
-| P-001b Factual five-minute sales/pitch deck after release evidence | in_progress | 2/3 | agent | M | WEB-001, BR-001, MKT-001, WEB-003 | — | docs/demo/pitch/**, public/pitch/**; locks: — |
+| P-001b Factual five-minute sales/pitch deck after release evidence | blocked | 2/3 | agent | M | WEB-001, BR-001, MKT-001, WEB-003 | — | docs/demo/pitch/**, public/pitch/**; locks: — |
 | MKT-001 Define the $0 marketing lab and its teaching contract | complete | 3/3 | agent | S | SEC-001, VP-007 | — | docs/marketing/marketing-lab-contract.md, docs/teaching/pedagogy-map.md; locks: — |
-| MKT-007 Extend the public demo with the marketing board | not_started | 0/3 | agent | S | MKT-001, WEB-002, BR-002 | — | src/components/demo/**, src/lib/demo/**, src/routes/demo.tsx (2 more; inspect --task); locks: route-integration |
+| MKT-007 Extend the public demo with the marketing board | blocked | 0/3 | agent | S | MKT-001, WEB-002, BR-002 | — | src/components/demo/**, src/lib/demo/**, src/routes/demo.tsx (2 more; inspect --task); locks: — |
 | BR-004 Create the First Ten logo and replace the favicon | complete | 3/3 | agent | S | BR-001 | — | public/brand/**, public/favicon.svg, public/favicon.ico (4 more; inspect --task); locks: route-integration, brand-assets |
 
 ## P3 — Personal workspace and reliable return
@@ -73,8 +73,8 @@ Make account/project identity, saved drafts and switching safe before shared wor
 | WS-005 Autosave and resume the interview workflow | not_started | 0/3 | agent | S | WS-004 | — | src/routes/_authenticated/interview.tsx, src/components/interviews/**, src/lib/useInterviewDraft.ts (3 more; inspect --task); locks: interview-flow |
 | WS-006 Finalize interviews atomically and exactly once in app state | not_started | 0/3 | agent | S | WS-005 | — | supabase/migrations/**, src/lib/interview-drafts.functions.ts, src/routes/_authenticated/interview.tsx (4 more; inspect --task); locks: database-schema, generated-types, interview-flow |
 | WS-007 Verify multi-project save and return journeys | not_started | 0/3 | agent | S | WS-003, WS-006 | — | src/tests/workspace-journeys/**, docs/qa/workspace-gate.md, src/tests/ws-007/**; locks: — |
-| MKT-002 Persist versioned private marketing plans | not_started | 0/3 | agent | S | MKT-001, SEC-003 | — | supabase/migrations/**, src/integrations/supabase/types.ts, src/lib/marketing.functions.ts (3 more; inspect --task); locks: database-schema, generated-types |
-| DEMO-001 Seed isolated fictional presenter data safely | not_started | 0/3 | agent | S | OPS-001, SEC-003 | — | scripts/seed-demo.mjs, scripts/seed-demo.test.mjs, docs/demo/presenter-data.md (1 more; inspect --task); locks: demo-data |
+| MKT-002 Persist versioned private marketing plans | blocked | 0/3 | agent | S | MKT-001, SEC-003 | — | supabase/migrations/**, src/integrations/supabase/types.ts, src/lib/marketing.functions.ts (3 more; inspect --task); locks: database-schema, generated-types |
+| DEMO-001 Seed isolated fictional presenter data safely | complete | 3/3 | agent | S | OPS-001, SEC-003 | — | scripts/seed-demo.mjs, scripts/seed-demo.test.mjs, docs/demo/presenter-data.md (8 more; inspect --task); locks: demo-data |
 
 ## P4 — Class spaces, teacher tools and admin analytics
 

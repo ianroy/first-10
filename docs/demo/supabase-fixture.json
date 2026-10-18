@@ -1,0 +1,231 @@
+{
+  "fixtureVersion": "first-ten-babson-2026-10-18-v1",
+  "fictional": true,
+  "account": {
+    "id": "f1d00000-0000-4000-8000-000000000001",
+    "email": "workshop-presenter@firstten-demo.invalid"
+  },
+  "project": {
+    "id": "f1d00000-0000-4000-8000-000000000010",
+    "name": "StudyLoop — fictional workshop demo",
+    "description": "FICTIONAL TEACHING DEMO. A campus study-group idea used to practice evidence, uncertainty and decisions. All people, interviews and drafts are authored examples, not real research or adoption.",
+    "audience": "Proposed: existing student study groups with unreliable attendance; not all students.",
+    "problem": "Assumption to test: attendance uncertainty matters more than discovering more study partners.",
+    "link": "",
+    "stage": 2,
+    "questions": [
+      "Tell me about the last time your study group met.",
+      "How did you decide who would attend?",
+      "What happened when plans changed?",
+      "What did you try to make coordination easier?",
+      "What worked well enough that you kept using it?",
+      "Who else has a different experience I should understand?"
+    ],
+    "survey": [
+      "After trying the proposed confirmation step, what happened?",
+      "What did you still have to do elsewhere?",
+      "What would you keep or change, and why?"
+    ],
+    "checklist": {
+      "s1_fit": true,
+      "s1_change": true,
+      "demo": {
+        "fictional": true,
+        "fixtureVersion": "first-ten-babson-2026-10-18-v1",
+        "excludeFromResearch": true,
+        "excludeFromProductMetrics": true
+      }
+    }
+  },
+  "contacts": [
+    {
+      "id": "f1d00000-0000-4000-8000-000000000101",
+      "first_name": "Maya (fictional)",
+      "relation": "Fictional workshop case participant",
+      "why": "Fictional classroom example only; not a real recruited participant.",
+      "stage": 1,
+      "source": "demo_fictional",
+      "status": "interviewed"
+    },
+    {
+      "id": "f1d00000-0000-4000-8000-000000000102",
+      "first_name": "Owen (fictional)",
+      "relation": "Fictional workshop case participant",
+      "why": "Fictional classroom example only; not a real recruited participant.",
+      "stage": 1,
+      "source": "demo_fictional",
+      "status": "interviewed"
+    },
+    {
+      "id": "f1d00000-0000-4000-8000-000000000103",
+      "first_name": "Priya (fictional)",
+      "relation": "Fictional workshop case participant",
+      "why": "Fictional classroom example only; not a real recruited participant.",
+      "stage": 1,
+      "source": "demo_fictional",
+      "status": "interviewed"
+    },
+    {
+      "id": "f1d00000-0000-4000-8000-000000000104",
+      "first_name": "Nora (fictional)",
+      "relation": "Fictional workshop case participant",
+      "why": "Fictional classroom example only; not a real recruited participant.",
+      "stage": 1,
+      "source": "demo_fictional",
+      "status": "interviewed"
+    },
+    {
+      "id": "f1d00000-0000-4000-8000-000000000105",
+      "first_name": "Remy (fictional)",
+      "relation": "Fictional workshop case participant",
+      "why": "Fictional classroom example only; not a real recruited participant.",
+      "stage": 1,
+      "source": "demo_fictional",
+      "status": "interviewed"
+    }
+  ],
+  "interviews": [
+    {
+      "id": "f1d00000-0000-4000-8000-000000000201",
+      "contact_id": "f1d00000-0000-4000-8000-000000000101",
+      "answers": [
+        {
+          "q": "Tell me about the last time your study group met.",
+          "note": "FICTIONAL TEACHING EXAMPLE: Attendance uncertainty; investigate whether this matters beyond this case.",
+          "quote": "I don’t need more people. I need to know who’s actually showing up."
+        }
+      ],
+      "tags": ["fictional demo"],
+      "completed": true
+    },
+    {
+      "id": "f1d00000-0000-4000-8000-000000000202",
+      "contact_id": "f1d00000-0000-4000-8000-000000000102",
+      "answers": [
+        {
+          "q": "Tell me about the last time your study group met.",
+          "note": "FICTIONAL TEACHING EXAMPLE: Last-minute coordination may be costly; frequency is unknown.",
+          "quote": "We sent messages all afternoon and still started with two people."
+        }
+      ],
+      "tags": ["fictional demo"],
+      "completed": true
+    },
+    {
+      "id": "f1d00000-0000-4000-8000-000000000203",
+      "contact_id": "f1d00000-0000-4000-8000-000000000103",
+      "answers": [
+        {
+          "q": "Tell me about the last time your study group met.",
+          "note": "FICTIONAL TEACHING EXAMPLE: An existing workaround may already be sufficient.",
+          "quote": "Our group works when everyone confirms before we leave."
+        }
+      ],
+      "tags": ["fictional demo"],
+      "completed": true
+    },
+    {
+      "id": "f1d00000-0000-4000-8000-000000000204",
+      "contact_id": "f1d00000-0000-4000-8000-000000000104",
+      "answers": [
+        {
+          "q": "Tell me about the last time your study group met.",
+          "note": "FICTIONAL TEACHING EXAMPLE: Counterexample: reliable groups may have no need.",
+          "quote": "My group already meets every Tuesday. I do not need another app."
+        }
+      ],
+      "tags": ["fictional demo"],
+      "completed": true
+    },
+    {
+      "id": "f1d00000-0000-4000-8000-000000000205",
+      "contact_id": "f1d00000-0000-4000-8000-000000000105",
+      "answers": [
+        {
+          "q": "Tell me about the last time your study group met.",
+          "note": "FICTIONAL TEACHING EXAMPLE: Counterexample: scheduling constraints may be outside the product’s control.",
+          "quote": "I cancelled because my work shift changed. A reminder would not fix that."
+        }
+      ],
+      "tags": ["fictional demo"],
+      "completed": true
+    }
+  ],
+  "learnings": [
+    {
+      "id": "f1d00000-0000-4000-8000-000000000301",
+      "stage": 1,
+      "kind": "synthesis",
+      "title": "Fictional example: coordination may matter more than discovery",
+      "body": "FICTIONAL TEACHING EXAMPLE, reviewed within the case only. No real customer interviews or product outcomes are claimed.",
+      "accepted": true,
+      "data": {
+        "problems": [
+          "Example interpretation: attendance uncertainty may disrupt some existing groups.",
+          "Example interpretation: last-minute coordination can consume effort.",
+          "Unknown: whether a separate app would be worth adopting."
+        ],
+        "objections": [
+          "Nora already has a reliable weekly group.",
+          "Priya has a workable confirmation routine.",
+          "Remy’s work-shift changes may not be solvable by reminders."
+        ],
+        "best_fit": [
+          "Proposed segment: existing groups with repeated uncertainty about attendance.",
+          "Exclude groups whose current routine already works well enough."
+        ],
+        "quotes": [
+          "I don’t need more people. I need to know who’s actually showing up.",
+          "My group already meets every Tuesday. I do not need another app.",
+          "I cancelled because my work shift changed. A reminder would not fix that."
+        ],
+        "changes": [
+          {
+            "title": "Narrow the audience",
+            "body": "Investigate existing groups with unreliable attendance; keep Nora as counterevidence."
+          },
+          {
+            "title": "Test before building discovery",
+            "body": "Propose a simple confirmation flow; this is not yet a completed test."
+          },
+          {
+            "title": "Compare with the current workaround",
+            "body": "Ask what the group already uses and what switching would cost."
+          }
+        ]
+      }
+    }
+  ],
+  "experiments": [
+    {
+      "id": "f1d00000-0000-4000-8000-000000000401",
+      "stage": 1,
+      "hypothesis": "PROPOSED FICTIONAL CASE: some existing groups will find attendance confirmation useful.",
+      "change": "Invite up to five consenting groups to a one-week confirmation test and compare their own attendance records. Access, consent and baseline remain to be established.",
+      "result": ""
+    }
+  ],
+  "outreach": [
+    {
+      "id": "f1d00000-0000-4000-8000-000000000501",
+      "stage": 2,
+      "kind": "channel",
+      "title": "Example route: a student club organizer",
+      "body": "FICTIONAL DRAFT. Investigate whether an organizer hosts study sessions. Ask about access, rules and an appropriate way to invite voluntary participation. No permission is assumed."
+    },
+    {
+      "id": "f1d00000-0000-4000-8000-000000000502",
+      "stage": 2,
+      "kind": "draft",
+      "title": "Example invitation to review",
+      "body": "FICTIONAL DRAFT. We are exploring whether a simple attendance confirmation helps existing study groups. If coordinating attendance is a problem you have experienced, could you show us your current routine? This is an early prototype; participation is optional."
+    },
+    {
+      "id": "f1d00000-0000-4000-8000-000000000503",
+      "stage": 2,
+      "kind": "channel",
+      "title": "Alternative route: an existing class community",
+      "body": "FICTIONAL DRAFT. Identify one relevant community and ask its moderator about research posts. Do not claim a venue, policy or access is verified. No automated posting."
+    }
+  ]
+}

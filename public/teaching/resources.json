@@ -12,7 +12,8 @@
       "description": "60-minute lesson",
       "markdown": "/teaching/instructor-guide.md",
       "printPages": 1,
-      "html": "/teaching/first-ten-teaching-kit.html#instructor-guide-1"
+      "html": "/teaching/first-ten-teaching-kit.html#instructor-guide-1",
+      "bytes": 4428
     },
     {
       "id": "studyloop-case",
@@ -20,7 +21,8 @@
       "description": "Fictional case and facilitator notes",
       "markdown": "/teaching/studyloop-case.md",
       "printPages": 1,
-      "html": "/teaching/first-ten-teaching-kit.html#studyloop-case-1"
+      "html": "/teaching/first-ten-teaching-kit.html#studyloop-case-1",
+      "bytes": 3937
     },
     {
       "id": "student-worksheet",
@@ -28,7 +30,8 @@
       "description": "Original thinking, evidence and marketing test",
       "markdown": "/teaching/student-worksheet.md",
       "printPages": 3,
-      "html": "/teaching/first-ten-teaching-kit.html#student-worksheet-1"
+      "html": "/teaching/first-ten-teaching-kit.html#student-worksheet-1",
+      "bytes": 4183
     },
     {
       "id": "one-week-assignment",
@@ -36,7 +39,8 @@
       "description": "$0 plan, permitted action and reflection",
       "markdown": "/teaching/one-week-assignment.md",
       "printPages": 1,
-      "html": "/teaching/first-ten-teaching-kit.html#one-week-assignment-1"
+      "html": "/teaching/first-ten-teaching-kit.html#one-week-assignment-1",
+      "bytes": 4420
     },
     {
       "id": "field-worksheet",
@@ -44,7 +48,8 @@
       "description": "Planning, manual measures and reflection",
       "markdown": "/teaching/field-worksheet.md",
       "printPages": 2,
-      "html": "/teaching/first-ten-teaching-kit.html#field-worksheet-1"
+      "html": "/teaching/first-ten-teaching-kit.html#field-worksheet-1",
+      "bytes": 4525
     },
     {
       "id": "assessment-rubric",
@@ -52,9 +57,12 @@
       "description": "Reasoning-focused rubric and teaching rationale",
       "markdown": "/teaching/assessment-rubric.md",
       "printPages": 1,
-      "html": "/teaching/first-ten-teaching-kit.html#assessment-rubric-1"
+      "html": "/teaching/first-ten-teaching-kit.html#assessment-rubric-1",
+      "bytes": 4472
     }
   ],
   "printableHtml": "/teaching/first-ten-teaching-kit.html",
-  "printablePdf": "/teaching/first-ten-teaching-kit.pdf"
+  "printablePdf": "/teaching/first-ten-teaching-kit.pdf",
+  "printablePdfBytes": 351063,
+  "printableHtmlBytes": 35958
 }

@@ -65,7 +65,7 @@ jobs:
             exit 1
           fi
       - name: Run real owner and anonymous policies
-        run: node scripts/test-policies.mjs
+        run: node scripts/test-policies.mjs --strict
       - name: Stop only this disposable stack
         if: always()
         shell: bash

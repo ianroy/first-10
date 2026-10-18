@@ -1,7 +1,9 @@
+import { BrandLogo } from "@/components/BrandLogo";
 import { Link, useNavigate } from "@tanstack/react-router";
-import type { ReactNode } from "react";
+import { useContext, type ReactNode } from "react";
 import { BookOpen, Home, Megaphone, MessageCircle, Users, LogOut } from "lucide-react";
 import { supabase } from "@/integrations/supabase/client";
+import { CurrentProjectContext } from "@/lib/current-project";
 
 const tabs = [
   { to: "/dashboard", label: "Ladder", icon: Home },
@@ -13,16 +15,26 @@ const tabs = [
 
 export function AppShell({ title, children }: { title: string; children: ReactNode }) {
   const navigate = useNavigate();
+  const project = useContext(CurrentProjectContext);
+  const checklist = project?.checklist;
+  const marker =
+    checklist && typeof checklist === "object" && !Array.isArray(checklist)
+      ? checklist["demo"]
+      : null;
+  const fictional =
+    marker && typeof marker === "object" && !Array.isArray(marker) && marker["fictional"] === true;
   return (
     <div className="mx-auto flex min-h-screen max-w-xl flex-col">
       <header className="flex items-center justify-between px-5 pt-6 pb-3">
-        <div>
-          <p className="text-xs font-semibold uppercase tracking-widest text-primary">First Ten</p>
+        <div className="min-w-0">
+          <Link to="/" aria-label="First Ten home" className="inline-flex min-h-11 items-center">
+            <BrandLogo className="h-8 w-auto" />
+          </Link>
           <h1 className="text-2xl font-bold">{title}</h1>
         </div>
         <button
           aria-label="Sign out"
-          className="rounded-full p-2 text-muted-foreground hover:bg-muted"
+          className="flex size-11 shrink-0 items-center justify-center rounded-full text-muted-foreground hover:bg-muted"
           onClick={async () => {
             await supabase.auth.signOut();
             navigate({ to: "/auth" });
@@ -31,7 +43,22 @@ export function AppShell({ title, children }: { title: string; children: ReactNo
           <LogOut className="size-5" />
         </button>
       </header>
-      <main className="flex-1 space-y-4 px-5 pb-28">{children}</main>
+      <main className="flex-1 space-y-4 px-5 pb-28">
+        {fictional && (
+          <aside
+            role="note"
+            aria-label="Fictional demo workspace"
+            className="rounded-xl border border-accent bg-accent/30 px-4 py-3 text-sm text-foreground"
+          >
+            <p className="font-semibold">Fictional demo workspace</p>
+            <p>
+              These people, conversations and drafts are examples, not customer research or
+              adoption.
+            </p>
+          </aside>
+        )}
+        {children}
+      </main>
       <nav className="pb-safe fixed inset-x-0 bottom-0 z-20 border-t bg-card/95 backdrop-blur">
         <div className="mx-auto grid max-w-xl grid-cols-5">
           {tabs.map(({ to, label, icon: Icon }) => (

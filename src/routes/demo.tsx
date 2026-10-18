@@ -1,3 +1,4 @@
+import { BrandLogo } from "@/components/BrandLogo";
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { ArrowUpRight, FileText } from "lucide-react";
 
@@ -31,13 +32,7 @@ function DemoPage() {
       </a>
       <header className="flex flex-wrap items-center justify-between gap-2 border-b border-border py-5">
         <Link to="/" aria-label="First Ten home">
-          <img
-            src="/brand/wordmark.svg"
-            alt="First Ten"
-            width="289"
-            height="64"
-            className="h-8 w-auto"
-          />
+          <BrandLogo />
         </Link>
         <Link
           to="/auth"

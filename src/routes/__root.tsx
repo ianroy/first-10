@@ -135,9 +135,9 @@ function RootComponent() {
   const router = useRouter();
   const pathname = useRouterState({ select: (state) => state.location.pathname });
   useEffect(() => {
-    // The public example must run without Supabase configuration or a session.
-    // Effect cleanup removes the existing subscription when entering the demo.
-    if (pathname === "/demo" || pathname === "/demo/") return;
+    // Public examples and teaching resources need no Supabase configuration or session.
+    // Cleanup removes an existing subscription when entering either public page.
+    if (["/demo", "/demo/", "/teach", "/teach/"].includes(pathname)) return;
     const { data } = supabase.auth.onAuthStateChange((event) => {
       if (event !== "SIGNED_IN" && event !== "SIGNED_OUT" && event !== "USER_UPDATED") return;
       router.invalidate();
