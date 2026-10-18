@@ -39,7 +39,7 @@ const args = (database, user = "postgres") => [
   "ON_ERROR_STOP=1",
 ];
 const fixtures = await loadFixtures();
-let created = false;
+let creationAttempted = false;
 try {
   const schema = docker([
     "exec",
@@ -58,8 +58,9 @@ try {
     ).stdout.trim() !== "0"
   )
     throw new Error("Clone name already exists");
+  // Record intent before dispatch: CREATE may commit even if its acknowledgement is lost.
+  creationAttempted = true;
   docker(["exec", container, "createdb", "-U", "postgres", "-T", "template0", db]);
-  created = true;
   docker(args(db, "supabase_admin"), schema);
   if (
     docker(
@@ -103,7 +104,17 @@ try {
     }),
   );
 } finally {
-  if (created) docker(["exec", container, "dropdb", "-U", "postgres", db]);
+  if (creationAttempted) {
+    const exists = docker(
+      args("postgres"),
+      `SELECT count(*) FROM pg_database WHERE datname='${db}';`,
+    ).stdout.trim();
+    if (!["0", "1"].includes(exists)) throw new Error("Exact clone existence unconfirmed");
+    // Only this exact generated name was verified absent before our CREATE attempt.
+    // A failed DROP acknowledgement must not bypass the final absence check below.
+    if (exists === "1")
+      docker(["exec", container, "dropdb", "-U", "postgres", db], undefined, true);
+  }
   const found = docker(
     args("postgres"),
     `SELECT count(*) FROM pg_database WHERE datname='${db}';`,
