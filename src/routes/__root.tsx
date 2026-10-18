@@ -4,6 +4,7 @@ import {
   Link,
   createRootRouteWithContext,
   useRouter,
+  useRouterState,
   HeadContent,
   Scripts,
   type ErrorComponentProps,
@@ -132,7 +133,11 @@ function RootShell({ children }: { children: ReactNode }) {
 function RootComponent() {
   const { queryClient } = Route.useRouteContext();
   const router = useRouter();
+  const pathname = useRouterState({ select: (state) => state.location.pathname });
   useEffect(() => {
+    // The public example must run without Supabase configuration or a session.
+    // Effect cleanup removes the existing subscription when entering the demo.
+    if (pathname === "/demo" || pathname === "/demo/") return;
     const { data } = supabase.auth.onAuthStateChange((event) => {
       if (event !== "SIGNED_IN" && event !== "SIGNED_OUT" && event !== "USER_UPDATED") return;
       router.invalidate();
@@ -140,7 +145,7 @@ function RootComponent() {
       else queryClient.clear();
     });
     return () => data.subscription.unsubscribe();
-  }, [router, queryClient]);
+  }, [router, queryClient, pathname]);
 
   return (
     <QueryClientProvider client={queryClient}>
