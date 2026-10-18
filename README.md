@@ -67,7 +67,7 @@ npm run dev
 | `APP_URL` | server only, optional | Sent to OpenRouter as the referer |
 | `NITRO_PRESET` | build (Vercel) | Set to `vercel` for deployment |
 
-`.env` is gitignored. `.env.example` lists the names only.
+`.env` is gitignored. `.env.example` lists the names only. On Vercel, add `VITE_SUPABASE_PUBLISHABLE_KEY` with `--type config` (the CLI refuses to expose a credential-looking `VITE_` value otherwise); without it the browser bundle throws "Missing Supabase environment variable(s)" and every page shows "This page didn't load".
 
 ### Database
 
