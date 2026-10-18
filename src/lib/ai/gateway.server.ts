@@ -24,6 +24,8 @@ export type GatewayMetadata = {
   };
   provider: string | null;
   attempts: number;
+  finishReason?: string | null;
+  latencyMs?: number | null;
 };
 export class AIGatewayError extends Error {
   constructor(
@@ -77,6 +79,10 @@ function metadataFromEnvelope(envelope: unknown, requestedModel: string): Gatewa
       typeof e["id"] === "string" && /^gen-[0-9A-Za-z-]{1,123}$/.test(e["id"]) ? e["id"] : null,
     provider: label(e["provider"]),
     attempts: 1,
+    finishReason: label(
+      (e["choices"] as { finish_reason?: unknown }[] | undefined)?.[0]?.finish_reason,
+    ),
+    latencyMs: null,
     usage: {
       prompt_tokens: count(u["prompt_tokens"]),
       completion_tokens: count(u["completion_tokens"]),
@@ -198,6 +204,8 @@ export async function requestStructuredDraft<T = AIOutput<AIKind>>(
     );
   }
   const metadata = metadataFromEnvelope(envelope, parameters.model);
+  const elapsed = now() - started;
+  metadata.latencyMs = Number.isFinite(elapsed) && elapsed >= 0 ? elapsed : null;
   const invalid = (code: string, message: string): never => {
     throw new AIGatewayError(code, message, 1, metadata);
   };

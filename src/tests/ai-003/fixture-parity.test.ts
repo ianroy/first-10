@@ -2,14 +2,17 @@ import { readFileSync } from "node:fs";
 import { execFileSync } from "node:child_process";
 import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
 import type { ExistingKind } from "@/lib/prompts/private-v1";
-const h = vi.hoisted(() => ({
-  prepare: vi.fn(),
-  write: vi.fn(),
-  request: vi.fn(),
-  budget: vi.fn(),
-  claim: vi.fn(),
-  settle: vi.fn(),
-}));
+const h = vi.hoisted(() => {
+  process.env["OPENROUTER_API_KEY"] = "synthetic-fixture-key";
+  return {
+    prepare: vi.fn(),
+    write: vi.fn(),
+    request: vi.fn(),
+    budget: vi.fn(),
+    claim: vi.fn(),
+    settle: vi.fn(),
+  };
+});
 vi.mock("@tanstack/react-start", () => ({
   createServerFn: () => ({
     middleware: () => ({ inputValidator: () => ({ handler: (fn: unknown) => fn }) }),
@@ -46,10 +49,10 @@ type Case = {
     contacts: unknown[];
   };
 };
-const fixtures = JSON.parse(readFileSync("src/tests/ai-eval/fixtures.v5.json", "utf8")) as {
+const fixtures = JSON.parse(readFileSync("src/tests/ai-eval/fixtures.v6.json", "utf8")) as {
   cases: Case[];
 };
-const baseline = JSON.parse(readFileSync("evals/offline-baseline.v5.json", "utf8")) as {
+const baseline = JSON.parse(readFileSync("evals/offline-baseline.v6.json", "utf8")) as {
   cases: { id: string; output: unknown }[];
 };
 afterEach(() => vi.unstubAllEnvs());
@@ -131,7 +134,7 @@ describe("AI-003 reproducible evaluation inputs", () => {
       expect(scope.contextFence.contextHash).toBe(c.budget_binding_sha256);
       expect(h.claim).toHaveBeenCalledOnce();
       expect(h.settle).toHaveBeenCalledWith(expect.objectContaining({ outputValid: true }));
-      if (c.id === "stage3-edge-v5") {
+      if (c.id === "stage3-edge-v6") {
         const user = h.request.mock.calls[0]?.[0].user;
         expect(user).toContain('"permission":');
         expect(user).not.toContain("WITHDRAWN_PRIVATE_NOTE");

@@ -22,7 +22,7 @@ import {
 } from "../../../scripts/eval-ai.mjs";
 const fixtures = await loadFixtures();
 const baseline = JSON.parse(
-  await readFile(new URL("../../../evals/offline-baseline.v5.json", import.meta.url), "utf8"),
+  await readFile(new URL("../../../evals/offline-baseline.v6.json", import.meta.url), "utf8"),
 );
 const endpoint = {
   data: {
@@ -93,7 +93,7 @@ test("endpoint preflight fails closed on missing schema support, price increases
   assert.throws(() => checkEndpoint({ data: { id: MODEL, endpoints: [] } }));
 });
 test("sparse source checks reject fabricated or duplicated quotes instead of satisfying a forced count", () => {
-  const c = fixtures.cases.find((c) => c.id === "synthesis-edge-v5");
+  const c = fixtures.cases.find((c) => c.id === "synthesis-edge-v6");
   const data = { quotes: [c.source_quotes[0]], changes: [{}, {}, {}] };
   assert.deepEqual(semanticChecks(c, data), []);
   assert.ok(
@@ -120,10 +120,14 @@ test("questions reject injected instructions and hypothetical willingness even i
 function passing() {
   const report = {
     execution_path: "generateAI",
+    source_sha256: fixtures.source_sha256,
+    origin: "http://127.0.0.1:55890",
+    functionId: "syntheticfunctionid",
+    transformedSha256: "a".repeat(64),
     version: fixtures.version,
     fixture_sha256: fixtures.fixture_sha256,
     endpoint: { provider: "Google", tag: "google-vertex", model: MODEL },
-    results: fixtures.cases.map((c) => ({
+    results: fixtures.cases.map((c, index) => ({
       id: c.id,
       kind: c.kind,
       contract_sha256: c.contract_sha256,
@@ -131,7 +135,13 @@ function passing() {
       status: "complete",
       model: MODEL,
       provider: "Google",
-      generation_id: `synthetic-generation-${c.id}`,
+      generation_id: `gen-synthetic-${c.id}`,
+      operation_id: `fa630000-0000-4000-8000-${String(index + 1).padStart(12, "0")}`,
+      attempt_id: `fa630001-0000-4000-8000-${String(index + 1).padStart(12, "0")}`,
+      origin_id: `fa630002-0000-4000-8000-${String(index + 1).padStart(12, "0")}`,
+      context_sha256: c.budget_binding_sha256,
+      route_version: 1,
+      usage: { prompt_tokens: 10, completion_tokens: 10, total_tokens: 20, cost: 0.001 },
       issues: [],
       actual_calls: 1,
       cost_usd: 0.001,
@@ -170,6 +180,12 @@ test("promotion gate requires complete named human review and always leaves prod
 test("unknown spend, absent provider, duplicate cases, slow calls and changed prompt versions block review eligibility", () => {
   for (const mutate of [
     (r) => (r.results[0].cost_usd = null),
+    (r) => (r.source_sha256 = {}),
+    (r) => (r.origin = "https://unreviewed.invalid"),
+    (r) => (r.results[0].operation_id = r.results[1].operation_id),
+    (r) => (r.results[0].context_sha256 = "b".repeat(64)),
+    (r) => (r.results[0].route_version = null),
+    (r) => (r.results[0].usage.cost = 0),
     (r) => (r.results[0].provider = "Google AI Studio"),
     (r) => (r.results[0].latency_ms = 25001),
     (r) => (r.results[0].latency_ms = -1),
@@ -188,7 +204,7 @@ test("unknown spend, absent provider, duplicate cases, slow calls and changed pr
   }
 });
 test("evaluation fixtures contain no production project IDs or destinations", async () => {
-  const raw = await readFile(new URL("./fixtures.v5.json", import.meta.url), "utf8");
+  const raw = await readFile(new URL("./fixtures.v6.json", import.meta.url), "utf8");
   assert.equal(/https?:\/\//.test(raw), false);
   assert.equal(/sk-or-v1-|service_role|SUPABASE_SERVICE_ROLE_KEY/.test(raw), false);
 });
@@ -324,7 +340,7 @@ async function fixtureTree() {
   await symlink(join(process.cwd(), "node_modules"), join(dir, "node_modules"), "dir");
   return dir;
 }
-test("v5 binds prompt content and identity even if someone refreshes only file hashes", async () => {
+test("v6 binds prompt content and identity even if someone refreshes only file hashes", async () => {
   const dir = await fixtureTree();
   try {
     const path = "src/lib/prompts/private-v1.ts";
@@ -341,7 +357,7 @@ test("v5 binds prompt content and identity even if someone refreshes only file h
     await rm(dir, { recursive: true, force: true });
   }
 });
-test("v5 refuses missing prompt pins, wrong versions, changed schema, forged quote catalog or changed evidence", async () => {
+test("v6 refuses missing prompt pins, wrong versions, changed schema, forged quote catalog or changed evidence", async () => {
   let mutationIndex = 0;
   for (const mutate of [
     (f) => delete f.source_sha256["src/lib/prompts/private-v1.ts"],

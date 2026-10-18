@@ -8,6 +8,12 @@ import { loadBoundedAIContext } from "./ai/context.server";
 import { validateGroundedOutput } from "./prompts/grounding-v2";
 import { prepareProvenanceWriter } from "./prompts/provenance.server";
 import { budgetInputBinding, prepareAIBudget, trustedGatewayUsage } from "./ai/budget.server";
+import {
+  preflightEvaluationKey,
+  verifyEvaluationIdentity,
+  verifyEvaluationRoute,
+} from "./ai/evaluation.server";
+import { evaluationReceiptSchema } from "./ai/evaluation-contract";
 import type { SupabaseClient } from "@supabase/supabase-js";
 
 export const generateAI = createServerFn({ method: "POST" })
@@ -15,6 +21,7 @@ export const generateAI = createServerFn({ method: "POST" })
   .inputValidator((d: unknown) => aiRequestSchema.parse(d))
   .handler(async ({ data, context }) => {
     const sb = context.supabase;
+    if (data.withEvaluation) await verifyEvaluationIdentity(sb, context.userId);
     const { data: p, error: projectError } = await sb
       .from("projects")
       .select("*")
@@ -61,6 +68,8 @@ export const generateAI = createServerFn({ method: "POST" })
     });
     let claimStarted = false;
     try {
+      if (budget.route.purpose === "eval_only" && !data.withEvaluation)
+        throw new Error("Use the bounded synthetic evaluation receipt for this route.");
       const { data: fresh, error: freshError } = await sb
         .from("projects")
         .select("*")
@@ -81,8 +90,18 @@ export const generateAI = createServerFn({ method: "POST" })
         throw new Error(
           "AI processing choices or source material changed. Review the current material before requesting a new draft.",
         );
+      if (data.withEvaluation) {
+        await verifyEvaluationIdentity(sb, context.userId);
+        verifyEvaluationRoute(
+          budget.route,
+          context.userId,
+          p.id,
+          budgetInputBinding(assembled).contextSha256,
+        );
+        await preflightEvaluationKey(key, budget.route);
+      }
       claimStarted = true; // Set BEFORE awaiting: a lost acknowledgement must never permit cancellation/dispatch.
-      await budget.claim();
+      const claim = await budget.claim();
       let result;
       try {
         result = await requestStructuredDraft({
@@ -140,6 +159,25 @@ export const generateAI = createServerFn({ method: "POST" })
         operationId: data.operationId,
         grounding: grounded.receipt,
       });
+      if (data.withEvaluation)
+        return {
+          draft: grounded.draft,
+          grounding: grounded.grounding,
+          evaluation: evaluationReceiptSchema.parse({
+            operationId: data.operationId,
+            attemptId: claim.attemptId,
+            contextSha256: budgetInputBinding(assembled).contextSha256,
+            routeVersion: budget.route.version,
+            originId,
+            model: result.actualModel,
+            provider: result.provider,
+            generationId: result.generationId,
+            attempts: result.attempts,
+            finishReason: result.finishReason,
+            latencyMs: result.latencyMs,
+            usage: result.usage,
+          }),
+        };
       return data.withOrigin ? { data: grounded.draft, originId } : grounded.draft;
     } catch (error) {
       if (!claimStarted) {

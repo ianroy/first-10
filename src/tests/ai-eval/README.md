@@ -1,6 +1,6 @@
 # Existing-kind AI evaluation
 
-**Offline harness verified; model quality not evaluated.** The v5 package uses fictional inputs and hand-authored outputs. Provider calls, secret reads, human quality reviews and production routing changes are absent. General paid AI remains disabled pending reviewed routing, bounded synthetic comparisons and human review. The fixed fictional workshop practice is separate.
+**Offline harness verified; model quality not evaluated.** The v6 package uses fictional inputs and hand-authored outputs. Provider calls, secret reads, human quality reviews and production routing changes are absent. General paid AI remains disabled pending reviewed routing, bounded synthetic comparisons and human review. The fixed fictional workshop practice is separate.
 
 ## Run with Node 22
 
@@ -9,15 +9,15 @@ node scripts/eval-ai.mjs --plan
 node scripts/eval-ai.mjs --baseline
 node --test src/tests/ai-eval/runner.test.mjs
 npx vitest run src/tests/ai-003/fixture-parity.test.ts
-node scripts/eval-ai.mjs --export --out /tmp/first-ten-eval-v5
-node scripts/eval-ai.mjs --score /tmp/first-ten-eval-v5/results.json --review /tmp/first-ten-eval-v5/review.json
+node scripts/eval-ai.mjs --export --out /tmp/first-ten-eval-v6
+node scripts/eval-ai.mjs --score /tmp/first-ten-eval-v6/results.json --review /tmp/first-ten-eval-v6/review.json
 ```
 
-The untouched exported packet must fail scoring: results are `not_run`, costs unknown and reviews unfilled. The new export directory uses 0700 and files 0600. Normal `npm test` runs actual-handler parity plus all 19 Node harness checks. `--plan` and `--baseline` forbid network and key access in tests. `--run` stays disabled regardless of credentials. Every future provider call must use authenticated `generateAI` and its database accounting/source fence.
+The untouched exported packet must fail scoring: results are `not_run`, costs unknown and reviews unfilled. The new export directory uses 0700 and files 0600. Normal `npm test` runs actual-handler parity plus all 19 Node harness checks. `--plan` and `--baseline` forbid network and key access in tests. The offline script’s `--run` stays disabled. The separate `scripts/eval-ai-paid.mjs` requires an explicitly reviewed private local plan, exact synthetic namespace, actual dedicated capped serving key, DB allowances and opening hold. Every provider call uses authenticated `generateAI` and its database accounting/source fence. No paid evaluation was run.
 
 ## Immutable snapshots and actual code parity
 
-Published fixture versions v1–v4 and baseline/results v2–v4 remain byte-for-byte historical evidence. Active `fixtures.v5.json` binds sixteen exact production files, including the actual context assembler, private-v2 prompt/schema, grounding validator, gateway, budget adapter, provenance adapter and migrations 11000/14000/17000. Each case binds exact prompt/schema IDs and versions, contract content hash, literal system/user/schema, canonical budget input hash and UTF-8 byte length, selected source identities/permission revisions and packing omission counts. Refreshing hashes alone cannot approve changed wording: loader tests mutate the actual frozen prompt module and refresh its hash, then require parity failure.
+Published fixture versions v1–v5 and baseline/results v2–v5 remain byte-for-byte historical evidence. Active `fixtures.v6.json` binds eighteen exact production files, including the actual context assembler, private-v2 prompt/schema, grounding validator, gateway, budget adapter, provenance adapter and migrations 11000/14000/17000. Each case binds exact prompt/schema IDs and versions, contract content hash, literal system/user/schema, canonical budget input hash and UTF-8 byte length, selected source identities/permission revisions and packing omission counts. Refreshing hashes alone cannot approve changed wording: loader tests mutate the actual frozen prompt module and refresh its hash, then require parity failure.
 
 Eight actual-handler cases supply a synthetic version-2 RPC envelope, pass through the real assembler/validator, and compare the provider arguments and fenced budget manifest against the fixture. Source permission logic itself is separately tested with real rollback SQL and overlapping source/withdrawal races; a mocked RPC acknowledgment does not certify ownership. Mocked billing fields are instrumentation, not measured provider usage. All tests substitute a synthetic key before invocation and assert its identity as a boolean before any full argument diff.
 
@@ -32,7 +32,7 @@ The versioned fixture RPC projection retains literal content, excludes explicitl
 
 The original long input remains intact. The additional repeated log is one unverified fictional source, not independent corroboration. A provider request longer than 14,000 characters exercises whole-record packing. Oversized records are counted and withheld, never sliced. Tests separately verify Unicode, deterministic packing, malformed scopes and preserved originals.
 
-`build-fixtures-v5.mjs` records how v5 was authored from immutable v4 inputs/baseline and the actual current assembler. It uses exclusive creation and refuses to overwrite an existing v5 artifact. Do not run it as a hash refresh. If any bound source changes, review the semantics and create a new immutable version with actual-handler parity; preserve all prior files. The source commit is provenance context; exact file and per-case content hashes are the runtime gate.
+`build-fixtures-v6.mjs` records how v6 was authored from immutable v5 inputs/baseline and the actual current assembler. It uses exclusive creation and refuses to overwrite an existing v6 artifact. Do not run it as a hash refresh. If any bound source changes, review the semantics and create a new immutable version with actual-handler parity; preserve all prior files. The source commit is provenance context; exact file and per-case content hashes are the runtime gate.
 
 ## Structured grounding and scoring
 
@@ -44,12 +44,14 @@ A technical report must contain eight distinct cases and generation IDs, current
 
 ## Preserved offline baseline
 
-`evals/offline-baseline.v5.json` has eight hand-authored valid wrappers and nine deliberately invalid cases, including forged source IDs and hidden omitted evidence. `evals/offline-results.v5.json` records their reproducible checks. Every expected pass and rejection succeeds. These are checker tests, not model outputs or measured model-quality results. No human pass, endpoint approval or real provider cost is claimed.
+`evals/offline-baseline.v6.json` has eight hand-authored valid wrappers and nine deliberately invalid cases, including forged source IDs and hidden omitted evidence. `evals/offline-results.v6.json` records their reproducible checks. Every expected pass and rejection succeeds. These are checker tests, not model outputs or measured model-quality results. No human pass, endpoint approval or real provider cost is claimed.
 
-## Paid mode remains unavailable
+## Bounded paid software; live execution still gated
 
 The future comparison ceiling is still $0.90, eight sequential synthetic calls, one attempt and 2,500 output tokens each. This is inside the approved global $25 run allocation, never additional money. The historical byte-proxy estimate is an offline planning preview, not a tokenizer proof or authorization. Actual accounting reserves the operator-reviewed full endpoint input ceiling plus bounded billable output and retains unknown charges. No default routes/user/project allowances are seeded.
 
-AI-004 supplies atomic accounting and a one-attempt gateway; AI-007 now supplies bounded source context and a serialized permission/version dispatch fence. Those software controls do not approve a model. AI-005 routing/privacy review and AI-006 actual comparisons/human review remain required. An `eval_only` route must bind a dedicated authorized synthetic user/project, trusted synthetic account marker and exact approved canonical context hashes. A plan hash is not product quality evidence. This leaves AI-003's paid-mode subtask partial honestly.
+AI-004 supplies atomic accounting and a one-attempt gateway; AI-007 now supplies bounded source context and a serialized permission/version dispatch fence. Those software controls do not approve a model. AI-005 routing/privacy review and AI-006 actual comparisons/human review remain required. An `eval_only` route must bind a dedicated authorized synthetic user/project, trusted synthetic account marker and exact approved canonical context hashes. A plan hash is not product quality evidence. The local-only bounded paid adapter now exists; live execution and human quality review remain unperformed. See [the exact operator gates and runtime instructions](../../../docs/ai-evaluation-operations.md).
 
-The dated `route-evidence.v1.json` remains historical research. No price/eligibility metadata retrieval was repeated here. A passing report only permits operator review; it never changes configuration or deploys. Rollback of this optional harness does not remove the app's budget, permission or source gates.
+The dated `route-evidence.v1.json` remains historical research. No live price/eligibility retrieval or paid evaluation was performed during implementation. A passing report only permits operator review; it never changes configuration or deploys. Rollback of this optional harness does not remove the app's budget, permission or source gates.
+
+The v6 fixed child IDs are distinct per case. The guarded schema-only clone rehearsal compared all eight complete real permission-RPC projections under sequential authenticated staging, preserved consent history, rolled back and verified clone removal. The actual compiled SDK invocation was separately tested against the real authentication middleware with external network blocked. These proofs are software/SQL evidence, not model-quality or paid-response evidence.

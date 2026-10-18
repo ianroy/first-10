@@ -8,8 +8,14 @@ export const aiRequestSchema = z
     projectId: z.string().uuid(),
     operationId: z.string().uuid(),
     withOrigin: z.boolean().optional(),
+    withEvaluation: z.literal(true).optional(),
   })
-  .strict();
+  .strict()
+  .refine(
+    (request) =>
+      !request.withEvaluation || (request.kind !== "marketing_demo" && !request.withOrigin),
+    "Evaluation receipts are separate from product/demo responses.",
+  );
 
 const text = z.string().trim().min(1).max(2400);
 const texts = z.array(text).max(20);

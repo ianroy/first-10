@@ -1,0 +1,74 @@
+{
+  "version": "first-ten-software-verification-v6",
+  "recorded_at": "2026-10-18T23:15:42.577Z",
+  "fixture_sha256": "a71c3f6b9cd195205b9899a6f2e52f2c641cd3a5a895067716a898d916a7d34d",
+  "source_sha256": {
+    "src/lib/ai.functions.ts": "fb2a78d05d57d69d4bbd0ea2a6a21981ec62fbd07220fd99dc7bf281bdd29836",
+    "src/lib/ai/contracts.ts": "311a690cc2fd4d35ee3738ab6020e85b0b8ab58893588339faff324ddbe98658",
+    "src/lib/ai/gateway.server.ts": "11feb5bf7be0c4b21e00964e06b4e6168d0dd44304880b5964f65aa5cfc16360",
+    "src/lib/ai/evaluation.server.ts": "88aad160191a35c03dc91077f75ee7bdb5eac443646cfd7a3db380941f91c1c7",
+    "src/lib/ai/evaluation-contract.ts": "80cf6c95316e97e7e4d099ad815a5bc577f5200267340847cc31a5599ced713f",
+    "src/lib/prompts/private-v1.ts": "52ac515036de8e382634f9293ea36aa379fab5e891378380a7340c4d3a54c726",
+    "src/lib/consent.ts": "5292bba869a4c0044e34953ae768df4775fd80c2fe6c61284ead813ebc8914c0",
+    "supabase/migrations/20261018011000_processing_consent.sql": "67346a6e8707ea2851506055fc9c3c20d88748c090e242247d9f80217ed84cd0",
+    "src/lib/ai/budget.server.ts": "f8018497cd65f155287a365ce1f47be5194f152d298e058c0091fa25abf2be62",
+    "src/lib/ai/budget-contract.ts": "cd39576eebf768722038316ee1015442fefead8724502e5e1e88b8e6cccb1736",
+    "supabase/migrations/20261018014000_ai_usage_budget.sql": "886cf1592d96bb848a33566f347be4a1e2c0d58233c7930f3324906d67f95580",
+    "src/hooks/useAIIntent.ts": "5df0e88c0084e2e6c4c835547a47e3fd6f65ff726bc6c8a8a3f01f1cc521c011",
+    "src/lib/ai/context.server.ts": "a3dbd2562dbadcff95935033a1d23dfcff0d2395b8a21e4fcda5d5efd59cac3a",
+    "src/lib/prompts/context-v2.ts": "74d334228f054898fcd27c17b3f4218d08d2e76f860adadab2d51f38898e8ef6",
+    "src/lib/prompts/grounding-v2.ts": "7649f73cdce3af1a53afbe008543e5afb19a60b98e3b9c4bba3c166a99f8224a",
+    "src/lib/prompts/private-v2.ts": "08c16551ef29443980455699e2497b1b0eb579b7e86259cd2742874f82fb7300",
+    "src/lib/prompts/provenance.server.ts": "bbb1408ce16e2c59b7b03f7c2c5ed121b0cc1e8a8e66826a2c1e74bec8cd7172",
+    "supabase/migrations/20261018017000_ai_context_sources.sql": "dba8e6c08b9708af50c180e74306a361cabc3ee0a8ad0ec1fb0fe061e858137f"
+  },
+  "application_tests": {
+    "passed": 982,
+    "skipped": 11,
+    "passing_files": 100,
+    "skipped_files": 1,
+    "log_sha256": "0a738f17748954de886e13b1cfa6743c3f73e0a8f9d78c24a4b6777676361024"
+  },
+  "ai003_tests": {
+    "passed": 26,
+    "files": 3,
+    "embedded_node_checks": 19,
+    "log_sha256": "fd282effac9a3a05f60e4b1df6ee3560ef124d8cbfcf2c1790659a1f56721ef5"
+  },
+  "runtime_adapter": {
+    "passed": 4,
+    "actual_compiled_generateAI": true,
+    "actual_auth_middleware_denial": true,
+    "stale_function_rejected": true,
+    "external_network_blocked": true,
+    "provider_calls": 0,
+    "log_sha256": "f7d6cd0135d9df14fc37a6f323803fd4288cd18f18c01cf30200f159656e6dd9"
+  },
+  "sql_parity": {
+    "cases": 8,
+    "actual_full_permission_rpc_json_equal": true,
+    "authenticated_rls_and_consent_rpc": true,
+    "transaction": "rolled_back",
+    "clone_removed_and_absence_verified": true,
+    "source_database_changed": false,
+    "hosted_changed": false,
+    "provider_calls": 0,
+    "fixture_sha256_at_completed_run": "c10a625221460513983d8b2b7c04de901b78275d94ea152f09fdf0151c1b3cd3",
+    "final_case_payload_sha256": "a8e67c475ef5f7427a9b1e8f5c422b655b686573a30d6db9d9bb02fd51458da3",
+    "final_metadata_repeat": "pending_function_cell_51",
+    "note": "The final fixture metadata changes only serving-source pins; all eight SQL case projections are unchanged. A matching final-metadata repeat is pending; not claimed complete."
+  },
+  "checks": {
+    "typecheck": "passed",
+    "scoped_lint": "passed",
+    "format": "passed",
+    "vercel_build": "passed",
+    "build_log_sha256": "6ff3198dcf9209a478958d00aba706298680b393eae547898286e73099ea401e",
+    "unapproved_plan": "refused_before_credentials_network_database"
+  },
+  "paid_calls": 0,
+  "model_quality_evaluated": false,
+  "human_review": "not_performed",
+  "production_policies_changed": false,
+  "production_promotion": false
+}

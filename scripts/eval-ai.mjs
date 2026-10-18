@@ -5,9 +5,10 @@ import { readFile, mkdir, writeFile } from "node:fs/promises";
 import { dirname, resolve } from "node:path";
 import { fileURLToPath, pathToFileURL } from "node:url";
 import { isDeepStrictEqual } from "node:util";
+import { evaluationReceiptSchema } from "../src/lib/ai/evaluation-contract.ts";
 import { assembleAIContextV2 } from "../src/lib/prompts/context-v2.ts";
 import { validateGroundedOutput } from "../src/lib/prompts/grounding-v2.ts";
-import { derivePermissionFixtureV5, sourceCatalog } from "../src/tests/ai-eval/fixture-rpc-v5.mjs";
+import { derivePermissionFixtureV6, sourceCatalog } from "../src/tests/ai-eval/fixture-rpc-v6.mjs";
 
 const ROOT = resolve(dirname(fileURLToPath(import.meta.url)), "..");
 export const MODEL = "google/gemini-2.5-flash-lite";
@@ -17,11 +18,13 @@ export const OUTPUT_CAP = 2500;
 export const MAX_CALLS = 8;
 const KINDS = ["questions", "synthesis", "stage2", "stage3"];
 export const hash = (value) => createHash("sha256").update(value).digest("hex");
-export const FIXTURE_PATH = "src/tests/ai-eval/fixtures.v5.json";
+export const FIXTURE_PATH = "src/tests/ai-eval/fixtures.v6.json";
 export const SOURCE_PATHS = [
   "src/lib/ai.functions.ts",
   "src/lib/ai/contracts.ts",
   "src/lib/ai/gateway.server.ts",
+  "src/lib/ai/evaluation.server.ts",
+  "src/lib/ai/evaluation-contract.ts",
   "src/lib/prompts/private-v1.ts",
   "src/lib/consent.ts",
   "supabase/migrations/20261018011000_processing_consent.sql",
@@ -70,13 +73,13 @@ export function assembleFixtureContext(c) {
   return assembleAIContextV2(c.permission_context, c.permission_context.projectId, c.kind).assembled
     .user;
 }
-export const derivePermissionFixture = derivePermissionFixtureV5;
+export const derivePermissionFixture = derivePermissionFixtureV6;
 export async function loadFixtures(root = ROOT) {
   const raw = await readFile(resolve(root, FIXTURE_PATH), "utf8");
   const fixture = JSON.parse(raw);
   if (
     !plain(fixture) ||
-    fixture.version !== "first-ten-existing-kinds-v5" ||
+    fixture.version !== "first-ten-existing-kinds-v6" ||
     typeof fixture.source_commit !== "string" ||
     !/^[a-f0-9]{40}$/.test(fixture.source_commit) ||
     !Array.isArray(fixture.cases) ||
@@ -399,6 +402,13 @@ export function promotionGate(report, review, fixtures) {
       production_changed: false,
       blockers: ["Malformed run report."],
     };
+  if (
+    !isDeepStrictEqual(report.source_sha256, fixtures.source_sha256) ||
+    !/^http:\/\/127\.0\.0\.1:55[89][0-9]{2}$/.test(report.origin ?? "") ||
+    !/^[A-Za-z0-9_-]{10,1024}$/.test(report.functionId ?? "") ||
+    !/^[a-f0-9]{64}$/.test(report.transformedSha256 ?? "")
+  )
+    blockers.push("Missing exact runtime/source/origin binding.");
   if (report.execution_path !== "generateAI")
     blockers.push("No execution evidence from the authorized generateAI path.");
   if (report.fixture_sha256 !== fixtures.fixture_sha256 || report.version !== fixtures.version)
@@ -417,6 +427,9 @@ export function promotionGate(report, review, fixtures) {
   )
     blockers.push("Incomplete or duplicate run.");
   const results = Array.isArray(report.results) ? report.results : [];
+  for (const field of ["operation_id", "attempt_id"])
+    if (new Set(results.map((r) => r?.[field])).size !== results.length)
+      blockers.push("Operation/attempt identities must be distinct.");
   const generationIds = results.map((r) => r?.generation_id);
   if (new Set(generationIds).size !== generationIds.length)
     blockers.push("Generation IDs must identify distinct calls.");
@@ -438,7 +451,23 @@ export function promotionGate(report, review, fixtures) {
       !r.provider ||
       r.provider !== report.endpoint?.provider ||
       !label(r.generation_id) ||
-      r.finish_reason !== "stop"
+      r.finish_reason !== "stop" ||
+      r.context_sha256 !== c.budget_binding_sha256 ||
+      r.usage?.cost !== r.cost_usd ||
+      !evaluationReceiptSchema.safeParse({
+        operationId: r.operation_id,
+        attemptId: r.attempt_id,
+        contextSha256: r.context_sha256,
+        routeVersion: r.route_version,
+        originId: r.origin_id,
+        model: r.model,
+        provider: r.provider,
+        generationId: r.generation_id,
+        attempts: r.actual_calls,
+        finishReason: r.finish_reason,
+        latencyMs: r.latency_ms,
+        usage: r.usage,
+      }).success
     )
       blockers.push(`${c.id}: technical/spend evidence incomplete or failed.`);
     if (!humanPass(review, c, r?.output))
@@ -520,7 +549,7 @@ async function exportPacket(fixtures, outputDirectory) {
 
 export async function runOfflineBaseline(fixtures, root = ROOT) {
   const baseline = JSON.parse(
-    await readFile(resolve(root, "evals/offline-baseline.v5.json"), "utf8"),
+    await readFile(resolve(root, "evals/offline-baseline.v6.json"), "utf8"),
   );
   if (
     baseline.fixture_sha256 !== fixtures.fixture_sha256 ||
