@@ -18,6 +18,7 @@ import { Route as AuthenticatedInterviewRouteImport } from './routes/_authentica
 import { Route as AuthenticatedLearningsRouteImport } from './routes/_authenticated/learnings'
 import { Route as AuthenticatedOutreachRouteImport } from './routes/_authenticated/outreach'
 import { Route as AuthenticatedSetupRouteImport } from './routes/_authenticated/setup'
+import { Route as ApiHealthRouteImport } from './routes/api.health'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
@@ -63,6 +64,11 @@ const AuthenticatedSetupRoute = AuthenticatedSetupRouteImport.update({
   path: '/setup',
   getParentRoute: () => AuthenticatedRouteRoute,
 } as any)
+const ApiHealthRoute = ApiHealthRouteImport.update({
+  id: '/api/health',
+  path: '/api/health',
+  getParentRoute: () => rootRouteImport,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
@@ -73,6 +79,7 @@ export interface FileRoutesByFullPath {
   '/learnings': typeof AuthenticatedLearningsRoute
   '/outreach': typeof AuthenticatedOutreachRoute
   '/setup': typeof AuthenticatedSetupRoute
+  '/api/health': typeof ApiHealthRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
@@ -83,6 +90,7 @@ export interface FileRoutesByTo {
   '/learnings': typeof AuthenticatedLearningsRoute
   '/outreach': typeof AuthenticatedOutreachRoute
   '/setup': typeof AuthenticatedSetupRoute
+  '/api/health': typeof ApiHealthRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
@@ -95,6 +103,7 @@ export interface FileRoutesById {
   '/_authenticated/learnings': typeof AuthenticatedLearningsRoute
   '/_authenticated/outreach': typeof AuthenticatedOutreachRoute
   '/_authenticated/setup': typeof AuthenticatedSetupRoute
+  '/api/health': typeof ApiHealthRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
@@ -107,6 +116,7 @@ export interface FileRouteTypes {
     | '/learnings'
     | '/outreach'
     | '/setup'
+    | '/api/health'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
@@ -117,6 +127,7 @@ export interface FileRouteTypes {
     | '/learnings'
     | '/outreach'
     | '/setup'
+    | '/api/health'
   id:
     | '__root__'
     | '/'
@@ -128,12 +139,14 @@ export interface FileRouteTypes {
     | '/_authenticated/learnings'
     | '/_authenticated/outreach'
     | '/_authenticated/setup'
+    | '/api/health'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   AuthenticatedRouteRoute: typeof AuthenticatedRouteRouteWithChildren
   AuthRoute: typeof AuthRoute
+  ApiHealthRoute: typeof ApiHealthRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -201,6 +214,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthenticatedSetupRouteImport
       parentRoute: typeof AuthenticatedRouteRoute
     }
+    '/api/health': {
+      id: '/api/health'
+      path: '/api/health'
+      fullPath: '/api/health'
+      preLoaderRoute: typeof ApiHealthRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
@@ -229,6 +249,7 @@ const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   AuthenticatedRouteRoute: AuthenticatedRouteRouteWithChildren,
   AuthRoute: AuthRoute,
+  ApiHealthRoute: ApiHealthRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)

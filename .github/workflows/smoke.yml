@@ -1,0 +1,31 @@
+name: Deployment public smoke
+
+on:
+  deployment_status:
+  workflow_dispatch:
+    inputs:
+      url:
+        description: Deployment HTTPS origin
+        required: true
+        default: https://first-10-three.vercel.app
+
+permissions:
+  contents: read
+
+jobs:
+  public-runtime:
+    if: github.event_name == 'workflow_dispatch' || github.event.deployment_status.state == 'success'
+    runs-on: ubuntu-latest
+    timeout-minutes: 3
+    steps:
+      - uses: actions/checkout@v5
+      - uses: actions/setup-node@v5
+        with:
+          node-version: "22"
+          package-manager-cache: false
+      - name: Check smoke runner fixtures
+        run: node --test src/tests/ops-002/smoke.test.mjs
+      - name: Check the completed deployment
+        env:
+          SMOKE_URL: ${{ inputs.url || github.event.deployment_status.environment_url }}
+        run: node scripts/smoke.mjs

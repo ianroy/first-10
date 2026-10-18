@@ -14,7 +14,9 @@
     "test:watch": "vitest",
     "typecheck": "tsc --noEmit",
     "roadmap:check": "node scripts/roadmap.mjs --check",
-    "roadmap:test": "node --test scripts/roadmap.test.mjs"
+    "roadmap:test": "node --test scripts/roadmap.test.mjs",
+    "smoke": "node scripts/smoke.mjs",
+    "smoke:test": "node --test src/tests/ops-002/smoke.test.mjs"
   },
   "overrides": {
     "rolldown": "1.2.1"
