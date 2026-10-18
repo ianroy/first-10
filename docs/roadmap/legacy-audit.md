@@ -30,7 +30,7 @@ Generated from [tasks.json](tasks.json). Historical notes remain in [the history
 | I3-002 | expanded | EV-007 | Manual first-ask guidance plus bounded low-cost rewrite, never automatic sending. Original dated Notes remain in FEATUREROADMAP_history.md. |
 | L-001 | retained | L-001 | Scheduled by Iteration 5; no implementation or validation claimed. Original dated Notes remain in FEATUREROADMAP_history.md. |
 | L-002 | retained | L-002 | Scheduled by Iteration 5; no implementation or validation claimed. Original dated Notes remain in FEATUREROADMAP_history.md. |
-| P-001 | split | WEB-003, P-001b | Current technical schematics proceed now; five-minute pitch deck with real outcome evidence remains deferred. Original dated Notes remain in FEATUREROADMAP_history.md. |
+| P-001 | split | WEB-003, P-001b | Current technical schematics are complete. The owner explicitly promoted an event pitch deck for the Babson workshop; current/proposed capabilities and fictional examples are labeled, with no invented outcome evidence. Original dated Notes remain in FEATUREROADMAP_history.md. |
 | R0-001 | complete | R0-001 | Workspace created; no participant findings implied. Original dated Notes remain in FEATUREROADMAP_history.md. |
 | R0-002 | complete | R0-002 | Inspiration only; direct Reddit audit remains cancelled. Original dated Notes remain in FEATUREROADMAP_history.md. |
 | R0-003 | dropped | — | Direct Reddit audit cancelled by owner; preserve supplied signal brief and historical rankings without resuming collection. Original dated Notes remain in FEATUREROADMAP_history.md. |

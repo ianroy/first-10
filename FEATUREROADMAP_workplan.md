@@ -20,23 +20,23 @@ Statuses are `not_started`, `in_progress`, `blocked`, `complete`, `deferred`, `d
 
 ```yaml
 current_iteration: 5
-current_stage: P0_with_parallel_R0
+current_stage: P1_foundation_with_parallel_P2_and_R0
 status: in_progress
 last_task_done: MKT-001
-next_task: OPS-001
-next_parallel_wave: [OPS-001, SEC-001, VP-007]
-active_claims: [SEC-002, BR-002]
+next_task: SEC-003
+next_parallel_wave: [SEC-003, BR-004, EDU-001]
+active_claims: [SEC-002, BR-002, VP-008, P-001b]
 research_gate: not_passed
 foundation_gate: not_passed
 realtime_go: pending
 last_updated: 2026-10-18
 last_documentation_update: "2026-10-17: DOC-002 added README team credits with names only; removed the existing email link."
 resume_hint: >-
-  Autonomous implementation started for tomorrow’s Babson mini hackathon.
-  OPS-001 passed and is integrated; SEC-001 / VP-007 remain in progress.
-  Prioritize a polished, reliable founder and educator demo for 45 academics. BR-001 and WEB-003 are also independently ready for later slots.
-  Research interviews/pilot still need humans. F-007 now has verified green CI;
-  F-009b preview setup, privacy, grounded AI and budget enforcement remain open.
+  Autonomous 10-hour Babson implementation run is active; see docs/roadmap/autonomous-run.md.
+  OPS-001, SEC-001, VP-007, WEB-001/003, BR-001, AI-001 and MKT-001 are integrated.
+  SEC-002 real policy harness, BR-002 tokens, VP-008 protocol and the event deck are claimed.
+  Prioritize ownership fixes, logo/favicon, a public fictional demo and educator lesson/page.
+  Keep current/proposed labels honest; no paid AI calls yet. Human interviews/pilot remain open.
 ```
 
 **Audit basis:** product source and documentation at `7006f87`, plus the concurrent team-credits commit `a2d69a3`, with repository research files rechecked. F-007 is now complete: [GitHub CI run 39092157827](https://github.com/ianroy/first-10/actions/runs/39092157827) succeeded for that commit. The earlier local typecheck, 17 tests, Vercel build and scoped lint results remain in history. Six existing lint warnings and generated `.vercel` scanning motivate OPS-001. A green code pipeline does not verify live auth, RLS, model quality, research outcomes or preview configuration.

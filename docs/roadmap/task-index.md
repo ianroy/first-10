@@ -55,7 +55,7 @@ Build truthful public materials from current capabilities while research continu
 | EDU-002 Build a teaching subpage with usable resources | not_started | 0/3 | agent | S | EDU-001, BR-002, WEB-001 | — | src/routes/teach.tsx, src/components/teaching/**, public/teaching/** (2 more; inspect --task); locks: route-integration |
 | EDU-004 Rehearse lesson materials with an instructor before the class pilot | not_started | 0/3 | human | S | EDU-001 | — | research/teaching-rehearsal.md, docs/teaching/**, public/teaching/**; locks: teaching-materials |
 | WEB-005 Verify public demo, teaching and brand journeys | not_started | 0/3 | agent | S | WEB-004, EDU-002, BR-003 | — | src/routes/public-pages.test.tsx, docs/marketing/release-check.md, src/tests/web-005/**; locks: — |
-| P-001b Factual five-minute sales/pitch deck after release evidence | not_started | 0/3 | agent | M | WEB-001, BR-001, MKT-001, WEB-003 | — | docs/demo/pitch/**, public/pitch/**; locks: — |
+| P-001b Factual five-minute sales/pitch deck after release evidence | in_progress | 0/3 | agent | M | WEB-001, BR-001, MKT-001, WEB-003 | — | docs/demo/pitch/**, public/pitch/**; locks: — |
 | MKT-001 Define the $0 marketing lab and its teaching contract | complete | 3/3 | agent | S | SEC-001, VP-007 | — | docs/marketing/marketing-lab-contract.md, docs/teaching/pedagogy-map.md; locks: — |
 | MKT-007 Extend the public demo with the marketing board | not_started | 0/3 | agent | S | MKT-001, WEB-002, BR-002 | — | src/components/demo/**, src/lib/demo/**, src/routes/demo.tsx (2 more; inspect --task); locks: route-integration |
 | BR-004 Create the First Ten logo and replace the favicon | not_started | 0/3 | agent | S | BR-001 | — | public/brand/**, public/favicon.svg, public/favicon.ico (4 more; inspect --task); locks: route-integration, brand-assets |
@@ -151,7 +151,7 @@ Human studies can run alongside engineering; unsupported outcomes remain hypothe
 | Task | Status | Subtasks complete | Owner | Size | Dependencies | Decisions | Write scope / locks |
 | --- | --- | --- | --- | --- | --- | --- | --- |
 | VP-007 Audit the promise, evidence and actual alternatives | complete | 3/3 | agent | S | VP-001, DOC-001 | — | research/value-prop.md, research/claim-ledger.md; locks: — |
-| VP-008 Revise interview guides and pre-register the learning protocol | not_started | 0/3 | agent | S | VP-007, VP-002 | — | research/value-test-plan.md, research/interviews/guide-founders.md, research/interviews/guide-instructors.md (2 more; inspect --task); locks: research-protocol |
+| VP-008 Revise interview guides and pre-register the learning protocol | in_progress | 0/3 | agent | S | VP-007, VP-002 | — | research/value-test-plan.md, research/interviews/guide-founders.md, research/interviews/guide-instructors.md (2 more; inspect --task); locks: research-protocol |
 | R0-004a Learn from the first three eligible founders | not_started | 0/3 | human | M | VP-008 | — | research/interviews/*-founder-*.md, research/founder-sample.md; locks: — |
 | R0-004b Complete the founder sample and seek counterexamples | not_started | 0/3 | human | M | R0-004a | — | research/interviews/*-founder-*.md, research/founder-sample.md; locks: — |
 | VP-003 Interview three to five instructors or program leads | not_started | 0/3 | human | M | VP-008 | — | research/interviews/*-instructor-*.md, research/instructor-sample.md; locks: — |

@@ -1583,13 +1583,13 @@
         "Resolve shared ownership before deleting an owner; test auth/account and application record cleanup together."
       ],
       "acceptance": [
-        "Export excludes others’ private notes and secrets.",
-        "Deletion cannot remove another owner’s project; failure/retry does not orphan unauthorized shares."
+        "Export excludes others\u2019 private notes and secrets.",
+        "Deletion cannot remove another owner\u2019s project; failure/retry does not orphan unauthorized shares."
       ],
       "verification_profile": "product",
       "verification": [
-        "Export excludes others’ private notes and secrets.",
-        "Deletion cannot remove another owner’s project; failure/retry does not orphan unauthorized shares.",
+        "Export excludes others\u2019 private notes and secrets.",
+        "Deletion cannot remove another owner\u2019s project; failure/retry does not orphan unauthorized shares.",
         "Run lint (exclude generated .vercel until OPS-001), typecheck, focused tests and NITRO_PRESET=vercel build; record actual outcomes. For data/roles run real isolated RLS tests; for new AI run versioned fixtures and the budgeted per-kind evaluation."
       ],
       "metric": "Export/deletion completion and failures.",
@@ -2042,7 +2042,7 @@
         "docs/roadmap/openrouter-plan.md",
         "src/lib/ai.functions.ts"
       ],
-      "goal": "Use the lowest-cost eligible model that passes each kind’s evaluations.",
+      "goal": "Use the lowest-cost eligible model that passes each kind\u2019s evaluations.",
       "steps": [
         "Recheck official model ids, endpoint schema support, price and data-policy eligibility.",
         "Set per-kind input/output limits and an explicit ordered fallback allowlist with maximum unit price.",
@@ -3780,7 +3780,7 @@
         "src/lib/stages.ts",
         "src/lib/data.ts"
       ],
-      "goal": "Measure First Ten adoption separately from each founder’s customer pipeline.",
+      "goal": "Measure First Ten adoption separately from each founder\u2019s customer pipeline.",
       "steps": [
         "Define visits, signups, project creation, first completed interview, accepted learning/next action and return with windows/denominators.",
         "Specify server-authoritative events versus optional anonymous attribution, deduplication and retention.",
@@ -4132,7 +4132,7 @@
         "stop_and_report": "If a required contract, test environment, human observation, budget or permission is missing, record the specific blocker. Continue another ready task; do not fabricate data or widen the write scope.",
         "handoff": "Report changed files, base/result commit, exact checks and outcomes, artifact/source ids, residual risks and the next eligible task. Only the coordinator edits task status, shared generated files and the main roadmap.",
         "integration": "Use a clean task branch/worktree from the coordinator base. Commit only this write scope. Migrations, generated types, route tree, dependency locks and shared entry points are serialized by the coordinator; never hand-edit generated output.",
-        "kind_approval": "Implement and test this kind’s authorized context adapter after its data services exist. Register schema/prompt/route and capture a capped held-out evaluation against the approved baseline, with dates, endpoint, actual cost and review. Foundation AI-008 does not automatically approve a new kind. Keep the kind disabled until its own scope, quality and budget criteria pass."
+        "kind_approval": "Implement and test this kind\u2019s authorized context adapter after its data services exist. Register schema/prompt/route and capture a capped held-out evaluation against the approved baseline, with dates, endpoint, actual cost and review. Foundation AI-008 does not automatically approve a new kind. Keep the kind disabled until its own scope, quality and budget criteria pass."
       },
       "notes": [
         {
@@ -4200,12 +4200,12 @@
       ],
       "acceptance": [
         "Class enrollment alone does not grant project/private-note read access.",
-        "Students cannot self-promote or attach another user’s project; teachers see only enrolled metadata allowed by contract."
+        "Students cannot self-promote or attach another user\u2019s project; teachers see only enrolled metadata allowed by contract."
       ],
       "verification_profile": "product",
       "verification": [
         "Class enrollment alone does not grant project/private-note read access.",
-        "Students cannot self-promote or attach another user’s project; teachers see only enrolled metadata allowed by contract.",
+        "Students cannot self-promote or attach another user\u2019s project; teachers see only enrolled metadata allowed by contract.",
         "Run lint (exclude generated .vercel until OPS-001), typecheck, focused tests and NITRO_PRESET=vercel build; record actual outcomes. For data/roles run real isolated RLS tests; for new AI run versioned fixtures and the budgeted per-kind evaluation."
       ],
       "metric": "Unauthorized class/project access: zero.",
@@ -4359,12 +4359,12 @@
       ],
       "acceptance": [
         "Teacher progress does not reveal unrelated projects, private contacts or hidden draft content.",
-        "Feedback writes are scoped to the teacher’s class/submission and remain attributable."
+        "Feedback writes are scoped to the teacher\u2019s class/submission and remain attributable."
       ],
       "verification_profile": "product",
       "verification": [
         "Teacher progress does not reveal unrelated projects, private contacts or hidden draft content.",
-        "Feedback writes are scoped to the teacher’s class/submission and remain attributable.",
+        "Feedback writes are scoped to the teacher\u2019s class/submission and remain attributable.",
         "Run lint (exclude generated .vercel until OPS-001), typecheck, focused tests and NITRO_PRESET=vercel build; record actual outcomes. For data/roles run real isolated RLS tests; for new AI run versioned fixtures and the budgeted per-kind evaluation."
       ],
       "metric": "Cross-class leakage and unauthorized feedback: zero.",
@@ -4618,7 +4618,7 @@
         "stop_and_report": "If a required contract, test environment, human observation, budget or permission is missing, record the specific blocker. Continue another ready task; do not fabricate data or widen the write scope.",
         "handoff": "Report changed files, base/result commit, exact checks and outcomes, artifact/source ids, residual risks and the next eligible task. Only the coordinator edits task status, shared generated files and the main roadmap.",
         "integration": "Use a clean task branch/worktree from the coordinator base. Commit only this write scope. Migrations, generated types, route tree, dependency locks and shared entry points are serialized by the coordinator; never hand-edit generated output.",
-        "kind_approval": "Implement and test this kind’s authorized context adapter after its data services exist. Register schema/prompt/route and capture a capped held-out evaluation against the approved baseline, with dates, endpoint, actual cost and review. Foundation AI-008 does not automatically approve a new kind. Keep the kind disabled until its own scope, quality and budget criteria pass."
+        "kind_approval": "Implement and test this kind\u2019s authorized context adapter after its data services exist. Register schema/prompt/route and capture a capped held-out evaluation against the approved baseline, with dates, endpoint, actual cost and review. Foundation AI-008 does not automatically approve a new kind. Keep the kind disabled until its own scope, quality and budget criteria pass."
       },
       "notes": [
         {
@@ -5034,7 +5034,7 @@
         "stop_and_report": "If a required contract, test environment, human observation, budget or permission is missing, record the specific blocker. Continue another ready task; do not fabricate data or widen the write scope.",
         "handoff": "Report changed files, base/result commit, exact checks and outcomes, artifact/source ids, residual risks and the next eligible task. Only the coordinator edits task status, shared generated files and the main roadmap.",
         "integration": "Use a clean task branch/worktree from the coordinator base. Commit only this write scope. Migrations, generated types, route tree, dependency locks and shared entry points are serialized by the coordinator; never hand-edit generated output.",
-        "kind_approval": "Implement and test this kind’s authorized context adapter after its data services exist. Register schema/prompt/route and capture a capped held-out evaluation against the approved baseline, with dates, endpoint, actual cost and review. Foundation AI-008 does not automatically approve a new kind. Keep the kind disabled until its own scope, quality and budget criteria pass."
+        "kind_approval": "Implement and test this kind\u2019s authorized context adapter after its data services exist. Register schema/prompt/route and capture a capped held-out evaluation against the approved baseline, with dates, endpoint, actual cost and review. Foundation AI-008 does not automatically approve a new kind. Keep the kind disabled until its own scope, quality and budget criteria pass."
       },
       "notes": [
         {
@@ -5126,7 +5126,7 @@
         "stop_and_report": "If a required contract, test environment, human observation, budget or permission is missing, record the specific blocker. Continue another ready task; do not fabricate data or widen the write scope.",
         "handoff": "Report changed files, base/result commit, exact checks and outcomes, artifact/source ids, residual risks and the next eligible task. Only the coordinator edits task status, shared generated files and the main roadmap.",
         "integration": "Use a clean task branch/worktree from the coordinator base. Commit only this write scope. Migrations, generated types, route tree, dependency locks and shared entry points are serialized by the coordinator; never hand-edit generated output.",
-        "kind_approval": "Implement and test this kind’s authorized context adapter after its data services exist. Register schema/prompt/route and capture a capped held-out evaluation against the approved baseline, with dates, endpoint, actual cost and review. Foundation AI-008 does not automatically approve a new kind. Keep the kind disabled until its own scope, quality and budget criteria pass."
+        "kind_approval": "Implement and test this kind\u2019s authorized context adapter after its data services exist. Register schema/prompt/route and capture a capped held-out evaluation against the approved baseline, with dates, endpoint, actual cost and review. Foundation AI-008 does not automatically approve a new kind. Keep the kind disabled until its own scope, quality and budget criteria pass."
       },
       "notes": [
         {
@@ -5218,7 +5218,7 @@
         "stop_and_report": "If a required contract, test environment, human observation, budget or permission is missing, record the specific blocker. Continue another ready task; do not fabricate data or widen the write scope.",
         "handoff": "Report changed files, base/result commit, exact checks and outcomes, artifact/source ids, residual risks and the next eligible task. Only the coordinator edits task status, shared generated files and the main roadmap.",
         "integration": "Use a clean task branch/worktree from the coordinator base. Commit only this write scope. Migrations, generated types, route tree, dependency locks and shared entry points are serialized by the coordinator; never hand-edit generated output.",
-        "kind_approval": "Implement and test this kind’s authorized context adapter after its data services exist. Register schema/prompt/route and capture a capped held-out evaluation against the approved baseline, with dates, endpoint, actual cost and review. Foundation AI-008 does not automatically approve a new kind. Keep the kind disabled until its own scope, quality and budget criteria pass."
+        "kind_approval": "Implement and test this kind\u2019s authorized context adapter after its data services exist. Register schema/prompt/route and capture a capped held-out evaluation against the approved baseline, with dates, endpoint, actual cost and review. Foundation AI-008 does not automatically approve a new kind. Keep the kind disabled until its own scope, quality and budget criteria pass."
       },
       "notes": [
         {
@@ -5695,12 +5695,12 @@
         "Apply only a user-selected suggestion against its expected revision; detect intervening edits."
       ],
       "acceptance": [
-        "AI cannot pull a member’s private interviews into the shared space.",
+        "AI cannot pull a member\u2019s private interviews into the shared space.",
         "Late AI responses never overwrite newer collaborative edits; all calls obey budget and schema policies."
       ],
       "verification_profile": "product",
       "verification": [
-        "AI cannot pull a member’s private interviews into the shared space.",
+        "AI cannot pull a member\u2019s private interviews into the shared space.",
         "Late AI responses never overwrite newer collaborative edits; all calls obey budget and schema policies.",
         "Run lint (exclude generated .vercel until OPS-001), typecheck, focused tests and NITRO_PRESET=vercel build; record actual outcomes. For data/roles run real isolated RLS tests; for new AI run versioned fixtures and the budgeted per-kind evaluation."
       ],
@@ -5711,7 +5711,7 @@
         "stop_and_report": "If a required contract, test environment, human observation, budget or permission is missing, record the specific blocker. Continue another ready task; do not fabricate data or widen the write scope.",
         "handoff": "Report changed files, base/result commit, exact checks and outcomes, artifact/source ids, residual risks and the next eligible task. Only the coordinator edits task status, shared generated files and the main roadmap.",
         "integration": "Use a clean task branch/worktree from the coordinator base. Commit only this write scope. Migrations, generated types, route tree, dependency locks and shared entry points are serialized by the coordinator; never hand-edit generated output.",
-        "kind_approval": "Implement and test this kind’s authorized context adapter after its data services exist. Register schema/prompt/route and capture a capped held-out evaluation against the approved baseline, with dates, endpoint, actual cost and review. Foundation AI-008 does not automatically approve a new kind. Keep the kind disabled until its own scope, quality and budget criteria pass."
+        "kind_approval": "Implement and test this kind\u2019s authorized context adapter after its data services exist. Register schema/prompt/route and capture a capped held-out evaluation against the approved baseline, with dates, endpoint, actual cost and review. Foundation AI-008 does not automatically approve a new kind. Keep the kind disabled until its own scope, quality and budget criteria pass."
       },
       "notes": [
         {
@@ -6510,7 +6510,7 @@
       "steps": [
         "Compare research, teaching and usage findings against the candidate promise and values.",
         "Record unresolved risks and keep/change/remove choices; classify research completion separately from capability release.",
-        "Run the regeneration protocol for a focused 6–12-task follow-up without deleting outstanding obligations or history."
+        "Run the regeneration protocol for a focused 6\u201312-task follow-up without deleting outstanding obligations or history."
       ],
       "acceptance": [
         "Every conclusion links evidence or is labeled unknown; no automated completion based on elapsed time.",
@@ -6553,7 +6553,7 @@
         {
           "id": "REL-005.s3",
           "status": "not_started",
-          "instruction": "Run the regeneration protocol for a focused 6–12-task follow-up without deleting outstanding obligations or history.",
+          "instruction": "Run the regeneration protocol for a focused 6\u201312-task follow-up without deleting outstanding obligations or history.",
           "notes": []
         }
       ]
@@ -6581,7 +6581,7 @@
       "goal": "Distinguish shipped capability, candidate value and unsupported competitive claims before reusing them publicly.",
       "steps": [
         "Read the current spec, landing copy, values and existing canvas; map every consequential claim to a source and current/planned/unknown status.",
-        "Inspect participants’ known alternatives without assuming First Ten wins; verify retained competitor capability or pricing claims against dated primary sources, or remove/mark them unverified.",
+        "Inspect participants\u2019 known alternatives without assuming First Ten wins; verify retained competitor capability or pricing claims against dated primary sources, or remove/mark them unverified.",
         "Revise the canvas and claim ledger around founder decision value, reviewer needs and an unresolved buying path; hand open questions to VP-008 and public-copy owners."
       ],
       "acceptance": [
@@ -6627,7 +6627,7 @@
         {
           "id": "VP-007.s2",
           "status": "complete",
-          "instruction": "Inspect participants’ known alternatives without assuming First Ten wins; verify retained competitor capability or pricing claims against dated primary sources, or remove/mark them unverified.",
+          "instruction": "Inspect participants\u2019 known alternatives without assuming First Ten wins; verify retained competitor capability or pricing claims against dated primary sources, or remove/mark them unverified.",
           "notes": []
         },
         {
@@ -6642,7 +6642,7 @@
       "id": "VP-008",
       "title": "Revise interview guides and pre-register the learning protocol",
       "phase": "R0",
-      "status": "not_started",
+      "status": "in_progress",
       "owner": "agent",
       "size": "S",
       "kind": "research",
@@ -6693,14 +6693,25 @@
         {
           "date": "2026-10-17",
           "text": "Not started. Human studies are not autonomous recruiting authorization. The coordinator may prepare materials and organize supplied notes; people conduct recruiting/interviews."
+        },
+        {
+          "date": "2026-10-18",
+          "text": "Claimed for the authorized autonomous demo run."
         }
       ],
-      "claim": null,
+      "claim": {
+        "owner": "protocol_worker",
+        "branch": "codex/vp-008-autonomous",
+        "base_commit": "b4e3110a0356cd26c0d80ac00916b2c293607ee9",
+        "worktree": "/Users/ianroy/.codex/worktrees/first-ten-value/First 10",
+        "started_at": "2026-10-18T03:48:26.462261+00:00",
+        "lease_expires_at": "2026-10-18T05:48:26.462261+00:00"
+      },
       "completion_evidence": [],
       "subtasks": [
         {
           "id": "VP-008.s1",
-          "status": "not_started",
+          "status": "in_progress",
           "instruction": "Define the live-app/low-recurring-use founder sample, course versus self-directed context, instructor roles, source ids and supports/contradicts/no-signal/uncertain coding.",
           "notes": []
         },
@@ -6957,12 +6968,12 @@
         "Record an actual next step accepted/completed/declined and reused-participant context; test any reviewer message separately when instructor participants are available."
       ],
       "acceptance": [
-        "Founder comparisons preserve participants’ own meaning and expectations, with order, source ids, sample overlap and missing follow-through disclosed.",
+        "Founder comparisons preserve participants\u2019 own meaning and expectations, with order, source ids, sample overlap and missing follow-through disclosed.",
         "No preference vote or small-sample behavior is described as causal conversion uplift; unavailable instructor responses do not prevent the founder result being recorded."
       ],
       "verification_profile": "research",
       "verification": [
-        "Founder comparisons preserve participants’ own meaning and expectations, with order, source ids, sample overlap and missing follow-through disclosed.",
+        "Founder comparisons preserve participants\u2019 own meaning and expectations, with order, source ids, sample overlap and missing follow-through disclosed.",
         "No preference vote or small-sample behavior is described as causal conversion uplift; unavailable instructor responses do not prevent the founder result being recorded."
       ],
       "metric": "Correctly understood audience/outcome/limits and completed next steps, reported as n/N with context rather than statistical winners.",
@@ -7257,12 +7268,12 @@
       ],
       "acceptance": [
         "Every substantive positioning/adoption claim has evidence or is marked a hypothesis; no automatic declaration that pricing or company-market fit is decided.",
-        "Decision distinguishes research confidence from the user’s authorization to implement and identifies which public statements may change in VP-006b."
+        "Decision distinguishes research confidence from the user\u2019s authorization to implement and identifies which public statements may change in VP-006b."
       ],
       "verification_profile": "research",
       "verification": [
         "Every substantive positioning/adoption claim has evidence or is marked a hypothesis; no automatic declaration that pricing or company-market fit is decided.",
-        "Decision distinguishes research confidence from the user’s authorization to implement and identifies which public statements may change in VP-006b."
+        "Decision distinguishes research confidence from the user\u2019s authorization to implement and identifies which public statements may change in VP-006b."
       ],
       "metric": "Unsupported decision claims and explicitly unresolved assumptions; next test or investment has a concrete reason.",
       "rollback": "Reopen or narrow the decision on contradictory evidence; retain prior decisions and avoid silently rewriting the public promise.",
@@ -7653,7 +7664,7 @@
         "Run lint (exclude generated .vercel until OPS-001), typecheck, focused tests and NITRO_PRESET=vercel build; record actual outcomes. For data/roles run real isolated RLS tests; for new AI run versioned fixtures and the budgeted per-kind evaluation."
       ],
       "metric": "Agreed follow-ups completed on time, unwanted reminders and duplicate deliveries.",
-      "rollback": "Disable scheduling/delivery while preserving the founder’s list and completion history.",
+      "rollback": "Disable scheduling/delivery while preserving the founder\u2019s list and completion history.",
       "agent_notes": {
         "starting_point": "Activation: actual missed agreed follow-ups recur in observed use, participants identify reminders as useful, and notification/channel consent and scheduling infrastructure are defined. Deferred and unimplemented. The coordinator must record activation and split/schema/API dependencies before implementation; evidence gates do not automatically enable this task.",
         "stop_and_report": "If a required contract, test environment, human observation, budget or permission is missing, record the specific blocker. Continue another ready task; do not fabricate data or widen the write scope.",
@@ -7713,7 +7724,7 @@
         "research/positioning-decision.md",
         "docs/architecture/access-contract.md"
       ],
-      "goal": "Preserve interview work through disconnection without leaking another account’s data or duplicating saves.",
+      "goal": "Preserve interview work through disconnection without leaking another account\u2019s data or duplicating saves.",
       "steps": [
         "Map device/account boundaries, offline draft lifecycle, conflicts and existing saved-draft behavior before adding caching.",
         "Implement minimal app-shell/offline draft support with queued idempotent saves, explicit sync/error state and account-switch/sign-out cleanup.",
@@ -8099,17 +8110,17 @@
       ],
       "goal": "Deliver a useful personal next-step summary without exporting private evidence to an unintended channel.",
       "steps": [
-        "Define the recipient’s intended outcome, safe summary fields, schedule/timezone, consent and unsubscribe behavior.",
+        "Define the recipient\u2019s intended outcome, safe summary fields, schedule/timezone, consent and unsubscribe behavior.",
         "Generate bounded summaries through generateAI only when permitted, or deterministic summaries otherwise; exclude raw interview text and instructor/private cross-scope data.",
         "Test opt-out, duplicate schedules, revoked permissions, empty progress and delivery failures; measure meaningful resumed actions rather than opens alone."
       ],
       "acceptance": [
-        "Digests are opt-in and scoped to the recipient’s current permissions; removal/opt-out prevents queued delivery.",
+        "Digests are opt-in and scoped to the recipient\u2019s current permissions; removal/opt-out prevents queued delivery.",
         "Private quotes and contact details are not included by default; unchanged/non-actionable state does not cause noisy delivery."
       ],
       "verification_profile": "product",
       "verification": [
-        "Digests are opt-in and scoped to the recipient’s current permissions; removal/opt-out prevents queued delivery.",
+        "Digests are opt-in and scoped to the recipient\u2019s current permissions; removal/opt-out prevents queued delivery.",
         "Private quotes and contact details are not included by default; unchanged/non-actionable state does not cause noisy delivery.",
         "Run lint (exclude generated .vercel until OPS-001), typecheck, focused tests and NITRO_PRESET=vercel build; record actual outcomes. For data/roles run real isolated RLS tests; for new AI run versioned fixtures and the budgeted per-kind evaluation."
       ],
@@ -8132,7 +8143,7 @@
         {
           "id": "HOLD-009.s1",
           "status": "deferred",
-          "instruction": "Define the recipient’s intended outcome, safe summary fields, schedule/timezone, consent and unsubscribe behavior.",
+          "instruction": "Define the recipient\u2019s intended outcome, safe summary fields, schedule/timezone, consent and unsubscribe behavior.",
           "notes": []
         },
         {
@@ -8188,7 +8199,7 @@
         "The experiment plan specifies a primary outcome, denominator, exposure policy and stopping rule before enrollment; privacy controls and AN-002 are usable.",
         "No low-sample preference/conversion difference is declared causal proof of the value proposition; assignment can be pinned without losing existing data."
       ],
-      "metric": "Eligible exposure → signup → relevant first interview within seven days by variant, with missingness and uncertainty.",
+      "metric": "Eligible exposure \u2192 signup \u2192 relevant first interview within seven days by variant, with missingness and uncertainty.",
       "rollback": "Pin the factual baseline, stop new assignments and retain only the agreed minimal experiment data under retention policy.",
       "agent_notes": {
         "starting_point": "Activation requires a coordinator-recorded traffic/power or explicitly exploratory plan, validated attribution and privacy settings after AN-002/WEB-004. Manual VP-004a is sufficient for early comprehension learning; live A/B work is not currently started.",
@@ -8375,7 +8386,7 @@
       "id": "P-001b",
       "title": "Factual five-minute sales/pitch deck after release evidence",
       "phase": "P2",
-      "status": "not_started",
+      "status": "in_progress",
       "owner": "agent",
       "size": "M",
       "kind": "documentation",
@@ -8392,8 +8403,8 @@
       ],
       "goal": "Create a polished workshop pitch deck linking pedagogy, live demo, $0 marketing and current technical architecture.",
       "steps": [
-        "Write a 3–5 minute pitch with a 90-second fallback: classroom problem, founder evidence loop, StudyLoop demo, $0 marketing lab, named pedagogical concepts, stack and invitation.",
-        "Author the editable deck using the Presentations skill and selected brand; cite the owner’s slides/board and primary pedagogy sources, and label demo/planned material.",
+        "Write a 3\u20135 minute pitch with a 90-second fallback: classroom problem, founder evidence loop, StudyLoop demo, $0 marketing lab, named pedagogical concepts, stack and invitation.",
+        "Author the editable deck using the Presentations skill and selected brand; cite the owner\u2019s slides/board and primary pedagogy sources, and label demo/planned material.",
         "Render and inspect every slide; rehearse the live-demo handoff, preserve readable offline story and provide a presentable deck link/artifact."
       ],
       "acceptance": [
@@ -8409,7 +8420,7 @@
       "metric": "Claim/source coverage, factual comprehension and actual rehearsal duration; not investor interest or revenue without evidence.",
       "rollback": "Replace the deck with the last factual version and remove stale screenshots/claims; retain editable source and ordinary Git history.",
       "agent_notes": {
-        "starting_point": "Deferred pitch-deck portion of legacy P-001. WEB-003 delivers factual schematics earlier; this deck is not a dependency for public pages or engineering and requires current REL-005 release evidence plus a real presentation purpose.",
+        "starting_point": "Event deck promoted by explicit owner request on 2026-10-18. Use current tested product facts, clearly fictional examples and labeled proposed classroom workflows. No outcome evidence or REL-005 result may be invented.",
         "stop_and_report": "If a required contract, test environment, human observation, budget or permission is missing, record the specific blocker. Continue another ready task; do not fabricate data or widen the write scope.",
         "handoff": "Report changed files, base/result commit, exact checks and outcomes, artifact/source ids, residual risks and the next eligible task. Only the coordinator edits task status, shared generated files and the main roadmap."
       },
@@ -8420,22 +8431,33 @@
         },
         {
           "date": "2026-10-18",
-          "text": "Promoted by explicit owner request for tomorrow’s Babson pitch. Build an evidence-honest current-capability/proposed-roadmap deck with named pedagogy; no invented traction or research outcomes. Original outcome-based deck dependency is superseded by this event need."
+          "text": "Promoted by explicit owner request for tomorrow\u2019s Babson pitch. Build an evidence-honest current-capability/proposed-roadmap deck with named pedagogy; no invented traction or research outcomes. Original outcome-based deck dependency is superseded by this event need."
+        },
+        {
+          "date": "2026-10-18",
+          "text": "Claimed for the authorized autonomous demo run."
         }
       ],
-      "claim": null,
+      "claim": {
+        "owner": "coordinator",
+        "branch": "main",
+        "base_commit": "b4e3110a0356cd26c0d80ac00916b2c293607ee9",
+        "worktree": "/Users/ianroy/Library/CloudStorage/Dropbox/Apps by Ian/Babson AI Academy/First 10",
+        "started_at": "2026-10-18T03:48:26.563882+00:00",
+        "lease_expires_at": "2026-10-18T05:48:26.563882+00:00"
+      },
       "completion_evidence": [],
       "subtasks": [
         {
           "id": "P-001b.s1",
-          "status": "not_started",
-          "instruction": "Write a 3–5 minute pitch with a 90-second fallback: classroom problem, founder evidence loop, StudyLoop demo, $0 marketing lab, named pedagogical concepts, stack and invitation.",
+          "status": "in_progress",
+          "instruction": "Write a 3\u20135 minute pitch with a 90-second fallback: classroom problem, founder evidence loop, StudyLoop demo, $0 marketing lab, named pedagogical concepts, stack and invitation.",
           "notes": []
         },
         {
           "id": "P-001b.s2",
           "status": "not_started",
-          "instruction": "Author the editable deck using the Presentations skill and selected brand; cite the owner’s slides/board and primary pedagogy sources, and label demo/planned material.",
+          "instruction": "Author the editable deck using the Presentations skill and selected brand; cite the owner\u2019s slides/board and primary pedagogy sources, and label demo/planned material.",
           "notes": []
         },
         {
@@ -8465,7 +8487,7 @@
         "docs/demo/babson-pitch-brief.md",
         "docs/architecture/access-contract.md"
       ],
-      "goal": "Turn the owner’s audience/channel/content/funnel board into a coherent student-led experiment workflow.",
+      "goal": "Turn the owner\u2019s audience/channel/content/funnel board into a coherent student-led experiment workflow.",
       "steps": [
         "Map the supplied BUS131 slides and board to audience, evidence/unknowns, specific physical/digital channels, reviewed content, resource limits and a one-week test.",
         "Define typed versioned plan/channel/asset/test/measurement contracts, private data boundaries and separate AI kinds; specify stage-2 entry without silently changing current stage unlocks.",
@@ -8484,7 +8506,7 @@
       "metric": "Completed useful workflow, source/permission integrity, recovery failures and measured AI cost where applicable.",
       "rollback": "Disable the affected entry point/AI kind; preserve existing private records, prior plan revisions and the tested demonstration fallback.",
       "agent_notes": {
-        "starting_point": "Owner-requested addition during the autonomous run for tomorrow’s Babson demo. Use the approved marketing-lab contract and existing contracts; no fictional evidence may become a claim of real research.",
+        "starting_point": "Owner-requested addition during the autonomous run for tomorrow\u2019s Babson demo. Use the approved marketing-lab contract and existing contracts; no fictional evidence may become a claim of real research.",
         "stop_and_report": "Record the exact missing environment, permission, budget or human evidence, preserve partial work, and continue another eligible task. Do not bypass gates or widen access.",
         "handoff": "Report scoped files, commit, checks/results, migration/type contracts, measured spend, remaining blockers and rollback. Coordinator owns registry/status/integration."
       },
@@ -8551,7 +8573,7 @@
         "docs/demo/babson-pitch-brief.md",
         "docs/architecture/access-contract.md"
       ],
-      "goal": "Save a project’s marketing board with strict validation and conflict-safe revisions.",
+      "goal": "Save a project\u2019s marketing board with strict validation and conflict-safe revisions.",
       "steps": [
         "Create one private plan per project with owner/project consistency, JSON shape/size bounds and revision timestamps.",
         "Implement authenticated load/save with expected revision and safe defaults; preserve unknown measurements rather than inventing zeros or results.",
@@ -8570,7 +8592,7 @@
       "metric": "Completed useful workflow, source/permission integrity, recovery failures and measured AI cost where applicable.",
       "rollback": "Disable the affected entry point/AI kind; preserve existing private records, prior plan revisions and the tested demonstration fallback.",
       "agent_notes": {
-        "starting_point": "Owner-requested addition during the autonomous run for tomorrow’s Babson demo. Use the approved marketing-lab contract and existing contracts; no fictional evidence may become a claim of real research.",
+        "starting_point": "Owner-requested addition during the autonomous run for tomorrow\u2019s Babson demo. Use the approved marketing-lab contract and existing contracts; no fictional evidence may become a claim of real research.",
         "stop_and_report": "Record the exact missing environment, permission, budget or human evidence, preserve partial work, and continue another eligible task. Do not bypass gates or widen access.",
         "handoff": "Report scoped files, commit, checks/results, migration/type contracts, measured spend, remaining blockers and rollback. Coordinator owns registry/status/integration."
       },
@@ -8630,7 +8652,7 @@
       ],
       "goal": "Guide students from a focused audience to two reachable channels and an executable $0 plan.",
       "steps": [
-        "Start with students’ own audience/known evidence/unknowns and initial channel ideas before offering AI assistance.",
+        "Start with students\u2019 own audience/known evidence/unknowns and initial channel ideas before offering AI assistance.",
         "Build a physical/digital channel board with exact place/link, observation, access/permission state, effort/time and primary/alternative selection; cap current commitments at two chosen channels.",
         "Add saved/unsaved/conflict/retry states and stage-aware navigation using the explicitly supplied project id; retain current private project flow until WS-002 integration."
       ],
@@ -8647,7 +8669,7 @@
       "metric": "Completed useful workflow, source/permission integrity, recovery failures and measured AI cost where applicable.",
       "rollback": "Disable the affected entry point/AI kind; preserve existing private records, prior plan revisions and the tested demonstration fallback.",
       "agent_notes": {
-        "starting_point": "Owner-requested addition during the autonomous run for tomorrow’s Babson demo. Use the approved marketing-lab contract and existing contracts; no fictional evidence may become a claim of real research.",
+        "starting_point": "Owner-requested addition during the autonomous run for tomorrow\u2019s Babson demo. Use the approved marketing-lab contract and existing contracts; no fictional evidence may become a claim of real research.",
         "stop_and_report": "Record the exact missing environment, permission, budget or human evidence, preserve partial work, and continue another eligible task. Do not bypass gates or widen access.",
         "handoff": "Report scoped files, commit, checks/results, migration/type contracts, measured spend, remaining blockers and rollback. Coordinator owns registry/status/integration."
       },
@@ -8663,7 +8685,7 @@
         {
           "id": "MKT-003.s1",
           "status": "not_started",
-          "instruction": "Start with students’ own audience/known evidence/unknowns and initial channel ideas before offering AI assistance.",
+          "instruction": "Start with students\u2019 own audience/known evidence/unknowns and initial channel ideas before offering AI assistance.",
           "notes": []
         },
         {
@@ -8726,7 +8748,7 @@
       "metric": "Completed useful workflow, source/permission integrity, recovery failures and measured AI cost where applicable.",
       "rollback": "Disable the affected entry point/AI kind; preserve existing private records, prior plan revisions and the tested demonstration fallback.",
       "agent_notes": {
-        "starting_point": "Owner-requested addition during the autonomous run for tomorrow’s Babson demo. Use the approved marketing-lab contract and existing contracts; no fictional evidence may become a claim of real research.",
+        "starting_point": "Owner-requested addition during the autonomous run for tomorrow\u2019s Babson demo. Use the approved marketing-lab contract and existing contracts; no fictional evidence may become a claim of real research.",
         "stop_and_report": "Record the exact missing environment, permission, budget or human evidence, preserve partial work, and continue another eligible task. Do not bypass gates or widen access.",
         "handoff": "Report scoped files, commit, checks/results, migration/type contracts, measured spend, remaining blockers and rollback. Coordinator owns registry/status/integration."
       },
@@ -8805,7 +8827,7 @@
       "metric": "Completed useful workflow, source/permission integrity, recovery failures and measured AI cost where applicable.",
       "rollback": "Disable the affected entry point/AI kind; preserve existing private records, prior plan revisions and the tested demonstration fallback.",
       "agent_notes": {
-        "starting_point": "Owner-requested addition during the autonomous run for tomorrow’s Babson demo. Use the approved marketing-lab contract and existing contracts; no fictional evidence may become a claim of real research.",
+        "starting_point": "Owner-requested addition during the autonomous run for tomorrow\u2019s Babson demo. Use the approved marketing-lab contract and existing contracts; no fictional evidence may become a claim of real research.",
         "stop_and_report": "Record the exact missing environment, permission, budget or human evidence, preserve partial work, and continue another eligible task. Do not bypass gates or widen access.",
         "handoff": "Report scoped files, commit, checks/results, migration/type contracts, measured spend, remaining blockers and rollback. Coordinator owns registry/status/integration."
       },
@@ -8882,7 +8904,7 @@
       "metric": "Completed useful workflow, source/permission integrity, recovery failures and measured AI cost where applicable.",
       "rollback": "Disable the affected entry point/AI kind; preserve existing private records, prior plan revisions and the tested demonstration fallback.",
       "agent_notes": {
-        "starting_point": "Owner-requested addition during the autonomous run for tomorrow’s Babson demo. Use the approved marketing-lab contract and existing contracts; no fictional evidence may become a claim of real research.",
+        "starting_point": "Owner-requested addition during the autonomous run for tomorrow\u2019s Babson demo. Use the approved marketing-lab contract and existing contracts; no fictional evidence may become a claim of real research.",
         "stop_and_report": "Record the exact missing environment, permission, budget or human evidence, preserve partial work, and continue another eligible task. Do not bypass gates or widen access.",
         "handoff": "Report scoped files, commit, checks/results, migration/type contracts, measured spend, remaining blockers and rollback. Coordinator owns registry/status/integration."
       },
@@ -8959,7 +8981,7 @@
       "metric": "Completed useful workflow, source/permission integrity, recovery failures and measured AI cost where applicable.",
       "rollback": "Disable the affected entry point/AI kind; preserve existing private records, prior plan revisions and the tested demonstration fallback.",
       "agent_notes": {
-        "starting_point": "Owner-requested addition during the autonomous run for tomorrow’s Babson demo. Use the approved marketing-lab contract and existing contracts; no fictional evidence may become a claim of real research.",
+        "starting_point": "Owner-requested addition during the autonomous run for tomorrow\u2019s Babson demo. Use the approved marketing-lab contract and existing contracts; no fictional evidence may become a claim of real research.",
         "stop_and_report": "Record the exact missing environment, permission, budget or human evidence, preserve partial work, and continue another eligible task. Do not bypass gates or widen access.",
         "handoff": "Report scoped files, commit, checks/results, migration/type contracts, measured spend, remaining blockers and rollback. Coordinator owns registry/status/integration."
       },
@@ -9014,7 +9036,7 @@
       "goal": "Confirm the $0 marketing feature works end to end before enabling it for real testers.",
       "steps": [
         "Exercise founder/teacher-review projection where implemented, two-account plan access, stage navigation, revisions and provider failures.",
-        "Run the actual browser path audience→channel→asset→test→measurement→reflection on desktop/mobile/keyboard.",
+        "Run the actual browser path audience\u2192channel\u2192asset\u2192test\u2192measurement\u2192reflection on desktop/mobile/keyboard.",
         "Check actual spend, permission disclosures and factual claims; fix critical failures and document enabled/manual/demo-only capabilities."
       ],
       "acceptance": [
@@ -9030,7 +9052,7 @@
       "metric": "Completed useful workflow, source/permission integrity, recovery failures and measured AI cost where applicable.",
       "rollback": "Disable the affected entry point/AI kind; preserve existing private records, prior plan revisions and the tested demonstration fallback.",
       "agent_notes": {
-        "starting_point": "Owner-requested addition during the autonomous run for tomorrow’s Babson demo. Use the approved marketing-lab contract and existing contracts; no fictional evidence may become a claim of real research.",
+        "starting_point": "Owner-requested addition during the autonomous run for tomorrow\u2019s Babson demo. Use the approved marketing-lab contract and existing contracts; no fictional evidence may become a claim of real research.",
         "stop_and_report": "Record the exact missing environment, permission, budget or human evidence, preserve partial work, and continue another eligible task. Do not bypass gates or widen access.",
         "handoff": "Report scoped files, commit, checks/results, migration/type contracts, measured spend, remaining blockers and rollback. Coordinator owns registry/status/integration."
       },
@@ -9052,7 +9074,7 @@
         {
           "id": "MKT-008.s2",
           "status": "not_started",
-          "instruction": "Run the actual browser path audience→channel→asset→test→measurement→reflection on desktop/mobile/keyboard.",
+          "instruction": "Run the actual browser path audience\u2192channel\u2192asset\u2192test\u2192measurement\u2192reflection on desktop/mobile/keyboard.",
           "notes": []
         },
         {
@@ -9109,7 +9131,7 @@
       "metric": "Completed useful workflow, source/permission integrity, recovery failures and measured AI cost where applicable.",
       "rollback": "Disable the affected entry point/AI kind; preserve existing private records, prior plan revisions and the tested demonstration fallback.",
       "agent_notes": {
-        "starting_point": "Owner-requested addition during the autonomous run for tomorrow’s Babson demo. Use the approved marketing-lab contract and existing contracts; no fictional evidence may become a claim of real research.",
+        "starting_point": "Owner-requested addition during the autonomous run for tomorrow\u2019s Babson demo. Use the approved marketing-lab contract and existing contracts; no fictional evidence may become a claim of real research.",
         "stop_and_report": "Record the exact missing environment, permission, budget or human evidence, preserve partial work, and continue another eligible task. Do not bypass gates or widen access.",
         "handoff": "Report scoped files, commit, checks/results, migration/type contracts, measured spend, remaining blockers and rollback. Coordinator owns registry/status/integration."
       },
@@ -9185,7 +9207,7 @@
       "metric": "Completed useful workflow, source/permission integrity, recovery failures and measured AI cost where applicable.",
       "rollback": "Disable the affected entry point/AI kind; preserve existing private records, prior plan revisions and the tested demonstration fallback.",
       "agent_notes": {
-        "starting_point": "Owner-requested addition during the autonomous run for tomorrow’s Babson demo. Use the approved marketing-lab contract and existing contracts; no fictional evidence may become a claim of real research.",
+        "starting_point": "Owner-requested addition during the autonomous run for tomorrow\u2019s Babson demo. Use the approved marketing-lab contract and existing contracts; no fictional evidence may become a claim of real research.",
         "stop_and_report": "Record the exact missing environment, permission, budget or human evidence, preserve partial work, and continue another eligible task. Do not bypass gates or widen access.",
         "handoff": "Report scoped files, commit, checks/results, migration/type contracts, measured spend, remaining blockers and rollback. Coordinator owns registry/status/integration."
       },
@@ -9368,7 +9390,7 @@
       "legacy_id": "P-001",
       "disposition": "split",
       "successors": ["WEB-003", "P-001b"],
-      "reason": "Current technical schematics proceed now; five-minute pitch deck with real outcome evidence remains deferred. Original dated Notes remain in FEATUREROADMAP_history.md."
+      "reason": "Current technical schematics are complete. The owner explicitly promoted an event pitch deck for the Babson workshop; current/proposed capabilities and fictional examples are labeled, with no invented outcome evidence. Original dated Notes remain in FEATUREROADMAP_history.md."
     },
     {
       "legacy_id": "R0-001",
@@ -9625,7 +9647,7 @@
     "openrouter_limit_usd": 25,
     "openrouter_spend_usd": 0,
     "deployment": "Production deployment and safe tested migrations authorized; commit/push often. No other paid services.",
-    "demo_priority": "Tomorrow’s Babson mini hackathon presentation for 45 academics; strong educator story, reliable fictional sample data and polished walkthrough.",
+    "demo_priority": "Tomorrow\u2019s Babson mini hackathon presentation for 45 academics; strong educator story, reliable fictional sample data and polished walkthrough.",
     "real_testers": "Supabase authorized for testers; no specific people/contact channels named. No unsolicited external messaging."
   }
 }
