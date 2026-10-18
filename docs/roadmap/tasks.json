@@ -152,14 +152,9 @@
       "requires_decisions": [],
       "write_scope": [],
       "exclusive_locks": [],
-      "read_first": [
-        "ProductSpec.md",
-        "FEATUREROADMAP_workplan.md"
-      ],
+      "read_first": ["ProductSpec.md", "FEATUREROADMAP_workplan.md"],
       "goal": "Research workspace exists",
-      "steps": [
-        "Inspect the linked completion evidence before reusing the result."
-      ],
+      "steps": ["Inspect the linked completion evidence before reusing the result."],
       "acceptance": [
         "Historical result is linked; do not rerun completed implementation without a new reason."
       ],
@@ -182,9 +177,7 @@
         }
       ],
       "claim": null,
-      "completion_evidence": [
-        "research/interviews/README.md"
-      ],
+      "completion_evidence": ["research/interviews/README.md"],
       "subtasks": [
         {
           "id": "R0-001.s1",
@@ -207,14 +200,9 @@
       "requires_decisions": [],
       "write_scope": [],
       "exclusive_locks": [],
-      "read_first": [
-        "ProductSpec.md",
-        "FEATUREROADMAP_workplan.md"
-      ],
+      "read_first": ["ProductSpec.md", "FEATUREROADMAP_workplan.md"],
       "goal": "Supplied title-level signal brief captured",
-      "steps": [
-        "Inspect the linked completion evidence before reusing the result."
-      ],
+      "steps": ["Inspect the linked completion evidence before reusing the result."],
       "acceptance": [
         "Historical result is linked; do not rerun completed implementation without a new reason."
       ],
@@ -237,9 +225,7 @@
         }
       ],
       "claim": null,
-      "completion_evidence": [
-        "research/inspiration/reddit-signals-2026-10.md"
-      ],
+      "completion_evidence": ["research/inspiration/reddit-signals-2026-10.md"],
       "subtasks": [
         {
           "id": "R0-002.s1",
@@ -262,14 +248,9 @@
       "requires_decisions": [],
       "write_scope": [],
       "exclusive_locks": [],
-      "read_first": [
-        "ProductSpec.md",
-        "FEATUREROADMAP_workplan.md"
-      ],
+      "read_first": ["ProductSpec.md", "FEATUREROADMAP_workplan.md"],
       "goal": "Initial value canvas and alternatives scan",
-      "steps": [
-        "Inspect the linked completion evidence before reusing the result."
-      ],
+      "steps": ["Inspect the linked completion evidence before reusing the result."],
       "acceptance": [
         "Historical result is linked; do not rerun completed implementation without a new reason."
       ],
@@ -292,9 +273,7 @@
         }
       ],
       "claim": null,
-      "completion_evidence": [
-        "research/value-prop.md"
-      ],
+      "completion_evidence": ["research/value-prop.md"],
       "subtasks": [
         {
           "id": "VP-001.s1",
@@ -317,14 +296,9 @@
       "requires_decisions": [],
       "write_scope": [],
       "exclusive_locks": [],
-      "read_first": [
-        "ProductSpec.md",
-        "FEATUREROADMAP_workplan.md"
-      ],
+      "read_first": ["ProductSpec.md", "FEATUREROADMAP_workplan.md"],
       "goal": "Initial interview guides",
-      "steps": [
-        "Inspect the linked completion evidence before reusing the result."
-      ],
+      "steps": ["Inspect the linked completion evidence before reusing the result."],
       "acceptance": [
         "Historical result is linked; do not rerun completed implementation without a new reason."
       ],
@@ -373,14 +347,9 @@
       "requires_decisions": [],
       "write_scope": [],
       "exclusive_locks": [],
-      "read_first": [
-        "ProductSpec.md",
-        "FEATUREROADMAP_workplan.md"
-      ],
+      "read_first": ["ProductSpec.md", "FEATUREROADMAP_workplan.md"],
       "goal": "Test baseline and CI verified",
-      "steps": [
-        "Inspect the linked completion evidence before reusing the result."
-      ],
+      "steps": ["Inspect the linked completion evidence before reusing the result."],
       "acceptance": [
         "Historical result is linked; do not rerun completed implementation without a new reason."
       ],
@@ -403,9 +372,7 @@
         }
       ],
       "claim": null,
-      "completion_evidence": [
-        "https://github.com/ianroy/first-10/actions/runs/39092157827"
-      ],
+      "completion_evidence": ["https://github.com/ianroy/first-10/actions/runs/39092157827"],
       "subtasks": [
         {
           "id": "F-007.s1",
@@ -428,14 +395,9 @@
       "requires_decisions": [],
       "write_scope": [],
       "exclusive_locks": [],
-      "read_first": [
-        "ProductSpec.md",
-        "FEATUREROADMAP_workplan.md"
-      ],
+      "read_first": ["ProductSpec.md", "FEATUREROADMAP_workplan.md"],
       "goal": "Production Git connection recorded",
-      "steps": [
-        "Inspect the linked completion evidence before reusing the result."
-      ],
+      "steps": ["Inspect the linked completion evidence before reusing the result."],
       "acceptance": [
         "Historical result is linked; do not rerun completed implementation without a new reason."
       ],
@@ -458,9 +420,7 @@
         }
       ],
       "claim": null,
-      "completion_evidence": [
-        "FEATUREROADMAP_history.md"
-      ],
+      "completion_evidence": ["FEATUREROADMAP_history.md"],
       "subtasks": [
         {
           "id": "F-009a.s1",
@@ -483,14 +443,9 @@
       "requires_decisions": [],
       "write_scope": [],
       "exclusive_locks": [],
-      "read_first": [
-        "ProductSpec.md",
-        "FEATUREROADMAP_workplan.md"
-      ],
+      "read_first": ["ProductSpec.md", "FEATUREROADMAP_workplan.md"],
       "goal": "Production magic-link setup recorded",
-      "steps": [
-        "Inspect the linked completion evidence before reusing the result."
-      ],
+      "steps": ["Inspect the linked completion evidence before reusing the result."],
       "acceptance": [
         "Historical result is linked; do not rerun completed implementation without a new reason."
       ],
@@ -513,9 +468,7 @@
         }
       ],
       "claim": null,
-      "completion_evidence": [
-        "FEATUREROADMAP_history.md"
-      ],
+      "completion_evidence": ["FEATUREROADMAP_history.md"],
       "subtasks": [
         {
           "id": "F-010.s1",
@@ -538,14 +491,9 @@
       "requires_decisions": [],
       "write_scope": [],
       "exclusive_locks": [],
-      "read_first": [
-        "ProductSpec.md",
-        "FEATUREROADMAP_workplan.md"
-      ],
+      "read_first": ["ProductSpec.md", "FEATUREROADMAP_workplan.md"],
       "goal": "README and ProductSpec deepened",
-      "steps": [
-        "Inspect the linked completion evidence before reusing the result."
-      ],
+      "steps": ["Inspect the linked completion evidence before reusing the result."],
       "acceptance": [
         "Historical result is linked; do not rerun completed implementation without a new reason."
       ],
@@ -568,9 +516,7 @@
         }
       ],
       "claim": null,
-      "completion_evidence": [
-        "https://github.com/ianroy/first-10/commit/7006f87"
-      ],
+      "completion_evidence": ["https://github.com/ianroy/first-10/commit/7006f87"],
       "subtasks": [
         {
           "id": "DOC-001.s1",
@@ -593,14 +539,9 @@
       "requires_decisions": [],
       "write_scope": [],
       "exclusive_locks": [],
-      "read_first": [
-        "ProductSpec.md",
-        "FEATUREROADMAP_workplan.md"
-      ],
+      "read_first": ["ProductSpec.md", "FEATUREROADMAP_workplan.md"],
       "goal": "Record the independently committed team-credits documentation update.",
-      "steps": [
-        "Inspect the linked completion evidence before reusing the result."
-      ],
+      "steps": ["Inspect the linked completion evidence before reusing the result."],
       "acceptance": [
         "Historical result is linked; do not rerun completed implementation without a new reason."
       ],
@@ -648,14 +589,9 @@
       "requires_decisions": [],
       "write_scope": [],
       "exclusive_locks": [],
-      "read_first": [
-        "ProductSpec.md",
-        "FEATUREROADMAP_workplan.md"
-      ],
+      "read_first": ["ProductSpec.md", "FEATUREROADMAP_workplan.md"],
       "goal": "Company values and voice charter defined",
-      "steps": [
-        "Inspect the linked completion evidence before reusing the result."
-      ],
+      "steps": ["Inspect the linked completion evidence before reusing the result."],
       "acceptance": [
         "Historical result is linked; do not rerun completed implementation without a new reason."
       ],
@@ -678,9 +614,7 @@
         }
       ],
       "claim": null,
-      "completion_evidence": [
-        "docs/company-values.md"
-      ],
+      "completion_evidence": ["docs/company-values.md"],
       "subtasks": [
         {
           "id": "VAL-001.s1",
@@ -703,14 +637,9 @@
       "requires_decisions": [],
       "write_scope": [],
       "exclusive_locks": [],
-      "read_first": [
-        "ProductSpec.md",
-        "FEATUREROADMAP_workplan.md"
-      ],
+      "read_first": ["ProductSpec.md", "FEATUREROADMAP_workplan.md"],
       "goal": "Official OpenRouter model and cost shortlist",
-      "steps": [
-        "Inspect the linked completion evidence before reusing the result."
-      ],
+      "steps": ["Inspect the linked completion evidence before reusing the result."],
       "acceptance": [
         "Historical result is linked; do not rerun completed implementation without a new reason."
       ],
@@ -733,9 +662,7 @@
         }
       ],
       "claim": null,
-      "completion_evidence": [
-        "docs/roadmap/openrouter-plan.md"
-      ],
+      "completion_evidence": ["docs/roadmap/openrouter-plan.md"],
       "subtasks": [
         {
           "id": "AI-000.s1",
@@ -758,14 +685,9 @@
       "requires_decisions": [],
       "write_scope": [],
       "exclusive_locks": [],
-      "read_first": [
-        "ProductSpec.md",
-        "FEATUREROADMAP_workplan.md"
-      ],
+      "read_first": ["ProductSpec.md", "FEATUREROADMAP_workplan.md"],
       "goal": "Execution roadmap and task registry audited",
-      "steps": [
-        "Inspect the linked completion evidence before reusing the result."
-      ],
+      "steps": ["Inspect the linked completion evidence before reusing the result."],
       "acceptance": [
         "Historical result is linked; do not rerun completed implementation without a new reason."
       ],
@@ -817,9 +739,7 @@
       "size": "S",
       "kind": "implementation",
       "priority": 1,
-      "depends_on": [
-        "F-007"
-      ],
+      "depends_on": ["F-007"],
       "requires_decisions": [],
       "write_scope": [
         "eslint.config.js",
@@ -910,14 +830,9 @@
       "size": "S",
       "kind": "documentation",
       "priority": 2,
-      "depends_on": [
-        "F-007"
-      ],
+      "depends_on": ["F-007"],
       "requires_decisions": [],
-      "write_scope": [
-        "docs/architecture/access-contract.md",
-        "docs/architecture/api-contracts.md"
-      ],
+      "write_scope": ["docs/architecture/access-contract.md", "docs/architecture/api-contracts.md"],
       "exclusive_locks": [],
       "read_first": [
         "ProductSpec.md",
@@ -965,9 +880,7 @@
         }
       ],
       "claim": null,
-      "completion_evidence": [
-        "474a912678bf37be144e6bd28b12c31969ec0a60"
-      ],
+      "completion_evidence": ["474a912678bf37be144e6bd28b12c31969ec0a60"],
       "subtasks": [
         {
           "id": "SEC-001.s1",
@@ -998,9 +911,7 @@
       "size": "S",
       "kind": "implementation",
       "priority": 50,
-      "depends_on": [
-        "OPS-001"
-      ],
+      "depends_on": ["OPS-001"],
       "requires_decisions": [],
       "write_scope": [
         "scripts/smoke.mjs",
@@ -1011,9 +922,7 @@
         "src/routes/api.health.ts",
         "src/routeTree.gen.ts"
       ],
-      "exclusive_locks": [
-        "delivery-config"
-      ],
+      "exclusive_locks": ["delivery-config"],
       "read_first": [
         "ProductSpec.md",
         "FEATUREROADMAP_workplan.md",
@@ -1096,18 +1005,11 @@
       "size": "S",
       "kind": "research",
       "priority": 50,
-      "depends_on": [
-        "OPS-002"
-      ],
+      "depends_on": ["OPS-002"],
       "requires_decisions": [],
-      "write_scope": [
-        "docs/operations/preview-environment.md"
-      ],
+      "write_scope": ["docs/operations/preview-environment.md"],
       "exclusive_locks": [],
-      "read_first": [
-        "ProductSpec.md",
-        "FEATUREROADMAP_workplan.md"
-      ],
+      "read_first": ["ProductSpec.md", "FEATUREROADMAP_workplan.md"],
       "goal": "Complete the missing preview-environment portion of F-009.",
       "steps": [
         "Use the intended preview Vercel/Supabase environment, never silently point test mutations at production.",
@@ -1169,10 +1071,7 @@
       "size": "S",
       "kind": "implementation",
       "priority": 50,
-      "depends_on": [
-        "SEC-001",
-        "OPS-001"
-      ],
+      "depends_on": ["SEC-001", "OPS-001"],
       "requires_decisions": [],
       "write_scope": [
         "supabase/tests/**",
@@ -1180,9 +1079,7 @@
         ".github/workflows/policies.yml",
         "src/tests/sec-002/**"
       ],
-      "exclusive_locks": [
-        "database-tests"
-      ],
+      "exclusive_locks": ["database-tests"],
       "read_first": [
         "ProductSpec.md",
         "FEATUREROADMAP_workplan.md",
@@ -1261,9 +1158,7 @@
       "size": "S",
       "kind": "implementation",
       "priority": 50,
-      "depends_on": [
-        "SEC-002"
-      ],
+      "depends_on": ["SEC-002"],
       "requires_decisions": [],
       "write_scope": [
         "supabase/migrations/**",
@@ -1273,10 +1168,7 @@
         "supabase/tests/sec-003.sql",
         "src/routes/_authenticated/learnings.tsx"
       ],
-      "exclusive_locks": [
-        "database-schema",
-        "generated-types"
-      ],
+      "exclusive_locks": ["database-schema", "generated-types"],
       "read_first": [
         "ProductSpec.md",
         "FEATUREROADMAP_workplan.md",
@@ -1361,9 +1253,7 @@
       "size": "S",
       "kind": "implementation",
       "priority": 50,
-      "depends_on": [
-        "SEC-003"
-      ],
+      "depends_on": ["SEC-003"],
       "requires_decisions": [],
       "write_scope": [
         "supabase/migrations/20261018005000_project_members.sql",
@@ -1373,9 +1263,7 @@
         "src/lib/membership.functions.test.ts",
         "supabase/tests/sec-004.sql"
       ],
-      "exclusive_locks": [
-        "project-membership-schema"
-      ],
+      "exclusive_locks": ["project-membership-schema"],
       "read_first": [
         "ProductSpec.md",
         "FEATUREROADMAP_workplan.md",
@@ -1454,14 +1342,12 @@
       "id": "SEC-005",
       "title": "Scoped invitation acceptance and revocation",
       "phase": "P1",
-      "status": "in_progress",
+      "status": "complete",
       "owner": "agent",
       "size": "S",
       "kind": "implementation",
       "priority": 50,
-      "depends_on": [
-        "SEC-004"
-      ],
+      "depends_on": ["SEC-004"],
       "requires_decisions": [],
       "write_scope": [
         "supabase/migrations/20261018012000_scoped_invitations.sql",
@@ -1472,10 +1358,7 @@
         "supabase/tests/sec-005.sql",
         "scripts/check-invitation-concurrency.mjs"
       ],
-      "exclusive_locks": [
-        "scoped-invitation-schema",
-        "invite-route"
-      ],
+      "exclusive_locks": ["scoped-invitation-schema", "invite-route"],
       "read_first": [
         "ProductSpec.md",
         "FEATUREROADMAP_workplan.md",
@@ -1514,33 +1397,32 @@
         {
           "date": "2026-10-18",
           "text": "e5e6b80 integrated; reviewed12000 hash e8fea81d applied only local55322.935real SQL assertions pass with rollback (62newinvite checks). Root mounts owner-only InvitationPanel in Account; collaboration remainsdisabled. Worker runs final realtwo-connectionrace beforetaskclose."
+        },
+        {
+          "date": "2026-10-18",
+          "text": "Completed final realtwo-connectionracebbdcaae integratedcef1ad9; no hostedfixtures or invitation emails. Application collaboration remains disabled until shared resources exist; legacy privateRLS unchanged."
         }
       ],
-      "claim": {
-        "owner": "lifecycle",
-        "branch": "codex/scoped-invitations-20261018",
-        "base_commit": "0e33ea9",
-        "worktree": "/private/tmp/first-ten-project-lifecycle",
-        "started_at": "2026-10-18T15:18:51.356254+00:00",
-        "lease_expires_at": "2026-10-18T17:18:51.356254+00:00"
-      },
-      "completion_evidence": [],
+      "claim": null,
+      "completion_evidence": [
+        "e5e6b80 + cef1ad9 (workers8237879,bbdcaae): recipient-bound hash-only expiring invitations, project-lock CAS membership and replay receipts, fragment-only token entry, owner create/revoke controls, disabled class/project collaboration grants.62 newSQL assertions/935combined passed;12000appliedlocal55322+hosted by reviewednormalmigration;31focused tests/typecheck/lint/build pass. Actual independent two-session acceptance race:1viewergrant, competingeditorREVISION_CONFLICT; replay1membership/1revision/1acceptaudit; unchangedprojectcontent. Newfictional fixturesremoved and capabilityfalse restored/verified."
+      ],
       "subtasks": [
         {
           "id": "SEC-005.s1",
-          "status": "in_progress",
+          "status": "complete",
           "instruction": "Store hashed expiring/revocable project tokens with allowed role and recipient binding; define the class-token contract but reject class consumption until CLS-001 exists.",
           "notes": []
         },
         {
           "id": "SEC-005.s2",
-          "status": "not_started",
+          "status": "complete",
           "instruction": "Accept project invitations atomically only after authentication; enforce one-use/idempotent semantics and test recipient/role races.",
           "notes": []
         },
         {
           "id": "SEC-005.s3",
-          "status": "not_started",
+          "status": "complete",
           "instruction": "Provide a user-copied invite link first; do not auto-email people during agent execution.",
           "notes": []
         }
@@ -1555,9 +1437,7 @@
       "size": "S",
       "kind": "implementation",
       "priority": 50,
-      "depends_on": [
-        "SEC-003"
-      ],
+      "depends_on": ["SEC-003"],
       "requires_decisions": [],
       "write_scope": [
         "supabase/migrations/20261018010000_platform_admin.sql",
@@ -1569,9 +1449,7 @@
         "src/components/AppShell.tsx",
         "src/tests/desktop-routes/admin-auth.test.ts"
       ],
-      "exclusive_locks": [
-        "platform-admin-authoring"
-      ],
+      "exclusive_locks": ["platform-admin-authoring"],
       "read_first": [
         "ProductSpec.md",
         "FEATUREROADMAP_workplan.md",
@@ -1657,9 +1535,7 @@
       "size": "S",
       "kind": "implementation",
       "priority": 50,
-      "depends_on": [
-        "SEC-003"
-      ],
+      "depends_on": ["SEC-003"],
       "requires_decisions": [],
       "write_scope": [
         "supabase/migrations/20261018011000_processing_consent.sql",
@@ -1678,11 +1554,7 @@
         "src/tests/ai-eval/**",
         "src/tests/ai-003/fixture-parity.test.ts"
       ],
-      "exclusive_locks": [
-        "processing-consent-schema",
-        "ai-entrypoint",
-        "interview-flow"
-      ],
+      "exclusive_locks": ["processing-consent-schema", "ai-entrypoint", "interview-flow"],
       "read_first": [
         "ProductSpec.md",
         "FEATUREROADMAP_workplan.md",
@@ -1757,10 +1629,7 @@
       "size": "S",
       "kind": "implementation",
       "priority": 50,
-      "depends_on": [
-        "PRV-001",
-        "SEC-004"
-      ],
+      "depends_on": ["PRV-001", "SEC-004"],
       "requires_decisions": [],
       "write_scope": [
         "src/routes/_authenticated/settings.tsx",
@@ -1772,11 +1641,7 @@
         "src/lib/account.functions.test.ts",
         "supabase/tests/prv-002.sql"
       ],
-      "exclusive_locks": [
-        "database-schema",
-        "generated-types",
-        "route-integration"
-      ],
+      "exclusive_locks": ["database-schema", "generated-types", "route-integration"],
       "read_first": [
         "ProductSpec.md",
         "FEATUREROADMAP_workplan.md",
@@ -1845,10 +1710,7 @@
       "size": "S",
       "kind": "documentation",
       "priority": 50,
-      "depends_on": [
-        "SEC-003",
-        "OPS-002"
-      ],
+      "depends_on": ["SEC-003", "OPS-002"],
       "requires_decisions": [],
       "write_scope": [
         "docs/operations/release-runbook.md",
@@ -1859,13 +1721,8 @@
         "scripts/rehearse-restore.py",
         "docs/operations/restore-rehearsal-2026-10-18.json"
       ],
-      "exclusive_locks": [
-        "migration-coordination"
-      ],
-      "read_first": [
-        "ProductSpec.md",
-        "FEATUREROADMAP_workplan.md"
-      ],
+      "exclusive_locks": ["migration-coordination"],
+      "read_first": ["ProductSpec.md", "FEATUREROADMAP_workplan.md"],
       "goal": "Give the integration agent a safe serial deployment path and data-preserving rollback.",
       "steps": [
         "Define additive migration, backfill, validation, generated types, compatible app release and feature enable order.",
@@ -1938,9 +1795,7 @@
       "size": "S",
       "kind": "implementation",
       "priority": 50,
-      "depends_on": [
-        "OPS-001"
-      ],
+      "depends_on": ["OPS-001"],
       "requires_decisions": [],
       "write_scope": [
         "src/lib/ai.functions.ts",
@@ -1951,11 +1806,7 @@
         "src/routes/_authenticated/interview.tsx",
         "src/routes/_authenticated/outreach.tsx"
       ],
-      "exclusive_locks": [
-        "ai-entrypoint",
-        "interview-flow",
-        "route-integration"
-      ],
+      "exclusive_locks": ["ai-entrypoint", "interview-flow", "route-integration"],
       "read_first": [
         "ProductSpec.md",
         "FEATUREROADMAP_workplan.md",
@@ -2005,9 +1856,7 @@
         }
       ],
       "claim": null,
-      "completion_evidence": [
-        "src/lib/ai.test.ts"
-      ],
+      "completion_evidence": ["src/lib/ai.test.ts"],
       "subtasks": [
         {
           "id": "AI-001.s1",
@@ -2038,10 +1887,7 @@
       "size": "S",
       "kind": "implementation",
       "priority": 50,
-      "depends_on": [
-        "AI-001",
-        "SEC-003"
-      ],
+      "depends_on": ["AI-001", "SEC-003"],
       "requires_decisions": [],
       "write_scope": [
         "src/lib/prompts/**",
@@ -2064,14 +1910,8 @@
         "src/tests/marketing-lab/persistence-ui.test.tsx",
         "scripts/check-ai-origin-concurrency.mjs"
       ],
-      "exclusive_locks": [
-        "ai-provenance-schema"
-      ],
-      "read_first": [
-        "ProductSpec.md",
-        "FEATUREROADMAP_workplan.md",
-        "src/lib/ai.functions.ts"
-      ],
+      "exclusive_locks": ["ai-provenance-schema"],
+      "read_first": ["ProductSpec.md", "FEATUREROADMAP_workplan.md", "src/lib/ai.functions.ts"],
       "goal": "Keep prompt/model/version and request identity with each generated result.",
       "steps": [
         "Extract current prompts without changing their wording or behavior.",
@@ -2175,10 +2015,7 @@
       "size": "S",
       "kind": "implementation",
       "priority": 50,
-      "depends_on": [
-        "AI-002",
-        "AI-004"
-      ],
+      "depends_on": ["AI-002", "AI-004"],
       "requires_decisions": [],
       "write_scope": [
         "evals/**",
@@ -2186,9 +2023,7 @@
         "src/tests/ai-eval/**",
         "src/tests/ai-003/**"
       ],
-      "exclusive_locks": [
-        "package-manifest"
-      ],
+      "exclusive_locks": ["package-manifest"],
       "read_first": [
         "ProductSpec.md",
         "FEATUREROADMAP_workplan.md",
@@ -2269,10 +2104,7 @@
       "size": "S",
       "kind": "implementation",
       "priority": 50,
-      "depends_on": [
-        "AI-001",
-        "SEC-003"
-      ],
+      "depends_on": ["AI-001", "SEC-003"],
       "requires_decisions": [],
       "write_scope": [
         "supabase/migrations/20261018014000_ai_usage_budget.sql",
@@ -2282,11 +2114,23 @@
         "supabase/tests/ai-004.sql",
         "docs/ai-budget-operations.md",
         "supabase/tests/30_demo-ai-budget.sql",
-        "scripts/check-ai-budget-concurrency.mjs"
+        "scripts/check-ai-budget-concurrency.mjs",
+        "src/lib/ai/contracts.ts",
+        "src/lib/ai.functions.ts",
+        "src/lib/ai/gateway.server.ts",
+        "src/lib/ai/demo-marketing.server.ts",
+        "src/hooks/useAIIntent.ts",
+        "src/routes/_authenticated/interview.tsx",
+        "src/routes/_authenticated/learnings.tsx",
+        "src/routes/_authenticated/outreach.tsx",
+        "src/components/marketing/LiveMarketingPractice.tsx",
+        "src/tests/prv-001/provider-boundary.test.ts"
       ],
       "exclusive_locks": [
         "ai-usage-ledger-schema",
-        "ai-budget-service"
+        "ai-budget-service",
+        "ai-entrypoint",
+        "ai-caller-intents"
       ],
       "read_first": [
         "ProductSpec.md",
@@ -2375,11 +2219,7 @@
       "size": "S",
       "kind": "implementation",
       "priority": 50,
-      "depends_on": [
-        "AI-002",
-        "AI-003",
-        "AI-004"
-      ],
+      "depends_on": ["AI-002", "AI-003", "AI-004"],
       "requires_decisions": [],
       "write_scope": [
         "src/lib/ai/model-policy.ts",
@@ -2389,9 +2229,7 @@
         "src/lib/ai/model-policy.test.ts",
         "src/lib/ai.functions.test.ts"
       ],
-      "exclusive_locks": [
-        "ai-entrypoint"
-      ],
+      "exclusive_locks": ["ai-entrypoint"],
       "read_first": [
         "ProductSpec.md",
         "FEATUREROADMAP_workplan.md",
@@ -2460,19 +2298,10 @@
       "size": "S",
       "kind": "research",
       "priority": 50,
-      "depends_on": [
-        "AI-005",
-        "AI-007"
-      ],
+      "depends_on": ["AI-005", "AI-007"],
       "requires_decisions": [],
-      "write_scope": [
-        "evals/results/**",
-        "docs/ai-model-policy.md",
-        "src/lib/ai/model-policy.ts"
-      ],
-      "exclusive_locks": [
-        "ai-entrypoint"
-      ],
+      "write_scope": ["evals/results/**", "docs/ai-model-policy.md", "src/lib/ai/model-policy.ts"],
+      "exclusive_locks": ["ai-entrypoint"],
       "read_first": [
         "ProductSpec.md",
         "FEATUREROADMAP_workplan.md",
@@ -2540,11 +2369,7 @@
       "size": "S",
       "kind": "implementation",
       "priority": 50,
-      "depends_on": [
-        "AI-002",
-        "PRV-001",
-        "SEC-004"
-      ],
+      "depends_on": ["AI-002", "PRV-001", "SEC-004"],
       "requires_decisions": [],
       "write_scope": [
         "src/lib/ai/context.server.ts",
@@ -2554,9 +2379,7 @@
         "src/lib/ai/context.server.test.ts",
         "src/lib/ai.functions.test.ts"
       ],
-      "exclusive_locks": [
-        "ai-entrypoint"
-      ],
+      "exclusive_locks": ["ai-entrypoint"],
       "read_first": [
         "ProductSpec.md",
         "FEATUREROADMAP_workplan.md",
@@ -2625,11 +2448,7 @@
       "size": "S",
       "kind": "gate",
       "priority": 50,
-      "depends_on": [
-        "AI-006",
-        "AI-007",
-        "AI-004"
-      ],
+      "depends_on": ["AI-006", "AI-007", "AI-004"],
       "requires_decisions": [],
       "write_scope": [
         "evals/results/ai-gate.md",
@@ -2640,14 +2459,8 @@
         "src/lib/ai/model-policy.test.ts",
         "src/lib/ai.functions.test.ts"
       ],
-      "exclusive_locks": [
-        "ai-entrypoint"
-      ],
-      "read_first": [
-        "ProductSpec.md",
-        "FEATUREROADMAP_workplan.md",
-        "src/lib/ai.functions.ts"
-      ],
+      "exclusive_locks": ["ai-entrypoint"],
+      "read_first": ["ProductSpec.md", "FEATUREROADMAP_workplan.md", "src/lib/ai.functions.ts"],
       "goal": "Validate the full authenticated, metered, schema-checked generation path before new kinds.",
       "steps": [
         "Run cross-tenant/context injection, duplicate request and concurrent budget scenarios.",
@@ -2710,14 +2523,9 @@
       "size": "S",
       "kind": "documentation",
       "priority": 4,
-      "depends_on": [
-        "VAL-001"
-      ],
+      "depends_on": ["VAL-001"],
       "requires_decisions": [],
-      "write_scope": [
-        "docs/brand/directions.md",
-        "docs/brand/previews/**"
-      ],
+      "write_scope": ["docs/brand/directions.md", "docs/brand/previews/**"],
       "exclusive_locks": [],
       "read_first": [
         "ProductSpec.md",
@@ -2765,9 +2573,7 @@
         }
       ],
       "claim": null,
-      "completion_evidence": [
-        "d8d78308ccb6fafcca82ea8a0d001796751bcfe8"
-      ],
+      "completion_evidence": ["d8d78308ccb6fafcca82ea8a0d001796751bcfe8"],
       "subtasks": [
         {
           "id": "BR-001.s1",
@@ -2798,10 +2604,7 @@
       "size": "S",
       "kind": "implementation",
       "priority": 50,
-      "depends_on": [
-        "BR-001",
-        "OPS-001"
-      ],
+      "depends_on": ["BR-001", "OPS-001"],
       "requires_decisions": [],
       "write_scope": [
         "src/styles.css",
@@ -2809,9 +2612,7 @@
         "docs/brand/tokens.md",
         "src/tests/br-002/**"
       ],
-      "exclusive_locks": [
-        "design-system"
-      ],
+      "exclusive_locks": ["design-system"],
       "read_first": [
         "ProductSpec.md",
         "FEATUREROADMAP_workplan.md",
@@ -2891,9 +2692,7 @@
       "size": "S",
       "kind": "implementation",
       "priority": 50,
-      "depends_on": [
-        "BR-002"
-      ],
+      "depends_on": ["BR-002"],
       "requires_decisions": [],
       "write_scope": [
         "src/components/AppShell.tsx",
@@ -2911,10 +2710,7 @@
         "src/tests/desktop-routes/**",
         "src/test/pages.test.tsx"
       ],
-      "exclusive_locks": [
-        "app-shell",
-        "route-integration"
-      ],
+      "exclusive_locks": ["app-shell", "route-integration"],
       "read_first": [
         "ProductSpec.md",
         "FEATUREROADMAP_workplan.md",
@@ -3002,15 +2798,9 @@
       "size": "S",
       "kind": "documentation",
       "priority": 50,
-      "depends_on": [
-        "VP-007",
-        "VAL-001"
-      ],
+      "depends_on": ["VP-007", "VAL-001"],
       "requires_decisions": [],
-      "write_scope": [
-        "docs/marketing/landing-brief.md",
-        "docs/marketing/claims.md"
-      ],
+      "write_scope": ["docs/marketing/landing-brief.md", "docs/marketing/claims.md"],
       "exclusive_locks": [],
       "read_first": [
         "ProductSpec.md",
@@ -3058,9 +2848,7 @@
         }
       ],
       "claim": null,
-      "completion_evidence": [
-        "006ec00995e5e38772d10e6647f14fd43e943978"
-      ],
+      "completion_evidence": ["006ec00995e5e38772d10e6647f14fd43e943978"],
       "subtasks": [
         {
           "id": "WEB-001.s1",
@@ -3091,11 +2879,7 @@
       "size": "S",
       "kind": "implementation",
       "priority": 50,
-      "depends_on": [
-        "WEB-001",
-        "BR-002",
-        "F-007"
-      ],
+      "depends_on": ["WEB-001", "BR-002", "F-007"],
       "requires_decisions": [],
       "write_scope": [
         "src/components/demo/**",
@@ -3106,9 +2890,7 @@
         "src/tests/demo/**",
         "src/routes/__root.tsx"
       ],
-      "exclusive_locks": [
-        "route-integration"
-      ],
+      "exclusive_locks": ["route-integration"],
       "read_first": [
         "ProductSpec.md",
         "FEATUREROADMAP_workplan.md",
@@ -3192,9 +2974,7 @@
       "size": "S",
       "kind": "documentation",
       "priority": 50,
-      "depends_on": [
-        "DOC-001"
-      ],
+      "depends_on": ["DOC-001"],
       "requires_decisions": [],
       "write_scope": [
         "docs/architecture/system-overview.md",
@@ -3250,9 +3030,7 @@
         }
       ],
       "claim": null,
-      "completion_evidence": [
-        "docs/architecture/system-overview.md"
-      ],
+      "completion_evidence": ["docs/architecture/system-overview.md"],
       "subtasks": [
         {
           "id": "WEB-003.s1",
@@ -3283,13 +3061,7 @@
       "size": "S",
       "kind": "implementation",
       "priority": 50,
-      "depends_on": [
-        "WEB-001",
-        "WEB-002",
-        "WEB-003",
-        "BR-002",
-        "EDU-002"
-      ],
+      "depends_on": ["WEB-001", "WEB-002", "WEB-003", "BR-002", "EDU-002"],
       "requires_decisions": [],
       "write_scope": [
         "src/routes/index.tsx",
@@ -3300,9 +3072,7 @@
         "README.md",
         "ProductSpec.md"
       ],
-      "exclusive_locks": [
-        "route-integration"
-      ],
+      "exclusive_locks": ["route-integration"],
       "read_first": [
         "ProductSpec.md",
         "FEATUREROADMAP_workplan.md",
@@ -3385,15 +3155,9 @@
       "size": "S",
       "kind": "documentation",
       "priority": 50,
-      "depends_on": [
-        "VAL-001",
-        "VP-008"
-      ],
+      "depends_on": ["VAL-001", "VP-008"],
       "requires_decisions": [],
-      "write_scope": [
-        "docs/teaching/**",
-        "public/teaching/**"
-      ],
+      "write_scope": ["docs/teaching/**", "public/teaching/**"],
       "exclusive_locks": [],
       "read_first": [
         "ProductSpec.md",
@@ -3473,11 +3237,7 @@
       "size": "S",
       "kind": "implementation",
       "priority": 50,
-      "depends_on": [
-        "EDU-001",
-        "BR-002",
-        "WEB-001"
-      ],
+      "depends_on": ["EDU-001", "BR-002", "WEB-001"],
       "requires_decisions": [],
       "write_scope": [
         "src/routes/teach.tsx",
@@ -3487,9 +3247,7 @@
         "src/routes/teach.test.tsx",
         "src/routes/__root.tsx"
       ],
-      "exclusive_locks": [
-        "route-integration"
-      ],
+      "exclusive_locks": ["route-integration"],
       "read_first": [
         "ProductSpec.md",
         "FEATUREROADMAP_workplan.md",
@@ -3576,18 +3334,10 @@
       "size": "S",
       "kind": "research",
       "priority": 50,
-      "depends_on": [
-        "EDU-001"
-      ],
+      "depends_on": ["EDU-001"],
       "requires_decisions": [],
-      "write_scope": [
-        "research/teaching-rehearsal.md",
-        "docs/teaching/**",
-        "public/teaching/**"
-      ],
-      "exclusive_locks": [
-        "teaching-materials"
-      ],
+      "write_scope": ["research/teaching-rehearsal.md", "docs/teaching/**", "public/teaching/**"],
+      "exclusive_locks": ["teaching-materials"],
       "read_first": [
         "ProductSpec.md",
         "FEATUREROADMAP_workplan.md",
@@ -3660,11 +3410,7 @@
       "size": "S",
       "kind": "gate",
       "priority": 50,
-      "depends_on": [
-        "WEB-004",
-        "EDU-002",
-        "BR-003"
-      ],
+      "depends_on": ["WEB-004", "EDU-002", "BR-003"],
       "requires_decisions": [],
       "write_scope": [
         "src/routes/public-pages.test.tsx",
@@ -3746,9 +3492,7 @@
       "size": "S",
       "kind": "implementation",
       "priority": 50,
-      "depends_on": [
-        "SEC-003"
-      ],
+      "depends_on": ["SEC-003"],
       "requires_decisions": [],
       "write_scope": [
         "supabase/migrations/20261018009000_project_lifecycle.sql",
@@ -3757,9 +3501,7 @@
         "supabase/tests/ws-001.sql",
         "scripts/check-project-lifecycle-concurrency.mjs"
       ],
-      "exclusive_locks": [
-        "project-lifecycle-authoring"
-      ],
+      "exclusive_locks": ["project-lifecycle-authoring"],
       "read_first": [
         "ProductSpec.md",
         "FEATUREROADMAP_workplan.md",
@@ -3847,10 +3589,7 @@
       "size": "M",
       "kind": "implementation",
       "priority": 50,
-      "depends_on": [
-        "WS-001",
-        "SEC-004"
-      ],
+      "depends_on": ["WS-001", "SEC-004"],
       "requires_decisions": [],
       "write_scope": [
         "src/lib/data.ts",
@@ -3865,9 +3604,7 @@
         "src/lib/project-lifecycle.ts",
         "src/tests/ws-001/project-lifecycle.test.ts"
       ],
-      "exclusive_locks": [
-        "workspace-lifecycle-ui"
-      ],
+      "exclusive_locks": ["workspace-lifecycle-ui"],
       "read_first": [
         "ProductSpec.md",
         "FEATUREROADMAP_workplan.md",
@@ -3943,10 +3680,7 @@
       "size": "S",
       "kind": "implementation",
       "priority": 50,
-      "depends_on": [
-        "WS-002",
-        "BR-002"
-      ],
+      "depends_on": ["WS-002", "BR-002"],
       "requires_decisions": [],
       "write_scope": [
         "src/routes/_authenticated/workspace.tsx",
@@ -3956,10 +3690,7 @@
         "src/routes/_authenticated/workspace.test.tsx",
         "src/components/AppShell.test.tsx"
       ],
-      "exclusive_locks": [
-        "app-shell",
-        "route-integration"
-      ],
+      "exclusive_locks": ["app-shell", "route-integration"],
       "read_first": [
         "ProductSpec.md",
         "FEATUREROADMAP_workplan.md",
@@ -4033,10 +3764,7 @@
       "size": "S",
       "kind": "implementation",
       "priority": 50,
-      "depends_on": [
-        "WS-002",
-        "PRV-001"
-      ],
+      "depends_on": ["WS-002", "PRV-001"],
       "requires_decisions": [],
       "write_scope": [
         "supabase/migrations/**",
@@ -4046,10 +3774,7 @@
         "src/lib/interview-drafts.functions.test.ts",
         "supabase/tests/ws-004.sql"
       ],
-      "exclusive_locks": [
-        "database-schema",
-        "generated-types"
-      ],
+      "exclusive_locks": ["database-schema", "generated-types"],
       "read_first": [
         "ProductSpec.md",
         "FEATUREROADMAP_workplan.md",
@@ -4119,9 +3844,7 @@
       "size": "S",
       "kind": "implementation",
       "priority": 50,
-      "depends_on": [
-        "WS-004"
-      ],
+      "depends_on": ["WS-004"],
       "requires_decisions": [],
       "write_scope": [
         "src/routes/_authenticated/interview.tsx",
@@ -4131,9 +3854,7 @@
         "src/routes/_authenticated/interview.test.tsx",
         "src/lib/useInterviewDraft.test.ts"
       ],
-      "exclusive_locks": [
-        "interview-flow"
-      ],
+      "exclusive_locks": ["interview-flow"],
       "read_first": [
         "ProductSpec.md",
         "FEATUREROADMAP_workplan.md",
@@ -4203,9 +3924,7 @@
       "size": "S",
       "kind": "implementation",
       "priority": 50,
-      "depends_on": [
-        "WS-005"
-      ],
+      "depends_on": ["WS-005"],
       "requires_decisions": [],
       "write_scope": [
         "supabase/migrations/**",
@@ -4216,11 +3935,7 @@
         "src/routes/_authenticated/interview.test.tsx",
         "supabase/tests/ws-006.sql"
       ],
-      "exclusive_locks": [
-        "database-schema",
-        "generated-types",
-        "interview-flow"
-      ],
+      "exclusive_locks": ["database-schema", "generated-types", "interview-flow"],
       "read_first": [
         "ProductSpec.md",
         "FEATUREROADMAP_workplan.md",
@@ -4290,10 +4005,7 @@
       "size": "S",
       "kind": "gate",
       "priority": 50,
-      "depends_on": [
-        "WS-003",
-        "WS-006"
-      ],
+      "depends_on": ["WS-003", "WS-006"],
       "requires_decisions": [],
       "write_scope": [
         "src/tests/workspace-journeys/**",
@@ -4374,15 +4086,9 @@
       "size": "S",
       "kind": "documentation",
       "priority": 50,
-      "depends_on": [
-        "SEC-001",
-        "PRV-001",
-        "WS-002"
-      ],
+      "depends_on": ["SEC-001", "PRV-001", "WS-002"],
       "requires_decisions": [],
-      "write_scope": [
-        "docs/analytics/event-contract.md"
-      ],
+      "write_scope": ["docs/analytics/event-contract.md"],
       "exclusive_locks": [],
       "read_first": [
         "ProductSpec.md",
@@ -4452,11 +4158,7 @@
       "size": "S",
       "kind": "implementation",
       "priority": 50,
-      "depends_on": [
-        "AN-001",
-        "AI-004",
-        "WS-006"
-      ],
+      "depends_on": ["AN-001", "AI-004", "WS-006"],
       "requires_decisions": [],
       "write_scope": [
         "supabase/migrations/**",
@@ -4471,11 +4173,7 @@
         "src/lib/interview-drafts.functions.test.ts",
         "supabase/tests/an-002.sql"
       ],
-      "exclusive_locks": [
-        "database-schema",
-        "generated-types",
-        "analytics-integration"
-      ],
+      "exclusive_locks": ["database-schema", "generated-types", "analytics-integration"],
       "read_first": [
         "ProductSpec.md",
         "FEATUREROADMAP_workplan.md",
@@ -4544,11 +4242,7 @@
       "size": "S",
       "kind": "implementation",
       "priority": 50,
-      "depends_on": [
-        "SEC-006",
-        "AN-002",
-        "AI-004"
-      ],
+      "depends_on": ["SEC-006", "AN-002", "AI-004"],
       "requires_decisions": [],
       "write_scope": [
         "src/lib/admin-metrics.functions.ts",
@@ -4558,10 +4252,7 @@
         "src/lib/admin-metrics.functions.test.ts",
         "supabase/tests/adm-001.sql"
       ],
-      "exclusive_locks": [
-        "database-schema",
-        "generated-types"
-      ],
+      "exclusive_locks": ["database-schema", "generated-types"],
       "read_first": [
         "ProductSpec.md",
         "FEATUREROADMAP_workplan.md",
@@ -4634,10 +4325,7 @@
       "size": "S",
       "kind": "implementation",
       "priority": 50,
-      "depends_on": [
-        "ADM-001",
-        "BR-002"
-      ],
+      "depends_on": ["ADM-001", "BR-002"],
       "requires_decisions": [],
       "write_scope": [
         "src/routes/_authenticated/admin.tsx",
@@ -4645,9 +4333,7 @@
         "src/tests/adm-002/**",
         "src/routes/_authenticated/admin.test.tsx"
       ],
-      "exclusive_locks": [
-        "route-integration"
-      ],
+      "exclusive_locks": ["route-integration"],
       "read_first": [
         "ProductSpec.md",
         "FEATUREROADMAP_workplan.md",
@@ -4720,10 +4406,7 @@
       "size": "S",
       "kind": "implementation",
       "priority": 50,
-      "depends_on": [
-        "ADM-002",
-        "AI-008"
-      ],
+      "depends_on": ["ADM-002", "AI-008"],
       "requires_decisions": [],
       "write_scope": [
         "src/lib/ai.functions.ts",
@@ -4742,10 +4425,7 @@
         "src/lib/ai/context.server.test.ts",
         "src/routes/_authenticated/admin.test.tsx"
       ],
-      "exclusive_locks": [
-        "ai-entrypoint",
-        "route-integration"
-      ],
+      "exclusive_locks": ["ai-entrypoint", "route-integration"],
       "read_first": [
         "ProductSpec.md",
         "FEATUREROADMAP_workplan.md",
@@ -4811,32 +4491,24 @@
       "id": "CLS-001",
       "title": "Model classes, enrollment and explicit project association",
       "phase": "P4",
-      "status": "not_started",
+      "status": "in_progress",
       "owner": "agent",
       "size": "S",
       "kind": "implementation",
       "priority": 50,
-      "depends_on": [
-        "SEC-004",
-        "SEC-005",
-        "WS-002"
-      ],
+      "depends_on": ["SEC-004", "SEC-005", "WS-002"],
       "requires_decisions": [],
       "write_scope": [
-        "supabase/migrations/**",
-        "src/integrations/supabase/types.ts",
+        "supabase/migrations/20261018015000_class_foundations.sql",
+        "src/lib/classes.ts",
         "src/lib/classes.functions.ts",
         "src/lib/invitations.functions.ts",
         "src/components/invitations/**",
         "src/tests/cls-001/**",
-        "src/lib/classes.functions.test.ts",
-        "src/lib/invitations.functions.test.ts",
-        "supabase/tests/cls-001.sql"
+        "supabase/tests/cls-001.sql",
+        "docs/architecture/class-foundations.md"
       ],
-      "exclusive_locks": [
-        "database-schema",
-        "generated-types"
-      ],
+      "exclusive_locks": ["class-foundation-schema", "class-membership-contract"],
       "read_first": [
         "ProductSpec.md",
         "FEATUREROADMAP_workplan.md",
@@ -4880,9 +4552,20 @@
         {
           "date": "2026-10-18",
           "text": "Guest model extension from FERPA-001 review: resolve account-only source assumptions before implementation."
+        },
+        {
+          "date": "2026-10-18",
+          "text": "Claimed afterSEC005 verifiedrace. Teacher-owned classes/enrollment/assignments/projectassociation plus real guestresource schema; no fake auth/projectFK. Reserved15000; rootserializes local/hostedapply and officialtypes, workerrequiresdesignreview first. Root wires final UIlaterCLS007/CLS003; no automaticstudent/privateproject grants."
         }
       ],
-      "claim": null,
+      "claim": {
+        "owner": "lifecycle",
+        "branch": "codex/class-foundation-20261018",
+        "base_commit": "cef1ad9",
+        "worktree": "/private/tmp/first-ten-project-lifecycle",
+        "started_at": "2026-10-18T15:47:57.209Z",
+        "lease_expires_at": "2026-10-18T18:47:57.211Z"
+      },
       "completion_evidence": [],
       "subtasks": [
         {
@@ -4920,10 +4603,7 @@
       "size": "S",
       "kind": "implementation",
       "priority": 50,
-      "depends_on": [
-        "CLS-001",
-        "PRV-001"
-      ],
+      "depends_on": ["CLS-001", "PRV-001"],
       "requires_decisions": [],
       "write_scope": [
         "supabase/migrations/**",
@@ -4934,10 +4614,7 @@
         "src/components/classes/SubmissionPreview.test.tsx",
         "supabase/tests/cls-002.sql"
       ],
-      "exclusive_locks": [
-        "database-schema",
-        "generated-types"
-      ],
+      "exclusive_locks": ["database-schema", "generated-types"],
       "read_first": [
         "ProductSpec.md",
         "FEATUREROADMAP_workplan.md",
@@ -5017,10 +4694,7 @@
       "size": "S",
       "kind": "implementation",
       "priority": 50,
-      "depends_on": [
-        "CLS-002",
-        "AN-002"
-      ],
+      "depends_on": ["CLS-002", "AN-002"],
       "requires_decisions": [],
       "write_scope": [
         "src/lib/teacher.functions.ts",
@@ -5030,10 +4704,7 @@
         "src/lib/teacher.functions.test.ts",
         "supabase/tests/cls-003.sql"
       ],
-      "exclusive_locks": [
-        "database-schema",
-        "generated-types"
-      ],
+      "exclusive_locks": ["database-schema", "generated-types"],
       "read_first": [
         "ProductSpec.md",
         "FEATUREROADMAP_workplan.md",
@@ -5113,10 +4784,7 @@
       "size": "S",
       "kind": "implementation",
       "priority": 50,
-      "depends_on": [
-        "CLS-003",
-        "BR-002"
-      ],
+      "depends_on": ["CLS-003", "BR-002"],
       "requires_decisions": [],
       "write_scope": [
         "src/routes/_authenticated/teacher.tsx",
@@ -5124,9 +4792,7 @@
         "src/tests/cls-004/**",
         "src/routes/_authenticated/teacher.test.tsx"
       ],
-      "exclusive_locks": [
-        "route-integration"
-      ],
+      "exclusive_locks": ["route-integration"],
       "read_first": [
         "ProductSpec.md",
         "FEATUREROADMAP_workplan.md",
@@ -5199,10 +4865,7 @@
       "size": "S",
       "kind": "implementation",
       "priority": 50,
-      "depends_on": [
-        "CLS-002",
-        "WS-003"
-      ],
+      "depends_on": ["CLS-002", "WS-003"],
       "requires_decisions": [],
       "write_scope": [
         "src/routes/_authenticated/classes.tsx",
@@ -5210,9 +4873,7 @@
         "src/tests/cls-005/**",
         "src/routes/_authenticated/classes.test.tsx"
       ],
-      "exclusive_locks": [
-        "route-integration"
-      ],
+      "exclusive_locks": ["route-integration"],
       "read_first": [
         "ProductSpec.md",
         "FEATUREROADMAP_workplan.md",
@@ -5281,12 +4942,7 @@
       "size": "S",
       "kind": "implementation",
       "priority": 50,
-      "depends_on": [
-        "CLS-004",
-        "CLS-005",
-        "EDU-001",
-        "AI-008"
-      ],
+      "depends_on": ["CLS-004", "CLS-005", "EDU-001", "AI-008"],
       "requires_decisions": [],
       "write_scope": [
         "src/lib/ai.functions.ts",
@@ -5305,10 +4961,7 @@
         "src/lib/ai/context.server.test.ts",
         "src/routes/_authenticated/teacher.test.tsx"
       ],
-      "exclusive_locks": [
-        "ai-entrypoint",
-        "route-integration"
-      ],
+      "exclusive_locks": ["ai-entrypoint", "route-integration"],
       "read_first": [
         "ProductSpec.md",
         "FEATUREROADMAP_workplan.md",
@@ -5380,10 +5033,7 @@
       "size": "S",
       "kind": "implementation",
       "priority": 50,
-      "depends_on": [
-        "AI-002",
-        "WS-002"
-      ],
+      "depends_on": ["AI-002", "WS-002"],
       "requires_decisions": [],
       "write_scope": [
         "supabase/migrations/**",
@@ -5398,11 +5048,7 @@
         "src/routes/_authenticated/outreach.test.tsx",
         "supabase/tests/ev-001.sql"
       ],
-      "exclusive_locks": [
-        "database-schema",
-        "generated-types",
-        "project-data-layer"
-      ],
+      "exclusive_locks": ["database-schema", "generated-types", "project-data-layer"],
       "read_first": [
         "ProductSpec.md",
         "FEATUREROADMAP_workplan.md",
@@ -5472,11 +5118,7 @@
       "size": "S",
       "kind": "implementation",
       "priority": 50,
-      "depends_on": [
-        "WS-002",
-        "AI-007",
-        "EV-001"
-      ],
+      "depends_on": ["WS-002", "AI-007", "EV-001"],
       "requires_decisions": [],
       "write_scope": [
         "supabase/migrations/**",
@@ -5486,10 +5128,7 @@
         "src/lib/decisions.functions.test.ts",
         "supabase/tests/ev-002.sql"
       ],
-      "exclusive_locks": [
-        "database-schema",
-        "generated-types"
-      ],
+      "exclusive_locks": ["database-schema", "generated-types"],
       "read_first": [
         "ProductSpec.md",
         "FEATUREROADMAP_workplan.md",
@@ -5559,11 +5198,7 @@
       "size": "S",
       "kind": "implementation",
       "priority": 50,
-      "depends_on": [
-        "EV-002",
-        "EV-001",
-        "BR-002"
-      ],
+      "depends_on": ["EV-002", "EV-001", "BR-002"],
       "requires_decisions": [],
       "write_scope": [
         "src/routes/_authenticated/decisions.tsx",
@@ -5573,9 +5208,7 @@
         "src/routes/_authenticated/decisions.test.tsx",
         "src/routes/_authenticated/experiments.test.tsx"
       ],
-      "exclusive_locks": [
-        "route-integration"
-      ],
+      "exclusive_locks": ["route-integration"],
       "read_first": [
         "ProductSpec.md",
         "FEATUREROADMAP_workplan.md",
@@ -5645,9 +5278,7 @@
       "size": "S",
       "kind": "implementation",
       "priority": 50,
-      "depends_on": [
-        "EV-002"
-      ],
+      "depends_on": ["EV-002"],
       "requires_decisions": [],
       "write_scope": [
         "supabase/migrations/**",
@@ -5660,11 +5291,7 @@
         "src/routes/_authenticated/decisions.test.tsx",
         "supabase/tests/ev-004.sql"
       ],
-      "exclusive_locks": [
-        "database-schema",
-        "generated-types",
-        "route-integration"
-      ],
+      "exclusive_locks": ["database-schema", "generated-types", "route-integration"],
       "read_first": [
         "ProductSpec.md",
         "FEATUREROADMAP_workplan.md",
@@ -5734,10 +5361,7 @@
       "size": "S",
       "kind": "implementation",
       "priority": 50,
-      "depends_on": [
-        "EV-003",
-        "AI-008"
-      ],
+      "depends_on": ["EV-003", "AI-008"],
       "requires_decisions": [],
       "write_scope": [
         "src/lib/ai.functions.ts",
@@ -5754,9 +5378,7 @@
         "src/lib/ai/model-policy.test.ts",
         "src/lib/ai/context.server.test.ts"
       ],
-      "exclusive_locks": [
-        "ai-entrypoint"
-      ],
+      "exclusive_locks": ["ai-entrypoint"],
       "read_first": [
         "ProductSpec.md",
         "FEATUREROADMAP_workplan.md",
@@ -5827,10 +5449,7 @@
       "size": "S",
       "kind": "implementation",
       "priority": 50,
-      "depends_on": [
-        "WS-007",
-        "AI-008"
-      ],
+      "depends_on": ["WS-007", "AI-008"],
       "requires_decisions": [],
       "write_scope": [
         "src/lib/question-coach.ts",
@@ -5851,10 +5470,7 @@
         "src/lib/ai/context.server.test.ts",
         "src/routes/_authenticated/interview.test.tsx"
       ],
-      "exclusive_locks": [
-        "ai-entrypoint",
-        "interview-flow"
-      ],
+      "exclusive_locks": ["ai-entrypoint", "interview-flow"],
       "read_first": [
         "ProductSpec.md",
         "FEATUREROADMAP_workplan.md",
@@ -5925,11 +5541,7 @@
       "size": "S",
       "kind": "implementation",
       "priority": 50,
-      "depends_on": [
-        "EV-001",
-        "AI-008",
-        "WEB-005"
-      ],
+      "depends_on": ["EV-001", "AI-008", "WEB-005"],
       "requires_decisions": [],
       "write_scope": [
         "src/components/outreach/FirstAsk.tsx",
@@ -5950,10 +5562,7 @@
         "src/routes/_authenticated/outreach.test.tsx",
         "src/routes/_authenticated/dashboard.test.tsx"
       ],
-      "exclusive_locks": [
-        "ai-entrypoint",
-        "route-integration"
-      ],
+      "exclusive_locks": ["ai-entrypoint", "route-integration"],
       "read_first": [
         "ProductSpec.md",
         "FEATUREROADMAP_workplan.md",
@@ -6024,10 +5633,7 @@
       "size": "S",
       "kind": "implementation",
       "priority": 50,
-      "depends_on": [
-        "CLS-002",
-        "EV-003"
-      ],
+      "depends_on": ["CLS-002", "EV-003"],
       "requires_decisions": [],
       "write_scope": [
         "supabase/migrations/**",
@@ -6038,10 +5644,7 @@
         "src/components/sharing/PackPreview.test.tsx",
         "supabase/tests/shr-001.sql"
       ],
-      "exclusive_locks": [
-        "database-schema",
-        "generated-types"
-      ],
+      "exclusive_locks": ["database-schema", "generated-types"],
       "read_first": [
         "ProductSpec.md",
         "FEATUREROADMAP_workplan.md",
@@ -6110,10 +5713,7 @@
       "size": "S",
       "kind": "implementation",
       "priority": 50,
-      "depends_on": [
-        "SHR-001",
-        "SEC-005"
-      ],
+      "depends_on": ["SHR-001", "SEC-005"],
       "requires_decisions": [],
       "write_scope": [
         "supabase/migrations/**",
@@ -6125,11 +5725,7 @@
         "src/routes/share.$token.test.tsx",
         "supabase/tests/shr-002.sql"
       ],
-      "exclusive_locks": [
-        "database-schema",
-        "generated-types",
-        "route-integration"
-      ],
+      "exclusive_locks": ["database-schema", "generated-types", "route-integration"],
       "read_first": [
         "ProductSpec.md",
         "FEATUREROADMAP_workplan.md",
@@ -6198,11 +5794,7 @@
       "size": "S",
       "kind": "implementation",
       "priority": 50,
-      "depends_on": [
-        "SEC-004",
-        "WS-007",
-        "EV-002"
-      ],
+      "depends_on": ["SEC-004", "WS-007", "EV-002"],
       "requires_decisions": [],
       "write_scope": [
         "supabase/migrations/**",
@@ -6213,10 +5805,7 @@
         "src/lib/design-space.functions.test.ts",
         "supabase/tests/col-001.sql"
       ],
-      "exclusive_locks": [
-        "database-schema",
-        "generated-types"
-      ],
+      "exclusive_locks": ["database-schema", "generated-types"],
       "read_first": [
         "ProductSpec.md",
         "FEATUREROADMAP_workplan.md",
@@ -6285,10 +5874,7 @@
       "size": "S",
       "kind": "implementation",
       "priority": 50,
-      "depends_on": [
-        "COL-001",
-        "BR-002"
-      ],
+      "depends_on": ["COL-001", "BR-002"],
       "requires_decisions": [],
       "write_scope": [
         "src/routes/_authenticated/design.tsx",
@@ -6298,10 +5884,7 @@
         "src/routes/_authenticated/design.test.tsx",
         "src/lib/useDesignDocument.test.ts"
       ],
-      "exclusive_locks": [
-        "route-integration",
-        "design-editor"
-      ],
+      "exclusive_locks": ["route-integration", "design-editor"],
       "read_first": [
         "ProductSpec.md",
         "FEATUREROADMAP_workplan.md",
@@ -6370,9 +5953,7 @@
       "size": "S",
       "kind": "implementation",
       "priority": 50,
-      "depends_on": [
-        "COL-002"
-      ],
+      "depends_on": ["COL-002"],
       "requires_decisions": [],
       "write_scope": [
         "supabase/migrations/**",
@@ -6385,11 +5966,7 @@
         "src/components/design/History.test.tsx",
         "supabase/tests/col-003.sql"
       ],
-      "exclusive_locks": [
-        "database-schema",
-        "generated-types",
-        "design-editor"
-      ],
+      "exclusive_locks": ["database-schema", "generated-types", "design-editor"],
       "read_first": [
         "ProductSpec.md",
         "FEATUREROADMAP_workplan.md",
@@ -6458,10 +6035,7 @@
       "size": "S",
       "kind": "implementation",
       "priority": 50,
-      "depends_on": [
-        "COL-002",
-        "AI-008"
-      ],
+      "depends_on": ["COL-002", "AI-008"],
       "requires_decisions": [],
       "write_scope": [
         "src/lib/ai.functions.ts",
@@ -6480,10 +6054,7 @@
         "src/lib/ai/context.server.test.ts",
         "src/routes/_authenticated/design.test.tsx"
       ],
-      "exclusive_locks": [
-        "ai-entrypoint",
-        "design-editor"
-      ],
+      "exclusive_locks": ["ai-entrypoint", "design-editor"],
       "read_first": [
         "ProductSpec.md",
         "FEATUREROADMAP_workplan.md",
@@ -6555,23 +6126,11 @@
       "size": "S",
       "kind": "research",
       "priority": 50,
-      "depends_on": [
-        "COL-002",
-        "OPS-003"
-      ],
+      "depends_on": ["COL-002", "OPS-003"],
       "requires_decisions": [],
-      "write_scope": [
-        "docs/architecture/realtime-decision.md",
-        "prototypes/realtime/**"
-      ],
-      "exclusive_locks": [
-        "realtime-spike"
-      ],
-      "read_first": [
-        "ProductSpec.md",
-        "FEATUREROADMAP_workplan.md",
-        "docs/company-values.md"
-      ],
+      "write_scope": ["docs/architecture/realtime-decision.md", "prototypes/realtime/**"],
+      "exclusive_locks": ["realtime-spike"],
+      "read_first": ["ProductSpec.md", "FEATUREROADMAP_workplan.md", "docs/company-values.md"],
       "goal": "Choose realtime only after demonstrating durable convergence, authorization and affordable operation.",
       "steps": [
         "Compare a CRDT/OT approach and current supported transport/storage options using primary technical sources and current limits/prices.",
@@ -6633,13 +6192,8 @@
       "size": "S",
       "kind": "implementation",
       "priority": 50,
-      "depends_on": [
-        "RT-001",
-        "COL-003"
-      ],
-      "requires_decisions": [
-        "realtime_go"
-      ],
+      "depends_on": ["RT-001", "COL-003"],
+      "requires_decisions": ["realtime_go"],
       "write_scope": [
         "supabase/migrations/**",
         "src/lib/realtime/**",
@@ -6649,16 +6203,8 @@
         "src/lib/design-space.functions.test.ts",
         "supabase/tests/rt-002.sql"
       ],
-      "exclusive_locks": [
-        "database-schema",
-        "generated-types",
-        "design-editor"
-      ],
-      "read_first": [
-        "ProductSpec.md",
-        "FEATUREROADMAP_workplan.md",
-        "docs/company-values.md"
-      ],
+      "exclusive_locks": ["database-schema", "generated-types", "design-editor"],
+      "read_first": ["ProductSpec.md", "FEATUREROADMAP_workplan.md", "docs/company-values.md"],
       "goal": "Synchronize shared design content using the approved conflict-resolution contract.",
       "steps": [
         "Implement authenticated document-scoped subscriptions and durable validated operations/snapshots.",
@@ -6721,26 +6267,16 @@
       "size": "S",
       "kind": "gate",
       "priority": 50,
-      "depends_on": [
-        "RT-002"
-      ],
-      "requires_decisions": [
-        "realtime_go"
-      ],
+      "depends_on": ["RT-002"],
+      "requires_decisions": ["realtime_go"],
       "write_scope": [
         "src/components/design/**",
         "src/tests/realtime/**",
         "docs/qa/realtime-gate.md",
         "src/tests/rt-003/**"
       ],
-      "exclusive_locks": [
-        "design-editor"
-      ],
-      "read_first": [
-        "ProductSpec.md",
-        "FEATUREROADMAP_workplan.md",
-        "docs/company-values.md"
-      ],
+      "exclusive_locks": ["design-editor"],
+      "read_first": ["ProductSpec.md", "FEATUREROADMAP_workplan.md", "docs/company-values.md"],
       "goal": "Make live co-editing understandable and safe under real multi-client failure modes.",
       "steps": [
         "Show presence/cursors separately from durable saved state and connection status.",
@@ -6901,15 +6437,7 @@
       "size": "S",
       "kind": "gate",
       "priority": 50,
-      "depends_on": [
-        "WEB-005",
-        "WS-007",
-        "CLS-004",
-        "ADM-002",
-        "EV-003",
-        "COL-002",
-        "REL-001"
-      ],
+      "depends_on": ["WEB-005", "WS-007", "CLS-004", "ADM-002", "EV-003", "COL-002", "REL-001"],
       "requires_decisions": [],
       "write_scope": [
         "docs/qa/experience-release-gate.md",
@@ -6985,16 +6513,9 @@
       "size": "S",
       "kind": "gate",
       "priority": 50,
-      "depends_on": [
-        "REL-001",
-        "OPS-003",
-        "F-009b"
-      ],
+      "depends_on": ["REL-001", "OPS-003", "F-009b"],
       "requires_decisions": [],
-      "write_scope": [
-        "docs/operations/staging-rehearsal.md",
-        "src/tests/rel-003/**"
-      ],
+      "write_scope": ["docs/operations/staging-rehearsal.md", "src/tests/rel-003/**"],
       "exclusive_locks": [],
       "read_first": [
         "ProductSpec.md",
@@ -7064,17 +6585,9 @@
       "size": "S",
       "kind": "research",
       "priority": 50,
-      "depends_on": [
-        "CLS-006",
-        "EDU-002",
-        "REL-001",
-        "EDU-004"
-      ],
+      "depends_on": ["CLS-006", "EDU-002", "REL-001", "EDU-004"],
       "requires_decisions": [],
-      "write_scope": [
-        "research/teaching-pilot/**",
-        "docs/teaching/revisions.md"
-      ],
+      "write_scope": ["research/teaching-pilot/**", "docs/teaching/revisions.md"],
       "exclusive_locks": [],
       "read_first": [
         "ProductSpec.md",
@@ -7171,9 +6684,7 @@
         "AGENTS.md",
         "src/tests/rel-004/**"
       ],
-      "exclusive_locks": [
-        "delivery-config"
-      ],
+      "exclusive_locks": ["delivery-config"],
       "read_first": [
         "ProductSpec.md",
         "FEATUREROADMAP_workplan.md",
@@ -7242,20 +6753,11 @@
       "size": "S",
       "kind": "research",
       "priority": 50,
-      "depends_on": [
-        "REL-004",
-        "AN-002",
-        "AI-008"
-      ],
+      "depends_on": ["REL-004", "AN-002", "AI-008"],
       "requires_decisions": [],
-      "write_scope": [
-        "research/usage-review.md"
-      ],
+      "write_scope": ["research/usage-review.md"],
       "exclusive_locks": [],
-      "read_first": [
-        "ProductSpec.md",
-        "FEATUREROADMAP_workplan.md"
-      ],
+      "read_first": ["ProductSpec.md", "FEATUREROADMAP_workplan.md"],
       "goal": "Use measured operation to improve model policy and budgets.",
       "steps": [
         "Observe a documented initial window, target two weeks; record actual active users/calls and missing data.",
@@ -7317,21 +6819,11 @@
       "size": "S",
       "kind": "research",
       "priority": 50,
-      "depends_on": [
-        "REL-004",
-        "EV-005",
-        "EV-006",
-        "EV-007"
-      ],
+      "depends_on": ["REL-004", "EV-005", "EV-006", "EV-007"],
       "requires_decisions": [],
-      "write_scope": [
-        "research/feature-use-review.md"
-      ],
+      "write_scope": ["research/feature-use-review.md"],
       "exclusive_locks": [],
-      "read_first": [
-        "ProductSpec.md",
-        "FEATUREROADMAP_workplan.md"
-      ],
+      "read_first": ["ProductSpec.md", "FEATUREROADMAP_workplan.md"],
       "goal": "Assess usefulness and friction of decision, coaching and first-ask tools.",
       "steps": [
         "Observe participants using enabled tools with consent and record which features were actually available.",
@@ -7393,16 +6885,9 @@
       "size": "S",
       "kind": "research",
       "priority": 50,
-      "depends_on": [
-        "L-001",
-        "L-002",
-        "EDU-003",
-        "G-004"
-      ],
+      "depends_on": ["L-001", "L-002", "EDU-003", "G-004"],
       "requires_decisions": [],
-      "write_scope": [
-        "research/release-learning-review.md"
-      ],
+      "write_scope": ["research/release-learning-review.md"],
       "exclusive_locks": [],
       "read_first": [
         "ProductSpec.md",
@@ -7471,15 +6956,9 @@
       "size": "S",
       "kind": "research",
       "priority": 3,
-      "depends_on": [
-        "VP-001",
-        "DOC-001"
-      ],
+      "depends_on": ["VP-001", "DOC-001"],
       "requires_decisions": [],
-      "write_scope": [
-        "research/value-prop.md",
-        "research/claim-ledger.md"
-      ],
+      "write_scope": ["research/value-prop.md", "research/claim-ledger.md"],
       "exclusive_locks": [],
       "read_first": [
         "ProductSpec.md",
@@ -7526,9 +7005,7 @@
         }
       ],
       "claim": null,
-      "completion_evidence": [
-        "d507846bc2f0a8bc08489f7fbc962958ebde5854"
-      ],
+      "completion_evidence": ["d507846bc2f0a8bc08489f7fbc962958ebde5854"],
       "subtasks": [
         {
           "id": "VP-007.s1",
@@ -7559,10 +7036,7 @@
       "size": "S",
       "kind": "research",
       "priority": 20,
-      "depends_on": [
-        "VP-007",
-        "VP-002"
-      ],
+      "depends_on": ["VP-007", "VP-002"],
       "requires_decisions": [],
       "write_scope": [
         "research/value-test-plan.md",
@@ -7571,9 +7045,7 @@
         "research/interviews/README.md",
         "research/recruitment-materials.md"
       ],
-      "exclusive_locks": [
-        "research-protocol"
-      ],
+      "exclusive_locks": ["research-protocol"],
       "read_first": [
         "ProductSpec.md",
         "FEATUREROADMAP_workplan.md",
@@ -7654,14 +7126,9 @@
       "size": "M",
       "kind": "research",
       "priority": 50,
-      "depends_on": [
-        "VP-008"
-      ],
+      "depends_on": ["VP-008"],
       "requires_decisions": [],
-      "write_scope": [
-        "research/interviews/*-founder-*.md",
-        "research/founder-sample.md"
-      ],
+      "write_scope": ["research/interviews/*-founder-*.md", "research/founder-sample.md"],
       "exclusive_locks": [],
       "read_first": [
         "ProductSpec.md",
@@ -7730,14 +7197,9 @@
       "size": "M",
       "kind": "research",
       "priority": 50,
-      "depends_on": [
-        "R0-004a"
-      ],
+      "depends_on": ["R0-004a"],
       "requires_decisions": [],
-      "write_scope": [
-        "research/interviews/*-founder-*.md",
-        "research/founder-sample.md"
-      ],
+      "write_scope": ["research/interviews/*-founder-*.md", "research/founder-sample.md"],
       "exclusive_locks": [],
       "read_first": [
         "ProductSpec.md",
@@ -7806,14 +7268,9 @@
       "size": "M",
       "kind": "research",
       "priority": 50,
-      "depends_on": [
-        "VP-008"
-      ],
+      "depends_on": ["VP-008"],
       "requires_decisions": [],
-      "write_scope": [
-        "research/interviews/*-instructor-*.md",
-        "research/instructor-sample.md"
-      ],
+      "write_scope": ["research/interviews/*-instructor-*.md", "research/instructor-sample.md"],
       "exclusive_locks": [],
       "read_first": [
         "ProductSpec.md",
@@ -7882,15 +7339,9 @@
       "size": "S",
       "kind": "research",
       "priority": 50,
-      "depends_on": [
-        "R0-004b",
-        "VP-007"
-      ],
+      "depends_on": ["R0-004b", "VP-007"],
       "requires_decisions": [],
-      "write_scope": [
-        "research/message-test.md",
-        "research/message-test-materials.md"
-      ],
+      "write_scope": ["research/message-test.md", "research/message-test-materials.md"],
       "exclusive_locks": [],
       "read_first": [
         "ProductSpec.md",
@@ -7959,15 +7410,9 @@
       "size": "S",
       "kind": "research",
       "priority": 50,
-      "depends_on": [
-        "R0-004b",
-        "VP-003"
-      ],
+      "depends_on": ["R0-004b", "VP-003"],
       "requires_decisions": [],
-      "write_scope": [
-        "research/decision-record-template.md",
-        "research/decision-record-review.md"
-      ],
+      "write_scope": ["research/decision-record-template.md", "research/decision-record-review.md"],
       "exclusive_locks": [],
       "read_first": [
         "ProductSpec.md",
@@ -8039,9 +7484,7 @@
       "size": "M",
       "kind": "research",
       "priority": 50,
-      "depends_on": [
-        "VP-009"
-      ],
+      "depends_on": ["VP-009"],
       "requires_decisions": [],
       "write_scope": [
         "research/pilot-plan.md",
@@ -8118,22 +7561,14 @@
       "size": "S",
       "kind": "research",
       "priority": 50,
-      "depends_on": [
-        "R0-004b",
-        "VP-003",
-        "VP-004a",
-        "VP-009",
-        "VP-010"
-      ],
+      "depends_on": ["R0-004b", "VP-003", "VP-004a", "VP-009", "VP-010"],
       "requires_decisions": [],
       "write_scope": [
         "research/synthesis.md",
         "research/interviews/README.md",
         "research/opportunity-ranking.md"
       ],
-      "exclusive_locks": [
-        "research-synthesis"
-      ],
+      "exclusive_locks": ["research-synthesis"],
       "read_first": [
         "ProductSpec.md",
         "FEATUREROADMAP_workplan.md",
@@ -8203,13 +7638,9 @@
       "size": "S",
       "kind": "research",
       "priority": 50,
-      "depends_on": [
-        "R0-005"
-      ],
+      "depends_on": ["R0-005"],
       "requires_decisions": [],
-      "write_scope": [
-        "research/positioning-decision.md"
-      ],
+      "write_scope": ["research/positioning-decision.md"],
       "exclusive_locks": [],
       "read_first": [
         "ProductSpec.md",
@@ -8278,13 +7709,9 @@
       "size": "S",
       "kind": "research",
       "priority": 50,
-      "depends_on": [
-        "VP-006a"
-      ],
+      "depends_on": ["VP-006a"],
       "requires_decisions": [],
-      "write_scope": [
-        "research/research-gate-review.md"
-      ],
+      "write_scope": ["research/research-gate-review.md"],
       "exclusive_locks": [],
       "read_first": [
         "ProductSpec.md",
@@ -8353,11 +7780,7 @@
       "size": "S",
       "kind": "implementation",
       "priority": 50,
-      "depends_on": [
-        "G-004",
-        "WEB-004",
-        "EDU-002"
-      ],
+      "depends_on": ["G-004", "WEB-004", "EDU-002"],
       "requires_decisions": [],
       "write_scope": [
         "src/routes/index.tsx",
@@ -8373,12 +7796,7 @@
         "src/routes/auth.test.tsx",
         "src/routes/_authenticated/setup.test.tsx"
       ],
-      "exclusive_locks": [
-        "public-copy",
-        "readme",
-        "product-spec",
-        "route-integration"
-      ],
+      "exclusive_locks": ["public-copy", "readme", "product-spec", "route-integration"],
       "read_first": [
         "ProductSpec.md",
         "FEATUREROADMAP_workplan.md",
@@ -8447,9 +7865,7 @@
       "size": "M",
       "kind": "implementation",
       "priority": 50,
-      "depends_on": [
-        "G-004"
-      ],
+      "depends_on": ["G-004"],
       "requires_decisions": [],
       "write_scope": [
         "research/community-finder-activation.md",
@@ -8526,9 +7942,7 @@
       "size": "M",
       "kind": "implementation",
       "priority": 50,
-      "depends_on": [
-        "G-004"
-      ],
+      "depends_on": ["G-004"],
       "requires_decisions": [],
       "write_scope": [
         "research/voice-capture-activation.md",
@@ -8605,9 +8019,7 @@
       "size": "M",
       "kind": "implementation",
       "priority": 50,
-      "depends_on": [
-        "G-004"
-      ],
+      "depends_on": ["G-004"],
       "requires_decisions": [],
       "write_scope": [
         "research/follow-up-activation.md",
@@ -8684,9 +8096,7 @@
       "size": "M",
       "kind": "implementation",
       "priority": 50,
-      "depends_on": [
-        "G-004"
-      ],
+      "depends_on": ["G-004"],
       "requires_decisions": [],
       "write_scope": [
         "research/offline-activation.md",
@@ -8763,9 +8173,7 @@
       "size": "M",
       "kind": "implementation",
       "priority": 50,
-      "depends_on": [
-        "G-004"
-      ],
+      "depends_on": ["G-004"],
       "requires_decisions": [],
       "write_scope": [
         "research/public-survey-activation.md",
@@ -8842,9 +8250,7 @@
       "size": "M",
       "kind": "implementation",
       "priority": 50,
-      "depends_on": [
-        "G-004"
-      ],
+      "depends_on": ["G-004"],
       "requires_decisions": [],
       "write_scope": [
         "research/model-picker-activation.md",
@@ -8920,9 +8326,7 @@
       "size": "M",
       "kind": "implementation",
       "priority": 50,
-      "depends_on": [
-        "G-004"
-      ],
+      "depends_on": ["G-004"],
       "requires_decisions": [],
       "write_scope": [
         "research/pain-miner-activation.md",
@@ -8999,9 +8403,7 @@
       "size": "M",
       "kind": "implementation",
       "priority": 50,
-      "depends_on": [
-        "G-004"
-      ],
+      "depends_on": ["G-004"],
       "requires_decisions": [],
       "write_scope": [
         "research/test-swap-activation.md",
@@ -9078,9 +8480,7 @@
       "size": "M",
       "kind": "implementation",
       "priority": 50,
-      "depends_on": [
-        "G-004"
-      ],
+      "depends_on": ["G-004"],
       "requires_decisions": [],
       "write_scope": [
         "research/digest-activation.md",
@@ -9157,10 +8557,7 @@
       "size": "S",
       "kind": "research",
       "priority": 50,
-      "depends_on": [
-        "AN-002",
-        "WEB-004"
-      ],
+      "depends_on": ["AN-002", "WEB-004"],
       "requires_decisions": [],
       "write_scope": [
         "research/traffic-experiment-plan.md",
@@ -9239,10 +8636,7 @@
       "requires_decisions": [],
       "write_scope": [],
       "exclusive_locks": [],
-      "read_first": [
-        "ProductSpec.md",
-        "FEATUREROADMAP_workplan.md"
-      ],
+      "read_first": ["ProductSpec.md", "FEATUREROADMAP_workplan.md"],
       "goal": "Retain the history of the superseded fake-door task without creating a misleading interest-only teacher product.",
       "steps": [
         "Read the legacy VP-005 intent and the newly authorized CLS class/teacher scope.",
@@ -9304,9 +8698,7 @@
       "size": "M",
       "kind": "implementation",
       "priority": 50,
-      "depends_on": [
-        "F-007"
-      ],
+      "depends_on": ["F-007"],
       "requires_decisions": [],
       "write_scope": [
         "vite.config.ts",
@@ -9318,10 +8710,7 @@
         "src/integrations/supabase/previewAuthStorage.ts",
         "docs/operations/scaffold-cleanup.md"
       ],
-      "exclusive_locks": [
-        "delivery-config",
-        "package-manifest"
-      ],
+      "exclusive_locks": ["delivery-config", "package-manifest"],
       "read_first": [
         "ProductSpec.md",
         "FEATUREROADMAP_workplan.md",
@@ -9390,17 +8779,9 @@
       "size": "M",
       "kind": "documentation",
       "priority": 12,
-      "depends_on": [
-        "WEB-001",
-        "BR-001",
-        "MKT-001",
-        "WEB-003"
-      ],
+      "depends_on": ["WEB-001", "BR-001", "MKT-001", "WEB-003"],
       "requires_decisions": [],
-      "write_scope": [
-        "docs/demo/pitch/**",
-        "public/pitch/**"
-      ],
+      "write_scope": ["docs/demo/pitch/**", "public/pitch/**"],
       "exclusive_locks": [],
       "read_first": [
         "ProductSpec.md",
@@ -9491,15 +8872,9 @@
       "size": "S",
       "kind": "documentation",
       "priority": 10,
-      "depends_on": [
-        "SEC-001",
-        "VP-007"
-      ],
+      "depends_on": ["SEC-001", "VP-007"],
       "requires_decisions": [],
-      "write_scope": [
-        "docs/marketing/marketing-lab-contract.md",
-        "docs/teaching/pedagogy-map.md"
-      ],
+      "write_scope": ["docs/marketing/marketing-lab-contract.md", "docs/teaching/pedagogy-map.md"],
       "exclusive_locks": [],
       "read_first": [
         "ProductSpec.md",
@@ -9545,9 +8920,7 @@
         }
       ],
       "claim": null,
-      "completion_evidence": [
-        "ed2635e8bdc0c88676b7249846acdc3a239796a6"
-      ],
+      "completion_evidence": ["ed2635e8bdc0c88676b7249846acdc3a239796a6"],
       "subtasks": [
         {
           "id": "MKT-001.s1",
@@ -9578,10 +8951,7 @@
       "size": "S",
       "kind": "implementation",
       "priority": 10,
-      "depends_on": [
-        "MKT-001",
-        "SEC-003"
-      ],
+      "depends_on": ["MKT-001", "SEC-003"],
       "requires_decisions": [],
       "write_scope": [
         "supabase/migrations/**",
@@ -9591,10 +8961,7 @@
         "src/lib/marketing-plan.test.ts",
         "supabase/tests/marketing.sql"
       ],
-      "exclusive_locks": [
-        "database-schema",
-        "generated-types"
-      ],
+      "exclusive_locks": ["database-schema", "generated-types"],
       "read_first": [
         "ProductSpec.md",
         "FEATUREROADMAP_workplan.md",
@@ -9680,10 +9047,7 @@
       "size": "S",
       "kind": "implementation",
       "priority": 10,
-      "depends_on": [
-        "MKT-002",
-        "BR-002"
-      ],
+      "depends_on": ["MKT-002", "BR-002"],
       "requires_decisions": [],
       "write_scope": [
         "src/routes/_authenticated/marketing.tsx",
@@ -9693,10 +9057,7 @@
         "src/tests/marketing-lab/**",
         "src/components/marketing/SavedMarketingLab.tsx"
       ],
-      "exclusive_locks": [
-        "route-integration",
-        "app-shell"
-      ],
+      "exclusive_locks": ["route-integration", "app-shell"],
       "read_first": [
         "ProductSpec.md",
         "FEATUREROADMAP_workplan.md",
@@ -9774,10 +9135,7 @@
       "size": "S",
       "kind": "implementation",
       "priority": 10,
-      "depends_on": [
-        "MKT-002",
-        "AI-008"
-      ],
+      "depends_on": ["MKT-002", "AI-008"],
       "requires_decisions": [],
       "write_scope": [
         "src/lib/ai.functions.ts",
@@ -9788,9 +9146,7 @@
         "evals/results/marketing-channels/**",
         "src/components/marketing-lab/ChannelSuggestions.tsx"
       ],
-      "exclusive_locks": [
-        "ai-entrypoint"
-      ],
+      "exclusive_locks": ["ai-entrypoint"],
       "read_first": [
         "ProductSpec.md",
         "FEATUREROADMAP_workplan.md",
@@ -9858,10 +9214,7 @@
       "size": "S",
       "kind": "implementation",
       "priority": 10,
-      "depends_on": [
-        "MKT-003",
-        "AI-008"
-      ],
+      "depends_on": ["MKT-003", "AI-008"],
       "requires_decisions": [],
       "write_scope": [
         "src/lib/ai.functions.ts",
@@ -9872,10 +9225,7 @@
         "evals/results/marketing-content/**",
         "src/components/marketing-lab/ContentStudio.tsx"
       ],
-      "exclusive_locks": [
-        "ai-entrypoint",
-        "marketing-editor"
-      ],
+      "exclusive_locks": ["ai-entrypoint", "marketing-editor"],
       "read_first": [
         "ProductSpec.md",
         "FEATUREROADMAP_workplan.md",
@@ -9943,9 +9293,7 @@
       "size": "S",
       "kind": "implementation",
       "priority": 10,
-      "depends_on": [
-        "MKT-003"
-      ],
+      "depends_on": ["MKT-003"],
       "requires_decisions": [],
       "write_scope": [
         "src/components/marketing-lab/TestPlanner.tsx",
@@ -9970,9 +9318,7 @@
         "src/tests/marketing-lab/planning-fixture.ts",
         "src/tests/marketing-lab/persistence-ui.test.tsx"
       ],
-      "exclusive_locks": [
-        "marketing-editor"
-      ],
+      "exclusive_locks": ["marketing-editor"],
       "read_first": [
         "ProductSpec.md",
         "FEATUREROADMAP_workplan.md",
@@ -10071,11 +9417,7 @@
       "size": "S",
       "kind": "implementation",
       "priority": 10,
-      "depends_on": [
-        "MKT-001",
-        "WEB-002",
-        "BR-002"
-      ],
+      "depends_on": ["MKT-001", "WEB-002", "BR-002"],
       "requires_decisions": [],
       "write_scope": [
         "src/components/demo/**",
@@ -10174,18 +9516,9 @@
       "size": "S",
       "kind": "implementation",
       "priority": 10,
-      "depends_on": [
-        "MKT-003",
-        "MKT-004",
-        "MKT-005",
-        "MKT-006",
-        "MKT-007"
-      ],
+      "depends_on": ["MKT-003", "MKT-004", "MKT-005", "MKT-006", "MKT-007"],
       "requires_decisions": [],
-      "write_scope": [
-        "src/tests/marketing-release/**",
-        "docs/qa/marketing-gate.md"
-      ],
+      "write_scope": ["src/tests/marketing-release/**", "docs/qa/marketing-gate.md"],
       "exclusive_locks": [],
       "read_first": [
         "ProductSpec.md",
@@ -10254,9 +9587,7 @@
       "size": "S",
       "kind": "implementation",
       "priority": 10,
-      "depends_on": [
-        "BR-001"
-      ],
+      "depends_on": ["BR-001"],
       "requires_decisions": [],
       "write_scope": [
         "public/brand/**",
@@ -10267,10 +9598,7 @@
         "src/routes/__root.tsx",
         "docs/brand/logo.md"
       ],
-      "exclusive_locks": [
-        "route-integration",
-        "brand-assets"
-      ],
+      "exclusive_locks": ["route-integration", "brand-assets"],
       "read_first": [
         "ProductSpec.md",
         "FEATUREROADMAP_workplan.md",
@@ -10348,10 +9676,7 @@
       "size": "S",
       "kind": "implementation",
       "priority": 10,
-      "depends_on": [
-        "OPS-001",
-        "SEC-003"
-      ],
+      "depends_on": ["OPS-001", "SEC-003"],
       "requires_decisions": [],
       "write_scope": [
         "scripts/seed-demo.mjs",
@@ -10366,9 +9691,7 @@
         "src/components/BrandLogo.tsx",
         "src/routes/demo.tsx"
       ],
-      "exclusive_locks": [
-        "demo-data"
-      ],
+      "exclusive_locks": ["demo-data"],
       "read_first": [
         "ProductSpec.md",
         "FEATUREROADMAP_workplan.md",
@@ -10458,10 +9781,7 @@
       "size": "S",
       "kind": "implementation",
       "priority": 10,
-      "depends_on": [
-        "DEMO-001",
-        "SEC-003"
-      ],
+      "depends_on": ["DEMO-001", "SEC-003"],
       "requires_decisions": [],
       "write_scope": [
         "src/routes/auth.tsx",
@@ -10472,9 +9792,7 @@
         "src/tests/desktop-routes/**",
         "docs/demo/presenter-data.md"
       ],
-      "exclusive_locks": [
-        "presenter-access"
-      ],
+      "exclusive_locks": ["presenter-access"],
       "read_first": [
         "ProductSpec.md",
         "FEATUREROADMAP_workplan.md",
@@ -10556,11 +9874,7 @@
       "size": "S",
       "kind": "implementation",
       "priority": 5,
-      "depends_on": [
-        "SEC-003",
-        "DEMO-001",
-        "BR-002"
-      ],
+      "depends_on": ["SEC-003", "DEMO-001", "BR-002"],
       "requires_decisions": [],
       "write_scope": [
         "src/lib/data.ts",
@@ -10572,10 +9886,7 @@
         "src/routes/_authenticated/route.tsx",
         "src/tests/workspace-selection/**"
       ],
-      "exclusive_locks": [
-        "project-selection",
-        "route-integration"
-      ],
+      "exclusive_locks": ["project-selection", "route-integration"],
       "read_first": [
         "ProductSpec.md",
         "FEATUREROADMAP_workplan.md",
@@ -10645,12 +9956,7 @@
       "size": "S",
       "kind": "implementation",
       "priority": 5,
-      "depends_on": [
-        "SEC-003",
-        "EDU-002",
-        "BR-002",
-        "DEMO-001"
-      ],
+      "depends_on": ["SEC-003", "EDU-002", "BR-002", "DEMO-001"],
       "requires_decisions": [],
       "write_scope": [
         "src/lib/teacher-plan.ts",
@@ -10664,10 +9970,7 @@
         "src/tests/teacher-planner/**",
         "supabase/tests/teacher-plans.sql"
       ],
-      "exclusive_locks": [
-        "teacher-plan-schema",
-        "route-integration"
-      ],
+      "exclusive_locks": ["teacher-plan-schema", "route-integration"],
       "read_first": [
         "ProductSpec.md",
         "FEATUREROADMAP_workplan.md",
@@ -10745,12 +10048,7 @@
       "size": "S",
       "kind": "implementation",
       "priority": 5,
-      "depends_on": [
-        "DEMO-002",
-        "WS-008",
-        "EDU-005",
-        "BR-003"
-      ],
+      "depends_on": ["DEMO-002", "WS-008", "EDU-005", "BR-003"],
       "requires_decisions": [],
       "write_scope": [
         "src/routes/auth.tsx",
@@ -10761,11 +10059,7 @@
         "src/tests/br-003/auth.test.tsx",
         "src/test/render-page.tsx"
       ],
-      "exclusive_locks": [
-        "auth-entry",
-        "route-integration",
-        "app-shell"
-      ],
+      "exclusive_locks": ["auth-entry", "route-integration", "app-shell"],
       "read_first": [
         "ProductSpec.md",
         "FEATUREROADMAP_workplan.md",
@@ -10835,12 +10129,7 @@
       "size": "S",
       "kind": "implementation",
       "priority": 5,
-      "depends_on": [
-        "AI-001",
-        "DEMO-002",
-        "MKT-003",
-        "SEC-003"
-      ],
+      "depends_on": ["AI-001", "DEMO-002", "MKT-003", "SEC-003"],
       "requires_decisions": [],
       "write_scope": [
         "src/lib/ai.functions.ts",
@@ -10855,11 +10144,7 @@
         "docs/demo/presenter-data.md",
         "supabase/tests/30_demo-ai-budget.sql"
       ],
-      "exclusive_locks": [
-        "ai-gateway",
-        "demo-ai-budget",
-        "presenter-access"
-      ],
+      "exclusive_locks": ["ai-gateway", "demo-ai-budget", "presenter-access"],
       "read_first": [
         "ProductSpec.md",
         "FEATUREROADMAP_workplan.md",
@@ -10941,19 +10226,10 @@
       "size": "M",
       "kind": "implementation",
       "priority": 1,
-      "depends_on": [
-        "DEMO-003",
-        "WEB-004",
-        "EDU-002"
-      ],
+      "depends_on": ["DEMO-003", "WEB-004", "EDU-002"],
       "requires_decisions": [],
-      "write_scope": [
-        "public/pitch/**",
-        "docs/demo/pitch/**"
-      ],
-      "exclusive_locks": [
-        "pitch-deck"
-      ],
+      "write_scope": ["public/pitch/**", "docs/demo/pitch/**"],
+      "exclusive_locks": ["pitch-deck"],
       "read_first": [
         "ProductSpec.md",
         "FEATUREROADMAP_workplan.md",
@@ -11064,10 +10340,7 @@
       "size": "M",
       "kind": "implementation",
       "priority": 1,
-      "depends_on": [
-        "WEB-004",
-        "SEC-003"
-      ],
+      "depends_on": ["WEB-004", "SEC-003"],
       "requires_decisions": [],
       "write_scope": [
         "src/routes/founding-partners.tsx",
@@ -11076,9 +10349,7 @@
         "supabase/migrations/20261018004000_founding_partners.sql",
         "src/tests/founding-partners/**"
       ],
-      "exclusive_locks": [
-        "founding-partner-intake"
-      ],
+      "exclusive_locks": ["founding-partner-intake"],
       "read_first": [
         "ProductSpec.md",
         "FEATUREROADMAP_workplan.md",
@@ -11154,10 +10425,7 @@
       "size": "M",
       "kind": "implementation",
       "priority": 1,
-      "depends_on": [
-        "PARTNER-001",
-        "DEMO-002"
-      ],
+      "depends_on": ["PARTNER-001", "DEMO-002"],
       "requires_decisions": [],
       "write_scope": [
         "src/lib/admin.functions.ts",
@@ -11173,9 +10441,7 @@
         "src/components/teaching/TeachingPage.tsx",
         "src/tests/web-004/landing.test.tsx"
       ],
-      "exclusive_locks": [
-        "admin-partner-counts"
-      ],
+      "exclusive_locks": ["admin-partner-counts"],
       "read_first": [
         "ProductSpec.md",
         "FEATUREROADMAP_workplan.md",
@@ -11253,18 +10519,14 @@
       "size": "M",
       "kind": "planning",
       "priority": 25,
-      "depends_on": [
-        "SEC-001"
-      ],
+      "depends_on": ["SEC-001"],
       "requires_decisions": [],
       "write_scope": [
         "docs/privacy/ferpa-first-product-direction.md",
         "docs/privacy/guest-data-contract.md",
         "docs/architecture/access-contract.md"
       ],
-      "exclusive_locks": [
-        "ferpa-001-integration"
-      ],
+      "exclusive_locks": ["ferpa-001-integration"],
       "read_first": [
         "ProductSpec.md",
         "FEATUREROADMAP_workplan.md",
@@ -11346,12 +10608,7 @@
       "size": "M",
       "kind": "implementation",
       "priority": 25,
-      "depends_on": [
-        "CLS-001",
-        "SEC-005",
-        "PRV-001",
-        "FERPA-001"
-      ],
+      "depends_on": ["CLS-001", "SEC-005", "PRV-001", "FERPA-001"],
       "requires_decisions": [],
       "write_scope": [
         "supabase/migrations/**",
@@ -11361,9 +10618,7 @@
         "src/tests/cls-007/**",
         "supabase/tests/cls-007.sql"
       ],
-      "exclusive_locks": [
-        "cls-007-integration"
-      ],
+      "exclusive_locks": ["cls-007-integration"],
       "read_first": [
         "ProductSpec.md",
         "FEATUREROADMAP_workplan.md",
@@ -11432,11 +10687,7 @@
       "size": "M",
       "kind": "implementation",
       "priority": 25,
-      "depends_on": [
-        "CLS-007",
-        "CLS-002",
-        "EXP-001"
-      ],
+      "depends_on": ["CLS-007", "CLS-002", "EXP-001"],
       "requires_decisions": [],
       "write_scope": [
         "src/routes/join.tsx",
@@ -11447,9 +10698,7 @@
         "src/tests/cls-008/**",
         "supabase/tests/cls-008.sql"
       ],
-      "exclusive_locks": [
-        "cls-008-integration"
-      ],
+      "exclusive_locks": ["cls-008-integration"],
       "read_first": [
         "ProductSpec.md",
         "FEATUREROADMAP_workplan.md",
@@ -11518,9 +10767,7 @@
       "size": "M",
       "kind": "implementation",
       "priority": 25,
-      "depends_on": [
-        "SEC-003"
-      ],
+      "depends_on": ["SEC-003"],
       "requires_decisions": [],
       "write_scope": [
         "src/lib/export/**",
@@ -11531,9 +10778,7 @@
         "package-lock.json",
         "public/fonts/pdf/**"
       ],
-      "exclusive_locks": [
-        "exp-001-integration"
-      ],
+      "exclusive_locks": ["exp-001-integration"],
       "read_first": [
         "ProductSpec.md",
         "FEATUREROADMAP_workplan.md",
@@ -11604,10 +10849,7 @@
       "size": "M",
       "kind": "implementation",
       "priority": 25,
-      "depends_on": [
-        "EXP-001",
-        "FERPA-001"
-      ],
+      "depends_on": ["EXP-001", "FERPA-001"],
       "requires_decisions": [],
       "write_scope": [
         "src/lib/export/**",
@@ -11627,9 +10869,7 @@
         "src/components/demo/StudyLoopDemo.tsx",
         "src/components/marketing/LiveMarketingPractice.tsx"
       ],
-      "exclusive_locks": [
-        "activity-export-adapters"
-      ],
+      "exclusive_locks": ["activity-export-adapters"],
       "read_first": [
         "ProductSpec.md",
         "FEATUREROADMAP_workplan.md",
@@ -11708,12 +10948,7 @@
       "size": "M",
       "kind": "implementation",
       "priority": 25,
-      "depends_on": [
-        "EXP-002",
-        "CLS-003",
-        "CLS-008",
-        "SHR-001"
-      ],
+      "depends_on": ["EXP-002", "CLS-003", "CLS-008", "SHR-001"],
       "requires_decisions": [],
       "write_scope": [
         "src/lib/export/**",
@@ -11723,9 +10958,7 @@
         "src/tests/exp-003/**",
         "supabase/tests/exp-003.sql"
       ],
-      "exclusive_locks": [
-        "exp-003-integration"
-      ],
+      "exclusive_locks": ["exp-003-integration"],
       "read_first": [
         "ProductSpec.md",
         "FEATUREROADMAP_workplan.md",
@@ -11794,22 +11027,14 @@
       "size": "M",
       "kind": "research",
       "priority": 25,
-      "depends_on": [
-        "FERPA-001",
-        "CLS-008",
-        "PRV-002",
-        "EXP-003",
-        "PRV-003"
-      ],
+      "depends_on": ["FERPA-001", "CLS-008", "PRV-002", "EXP-003", "PRV-003"],
       "requires_decisions": [],
       "write_scope": [
         "docs/privacy/institution-review.md",
         "docs/privacy/agreements/**",
         "research/classroom-privacy-review.md"
       ],
-      "exclusive_locks": [
-        "ferpa-002-integration"
-      ],
+      "exclusive_locks": ["ferpa-002-integration"],
       "read_first": [
         "ProductSpec.md",
         "FEATUREROADMAP_workplan.md",
@@ -11878,11 +11103,7 @@
       "size": "M",
       "kind": "implementation",
       "priority": 25,
-      "depends_on": [
-        "CLS-008",
-        "PRV-002",
-        "FERPA-001"
-      ],
+      "depends_on": ["CLS-008", "PRV-002", "FERPA-001"],
       "requires_decisions": [],
       "write_scope": [
         "supabase/migrations/**",
@@ -11891,9 +11112,7 @@
         "src/tests/prv-003/**",
         "supabase/tests/prv-003.sql"
       ],
-      "exclusive_locks": [
-        "prv-003-integration"
-      ],
+      "exclusive_locks": ["prv-003-integration"],
       "read_first": [
         "ProductSpec.md",
         "FEATUREROADMAP_workplan.md",
@@ -11962,11 +11181,7 @@
       "size": "M",
       "kind": "implementation",
       "priority": 25,
-      "depends_on": [
-        "WS-002",
-        "SEC-005",
-        "AI-007"
-      ],
+      "depends_on": ["WS-002", "SEC-005", "AI-007"],
       "requires_decisions": [],
       "write_scope": [
         "supabase/migrations/**",
@@ -11976,9 +11191,7 @@
         "src/tests/ws-009/**",
         "supabase/tests/ws-009.sql"
       ],
-      "exclusive_locks": [
-        "ws-009-integration"
-      ],
+      "exclusive_locks": ["ws-009-integration"],
       "read_first": [
         "ProductSpec.md",
         "FEATUREROADMAP_workplan.md",
@@ -12047,11 +11260,7 @@
       "size": "M",
       "kind": "implementation",
       "priority": 15,
-      "depends_on": [
-        "WS-002",
-        "PRV-001",
-        "EXP-001"
-      ],
+      "depends_on": ["WS-002", "PRV-001", "EXP-001"],
       "requires_decisions": [],
       "write_scope": [
         "supabase/migrations/20261018013000_discovery_workspaces.sql",
@@ -12064,10 +11273,7 @@
         "supabase/tests/disc-001.sql",
         "docs/pedagogy/discovery-implementation.md"
       ],
-      "exclusive_locks": [
-        "discovery-workspace-schema",
-        "discovery-flow"
-      ],
+      "exclusive_locks": ["discovery-workspace-schema", "discovery-flow"],
       "read_first": [
         "ProductSpec.md",
         "FEATUREROADMAP_workplan.md",
@@ -12143,12 +11349,7 @@
       "size": "M",
       "kind": "implementation",
       "priority": 15,
-      "depends_on": [
-        "DISC-001",
-        "AI-004",
-        "AI-007",
-        "AI-008"
-      ],
+      "depends_on": ["DISC-001", "AI-004", "AI-007", "AI-008"],
       "requires_decisions": [],
       "write_scope": [
         "src/lib/ai.functions.ts",
@@ -12158,9 +11359,7 @@
         "src/tests/disc-002/**",
         "evals/**"
       ],
-      "exclusive_locks": [
-        "disc-002-integration"
-      ],
+      "exclusive_locks": ["disc-002-integration"],
       "read_first": [
         "ProductSpec.md",
         "FEATUREROADMAP_workplan.md",
@@ -12229,12 +11428,7 @@
       "size": "M",
       "kind": "implementation",
       "priority": 15,
-      "depends_on": [
-        "DISC-001",
-        "DISC-002",
-        "EV-003",
-        "EV-006"
-      ],
+      "depends_on": ["DISC-001", "DISC-002", "EV-003", "EV-006"],
       "requires_decisions": [],
       "write_scope": [
         "src/components/discovery/**",
@@ -12244,9 +11438,7 @@
         "src/tests/disc-003/**",
         "evals/**"
       ],
-      "exclusive_locks": [
-        "disc-003-integration"
-      ],
+      "exclusive_locks": ["disc-003-integration"],
       "read_first": [
         "ProductSpec.md",
         "FEATUREROADMAP_workplan.md",
@@ -12315,10 +11507,7 @@
       "size": "M",
       "kind": "implementation",
       "priority": 15,
-      "depends_on": [
-        "DISC-001",
-        "AI-007"
-      ],
+      "depends_on": ["DISC-001", "AI-007"],
       "requires_decisions": [],
       "write_scope": [
         "src/lib/context/**",
@@ -12328,9 +11517,7 @@
         "supabase/migrations/**",
         "supabase/tests/ctx-001.sql"
       ],
-      "exclusive_locks": [
-        "ctx-001-integration"
-      ],
+      "exclusive_locks": ["ctx-001-integration"],
       "read_first": [
         "ProductSpec.md",
         "FEATUREROADMAP_workplan.md",
@@ -12395,108 +11582,73 @@
     {
       "legacy_id": "DOC-001",
       "disposition": "complete",
-      "successors": [
-        "DOC-001"
-      ],
+      "successors": ["DOC-001"],
       "reason": "Committed and pushed; describes current code and candidate value. Original dated Notes remain in FEATUREROADMAP_history.md."
     },
     {
       "legacy_id": "DOC-002",
       "disposition": "complete",
-      "successors": [
-        "DOC-002"
-      ],
+      "successors": ["DOC-002"],
       "reason": "Concurrent completed commit a2d69a3 added team names and removed the old email link. Credits are preserved in README and the historical roadmap snapshot."
     },
     {
       "legacy_id": "F-001",
       "disposition": "deferred",
-      "successors": [
-        "F-001"
-      ],
+      "successors": ["F-001"],
       "reason": "Deferred. F-007 verifies the baseline but does not establish that wrapper cleanup is needed. Activation requires a recorded concrete reason and compatible replacement plan; retain Lovable history protections. Original dated Notes remain in FEATUREROADMAP_history.md."
     },
     {
       "legacy_id": "F-002",
       "disposition": "split",
-      "successors": [
-        "AI-001",
-        "AI-004",
-        "AI-005"
-      ],
+      "successors": ["AI-001", "AI-004", "AI-005"],
       "reason": "Existing timeout/retry is partial; complete strict runtime validation, bounded retries, accounting and evaluated routing before marking reliability done. Original dated Notes remain in FEATUREROADMAP_history.md."
     },
     {
       "legacy_id": "F-003",
       "disposition": "split",
-      "successors": [
-        "AI-002",
-        "AI-007"
-      ],
+      "successors": ["AI-002", "AI-007"],
       "reason": "Versioned prompts/schema parity and authorized grounded context are separate migration/integration tasks. Original dated Notes remain in FEATUREROADMAP_history.md."
     },
     {
       "legacy_id": "F-004",
       "disposition": "split",
-      "successors": [
-        "AI-003",
-        "AI-006",
-        "AI-008"
-      ],
+      "successors": ["AI-003", "AI-006", "AI-008"],
       "reason": "Offline harness, capped actual comparisons and release gate have distinct evidence. Original dated Notes remain in FEATUREROADMAP_history.md."
     },
     {
       "legacy_id": "F-005",
       "disposition": "split",
-      "successors": [
-        "AI-004",
-        "ADM-001",
-        "ADM-002"
-      ],
+      "successors": ["AI-004", "ADM-001", "ADM-002"],
       "reason": "Authoritative cost/usage ledger and protected aggregate dashboard; a UI graph alone cannot enforce budget. Original dated Notes remain in FEATUREROADMAP_history.md."
     },
     {
       "legacy_id": "F-006",
       "disposition": "split",
-      "successors": [
-        "PRV-001",
-        "PRV-002",
-        "SEC-001",
-        "SEC-003"
-      ],
+      "successors": ["PRV-001", "PRV-002", "SEC-001", "SEC-003"],
       "reason": "Persist processing/sharing choices, ownership consistency and scoped export/delete; existing local checkbox is insufficient. Original dated Notes remain in FEATUREROADMAP_history.md."
     },
     {
       "legacy_id": "F-007",
       "disposition": "complete",
-      "successors": [
-        "F-007"
-      ],
+      "successors": ["F-007"],
       "reason": "CI success verified for 7006f87 on 2026-10-17. Local typecheck, 17 tests, Vercel build and scoped lint passed in DOC-001. Six existing refresh warnings; schema parity stays with AI-002. Original dated Notes remain in FEATUREROADMAP_history.md."
     },
     {
       "legacy_id": "F-008",
       "disposition": "expanded",
-      "successors": [
-        "EV-001"
-      ],
+      "successors": ["EV-001"],
       "reason": "Preserve both outreach and synthesis with atomic history and explicit acceptance. Original dated Notes remain in FEATUREROADMAP_history.md."
     },
     {
       "legacy_id": "F-009",
       "disposition": "split",
-      "successors": [
-        "F-009a",
-        "F-009b"
-      ],
+      "successors": ["F-009a", "F-009b"],
       "reason": "Production connection was owner-confirmed; preview environment/auth acceptance remains not started. Original dated Notes remain in FEATUREROADMAP_history.md."
     },
     {
       "legacy_id": "F-010",
       "disposition": "complete",
-      "successors": [
-        "F-010"
-      ],
+      "successors": ["F-010"],
       "reason": "Owner confirmed sign-in and AI generation on 2026-10-17; not a new uptime claim. Original dated Notes remain in FEATUREROADMAP_history.md."
     },
     {
@@ -12514,109 +11666,79 @@
     {
       "legacy_id": "G-004",
       "disposition": "retained",
-      "successors": [
-        "G-004"
-      ],
+      "successors": ["G-004"],
       "reason": "Research decision is retained independently of engineering authorization; no automatic erasure of the owner-requested broader plan. Original dated Notes remain in FEATUREROADMAP_history.md."
     },
     {
       "legacy_id": "I2-001",
       "disposition": "revised",
-      "successors": [
-        "EV-004"
-      ],
+      "successors": ["EV-004"],
       "reason": "Keep distinct requested/agreed/fulfilled actions; avoid universal proof scoring or forced positive gates. Original dated Notes remain in FEATUREROADMAP_history.md."
     },
     {
       "legacy_id": "I2-002",
       "disposition": "revised",
-      "successors": [
-        "EV-004",
-        "EV-003"
-      ],
+      "successors": ["EV-004", "EV-003"],
       "reason": "UI distinguishes observed actions and decisions; original mandatory validation gate is not retained. Original dated Notes remain in FEATUREROADMAP_history.md."
     },
     {
       "legacy_id": "I2-003",
       "disposition": "retained",
-      "successors": [
-        "EV-005"
-      ],
+      "successors": ["EV-005"],
       "reason": "Optional grounded challenge through the shared, metered AI entry point. Original dated Notes remain in FEATUREROADMAP_history.md."
     },
     {
       "legacy_id": "I2-004",
       "disposition": "split",
-      "successors": [
-        "EV-006"
-      ],
+      "successors": ["EV-006"],
       "reason": "Deterministic cues plus optional evaluated low-cost rewrite; no truth/authenticity score. Original dated Notes remain in FEATUREROADMAP_history.md."
     },
     {
       "legacy_id": "I2-005",
       "disposition": "split",
-      "successors": [
-        "AN-001",
-        "AN-002"
-      ],
+      "successors": ["AN-001", "AN-002"],
       "reason": "Define funnel/events before collection; distinguish application adoption and founder-entered customer pipeline. Original dated Notes remain in FEATUREROADMAP_history.md."
     },
     {
       "legacy_id": "I3-001",
       "disposition": "split",
-      "successors": [
-        "SHR-001",
-        "SHR-002"
-      ],
+      "successors": ["SHR-001", "SHR-002"],
       "reason": "Reviewed immutable snapshot, then explicit scoped grants/revocation. Original dated Notes remain in FEATUREROADMAP_history.md."
     },
     {
       "legacy_id": "I3-002",
       "disposition": "expanded",
-      "successors": [
-        "EV-007"
-      ],
+      "successors": ["EV-007"],
       "reason": "Manual first-ask guidance plus bounded low-cost rewrite, never automatic sending. Original dated Notes remain in FEATUREROADMAP_history.md."
     },
     {
       "legacy_id": "L-001",
       "disposition": "retained",
-      "successors": [
-        "L-001"
-      ],
+      "successors": ["L-001"],
       "reason": "Scheduled by Iteration 5; no implementation or validation claimed. Original dated Notes remain in FEATUREROADMAP_history.md."
     },
     {
       "legacy_id": "L-002",
       "disposition": "retained",
-      "successors": [
-        "L-002"
-      ],
+      "successors": ["L-002"],
       "reason": "Scheduled by Iteration 5; no implementation or validation claimed. Original dated Notes remain in FEATUREROADMAP_history.md."
     },
     {
       "legacy_id": "P-001",
       "disposition": "split",
-      "successors": [
-        "WEB-003",
-        "P-001b"
-      ],
+      "successors": ["WEB-003", "P-001b"],
       "reason": "Current technical schematics are complete. The owner explicitly promoted an event pitch deck for the Babson workshop; current/proposed capabilities and fictional examples are labeled, with no invented outcome evidence. Original dated Notes remain in FEATUREROADMAP_history.md."
     },
     {
       "legacy_id": "R0-001",
       "disposition": "complete",
-      "successors": [
-        "R0-001"
-      ],
+      "successors": ["R0-001"],
       "reason": "Workspace created; no participant findings implied. Original dated Notes remain in FEATUREROADMAP_history.md."
     },
     {
       "legacy_id": "R0-002",
       "disposition": "complete",
-      "successors": [
-        "R0-002"
-      ],
+      "successors": ["R0-002"],
       "reason": "Inspiration only; direct Reddit audit remains cancelled. Original dated Notes remain in FEATUREROADMAP_history.md."
     },
     {
@@ -12628,159 +11750,115 @@
     {
       "legacy_id": "R0-004",
       "disposition": "split",
-      "successors": [
-        "R0-004a",
-        "R0-004b"
-      ],
+      "successors": ["R0-004a", "R0-004b"],
       "reason": "Human founder sample split into first three and remaining two to five eligible cases. Original dated Notes remain in FEATUREROADMAP_history.md."
     },
     {
       "legacy_id": "R0-004a",
       "disposition": "retained",
-      "successors": [
-        "R0-004a"
-      ],
+      "successors": ["R0-004a"],
       "reason": "Not started; requires human recruiting and interviews. Agents may prepare documents or analyze notes the human supplies, but may not contact participants. Original dated Notes remain in FEATUREROADMAP_history.md."
     },
     {
       "legacy_id": "R0-004b",
       "disposition": "retained",
-      "successors": [
-        "R0-004b"
-      ],
+      "successors": ["R0-004b"],
       "reason": "Not started. Completes the human founder-study portion of legacy R0-004 only when both R0-004a and R0-004b meet their criteria. Original dated Notes remain in FEATUREROADMAP_history.md."
     },
     {
       "legacy_id": "R0-005",
       "disposition": "retained",
-      "successors": [
-        "R0-005"
-      ],
+      "successors": ["R0-005"],
       "reason": "Not started. Engineering may proceed within the newly authorized plan while this evidence work remains open; feature delivery is not market validation. Original dated Notes remain in FEATUREROADMAP_history.md."
     },
     {
       "legacy_id": "VP-001",
       "disposition": "complete",
-      "successors": [
-        "VP-001"
-      ],
+      "successors": ["VP-001"],
       "reason": "Completed draft; unsupported/secondary-source claims still require VP-007 audit. Original dated Notes remain in FEATUREROADMAP_history.md."
     },
     {
       "legacy_id": "VP-002",
       "disposition": "complete",
-      "successors": [
-        "VP-002"
-      ],
+      "successors": ["VP-002"],
       "reason": "Guides exist; VP-008 revises tests and processing choices. Original dated Notes remain in FEATUREROADMAP_history.md."
     },
     {
       "legacy_id": "VP-003",
       "disposition": "retained",
-      "successors": [
-        "VP-003"
-      ],
+      "successors": ["VP-003"],
       "reason": "Not started. Agent prepares/organizes only; human conducts outreach and interviews. This study can proceed alongside founder interviews and engineering. Original dated Notes remain in FEATUREROADMAP_history.md."
     },
     {
       "legacy_id": "VP-004",
       "disposition": "split",
-      "successors": [
-        "VP-004a",
-        "VP-004b"
-      ],
+      "successors": ["VP-004a", "VP-004b"],
       "reason": "Manual comprehension/action study can run without traffic; live A/B requires its own traffic and attribution plan. Original dated Notes remain in FEATUREROADMAP_history.md."
     },
     {
       "legacy_id": "VP-004a",
       "disposition": "retained",
-      "successors": [
-        "VP-004a"
-      ],
+      "successors": ["VP-004a"],
       "reason": "Not started. Replaces the manual-study part of legacy VP-004; automated VP-004b remains separately deferred. No external contacts are sent by the agent. Original dated Notes remain in FEATUREROADMAP_history.md."
     },
     {
       "legacy_id": "VP-004b",
       "disposition": "deferred",
-      "successors": [
-        "VP-004b"
-      ],
+      "successors": ["VP-004b"],
       "reason": "Activation requires a coordinator-recorded traffic/power or explicitly exploratory plan, validated attribution and privacy settings after AN-002/WEB-004. Manual VP-004a is sufficient for early comprehension learning; live A/B work is not currently started. Original dated Notes remain in FEATUREROADMAP_history.md."
     },
     {
       "legacy_id": "VP-005",
       "disposition": "dropped",
-      "successors": [
-        "VP-005"
-      ],
+      "successors": ["VP-005"],
       "reason": "Dropped: the user now explicitly requests real class spaces and teacher workflows (CLS tasks). A fake-door interest table is superseded, not completed; no instructor purchase or efficacy claim follows from this scope decision. Original dated Notes remain in FEATUREROADMAP_history.md."
     },
     {
       "legacy_id": "VP-006",
       "disposition": "split",
-      "successors": [
-        "VP-006a",
-        "VP-006b"
-      ],
+      "successors": ["VP-006a", "VP-006b"],
       "reason": "Evidence decision and later production positioning rollout have separate checks. Original dated Notes remain in FEATUREROADMAP_history.md."
     },
     {
       "legacy_id": "VP-006a",
       "disposition": "retained",
-      "successors": [
-        "VP-006a"
-      ],
+      "successors": ["VP-006a"],
       "reason": "Not started. This replaces the decision part of legacy VP-006; it is not a blanket veto or completion gate for the newly authorized full engineering plan. Original dated Notes remain in FEATUREROADMAP_history.md."
     },
     {
       "legacy_id": "VP-006b",
       "disposition": "retained",
-      "successors": [
-        "VP-006b"
-      ],
+      "successors": ["VP-006b"],
       "reason": "Not started. Future evidence-based reconciliation of WEB-004/EDU-002, not a prerequisite that prevents their factual candidate materials from shipping earlier. If the actual teaching route differs, coordinator assigns that existing route before work; do not create a duplicate. Original dated Notes remain in FEATUREROADMAP_history.md."
     },
     {
       "legacy_id": "VP-007",
       "disposition": "retained",
-      "successors": [
-        "VP-007"
-      ],
+      "successors": ["VP-007"],
       "reason": "Not started. Extends the existing VP-007 research audit; DOC-001 updated product documentation but did not complete this task. No participant findings exist merely because a canvas exists. Original dated Notes remain in FEATUREROADMAP_history.md."
     },
     {
       "legacy_id": "VP-008",
       "disposition": "retained",
-      "successors": [
-        "VP-008"
-      ],
+      "successors": ["VP-008"],
       "reason": "Not started. Human studies are not autonomous recruiting authorization. The coordinator may prepare materials and organize supplied notes; people conduct recruiting/interviews. Original dated Notes remain in FEATUREROADMAP_history.md."
     },
     {
       "legacy_id": "VP-009",
       "disposition": "retained",
-      "successors": [
-        "VP-009"
-      ],
+      "successors": ["VP-009"],
       "reason": "Not started. Agents can prepare the prototype; human observations are required. This manual test does not complete the planned Evidence Pack or structured-decision implementation. Original dated Notes remain in FEATUREROADMAP_history.md."
     },
     {
       "legacy_id": "VP-010",
       "disposition": "retained",
-      "successors": [
-        "VP-010"
-      ],
+      "successors": ["VP-010"],
       "reason": "Not started. Human-owned participation and follow-up; the coordinator prepares materials and analyzes supplied evidence. This does not satisfy feature-specific or classroom pilots elsewhere in the plan. Original dated Notes remain in FEATUREROADMAP_history.md."
     },
     {
       "legacy_id": "X-001",
       "disposition": "expanded",
-      "successors": [
-        "OPS-001",
-        "OPS-002",
-        "F-009b",
-        "OPS-003"
-      ],
+      "successors": ["OPS-001", "OPS-002", "F-009b", "OPS-003"],
       "reason": "Repeatable local/CI, real isolated preview smoke and migration/restore procedures. Original dated Notes remain in FEATUREROADMAP_history.md."
     }
   ],
@@ -12788,173 +11866,115 @@
     {
       "legacy_id": "FB-01",
       "disposition": "deferred",
-      "successors": [
-        "HOLD-001"
-      ],
+      "successors": ["HOLD-001"],
       "reason": "Discovery of communities needs observed access friction and permitted source workflows."
     },
     {
       "legacy_id": "FB-02",
       "disposition": "scheduled",
-      "successors": [
-        "EV-006"
-      ],
+      "successors": ["EV-006"],
       "reason": "Question coaching uses deterministic feedback before cheap optional AI."
     },
     {
       "legacy_id": "FB-03",
       "disposition": "deferred",
-      "successors": [
-        "HOLD-002"
-      ],
+      "successors": ["HOLD-002"],
       "reason": "Voice adds consent/storage/transcription cost before capture friction is established."
     },
     {
       "legacy_id": "FB-04",
       "disposition": "scheduled",
-      "successors": [
-        "AI-007",
-        "EV-001",
-        "EV-003"
-      ],
+      "successors": ["AI-007", "EV-001", "EV-003"],
       "reason": "Ground sources, preserve reviewed versions, connect evidence to decisions."
     },
     {
       "legacy_id": "FB-05",
       "disposition": "revised",
-      "successors": [
-        "EV-004"
-      ],
+      "successors": ["EV-004"],
       "reason": "Distinct commitments and observed outcomes replace universal proof scores."
     },
     {
       "legacy_id": "FB-06",
       "disposition": "deferred",
-      "successors": [
-        "HOLD-003"
-      ],
+      "successors": ["HOLD-003"],
       "reason": "Follow-up demand must be observed; user controls all communication."
     },
     {
       "legacy_id": "FB-07",
       "disposition": "deferred",
-      "successors": [
-        "HOLD-004"
-      ],
+      "successors": ["HOLD-004"],
       "reason": "Online durable drafts ship first; full offline sync adds conflict/security complexity."
     },
     {
       "legacy_id": "FB-08",
       "disposition": "promoted",
-      "successors": [
-        "WS-001",
-        "WS-002",
-        "WS-003",
-        "WS-004",
-        "WS-005",
-        "WS-006",
-        "WS-007"
-      ],
+      "successors": ["WS-001", "WS-002", "WS-003", "WS-004", "WS-005", "WS-006", "WS-007"],
       "reason": "Owner explicitly requested saving/returning and different ideas; no longer waiting for research permission."
     },
     {
       "legacy_id": "FB-09",
       "disposition": "promoted",
-      "successors": [
-        "CLS-001",
-        "CLS-002",
-        "CLS-003",
-        "CLS-004",
-        "CLS-005",
-        "CLS-006"
-      ],
+      "successors": ["CLS-001", "CLS-002", "CLS-003", "CLS-004", "CLS-005", "CLS-006"],
       "reason": "Owner explicitly requested real teacher class spaces; reviewed submission boundaries replace fake door."
     },
     {
       "legacy_id": "FB-10",
       "disposition": "scheduled",
-      "successors": [
-        "EV-002",
-        "EV-003"
-      ],
+      "successors": ["EV-002", "EV-003"],
       "reason": "Link experiments to a decision, expected observation and later outcome."
     },
     {
       "legacy_id": "FB-11",
       "disposition": "deferred",
-      "successors": [
-        "HOLD-005"
-      ],
+      "successors": ["HOLD-005"],
       "reason": "Hosted survey distribution needs privacy/abuse scope and observed need."
     },
     {
       "legacy_id": "FB-12",
       "disposition": "split",
-      "successors": [
-        "AI-004",
-        "AI-005",
-        "ADM-002",
-        "HOLD-006"
-      ],
+      "successors": ["AI-004", "AI-005", "ADM-002", "HOLD-006"],
       "reason": "Internal cheap routing and usage/caps are scheduled; end-user model picker remains unproven."
     },
     {
       "legacy_id": "FB-13",
       "disposition": "scheduled",
-      "successors": [
-        "SHR-001",
-        "SHR-002"
-      ],
+      "successors": ["SHR-001", "SHR-002"],
       "reason": "Reviewed evidence snapshots and explicit revocable sharing."
     },
     {
       "legacy_id": "FB-14",
       "disposition": "scheduled",
-      "successors": [
-        "EV-007"
-      ],
+      "successors": ["EV-007"],
       "reason": "First-ask guidance with optional bounded rewrite."
     },
     {
       "legacy_id": "FB-15",
       "disposition": "scheduled",
-      "successors": [
-        "EV-005"
-      ],
+      "successors": ["EV-005"],
       "reason": "Evidence-linked challenge, optional and human-reviewed."
     },
     {
       "legacy_id": "FB-16",
       "disposition": "deferred",
-      "successors": [
-        "HOLD-007"
-      ],
+      "successors": ["HOLD-007"],
       "reason": "Pain-mining source rights and user need remain unresolved."
     },
     {
       "legacy_id": "FB-17",
       "disposition": "deferred",
-      "successors": [
-        "HOLD-008"
-      ],
+      "successors": ["HOLD-008"],
       "reason": "Peer participation is not customer relevance; network needs real demand and moderation scope."
     },
     {
       "legacy_id": "FB-18",
       "disposition": "deferred",
-      "successors": [
-        "HOLD-009"
-      ],
+      "successors": ["HOLD-009"],
       "reason": "Digest needs repeated-use evidence, events and explicit notification preferences."
     },
     {
       "legacy_id": "FB-19",
       "disposition": "scheduled",
-      "successors": [
-        "EV-002",
-        "EV-003",
-        "EV-005"
-      ],
+      "successors": ["EV-002", "EV-003", "EV-005"],
       "reason": "Manual research continues while requested implementation records evidence and next decisions."
     }
   ],

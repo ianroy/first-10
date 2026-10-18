@@ -22,10 +22,10 @@ Statuses are `not_started`, `in_progress`, `blocked`, `complete`, `deferred`, `d
 current_iteration: 5
 current_stage: P1_foundation_with_parallel_P2_and_R0
 status: in_progress
-last_task_done: EXP-002
+last_task_done: SEC-005
 next_task: DISC-001
-next_parallel_wave: [SEC-005, AI-004, DISC-001]
-active_claims: [AI-004, SEC-005, DISC-001]
+next_parallel_wave: [CLS-001, AI-004, DISC-001]
+active_claims: [AI-004, CLS-001, DISC-001]
 research_gate: not_passed
 foundation_gate: not_passed
 realtime_go: pending
@@ -51,7 +51,8 @@ resume_hint: >-
   passwithrollback through12000. Hosted11000/12000 reviewed dryrun and normalapply both succeeded.
   EXP002 integrated currentactivityexports plus rootdesktopmounts;564combinedapptests,
   typecheck/lint/build pass.35adapterPDFpages inspected. Actualproduction2pageinterviewscript PDF downloaded/renderedandinspected; all9questions+origin.
-  SEC005 actualrace pending. AI004foundation integratedf489e82;997SQLassertions andreal
+  SEC005 completecef1ad9: realcompetingacceptance/replay passed;fixturesabsent/flagrestored.
+  CLS001 reserved next forclass/enrollment/guestresources; dispatchawaitsDISCtestchildslot. AI004foundation integratedf489e82;997SQLassertions andreal
   budgetraces verifiedin disposableclone; no mainlocal/hosted14000apply. Stableintent/gatewaywiring active.
   ProductionportfolioUI prepared31selectedactivities as42pages; actualdownloadfile notlocated.
   Public landing/teach pages now explain the sevenstep method and context/evidence distinction;
