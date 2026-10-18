@@ -4,6 +4,7 @@ const h = vi.hoisted(() => ({
   authorization: "Bearer valid-fixture-token",
   getUser: vi.fn(),
   createClient: vi.fn(),
+  actorRpc: vi.fn(),
   from: vi.fn(),
   rpc: vi.fn(),
   setStatus: vi.fn(),
@@ -56,7 +57,8 @@ beforeEach(() => {
     data: { user: { id: "presenter-id", app_metadata: { firstten_demo_admin: true } } },
     error: null,
   });
-  h.createClient.mockReturnValue({ auth: { getUser: h.getUser } });
+  h.actorRpc.mockReturnValue({ abortSignal: async () => ({ data: null, error: null }) });
+  h.createClient.mockReturnValue({ auth: { getUser: h.getUser }, rpc: h.actorRpc });
   h.from.mockImplementation((table: string) => {
     const row = {
       table,
@@ -137,7 +139,7 @@ describe("server-only admin aggregate authorization", () => {
     await expect(getAdminSnapshot()).rejects.toThrow("Admin access denied.");
     expect(h.from).toHaveBeenCalledTimes(12);
     expect(h.rpc).toHaveBeenCalledOnce();
-    expect(h.getUser).toHaveBeenCalledTimes(2);
+    expect(h.getUser).toHaveBeenCalledTimes(3);
   });
 
   it("returns only count aggregates, labels presenter rows separately, and prohibits HTTP caching", async () => {
@@ -187,6 +189,64 @@ describe("server-only admin aggregate authorization", () => {
       "email",
     ])
       expect(serialized).not.toContain(forbidden);
+  });
+
+  it("allows an operator-granted platform admin and audits before returning only fixed aggregates", async () => {
+    const id = "f6000000-0000-4000-8000-000000000001";
+    const receipt = "f6000000-0000-4000-8000-000000000002";
+    h.getUser.mockResolvedValue({ data: { user: { id, app_metadata: {} } }, error: null });
+    h.actorRpc.mockImplementation((name) => ({
+      abortSignal: async () => ({
+        data: name === "get_platform_admin_authorization" ? { userId: id } : receipt,
+        error: null,
+      }),
+    }));
+    const result = await getAdminSnapshot();
+    expect(result.status).toBe("ready");
+    expect(h.actorRpc).toHaveBeenCalledWith("get_platform_admin_authorization");
+    expect(h.actorRpc).toHaveBeenCalledWith(
+      "record_platform_admin_action",
+      expect.objectContaining({
+        p_operation: "operational_snapshot",
+        p_outcome: "ready",
+        p_request_id: expect.any(String),
+      }),
+    );
+    expect(h.createClient.mock.calls[0]?.[2].global.headers).toEqual({
+      Authorization: "Bearer valid-fixture-token",
+    });
+    expect(JSON.stringify(result)).not.toContain(id);
+    expect(
+      h.requests.filter((r) =>
+        r.filters.some(([k, v]) => k === "user_id" && v === "f1d00000-0000-4000-8000-000000000001"),
+      ),
+    ).toHaveLength(6);
+  });
+  it("withholds aggregates when the DB role is revoked before audit or audit cannot commit", async () => {
+    const id = "f6000000-0000-4000-8000-000000000001";
+    h.getUser.mockResolvedValue({ data: { user: { id } }, error: null });
+    h.actorRpc.mockImplementation((name) => ({
+      abortSignal: async () =>
+        name === "get_platform_admin_authorization"
+          ? { data: { userId: id }, error: null }
+          : { data: null, error: { message: "PRIVATE" } },
+    }));
+    await expect(getAdminSnapshot()).rejects.toThrow("Admin action could not be recorded");
+    expect(h.setStatus).toHaveBeenCalledWith(503);
+    expect(h.from).toHaveBeenCalledTimes(12);
+  });
+  it("denies missing and mismatched database role grants before privileged import or counts", async () => {
+    const id = "f6000000-0000-4000-8000-000000000001";
+    h.getUser.mockResolvedValue({
+      data: { user: { id, user_metadata: { role: "admin" } } },
+      error: null,
+    });
+    for (const grant of [null, { userId: "f6000000-0000-4000-8000-000000000099" }]) {
+      h.actorRpc.mockReturnValue({ abortSignal: async () => ({ data: grant, error: null }) });
+      await expect(getAdminSnapshot()).rejects.toThrow("Admin access denied");
+    }
+    expect(h.from).not.toHaveBeenCalled();
+    expect(h.rpc).not.toHaveBeenCalled();
   });
 
   it("reports unconfigured or failed counts as unavailable, never zero or leaked errors", async () => {

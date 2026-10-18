@@ -1,5 +1,7 @@
 import { createServerFn } from "@tanstack/react-start";
 import type { SupabaseClient } from "@supabase/supabase-js";
+import { requirePlatformAdmin } from "./admin-auth.server";
+import { auditPlatformAdminAction } from "./admin-audit.server";
 import { parsePartnerCounts, type PartnerCounts } from "./admin-partners";
 
 export type AdminMetric = {
@@ -42,14 +44,40 @@ export const getAdminSnapshot = createServerFn({ method: "GET" }).handler(
     const verifier = createClient(url, publicKey, {
       auth: { persistSession: false, autoRefreshToken: false, detectSessionInUrl: false },
       global: {
+        headers: { Authorization: `Bearer ${token}` },
         fetch: (input, init) => fetch(input, { ...init, signal: AbortSignal.timeout(8000) }),
       },
     });
     const verified = await verifier.auth.getUser(token).catch(() => deny());
     const user = verified.data.user;
-    if (verified.error || !user?.id || user.app_metadata?.["firstten_demo_admin"] !== true)
-      return deny();
-    const verifiedUserId = user.id;
+    if (verified.error || !user?.id) return deny();
+    const demoAccess = user.app_metadata?.["firstten_demo_admin"] === true;
+    if (!demoAccess) {
+      try {
+        await requirePlatformAdmin(verifier, `Bearer ${token}`);
+      } catch {
+        return deny();
+      }
+    }
+    // Presenter remains a separate narrow permission, never an automatic platform grant.
+    const presenterUserId = demoAccess ? user.id : "f1d00000-0000-4000-8000-000000000001";
+    const finish = async (snapshot: AdminSnapshot): Promise<AdminSnapshot> => {
+      if (!demoAccess) {
+        try {
+          await auditPlatformAdminAction(verifier, {
+            operation: "operational_snapshot",
+            outcome: snapshot.status,
+            requestId: crypto.randomUUID(),
+          });
+        } catch {
+          setResponseStatus(503);
+          throw new Error(
+            "Admin action could not be recorded. No aggregate response is available.",
+          );
+        }
+      }
+      return snapshot;
+    };
 
     const definitions = [
       { key: "projects", label: "Projects", table: "projects" },
@@ -60,7 +88,7 @@ export const getAdminSnapshot = createServerFn({ method: "GET" }).handler(
       { key: "outreach", label: "Outreach draft records", table: "outreach" },
     ] as const;
     if (!process.env["SUPABASE_SERVICE_ROLE_KEY"]?.trim()) {
-      return {
+      return finish({
         status: "unavailable",
         asOf: new Date().toISOString(),
         metrics: definitions.map(({ key, label }) => ({
@@ -69,7 +97,7 @@ export const getAdminSnapshot = createServerFn({ method: "GET" }).handler(
           total: null,
           presenter: null,
         })),
-      };
+      });
     }
     // The privileged module is imported only after a fresh trusted-role check.
     // It is never imported by the route or evaluated in the browser.
@@ -83,7 +111,7 @@ export const getAdminSnapshot = createServerFn({ method: "GET" }).handler(
             : table === "learnings"
               ? supabaseAdmin.from("learnings").select("id", selection).eq("accepted", true)
               : supabaseAdmin.from(table).select("id", selection);
-        if (presenterOnly) query = query.eq("user_id", verifiedUserId);
+        if (presenterOnly) query = query.eq("user_id", presenterUserId);
         const result = await query.abortSignal(AbortSignal.timeout(8000));
         return !result.error && Number.isSafeInteger(result.count) && result.count! >= 0
           ? result.count
@@ -112,7 +140,7 @@ export const getAdminSnapshot = createServerFn({ method: "GET" }).handler(
         }),
       ),
     ]);
-    return {
+    return finish({
       status:
         partners !== null &&
         metrics.every((metric) => metric.total !== null && metric.presenter !== null)
@@ -123,6 +151,6 @@ export const getAdminSnapshot = createServerFn({ method: "GET" }).handler(
       asOf: new Date().toISOString(),
       metrics,
       partners,
-    };
+    });
   },
 );

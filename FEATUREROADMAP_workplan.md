@@ -22,35 +22,30 @@ Statuses are `not_started`, `in_progress`, `blocked`, `complete`, `deferred`, `d
 current_iteration: 5
 current_stage: P1_foundation_with_parallel_P2_and_R0
 status: in_progress
-last_task_done: AI-002
-next_task: FERPA-001
-next_parallel_wave: [WS-001, SEC-006]
-active_claims: [FERPA-001, WS-001, SEC-006, EXP-001]
+last_task_done: SEC-006
+next_task: PRV-001
+next_parallel_wave: [WS-002, AI-003, EXP-001]
+active_claims: [AI-003, EXP-001]
 research_gate: not_passed
 foundation_gate: not_passed
 realtime_go: pending
 last_updated: 2026-10-18
 last_documentation_update: "2026-10-18: AI-002 complete; resumed lifecycle/admin parallel work; added FERPA-first account-free class/hackathon spaces and PDF export of every activity/team."
 resume_hint: >-
-  Production 64bc86e includes complete MKT-006 manual planner controls and private partner
-  Admin counts. Actual presenter login worked: 0 interest, 0 feedback, 0 distinct addresses
-  and 1 excluded fixture. The fictional October 19–25 plan, October 26 review, two not-run
-  actions and 50 estimated minutes within a 180-minute ceiling saved as revision 7 and
-  survived reload. Status stays Draft, baseline unknown, and original thinking preserved.
-  Hosted migrations 05000/06000/07000 applied normally; official types are regenerated.
-  Combined 357 tests, typecheck, lint and build pass; 619 real SQL assertions pass with
-  rollback. The later label improvement passes 12 focused UI checks and live exact labels.
-  CI 39131773694 and database policies 39131773786 passed at 92c43ee.
-  AI-002 saved-output links, owner metadata UI and atomic outreach replacement are implemented.
-  Migration08000 is applied; 372 app tests and 659 SQL assertions pass; typecheck/lint/build pass.
-  Deployed d564fa8; CampusSwap questions generated, reviewed, saved and reloaded with origin.
-  Reported cost $0.004239, Claude Sonnet4.5 via Amazon Bedrock. Owner resumed product work after presentation refinements; concurrency rehearsal and final handoff remain. Origin means source draft,
-  not proof that edited wording is unchanged or that its claims are true.
-  SEC-004 is complete as a foundation, with collaboration disabled and no class visibility.
-  The ten-hour checkpoint was 13:29:45 UTC; the report and final live checks followed.
-  General class spaces/submissions, AI budgets, sharing, realtime and human studies remain.
-  Owner added FERPA-first no-account class/hackathon participation and per-activity/team PDFs;
-  FERPA-001/002, CLS-007/008 and EXP-001/002/003 are explicit new requirements.
+  Owner resumed all roadmap work and added FERPA-first no-account class/hackathon spaces
+  plus PDF of every activity/team. Registry137tasks; guest source/capability/export/retention
+  contract reviewed with no remaining design contradiction, not institutional approval.
+  AI002 complete: persisted origins and owner metadata; actual synthetic question save/reload
+  and two-connection atomic outreach rehearsal passed. Extra call reported0.004239USD.
+  WS001 and SEC006 foundations integrated with official types;794real SQL assertions and
+  real lifecycle CAS race pass;437app tests/typecheck/lint/build pass. Pitch script lint fixed.
+  Exact09000/10000 hosted dryrun reviewed and normal apply succeeded. No automatic admin grant.
+  Archive marker is recoverable metadata; WS009 owns eventual ordinary-write freeze.
+  AI003 worker extends existing eval harness (stale bindings and report validation defects).
+  EXP001 worker builds real local PDF engine/preview, not yet per-activity adapters.
+  Next workerWS002 integrates archive selection/cache/UI; coordinatorPRV001 processing choices.
+  Existing Stage2 fictional marketing plan revision7 and private teaching planner persist.
+  Guest classrooms, all activity PDFs, general AI budgets, sharing/realtime remain unfinished.
 
 ```
 

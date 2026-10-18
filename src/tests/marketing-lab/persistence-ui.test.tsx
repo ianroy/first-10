@@ -30,6 +30,8 @@ const project: Project = {
   link: "",
   stage: 2,
   questions: [],
+  archived_at: null,
+  lifecycle_revision: 0,
   questions_origin_id: null,
   survey_origin_id: null,
   survey: [],

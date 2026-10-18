@@ -30,8 +30,19 @@ export function AppShell({ title, children }: { title: string; children: ReactNo
     let active = true;
     const request = supabase.auth.getUser?.();
     request
-      ?.then(({ data }) => {
-        if (active) setAdmin(data.user?.app_metadata?.["firstten_demo_admin"] === true);
+      ?.then(async ({ data }) => {
+        if (!data.user) return;
+        let allowed = data.user.app_metadata?.["firstten_demo_admin"] === true;
+        if (!allowed) {
+          const grant = await supabase.rpc("get_platform_admin_authorization");
+          allowed =
+            !grant.error &&
+            grant.data !== null &&
+            typeof grant.data === "object" &&
+            !Array.isArray(grant.data) &&
+            grant.data["userId"] === data.user.id;
+        }
+        if (active) setAdmin(allowed);
       })
       .catch(() => {});
     return () => {

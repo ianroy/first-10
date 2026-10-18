@@ -27,6 +27,7 @@ Export follows the same access rules as viewing. Students can export their own a
 - FERPA-001: field/principal/processor/export matrix and reviewed technical contract.
 - CLS-007/008: teacher provision and account-free team activity/return/submission journeys.
 - EXP-001/002/003: common PDF engine, every-activity coverage and team/class portfolios.
+- PRV-003: executable guest/session/team retention and deletion after guest resources exist.
 - FERPA-002: actual institutional review, agreement/settings evidence and disposition.
 
 Keep implementation and public availability distinct. “FERPA-first” is the design and operating requirement. Do not describe the current prototype as certified or institutionally approved without the corresponding evidence.

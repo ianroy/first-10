@@ -333,11 +333,13 @@ export type Database = {
       };
       projects: {
         Row: {
+          archived_at: string | null;
           audience: string;
           checklist: NonNullable<Json>;
           created_at: string;
           description: string;
           id: string;
+          lifecycle_revision: number;
           link: string;
           name: string;
           problem: string;
@@ -351,11 +353,13 @@ export type Database = {
         };
         ComputedFields: never;
         Insert: {
+          archived_at?: string | null;
           audience?: string;
           checklist?: NonNullable<Json>;
           created_at?: string;
           description?: string;
           id?: string;
+          lifecycle_revision?: number;
           link?: string;
           name?: string;
           problem?: string;
@@ -368,11 +372,13 @@ export type Database = {
           user_id?: string;
         };
         Update: {
+          archived_at?: string | null;
           audience?: string;
           checklist?: NonNullable<Json>;
           created_at?: string;
           description?: string;
           id?: string;
+          lifecycle_revision?: number;
           link?: string;
           name?: string;
           problem?: string;
@@ -436,6 +442,19 @@ export type Database = {
       [_ in never]: never;
     };
     Functions: {
+      create_owned_project: {
+        Args: {
+          p_audience: string;
+          p_description: string;
+          p_link?: string;
+          p_name: string;
+          p_problem: string;
+          p_project_id: string;
+          p_request_id: string;
+        };
+        Returns: Json;
+      };
+      current_platform_admin: { Args: Record<PropertyKey, never>; Returns: boolean };
       current_project_role: { Args: { p_project_id: string }; Returns: string };
       get_ai_generation_origin: {
         Args: { p_origin_id: string; p_project_id: string };
@@ -443,6 +462,7 @@ export type Database = {
       };
       get_founding_partner_counts: { Args: Record<PropertyKey, never>; Returns: Json };
       get_member_project_summary: { Args: { p_project_id: string }; Returns: Json };
+      get_platform_admin_authorization: { Args: Record<PropertyKey, never>; Returns: Json };
       list_project_members: { Args: { p_cursor?: string; p_project_id: string }; Returns: Json };
       project_collaboration_enabled: { Args: Record<PropertyKey, never>; Returns: boolean };
       record_ai_generation: { Args: { p_record: Json }; Returns: string };
@@ -455,6 +475,10 @@ export type Database = {
           p_school: string;
         };
         Returns: Json;
+      };
+      record_platform_admin_action: {
+        Args: { p_operation: string; p_outcome: string; p_request_id: string };
+        Returns: string;
       };
       reserve_demo_ai: { Args: { p_project_id: string; p_request_id: string }; Returns: Json };
       revoke_project_member: {
@@ -492,6 +516,15 @@ export type Database = {
           p_expected_revision: number;
           p_mutation_id: string;
           p_project_id: string;
+        };
+        Returns: Json;
+      };
+      set_owned_project_archived: {
+        Args: {
+          p_archived: boolean;
+          p_expected_revision: number;
+          p_project_id: string;
+          p_request_id: string;
         };
         Returns: Json;
       };

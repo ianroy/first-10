@@ -8,13 +8,13 @@ A teacher authenticates normally and owns a class or hackathon. A student can us
 
 Proposed class relations are explicit exceptions to the account-project scope: `class_guest_principals`, `class_teams`, `class_guest_sessions` and `class_guest_activities` have real class/team/principal references and immutable teacher issuer/guest author fields as applicable. Account-owned projects keep `user_id` and `project_id` intact. If a team intentionally associates a real existing project later, authorize that owner/project separately; enrollment never establishes that relationship.
 
-Class entry and team access are different capabilities. A teacher may display a class-entry code/QR. It permits bounded guest entry or creation of a new team; it never reveals a roster, existing team content or a reusable private team secret. Joining an existing team requires an intentionally shared team invitation. Return access uses a high-entropy recovery capability, communicated to the student, not a hidden account or forced email collection. Show how losing that capability affects recovery before the student relies on it.
+Class entry and team access are different capabilities. A teacher may display a class-entry code/QR. It permits bounded guest entry or creation of a new team; it never reveals a roster, existing team content or a reusable private team secret. Joining an existing team requires an intentionally shared team invitation. Principal-private notes use a separate principal-specific private capability and recovery method, which is never the team invitation/return key. Sharing a team key never unlocks another member’s private work. Team return access uses its own high-entropy recovery capability, communicated to the student, not a hidden account or forced email collection. Show how losing that capability affects recovery before the student relies on it.
 
 Team/session secrets are generated server-side with at least 128 bits of entropy, stored only as hashes and compared safely. Use secure, HttpOnly, SameSite cookies for the active session. Do not place private return/team secrets in URL queries, analytics, logs or referrers. Class-entry codes are rate limited, bounded and revocable; accepting one exchanges it for a specific team/session capability. Apply CSRF/origin protection to mutations. Database functions recheck class lifecycle, session expiry/revocation, team and allowed operation on every call. No general anonymous SELECT policy is added to class, submission, team, project or interview tables.
 
 ## Field and audience matrix
 
-`Own` means the verified account owner or validated guest/team capability for that resource. Teacher means an active teacher for that class. Submitted means an explicitly reviewed immutable snapshot, not a live private-table join. Institution/operator control is governed by configured service access and agreements; it does not become ordinary teacher UI permission.
+`Own` means the verified account owner, principal-private guest capability or team capability required by that specific resource. They are distinct scopes: a team capability never authorizes a teammate’s private notes. Teacher means an active teacher for that class. Submitted means an explicitly reviewed immutable snapshot, not a live private-table join. Institution/operator control is governed by configured service access and agreements; it does not become ordinary teacher UI permission.
 
 | Data or operation | Current storage/processor | Owner or guest team | Teacher | Other teams/public | PDF default | Target control |
 | --- | --- | --- | --- | --- | --- | --- |
@@ -36,6 +36,8 @@ Team/session secrets are generated server-side with at least 128 bits of entropy
 | Access/revocation audit | Existing narrow ledgers; class scope planned | Safe own operation result | Class-scoped management result | Deny | Exclude internal actor/token IDs | No source-content payload in operational logs |
 | IP/browser/server request metadata | Hosting/database processors; exact retention review pending | Do not imply anonymous | No ordinary teacher trail | Deny | Exclude | Inventory actual provider settings; minimize app logging |
 
+Submissions use a discriminated source: an `account_project` source requires verified owner plus real project; a `guest_team` source requires the real class/team and validated submitter capability, with no invented account/project. CLS-002 may use separate guest submission relations rather than nullable fake foreign keys. CLS-003 feedback/progress must handle both source variants without joining private drafts.
+
 A team member can see only the work whose audience is explicitly the team. A private interview must not turn into team or teacher data merely because an activity adapter exports it. Every export adapter derives `sourceScope` and audience from authorized acquisition. Selecting “teacher” or supplying an arbitrary JSON `submitted_snapshot` string is never itself an access grant.
 
 ## Provision, save, submit, export, withdraw
@@ -46,7 +48,7 @@ A team member can see only the work whose audience is explicitly the team. A pri
 4. Submission creates a selected, redacted, versioned snapshot. Preview shows exactly what the teacher can see. Teacher progress projections omit draft text, contact identities and raw source IDs.
 5. PDF export freezes selected authorized versions. The file identifies activity, alias when chosen, capture date, source/activity version and status. Include blank/unknown/not-run states honestly. Record coverage so every activity supplies an adapter; all-activity export reports omissions rather than silently dropping them.
 6. Withdrawal/revocation removes future recipient access and excludes withdrawn work from newly generated teacher bundles. It does not delete a PDF already downloaded by someone else. Explain this at export/submission, without treating export as public sharing.
-7. Class closure blocks new guest entry and follows its disclosed save/return/submission policy. Give students an opportunity to export before access ends. Retention/deletion is explicit and institution-configured; no indefinite guest workspace is silently created. PRV-002 implements deletion mechanics before a retention promise is advertised.
+7. Class closure blocks new guest entry and follows its disclosed save/return/submission policy. Give students an opportunity to export before access ends. Retention/deletion is explicit and institution-configured; no indefinite guest workspace is silently created. PRV-002 handles account deletion; PRV-003 separately implements guest/session/team retention and deletion after those relations exist, before guest-retention behavior is advertised.
 
 ## AI and processor policy
 
@@ -56,7 +58,7 @@ Department of Education guidance addresses online educational services, institut
 
 ## Required executable evidence
 
-- Two teachers, two classes, two teams per class, guest and account principals: direct API/RPC/SQL reads and writes stay within scope. Forged, revoked, expired, reused, wrong-team and closed-space capabilities fail without disclosing whether private content exists.
+- Two teachers, two classes, two teams per class, guest and account principals: direct API/RPC/SQL reads and writes stay within scope. A teammate holding a shared team key cannot read another principal’s private draft or use their recovery path. Forged, revoked, expired, reused, wrong-team and closed-space capabilities fail without disclosing whether private content exists.
 - No-account guest can join, finish an activity, save/reload, return via disclosed recovery, preview a submission and obtain its PDF. A second unrelated guest cannot retrieve it.
 - Missing/withdrawn processing permission or disabled class AI prevents the affected text from reaching the mocked provider boundary. Verify actual bounded synthetic provider use separately.
 - Individual and full-team exports show all selected activities, no unrelated rows and no unselected private identifiers. Withdrawn/unsubmitted private work is absent from teacher bundles. Inspect actual PDF pages for long text, Unicode, tables, links and page overflow.

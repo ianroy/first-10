@@ -23,6 +23,8 @@ The current [AI handler](../../src/lib/ai.functions.ts) reads context using the 
 
 ## 2. Identity and scope decisions
 
+**Guest scope extension, 2026-10-18:** the account and project rules below govern authenticated account/project operations. CLS-007/008 add separately validated class/team guest capabilities, not a fabricated Supabase user. Account-project and guest-team submissions are discriminated source variants (or separate relations); guest sources do not require an invented project/user FK. Public class entry alone grants no private reads. See §12 and the guest data contract.
+
 1. **Authenticate the actor on the server.** Derive `actorId` from the verified Supabase session. Never accept `user_id`, owner, author, role, administrator status or institution from client-controlled metadata as authority.
 2. **Preserve ownership.** On existing tables, `user_id` remains the immutable owner. Their `project_id` must reference a project with the same `user_id`; an interview's non-null contact must have that same owner and project. Reject changes to identity/scope columns after insert. The first slice has no ownership transfer.
 3. **Owner is derived.** `projects.user_id` is the authoritative project owner. Store only `editor` / `viewer` grants in `project_members`; do not duplicate an `owner` grant that could drift. No membership operation may remove or demote the derived owner.
@@ -82,8 +84,8 @@ Names below reserve a consistent vocabulary for dependent tasks; no table in thi
 | Consent records | Private owner/project/subject-record scope, purpose, granted/declined/unknown/withdrawn, policy version and time. Historical records are never auto-granted | PRV-001 |
 | `classes`, `class_members`, `assignments` | Class creator `classes.user_id` is immutable and remains class owner; class has lifecycle/revision and disclosed recipient `access_expires_at`; class membership subject `user_id`, role student/teacher, active state and immutable grantor; assignment `user_id` is teacher author | CLS-001 |
 | `class_project_links` | Unique active `(class_id, user_id)` link to a project that this enrolled student owns. Explicit confirmation; switching link never links other projects or publishes private content | CLS-001 |
-| `class_submissions` | Student `user_id`, actual project, class, assignment, immutable snapshot versions, submission/withdrawal state and revision. Derive class/project from authorized association, not trusting a mismatched request | CLS-002 |
-| `submission_feedback` | Teacher author `user_id`, derived class/project/submission ids, versioned feedback; original author immutable | CLS-003 |
+| `class_submissions` and guest submission variant | Account-project source: student `user_id` and actual project. Guest-team source: real class/team plus validated guest author/capability, without invented account/project. Both have assignment, immutable submitted versions, state and revision; derive source scope from authorized association | CLS-002 |
+| `submission_feedback` | Teacher author `user_id`, class/submission and discriminated account-project or guest-team source; versioned feedback, original author immutable; no raw private-source join | CLS-003 |
 | Product events and AI usage | Trusted actor `user_id`, authorized project or explicit class/platform scope; enum event and allowlisted properties. Ledger costs written only by trusted budget operations | AN-002, AI-004 |
 | Decisions, experiments and commitments | Owner-private project records unless copied into an intentional snapshot; retain evidence revision links and reported/observed distinctions | EV-002/004 |
 | Evidence snapshots and share grants | Owner `user_id`, project, immutable selected payload; grants bind snapshot version, audience, permission read, expiry and revocation. Never a dynamic view into all notes | SHR-001/002 |
@@ -118,6 +120,8 @@ Use a dedicated narrowly privileged owner for helpers where feasible; never expo
 **Admin analytics:** allow only fixed dimensions (time grain, approved event/kind/model grouping), bounded windows and aggregate projections. Suppress behavioral/cohort breakdowns with fewer than five distinct eligible users; use fixed bucket boundaries and prohibit arbitrary intersecting identity filters to reduce differencing. Return `suppressed`/`insufficient_data`, not a zero that implies no activity. Exact platform-wide AI spend/reservation totals may be displayed for budget operation without per-person attribution. Admin-summary AI receives only the already-authorized aggregate DTO, never raw event or content tables. These are initial product privacy choices, not a claim of formal anonymization.
 
 ## 7. Concurrency, revocation and lifecycle
+
+**Implementation status:** WS-001 adds recoverable archive metadata and retains existing owner CRUD. The freeze policy below is a later WS-009 requirement; do not infer current enforcement from the marker.
 
 - Mutable resources have a server-incremented integer `revision`; updates require `expectedRevision`. Zero matching authorized rows is a conflict or generic unavailable result, never a silent overwrite. Read the current authorized revision before offering merge/replace. Keep actor, created time and container ids immutable.
 - Mutations with retry risk take an idempotency key, scoped to actor + operation + resource. Store a request hash and result; the same key/payload returns the existing result after current authorization is rechecked, a changed payload returns `IDEMPOTENCY_CONFLICT`. Never return a cached private response to a revoked actor.

@@ -1541,7 +1541,7 @@
       "id": "SEC-006",
       "title": "Platform admin role and audited privileged boundary",
       "phase": "P1",
-      "status": "in_progress",
+      "status": "complete",
       "owner": "agent",
       "size": "S",
       "kind": "implementation",
@@ -1555,7 +1555,10 @@
         "src/lib/admin-auth.server.ts",
         "src/lib/admin-audit.server.ts",
         "src/tests/sec-006/**",
-        "supabase/tests/sec-006.sql"
+        "supabase/tests/sec-006.sql",
+        "src/lib/admin.functions.ts",
+        "src/components/AppShell.tsx",
+        "src/tests/desktop-routes/admin-auth.test.ts"
       ],
       "exclusive_locks": [
         "platform-admin-authoring"
@@ -1599,33 +1602,38 @@
         {
           "date": "2026-10-18",
           "text": "Resumed run: isolated authoring only; unique migration reserved in write scope. Coordinator owns serial migration apply, public type generation, route integration and roadmap. No hosted action or broad schema lock delegated."
+        },
+        {
+          "date": "2026-10-18",
+          "text": "Complete foundation after66new SQL assertions within794combined,30helper tests plus15admin boundary tests and437integrated app checks. Operator-only role grant/revoke; safe bounded revisions; fresh identity-bound DB checks and required audit before platformaggregate response. Legacy narrow presenterflag stays separate. No automatic production grants. Hosted application of exact09000/10000 follows reviewed dryrun."
         }
       ],
-      "claim": {
-        "owner": "platform_admin",
-        "branch": "codex/roadmap-admin-20261018",
-        "base_commit": "07f0426",
-        "worktree": "/private/tmp/first-ten-platform-admin",
-        "started_at": "2026-10-18T14:44:38.158676+00:00",
-        "lease_expires_at": "2026-10-18T16:44:38.158676+00:00"
-      },
-      "completion_evidence": [],
+      "claim": null,
+      "completion_evidence": [
+        "supabase/migrations/20261018010000_platform_admin.sql",
+        "src/lib/admin-auth.server.ts",
+        "src/lib/admin-audit.server.ts",
+        "src/lib/admin.functions.ts",
+        "src/tests/sec-006/platform-admin.test.ts",
+        "supabase/tests/sec-006.sql",
+        "src/tests/desktop-routes/admin-auth.test.ts"
+      ],
       "subtasks": [
         {
           "id": "SEC-006.s1",
-          "status": "in_progress",
+          "status": "complete",
           "instruction": "Define protected role assignment/initial bootstrap through an operator-controlled path.",
           "notes": []
         },
         {
           "id": "SEC-006.s2",
-          "status": "not_started",
+          "status": "complete",
           "instruction": "Add server-side role verification and append-only audit records for privileged actions.",
           "notes": []
         },
         {
           "id": "SEC-006.s3",
-          "status": "not_started",
+          "status": "complete",
           "instruction": "Test direct API/RPC denial, self-assignment, role revocation and least-privilege data selection.",
           "notes": []
         }
@@ -2148,7 +2156,7 @@
       "id": "AI-003",
       "title": "Deterministic eval harness and representative fixtures",
       "phase": "P1",
-      "status": "not_started",
+      "status": "in_progress",
       "owner": "agent",
       "size": "S",
       "kind": "implementation",
@@ -2160,7 +2168,7 @@
       "write_scope": [
         "evals/**",
         "scripts/eval-ai.mjs",
-        "package.json",
+        "src/tests/ai-eval/**",
         "src/tests/ai-003/**"
       ],
       "exclusive_locks": [
@@ -2200,14 +2208,25 @@
         {
           "date": "2026-10-17",
           "text": "Scheduled by Iteration 5; no implementation or validation claimed."
+        },
+        {
+          "date": "2026-10-18",
+          "text": "Independent audit confirmed stale binding hashes and eval gate accepting negative latency, duplicate generation IDs and invalid review date. Worker extends existing harness in isolated branch; no package edits (PDF worker owns manifest), no paid calls; bounded paid adapter remains pending if not yet enforceable."
         }
       ],
-      "claim": null,
+      "claim": {
+        "owner": "platform_admin",
+        "branch": "codex/ai-eval-bindings-20261018",
+        "base_commit": "31d2d77",
+        "worktree": "/private/tmp/first-ten-platform-admin",
+        "started_at": "2026-10-18T14:51:30.300490+00:00",
+        "lease_expires_at": "2026-10-18T16:51:30.300490+00:00"
+      },
       "completion_evidence": [],
       "subtasks": [
         {
           "id": "AI-003.s1",
-          "status": "not_started",
+          "status": "in_progress",
           "instruction": "Use fictional/de-identified short, long, contradictory and adversarial evidence fixtures.",
           "notes": []
         },
@@ -3688,7 +3707,7 @@
       "id": "WS-001",
       "title": "Add safe project lifecycle metadata",
       "phase": "P3",
-      "status": "in_progress",
+      "status": "complete",
       "owner": "agent",
       "size": "S",
       "kind": "implementation",
@@ -3701,7 +3720,8 @@
         "supabase/migrations/20261018009000_project_lifecycle.sql",
         "src/lib/project-lifecycle.ts",
         "src/tests/ws-001/**",
-        "supabase/tests/ws-001.sql"
+        "supabase/tests/ws-001.sql",
+        "scripts/check-project-lifecycle-concurrency.mjs"
       ],
       "exclusive_locks": [
         "project-lifecycle-authoring"
@@ -3749,33 +3769,36 @@
         {
           "date": "2026-10-18",
           "text": "Resumed run: isolated authoring only; unique migration reserved in write scope. Coordinator owns serial migration apply, public type generation, route integration and roadmap. No hosted action or broad schema lock delegated."
+        },
+        {
+          "date": "2026-10-18",
+          "text": "Complete foundation after combined794 realSQL assertions and real two-connection CAS archive race: one success/one REVISION_CONFLICT, no content change, only newlocal fixtures removed.32focusedcontracts and437integratedapp tests/typecheck/lint/build pass. Archive remains metadata; ordinary-write freeze is explicitly WS009, controls/filtering WS002/003."
         }
       ],
-      "claim": {
-        "owner": "lifecycle",
-        "branch": "codex/roadmap-lifecycle-20261018",
-        "base_commit": "07f0426",
-        "worktree": "/private/tmp/first-ten-project-lifecycle",
-        "started_at": "2026-10-18T14:44:38.158676+00:00",
-        "lease_expires_at": "2026-10-18T16:44:38.158676+00:00"
-      },
-      "completion_evidence": [],
+      "claim": null,
+      "completion_evidence": [
+        "supabase/migrations/20261018009000_project_lifecycle.sql",
+        "src/lib/project-lifecycle.ts",
+        "src/tests/ws-001/project-lifecycle.test.ts",
+        "supabase/tests/ws-001.sql",
+        "scripts/check-project-lifecycle-concurrency.mjs"
+      ],
       "subtasks": [
         {
           "id": "WS-001.s1",
-          "status": "in_progress",
+          "status": "complete",
           "instruction": "Inventory first-row assumptions, child references and archive behavior.",
           "notes": []
         },
         {
           "id": "WS-001.s2",
-          "status": "not_started",
+          "status": "complete",
           "instruction": "Add named project lifecycle/updated metadata and scoped create/archive/restore contracts.",
           "notes": []
         },
         {
           "id": "WS-001.s3",
-          "status": "not_started",
+          "status": "complete",
           "instruction": "Backfill existing projects without changing stage/checklist state; test owned/shared deletion boundaries.",
           "notes": []
         }
@@ -4790,7 +4813,8 @@
       "steps": [
         "Create teacher-owned classes, student enrollment and assignments with scoped role operations.",
         "Use explicit student-confirmed project association and separate class membership from project membership.",
-        "Activate the SEC-005 class-invitation contract after class tables exist; test recipient binding, one-use/races, duplicate enrollment, teacher changes and leave/removal. Class join grants student enrollment only."
+        "Activate the SEC-005 class-invitation contract after class tables exist; test recipient binding, one-use/races, duplicate enrollment, teacher changes and leave/removal. Class join grants student enrollment only.",
+        "Model guest principals/teams as real class-scoped resources with separate principal-private versus team capabilities; no invented auth user or project foreign key."
       ],
       "acceptance": [
         "Class enrollment alone does not grant project/private-note read access.",
@@ -4818,6 +4842,10 @@
         {
           "date": "2026-10-18",
           "text": "DEMO-002/003 and EDU-005 provide presenter aggregate counts, three-view navigation, private lesson planning and authored cohort examples only. They do not supply shared class roles, live submissions/activity, platform funnel analytics, instructor study evidence or a real class pilot; this task remains open."
+        },
+        {
+          "date": "2026-10-18",
+          "text": "Guest model extension from FERPA-001 review: resolve account-only source assumptions before implementation."
         }
       ],
       "claim": null,
@@ -4839,6 +4867,12 @@
           "id": "CLS-001.s3",
           "status": "not_started",
           "instruction": "Activate the SEC-005 class-invitation contract after class tables exist; test recipient binding, one-use/races, duplicate enrollment, teacher changes and leave/removal. Class join grants student enrollment only.",
+          "notes": []
+        },
+        {
+          "id": "CLS-001.s4",
+          "status": "not_started",
+          "instruction": "Model guest principals/teams as real class-scoped resources with separate principal-private versus team capabilities; no invented auth user or project foreign key.",
           "notes": []
         }
       ]
@@ -4880,7 +4914,8 @@
       "steps": [
         "Define a versioned submission snapshot containing selected/redacted evidence and reflection.",
         "Show exactly what the teacher sees before affirmative submission; record scope/version/choice.",
-        "Implement withdrawal, class access expiry and retention rules without broad SELECT on source interviews."
+        "Implement withdrawal, class access expiry and retention rules without broad SELECT on source interviews.",
+        "Add a discriminated account_project versus guest_team submission source or a separate guest submission relation. Each immutable snapshot has its own class/assignment and verified actor/team; guest submission requires no personal account/project."
       ],
       "acceptance": [
         "Future private edits do not automatically appear in submitted snapshots.",
@@ -4904,6 +4939,10 @@
         {
           "date": "2026-10-17",
           "text": "Scheduled by Iteration 5; no implementation or validation claimed."
+        },
+        {
+          "date": "2026-10-18",
+          "text": "Guest model extension from FERPA-001 review: resolve account-only source assumptions before implementation."
         }
       ],
       "claim": null,
@@ -4925,6 +4964,12 @@
           "id": "CLS-002.s3",
           "status": "not_started",
           "instruction": "Implement withdrawal, class access expiry and retention rules without broad SELECT on source interviews.",
+          "notes": []
+        },
+        {
+          "id": "CLS-002.s4",
+          "status": "not_started",
+          "instruction": "Add a discriminated account_project versus guest_team submission source or a separate guest submission relation. Each immutable snapshot has its own class/assignment and verified actor/team; guest submission requires no personal account/project.",
           "notes": []
         }
       ]
@@ -4965,7 +5010,8 @@
       "steps": [
         "Define teacher projections for enrollment, assignment milestones, progress metadata and submitted artifacts.",
         "Add teacher-authored feedback/revision history and audit events with protected class scope.",
-        "Test cross-class teachers, unenrolled users, direct endpoints and revoked teacher access."
+        "Test cross-class teachers, unenrolled users, direct endpoints and revoked teacher access.",
+        "Authorize progress/feedback against discriminated account-project or guest-team submission scope; teachers see submitted snapshots only, never a live private-source join."
       ],
       "acceptance": [
         "Teacher progress does not reveal unrelated projects, private contacts or hidden draft content.",
@@ -4989,6 +5035,10 @@
         {
           "date": "2026-10-17",
           "text": "Scheduled by Iteration 5; no implementation or validation claimed."
+        },
+        {
+          "date": "2026-10-18",
+          "text": "Guest model extension from FERPA-001 review: resolve account-only source assumptions before implementation."
         }
       ],
       "claim": null,
@@ -5010,6 +5060,12 @@
           "id": "CLS-003.s3",
           "status": "not_started",
           "instruction": "Test cross-class teachers, unenrolled users, direct endpoints and revoked teacher access.",
+          "notes": []
+        },
+        {
+          "id": "CLS-003.s4",
+          "status": "not_started",
+          "instruction": "Authorize progress/feedback against discriminated account-project or guest-team submission scope; teachers see submitted snapshots only, never a live private-source join.",
           "notes": []
         }
       ]
@@ -6732,7 +6788,9 @@
         "MKT-008",
         "CLS-008",
         "EXP-002",
-        "EXP-003"
+        "EXP-003",
+        "PRV-003",
+        "WS-009"
       ],
       "requires_decisions": [],
       "write_scope": [
@@ -7068,7 +7126,8 @@
         "CLS-008",
         "EXP-002",
         "EXP-003",
-        "FERPA-002"
+        "FERPA-002",
+        "PRV-003"
       ],
       "requires_decisions": [],
       "write_scope": [
@@ -11155,7 +11214,7 @@
       "id": "FERPA-001",
       "title": "Define FERPA-first guest-space and export privacy contract",
       "phase": "P1",
-      "status": "in_progress",
+      "status": "complete",
       "owner": "agent",
       "size": "M",
       "kind": "planning",
@@ -11206,33 +11265,39 @@
         {
           "date": "2026-10-18",
           "text": "Owner explicitly added as core product value; preserve privacy boundaries and show status truthfully."
+        },
+        {
+          "date": "2026-10-18",
+          "text": "Independent review found guest/account submission-source mismatch, acceptance staging cycle, shared-key/private-note ambiguity and unowned guest retention. Corrected class task sources and individual-vs-portfolio staging; private principal key separated from team key; added PRV003 guest retention and WS009 archive-freeze enforcement. Processor settings remain unverified, not claimed."
+        },
+        {
+          "date": "2026-10-18",
+          "text": "Planning contract complete after independent review and recheck resolved all4scope/recovery/staging/retention defects. Explicit source-field/audience matrix and implementation evidence requirements. No institution approval or processor-setting verification claimed; FERPA002 and implementation tasks remain outstanding."
         }
       ],
-      "claim": {
-        "owner": "coordinator",
-        "branch": "main",
-        "base_commit": "07f0426",
-        "worktree": "/Users/ianroy/Library/CloudStorage/Dropbox/Apps by Ian/Babson AI Academy/First 10",
-        "started_at": "2026-10-18T14:49:38.082477+00:00",
-        "lease_expires_at": "2026-10-18T16:49:38.082477+00:00"
-      },
-      "completion_evidence": [],
+      "claim": null,
+      "completion_evidence": [
+        "docs/privacy/ferpa-first-product-direction.md",
+        "docs/privacy/guest-data-contract.md",
+        "docs/architecture/access-contract.md",
+        "docs/roadmap/tasks.json"
+      ],
       "subtasks": [
         {
           "id": "FERPA-001.s1",
-          "status": "in_progress",
+          "status": "complete",
           "instruction": "Inventory direct/indirect identifiers, processors, logs, guest/team capabilities, teacher projections and each exported field; link primary Department of Education sources.",
           "notes": []
         },
         {
           "id": "FERPA-001.s2",
-          "status": "not_started",
+          "status": "complete",
           "instruction": "Specify teacher provision, invitation expiry/revocation, pseudonymous guest/team principals, recovery and separate private-versus-submitted activity data. A public class code never reads team work.",
           "notes": []
         },
         {
           "id": "FERPA-001.s3",
-          "status": "not_started",
+          "status": "complete",
           "instruction": "Specify institution-controlled AI opt-in, access/retention/deletion/export policies and actionable release evidence; keep legal/institutional approval separate from engineering.",
           "notes": []
         }
@@ -11365,12 +11430,12 @@
       ],
       "acceptance": [
         "Guest/team activities persist and return within disclosed lifecycle, without treating class enrollment as consent for AI or sharing.",
-        "Students can obtain individual activity PDFs and a team portfolio before expiry; teacher export never silently includes raw private notes."
+        "Students can obtain individual activity PDFs before expiry; team portfolios are completed in dependent EXP-003. Teacher access never silently includes raw private notes."
       ],
       "verification_profile": "product",
       "verification": [
         "Guest/team activities persist and return within disclosed lifecycle, without treating class enrollment as consent for AI or sharing.",
-        "Students can obtain individual activity PDFs and a team portfolio before expiry; teacher export never silently includes raw private notes.",
+        "Students can obtain individual activity PDFs before expiry; team portfolios are completed in dependent EXP-003. Teacher access never silently includes raw private notes.",
         "Run meaningful authorization and UI tests, typecheck, lint and production build; inspect actual generated PDF pages or guest browser journeys. Use real isolated SQL tests for access changes."
       ],
       "metric": "Unauthorized disclosures: zero; guest and PDF activity coverage tracked explicitly.",
@@ -11683,7 +11748,8 @@
         "FERPA-001",
         "CLS-008",
         "PRV-002",
-        "EXP-003"
+        "EXP-003",
+        "PRV-003"
       ],
       "requires_decisions": [],
       "write_scope": [
@@ -11749,6 +11815,175 @@
           "id": "FERPA-002.s3",
           "status": "not_started",
           "instruction": "Resolve material technical findings, configure the institution scope and record approved uses and remaining limits before marketing verified compliance.",
+          "notes": []
+        }
+      ]
+    },
+    {
+      "id": "PRV-003",
+      "title": "Implement guest/session/team retention, export window and deliberate cleanup",
+      "phase": "P4",
+      "status": "not_started",
+      "owner": "agent",
+      "size": "M",
+      "kind": "implementation",
+      "priority": 25,
+      "depends_on": [
+        "CLS-008",
+        "PRV-002",
+        "FERPA-001"
+      ],
+      "requires_decisions": [],
+      "write_scope": [
+        "supabase/migrations/**",
+        "src/lib/guest-retention/**",
+        "src/components/guest/**",
+        "src/tests/prv-003/**",
+        "supabase/tests/prv-003.sql"
+      ],
+      "exclusive_locks": [
+        "prv-003-integration"
+      ],
+      "read_first": [
+        "ProductSpec.md",
+        "FEATUREROADMAP_workplan.md",
+        "docs/privacy/ferpa-first-product-direction.md",
+        "docs/architecture/access-contract.md"
+      ],
+      "goal": "Implement guest/session/team retention, export window and deliberate cleanup",
+      "steps": [
+        "Inventory guest principal/private draft/team draft/submission/session/token/audit relations and every export source; assign retention policy from class provision without changing existing account deletion semantics.",
+        "Implement disclosed expiry/export grace, guest session revocation and bounded idempotent deletion with safe counts; delete hash secrets/capability mappings and private content according to configured schedule; no sweeping arbitrary projects.",
+        "Run dry-run/expiry/restore and two-team tests proving target cleanup, no unrelated content loss, teacher-export exclusions after withdrawal and honest limits for downloaded PDFs."
+      ],
+      "acceptance": [
+        "Guest lifecycle has actual executable retention/deletion controls and an export opportunity; closing a class does not silently orphan guest work.",
+        "Cleanup is scoped, testable and repeat-safe; principal-private recovery never uses a shared team capability."
+      ],
+      "verification_profile": "product",
+      "verification": [
+        "Guest lifecycle has actual executable retention/deletion controls and an export opportunity; closing a class does not silently orphan guest work.",
+        "Cleanup is scoped, testable and repeat-safe; principal-private recovery never uses a shared team capability.",
+        "Run meaningful isolated SQL/API/browser tests and document actual enforcement."
+      ],
+      "metric": "Unauthorized disclosures: zero; guest and PDF activity coverage tracked explicitly.",
+      "rollback": "Disable new entry points without deleting saved work; preserve previous private-account and teaching workflows.",
+      "agent_notes": {
+        "starting_point": "Explicit owner addition2026-10-18: FERPA-first class/hackathon spaces with student participation without account creation; PDF export of every activity/team data. This is a product requirement, not a claim of compliance or current availability.",
+        "stop_and_report": "If a required contract, test environment, human observation, budget or permission is missing, record the specific blocker. Continue another ready task; do not fabricate data or widen the write scope.",
+        "handoff": "Report changed files, base/result commit, exact checks and outcomes, artifact/source ids, residual risks and the next eligible task. Only the coordinator edits task status, shared generated files and the main roadmap.",
+        "integration": "Use a clean task branch/worktree from the coordinator base. Commit only this write scope. Migrations, generated types, route tree, dependency locks and shared entry points are serialized by the coordinator; never hand-edit generated output."
+      },
+      "notes": [
+        {
+          "date": "2026-10-18",
+          "text": "Owner explicitly added as core product value; preserve privacy boundaries and show status truthfully."
+        }
+      ],
+      "claim": null,
+      "completion_evidence": [],
+      "subtasks": [
+        {
+          "id": "PRV-003.s1",
+          "status": "not_started",
+          "instruction": "Inventory guest principal/private draft/team draft/submission/session/token/audit relations and every export source; assign retention policy from class provision without changing existing account deletion semantics.",
+          "notes": []
+        },
+        {
+          "id": "PRV-003.s2",
+          "status": "not_started",
+          "instruction": "Implement disclosed expiry/export grace, guest session revocation and bounded idempotent deletion with safe counts; delete hash secrets/capability mappings and private content according to configured schedule; no sweeping arbitrary projects.",
+          "notes": []
+        },
+        {
+          "id": "PRV-003.s3",
+          "status": "not_started",
+          "instruction": "Run dry-run/expiry/restore and two-team tests proving target cleanup, no unrelated content loss, teacher-export exclusions after withdrawal and honest limits for downloaded PDFs.",
+          "notes": []
+        }
+      ]
+    },
+    {
+      "id": "WS-009",
+      "title": "Enforce archived-workspace write and generation boundaries",
+      "phase": "P3",
+      "status": "not_started",
+      "owner": "agent",
+      "size": "M",
+      "kind": "implementation",
+      "priority": 25,
+      "depends_on": [
+        "WS-002",
+        "SEC-005",
+        "AI-007"
+      ],
+      "requires_decisions": [],
+      "write_scope": [
+        "supabase/migrations/**",
+        "src/lib/project-lifecycle.ts",
+        "src/lib/ai.functions.ts",
+        "src/lib/invitations.functions.ts",
+        "src/tests/ws-009/**",
+        "supabase/tests/ws-009.sql"
+      ],
+      "exclusive_locks": [
+        "ws-009-integration"
+      ],
+      "read_first": [
+        "ProductSpec.md",
+        "FEATUREROADMAP_workplan.md",
+        "docs/privacy/ferpa-first-product-direction.md",
+        "docs/architecture/access-contract.md"
+      ],
+      "goal": "Enforce archived-workspace write and generation boundaries",
+      "steps": [
+        "Inventory every legacy/new project mutation, generation, invite and snapshot endpoint; distinguish owner archive/restore from ordinary content writes.",
+        "Enforce archived project policy at server/database boundaries so ordinary changes/new generation/invites/snapshots fail while owner read/export/restore remain authorized; keep existing metadata-only behavior disclosed until applied.",
+        "Verify owner/editor/viewer/direct client/RPC attempts, pending saves across archive, restore, idempotent retries, export and no private data deletion."
+      ],
+      "acceptance": [
+        "Archived-write freeze is actually enforced across APIs and tables, not merely disabled UI.",
+        "Owner can inspect/export and restore safely; archive does not reassign ownership or expand class/member access."
+      ],
+      "verification_profile": "product",
+      "verification": [
+        "Archived-write freeze is actually enforced across APIs and tables, not merely disabled UI.",
+        "Owner can inspect/export and restore safely; archive does not reassign ownership or expand class/member access.",
+        "Run meaningful isolated SQL/API/browser tests and document actual enforcement."
+      ],
+      "metric": "Unauthorized disclosures: zero; guest and PDF activity coverage tracked explicitly.",
+      "rollback": "Disable new entry points without deleting saved work; preserve previous private-account and teaching workflows.",
+      "agent_notes": {
+        "starting_point": "Explicit owner addition2026-10-18: FERPA-first class/hackathon spaces with student participation without account creation; PDF export of every activity/team data. This is a product requirement, not a claim of compliance or current availability.",
+        "stop_and_report": "If a required contract, test environment, human observation, budget or permission is missing, record the specific blocker. Continue another ready task; do not fabricate data or widen the write scope.",
+        "handoff": "Report changed files, base/result commit, exact checks and outcomes, artifact/source ids, residual risks and the next eligible task. Only the coordinator edits task status, shared generated files and the main roadmap.",
+        "integration": "Use a clean task branch/worktree from the coordinator base. Commit only this write scope. Migrations, generated types, route tree, dependency locks and shared entry points are serialized by the coordinator; never hand-edit generated output."
+      },
+      "notes": [
+        {
+          "date": "2026-10-18",
+          "text": "Owner explicitly added as core product value; preserve privacy boundaries and show status truthfully."
+        }
+      ],
+      "claim": null,
+      "completion_evidence": [],
+      "subtasks": [
+        {
+          "id": "WS-009.s1",
+          "status": "not_started",
+          "instruction": "Inventory every legacy/new project mutation, generation, invite and snapshot endpoint; distinguish owner archive/restore from ordinary content writes.",
+          "notes": []
+        },
+        {
+          "id": "WS-009.s2",
+          "status": "not_started",
+          "instruction": "Enforce archived project policy at server/database boundaries so ordinary changes/new generation/invites/snapshots fail while owner read/export/restore remain authorized; keep existing metadata-only behavior disclosed until applied.",
+          "notes": []
+        },
+        {
+          "id": "WS-009.s3",
+          "status": "not_started",
+          "instruction": "Verify owner/editor/viewer/direct client/RPC attempts, pending saves across archive, restore, idempotent retries, export and no private data deletion.",
           "notes": []
         }
       ]
