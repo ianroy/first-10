@@ -125,7 +125,7 @@ const authoredSlides = [
   },
 ];
 // Layout keys retain their authored positions; presentation order is independent.
-export const slideOrder = [0, 1, 2, 3, 4, 5, 6, 7, 9, 10, 8, 11, 12];
+export const slideOrder = [0, 0, 1, 2, 3, 4, 5, 6, 7, 9, 10, 8, 11, 12];
 export const slides = slideOrder.map((index) => authoredSlides[index]);
 
 export default async function rebuild({ presentation, input }) {
@@ -158,7 +158,7 @@ export default async function rebuild({ presentation, input }) {
   };
   const footer = (s, c, dark = false) =>
     text(s, c, 72, 657, 1136, 40, 16, dark ? "#B9D3C3" : "#4D655A");
-  while (presentation.slides.items.length < 13)
+  while (presentation.slides.items.length < slides.length)
     presentation.slides.add({ width: 1280, height: 720 });
   for (let outputIndex = input.from; outputIndex <= input.to; outputIndex++) {
     const i = slideOrder[outputIndex];

@@ -28,6 +28,7 @@ test("title Next starts 90/60/30 segments and one continuous 3-minute clock", ()
   p.click("present");
   assert.equal(p.text("speaker-time"), "1:30");
   p.click("next");
+  assert.equal(p.doc.querySelector(".slide.active img").getAttribute("alt"), p.doc.querySelector(".slide img").getAttribute("alt"));
   p.tick(65000);
   assert.equal(p.text("speaker-time"), "0:30");
   assert.equal(p.text("total-time"), "2:00");
@@ -62,7 +63,7 @@ test("pause/resume and returning to the title never restart the clock; explicit 
   p.tick(110000);
   assert.equal(p.text("speaker-time"), "1:10");
   p.click("clock-reset");
-  assert.equal(p.text("position"), "1 / 13");
+  assert.equal(p.text("position"), "1 / 14");
   assert.equal(p.text("total-time"), "3:00");
   p.click("next");
   p.tick(200000);
