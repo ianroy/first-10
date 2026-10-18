@@ -33,7 +33,9 @@ last_updated: 2026-10-18
 last_documentation_update: "2026-10-18: AI-002 complete; resumed lifecycle/admin parallel work; added FERPA-first account-free class/hackathon spaces and PDF export of every activity/team."
 resume_hint: >-
   Owner resumed all roadmap work and added FERPA-first no-account class/hackathon spaces
-  plus PDF of every activity/team. Registry137tasks; guest source/capability/export/retention
+  plus PDF of every activity/team. New main student framework: idea, falsifiable hypothesis,
+  adjacent hypotheses, fivepeople/bias map, editable printed script, interviews/results/nextsteps.
+  DISC001/002/003 and CTX001 also connect reviewed website/GitHub/pasted context. Registry141tasks; guest source/capability/export/retention
   contract reviewed with no remaining design contradiction, not institutional approval.
   AI002 complete: persisted origins and owner metadata; actual synthetic question save/reload
   and two-connection atomic outreach rehearsal passed. Extra call reported0.004239USD.

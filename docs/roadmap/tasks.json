@@ -1355,7 +1355,8 @@
         "src/routes/invite.tsx",
         "src/components/invitations/**",
         "src/tests/sec-005/**",
-        "supabase/tests/sec-005.sql"
+        "supabase/tests/sec-005.sql",
+        "scripts/check-invitation-concurrency.mjs"
       ],
       "exclusive_locks": ["scoped-invitation-schema", "invite-route"],
       "read_first": [
@@ -1392,6 +1393,10 @@
         {
           "date": "2026-10-17",
           "text": "Scheduled by Iteration 5; no implementation or validation claimed."
+        },
+        {
+          "date": "2026-10-18",
+          "text": "e5e6b80 integrated; reviewed12000 hash e8fea81d applied only local55322.935real SQL assertions pass with rollback (62newinvite checks). Root mounts owner-only InvitationPanel in Account; collaboration remainsdisabled. Worker runs final realtwo-connectionrace beforetaskclose."
         }
       ],
       "claim": {
@@ -1544,7 +1549,11 @@
         "src/tests/prv-001/**",
         "supabase/tests/prv-001.sql",
         "src/tests/ai-002/server-function.test.ts",
-        "src/tests/desktop-routes/workflows.test.tsx"
+        "src/tests/desktop-routes/workflows.test.tsx",
+        "scripts/eval-ai.mjs",
+        "evals/**",
+        "src/tests/ai-eval/**",
+        "src/tests/ai-003/fixture-parity.test.ts"
       ],
       "exclusive_locks": ["processing-consent-schema", "ai-entrypoint", "interview-flow"],
       "read_first": [
@@ -1581,6 +1590,10 @@
         {
           "date": "2026-10-17",
           "text": "Scheduled by Iteration 5; no implementation or validation claimed."
+        },
+        {
+          "date": "2026-10-18",
+          "text": "Coordinator approved immutable evalv3/source bindings and actual-handler parity updates required by permission-scoped context, preserving published v1/v2 bytes. Reviewed11000 hash67346a6e applied only to dedicated local55322 successfully; real SQL testing continues. Hosted not yet applied."
         }
       ],
       "claim": {
@@ -11197,6 +11210,322 @@
           "id": "WS-009.s3",
           "status": "not_started",
           "instruction": "Verify owner/editor/viewer/direct client/RPC attempts, pending saves across archive, restore, idempotent retries, export and no private data deletion.",
+          "notes": []
+        }
+      ]
+    },
+    {
+      "id": "DISC-001",
+      "title": "Build the student hypothesis-to-interview learning cycle",
+      "phase": "P3",
+      "status": "not_started",
+      "owner": "agent",
+      "size": "M",
+      "kind": "implementation",
+      "priority": 15,
+      "depends_on": ["WS-002", "PRV-001", "EXP-001"],
+      "requires_decisions": [],
+      "write_scope": [
+        "supabase/migrations/**",
+        "src/lib/discovery*",
+        "src/components/discovery/**",
+        "src/routes/_authenticated/discovery.tsx",
+        "src/tests/disc-001/**",
+        "supabase/tests/disc-001.sql"
+      ],
+      "exclusive_locks": ["disc-001-integration"],
+      "read_first": [
+        "ProductSpec.md",
+        "FEATUREROADMAP_workplan.md",
+        "docs/pedagogy/student-discovery-framework.md",
+        "docs/architecture/access-contract.md"
+      ],
+      "goal": "Build the student hypothesis-to-interview learning cycle",
+      "steps": [
+        "Persist versioned owner-scoped problem/solution framing, student-authored first falsifiable hypothesis, five reachable people and sampling-risk/mitigation map; preserve the original attempt before optional AI.",
+        "Build the seven-step desktop journey with hypothesis pivots, editable manual scripts, saved/printed script and results-to-next-step links; preserve existing people/interview workflows without fabricated completion.",
+        "Attach reviewed links and pasted context at any step with source type/retrieval state/permission labels; export every framework activity and include it in authorized saved portfolios."
+      ],
+      "acceptance": [
+        "A student can complete the manual seven-step cycle across reloads and projects; concurrent/stale saves cannot overwrite acknowledged work.",
+        "First hypothesis precedes AI suggestions; five people is a scaffold, no forced contact or fabricated evidence. Every new activity has a readable PDF."
+      ],
+      "verification_profile": "product",
+      "verification": [
+        "A student can complete the manual seven-step cycle across reloads and projects; concurrent/stale saves cannot overwrite acknowledged work.",
+        "First hypothesis precedes AI suggestions; five people is a scaffold, no forced contact or fabricated evidence. Every new activity has a readable PDF.",
+        "Run focused authorization/concurrency/UI tests, typecheck, lint and production build. Render actual new activity PDFs; for AI use versioned fixtures and bounded evaluations."
+      ],
+      "metric": "Useful evidence-linked decisions; no invented interviews, unauthorized processing or omitted activity exports.",
+      "rollback": "Disable new entry points while preserving saved private work and existing manual routes.",
+      "agent_notes": {
+        "starting_point": "Owner-defined core student framework. Existing app has idea/people/questions/interviews/synthesis but lacks persisted first hypotheses, sampling feedback and reviewed external context. Do not imply planned retrieval or new AI kinds exist. Preserve guest/account privacy and every-activity PDF coverage.",
+        "stop_and_report": "If a required contract, test environment, human observation, budget or permission is missing, record the specific blocker. Continue another ready task; do not fabricate data or widen the write scope.",
+        "handoff": "Report changed files, base/result commit, exact checks and outcomes, artifact/source ids, residual risks and the next eligible task. Only the coordinator edits task status, shared generated files and the main roadmap.",
+        "integration": "Use a clean task branch/worktree from the coordinator base. Commit only this write scope. Migrations, generated types, route tree, dependency locks and shared entry points are serialized by the coordinator; never hand-edit generated output."
+      },
+      "notes": [
+        {
+          "date": "2026-10-18",
+          "text": "Explicit owner framework addition: first falsifiable hypothesis, adjacent hypotheses, five-person sampling map, bias feedback, pivotable printed scripts, interviews/results/actionable next steps and connected website/GitHub/prompt context."
+        }
+      ],
+      "claim": null,
+      "completion_evidence": [],
+      "subtasks": [
+        {
+          "id": "DISC-001.s1",
+          "status": "not_started",
+          "instruction": "Persist versioned owner-scoped problem/solution framing, student-authored first falsifiable hypothesis, five reachable people and sampling-risk/mitigation map; preserve the original attempt before optional AI.",
+          "notes": []
+        },
+        {
+          "id": "DISC-001.s2",
+          "status": "not_started",
+          "instruction": "Build the seven-step desktop journey with hypothesis pivots, editable manual scripts, saved/printed script and results-to-next-step links; preserve existing people/interview workflows without fabricated completion.",
+          "notes": []
+        },
+        {
+          "id": "DISC-001.s3",
+          "status": "not_started",
+          "instruction": "Attach reviewed links and pasted context at any step with source type/retrieval state/permission labels; export every framework activity and include it in authorized saved portfolios.",
+          "notes": []
+        }
+      ]
+    },
+    {
+      "id": "DISC-002",
+      "title": "Offer adjacent hypotheses and sampling-risk feedback through bounded AI",
+      "phase": "P5",
+      "status": "not_started",
+      "owner": "agent",
+      "size": "M",
+      "kind": "implementation",
+      "priority": 15,
+      "depends_on": ["DISC-001", "AI-004", "AI-007", "AI-008"],
+      "requires_decisions": [],
+      "write_scope": [
+        "src/lib/ai.functions.ts",
+        "src/lib/ai/**",
+        "src/lib/prompts/**",
+        "src/components/discovery/**",
+        "src/tests/disc-002/**",
+        "evals/**"
+      ],
+      "exclusive_locks": ["disc-002-integration"],
+      "read_first": [
+        "ProductSpec.md",
+        "FEATUREROADMAP_workplan.md",
+        "docs/pedagogy/student-discovery-framework.md",
+        "docs/architecture/access-contract.md"
+      ],
+      "goal": "Offer adjacent hypotheses and sampling-risk feedback through bounded AI",
+      "steps": [
+        "Add strict versioned hypothesis-feedback and sampling-feedback kinds through generateAI, using only the selected saved hypothesis, relevant reviewed context and permitted alias-based mapping.",
+        "Generate several meaningfully adjacent hypotheses with predicted/disconfirming observations; explain possible false positives/negatives as hypotheses, never judgments about people.",
+        "Evaluate cheap eligible OpenRouter routes on sparse, contradictory, adversarial and withheld-source fixtures; retain student text until explicit adoption and enforce configured budgets."
+      ],
+      "acceptance": [
+        "AI does not run before an authored first hypothesis and explicit eligible processing permission; every suggestion can be edited or rejected.",
+        "Provider failures/withdrawal preserve manual work; advice cites supplied context and does not invent interviews, bias diagnoses or product-market fit."
+      ],
+      "verification_profile": "product",
+      "verification": [
+        "AI does not run before an authored first hypothesis and explicit eligible processing permission; every suggestion can be edited or rejected.",
+        "Provider failures/withdrawal preserve manual work; advice cites supplied context and does not invent interviews, bias diagnoses or product-market fit.",
+        "Run focused authorization/concurrency/UI tests, typecheck, lint and production build. Render actual new activity PDFs; for AI use versioned fixtures and bounded evaluations."
+      ],
+      "metric": "Useful evidence-linked decisions; no invented interviews, unauthorized processing or omitted activity exports.",
+      "rollback": "Disable new entry points while preserving saved private work and existing manual routes.",
+      "agent_notes": {
+        "starting_point": "Owner-defined core student framework. Existing app has idea/people/questions/interviews/synthesis but lacks persisted first hypotheses, sampling feedback and reviewed external context. Do not imply planned retrieval or new AI kinds exist. Preserve guest/account privacy and every-activity PDF coverage.",
+        "stop_and_report": "If a required contract, test environment, human observation, budget or permission is missing, record the specific blocker. Continue another ready task; do not fabricate data or widen the write scope.",
+        "handoff": "Report changed files, base/result commit, exact checks and outcomes, artifact/source ids, residual risks and the next eligible task. Only the coordinator edits task status, shared generated files and the main roadmap.",
+        "integration": "Use a clean task branch/worktree from the coordinator base. Commit only this write scope. Migrations, generated types, route tree, dependency locks and shared entry points are serialized by the coordinator; never hand-edit generated output."
+      },
+      "notes": [
+        {
+          "date": "2026-10-18",
+          "text": "Explicit owner framework addition: first falsifiable hypothesis, adjacent hypotheses, five-person sampling map, bias feedback, pivotable printed scripts, interviews/results/actionable next steps and connected website/GitHub/prompt context."
+        }
+      ],
+      "claim": null,
+      "completion_evidence": [],
+      "subtasks": [
+        {
+          "id": "DISC-002.s1",
+          "status": "not_started",
+          "instruction": "Add strict versioned hypothesis-feedback and sampling-feedback kinds through generateAI, using only the selected saved hypothesis, relevant reviewed context and permitted alias-based mapping.",
+          "notes": []
+        },
+        {
+          "id": "DISC-002.s2",
+          "status": "not_started",
+          "instruction": "Generate several meaningfully adjacent hypotheses with predicted/disconfirming observations; explain possible false positives/negatives as hypotheses, never judgments about people.",
+          "notes": []
+        },
+        {
+          "id": "DISC-002.s3",
+          "status": "not_started",
+          "instruction": "Evaluate cheap eligible OpenRouter routes on sparse, contradictory, adversarial and withheld-source fixtures; retain student text until explicit adoption and enforce configured budgets.",
+          "notes": []
+        }
+      ]
+    },
+    {
+      "id": "DISC-003",
+      "title": "Connect hypothesis and people mapping to scripts and actionable pivots",
+      "phase": "P5",
+      "status": "not_started",
+      "owner": "agent",
+      "size": "M",
+      "kind": "implementation",
+      "priority": 15,
+      "depends_on": ["DISC-001", "DISC-002", "EV-003", "EV-006"],
+      "requires_decisions": [],
+      "write_scope": [
+        "src/components/discovery/**",
+        "src/lib/discovery*",
+        "src/lib/prompts/**",
+        "src/lib/ai.functions.ts",
+        "src/tests/disc-003/**",
+        "evals/**"
+      ],
+      "exclusive_locks": ["disc-003-integration"],
+      "read_first": [
+        "ProductSpec.md",
+        "FEATUREROADMAP_workplan.md",
+        "docs/pedagogy/student-discovery-framework.md",
+        "docs/architecture/access-contract.md"
+      ],
+      "goal": "Connect hypothesis and people mapping to scripts and actionable pivots",
+      "steps": [
+        "Generate optional versioned interview scripts from the chosen hypothesis and sampling map; preserve editable questions and prior scripts when the student pivots.",
+        "Print/save the selected script with permission prompts and note space; link returned observations to the script/hypothesis version actually used.",
+        "Show source-linked proposed product changes, adjacent pivots, uncertainties and next tests after interviews, including disconfirming or inconclusive results; student records the final decision."
+      ],
+      "acceptance": [
+        "The same selected hypothesis/context/script versions remain traceable through printed interviews and returned results.",
+        "No interview completion or demand is inferred from generation, printing, positive statements or an accepted summary. Individual/portfolio PDFs preserve context and draft labels."
+      ],
+      "verification_profile": "product",
+      "verification": [
+        "The same selected hypothesis/context/script versions remain traceable through printed interviews and returned results.",
+        "No interview completion or demand is inferred from generation, printing, positive statements or an accepted summary. Individual/portfolio PDFs preserve context and draft labels.",
+        "Run focused authorization/concurrency/UI tests, typecheck, lint and production build. Render actual new activity PDFs; for AI use versioned fixtures and bounded evaluations."
+      ],
+      "metric": "Useful evidence-linked decisions; no invented interviews, unauthorized processing or omitted activity exports.",
+      "rollback": "Disable new entry points while preserving saved private work and existing manual routes.",
+      "agent_notes": {
+        "starting_point": "Owner-defined core student framework. Existing app has idea/people/questions/interviews/synthesis but lacks persisted first hypotheses, sampling feedback and reviewed external context. Do not imply planned retrieval or new AI kinds exist. Preserve guest/account privacy and every-activity PDF coverage.",
+        "stop_and_report": "If a required contract, test environment, human observation, budget or permission is missing, record the specific blocker. Continue another ready task; do not fabricate data or widen the write scope.",
+        "handoff": "Report changed files, base/result commit, exact checks and outcomes, artifact/source ids, residual risks and the next eligible task. Only the coordinator edits task status, shared generated files and the main roadmap.",
+        "integration": "Use a clean task branch/worktree from the coordinator base. Commit only this write scope. Migrations, generated types, route tree, dependency locks and shared entry points are serialized by the coordinator; never hand-edit generated output."
+      },
+      "notes": [
+        {
+          "date": "2026-10-18",
+          "text": "Explicit owner framework addition: first falsifiable hypothesis, adjacent hypotheses, five-person sampling map, bias feedback, pivotable printed scripts, interviews/results/actionable next steps and connected website/GitHub/prompt context."
+        }
+      ],
+      "claim": null,
+      "completion_evidence": [],
+      "subtasks": [
+        {
+          "id": "DISC-003.s1",
+          "status": "not_started",
+          "instruction": "Generate optional versioned interview scripts from the chosen hypothesis and sampling map; preserve editable questions and prior scripts when the student pivots.",
+          "notes": []
+        },
+        {
+          "id": "DISC-003.s2",
+          "status": "not_started",
+          "instruction": "Print/save the selected script with permission prompts and note space; link returned observations to the script/hypothesis version actually used.",
+          "notes": []
+        },
+        {
+          "id": "DISC-003.s3",
+          "status": "not_started",
+          "instruction": "Show source-linked proposed product changes, adjacent pivots, uncertainties and next tests after interviews, including disconfirming or inconclusive results; student records the final decision.",
+          "notes": []
+        }
+      ]
+    },
+    {
+      "id": "CTX-001",
+      "title": "Safely retrieve and review public site and GitHub context",
+      "phase": "P5",
+      "status": "not_started",
+      "owner": "agent",
+      "size": "M",
+      "kind": "implementation",
+      "priority": 15,
+      "depends_on": ["DISC-001", "AI-007"],
+      "requires_decisions": [],
+      "write_scope": [
+        "src/lib/context/**",
+        "src/lib/context.functions.ts",
+        "src/components/discovery/**",
+        "src/tests/ctx-001/**",
+        "supabase/migrations/**",
+        "supabase/tests/ctx-001.sql"
+      ],
+      "exclusive_locks": ["ctx-001-integration"],
+      "read_first": [
+        "ProductSpec.md",
+        "FEATUREROADMAP_workplan.md",
+        "docs/pedagogy/student-discovery-framework.md",
+        "docs/architecture/access-contract.md"
+      ],
+      "goal": "Safely retrieve and review public site and GitHub context",
+      "steps": [
+        "Allow explicit bounded retrieval of a public live-site URL or public GitHub repository description/readme/selected files, without credentials, executing code or following source instructions.",
+        "Enforce protocol/port/private-network and redirect protections, DNS/rebinding-safe outbound policy, byte/time/file-count limits and a preview; fail closed on unsupported hosts and keep manual paste.",
+        "Store selected source revisions/hash/retrieval time separately from author claims and customer evidence; apply processing permissions and attach only reviewed bounded snippets to generation and exports."
+      ],
+      "acceptance": [
+        "A URL never appears as read/verified unless retrieval succeeded and the learner reviewed its contents. Secrets/private-network resources and repository execution are excluded.",
+        "Hostile page/repo/prompt text cannot change app policy or broaden data access. Retrieval failure leaves existing sources and manual workflow usable."
+      ],
+      "verification_profile": "product",
+      "verification": [
+        "A URL never appears as read/verified unless retrieval succeeded and the learner reviewed its contents. Secrets/private-network resources and repository execution are excluded.",
+        "Hostile page/repo/prompt text cannot change app policy or broaden data access. Retrieval failure leaves existing sources and manual workflow usable.",
+        "Run focused authorization/concurrency/UI tests, typecheck, lint and production build. Render actual new activity PDFs; for AI use versioned fixtures and bounded evaluations."
+      ],
+      "metric": "Useful evidence-linked decisions; no invented interviews, unauthorized processing or omitted activity exports.",
+      "rollback": "Disable new entry points while preserving saved private work and existing manual routes.",
+      "agent_notes": {
+        "starting_point": "Owner-defined core student framework. Existing app has idea/people/questions/interviews/synthesis but lacks persisted first hypotheses, sampling feedback and reviewed external context. Do not imply planned retrieval or new AI kinds exist. Preserve guest/account privacy and every-activity PDF coverage.",
+        "stop_and_report": "If a required contract, test environment, human observation, budget or permission is missing, record the specific blocker. Continue another ready task; do not fabricate data or widen the write scope.",
+        "handoff": "Report changed files, base/result commit, exact checks and outcomes, artifact/source ids, residual risks and the next eligible task. Only the coordinator edits task status, shared generated files and the main roadmap.",
+        "integration": "Use a clean task branch/worktree from the coordinator base. Commit only this write scope. Migrations, generated types, route tree, dependency locks and shared entry points are serialized by the coordinator; never hand-edit generated output."
+      },
+      "notes": [
+        {
+          "date": "2026-10-18",
+          "text": "Explicit owner framework addition: first falsifiable hypothesis, adjacent hypotheses, five-person sampling map, bias feedback, pivotable printed scripts, interviews/results/actionable next steps and connected website/GitHub/prompt context."
+        }
+      ],
+      "claim": null,
+      "completion_evidence": [],
+      "subtasks": [
+        {
+          "id": "CTX-001.s1",
+          "status": "not_started",
+          "instruction": "Allow explicit bounded retrieval of a public live-site URL or public GitHub repository description/readme/selected files, without credentials, executing code or following source instructions.",
+          "notes": []
+        },
+        {
+          "id": "CTX-001.s2",
+          "status": "not_started",
+          "instruction": "Enforce protocol/port/private-network and redirect protections, DNS/rebinding-safe outbound policy, byte/time/file-count limits and a preview; fail closed on unsupported hosts and keep manual paste.",
+          "notes": []
+        },
+        {
+          "id": "CTX-001.s3",
+          "status": "not_started",
+          "instruction": "Store selected source revisions/hash/retrieval time separately from author claims and customer evidence; apply processing permissions and attach only reviewed bounded snippets to generation and exports.",
           "notes": []
         }
       ]

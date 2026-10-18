@@ -73,6 +73,12 @@ Export covers every implemented activity individually and complete selected team
 
 These are **new requirements**, not delivered guest-class or universal-export capabilities. The [FERPA-first product direction](docs/privacy/ferpa-first-product-direction.md) defines the technical/privacy work and primary sources. FERPA-001, CLS-007/008 and EXP-001/002/003 implement the design; FERPA-002 records actual institution-dependent review and agreements. Account-free does not mean anonymous or automatically compliant.
 
+### 1.6 The main student framework
+
+The owner defines a seven-step backbone: **problem/solution idea → first falsifiable hypothesis → feedback and adjacent hypotheses → five-person sampling map with false-positive/false-negative risks → editable, pivotable interview script → saved/printed script and real interviews → results, actionable product steps and reflection.** The student's own hypothesis precedes optional AI feedback; suggestions remain editable and rejectable. The sampling map records relationships, relevant experience, possible response bias, missing perspectives and mitigations. It does not classify people as reliable or unreliable.
+
+Live-site/GitHub links and pasted prompts or outputs should connect context at any step. A saved URL must be distinguished from actually retrieved contents; model output remains an unverified draft, separate from interview evidence. Only reviewed, permitted, bounded source content may enter AI context. [The discovery framework](docs/pedagogy/student-discovery-framework.md) defines the behavior and pending implementation. Existing screens currently support parts of this cycle; the complete guided framework is a new requirement.
+
 ## 2. User journey and screens
 
 ### 2.1 Route map

@@ -18,13 +18,17 @@ The initial audience to test is a student founder who has recently tried to find
 
 The immediate outcome to test is a founder who can say: **“I know whom I'm learning from, can point to something they did or described, understand what is still uncertain, and have chosen my next move.”** Finding users who return is the longer-term aspiration. Narrowing an audience, retaining a decision for a clearer reason, or stopping a weak idea can also be a useful result.
 
-The intended loop is:
+The owner-defined student framework is:
 
-1. Find a reachable person who has experienced the problem. A friend can qualify; knowing them is not enough.
-2. Ask about a recent situation, its consequences and their workaround. Capture disagreement as well as encouraging answers.
-3. Separate what the person said or did from your interpretation and remaining questions.
-4. Choose an action that helps resolve the uncertainty: another conversation, a product change, a trial or a follow-up.
-5. Check what happened and decide again.
+1. Describe a problem space or solution idea in your own words.
+2. Write a first **falsifiable hypothesis**: what observation would support it, and what would weaken it? Then consider feedback and several adjacent hypotheses.
+3. Map **five reachable people**, their relevant experience and your relationship to them.
+4. Consider possible false positives and false negatives, missing perspectives and ways to reduce sampling bias.
+5. Build an interview script from that map; edit questions or pivot the hypothesis.
+6. Save or print the script, then conduct the interviews with permission.
+7. Enter observations and use optional AI help to choose an actionable product change, another test or a pivot.
+
+Attach a live-site/GitHub link or paste relevant prompts, outputs and product context throughout the cycle. A stored link must be distinguished from actually retrieved contents; generated text is not customer evidence. The [framework contract](docs/pedagogy/student-discovery-framework.md) records this new core direction. Existing screens support parts of the cycle; hypothesis mapping, reviewed context connections and the complete guided journey are being built through DISC-001/002/003 and CTX-001.
 
 For example, a founder building a study planner might hear that a student already plans carefully but loses track when assignments change. A useful next move could be to test a change-notification flow with students who have that problem. The conversation does not establish that they will use or pay for it. This is an illustrative example, not a customer result.
 
@@ -208,15 +212,14 @@ The project remains connected to Lovable. Preserve published Git history: use or
 
 First Ten was created for the Babson AI Academy by:
 
-| Maker | Professional profile | Affiliation / focus |
-| --- | --- | --- |
-| Ian Roy | [Brandeis profile](https://scholarworks.brandeis.edu/esploro/profile/ian_roy/overview) | Brandeis University · Design & Innovation; Senior Lecturer in Engineering and Business |
-| Anna M. Pietraszek | [FIU profile](https://business.fiu.edu/about/directory/profile/pietraszeka) | Florida International University · Entrepreneurship Center Director; Associate Teaching Professor, Marketing & Logistics |
-| Jungsoo Ahn | [Stony Brook profile](https://www.stonybrook.edu/business/faculty-research/faculty-directory/jungsoo-ahn.html) | Stony Brook University College of Business · Assistant Professor of Strategy and Entrepreneurship |
-| José Pedro Carreón Gutiérrez | [EGADE profile](https://egade.tec.mx/en/profesor/pedro-carreon) | EGADE Business School, Tecnológico de Monterrey · MBA leadership |
-| Harini Mittal | [BCC profile](https://www.bcc.cuny.edu/employees/mittal-harini/) · [LinkedIn](https://www.linkedin.com/in/harini-mittal-ms-mba-phd-78a3615/) | Bronx Community College, CUNY · Business & Information Systems |
-| Raquel Thomas | [Benedict College profile](https://benedict.edu/faculty-and-staff/raquel-thomas/) | Benedict College · Business & Entrepreneurship |
-
+| Maker                        | Professional profile                                                                                                                         | Affiliation / focus                                                                                                      |
+| ---------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------ |
+| Ian Roy                      | [Brandeis profile](https://scholarworks.brandeis.edu/esploro/profile/ian_roy/overview)                                                       | Brandeis University · Design & Innovation; Senior Lecturer in Engineering and Business                                   |
+| Anna M. Pietraszek           | [FIU profile](https://business.fiu.edu/about/directory/profile/pietraszeka)                                                                  | Florida International University · Entrepreneurship Center Director; Associate Teaching Professor, Marketing & Logistics |
+| Jungsoo Ahn                  | [Stony Brook profile](https://www.stonybrook.edu/business/faculty-research/faculty-directory/jungsoo-ahn.html)                               | Stony Brook University College of Business · Assistant Professor of Strategy and Entrepreneurship                        |
+| José Pedro Carreón Gutiérrez | [EGADE profile](https://egade.tec.mx/en/profesor/pedro-carreon)                                                                              | EGADE Business School, Tecnológico de Monterrey · MBA leadership                                                         |
+| Harini Mittal                | [BCC profile](https://www.bcc.cuny.edu/employees/mittal-harini/) · [LinkedIn](https://www.linkedin.com/in/harini-mittal-ms-mba-phd-78a3615/) | Bronx Community College, CUNY · Business & Information Systems                                                           |
+| Raquel Thomas                | [Benedict College profile](https://benedict.edu/faculty-and-staff/raquel-thomas/)                                                            | Benedict College · Business & Entrepreneurship                                                                           |
 
 ## Project documents
 
@@ -233,6 +236,5 @@ Public checks: `npm run smoke -- https://first-10-three.vercel.app`. The redacte
 The [presenter workspace](docs/demo/presenter-data.md) contains only clearly fictional examples in a dedicated account. Insert-only seeding is dry-run-first and preserves edits on repeat. The browser sign-in, source reads and saved-summary reload were verified. No real participant study or product adoption is implied. The pitch also has a downloadable, self-contained HTML fallback.
 
 The [founding-partner invitation](https://first-10-three.vercel.app/founding-partners) offers educators two semesters free for classroom trials and feedback. Its QR code is on the final pitch slide. Requests are privately recorded for team follow-up; they do not automatically create an account, enroll a class or grant access.
-
 
 The four private AI workflows use frozen versioned prompts/schemas and record server-owned successful-generation metadata without source/output text. Unknown provider/model/usage/cost remain unknown; this is not the general budget system or a durable link to a later edited saved output. Project collaboration has a tested membership foundation but stays disabled until its invitation/design interface is ready. The [release runbook](docs/operations/release-runbook.md) includes migration-history checks and an executed restore rehearsal using only disposable fictional data.
