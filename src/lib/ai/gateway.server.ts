@@ -197,6 +197,8 @@ export async function requestStructuredDraft(options: Options) {
     const data = validateAIOutput(kind, parsed);
     return {
       data,
+      requestedModel: model,
+      actualModel: typeof envelope.model === "string" ? envelope.model : null,
       generationId: typeof envelope.id === "string" ? envelope.id : null,
       model: typeof envelope.model === "string" ? envelope.model : model,
       usage: envelope.usage ?? null,
