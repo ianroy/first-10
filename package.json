@@ -12,7 +12,9 @@
     "format": "prettier --write .",
     "test": "vitest run",
     "test:watch": "vitest",
-    "typecheck": "tsc --noEmit"
+    "typecheck": "tsc --noEmit",
+    "roadmap:check": "node scripts/roadmap.mjs --check",
+    "roadmap:test": "node --test scripts/roadmap.test.mjs"
   },
   "overrides": {
     "rolldown": "1.2.1"

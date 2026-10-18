@@ -75,7 +75,7 @@ When you request generation, the server sends selected context to **OpenRouter a
 
 ## Development setup
 
-Use **Node.js 22.12+** and **Bun 1.3.5**, matching the installed framework's Node requirement and the Bun version in CI. The commands below invoke the pinned Bun version through npm's `npx`; an installed Bun 1.3.5 can run the equivalent `bun` commands.
+Use **Node.js 22.12+** and **Bun 1.3.5**, matching the installed framework's Node requirement and the Bun version in CI. CI explicitly selects Node.js 22; use that major when reproducing a CI result. The commands below invoke the pinned Bun version through npm's `npx`; an installed Bun 1.3.5 can run the equivalent `bun` commands.
 
 ```sh
 git clone https://github.com/ianroy/first-10.git
@@ -116,20 +116,32 @@ Check the linked project before applying changes. Add new migrations for schema 
 
 ### Checks and commands
 
-| Command                                       | Purpose                                                   |
-| --------------------------------------------- | --------------------------------------------------------- |
-| `npx bun@1.3.5 run dev`                       | Start the development server                              |
-| `npx bun@1.3.5 run typecheck`                 | TypeScript check                                          |
-| `npx bun@1.3.5 run lint`                      | ESLint                                                    |
-| `npx bun@1.3.5 run test`                      | Vitest run                                                |
-| `npx bun@1.3.5 run test:watch`                | Vitest watch mode                                         |
-| `NITRO_PRESET=vercel npx bun@1.3.5 run build` | Build for Vercel                                          |
-| `npx bun@1.3.5 run preview`                   | Preview a production build                                |
-| `npx bun@1.3.5 run format`                    | Rewrite formatting across the repository; review the diff |
+| Command                                       | Purpose                                                               |
+| --------------------------------------------- | --------------------------------------------------------------------- |
+| `npx bun@1.3.5 run dev`                       | Start the development server                                          |
+| `npx bun@1.3.5 run typecheck`                 | TypeScript check                                                      |
+| `npx bun@1.3.5 run lint`                      | ESLint                                                                |
+| `npx bun@1.3.5 run test`                      | Vitest run                                                            |
+| `npx bun@1.3.5 run roadmap:check`             | Validate task dependencies, decisions, claims and completion evidence |
+| `npx bun@1.3.5 run roadmap:test`              | Test the roadmap validator and execution controls                     |
+| `npx bun@1.3.5 run test:watch`                | Vitest watch mode                                                     |
+| `NITRO_PRESET=vercel npx bun@1.3.5 run build` | Build for Vercel                                                      |
+| `npx bun@1.3.5 run preview`                   | Preview a production build                                            |
+| `npx bun@1.3.5 run format`                    | Rewrite formatting across the repository; review the diff             |
 
-After a local Vercel build, use `npx bun@1.3.5 run lint --ignore-pattern '.vercel/**'` to exclude generated output. The current ESLint ignore list does not exclude that directory; CI runs lint before building.
+Run the same sequence locally and in [CI](.github/workflows/ci.yml):
 
-[CI](.github/workflows/ci.yml) installs from the frozen Bun lockfile, then runs lint, typecheck, tests and a Vercel build. Follow [ProductSpec.md](ProductSpec.md) and the roadmap's current state before changing product behavior.
+```sh
+npx bun@1.3.5 install --frozen-lockfile
+npx bun@1.3.5 run lint
+npx bun@1.3.5 run typecheck
+npx bun@1.3.5 run test
+npx bun@1.3.5 run roadmap:check
+npx bun@1.3.5 run roadmap:test
+NITRO_PRESET=vercel npx bun@1.3.5 run build
+```
+
+Lint excludes generated `dist`, `.output`, `.vinxi` and `.vercel` output automatically, so the command is unchanged after a Vercel build. Keep the frozen Bun lockfile; these checks need no live Supabase credentials or OpenRouter key. Tests use local fixtures and the build does not verify live authentication, database policies or AI generation. The roadmap check rejects an invalid task graph; its separate test suite covers dependency, decision and claim enforcement. Follow [ProductSpec.md](ProductSpec.md) and the roadmap's current state before changing product behavior.
 
 ## Architecture and deployment
 
