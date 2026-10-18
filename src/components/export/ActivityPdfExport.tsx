@@ -163,7 +163,7 @@ export function ActivityPdfExport({ document, permittedAudiences }: Props) {
               fictional example. A role label alone does not authorize access.
             </p>
           </div>
-          <fieldset className="space-y-3">
+          <fieldset className="max-h-[28rem] space-y-3 overflow-y-auto rounded-xl border p-3">
             <legend className="mb-2 font-semibold">Select activities and sections</legend>
             {document.activities.map((a) => {
               const permitted = audience === "owner" || a.sourceScope !== "owner_private";

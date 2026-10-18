@@ -273,10 +273,15 @@ function Account() {
           />
         )}
         {exportProject && (
-          <InvitationPanel
-            key={`invite:${exportProject.user_id}:${exportProject.id}`}
-            projectId={exportProject.id}
-          />
+          <details className="rounded-2xl border bg-card p-5">
+            <summary className="min-h-11 cursor-pointer font-semibold">
+              Sharing controls · in development
+            </summary>
+            <InvitationPanel
+              key={`invite:${exportProject.user_id}:${exportProject.id}`}
+              projectId={exportProject.id}
+            />
+          </details>
         )}
       </AppShell>
     </CurrentProjectContext.Provider>
