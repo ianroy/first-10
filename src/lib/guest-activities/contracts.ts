@@ -18,6 +18,8 @@ export const GUEST_ACTIVITY_LIMITS = {
 } as const;
 const uuid = z.string().uuid();
 const instant = z.string().datetime({ offset: true });
+const unicodeText = (max: number) =>
+  z.string().refine((value) => Array.from(value).length <= max, `Use at most ${max} characters.`);
 const choice = z.enum(["unknown", "granted", "withdrawn"]);
 export const guestChoicesSchema = z
   .object({
@@ -30,7 +32,7 @@ export const guestChoicesSchema = z
 export const guestInterviewSchema = z
   .object({
     id: uuid,
-    alias: z.string().trim().max(120),
+    alias: unicodeText(120).transform((value) => value.trim()),
     scriptId: uuid,
     capturedAt: instant,
     completed: z.boolean(),
@@ -38,9 +40,9 @@ export const guestInterviewSchema = z
       .array(
         z
           .object({
-            q: z.string().max(1000),
-            note: z.string().max(4000),
-            quote: z.string().max(2000),
+            q: unicodeText(1000),
+            note: unicodeText(4000),
+            quote: unicodeText(2000),
           })
           .strict(),
       )
@@ -122,10 +124,7 @@ export function guestPreservedError(
 ): string | null {
   const error = preservedVersionsError(before.discovery, after.discovery);
   if (error) return error;
-  const perms = (x: GuestLearningDocument["permissions"] | GuestInterview["choices"]) => {
-    const { revision: _revision, ...rest } = x;
-    return JSON.stringify(rest);
-  };
+  const perms = guestPermissionBasis;
   if (
     after.permissions.revision !==
     before.permissions.revision + Number(perms(before.permissions) !== perms(after.permissions))
@@ -158,6 +157,28 @@ export function guestPreservedError(
       return "Completed interview answers remain fixed; withdrawal may clear them.";
   }
   return null;
+}
+function guestPermissionBasis(x: GuestLearningDocument["permissions"] | GuestInterview["choices"]) {
+  return JSON.stringify([x.ai, x.sharing, "note" in x ? x.note : null]);
+}
+/** Compare final choices with the last acknowledged saved baseline, not individual local toggles. */
+export function prepareGuestLearningSave(
+  candidate: GuestLearningDocument,
+  saved: GuestLearningDocument | null,
+): GuestLearningDocument {
+  const next = structuredClone(candidate);
+  next.permissions.revision = saved
+    ? saved.permissions.revision +
+      Number(guestPermissionBasis(saved.permissions) !== guestPermissionBasis(next.permissions))
+    : 1;
+  for (const interview of next.interviews) {
+    const before = saved?.interviews.find((i) => i.id === interview.id);
+    interview.choices.revision = before
+      ? before.choices.revision +
+        Number(guestPermissionBasis(before.choices) !== guestPermissionBasis(interview.choices))
+      : 1;
+  }
+  return next;
 }
 export const guestAudienceSchema = z.enum(["principal_private", "team_shared"]);
 export const guestActivityRecordSchema = z
@@ -227,12 +248,12 @@ export const saveGuestActivitySchema = loadGuestActivitySchema
     if (
       v.audience === "team_shared" &&
       (v.document.interviews.length ||
-        v.document.discovery.results.some((r) => r.interviewId !== null))
+        v.document.discovery.results.some((r) => r.interviewId !== null || Boolean(r.quote)))
     )
       ctx.addIssue({
         code: "custom",
         message:
-          "Raw interviews remain principal-private. Share only a separately reviewed snapshot.",
+          "Interview records and participant quotes remain principal-private. Share only a separately reviewed snapshot.",
       });
     if (v.audience === "team_shared" && v.expectedRevision === 0 && !v.sharedAudienceConfirmed)
       ctx.addIssue({
@@ -254,16 +275,20 @@ export const guestSelectorSchema = z
       "next_test",
       "answers",
     ]),
-    excerpt: z.string().min(1).max(6000).optional(),
+    excerpt: unicodeText(6000)
+      .refine((value) => value.length > 0)
+      .optional(),
   })
   .strict();
 export const guestReflectionSchema = z
   .object({
-    title: z.string().trim().min(1).max(120),
-    interpretation: z.string().max(3000),
-    uncertainty: z.string().max(2000),
-    decision: z.string().max(2000),
-    nextAction: z.string().max(2000),
+    title: unicodeText(120)
+      .refine((value) => Boolean(value.trim()))
+      .transform((value) => value.trim()),
+    interpretation: unicodeText(3000),
+    uncertainty: unicodeText(2000),
+    decision: unicodeText(2000),
+    nextAction: unicodeText(2000),
   })
   .strict();
 export const previewGuestSubmissionSchema = loadGuestActivitySchema
@@ -273,7 +298,13 @@ export const previewGuestSubmissionSchema = loadGuestActivitySchema
     requestId: uuid,
     audience: z.enum(["teacher", "team"]),
     selections: z.array(guestSelectorSchema).min(1).max(12),
-    redactions: z.array(z.string().trim().min(1).max(200)).max(30),
+    redactions: z
+      .array(
+        unicodeText(200)
+          .refine((value) => Boolean(value.trim()))
+          .transform((value) => value.trim()),
+      )
+      .max(30),
     reflection: guestReflectionSchema,
   })
   .strict();
@@ -285,8 +316,8 @@ const payload = guestReflectionSchema
         z
           .object({
             key: z.string().regex(/^excerpt\.[1-9][0-9]?$/),
-            label: z.string().min(1).max(120),
-            text: z.string().min(1).max(6000),
+            label: unicodeText(120).refine((value) => value.length > 0),
+            text: unicodeText(6000).refine((value) => value.length > 0),
             sourceKind: z.enum(["discovery", "interview"]),
             evidenceLabel: z.literal("Owner-reported; selected and reviewed"),
           })
@@ -315,11 +346,11 @@ export const guestSubmissionHeaderSchema = z
     sourceType: z.literal("guest_team"),
     version: z.number().int().min(1).max(20),
     audience: z.enum(["teacher", "team"]),
-    authorLabel: z.string().min(1).max(80),
+    authorLabel: unicodeText(80).refine((value) => value.length > 0),
     submittedAt: instant,
     grantState: z.enum(["active", "withdrawn"]),
     grantRevision: z.number().int().min(1).max(Number.MAX_SAFE_INTEGER),
-    title: z.string().max(120),
+    title: unicodeText(120),
   })
   .strict();
 export const guestSubmissionViewSchema = guestSubmissionHeaderSchema.extend({ payload }).strict();

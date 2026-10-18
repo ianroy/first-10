@@ -5,6 +5,7 @@ import {
   guestPreservedError,
   saveGuestActivitySchema,
   guestActivityRecordSchema,
+  prepareGuestLearningSave,
 } from "@/lib/guest-activities/contracts";
 const id = (n: number) => `fc080000-0000-4000-8000-${String(n).padStart(12, "0")}`;
 const stamp = "2026-10-18T20:00:00Z";
@@ -195,4 +196,73 @@ describe("guest learning document boundaries", () => {
     ).toBe(false);
     expect(guestActivityRecordSchema.safeParse({ ...record, aiEnabled: true }).success).toBe(false);
   });
+});
+
+describe("permission revision save preparation", () => {
+  it("new choices start at one regardless of local editing history", () => {
+    const d = complete();
+    d.permissions.revision = 12;
+    d.interviews[0]!.choices.revision = 19;
+    const prepared = prepareGuestLearningSave(d, null);
+    expect(prepared.permissions.revision).toBe(1);
+    expect(prepared.interviews[0]!.choices.revision).toBe(1);
+    expect(d.permissions.revision).toBe(12);
+  });
+  it("one final choice change increments once, and reverting retains the saved revision", () => {
+    const before = complete(),
+      draft = structuredClone(before);
+    draft.permissions.sharing = "granted";
+    draft.permissions.revision = 88;
+    expect(prepareGuestLearningSave(draft, before).permissions.revision).toBe(2);
+    draft.permissions.sharing = "unknown";
+    expect(prepareGuestLearningSave(draft, before).permissions.revision).toBe(1);
+  });
+  it("semantic choice comparison is independent of JSON key order", () => {
+    const before = complete(),
+      after = structuredClone(before);
+    after.permissions = { revision: 1, sharing: "unknown", ai: "unknown" };
+    after.interviews[0]!.choices = {
+      revision: 1,
+      sharing: "unknown",
+      note: "granted",
+      ai: "unknown",
+    };
+    expect(guestPreservedError(before, after)).toBeNull();
+  });
+});
+
+describe("guest Unicode bounds", () => {
+  it("counts reported answer characters consistently with PostgreSQL rather than UTF16 units", () => {
+    const d = complete();
+    d.interviews[0]!.answers[0]!.note = "💡".repeat(4000);
+    expect(guestLearningDocumentSchema.safeParse(d).success).toBe(true);
+    d.interviews[0]!.answers[0]!.note += "💡";
+    expect(guestLearningDocumentSchema.safeParse(d).success).toBe(false);
+  });
+});
+
+it("shared editable work cannot carry structured participant quotes without the reviewed-copy path", () => {
+  const document = createEmptyGuestLearning();
+  document.discovery.results.push({
+    id: id(99),
+    interviewId: null,
+    scriptId: null,
+    sourceCapturedAt: null,
+    observation: "A team interpretation",
+    quote: "Participant words require a separate choice",
+    interpretation: "A possibility",
+    counterevidence: "Unknown",
+  });
+  const input = {
+    activityId: id(9),
+    csrf: "a".repeat(64),
+    audience: "team_shared",
+    expectedRevision: 0,
+    mutationId: id(10),
+    sharedAudienceConfirmed: true,
+    document,
+  };
+  expect(saveGuestActivitySchema.safeParse(input).success).toBe(false);
+  input.document.discovery.results[0]!.quote = "";
+  expect(saveGuestActivitySchema.safeParse(input).success).toBe(true);
 });
