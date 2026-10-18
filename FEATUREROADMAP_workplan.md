@@ -22,9 +22,9 @@ Statuses are `not_started`, `in_progress`, `blocked`, `complete`, `deferred`, `d
 current_iteration: 5
 current_stage: P1_foundation_with_parallel_P2_and_R0
 status: in_progress
-last_task_done: WS-005
+last_task_done: WS-006
 next_task: CLS-008
-next_parallel_wave: [CLS-008, AI-003, CTX-001]
+next_parallel_wave: [CLS-008, WS-007, AN-002]
 active_claims: [CLS-008, WS-003]
 research_gate: not_passed
 foundation_gate: not_passed
@@ -32,42 +32,39 @@ realtime_go: pending
 last_updated: 2026-10-18
 last_documentation_update: "2026-10-18: AI-002 complete; resumed lifecycle/admin parallel work; added FERPA-first account-free class/hackathon spaces and PDF export of every activity/team."
 resume_hint: >-
-  Active goal: keep building every feasible authorized item, verify, commit/push/deploy.
-  Preserve $25 total OpenRouter cap; no other paid services. No reset credits currently reported.
-  Hosted and dedicated local55322 through23; never touch unrelated54322 database.
-  Main livee558604 has owner discovery, archive freeze, reviewed account submissions,
-  public-source PDF adapters and real guest access/recovery. WS009 completed after live
-  archive/stale-write rejection/read/export/restore rehearsal. Fictional StudyLoop remains selected.
-  Integrated guest22 source throughd530569: genuine principal-private/team-shared manual
-  seven-step studios, permissions, exact replay/CAS, reviewed selected handoffs and PDF exports.
-  Root1697 rollback SQL assertions and993 app tests pass; typecheck/lint0errors/Vercelbuild pass.
-  Guest actual23/2/3/2-page PDFs verified. Exactdryrun and normal hosted22 apply complete; live
-  guest rehearsal after publication next.
-  CLS002 complete: account21/guest22 selected submissions, real authorization/race tests and
-  teacher/student mounts. Live guest preview/submit/teacher2pagePDF/withdrawal denial pass;
-  raw private interview draft absent. Saved guestrevision7 reload and exact4page script PDF pass.
-  CTX production activation explicitly approved. First controlledhomepage failedsafely; policy
-  stopped, parser-fixed and redeployed8768392. Bothhomepage+commitpinnedGitHub retrievaland
-  exactexcerptreview nowpasslive onNode24.21. Policyenabled withreceipt83724f78 (savedinrepo);
-  sourceAI/sharingexcluded. Reviewed-sourceprocessing/AIadapter remainsunfinished.
-  AllnewAI dispatch nowpausedbyexistingglobal_stop afterretirement/billableboundreview;
-  permanent$1democarveoutandallaccountingpreserved. Publicretrievalremainsenabled. AI003 bounded evaluation software worker has real compiled
-  server-function runtime tests and eight-case isolated SQL parity; no paid calls. Final v6
-  integration passes1023app tests,26Node checks, typecheck/lint/build. AI003 softwarecomplete;
-  final8caseSQLprojectionmatches/rollback/drop verified. Historicalv2-v5 immutable; no paidcalls,
-  model-quality promotion or fabricatedreview. AI005 officialreviewfinds2.5FlashLiteCloud
-  retirementOct20 andunprovenaccount/privacy/allinbillingbound; noqualitypromotion.
-  AN001 source-auditedeventcontract complete; no
-  telemetryactivation. WS005 complete85cac14/9dd4691:1036app tests, type/lint/build pass; liveautosaverevision3
-  survivesreload+Resume; completedcountunchanged5. WS003 personalresume panel isolatedworker.
-  Guest Marketing Lab23 candidate dfa6de reviewed; correctedcloneharness3eccad ran1738SQL
-  assertions+6actualDTOs+5races, rollback/drop/absencepass. Final1746SQLcap assertions/6DTOs/5races pass andclonescleaned. Root1062app tests,
-  typecheck/lint/build pass;23appliednormallydedicatedlocalandhosted, published UI next.
-  Gueststudiosswitchwithoutunmount andaggregate dirtystateindependently.
-  Broader guest MarketingLab/outreach parity, guest-to-account continuity, teacher bundles,
-  source-fenced AI attachment, sharing, retention and real research gates remain unfinished.
-  Keep independent work moving around task blockers; never mark the global goal complete early.
-
+  Active goal: continue every feasible authorized item, verify, commit/push/deploy.
+  Preserve the $25 total OpenRouter cap; no other paid services. No reset credits reported.
+  Hosted and dedicated local database55322 are through migration23. Never touch54322.
+  Last live eb5bdb4 includes account recovery, owner discovery, archive enforcement,
+  reviewed account and guest submissions, bounded public context, interview autosave,
+  and both genuine guest studios. Guest Discovery revision7 and private Marketing Lab
+  revision5 are clearly fictional demo records; no actual interviews or marketing results.
+  Public retrieval was explicitly approved and now passes deployed homepage and
+  commit-pinned GitHub retrieval plus reviewed-excerpt saving. Current receipt83724f78
+  is committed in docs/verification/public-context-20261018.json. Source AI and sharing
+  remain excluded; CTX001 still lacks reviewed-source processing/AI integration.
+  All new AI dispatch is paused via existing global_stop after official retirement and
+  billable-bound review. The permanent $1 demo carveout and accounting are preserved.
+  AI003 evaluation software is complete with actual eight-case SQL projection parity,
+  compiled runtime checks and 26 Node tests; no paid evaluation or quality promotion.
+  AI005 public model review is complete; actual account/privacy/billing and successor
+  quality gates remain blocked. No provider keys were read for that review.
+  WS005 autosave is verified live: revision3 survived reload/Resume, completed count5
+  unchanged. WS006 completion is complete by independent source/test audit of existing
+  transactional WS004/005; actual nested consent-failure and overlapping race evidence
+  is recorded precisely. No duplicate completion implementation or migration added.
+  WS003 owner workspace source0c8c0f4 is integrated with generated routeTree. Root1083
+  app tests pass, 11 existing skips; typecheck/build pass, lint zero errors/six existing
+  warnings. Publish and verify live workspace next; genuine shared Design discovery is
+  explicitly unfinished under COL002.s4.
+  Guest Marketing Lab23 passed1746 SQL assertions, six actual DTOs, five real races and
+  clone rollback/drop/absence checks before normal local/hosted application. Live plan
+  revision5 reload, unsaved studio-switch preservation and two-page outreach PDF pass.
+  CLS008 teacher selected-copy migration24 is in exact-pinned disposable-clone rehearsal
+  after independent guard/privacy review; no24 original or hosted application yet.
+  AN001 event contract is complete; telemetry capture is not enabled. Guest-to-account
+  transfer, complete teacher bundles, retention, collaboration, source-fenced AI and
+  real research remain unfinished. Keep independent work moving around those gates.
 ```
 
 **Audit basis:** product source and documentation at `7006f87`, plus the concurrent team-credits commit `a2d69a3`, with repository research files rechecked. F-007 is now complete: [GitHub CI run 39092157827](https://github.com/ianroy/first-10/actions/runs/39092157827) succeeded for that commit. The earlier local typecheck, 17 tests, Vercel build and scoped lint results remain in history. Six existing lint warnings and generated `.vercel` scanning motivate OPS-001. A green code pipeline does not verify live auth, RLS, model quality, research outcomes or preview configuration.

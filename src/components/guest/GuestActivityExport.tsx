@@ -49,10 +49,9 @@ export function GuestActivityExport({
       {open && (
         <div className="mt-4 space-y-4">
           <p className="text-sm text-muted-foreground">
-            Take every activity, preserved hypothesis, exact script and blank worksheet, private
-            draft, result or reviewed context with you. Current unsaved edits are labeled. Choose a
-            smaller selection if a portfolio is too large; nothing is silently omitted. Export
-            before class access ends.
+            Take any listed activity with you as a PDF, or combine selected activities into a
+            portfolio. Current unsaved edits are labeled. Choose a smaller selection if a portfolio
+            is too large; nothing is silently omitted. Export before class access ends.
           </p>
           <label className="flex items-center gap-3 text-sm">
             <input

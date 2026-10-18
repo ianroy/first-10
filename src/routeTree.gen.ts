@@ -29,6 +29,7 @@ import { Route as AuthenticatedMarketingRouteImport } from './routes/_authentica
 import { Route as AuthenticatedOutreachRouteImport } from './routes/_authenticated/outreach'
 import { Route as AuthenticatedSetupRouteImport } from './routes/_authenticated/setup'
 import { Route as AuthenticatedTeacherRouteImport } from './routes/_authenticated/teacher'
+import { Route as AuthenticatedWorkspaceRouteImport } from './routes/_authenticated/workspace'
 import { Route as ApiHealthRouteImport } from './routes/api.health'
 
 const IndexRoute = IndexRouteImport.update({
@@ -130,6 +131,11 @@ const AuthenticatedTeacherRoute = AuthenticatedTeacherRouteImport.update({
   path: '/teacher',
   getParentRoute: () => AuthenticatedRouteRoute,
 } as any)
+const AuthenticatedWorkspaceRoute = AuthenticatedWorkspaceRouteImport.update({
+  id: '/workspace',
+  path: '/workspace',
+  getParentRoute: () => AuthenticatedRouteRoute,
+} as any)
 const ApiHealthRoute = ApiHealthRouteImport.update({
   id: '/api/health',
   path: '/api/health',
@@ -156,6 +162,7 @@ export interface FileRoutesByFullPath {
   '/outreach': typeof AuthenticatedOutreachRoute
   '/setup': typeof AuthenticatedSetupRoute
   '/teacher': typeof AuthenticatedTeacherRoute
+  '/workspace': typeof AuthenticatedWorkspaceRoute
   '/api/health': typeof ApiHealthRoute
 }
 export interface FileRoutesByTo {
@@ -178,6 +185,7 @@ export interface FileRoutesByTo {
   '/outreach': typeof AuthenticatedOutreachRoute
   '/setup': typeof AuthenticatedSetupRoute
   '/teacher': typeof AuthenticatedTeacherRoute
+  '/workspace': typeof AuthenticatedWorkspaceRoute
   '/api/health': typeof ApiHealthRoute
 }
 export interface FileRoutesById {
@@ -202,6 +210,7 @@ export interface FileRoutesById {
   '/_authenticated/outreach': typeof AuthenticatedOutreachRoute
   '/_authenticated/setup': typeof AuthenticatedSetupRoute
   '/_authenticated/teacher': typeof AuthenticatedTeacherRoute
+  '/_authenticated/workspace': typeof AuthenticatedWorkspaceRoute
   '/api/health': typeof ApiHealthRoute
 }
 export interface FileRouteTypes {
@@ -226,6 +235,7 @@ export interface FileRouteTypes {
     | '/outreach'
     | '/setup'
     | '/teacher'
+    | '/workspace'
     | '/api/health'
   fileRoutesByTo: FileRoutesByTo
   to:
@@ -248,6 +258,7 @@ export interface FileRouteTypes {
     | '/outreach'
     | '/setup'
     | '/teacher'
+    | '/workspace'
     | '/api/health'
   id:
     | '__root__'
@@ -271,6 +282,7 @@ export interface FileRouteTypes {
     | '/_authenticated/outreach'
     | '/_authenticated/setup'
     | '/_authenticated/teacher'
+    | '/_authenticated/workspace'
     | '/api/health'
   fileRoutesById: FileRoutesById
 }
@@ -428,6 +440,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthenticatedTeacherRouteImport
       parentRoute: typeof AuthenticatedRouteRoute
     }
+    '/_authenticated/workspace': {
+      id: '/_authenticated/workspace'
+      path: '/workspace'
+      fullPath: '/workspace'
+      preLoaderRoute: typeof AuthenticatedWorkspaceRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
     '/api/health': {
       id: '/api/health'
       path: '/api/health'
@@ -451,6 +470,7 @@ interface AuthenticatedRouteRouteChildren {
   AuthenticatedOutreachRoute: typeof AuthenticatedOutreachRoute
   AuthenticatedSetupRoute: typeof AuthenticatedSetupRoute
   AuthenticatedTeacherRoute: typeof AuthenticatedTeacherRoute
+  AuthenticatedWorkspaceRoute: typeof AuthenticatedWorkspaceRoute
 }
 
 const AuthenticatedRouteRouteChildren: AuthenticatedRouteRouteChildren = {
@@ -466,6 +486,7 @@ const AuthenticatedRouteRouteChildren: AuthenticatedRouteRouteChildren = {
   AuthenticatedOutreachRoute: AuthenticatedOutreachRoute,
   AuthenticatedSetupRoute: AuthenticatedSetupRoute,
   AuthenticatedTeacherRoute: AuthenticatedTeacherRoute,
+  AuthenticatedWorkspaceRoute: AuthenticatedWorkspaceRoute,
 }
 
 const AuthenticatedRouteRouteWithChildren =

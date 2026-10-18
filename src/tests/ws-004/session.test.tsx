@@ -136,9 +136,11 @@ describe("private interview save/resume interface", () => {
     expect(screen.getByRole("button", { name: "Complete interview" })).toBeDisabled();
     fireEvent.click(screen.getByRole("button", { name: "Save draft" }));
     await screen.findByText(/Draft saved\./);
-    expect(
-      screen.getByRole("checkbox", { name: /I conducted this conversation/ }),
-    ).not.toBeChecked();
+    await waitFor(() =>
+      expect(
+        screen.getByRole("checkbox", { name: /I conducted this conversation/ }),
+      ).not.toBeChecked(),
+    );
     fireEvent.click(screen.getByRole("checkbox", { name: /I conducted this conversation/ }));
     fireEvent.click(screen.getByRole("button", { name: "Complete interview" }));
     expect(h.complete).not.toHaveBeenCalled();
