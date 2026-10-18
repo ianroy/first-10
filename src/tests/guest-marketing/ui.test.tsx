@@ -34,6 +34,11 @@ vi.mock("@/components/guest/GuestActivityExport", () => ({
     </button>
   ),
 }));
+vi.mock("@/components/guest-marketing/ReviewedMarketingHandoff", () => ({
+  ReviewedMarketingHandoff: ({ onDraftChange }: { onDraftChange: (dirty: boolean) => void }) => (
+    <button onClick={() => onDraftChange(false)}>Test clean handoff child</button>
+  ),
+}));
 import { GuestMarketingWorkspace } from "@/components/guest-marketing/GuestMarketingWorkspace";
 import {
   createGuestMarketing,
@@ -258,4 +263,16 @@ it("does not preserve an empty thinking block and trap required fields", async (
   fireEvent.click(screen.getByRole("button", { name: "Preserve first thinking" }));
   expect(screen.getByLabelText("What have you observed?")).toBeDisabled();
   expect(screen.getByLabelText("Beachhead audience")).toBeEnabled();
+});
+it("a clean reviewed-handoff child cannot clear an unsaved Marketing Lab draft guard", async () => {
+  const report = vi.fn();
+  render(<GuestMarketingWorkspace view={view} csrf={csrf} onDirtyChange={report} />);
+  await screen.findByRole("button", { name: "Test clean handoff child" });
+  fireEvent.change(screen.getByLabelText("Marketing plan title"), {
+    target: { value: "Unsaved plan still here" },
+  });
+  await waitFor(() => expect(report).toHaveBeenLastCalledWith(true));
+  fireEvent.click(screen.getByRole("button", { name: "Test clean handoff child" }));
+  expect(report).toHaveBeenLastCalledWith(true);
+  expect(h.block.mock.lastCall?.[0].shouldBlockFn()).toBe(true);
 });

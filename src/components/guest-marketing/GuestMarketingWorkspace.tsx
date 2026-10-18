@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 import { useBlocker } from "@tanstack/react-router";
 import { Button } from "@/components/ui/button";
 import { GuestField } from "@/components/guest/GuestFields";
@@ -21,6 +21,7 @@ import {
   guestMarketingHeaderSchema,
 } from "@/lib/guest-marketing/contracts";
 import { guestMarketingActivities } from "@/lib/guest-marketing/pdf-adapters";
+import { ReviewedMarketingHandoff } from "./ReviewedMarketingHandoff";
 import { MarketingSteps } from "./MarketingSteps";
 import type { z } from "zod";
 type Header = z.infer<typeof guestMarketingHeaderSchema>;
@@ -56,6 +57,8 @@ function Workspace({ view, csrf, onDirtyChange }: Props) {
     [message, setMessage] = useState(""),
     [step, setStep] = useState(0),
     [expired, setExpired] = useState(() => Date.now() >= Date.parse(view.accessExpiresAt));
+  const [handoffDirty, setHandoffDirty] = useState(false);
+  const reportHandoff = useCallback((value: boolean) => setHandoffDirty(value), []);
   const alive = useRef(true),
     epoch = useRef(0),
     current = useRef(doc),
@@ -66,7 +69,7 @@ function Workspace({ view, csrf, onDirtyChange }: Props) {
   saved.current = record;
   reporter.current = onDirtyChange;
   const dirty = fp(doc) !== fp(record?.document ?? createGuestMarketing()),
-    guard = dirty || busy || uncertain;
+    guard = dirty || busy || uncertain || handoffDirty;
   const blocker = useBlocker({
     shouldBlockFn: () => guard,
     enableBeforeUnload: guard,
@@ -422,6 +425,13 @@ function Workspace({ view, csrf, onDirtyChange }: Props) {
           here.
         </p>
       )}
+      <ReviewedMarketingHandoff
+        view={view}
+        csrf={csrf}
+        record={record}
+        dirty={dirty}
+        onDraftChange={reportHandoff}
+      />
       {blocker.status === "blocked" && (
         <div role="alert" className="rounded-xl border p-4">
           <p>Your Marketing Lab has unsaved or unconfirmed work.</p>
