@@ -1,0 +1,172 @@
+-- Fictional CLS002 fixtures; all source/private/publication state rolls back.
+RESET ROLE;
+INSERT INTO firstten_policy_test.ids(label,id)VALUES
+('submission_class','c2120000-0000-4000-8000-000000000001'),('submission_project','c2120000-0000-4000-8000-000000000002'),
+('submission_thread','c2120000-0000-4000-8000-000000000003'),('submission_assignment','c2120000-0000-4000-8000-000000000004'),
+('submission_contact','c2120000-0000-4000-8000-000000000005'),('submission_interview','c2120000-0000-4000-8000-000000000006'),
+('submission_other_class','c2120000-0000-4000-8000-000000000008'),('submission_other_assignment','c2120000-0000-4000-8000-000000000009');
+CREATE TABLE firstten_policy_test.submission_results(label text PRIMARY KEY,result jsonb);
+GRANT SELECT,INSERT ON firstten_policy_test.submission_results TO authenticated;
+INSERT INTO public.projects(id,user_id,name,problem)VALUES(firstten_policy_test.id('submission_project'),firstten_policy_test.id('student'),'Fictional classroom idea','Selected problem; hidden contact note stays out; private student@example.invalid c2120000-0000-4000-8000-000000000002');
+INSERT INTO public.contacts(id,user_id,project_id,first_name,why)VALUES(firstten_policy_test.id('submission_contact'),firstten_policy_test.id('student'),firstten_policy_test.id('submission_project'),'DO_NOT_DISCLOSE_CONTACT','PRIVATE_CONTACT_CONTEXT');
+INSERT INTO public.interviews(id,user_id,project_id,contact_id,answers,completed)VALUES(firstten_policy_test.id('submission_interview'),firstten_policy_test.id('student'),firstten_policy_test.id('submission_project'),firstten_policy_test.id('submission_contact'),'[{"q":"Last time?","note":"PRIVATE_INTERVIEW_NOTE","quote":"SELECTED_REPORTED_QUOTE"}]',true);
+CREATE FUNCTION firstten_policy_test.submission_spec(request uuid DEFAULT 'c2120000-0000-4000-8000-000000000020',thread uuid DEFAULT 'c2120000-0000-4000-8000-000000000003')RETURNS jsonb LANGUAGE sql STABLE AS $$
+SELECT jsonb_build_object('source',jsonb_build_object('type','account_project','projectId',firstten_policy_test.id('submission_project')),'classId',firstten_policy_test.id('submission_class'),'assignmentId',firstten_policy_test.id('submission_assignment'),'threadId',thread,'requestId',request,'audience','teacher','selections',jsonb_build_array(jsonb_build_object('kind','project','recordId',firstten_policy_test.id('submission_project'),'field','problem')),'redactions',jsonb_build_array('hidden contact note'),'reflection',jsonb_build_object('title','Fictional reviewed check-in','interpretation','My interpretation','uncertainty','Not verified','decision','Test','nextAction','Talk to a relevant person'));
+$$;
+GRANT EXECUTE ON FUNCTION firstten_policy_test.submission_spec(uuid,uuid)TO authenticated;
+SELECT ok(NOT has_table_privilege('authenticated','firstten_private.class_submission_versions','SELECT,INSERT,UPDATE,DELETE'),'students and teachers have no raw snapshot table grant');
+SELECT ok(NOT has_table_privilege('service_role','firstten_private.class_submission_previews','SELECT,INSERT,UPDATE,DELETE'),'service key cannot read preview internals directly');
+SELECT ok(NOT has_function_privilege('authenticated','firstten_private.submission_source(uuid,uuid,jsonb)','EXECUTE'),'owner source extractor is not a public arbitrary read API');
+SELECT ok(NOT has_function_privilege('anon','public.get_teacher_class_submission(uuid,uuid)','EXECUTE'),'anonymous snapshot reads denied');
+SELECT firstten_policy_test.set_actor('owner_a');SET LOCAL ROLE authenticated;
+SELECT is(public.create_class(firstten_policy_test.id('submission_class'),gen_random_uuid(),jsonb_build_object('name','Submission class A','mode','class','instructions','Submit reviewed work only','accessExpiresAt',clock_timestamp()+interval '10 days','retentionDays',30))->>'ok','true','teacher provisions submission class');
+SELECT is(public.save_class_assignment(firstten_policy_test.id('submission_class'),firstten_policy_test.id('submission_assignment'),0,gen_random_uuid(),'{"title":"Discovery review","instructions":"Selected evidence and uncertainty","dueAt":null,"state":"published"}')->>'ok','true','teacher publishes a real assignment');
+INSERT INTO firstten_policy_test.submission_results SELECT 'invite',public.create_class_invitation(firstten_policy_test.id('submission_class'),firstten_policy_test.id('student'),7,gen_random_uuid());
+RESET ROLE;SELECT firstten_policy_test.set_actor('student');SET LOCAL ROLE authenticated;
+SELECT is(public.accept_class_invitation((SELECT result->>'token'FROM firstten_policy_test.submission_results WHERE label='invite'),'Learner alias')->>'ok','true','real student joins class');
+SELECT is(public.preview_class_submission(firstten_policy_test.submission_spec())->>'code','NOT_FOUND','enrollment alone cannot associate or share private project');
+SELECT is(public.associate_class_project(firstten_policy_test.id('submission_class'),firstten_policy_test.id('submission_project'),0,gen_random_uuid())->>'ok','true','student explicitly associates own project');
+SELECT is(public.preview_class_submission(firstten_policy_test.submission_spec())->>'code','SHARING_REQUIRED','unknown project sharing is not permission');
+SELECT is(public.set_processing_consent(firstten_policy_test.id('submission_project'),'project',firstten_policy_test.id('submission_project'),'unknown','unknown','granted',1,0)->>'ok','true','sharing choice is separate from AI choice');
+SELECT is(public.preview_class_submission(firstten_policy_test.submission_spec()||'{"ownerId":"forged"}')->>'code','INVALID_INPUT','unknown root authority fields rejected');
+SELECT is(public.preview_class_submission(jsonb_set(firstten_policy_test.submission_spec(),'{source}','{"type":"guest_team","teamId":"c2120000-0000-4000-8000-000000000099"}'))->>'code','FEATURE_DISABLED','guest source cannot be fabricated before actual activity adapter');
+SELECT is(public.preview_class_submission(jsonb_set(firstten_policy_test.submission_spec(),'{audience}','"team"'))->>'code','FEATURE_DISABLED','account enrollment grants no guest-team audience');
+INSERT INTO firstten_policy_test.submission_results SELECT 'preview',public.preview_class_submission(firstten_policy_test.submission_spec());
+SELECT is((SELECT result->>'ok'FROM firstten_policy_test.submission_results WHERE label='preview'),'true','server derives exact bounded preview from permitted owner source');
+SELECT ok((SELECT result#>>'{data,payload,excerpts,0,text}'LIKE '%[Redacted]%'FROM firstten_policy_test.submission_results WHERE label='preview'),'selected phrase redacted server-side');
+SELECT ok((SELECT result#>>'{data,payload,excerpts,0,text}'LIKE '%[Email removed]%'AND result#>>'{data,payload,excerpts,0,text}'LIKE '%[Identifier removed]%'FROM firstten_policy_test.submission_results WHERE label='preview'),'emails and raw UUIDs omitted from selected payload');
+SELECT is((SELECT result#>>'{data,payload,excerpts,0,key}'FROM firstten_policy_test.submission_results WHERE label='preview'),'excerpt.1','presentation key is snapshot-local, not a private row UUID');
+SELECT is(jsonb_array_length(public.list_own_class_submissions()#>'{data,items}'),0,'preview does not count as a submission');
+SELECT is(public.preview_class_submission(firstten_policy_test.submission_spec()),(SELECT result FROM firstten_policy_test.submission_results WHERE label='preview'),'identical preview retry returns the same reviewed version');
+SELECT is(public.preview_class_submission(jsonb_set(firstten_policy_test.submission_spec(),'{reflection,title}','"Changed request"'))->>'code','IDEMPOTENCY_CONFLICT','same preview request cannot change selected content');
+SELECT is(public.confirm_class_submission((SELECT(result#>>'{data,id}')::uuid FROM firstten_policy_test.submission_results WHERE label='preview'),repeat('0',64),gen_random_uuid())->>'code','CHANGED','caller cannot confirm forged preview digest');
+INSERT INTO firstten_policy_test.submission_results SELECT 'submitted',public.confirm_class_submission((SELECT(result#>>'{data,id}')::uuid FROM firstten_policy_test.submission_results WHERE label='preview'),(SELECT result#>>'{data,hash}'FROM firstten_policy_test.submission_results WHERE label='preview'),'c2120000-0000-4000-8000-000000000021');
+SELECT is((SELECT result->>'ok'FROM firstten_policy_test.submission_results WHERE label='submitted'),'true','affirmative confirm atomically creates immutable selected snapshot');
+SELECT is(public.confirm_class_submission((SELECT(result#>>'{data,id}')::uuid FROM firstten_policy_test.submission_results WHERE label='preview'),(SELECT result#>>'{data,hash}'FROM firstten_policy_test.submission_results WHERE label='preview'),'c2120000-0000-4000-8000-000000000021'),(SELECT result FROM firstten_policy_test.submission_results WHERE label='submitted'),'same submission retry creates no duplicate version');
+RESET ROLE;
+SELECT is((SELECT count(*)FROM firstten_private.class_submission_versions WHERE thread_id=firstten_policy_test.id('submission_thread')),1::bigint,'exactly one submitted version stored');
+SELECT is(firstten_policy_test.attempt($case$UPDATE firstten_private.class_submission_versions SET payload='{}' WHERE thread_id=firstten_policy_test.id('submission_thread')$case$),'error:42501','privileged maintenance cannot rewrite submitted payload silently');
+SELECT firstten_policy_test.set_actor('owner_a');SET LOCAL ROLE authenticated;
+INSERT INTO firstten_policy_test.submission_results SELECT 'teacher_read',public.get_teacher_class_submission(firstten_policy_test.id('submission_class'),(SELECT(result#>>'{data,id}')::uuid FROM firstten_policy_test.submission_results WHERE label='submitted'));
+SELECT is((SELECT result->>'ok'FROM firstten_policy_test.submission_results WHERE label='teacher_read'),'true','active class teacher reads intentionally submitted version');
+SELECT ok((SELECT result::text NOT LIKE '%PRIVATE_INTERVIEW_NOTE%'AND result::text NOT LIKE '%DO_NOT_DISCLOSE_CONTACT%'AND result::text NOT LIKE '%PRIVATE_CONTACT_CONTEXT%'AND result::text NOT LIKE '%'||firstten_policy_test.id('submission_project')::text||'%'FROM firstten_policy_test.submission_results WHERE label='teacher_read'),'teacher DTO omits private records, contact identity and project UUID');
+SELECT is(firstten_policy_test.visible_count('interviews',firstten_policy_test.id('submission_interview')),0::bigint,'submission grants no direct raw interview read');
+SELECT is(public.get_own_class_submission((SELECT(result#>>'{data,id}')::uuid FROM firstten_policy_test.submission_results WHERE label='submitted'))->>'code','NOT_FOUND','teacher cannot use author-copy endpoint');
+RESET ROLE;SELECT firstten_policy_test.set_actor('owner_b');SET LOCAL ROLE authenticated;
+SELECT is(public.get_teacher_class_submission(firstten_policy_test.id('submission_class'),(SELECT(result#>>'{data,id}')::uuid FROM firstten_policy_test.submission_results WHERE label='submitted'))->>'code','NOT_FOUND','foreign teacher cannot read known snapshot ID');
+RESET ROLE;SELECT firstten_policy_test.set_actor('student');SET LOCAL ROLE authenticated;
+UPDATE public.projects SET problem='Later private edit stays private'WHERE id=firstten_policy_test.id('submission_project');
+INSERT INTO firstten_policy_test.submission_results SELECT 'next_preview',public.preview_class_submission(firstten_policy_test.submission_spec('c2120000-0000-4000-8000-000000000022'));
+SELECT is(public.confirm_class_submission((SELECT(result#>>'{data,id}')::uuid FROM firstten_policy_test.submission_results WHERE label='preview'),(SELECT result#>>'{data,hash}'FROM firstten_policy_test.submission_results WHERE label='preview'),'c2120000-0000-4000-8000-000000000025')#>>'{data,id}',(SELECT result#>>'{data,id}'FROM firstten_policy_test.submission_results WHERE label='submitted'),'consumed-preview new intent is bound to the same immutable receipt');
+SELECT is(public.confirm_class_submission((SELECT(result#>>'{data,id}')::uuid FROM firstten_policy_test.submission_results WHERE label='next_preview'),(SELECT result#>>'{data,hash}'FROM firstten_policy_test.submission_results WHERE label='next_preview'),'c2120000-0000-4000-8000-000000000025')->>'code','IDEMPOTENCY_CONFLICT','consumed receipt intent cannot later publish another preview');
+UPDATE public.projects SET problem='Changed after preview'WHERE id=firstten_policy_test.id('submission_project');
+SELECT is(public.confirm_class_submission((SELECT(result#>>'{data,id}')::uuid FROM firstten_policy_test.submission_results WHERE label='next_preview'),(SELECT result#>>'{data,hash}'FROM firstten_policy_test.submission_results WHERE label='next_preview'),gen_random_uuid())->>'code','CHANGED','source content changed since preview cannot silently submit');
+INSERT INTO firstten_policy_test.submission_results SELECT 'permission_preview',public.preview_class_submission(firstten_policy_test.submission_spec('c2120000-0000-4000-8000-000000000023'));
+SELECT is(public.set_processing_consent(firstten_policy_test.id('submission_project'),'project',firstten_policy_test.id('submission_project'),'unknown','unknown','withdrawn',1,1)->>'ok','true','source sharing permission withdrawn independently');
+SELECT is(public.confirm_class_submission((SELECT(result#>>'{data,id}')::uuid FROM firstten_policy_test.submission_results WHERE label='permission_preview'),(SELECT result#>>'{data,hash}'FROM firstten_policy_test.submission_results WHERE label='permission_preview'),gen_random_uuid())->>'code','SHARING_REQUIRED','withdrawn source sharing blocks a new confirmation');
+RESET ROLE;SELECT firstten_policy_test.set_actor('owner_a');SET LOCAL ROLE authenticated;
+SELECT is(public.get_teacher_class_submission(firstten_policy_test.id('submission_class'),(SELECT(result#>>'{data,id}')::uuid FROM firstten_policy_test.submission_results WHERE label='submitted'))->>'code','NOT_FOUND','current restrictive source sharing hides existing recipient snapshot');
+RESET ROLE;SELECT firstten_policy_test.set_actor('student');SET LOCAL ROLE authenticated;
+SELECT is(public.get_own_class_submission((SELECT(result#>>'{data,id}')::uuid FROM firstten_policy_test.submission_results WHERE label='submitted'))#>>'{data,payload,excerpts,0,text}',(SELECT result#>>'{data,payload,excerpts,0,text}'FROM firstten_policy_test.submission_results WHERE label='submitted'),'author immutable copy survives source edits and permission withdrawal');
+SELECT is(public.set_processing_consent(firstten_policy_test.id('submission_project'),'project',firstten_policy_test.id('submission_project'),'unknown','unknown','granted',1,2)->>'ok','true','author deliberately restores sharing choice while project active');
+RESET ROLE;SELECT firstten_policy_test.set_actor('owner_a');SET LOCAL ROLE authenticated;
+SELECT is(public.get_teacher_class_submission(firstten_policy_test.id('submission_class'),(SELECT(result#>>'{data,id}')::uuid FROM firstten_policy_test.submission_results WHERE label='submitted'))->>'code','NOT_FOUND','withdrawal then regrant never resurrects an old source disclosure');
+RESET ROLE;SELECT firstten_policy_test.set_actor('student');SET LOCAL ROLE authenticated;
+-- Raw notes are never selected automatically, and their independent choices are required.
+SELECT is(public.preview_class_submission(jsonb_set(firstten_policy_test.submission_spec(gen_random_uuid()),'{selections}',jsonb_build_array(jsonb_build_object('kind','interview','recordId',firstten_policy_test.id('submission_interview'),'field','answers','excerpt','SELECTED_REPORTED_QUOTE'))))->>'code','SHARING_REQUIRED','project sharing alone does not expose interview note or quote');
+SELECT is(public.set_processing_consent(firstten_policy_test.id('submission_project'),'interview',firstten_policy_test.id('submission_interview'),'granted','unknown','granted',1,0)->>'ok','true','interview note and sharing choices recorded separately');
+SELECT is(public.preview_class_submission(jsonb_set(firstten_policy_test.submission_spec(gen_random_uuid()),'{selections}',jsonb_build_array(jsonb_build_object('kind','interview','recordId',firstten_policy_test.id('submission_interview'),'field','answers','excerpt','SELECTED_REPORTED_QUOTE'))))->>'code','SHARING_REQUIRED','linked contact sharing remains required');
+SELECT is(public.set_processing_consent(firstten_policy_test.id('submission_project'),'contact',firstten_policy_test.id('submission_contact'),'unknown','unknown','granted',1,0)->>'ok','true','contact sharing choice explicitly reported');
+INSERT INTO firstten_policy_test.submission_results SELECT 'quote_preview',public.preview_class_submission(jsonb_set(firstten_policy_test.submission_spec(gen_random_uuid()),'{selections}',jsonb_build_array(jsonb_build_object('kind','interview','recordId',firstten_policy_test.id('submission_interview'),'field','answers','excerpt','SELECTED_REPORTED_QUOTE'))));
+SELECT is((SELECT result->>'ok'FROM firstten_policy_test.submission_results WHERE label='quote_preview'),'true','explicitly selected separately permitted quote can be previewed');
+SELECT ok((SELECT result#>>'{data,payload,excerpts,0,text}'='SELECTED_REPORTED_QUOTE'AND result::text NOT LIKE '%PRIVATE_INTERVIEW_NOTE%'FROM firstten_policy_test.submission_results WHERE label='quote_preview'),'quote preview does not include unselected raw notes');
+SELECT is(public.preview_class_submission(jsonb_set(firstten_policy_test.submission_spec(gen_random_uuid()),'{selections}',jsonb_build_array(jsonb_build_object('kind','interview','recordId',firstten_policy_test.id('submission_interview'),'field','answers','excerpt','Invented exact quote'))))->>'code','INVALID_INPUT','arbitrary client text cannot masquerade as selected source evidence');
+SELECT is(public.leave_class(firstten_policy_test.id('submission_class'),1,gen_random_uuid())->>'ok','true','student exits class');
+SELECT is(public.get_own_class_submission((SELECT(result#>>'{data,id}')::uuid FROM firstten_policy_test.submission_results WHERE label='submitted'))->>'ok','true','author own submitted copy remains after class exit');
+SELECT is(public.preview_class_submission(firstten_policy_test.submission_spec(gen_random_uuid()))->>'code','NOT_FOUND','author exit cannot create new submission authority');
+RESET ROLE;SELECT firstten_policy_test.set_actor('owner_a');SET LOCAL ROLE authenticated;
+SELECT is(public.get_teacher_class_submission(firstten_policy_test.id('submission_class'),(SELECT(result#>>'{data,id}')::uuid FROM firstten_policy_test.submission_results WHERE label='submitted'))->>'code','NOT_FOUND','student removal/exit stops future teacher access');
+SELECT is(public.set_class_archived(firstten_policy_test.id('submission_class'),true,1,gen_random_uuid())->>'ok','true','teacher closes class');
+RESET ROLE;SELECT firstten_policy_test.set_actor('student');SET LOCAL ROLE authenticated;
+SELECT is(public.withdraw_class_submission((SELECT(result#>>'{data,id}')::uuid FROM firstten_policy_test.submission_results WHERE label='submitted'),'c2120000-0000-4000-8000-000000000024')#>>'{data,grantState}','withdrawn','privacy-reducing withdrawal remains after class closes and author exits');
+SELECT is(public.withdraw_class_submission((SELECT(result#>>'{data,id}')::uuid FROM firstten_policy_test.submission_results WHERE label='submitted'),'c2120000-0000-4000-8000-000000000024')#>>'{data,grantState}','withdrawn','withdrawal retry remains safe and does not regrant');
+SELECT is(public.get_own_class_submission((SELECT(result#>>'{data,id}')::uuid FROM firstten_policy_test.submission_results WHERE label='submitted'))->>'ok','true','withdrawn author copy retained');
+RESET ROLE;SELECT firstten_policy_test.set_actor('unrelated');SET LOCAL ROLE authenticated;
+SELECT is(public.withdraw_class_submission((SELECT(result#>>'{data,id}')::uuid FROM firstten_policy_test.submission_results WHERE label='submitted'),gen_random_uuid())->>'code','NOT_FOUND','unrelated account cannot withdraw known snapshot');
+SELECT is(jsonb_array_length(public.list_own_class_submissions()#>'{data,items}'),0,'unrelated author list contains no submissions');
+RESET ROLE;
+
+-- Exact authority generations: legal monotonic fixture transitions never resurrect old publication.
+RESET ROLE;
+UPDATE public.classes SET archived_at=NULL,revision=revision+1 WHERE id=firstten_policy_test.id('submission_class');
+UPDATE public.class_members SET state='active',revision=revision+1 WHERE class_id=firstten_policy_test.id('submission_class')AND user_id=firstten_policy_test.id('student');
+UPDATE public.class_project_links SET active=true,revision=revision+1 WHERE class_id=firstten_policy_test.id('submission_class')AND user_id=firstten_policy_test.id('student');
+CREATE FUNCTION firstten_policy_test.new_submission()RETURNS uuid LANGUAGE plpgsql AS $fn$
+DECLARE p jsonb;r jsonb;BEGIN
+ p:=public.preview_class_submission(firstten_policy_test.submission_spec(gen_random_uuid()));
+ r:=public.confirm_class_submission((p#>>'{data,id}')::uuid,p#>>'{data,hash}',gen_random_uuid());
+ IF r->>'ok'IS DISTINCT FROM'true'THEN RAISE EXCEPTION 'Fixture publication failed';END IF;RETURN(r#>>'{data,id}')::uuid;
+END $fn$;
+GRANT EXECUTE ON FUNCTION firstten_policy_test.new_submission()TO authenticated;
+SELECT firstten_policy_test.set_actor('student');SET LOCAL ROLE authenticated;
+INSERT INTO firstten_policy_test.submission_results SELECT 'membership_bound',jsonb_build_object('id',firstten_policy_test.new_submission());
+RESET ROLE;
+UPDATE public.class_members SET state='removed',revision=revision+1 WHERE class_id=firstten_policy_test.id('submission_class')AND user_id=firstten_policy_test.id('student');
+UPDATE public.class_members SET state='active',revision=revision+1 WHERE class_id=firstten_policy_test.id('submission_class')AND user_id=firstten_policy_test.id('student');
+SELECT firstten_policy_test.set_actor('owner_a');SET LOCAL ROLE authenticated;
+SELECT is(public.get_teacher_class_submission(firstten_policy_test.id('submission_class'),(SELECT(result->>'id')::uuid FROM firstten_policy_test.submission_results WHERE label='membership_bound'))->>'code','NOT_FOUND','remove then rejoin cannot resurrect prior teacher disclosure');
+RESET ROLE;SELECT firstten_policy_test.set_actor('student');SET LOCAL ROLE authenticated;
+INSERT INTO firstten_policy_test.submission_results SELECT 'association_bound',jsonb_build_object('id',firstten_policy_test.new_submission());
+RESET ROLE;
+UPDATE public.class_project_links SET active=false,revision=revision+1 WHERE class_id=firstten_policy_test.id('submission_class')AND user_id=firstten_policy_test.id('student');
+UPDATE public.class_project_links SET active=true,revision=revision+1 WHERE class_id=firstten_policy_test.id('submission_class')AND user_id=firstten_policy_test.id('student');
+SELECT firstten_policy_test.set_actor('owner_a');SET LOCAL ROLE authenticated;
+SELECT is(public.get_teacher_class_submission(firstten_policy_test.id('submission_class'),(SELECT(result->>'id')::uuid FROM firstten_policy_test.submission_results WHERE label='association_bound'))->>'code','NOT_FOUND','re-association is not renewed disclosure consent');
+RESET ROLE;SELECT firstten_policy_test.set_actor('student');SET LOCAL ROLE authenticated;
+INSERT INTO firstten_policy_test.submission_results SELECT 'assignment_bound',jsonb_build_object('id',firstten_policy_test.new_submission());
+RESET ROLE;
+UPDATE public.assignments SET state='archived',revision=revision+1 WHERE id=firstten_policy_test.id('submission_assignment');
+UPDATE public.assignments SET state='published',revision=revision+1 WHERE id=firstten_policy_test.id('submission_assignment');
+SELECT firstten_policy_test.set_actor('owner_a');SET LOCAL ROLE authenticated;
+SELECT is(public.get_teacher_class_submission(firstten_policy_test.id('submission_class'),(SELECT(result->>'id')::uuid FROM firstten_policy_test.submission_results WHERE label='assignment_bound'))->>'code','NOT_FOUND','republishing assignment does not restore old disclosure');
+RESET ROLE;SELECT firstten_policy_test.set_actor('student');SET LOCAL ROLE authenticated;
+INSERT INTO firstten_policy_test.submission_results SELECT 'class_bound',jsonb_build_object('id',firstten_policy_test.new_submission());
+RESET ROLE;
+UPDATE public.classes SET archived_at=clock_timestamp(),revision=revision+1 WHERE id=firstten_policy_test.id('submission_class');
+UPDATE public.classes SET archived_at=NULL,access_expires_at=access_expires_at+interval '1 day',revision=revision+1 WHERE id=firstten_policy_test.id('submission_class');
+SELECT firstten_policy_test.set_actor('owner_a');SET LOCAL ROLE authenticated;
+SELECT is(public.get_teacher_class_submission(firstten_policy_test.id('submission_class'),(SELECT(result->>'id')::uuid FROM firstten_policy_test.submission_results WHERE label='class_bound'))->>'code','NOT_FOUND','class reopen and deadline extension cannot revive or extend prior disclosure');
+RESET ROLE;SELECT firstten_policy_test.set_actor('student');SET LOCAL ROLE authenticated;
+INSERT INTO firstten_policy_test.submission_results SELECT 'expiry_bound',jsonb_build_object('id',firstten_policy_test.new_submission());
+RESET ROLE;
+UPDATE public.classes SET access_expires_at=clock_timestamp()-interval '1 second',revision=revision+1 WHERE id=firstten_policy_test.id('submission_class');
+SELECT firstten_policy_test.set_actor('student');SET LOCAL ROLE authenticated;
+SELECT is(public.withdraw_class_submission((SELECT(result->>'id')::uuid FROM firstten_policy_test.submission_results WHERE label='expiry_bound'),gen_random_uuid())#>>'{data,grantState}','withdrawn','expired class still permits author privacy-reducing withdrawal');
+SELECT is(public.get_own_class_submission((SELECT(result->>'id')::uuid FROM firstten_policy_test.submission_results WHERE label='expiry_bound'))->>'ok','true','expired class retains only author own-copy authority');
+RESET ROLE;
+SELECT is(firstten_private.submission_scrub('Contact foo@example.org and bar+tag@school.edu'),'Contact [Email removed] and [Email removed]','ordinary email regex redacts actual SQL strings');
+-- Lifetime bounds are explicit, preserve saved work, and do not recycle history.
+UPDATE public.classes SET access_expires_at=clock_timestamp()+interval '1 day',revision=revision+1 WHERE id=firstten_policy_test.id('submission_class');
+SELECT firstten_policy_test.set_actor('student');SET LOCAL ROLE authenticated;
+INSERT INTO firstten_policy_test.submission_results SELECT 'expired_preview',public.preview_class_submission(firstten_policy_test.submission_spec(gen_random_uuid()));
+RESET ROLE;
+UPDATE firstten_private.class_submission_previews SET expires_at=clock_timestamp()-interval '1 second'WHERE id=(SELECT(result#>>'{data,id}')::uuid FROM firstten_policy_test.submission_results WHERE label='expired_preview');
+SELECT firstten_policy_test.set_actor('student');SET LOCAL ROLE authenticated;
+SELECT is(public.confirm_class_submission((SELECT(result#>>'{data,id}')::uuid FROM firstten_policy_test.submission_results WHERE label='expired_preview'),(SELECT result#>>'{data,hash}'FROM firstten_policy_test.submission_results WHERE label='expired_preview'),gen_random_uuid())->>'code','EXPIRED','expired preview cannot grant teacher access');
+DO $fn$ DECLARE r jsonb;n integer;BEGIN
+ FOR n IN 1..50 LOOP
+  r:=public.preview_class_submission(firstten_policy_test.submission_spec(gen_random_uuid(),'c2120000-0000-4000-8000-000000000090'));
+  IF r->>'ok'IS DISTINCT FROM'true'THEN RAISE EXCEPTION 'Preview bound fixture failed';END IF;
+ END LOOP;
+END $fn$;
+SELECT is(public.preview_class_submission(firstten_policy_test.submission_spec(gen_random_uuid(),'c2120000-0000-4000-8000-000000000090'))->>'code','CAPACITY','51st historical preview explicitly denied without recycling earlier versions');
+DO $fn$ DECLARE r jsonb;p jsonb;n integer;BEGIN
+ FOR n IN 1..20 LOOP
+  p:=public.preview_class_submission(firstten_policy_test.submission_spec(gen_random_uuid(),'c2120000-0000-4000-8000-000000000091'));
+  r:=public.confirm_class_submission((p#>>'{data,id}')::uuid,p#>>'{data,hash}',gen_random_uuid());
+  IF r->>'ok'IS DISTINCT FROM'true'THEN RAISE EXCEPTION 'Version bound fixture failed';END IF;
+ END LOOP;
+END $fn$;
+SELECT is(public.preview_class_submission(firstten_policy_test.submission_spec(gen_random_uuid(),'c2120000-0000-4000-8000-000000000091'))->>'code','CAPACITY','21st immutable publication version explicitly denied');
+RESET ROLE;
+SELECT is((SELECT count(*)FROM firstten_private.class_submission_versions WHERE thread_id='c2120000-0000-4000-8000-000000000091'),20::bigint,'all20 prior immutable versions preserved at capacity');
