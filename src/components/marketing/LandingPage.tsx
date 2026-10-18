@@ -57,7 +57,7 @@ const faqs = [
   ],
   [
     "Can teachers review a class?",
-    "Use the teaching kit and your existing private submission method today. Separate teacher panels, class submissions, shared project work and event-funnel analytics are planned. The current admin view is a protected count-only operational dashboard. No measured learning improvement or institutional endorsement is claimed.",
+    "Private educator lesson planning is available now, with clearly labeled fictional cohort examples in the workshop demo. Live class submissions, teacher access to student work, shared projects and event-funnel analytics remain planned. Use your existing private course submission method. The admin view is a protected count-only operational dashboard. No measured learning improvement or institutional endorsement is claimed.",
   ],
 ] as const;
 

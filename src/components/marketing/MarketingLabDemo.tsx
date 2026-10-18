@@ -527,8 +527,9 @@ function MarketingBoard({
         </div>
       </div>
       <p className="mt-4 text-sm text-muted-foreground">
-        This is a public teaching example. The saved, signed-in Marketing Lab is planned. “Next 50”
-        names a learning stage, not a promise of 50 customers.
+        This public example stays separate from your work. A saved manual Marketing Lab is available
+        in the signed-in app at Stage 2. “Next 50” names a learning stage, not a promise of 50
+        customers.
       </p>
     </section>
   );

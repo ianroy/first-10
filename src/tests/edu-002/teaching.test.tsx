@@ -86,7 +86,7 @@ describe("public teaching resources", () => {
     expect(appSummary.closest("details")).toHaveAttribute("open");
     expect(screen.getByText(/Individual work, available now/)).toBeVisible();
     expect(
-      screen.getByText(/teacher panels, class submissions, shared project work/),
+      screen.getByText(/live class submissions, teacher access to student work/),
     ).toBeVisible();
     fireEvent.click(screen.getByText("How should we handle people and AI?"));
     expect(screen.getByText(/Class enrollment does not grant them/)).toBeVisible();

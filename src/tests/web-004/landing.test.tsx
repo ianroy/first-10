@@ -47,7 +47,8 @@ it("exposes the six teaching concepts and keeps current versus proposed claims i
     expect(screen.getByRole("heading", { name })).toBeVisible();
   expect(screen.getByText(/learning gains have not been measured/)).toBeVisible();
   fireEvent.click(screen.getByText("Can teachers review a class?"));
-  expect(screen.getByText(/Separate teacher panels, class submissions/)).toBeVisible();
+  expect(screen.getByText(/Private educator lesson planning is available now/)).toBeVisible();
+  expect(screen.getByText(/Live class submissions, teacher access to student work/)).toBeVisible();
   expect(screen.getByText(/saved manual Stage 2 lab available now/)).toBeVisible();
 });
 

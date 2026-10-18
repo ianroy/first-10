@@ -333,14 +333,17 @@ export function TeachingPage() {
                 <div className="pb-5 text-sm leading-relaxed text-muted-foreground">
                   <p>
                     <strong className="text-foreground">Individual work, available now:</strong>{" "}
-                    interview preparation, notes, editable learning drafts and experiments. Initial
-                    question setup starts with AI; keep the lesson’s first thinking on paper or in a
-                    document. Interview notes save at wrap-up, so finish and save before leaving.
+                    interview preparation, notes, editable learning drafts, experiments, a saved
+                    manual Stage 2 Marketing Lab and private educator lesson planning. The workshop
+                    demo includes clearly labeled authored cohort examples. Initial question setup
+                    starts with AI; keep the lesson’s first thinking on paper or in a document.
+                    Interview notes save at wrap-up, so finish and save before leaving.
                   </p>
                   <p className="mt-3">
-                    <strong className="text-foreground">Planned:</strong> teacher panels, class
-                    submissions, shared project work and the full in-app Marketing Lab. Use your
-                    existing private course submission process for this assignment.
+                    <strong className="text-foreground">Planned:</strong> live class submissions,
+                    teacher access to student work, shared projects and dedicated marketing AI for
+                    private student plans. Use your existing private course submission process for
+                    this assignment.
                   </p>
                   <Link
                     to="/auth"
