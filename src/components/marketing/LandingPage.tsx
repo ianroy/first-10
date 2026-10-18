@@ -1,40 +1,16 @@
 import { FoundingPartnerInvite } from "@/components/partners/FoundingPartnerInvite";
 import { Link } from "@tanstack/react-router";
-import {
-  ArrowDown,
-  ArrowRight,
-  ArrowUpRight,
-  Check,
-  MessageCircle,
-  NotebookPen,
-  Sprout,
-} from "lucide-react";
+import { ArrowDown, ArrowRight, ArrowUpRight, Check } from "lucide-react";
 import { BrandLogo } from "@/components/BrandLogo";
 import { StudyLoopDemo } from "@/components/demo/StudyLoopDemo";
 import { TeachingConcepts } from "@/components/teaching/TeachingConcepts";
+import { DiscoveryCycleOverview } from "@/components/teaching/DiscoveryCycleOverview";
 import { StackDiagram } from "./StackDiagram";
 
 const button =
   "inline-flex min-h-12 items-center justify-center gap-2 rounded-xl bg-primary px-5 py-3 font-semibold text-primary-foreground transition-colors hover:bg-primary-hover";
 const secondary =
   "inline-flex min-h-12 items-center justify-center gap-2 rounded-xl border border-input bg-card px-5 py-3 font-semibold hover:bg-secondary";
-const benefits = [
-  {
-    title: "Ask about what happened.",
-    text: "Start with draft questions about recent situations and real workarounds. Edit them before you go.",
-    icon: MessageCircle,
-  },
-  {
-    title: "Review what you heard.",
-    text: "Capture notes and exact words. Review an editable AI summary, and check it against your conversations.",
-    icon: NotebookPen,
-  },
-  {
-    title: "Try one small change.",
-    text: "Log an experiment, record what happened and carry reviewed learnings into later outreach.",
-    icon: Sprout,
-  },
-];
 const faqs = [
   [
     "Do I need to sign in to explore?",
@@ -184,20 +160,19 @@ export function LandingPage() {
               id="workflow-title"
               className="mt-4 max-w-3xl text-3xl font-bold leading-tight sm:text-4xl"
             >
-              From a conversation to something you can try.
+              A testable idea. Five people. A clearer next step.
             </h2>
-            <div className="mt-9 grid gap-8 md:grid-cols-3">
-              {benefits.map(({ title, text, icon: Icon }, i) => (
-                <article key={title} className="border-t border-border pt-5">
-                  <div className="flex items-center justify-between text-primary">
-                    <Icon className="size-6" aria-hidden="true" />
-                    <span className="text-xs font-bold">0{i + 1}</span>
-                  </div>
-                  <h3 className="mt-6 text-xl font-bold">{title}</h3>
-                  <p className="mt-3 leading-relaxed text-muted-foreground">{text}</p>
-                </article>
-              ))}
+            <p className="mt-4 max-w-3xl leading-relaxed text-muted-foreground">
+              Our seven-step method keeps the student’s thinking visible: first a hypothesis, then a
+              deliberate sample, real conversations and a decision that can change.
+            </p>
+            <div className="mt-8">
+              <DiscoveryCycleOverview />
             </div>
+            <p className="mt-5 text-sm text-muted-foreground">
+              The guided discovery workspace and context-aware AI extensions are in development.
+              Current interview tools, activity PDFs and the manual teaching method are available.
+            </p>
             <p className="mt-8 inline-flex items-center gap-2 rounded-full bg-secondary px-4 py-2 text-sm font-semibold">
               <Check className="size-4" aria-hidden="true" /> AI drafts. You review and decide.
             </p>

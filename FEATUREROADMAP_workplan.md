@@ -54,6 +54,8 @@ resume_hint: >-
   SEC005 actualrace pending. AI004foundation integratedf489e82;997SQLassertions andreal
   budgetraces verifiedin disposableclone; no mainlocal/hosted14000apply. Stableintent/gatewaywiring active.
   ProductionportfolioUI prepared31selectedactivities as42pages; actualdownloadfile notlocated.
+  Public landing/teach pages now explain the sevenstep method and context/evidence distinction;
+  9focusedpublictests/typecheck/scopedlint pass. Guidedworkspace is labeled indevelopment.
   WorkerDISC001 builds owner-defined hypothesis/sampling/context learningcycle; AI004 budget
   stays isolated in schema-only disposable localDB clone, no provider calls.
   f60ed4e GitHubCI passed; live presenteradmin verified after hosted migrations.

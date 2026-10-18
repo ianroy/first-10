@@ -4,6 +4,7 @@ import { Link } from "@tanstack/react-router";
 import { ArrowRight, ArrowUpRight, Check, Download, NotebookPen } from "lucide-react";
 import { LessonSequence } from "./LessonSequence";
 import { TeachingConcepts } from "./TeachingConcepts";
+import { DiscoveryCycleOverview } from "./DiscoveryCycleOverview";
 import { TeachingResources } from "./TeachingResources";
 import { teachingKit } from "./resources";
 
@@ -158,6 +159,25 @@ export function TeachingPage() {
             Using it in class
           </a>
         </nav>
+
+        <section aria-labelledby="discovery-method-title" className="border-b py-12 sm:py-16">
+          <p className="text-xs font-bold uppercase tracking-[0.18em] text-primary">
+            The student framework
+          </p>
+          <h2 id="discovery-method-title" className="mt-3 text-3xl font-bold sm:text-4xl">
+            Teach a decision, not a polished guess.
+          </h2>
+          <p className="mt-4 mb-8 max-w-3xl leading-relaxed text-muted-foreground">
+            Ask students to keep their first hypothesis, explain who could challenge it, and show
+            how an observation changes the next test. Use the sequence manually today; the saved
+            guided workspace and adjacent-hypothesis AI are being developed.
+          </p>
+          <DiscoveryCycleOverview />
+          <p className="mt-5 text-sm text-muted-foreground">
+            Five people is a planning scaffold, not a quota to fabricate. Assess the reasoning,
+            participant respect and willingness to revise—not positive responses or AI use.
+          </p>
+        </section>
 
         <section id="lesson" aria-labelledby="lesson-title" className="scroll-mt-6 py-12 sm:py-16">
           <p className="text-xs font-bold uppercase tracking-[0.18em] text-primary">
