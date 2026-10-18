@@ -61,6 +61,14 @@ describe("AI007 source and exact quote validator", () => {
     if (scenario === "hidden limitation") v.grounding.missingEvidence.pop();
     expect(() => validateGroundedOutput("synthesis", v, sources, omissions)).toThrow();
   });
+  it("does not count a repeated quotation as another observation", () => {
+    const value = cited();
+    value.draft.quotes.push(value.draft.quotes[0]!);
+    value.grounding.observations.push({ ...value.grounding.observations[0]!, path: "/quotes/1" });
+    expect(() => validateGroundedOutput("synthesis", value, sources, omissions)).toThrow(
+      "Repeated quotations",
+    );
+  });
   it("allows honest empty evidence arrays and proposals without fabricating evidence", () => {
     expect(
       validateGroundedOutput("synthesis", wrapper("synthesis"), sources, omissions).draft,

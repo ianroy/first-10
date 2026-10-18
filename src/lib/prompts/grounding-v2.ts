@@ -82,6 +82,11 @@ export function validateGroundedOutput(
 ) {
   const wrapper = z.object({ draft: z.unknown(), grounding }).strict().parse(value);
   const draft = validateAIOutput(kind, wrapper.draft);
+  if (kind === "synthesis") {
+    const quotes = (draft as { quotes: string[] }).quotes.map(whitespace);
+    if (new Set(quotes).size !== quotes.length)
+      throw new Error("Repeated quotations do not add independent evidence.");
+  }
   const paths = new Map(leaves(draft));
   const catalog = new Map(sources.map((s) => [s.sourceId, s]));
   const seen = new Set<string>();
