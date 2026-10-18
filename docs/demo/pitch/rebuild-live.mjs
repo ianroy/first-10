@@ -111,7 +111,7 @@ const authoredSlides = [
   {
     title: "Teaching built into the workflow",
     caption:
-      "React/TanStack, Supabase owner-scoped storage, Vercel and one server-side OpenRouter gateway support the workflow. Six teaching concepts map to student activities. These design choices have not established learning gains.",
+      "React/TanStack, Supabase owner-scoped storage, Vercel and one server-side OpenRouter gateway support the workflow. Actual Worksheet B from the printable teaching kit demonstrates evidence, counterexamples, a decision and reflection. Six teaching concepts map to student activities. These design choices have not established learning gains.",
   },
   {
     title: "Crossing the Chasm",
@@ -125,7 +125,7 @@ const authoredSlides = [
   },
 ];
 // Layout keys retain their authored positions; presentation order is independent.
-export const slideOrder = [0, 1, 2, 3, 8, 4, 5, 6, 7, 9, 10, 11, 12];
+export const slideOrder = [0, 1, 2, 3, 4, 5, 6, 7, 9, 10, 8, 11, 12];
 export const slides = slideOrder.map((index) => authoredSlides[index]);
 
 export default async function rebuild({ presentation, input }) {
@@ -374,20 +374,19 @@ export default async function rebuild({ presentation, input }) {
         cream,
         true,
       );
+      image(s, "pitch/demo/student-worksheet.png", 76, 242, 540, 408,
+        "Actual printable Worksheet B: source, interpretation, counterexample, decision and next action");
       const rows = [
         ["Experiential learning", "A real conversation or small test"],
-        [
-          "Generative, student-led thinking before AI",
-          "An initial explanation in the student’s own words",
-        ],
-        ["Scaffolded practice", "A bounded sequence from evidence to action"],
+        ["Student-led thinking before AI", "Start with the student’s own explanation"],
+        ["Scaffolded practice", "Move from source to decision to action"],
         ["Formative peer feedback", "A peer checks the plan and next step"],
         ["Metacognition and reflection", "What changed? What would change it again?"],
         ["Responsible AI and human judgment", "Review claims, permissions and drafts"],
       ];
       rows.forEach((r, j) => {
-        text(s, r[0], 76, 310 + j * 49, 585, 42, 21, gold, true);
-        text(s, r[1], 684, 310 + j * 49, 510, 42, 21, cream);
+        text(s, r[0], 680, 252 + j * 64, 530, 30, 22, cream, true);
+        text(s, r[1], 680, 283 + j * 64, 530, 30, 18, "#B9D3C3");
       });
       footer(
         s,
@@ -395,7 +394,7 @@ export default async function rebuild({ presentation, input }) {
         true,
       );
       notes +=
-        " Sources: current repository ProductSpec and pedagogy-map; " +
+        " Worksheet image is a direct rendering of page4 (Worksheet B) of public/teaching/first-ten-teaching-kit.pdf, cropped only to remove bottom blank paper; full editable source: https://first-10-three.vercel.app/teaching/student-worksheet.md ; printable kit: https://first-10-three.vercel.app/teaching/first-ten-teaching-kit.pdf . Sources: current repository ProductSpec and pedagogy-map; " +
         sources.pedagogy +
         " ; " +
         sources.eef +
