@@ -376,6 +376,16 @@ export type Database = {
       [_ in never]: never;
     };
     Functions: {
+      record_founding_partner: {
+        Args: {
+          p_email: string;
+          p_ip_hash?: string;
+          p_kind: string;
+          p_note: string;
+          p_school: string;
+        };
+        Returns: Json;
+      };
       reserve_demo_ai: { Args: { p_project_id: string; p_request_id: string }; Returns: Json };
       save_marketing_plan: {
         Args: {
