@@ -1,90 +1,117 @@
-# First Ten: Value Proposition Canvas and Alternatives (VP-001)
+# First Ten: value proposition and alternatives
 
-Status: **hypotheses**, not findings. Written 2026-10-17. Sources were checked on 2026-10-17 through web search; prices change, so re-check before quoting them in public. Interviews (R0-004, VP-003) and the message test (VP-004) confirm or kill what is here; the decision lands in VP-006.
+**VP-007 audit — 2026-10-17.** Product claims checked against repository base `f3c45253d837d486f8a8cec4e3b353eabf7acb5a`; external sources checked on the same date. This revision replaces the initial VP-001 canvas's unsupported competitive and outcome claims. It does not complete a participant study or validate a buyer.
 
-Related: [FEATUREROADMAP_workplan.md §2.1](../FEATUREROADMAP_workplan.md) · [signal brief](inspiration/reddit-signals-2026-10.md) · interview guides in [interviews/](interviews/).
+Related: [claim ledger](claim-ledger.md) · [ProductSpec](../ProductSpec.md) · [current roadmap](../FEATUREROADMAP_workplan.md) · [company values](../docs/company-values.md) · [interview workspace](interviews/README.md).
 
----
+## 1. The value proposition to test
 
-## 1. What First Ten offers today
+**Founder:** Turn real customer conversations into a clearer next move: who to focus on, what to change, and what to try next.
 
-- **Promise on the landing page**: "You built it. Now meet the people it's for." A ladder from 10 conversations with people you know, to 50 through their networks and communities, to 100 through channels that scale.
-- **What the product actually does**: AI-written Mom Test questions; a consent-first, one-question-per-screen interview mode on your phone; tags; AI synthesis after 5 interviews (problems, objections, best-fit users, quotes, 3 suggested changes); a checklist that unlocks the next stage; AI-drafted outreach channels, messages and a survey (Stage 2); referral asks and onboarding questions (Stage 3); a simple pipeline and timeline.
-- **What it sells**: a *process*. The working hypothesis (§2.1) is that people buy the *outcome*: confidence grounded in proof.
+**Educator:** Help students show how customer evidence changes their next decision.
 
-## 2. Canvas: student founder (user)
+The connecting idea is learning that changes action. A student can explain whom they spoke to, what they heard, what remains uncertain and what they will do next. An educator can respond to that reasoning. The current app supports questions, notes, editable synthesis and experiments; the complete evidence-linked decision and teacher-review workflow is planned. These promises describe the direction to test, not measured results.
 
-Ranked by how intense we *think* each item is; interviews re-rank.
+For a founder, the trigger may be: “I launched and got little useful response. Should I change the audience, change the product or keep trying?” For an educator, the proposed trigger is: “I want a practical AI-supported customer-discovery exercise where I can see what the student learned and why their next action follows.” The educator trigger is a hypothesis to investigate, not a quotation from an interview.
 
-| Customer profile | |
-|---|---|
-| **Jobs** (functional) | 1. Find out whether anyone really wants what I built. 2. Find the first people to talk to. 3. Know what to ask and what to change. 4. Get first users, then more. |
-| **Jobs** (emotional) | Stop feeling stuck after launch; avoid the embarrassment of "spamming"; feel steady progress. |
-| **Jobs** (social) | Show an instructor, teammates or investors that this is real; look credible despite being young or new. |
-| **Pains** | Crickets after launch ("everything is saturated"); friends say "cool" and it teaches nothing; not knowing who to ask; fear of reaching out; generic or flattering AI advice; little time between classes; not knowing what counts as validation. |
-| **Gains** | A first real conversation this week; customers' own words to reuse; a commitment from someone outside the friend circle; a clear, honest next step; something credible to show. |
+A useful result may be a narrower audience, an unchanged decision with clearer support, another test or a decision to stop. Ten conversations, an attractive summary and a positive reaction do not independently establish demand. The immediate outcome is a better-explained next move; users who return are a longer-term aspiration.
 
-| Value map | Have today | Missing (roadmap) |
-|---|---|---|
-| **Products and services** | Ladder app (web, phone-first), AI drafts | Evidence Pack (I3-001) |
-| **Pain relievers** | One next step; Mom Test questions; consent-first interview mode; outreach drafts in customers' words | Interview Coach (I2-004); Devil's Advocate (I2-003); first-ask kickstart (I3-002) |
-| **Gain creators** | Synthesis with quotes; stage progress; learnings timeline | Proof, Not Praise scorecard and gates (I2-001/002); shareable Evidence Pack |
+## 2. Workshop context and what it supports
 
-**Fit gaps to watch**: the app helps *after* a founder decides to talk to someone, but the hardest moment may be *before* (nerve, VP2). And today nothing helps the founder *show* their proof (VP1).
+The owner reports a pitch and mini-hackathon for **45 academics** at the Babson workshop, with the pitch described as “tomorrow” in the October 17 planning context. Treat October 18 as the working event date to confirm with the organizer. Audience size and pitch format are owner-provided planning information, not measured demand or proof of adoption.
 
-## 3. Canvas: instructor or program lead (champion, likely buyer)
+Babson's official program page lists **October 16–18, 2026**, identifies beginner/intermediate AI users in university education as its audience, and describes practical classroom prototypes, course-integration confidence and sharing teaching practices as program aims. [Official program](https://www.babson.edu/professional/entrepreneurship-education/faculty-and-staff-programs/ai-for-entrepreneurship-educators/), checked 2026-10-17.
 
-| Customer profile | |
-|---|---|
-| **Jobs** (functional) | Get every team to do real customer discovery; review and grade it fairly; spot stuck teams early. |
-| **Jobs** (emotional) | Stop chasing students for evidence; trust that the work is real. |
-| **Jobs** (social) | Show the program produces founders who talk to customers; meet program reporting needs. |
-| **Pains** | Discovery handed in as slides with little proof; uncertainty whether interviews happened or were with real customers; AI-generated "synthetic users" replacing real research (see §4, Poets&Quants); late discovery that a team is stuck; time spent reviewing. |
-| **Gains** | Live visibility across teams; consistent method across sections; evidence-based grading; better pitches at demo day. |
+**Implication for the demonstration, not a market finding:** show one teachable loop in plain language. Start with a student's question, show a short conversation record, distinguish an observation from an inference, and finish with a next test. Give educators a small exercise they can adapt. A clearly labeled fictional sample can demonstrate the method; it is not research evidence or a testimonial. Role-play can rehearse interviewing, but cannot establish what an actual customer did.
 
-| Value map | Have today | Missing |
-|---|---|---|
-| **Products and services** | Nothing instructor-facing | Instructor view (FB-09, fake door VP-005); rubric-aligned Evidence Pack (I3-001); assignment template |
-| **Pain relievers** | Students' consent-first interviews and quotes exist in the data | A way for instructors to see them without exposing interviewee details |
-| **Gain creators** | Stage progress per founder | Cohort progress, stuck alerts |
+Neither the event nor the repository establishes Babson endorsement, a partnership, institutional adoption, improved learning outcomes or 45 prospective buyers. Use workshop context to explain relevance, not to imply any of those claims.
 
-## 4. Alternatives and competitive landscape (checked 2026-10-17)
+## 3. What exists and what is proposed
 
-| Alternative | Category | Price signal | Good at | Gap for a student founder's first 10 | Sources |
-|---|---|---|---|---|---|
-| ChatGPT (and similar assistants) | General AI | Free tier with ads; Go about $8/mo; Plus $20/mo | Free, flexible, drafts anything | Generic; tends to agree with you; no memory of your real evidence; no process or gates | [tldv](https://tldv.io/blog/chatgpt-pricing/), [CometAPI](https://www.cometapi.com/chatgpt-pricing-2026-free-vs-go-vs-plus-vs-pro/) |
-| *The Mom Test* (Rob Fitzpatrick) | Method (book) | Book price | The method: talk about their life, ask about specific past behavior, listen; look for commitment of time, reputation or money | No help in the moment, no follow-through or tracking | [Sachin Rekhi primer](https://www.sachinrekhi.com/the-mom-test-rob-fitzpatrick), [mtlynch report](https://mtlynch.io/book-reports/the-mom-test/) |
-| YC Startup School | Free course | Free | Credible curriculum, including a "how to talk to users" lesson | Video advice; nothing to run your own conversations | [TechCrunch](https://techcrunch.com/?p=2004613), [YC blog](https://www.ycombinator.com/blog/startup-school-videos) |
-| Notion templates and guides | DIY template | Free to a few dollars | Familiar, flexible; Mom Test-based templates exist | No synthesis, progress or accountability; blank-page problem | [Problem-Solution Navigator](https://mariluukkainen.notion.site/Problem-Solution-Navigator-A-Mom-Test-Based-Interview-Template-for-Startups-88d204308c284afbabede2e023c2ab0b), [Harvard i-lab guide](https://harvard-ilab.notion.site/Customer-interview-2c8ece395223448d96be4828ffbee51b) |
-| Dovetail | Research repository | Reported as Free (1 project) plus custom Enterprise; self-serve paid tier reportedly discontinued | Deep analysis of many recordings | Built and priced for research teams; doesn't help you find people | [Formbricks](https://formbricks.com/blog/dovetail-pricing), [PricingSaaS](https://pricingsaas.com/companies/dovetail) |
-| AI-moderated interview platforms (e.g. Perspective AI, Koji, Outset, Strella) | AI runs interviews at scale | Mostly paid; vendor rankings are self-promotional | Many conversations a week, automatic synthesis | Assumes you already have users or a panel; the founder doesn't build the skill or the relationship | [Koji list](https://www.koji.so/blog/best-customer-discovery-tools-2026), [Perspective AI list](https://getperspective.ai/blog/best-ai-customer-discovery-platforms-founders-2026-10-ranked/markdown) |
-| Apollo.io and lead tools | Outbound sales | Free plan with limited monthly credits; paid about $49-$119/user/mo | Contact data and sequences at volume | Wrong stage; cold and spammy for a student's first conversations | [Woodpecker](https://woodpecker.co/blog/apollo-io-pricing/), [Zeliq](https://www.zeliq.com/blog/apolloio-pricing) |
-| LaunchPad Central | Lean program platform (instructor side) | Institutional | Built for NSF I-Corps; connects teams with instructors and mentors to review evidence | Closest instructor-side competitor; public detail on current features is thin. Verify how programs use it in VP-003 | [Texas State IT listing](https://services.txst.edu/TDClient/39/ITAC/Requests/Service/432/Macmillan-Launch-Pad), [Steve Blank 2013](https://steveblank.com/2013/12/21) |
-| AI practice customers (custom GPT personas) | Teaching tool | Low | Safe practice before real interviews; one 2026 study found students rated AI and human practice similarly | Practice, not evidence; doesn't replace real conversations | [JMIR Formative 2026](https://formative.jmir.org/2026/1/e95225), [OpenAI Edu newsletter](https://edunewsletter.openai.com/p/doan-winkel) |
-| Instructors, mentors, programs (e.g. I-Corps) | Human | Program cost | Judgment, accountability; I-Corps sets high interview targets (often 100) | Scarce, after the fact | [VentureWell I-Corps](https://venturewell.org/i-corps/), [Ohio State I-Corps](https://bvms.osu.edu/icorps) |
+| Value moment                    | Current support at the audited revision                                            | Proposed extension or important limit                                                                                                        |
+| ------------------------------- | ---------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------- |
+| Choose whom to approach         | Contact first name, relationship and reason to ask                                 | Relevance is founder judgment; the app does not find verified prospects.                                                                     |
+| Prepare a conversation          | AI-generated, editable questions; prompt asks about past behavior                  | No live quality assessment; initial question setup currently starts with AI.                                                                 |
+| Capture what happened           | One question per screen, notes, optional quote and tags                            | Notes save at the end, not continuously. Note-taking permission is a session checkbox, not a persisted consent record.                       |
+| Review patterns                 | Editable synthesis after five completed interviews through the normal UI           | Generated quotes and interpretations require checking; no claim-level source links.                                                          |
+| Make and follow a small bet     | Hypothesis/change/result experiment fields; result can be updated                  | No structured observation → decision → next-action record yet.                                                                               |
+| Reach beyond the initial group  | Editable outreach bodies, suggested channels, survey text, manual contact pipeline | Suggestions are not live community research; messages are copied and sent by the founder.                                                    |
+| Explain learning to an educator | A learner can manually select and explain their work outside the app               | Teacher panel, class submissions, controlled sharing, collaboration and multi-project workspace are planned tasks, not current capabilities. |
 
-### What the landscape suggests (interpretation, to be tested)
+Implementation evidence and the specific public-copy limits are in [claim ledger §2](claim-ledger.md#2-current-product-and-operational-claims). Recheck these statuses after integration; a planned feature changes status only with implemented and verified evidence.
 
-1. **An open niche, if it's real**: none of the tools above targets a *pre-audience* student founder doing their *own* first conversations. AI-moderated platforms assume an audience; research repositories assume a research team; lead tools assume a sales motion. The closest overlap is LaunchPad Central on the instructor side.
-2. **AI raises the value of real conversations**: a September 2026 Poets&Quants piece on teaching entrepreneurship reports teams using synthetic users, with concern that research isn't based on real customers ([Poets&Quants](https://poetsandquants.com/2026/09/21/the-year-ai-came-for-us-teaching-entrepreneurship-will-never-be-the-same/)). NYU's Entrepreneurial Institute says AI helps with framing but is no replacement for talking to real people ([NYU](https://entrepreneur.nyu.edu/blog/2026/02/16/how-to-use-ai-to-improve-and-accelerate-customer-discovery/)). This supports a new hypothesis, VP6.
-3. **"Commitment" is broader than money**: *The Mom Test* treats time, reputation and money as commitment. That directly informs which commitment kinds I2-001 should support for students with free apps (VP5).
-4. **Students' alternatives are free**: ChatGPT's free tier, Startup School and free templates set a $0 anchor for students. Charging students early looks hard; a program or institutional buyer (VP3) is the more plausible path. This is a pricing hypothesis, not a finding.
+## 4. Founder canvas: the learner doing customer discovery
 
-## 5. Value hypotheses
+This is an unranked set of hypotheses. The research log is empty; no participant's recent workflow is known yet.
 
-Test order: VP3 first (decides the business model), then VP2 (decides the activation feature), then VP1, VP6, VP5, VP4.
+| Dimension             | Hypothesis                                                                                              | What would make it useful evidence                                                                                 |
+| --------------------- | ------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------ |
+| Functional job        | Choose a relevant person, learn about a real problem and decide what to do next                         | A recent attempt, the actual blockage, an observation and a decision or action that followed                       |
+| Emotional job         | Feel able to take a manageable next step despite uncertainty                                            | The founder describes uncertainty in their own terms and acts; do not prompt them to report fear                   |
+| Social job            | Explain reasoning to a teammate, mentor or instructor                                                   | A specific review occasion and an artifact they actually used                                                      |
+| Possible pains        | Difficulty reaching people, limited time, unclear questions, uncertain interpretation, fragmented notes | Compare these explanations; do not assume the hardest problem is confidence or that every founder needs a new tool |
+| Possible gains        | One relevant conversation, a clearer decision, a useful next test, a return to inspect the result       | Observe external action and voluntary reuse, including decisions that disconfirm the idea                          |
+| Current value offered | A compact sequence of people, questions, notes, synthesis, experiments and outreach                     | Compare the same job with the founder's actual existing process                                                    |
+| Switching cost        | Setup, another account, recording habits, AI review and data-handling decisions                         | Observe whether the workflow saves enough effort or confusion to justify those costs                               |
 
-| ID | Hypothesis | Why we think so | Confirm signal | Kill signal | Tested by (question) |
-|---|---|---|---|---|---|
-| VP1 | Founders value proof they can **show** others more than the ladder itself | Social job; instructors and investors ask for evidence | Founders describe recently showing evidence to someone and what they showed | Founders never mention an audience for their evidence | R0-004 F8 |
-| VP2 | The first outreach is blocked more by **nerve** than by not knowing the method | Signal brief: burnout, "everything is saturated" | Most stalls are described as avoiding or delaying reaching out | Most stalls cite time or not knowing how | R0-004 F2, F4 |
-| VP3 | **Instructors** would adopt a tool for visibility and gradable evidence; the program is the buyer | Course context; LaunchPad Central exists for I-Corps | At least 2 of 3-5 instructors describe this pain in a recent course and have paid or would budget for a fix | At most 1 describes the pain, or none controls a budget | VP-003 I2, I5, I8, I9; VP-005 sign-ups |
-| VP4 | Outside a course, founders **stall** after Stage 1 without deadlines | Accountability theme | Self-directed founders describe stalling after first talks | Self-directed founders progress like course founders | R0-004 F11; events data later |
-| VP5 | Students with free apps can collect **meaningful commitments** (time, reputation/intros, repeat use, pre-signups), not only money | *The Mom Test* commitment framing | Founders can name a commitment they received or could ask for | Founders can't name one plausible commitment for their app | R0-004 F7 |
-| VP6 | As AI-made "research" spreads, **proof that conversations were real** (consent, timestamps, roles, quotes) gains value for instructors and founders | Poets&Quants Sept 2026; NYU 2026 | Instructors describe doubting whether interviews happened or were real | Instructors are unconcerned about synthetic or invented interviews | VP-003 I3, I4 |
+Fit must be earned across the whole loop. A founder who needs access to a specific customer group may gain little from better synthesis. A founder with an effective notebook-and-mentor routine may have no reason to switch. Both are useful findings.
 
-## 6. Open questions this file cannot answer
+## 5. Educator canvas: reviewer, champion and purchaser are separate
 
-- Who signs for an instructor tool at Babson and similar schools: the instructor, a center, or IT? (VP-003 I9, I10)
-- Does LaunchPad Central serve non-I-Corps courses today, and what do instructors say about it? (VP-003 I6)
-- Will founders share interviewee quotes outside the app, and under what privacy conditions? (R0-004 F8, I3-001 design)
+| Role                     | Candidate job and benefit                                                     | Evidence to seek                                                                                   | What not to assume                                                                   |
+| ------------------------ | ----------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------ |
+| Educator using a lesson  | Run an understandable AI-supported activity while preserving student judgment | A real course objective, an adapted activity and a classroom rehearsal or use                      | A workshop attendee automatically wants an ongoing platform                          |
+| Educator reviewing work  | See which observations support a decision and give specific feedback          | An actual assignment/artifact, the feedback decision and effort compared with their current rubric | More interviews mean better work; a quote or timestamp verifies authenticity         |
+| Champion or program lead | Help colleagues reuse a practice that fits their teaching                     | A named follow-up, course fit, expected support needs and a concrete pilot step                    | Interest equals institution-wide adoption                                            |
+| Purchaser or approver    | Decide whether the benefit justifies cost, support and procurement            | Past spending, budget authority, an approval path and an actual purchase or pilot commitment       | The instructor controls the budget or institutions are the inevitable business model |
+| Student participant      | Learn the method, retain agency and control what is shared                    | Ability to explain a decision, sensible next action and informed sharing choices                   | Compliance with an assignment is voluntary retention or product demand               |
+
+**Minimum educator concept:** a short activity and a selected, de-identified record showing observation, interpretation, uncertainty and next action. Review it manually first. This is useful as a concept even before class dashboards exist; it does not demonstrate that teacher software has shipped or that grading becomes faster or fairer.
+
+Ask educators to show their current assignment and how they reviewed the last submission. Explore whether the need is lesson design, timely feedback, progress visibility, authenticity concerns or something else. If they need independent proof an interview happened, the current product cannot provide it.
+
+## 6. Alternatives to compare fairly
+
+These are **candidate alternatives**, not tools known to be used by participants. Begin interviews by asking what the person actually used. The practical alternative may be a combination or simply continuing to build without new research. No paid plan prices are retained from the old scan.
+
+| Alternative                                                              | What is established or proposed                                                                                                                                                                                      | Fair comparison question                                                                                                    |
+| ------------------------------------------------------------------------ | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------- |
+| Notebook or shared document + a question guide + mentor/teacher feedback | A manually assembled comparison workflow we can test; no claimed prevalence or measured efficacy                                                                                                                     | Can the person reach the same decision with less setup or review effort?                                                    |
+| General AI assistant + the founder's own evidence and instructions       | A candidate workflow to ask about; no blanket claim about memory, grounding, agreement or inability to structure a process                                                                                           | What context did they supply, what did they check, and what useful action resulted?                                         |
+| Notion with AI                                                           | Official documentation describes workspace-context search, writing assistance and meeting summarization. Plan and feature availability vary. [Notion AI help](https://www.notion.com/help/notion-ai-faqs)            | Does First Ten's focused flow add enough value compared with configuring a familiar workspace?                              |
+| Dovetail                                                                 | Its official site describes analysis of customer feedback and documents linked to source evidence. This is a vendor capability description, not an independent quality comparison. [Dovetail](https://dovetail.com/) | Is a research-oriented workspace already sufficient, and what setup or review tradeoffs matter for this specific learner?   |
+| YC Startup School                                                        | The official site offers a free founder course and a weekly progress-update tool. It is not accurate to characterize it as video advice only. [Startup School](https://www.startupschool.org/)                       | Does existing instruction plus progress reporting already meet the job?                                                     |
+| The Mom Test                                                             | The author's site presents a handbook for customer conversations. A method can be combined with notes and a human reviewer. [Author's site](https://www.momtestbook.com/)                                            | Is a question guide and practice enough, or does the learner benefit from continuity through reflection and follow-through? |
+| Existing course/LMS/rubric and scheduled feedback                        | A candidate educator workflow to observe; its features and effectiveness depend on the actual institution and setup                                                                                                  | Which review decision is difficult today, and would an additional tool help more than adapting the assignment?              |
+
+Primary sources above checked **2026-10-17**. They support the narrow capability descriptions only. They do not establish student adoption, First Ten superiority, relative total cost or an exclusive market niche. Recheck any feature/price before using it in a comparison slide.
+
+**Differentiation to earn:** a small, understandable sequence that connects a real conversation to an explained choice and a later check on the result. For education, test whether that sequence makes reasoning easier to teach and discuss. The method is not proprietary; AI drafting and synthesis are not unique. First Ten must earn repeated use through the fit of the whole workflow.
+
+## 7. Value hypotheses and what would change our mind
+
+These align with the current roadmap, replacing VP-001's stronger “confirm/kill” rules. None is answered by this audit.
+
+| ID  | Hypothesis to investigate                                    | Supporting observation to seek                                                                                                                       | Reason to revise                                                                           |
+| --- | ------------------------------------------------------------ | ---------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------ |
+| VP1 | A selected record is useful to show others                   | A founder uses it in an actual feedback/review decision                                                                                              | No sharing need; preserve the possibility of private decision value                        |
+| VP2 | Help getting started changes action                          | Identify the most recent stalled attempt and what unblocked it                                                                                       | Access, time, readiness or method matters more than confidence                             |
+| VP3 | Educator/champion value supports a buying path               | Actual review difficulty, usable artifact, identified authority and concrete follow-up                                                               | Interest without an adoption step, or procurement/support cost outweighs benefit           |
+| VP4 | Course and self-directed return behavior differ              | Record voluntary returns, requirements and assistance separately                                                                                     | Apparent repeat use is entirely reminders or course compliance                             |
+| VP5 | Different completed actions reveal different kinds of demand | Distinguish requested, agreed and completed trial, intro, repeat use or payment                                                                      | A polite promise or helping a friend is mistaken for product demand                        |
+| VP6 | Inspectable reasoning helps reviewers                        | A reviewer uses sources, limits and decision changes for feedback                                                                                    | They need another artifact, or independent authenticity verification the app cannot supply |
+| VP7 | The loop has decision value                                  | A founder takes an external action and explains a specific changed or retained decision using observations, counterevidence/unknowns and a next step | Only polished reporting or heavy facilitation helps; no voluntary return                   |
+
+The existing manual pilot definition is a useful loop within 14 days, not a guaranteed customer outcome. Report denominators, withdrawals and assistance. An informative negative result counts; a generated summary alone does not.
+
+## 8. Handoff to research and public-copy owners
+
+**VP-008:** revise guides around recent episodes, actual alternatives and neutral probes. Add the workshop as recruiting context without treating a convenience sample of academics as representative demand. Keep founder, educator/reviewer and purchaser findings separate. Resolve data processing/sharing choices before collecting notes; role-play or fictional fixtures must be labeled.
+
+**WEB-001 / WEB-004 / EDU-001 / EDU-002:** lead with the learning loop and a concrete example. A factual description available now is: “A guided customer-discovery workspace for student founders, with editable questions, notes, AI-assisted summaries and experiments.” Present the educator promise as the design aim and proposed classroom application. Mark a sample as a sample; mark future teacher/class/collaboration tools as planned until their own verification lands. Use [ledger §5](claim-ledger.md#5-copy-handoff-and-change-control) for wording.
+
+**Workshop follow-up to propose, not automatically perform:** invite an educator to name one course and assignment where the exercise could fit, then arrange a voluntary follow-up to review their existing artifact and constraints. Record action taken separately from interest or compliments. Do not contact participants, collect their contact details in these research files, or infer buyer authority from attendance.
+
+## 9. Audit trail
+
+The prior canvas remains recoverable with `git show f3c45253d837d486f8a8cec4e3b353eabf7acb5a:research/value-prop.md`. This audit removes secondary-source competitor prices, universal claims about AI memory and doc tools, the open-niche assertion, presumed instructor purchasing, a fear-first diagnosis, and claims of proving interview authenticity. It retains the research questions with narrower wording. The [claim ledger](claim-ledger.md) records the disposition and evidence needed to revisit them.
