@@ -1,0 +1,137 @@
+import { beforeEach, describe, expect, it, vi } from "vitest";
+const h = vi.hoisted(() => ({
+  request: vi.fn(),
+  write: vi.fn(),
+  prepare: vi.fn(),
+  demo: vi.fn(),
+  rpc: vi.fn(),
+  tables: [] as string[],
+}));
+vi.mock("@tanstack/react-start", () => ({
+  createServerFn: () => ({
+    middleware: () => ({ inputValidator: () => ({ handler: (fn: unknown) => fn }) }),
+  }),
+}));
+vi.mock("@/integrations/supabase/auth-middleware", () => ({ requireSupabaseAuth: {} }));
+vi.mock("@/lib/ai/gateway.server", () => ({ requestStructuredDraft: h.request }));
+vi.mock("@/lib/prompts/provenance.server", () => ({ prepareProvenanceWriter: h.prepare }));
+vi.mock("@/lib/ai/demo-marketing.server", () => ({ generateFictionalMarketingPractice: h.demo }));
+import { generateAI } from "@/lib/ai.functions";
+const projectId = "fa110000-0000-4000-8000-000000000001";
+const safe = {
+  project: {
+    name: "Permitted idea",
+    description: "Approved description",
+    audience: "Relevant people",
+    problem: "Uncertain coordination",
+  },
+  interviews: [
+    { answers: [{ q: "Recent event?", note: "ALLOWED_NOTE", quote: "ALLOWED_QUOTE" }], tags: [] },
+  ],
+  learnings: [],
+  contacts: [],
+  excluded: { interviews: 1, contacts: 1, learnings: 1 },
+};
+const sb = {
+  rpc: h.rpc,
+  from: (table: string) => {
+    h.tables.push(table);
+    if (table !== "projects") throw Error("Raw table read forbidden");
+    const q = {
+      select: () => q,
+      eq: () => q,
+      single: async () => ({
+        data: {
+          id: projectId,
+          user_id: "actor",
+          name: "RAW_NAME",
+          description: "WITHDRAWN_RAW_PROJECT",
+        },
+        error: null,
+      }),
+    };
+    return q;
+  },
+};
+const invoke = (kind: string) =>
+  (generateAI as unknown as (args: unknown) => Promise<unknown>)({
+    data: { kind, projectId },
+    context: { supabase: sb, userId: "actor" },
+  });
+beforeEach(() => {
+  vi.clearAllMocks();
+  h.tables = [];
+  h.prepare.mockResolvedValue(h.write);
+  h.write.mockResolvedValue("receipt");
+  h.request.mockResolvedValue({ data: { fixture: true } });
+  h.rpc.mockReturnValue({
+    abortSignal: async () => ({ data: { ok: true, data: safe }, error: null }),
+  });
+});
+describe("PRV001 provider boundary", () => {
+  it.each(["questions", "synthesis", "stage2", "stage3"])(
+    "denies %s without processing permission before any provider call",
+    async (kind) => {
+      h.rpc.mockReturnValue({
+        abortSignal: async () => ({
+          data: { ok: false, code: "PROCESSING_PERMISSION_REQUIRED" },
+          error: null,
+        }),
+      });
+      await expect(invoke(kind)).rejects.toThrow("AI processing is not enabled");
+      expect(h.request).not.toHaveBeenCalled();
+      expect(h.write).not.toHaveBeenCalled();
+      expect(h.tables).toEqual(["projects"]);
+    },
+  );
+  it.each(["questions", "synthesis", "stage2", "stage3"])(
+    "uses only permission-scoped projections for %s",
+    async (kind) => {
+      await invoke(kind);
+      const args = h.request.mock.calls[0]?.[0];
+      expect(args.user).toContain("Approved description");
+      expect(args.user).not.toContain("WITHDRAWN_RAW_PROJECT");
+      expect(args.user).toContain("PRIVACY LIMITS");
+      expect(args.user).not.toContain("WITHDRAWN_NOTE");
+      expect(h.rpc).toHaveBeenCalledWith("get_ai_processing_context", {
+        p_project_id: projectId,
+        p_kind: kind,
+      });
+      expect(h.tables).toEqual(["projects"]);
+      if (kind === "questions") expect(args.user).not.toContain("ALLOWED_NOTE");
+      else expect(args.user).toContain("ALLOWED_NOTE");
+    },
+  );
+  it("rechecks permission on the next call rather than reusing cached source context", async () => {
+    await invoke("synthesis");
+    h.rpc.mockReturnValue({
+      abortSignal: async () => ({
+        data: { ok: false, code: "PROCESSING_PERMISSION_REQUIRED" },
+        error: null,
+      }),
+    });
+    await expect(invoke("synthesis")).rejects.toThrow("AI processing is not enabled");
+    expect(h.request).toHaveBeenCalledTimes(1);
+    expect(h.rpc).toHaveBeenCalledTimes(2);
+  });
+  it.each([
+    { data: null, error: { message: "WITHDRAWN_NOTE" } },
+    { data: { ok: true, data: { ...safe, privateNotes: "WITHDRAWN_NOTE" } }, error: null },
+    {
+      data: { ok: true, data: { ...safe, interviews: [{ answers: "WITHDRAWN_NOTE", tags: [] }] } },
+      error: null,
+    },
+  ])("fails closed for unavailable or malformed context, with no raw fallback", async (result) => {
+    h.rpc.mockReturnValue({ abortSignal: async () => result });
+    await expect(invoke("synthesis")).rejects.toThrow("Privacy settings could not be verified");
+    expect(h.request).not.toHaveBeenCalled();
+    expect(h.tables).toEqual(["projects"]);
+  });
+  it("leaves the fixed fictional marketing practice boundary separate", async () => {
+    h.demo.mockResolvedValue({ fixture: true });
+    await invoke("marketing_demo");
+    expect(h.demo).toHaveBeenCalledOnce();
+    expect(h.rpc).not.toHaveBeenCalled();
+    expect(h.prepare).not.toHaveBeenCalled();
+  });
+});

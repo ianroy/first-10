@@ -6,6 +6,8 @@ import { generateFictionalMarketingPractice } from "./ai/demo-marketing.server";
 import { requestStructuredDraft } from "./ai/gateway.server";
 import { getPrivateContract } from "./prompts/private-v1";
 import { prepareProvenanceWriter } from "./prompts/provenance.server";
+import { loadAIProcessingContext } from "./consent";
+import type { SupabaseClient } from "@supabase/supabase-js";
 
 export const generateAI = createServerFn({ method: "POST" })
   .middleware([requireSupabaseAuth])
@@ -32,22 +34,17 @@ export const generateAI = createServerFn({ method: "POST" })
       projectOwnerId: p.user_id,
       contract,
     });
-    const [interviewResult, learningResult, contactResult] = await Promise.all([
-      sb.from("interviews").select("answers,tags").eq("project_id", p.id).eq("completed", true),
-      sb
-        .from("learnings")
-        .select("title,body,data,kind")
-        .eq("project_id", p.id)
-        .eq("accepted", true),
-      sb.from("contacts").select("relation,why,source,stage").eq("project_id", p.id),
-    ]);
-    if (interviewResult.error || learningResult.error || contactResult.error)
-      throw new Error("Could not load the project evidence. Your saved work is unchanged.");
-    const interviews = interviewResult.data;
-    const learnings = learningResult.data;
-    const contacts = contactResult.data;
+    // Fresh user verification above, then an owner-scoped permission snapshot immediately
+    // before the provider request. No raw child-table fallback when choices are unavailable.
+    const permitted = await loadAIProcessingContext(
+      sb as unknown as Pick<SupabaseClient, "rpc">,
+      p.id,
+      data.kind,
+    );
+    const { interviews, learnings, contacts, excluded } = permitted;
+    const safeProject = permitted.project;
     const ctx = [
-      `APP: ${p.name}\nWhat it does: ${p.description}\nWho it's for: ${p.audience}\nProblem: ${p.problem}`,
+      `APP: ${safeProject.name}\nWhat it does: ${safeProject.description}\nWho it's for: ${safeProject.audience}\nProblem: ${safeProject.problem}`,
       data.kind !== "questions" && interviews?.length
         ? `INTERVIEWS:\n${JSON.stringify(interviews).slice(0, 14000)}`
         : "",
@@ -56,6 +53,9 @@ export const generateAI = createServerFn({ method: "POST" })
         : "",
       data.kind === "stage2"
         ? `CONTACT SOURCES:\n${JSON.stringify(contacts ?? []).slice(0, 3000)}`
+        : "",
+      excluded.interviews + excluded.contacts + excluded.learnings > 0
+        ? `PRIVACY LIMITS: ${excluded.interviews} interview records, ${excluded.contacts} contact records and ${excluded.learnings} learning records are withheld. Do not infer their content or treat the available material as complete evidence.`
         : "",
     ]
       .filter(Boolean)

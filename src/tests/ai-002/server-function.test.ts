@@ -27,6 +27,26 @@ const project = {
   problem: "Planning",
 };
 const sb = {
+  rpc: () => ({
+    abortSignal: async () => ({
+      data: {
+        ok: true,
+        data: {
+          project: {
+            name: project.name,
+            description: project.description,
+            audience: project.audience,
+            problem: project.problem,
+          },
+          interviews: [{ answers: [{ q: "Recent event?", note: "PRIVATE", quote: "" }], tags: [] }],
+          learnings: [],
+          contacts: [],
+          excluded: { interviews: 0, contacts: 0, learnings: 0 },
+        },
+      },
+      error: null,
+    }),
+  }),
   from: (table: string) => {
     const q = {
       select: () => q,

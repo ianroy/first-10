@@ -3,13 +3,24 @@ import { cleanup, fireEvent, screen, waitFor } from "@testing-library/react";
 import { createFakeSupabase, type FakeSupabase } from "@/test/fake-supabase";
 import { renderPage } from "@/test/render-page";
 
-const h = vi.hoisted(() => ({ supabase: null as unknown as FakeSupabase, generate: vi.fn() }));
+const h = vi.hoisted(() => ({
+  supabase: null as unknown as FakeSupabase,
+  generate: vi.fn(),
+  capture: vi.fn(),
+  getConsent: vi.fn(),
+  setConsent: vi.fn(),
+}));
 vi.mock("@/integrations/supabase/client", () => ({
   get supabase() {
     return h.supabase;
   },
 }));
 vi.mock("@/lib/ai.functions", () => ({ generateAI: h.generate }));
+vi.mock("@/lib/consent.functions", () => ({
+  saveInterviewWithConsent: h.capture,
+  getProcessingConsent: h.getConsent,
+  setProcessingConsent: h.setConsent,
+}));
 import { Route as Contacts } from "@/routes/_authenticated/contacts";
 import { Route as Learnings } from "@/routes/_authenticated/learnings";
 import { Route as Interview } from "@/routes/_authenticated/interview";
@@ -44,6 +55,17 @@ const page = (route: { options: { component?: unknown } }) =>
   route.options.component as Parameters<typeof renderPage>[0];
 beforeEach(() => {
   h.generate.mockClear();
+  h.capture.mockReset().mockResolvedValue({ interviewId: "saved-interview", replayed: false });
+  h.getConsent.mockImplementation(async ({ data }: { data: Record<string, unknown> }) => ({
+    ...data,
+    noteStatus: "unknown",
+    aiStatus: "unknown",
+    sharingStatus: "unknown",
+    revision: 0,
+    policyVersion: 1,
+    evidenceInvalidated: false,
+    reportedAt: null,
+  }));
 });
 afterEach(cleanup);
 
@@ -136,6 +158,33 @@ describe("desktop workflow layout preserves actions and accessible inputs", () =
     expect(screen.getByLabelText("Result (optional for now)")).toBeVisible();
   });
 
+  it("allows manually written questions while processing permission remains unknown", async () => {
+    h.supabase = createFakeSupabase({
+      projects: [{ ...project, questions: [] }],
+      contacts: [],
+      interviews: [],
+    });
+    renderPage(page(Interview), "/interview");
+    fireEvent.click(await screen.findByRole("button", { name: "Write questions myself" }));
+    fireEvent.change(screen.getByLabelText("Question 1"), {
+      target: { value: "What happened the last time you arranged a meeting?" },
+    });
+    fireEvent.click(screen.getByRole("button", { name: "Save questions" }));
+    await waitFor(() =>
+      expect(h.supabase.calls).toContainEqual(
+        expect.objectContaining({
+          table: "projects",
+          op: "update",
+          payload: expect.objectContaining({
+            questions: ["What happened the last time you arranged a meeting?"],
+            questions_origin_id: null,
+          }),
+        }),
+      ),
+    );
+    expect(h.generate).not.toHaveBeenCalled();
+  });
+
   it("retains interview permission gating and saves labeled notes/quotes only at wrap-up", async () => {
     h.supabase = createFakeSupabase({
       projects: [{ ...project, stage: 1 }],
@@ -161,24 +210,25 @@ describe("desktop workflow layout preserves actions and accessible inputs", () =
     fireEvent.click(screen.getByRole("button", { name: "Next" }));
     fireEvent.click(screen.getByRole("button", { name: "Save interview" }));
     await waitFor(() =>
-      expect(h.supabase.calls).toContainEqual(
-        expect.objectContaining({
-          table: "interviews",
-          op: "insert",
-          payload: expect.objectContaining({
-            completed: true,
-            contact_id: "c1",
-            answers: [
-              {
-                q: project.questions[0],
-                note: "Fictional note for the fixture",
-                quote: "Fictional exact words",
-              },
-              { q: project.questions[1], note: "", quote: "" },
-            ],
-          }),
+      expect(h.capture).toHaveBeenCalledWith({
+        data: expect.objectContaining({
+          projectId: "p1",
+          contactId: "c1",
+          noteStatus: "granted",
+          aiStatus: "unknown",
+          sharingStatus: "unknown",
+          policyVersion: 1,
+          requestId: expect.any(String),
+          answers: [
+            {
+              q: project.questions[0],
+              note: "Fictional note for the fixture",
+              quote: "Fictional exact words",
+            },
+            { q: project.questions[1], note: "", quote: "" },
+          ],
         }),
-      ),
+      }),
     );
     expect(h.generate).not.toHaveBeenCalled();
   });

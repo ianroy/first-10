@@ -7,6 +7,9 @@ import { supabase } from "@/integrations/supabase/client";
 import { generateAI } from "@/lib/ai.functions";
 import { recordedAIOutput } from "@/lib/ai/saved-output";
 import { AIOrigin } from "@/components/AIOrigin";
+import { ConsentFields, SavedConsentFields } from "@/components/ConsentFields";
+import { saveInterviewWithConsent } from "@/lib/consent.functions";
+import { unknownConsent, type ConsentChoices, type ConsentScope } from "@/lib/consent";
 import { AppShell, Card, DraftBadge, Empty, PrivacyNote } from "@/components/AppShell";
 import { RequireProject } from "@/components/RequireProject";
 import { Button } from "@/components/ui/button";
@@ -16,6 +19,7 @@ import {
   TAGS,
   useContacts,
   useInterviews,
+  useLearnings,
   useRefresh,
   type Answer,
   type Project,
@@ -59,11 +63,38 @@ function Prep({
   const refresh = useRefresh();
   const { data: contacts = [] } = useContacts(p.id);
   const { data: interviews = [] } = useInterviews(p.id);
+  const { data: learnings = [] } = useLearnings(p.id);
   const [busy, setBusy] = useState(false);
   const [draft, setDraft] = useState<string[] | null>(null);
   const [draftOrigin, setDraftOrigin] = useState<string | null | undefined>(undefined);
   const [who, setWho] = useState("");
   const [asked, setAsked] = useState(false);
+  const [privacyTarget, setPrivacyTarget] = useState(`project:${p.id}`);
+  const privacyRecords = [
+    { kind: "project" as const, id: p.id, label: "This idea" },
+    ...contacts.map((c) => ({
+      kind: "contact" as const,
+      id: c.id,
+      label: `Contact: ${c.first_name}`,
+    })),
+    ...interviews.map((iv, index) => ({
+      kind: "interview" as const,
+      id: iv.id,
+      label: `Interview ${index + 1}`,
+    })),
+    ...learnings.map((l, index) => ({
+      kind: "learning" as const,
+      id: l.id,
+      label: `Learning: ${l.title || index + 1}`,
+    })),
+  ];
+  const selectedPrivacy =
+    privacyRecords.find((r) => `${r.kind}:${r.id}` === privacyTarget) ?? privacyRecords[0]!;
+  const privacyScope: ConsentScope = {
+    projectId: p.id,
+    targetKind: selectedPrivacy.kind,
+    targetId: selectedPrivacy.id,
+  };
   const qs = draft ?? questions;
   const pending = contacts.filter((c) => c.stage === 1 && c.status !== "interviewed");
 
@@ -91,6 +122,41 @@ function Prep({
         Prepare a few useful questions, listen for a recent example and keep observations separate
         from your interpretation.
       </p>
+      <Card>
+        <h2 className="text-lg font-bold">Privacy and processing choices</h2>
+        <p className="my-3 max-w-3xl text-sm text-muted-foreground">
+          AI is optional. Idea details require an explicit saved AI choice. Contact and interview
+          records need their own choices; notes permission alone never enables AI. Accepted
+          summaries are withheld when underlying evidence is unapproved, and withdrawn evidence
+          invalidates existing learning permissions. Manual questions, notes and decisions remain
+          available.
+        </p>
+        <label htmlFor="privacy-record" className="block text-sm font-semibold">
+          Record to review
+        </label>
+        <select
+          id="privacy-record"
+          value={`${selectedPrivacy.kind}:${selectedPrivacy.id}`}
+          onChange={(e) => setPrivacyTarget(e.target.value)}
+          className="my-3 min-h-11 w-full max-w-xl rounded-lg border bg-background px-3"
+        >
+          {privacyRecords.map((r) => (
+            <option key={`${r.kind}:${r.id}`} value={`${r.kind}:${r.id}`}>
+              {r.label}
+            </option>
+          ))}
+        </select>
+        <SavedConsentFields
+          key={`${p.id}:${selectedPrivacy.kind}:${selectedPrivacy.id}`}
+          scope={privacyScope}
+          label={selectedPrivacy.label}
+        />
+        <p className="mt-3 text-xs text-muted-foreground">
+          Allowed AI content travels through this app to OpenRouter and its routed model provider.
+          Keep names and sensitive details out of free text. Withdrawal stops future requests;
+          already transmitted content and downloaded copies cannot be recalled.
+        </p>
+      </Card>
       <div className="grid items-start gap-6 lg:grid-cols-[minmax(0,1.3fr)_minmax(0,1fr)]">
         <div className="min-w-0">
           <Card>
@@ -109,26 +175,37 @@ function Prep({
               />
             )}
             {qs.length === 0 ? (
-              <Button
-                size="xl"
-                disabled={busy}
-                onClick={async () => {
-                  setBusy(true);
-                  try {
-                    const r = await gen({
-                      data: { kind: "questions", projectId: p.id, withOrigin: true },
-                    });
-                    const recorded = recordedAIOutput("questions", r);
-                    setDraft(recorded.data.questions);
-                    setDraftOrigin(recorded.originId);
-                  } catch (e) {
-                    toast.error((e as Error).message);
-                  }
-                  setBusy(false);
-                }}
-              >
-                {busy ? "Writing questions…" : "Write my interview questions"}
-              </Button>
+              <div className="space-y-3">
+                <Button
+                  variant="outline"
+                  onClick={() => {
+                    setDraft([""]);
+                    setDraftOrigin(null);
+                  }}
+                >
+                  Write questions myself
+                </Button>
+                <Button
+                  size="xl"
+                  disabled={busy}
+                  onClick={async () => {
+                    setBusy(true);
+                    try {
+                      const r = await gen({
+                        data: { kind: "questions", projectId: p.id, withOrigin: true },
+                      });
+                      const recorded = recordedAIOutput("questions", r);
+                      setDraft(recorded.data.questions);
+                      setDraftOrigin(recorded.originId);
+                    } catch (e) {
+                      toast.error((e as Error).message);
+                    }
+                    setBusy(false);
+                  }}
+                >
+                  {busy ? "Writing questions…" : "Write my interview questions"}
+                </Button>
+              </div>
             ) : (
               <div className="space-y-2">
                 {qs.map((q, i) => (
@@ -229,7 +306,8 @@ function Prep({
               </label>
               <p className="mt-3 text-sm text-muted-foreground">
                 Permission to take notes is separate from permission to send content to AI or share
-                it.
+                it. Your note-permission report is saved with the interview at wrap-up; it is not
+                independently verified.
               </p>
               <Button
                 size="xl"
@@ -294,28 +372,50 @@ function Session({
   onDone: () => void;
 }) {
   const refresh = useRefresh();
+  const capture = useServerFn(saveInterviewWithConsent);
   const [i, setI] = useState(0);
   const [answers, setAnswers] = useState<Answer[]>(
     questions.map((q) => ({ q, note: "", quote: "" })),
   );
   const [tags, setTags] = useState<string[]>([]);
   const [saving, setSaving] = useState(false);
+  const [choices, setChoices] = useState<ConsentChoices>({
+    ...unknownConsent,
+    noteStatus: "granted",
+  });
+  const [requestId] = useState(() => crypto.randomUUID());
   const last = i === questions.length;
   const set = (k: "note" | "quote", v: string) =>
     setAnswers((a) => a.map((x, j) => (j === i ? { ...x, [k]: v } : x)));
 
   const finish = async () => {
     setSaving(true);
-    const { error } = await supabase
-      .from("interviews")
-      .insert({ project_id: p.id, contact_id: contactId, answers, tags, completed: true });
-    if (!error && contactId)
-      await supabase.from("contacts").update({ status: "interviewed" }).eq("id", contactId);
-    setSaving(false);
-    if (error) {
-      toast.error(error.message);
+    try {
+      if (choices.noteStatus !== "granted")
+        throw new Error(
+          "Reported permission to keep notes is required before saving this interview.",
+        );
+      await capture({
+        data: {
+          projectId: p.id,
+          contactId,
+          answers,
+          tags: tags as (
+            "has problem" | "current workaround" | "would use" | "would pay" | "gave referral"
+          )[],
+          noteStatus: "granted",
+          aiStatus: choices.aiStatus,
+          sharingStatus: choices.sharingStatus,
+          policyVersion: 1,
+          requestId,
+        },
+      });
+    } catch (error) {
+      toast.error(error instanceof Error ? error.message : "Interview was not saved.");
+      setSaving(false);
       return;
     }
+    setSaving(false);
     refresh("interviews", "contacts");
     toast.success("Interview saved. Nice work! ");
     onDone();
@@ -411,6 +511,14 @@ function Session({
                 </button>
               ))}
             </div>
+            <div className="mt-6">
+              <ConsentFields
+                value={choices}
+                onChange={setChoices}
+                disabled={saving}
+                label="Choices saved with this interview"
+              />
+            </div>
           </>
         )}
       </div>
@@ -425,7 +533,12 @@ function Session({
           Back
         </Button>
         {last ? (
-          <Button size="xl" className="flex-1" disabled={saving} onClick={finish}>
+          <Button
+            size="xl"
+            className="flex-1"
+            disabled={saving || choices.noteStatus !== "granted"}
+            onClick={finish}
+          >
             {saving ? "Saving…" : "Save interview"}
           </Button>
         ) : (
