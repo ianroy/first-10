@@ -42,8 +42,8 @@ function Panel({ classId }: { classId: string }) {
       <h2 className="text-xl font-bold">Invite a student account</h2>
       <p className="text-sm">
         This link admits only the named account as a student. It grants no teacher authority or
-        private-project access. Account-free class entry is a later feature. Share the link
-        yourself; First Ten sends no message.
+        private-project access. For students without accounts, use the separate class entry QR.
+        Share the link yourself; First Ten sends no message.
       </p>
       <form
         className="space-y-3"

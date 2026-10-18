@@ -22,10 +22,10 @@ Statuses are `not_started`, `in_progress`, `blocked`, `complete`, `deferred`, `d
 current_iteration: 5
 current_stage: P1_foundation_with_parallel_P2_and_R0
 status: in_progress
-last_task_done: WS-004
-next_task: CLS-007
-next_parallel_wave: [CLS-007, CTX-001, WS-009]
-active_claims: [CLS-007, CTX-001, WS-009]
+last_task_done: CLS-007
+next_task: CTX-001
+next_parallel_wave: [CTX-001, WS-009, CLS-002]
+active_claims: [CTX-001, WS-009, CLS-002]
 research_gate: not_passed
 foundation_gate: not_passed
 realtime_go: pending
@@ -55,9 +55,13 @@ resume_hint: >-
   CLS-007 integrated41da669; exact reviewed18000 applied only dedicated local55322 after17,
   official types/routes regenerated. Combined786 app tests/1402SQL/typecheck/build pass.
   Root classes nav and safe educator return are ready; hosted18 normal apply succeeded after
-  exact dry-run. Two auth-return regression cases pass; live guest acceptance is next.
+  exact dry-run. Live guest join/reload/logout/private recovery and old-key rejection pass;
+  teacher roster remains one learner after recovery. No raw private work or recovery keys
+  appear in teacher view. CLS-007 complete; CLS-002 reviewed submissions claimed with21000
+  after19/20. Guest activities and PDFs remain CLS-008/EXP-003.
   CTX-001 first retrieval/review slice in progress with19000; no provider inclusion yet.
-  Publish and apply migrations in order 16, 17, 18. Regenerate types and verify combined gates.
+  Migrations16/17/18 are published/applied. Next publication/apply order19,20,21.
+  Root reviews pinned source, regenerates types and verifies combined gates.
   General model quality, guest activities/submissions, sharing and retention remain unfinished.
 
 ```

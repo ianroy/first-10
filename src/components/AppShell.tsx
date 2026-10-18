@@ -84,13 +84,15 @@ export function AppShell({ title, children }: { title: string; children: ReactNo
         </Link>
         <div className="mb-4 rounded-2xl border bg-background p-3">
           <p className="text-[11px] font-semibold uppercase tracking-[.15em] text-muted-foreground">
-            Your project
+            {project ? "Your project" : "Your workspaces"}
           </p>
           <p className="mt-2 line-clamp-2 break-words font-display text-base font-bold">
-            {project?.name || "Your next idea"}
+            {project?.name || "Ideas & classrooms"}
           </p>
           <p className="mt-1 text-xs text-muted-foreground">
-            Stage {project?.stage || 1} · Learn, decide, try
+            {project
+              ? `Stage ${project.stage} · Learn, decide, try`
+              : "Choose an idea for personal work"}
           </p>
         </div>
         <nav aria-label="Workspace" className="space-y-1.5">

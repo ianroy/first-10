@@ -4633,7 +4633,7 @@
       "id": "CLS-002",
       "title": "Create student-reviewed submission snapshots",
       "phase": "P4",
-      "status": "not_started",
+      "status": "in_progress",
       "owner": "agent",
       "size": "S",
       "kind": "implementation",
@@ -4641,13 +4641,14 @@
       "depends_on": ["CLS-001", "PRV-001"],
       "requires_decisions": [],
       "write_scope": [
-        "supabase/migrations/**",
+        "supabase/migrations/20261018021000_reviewed_class_submissions.sql",
+        "src/lib/submissions/**",
         "src/lib/submissions.functions.ts",
         "src/components/classes/SubmissionPreview.tsx",
+        "src/components/classes/SubmissionList.tsx",
         "src/tests/cls-002/**",
-        "src/lib/submissions.functions.test.ts",
-        "src/components/classes/SubmissionPreview.test.tsx",
-        "supabase/tests/cls-002.sql"
+        "supabase/tests/cls-002.sql",
+        "docs/architecture/reviewed-submissions.md"
       ],
       "exclusive_locks": ["database-schema", "generated-types"],
       "read_first": [
@@ -4689,9 +4690,20 @@
         {
           "date": "2026-10-18",
           "text": "Guest model extension from FERPA-001 review: resolve account-only source assumptions before implementation."
+        },
+        {
+          "date": "2026-10-18",
+          "text": "Claimed shared reviewed-submission foundation after live guest entry passes. Reserve21 after19/20. Establish immutable server-derived preview and deliberate snapshot/audience/withdrawal semantics before guest activity adapters. No teacher read of raw private notes, no fake guest user/project IDs. Root owns eventual mount, PDFs/portfolio and generated files; worker sends schema/scope design before apply. CLS008 depends on this foundation and implements guest work/exports next."
         }
       ],
-      "claim": null,
+      "claim": {
+        "owner": "lifecycle",
+        "branch": "codex/reviewed-class-submissions-20261018",
+        "base_commit": "5caaabf",
+        "worktree": "/private/tmp/first-ten-project-lifecycle",
+        "started_at": "2026-10-18T20:10:00Z",
+        "lease_expires_at": "2026-10-19T00:30:00Z"
+      },
       "completion_evidence": [],
       "subtasks": [
         {
@@ -10638,7 +10650,7 @@
       "id": "CLS-007",
       "title": "Teacher provisions class or hackathon spaces for account-free student entry",
       "phase": "P4",
-      "status": "in_progress",
+      "status": "complete",
       "owner": "agent",
       "size": "M",
       "kind": "implementation",
@@ -10697,31 +10709,26 @@
           "text": "Claimed afterCLS001 foundation. Build real teacher class/hackathon provision UI outside RequireProject and no-account public entry, separate class-entry/team/principal-private capabilities, HttpOnly sessions and recoverable return, QR. No student emails or fake accounts; no private class/team content untilCLS008. Guest/class AI startsdisabled; retention schedule requested not enforced untilPRV003. Reserved18000; root publishes/applies15000→16000→17000→18000 in order and owns package locks/generatedtypes/routeTree/AppShell links."
         }
       ],
-      "claim": {
-        "owner": "lifecycle",
-        "branch": "codex/guest-class-entry-20261018",
-        "base_commit": "0263cf3",
-        "worktree": "/private/tmp/first-ten-project-lifecycle",
-        "started_at": "2026-10-18T16:10:31.613Z",
-        "lease_expires_at": "2026-10-19T00:00:00Z"
-      },
-      "completion_evidence": [],
+      "claim": null,
+      "completion_evidence": [
+        "41da669 +5caaabf (worker4bfd183): teacher provisioning independent of private projects, bounded class QR, real guest/team/principal capabilities, secure host cookies, exact-origin/CSRF, hash-only separate recovery, revocation and bounded admission. Combined786 app tests/1402 rollback SQL assertions/typecheck/build pass; two additional safe auth-return regressions pass. Real cap255/256 and blocked-expiry races pass in disposable schema clone, dropped/absence verified. Hosted18 applied normally after exact dry-run. Actual production desktop: fictional Babson class and seven-step assignment provisioned; QR rendered locally; guest joined as Fictional Team Compass/Fictional learner without an account form; reload retained secure session; logout and private recovery restored same scope; old one-use recovery rejected and rotated key succeeded; teacher roster remains one learner without private keys/notes. Screenshot /private/tmp/first-ten-pdf-qa/live-guest-class-desktop.png. Guest activities/submissions/PDFs remain CLS008/EXP003, not claimed from entry alone."
+      ],
       "subtasks": [
         {
           "id": "CLS-007.s1",
-          "status": "not_started",
+          "status": "complete",
           "instruction": "Teacher creates named class/hackathon with assignments, end/retention dates, visibility and AI policy; receives bounded revocable join link/code and QR.",
           "notes": []
         },
         {
           "id": "CLS-007.s2",
-          "status": "not_started",
+          "status": "complete",
           "instruction": "Implement high-entropy scoped guest/team capability sessions with hash-only secret storage, secure transport, expiry/rate limits and explicit schema principal exceptions; student entry requires no email/password or personal account.",
           "notes": []
         },
         {
           "id": "CLS-007.s3",
-          "status": "not_started",
+          "status": "complete",
           "instruction": "Exercise join, full/expired/revoked/closed space, invalid code, wrong team/class, teacher revocation and recovery without revealing roster/private work.",
           "notes": []
         }
