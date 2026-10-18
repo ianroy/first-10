@@ -1366,8 +1366,7 @@
       ],
       "requires_decisions": [],
       "write_scope": [
-        "supabase/migrations/**",
-        "src/integrations/supabase/types.ts",
+        "supabase/migrations/20261018005000_project_members.sql",
         "src/lib/permissions/**",
         "src/lib/membership.functions.ts",
         "src/tests/sec-004/**",
@@ -1375,8 +1374,7 @@
         "supabase/tests/sec-004.sql"
       ],
       "exclusive_locks": [
-        "database-schema",
-        "generated-types"
+        "project-membership-schema"
       ],
       "read_first": [
         "ProductSpec.md",
@@ -1417,6 +1415,10 @@
         {
           "date": "2026-10-18",
           "text": "Claimed for the authorized autonomous demo run."
+        },
+        {
+          "date": "2026-10-18",
+          "text": "Coordinator serialized integration and generated types; worker schema writes narrowed to unique reserved migration filename. No worker applies hosted migrations or edits generated types. Distinct scoped authoring can run concurrently; actual migration apply remains serial."
         }
       ],
       "claim": {
@@ -2015,16 +2017,15 @@
       "write_scope": [
         "src/lib/prompts/**",
         "src/lib/ai.functions.ts",
-        "supabase/migrations/**",
-        "src/integrations/supabase/types.ts",
+        "supabase/migrations/20261018006000_ai_provenance.sql",
         "src/tests/ai-002/**",
         "src/lib/ai.functions.test.ts",
-        "supabase/tests/ai-002.sql"
+        "supabase/tests/ai-002.sql",
+        "src/lib/ai/gateway.server.ts",
+        "src/lib/ai/provenance.server.ts"
       ],
       "exclusive_locks": [
-        "ai-entrypoint",
-        "database-schema",
-        "generated-types"
+        "ai-provenance-schema"
       ],
       "read_first": [
         "ProductSpec.md",
@@ -2063,6 +2064,10 @@
         {
           "date": "2026-10-18",
           "text": "Claimed for the authorized autonomous demo run."
+        },
+        {
+          "date": "2026-10-18",
+          "text": "Coordinator serialized integration and generated types; worker schema writes narrowed to unique reserved migration filename. No worker applies hosted migrations or edits generated types. Distinct scoped authoring can run concurrently; actual migration apply remains serial."
         }
       ],
       "claim": {
