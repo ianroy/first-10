@@ -1,0 +1,135 @@
+{
+  "mode": "offline_mocked",
+  "model_evaluated": false,
+  "paid_calls": 0,
+  "baseline_version": "first-ten-offline-baseline-v2",
+  "fixture_sha256": "33171616d5f522e95fa703a556ce3bed47a625101de90b0bc574963f2b2e1a4d",
+  "all_expectations_passed": true,
+  "valid_cases": [
+    {
+      "id": "questions-typical-v2",
+      "kind": "questions",
+      "passed": true
+    },
+    {
+      "id": "questions-edge-v2",
+      "kind": "questions",
+      "passed": true
+    },
+    {
+      "id": "synthesis-typical-v2",
+      "kind": "synthesis",
+      "passed": true
+    },
+    {
+      "id": "synthesis-edge-v2",
+      "kind": "synthesis",
+      "passed": true
+    },
+    {
+      "id": "stage2-typical-v2",
+      "kind": "stage2",
+      "passed": true
+    },
+    {
+      "id": "stage2-edge-v2",
+      "kind": "stage2",
+      "passed": true
+    },
+    {
+      "id": "stage3-typical-v2",
+      "kind": "stage3",
+      "passed": true
+    },
+    {
+      "id": "stage3-edge-v2",
+      "kind": "stage3",
+      "passed": true
+    }
+  ],
+  "invalid_cases": [
+    {
+      "id": "schema-rejected",
+      "passed": true
+    },
+    {
+      "id": "invented-quote",
+      "passed": true
+    },
+    {
+      "id": "duplicate-quote",
+      "passed": true
+    },
+    {
+      "id": "hypothetical-question",
+      "passed": true
+    },
+    {
+      "id": "source-instruction",
+      "passed": true
+    },
+    {
+      "id": "fabricated-certainty",
+      "passed": true
+    },
+    {
+      "id": "missing-channels",
+      "passed": true
+    }
+  ],
+  "summary": [
+    {
+      "kind": "questions",
+      "expected": 2,
+      "completed": 2,
+      "deterministic_passed": 2,
+      "deterministic_pass_rate": 1,
+      "human_passed": 0,
+      "human_pass_rate": null,
+      "reference_integrity": "unavailable_in_legacy_output",
+      "cost_usd": null,
+      "p95_latency_ms": null,
+      "measured_provider_results": false
+    },
+    {
+      "kind": "synthesis",
+      "expected": 2,
+      "completed": 2,
+      "deterministic_passed": 2,
+      "deterministic_pass_rate": 1,
+      "human_passed": 0,
+      "human_pass_rate": null,
+      "reference_integrity": "unavailable_in_legacy_output",
+      "cost_usd": null,
+      "p95_latency_ms": null,
+      "measured_provider_results": false
+    },
+    {
+      "kind": "stage2",
+      "expected": 2,
+      "completed": 2,
+      "deterministic_passed": 2,
+      "deterministic_pass_rate": 1,
+      "human_passed": 0,
+      "human_pass_rate": null,
+      "reference_integrity": "unavailable_in_legacy_output",
+      "cost_usd": null,
+      "p95_latency_ms": null,
+      "measured_provider_results": false
+    },
+    {
+      "kind": "stage3",
+      "expected": 2,
+      "completed": 2,
+      "deterministic_passed": 2,
+      "deterministic_pass_rate": 1,
+      "human_passed": 0,
+      "human_pass_rate": null,
+      "reference_integrity": "unavailable_in_legacy_output",
+      "cost_usd": null,
+      "p95_latency_ms": null,
+      "measured_provider_results": false
+    }
+  ],
+  "limitation": "Legacy outputs have no source IDs; reference-bearing adapter checks are tested separately, not credited as existing output capability. Human judgments remain unfilled."
+}

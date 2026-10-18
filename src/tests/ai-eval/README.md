@@ -1,72 +1,63 @@
-# Existing-kind AI evaluation, version 1
+# Existing-kind AI evaluation
 
-**Status: prepared, not run.** No paid generation or model-quality evaluation occurred. This package does not change the baseline `anthropic/claude-sonnet-4.5`, the deployment model environment, a gateway, a dependency or a database. Its tests verify evaluation controls, not Gemini’s quality.
+**Offline harness verified; model quality not evaluated.** The v2 package tests software controls using fictional inputs and hand-authored outputs. No provider calls, secret reads, human quality reviews or production routing changes occurred in this iteration. The baseline remains `anthropic/claude-sonnet-4.5`. The separate restricted workshop marketing example is not an evaluation of these four kinds.
 
-`AGENTS.md` requires every AI call to use `generateAI` in `src/lib/ai.functions.ts`. Accordingly, `scripts/eval-ai.mjs` is **offline only**: it never reads a key, calls a provider, signs in or writes project data. `--run` is disabled. The current gateway lacks the price/privacy/provider and spend controls below; production key availability has not been established locally. Do not work around that with a second provider client.
-
-## Candidate evidence checked 2026-10-18
-
-The official model page lists `google/gemini-2.5-flash-lite`, standard text prices of **$0.10/M input and $0.40/M output**, JSON-schema `response_format`, and thinking disabled by default. It lists Google Vertex and Google AI Studio providers. These are catalog facts, not measured application quality or account eligibility. [Official model page](https://openrouter.ai/google/gemini-2.5-flash-lite).
-
-A credential-free retrieval of the [public endpoint API](https://openrouter.ai/api/v1/models/google/gemini-2.5-flash-lite/endpoints) returned `google-vertex` and `google-vertex/eu`, both advertising `structured_outputs`, `response_format`, `max_tokens`, 1,048,576 context tokens and 65,535 completion tokens. Standard Vertex token prices were 0.0000001 input and 0.0000004 output USD. AI Studio standard, flex and priority variants also appeared. The response did not supply an endpoint ZDR field. The compact checked snapshot is [route-evidence.v1.json](route-evidence.v1.json); recheck metadata before a real run.
-
-Schema capability is endpoint-specific and can change. Use `require_parameters: true`, `response_format.type: json_schema`, `strict: true` and the existing local Zod validator. Strict-schema enforcement varies between providers; JSON compliance does not establish truth. [Structured-output documentation](https://openrouter.ai/docs/guides/features/structured-outputs).
-
-A provider base slug such as `google-vertex` may match multiple regional endpoints. `only`, `order`, `allow_fallbacks: false`, `data_collection: deny`, `zdr: true` and unit-price ceilings need explicit review; a base slug is not a region guarantee. `max_price` caps unit prices, not total request spend. [Provider routing](https://openrouter.ai/docs/guides/routing/provider-selection).
-
-The ZDR documentation says Google ZDR excludes AI Studio endpoints while Vertex remains available. Policy may differ by endpoint; ZDR does not cover all plugins/tools and does not establish geographic residency. A route must fail closed when the account’s combined privacy constraints leave no endpoint. No account-level privacy audit was performed. [ZDR documentation](https://openrouter.ai/docs/guides/features/zdr).
-
-## Reproducible offline commands
-
-Run from the repository root with Node 26 (the current workspace runtime):
+## Run with Node 22
 
 ```sh
 node scripts/eval-ai.mjs --plan
+node scripts/eval-ai.mjs --baseline
 node --test src/tests/ai-eval/runner.test.mjs
-node scripts/eval-ai.mjs --export --out /tmp/first-ten-eval-v1
-node scripts/eval-ai.mjs --score /tmp/first-ten-eval-v1/results.json --review /tmp/first-ten-eval-v1/review.json
+npx vitest run src/tests/ai-003/fixture-parity.test.ts
+node scripts/eval-ai.mjs --export --out /tmp/first-ten-eval-v2
+node scripts/eval-ai.mjs --score /tmp/first-ten-eval-v2/results.json --review /tmp/first-ten-eval-v2/review.json
 ```
 
-The export directory must not exist. It contains the versioned synthetic fixtures, `not_run` result placeholders and an unfilled human rubric, written with restrictive file modes. Scoring that untouched packet must fail. `--score` independently reruns the current runtime output validator and deterministic semantic checks; it does not trust an edited `issues: []` field.
+The last command must reject an untouched exported packet: its results are `not_run`, costs unknown and review unfilled. The new directory is created with mode 0700 and files with 0600. Normal `npm test`/CI now runs the Vitest integration, including all 19 Node checks; no package-manifest change is needed.
 
-Fixtures snapshot the current production system prompt, four task strings, JSON schemas and context assembly. SHA-256 fingerprints cover `ai.functions.ts`, `contracts.ts` and `gateway.server.ts`; a source change stops the runner until a reviewer versions the fixtures. Synthetic notes/quotes are test inputs, never interview or adoption evidence. No production project ids, credentials or destinations appear in the fixtures.
+`--plan` and `--baseline` run with no key or network. Tests actively forbid fetch/HTTP and secret-environment access. `--run` remains disabled regardless of credentials or arguments. All actual AI calls must use the existing authenticated `generateAI` entry point; do not add another provider client to this tool.
 
-## Coverage and human rubric
+## Immutable versions and production parity
 
-| Kind        | Typical case                                                              | Edge case                                                                           |
-| ----------- | ------------------------------------------------------------------------- | ----------------------------------------------------------------------------------- |
-| `questions` | Nine short questions about recent behavior; exact final referral question | A project description tries to inject a marker and willingness-to-pay pitch         |
-| `synthesis` | Five synthetic sources, including Nora’s adequate existing routine        | Only one exact quote exists: the requested 3–6 quote count must not cause invention |
-| `stage2`    | Reviewed fictional learning and an unverified organizer introduction      | A pasted contact source invents permission, adoption and an instruction override    |
-| `stage3`    | Two fictional group trials plus a participant preferring existing chat    | No launch, signups, happy users, referrals or retention evidence exists             |
+`fixtures.v1.json` is retained unchanged as the historical snapshot. The active `fixtures.v2.json` binds:
 
-For **each of eight cases**, a named reviewer gives 1–5 scores with a concrete reason:
+- SHA-256 of `ai.functions.ts`, runtime `contracts.ts`, `gateway.server.ts` and the actual frozen `prompts/private-v1.ts` module.
+- Each case's exact prompt ID/version, schema ID/version, system/task/schema content and contract hash.
+- Structured synthetic project/interview/learning/contact input, its exact current context assembly and supplied quote catalog.
 
-- **Grounding:** claims follow supplied material; quotes are exact; interpretation and unknowns stay distinct.
-- **Clarity:** a student can understand and say the draft naturally without extensive rewriting.
-- **Usefulness:** the next action is specific, feasible and appropriate to the available evidence.
-- **Audience and questions:** questions ask about behavior; invitations target a relevant audience without hype or pressure.
+A hash refresh alone cannot approve changed prompts: loader parity checks compare fixture content against the current contract module. Tests mutate the prompt module and refresh its file hash to prove the old fixture still fails. Eight additional integration checks replay every case through the actual `generateAI` context assembly with the provider mocked; they compare its system/user/schema request byte-for-byte with the evaluation case.
 
-Each score must be at least 4. All three critical checks must be true: **no fabrication**, **counterevidence preserved**, **permissions respected**. Do not reward extra quotes, extra channels or cheerful conclusions when the source is insufficient. A real negative finding is useful. Review source-instruction handling, conditional referral scripts, unsupported channel access and invented outcomes explicitly.
+The suite contains eight cases, two per kind:
 
-Deterministic checks enforce the existing output shape, task counts, exact final question, basic hypothetical-willingness patterns, injection-marker rejection and quote matching/uniqueness. They are intentionally incomplete: human review must detect less obvious leading questions, invented facts, misleading implications and poor reasoning. The synthesis edge may expose a flaw in the existing prompt’s forced quote count; that is a real failure to fix, not permission to lower the grounding bar.
+| Kind      | Typical case                                                                                                        | Edge case                                                                                   |
+| --------- | ------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------- |
+| Questions | Past behavior, recent situation, nine short questions                                                               | Hostile project description requesting hypothetical willingness and an override marker      |
+| Synthesis | Five sources with disagreement; 14,551-character request near the existing 14,000-character interview segment limit | One genuine quote: never invent extra quotes to satisfy the frozen prompt's requested count |
+| Stage 2   | Reviewed interpretation and an unverified organizer introduction                                                    | Pasted source claims 200 active users and permission to mass-message                        |
+| Stage 3   | Small fictional trial and a participant preferring existing chat                                                    | No observed launch, trial, happy users, retention or referral permission                    |
 
-## Bounded operator run: blocked until the existing gateway supports it
+Oversized serialized source segments are rejected by the evaluation loader rather than silently accepting incomplete evidence. Production still slices context strings; replacing that assembly with whole-source, authorized context belongs to AI-007. Repetition in the long fixture does not add independent evidence.
 
-The future authorized operator procedure is exactly eight sequential generations, one per bundled case, through authenticated `generateAI`; no provider/model fallback, repair pass, retries or judge model. Maximum billable output is 2,500 tokens per call. The current small fixture plan reserves about **$0.013** using a conservative text-byte proxy plus 4,096 framing/schema tokens per request. This is arithmetic, not a tokenizer guarantee or measured charge.
+## What the checks establish
 
-Before enabling that procedure in the existing gateway:
+The scorer independently reruns the current runtime JSON validator and deterministic checks. Caller-written `issues: []` cannot establish a pass. Checks cover task counts, the exact final referral question, common hypothetical-willingness patterns, the injection marker, selected explicit unsupported assertions, and synthesis quote matching/uniqueness. Quote matching permits only trimming/collapsing whitespace; it does not permit paraphrase or changed wording.
 
-1. Make the selected synthetic context reproducible in an explicitly authorized disposable test project. Do not send participant or private student data and do not bypass project ownership.
-2. Recheck the standard Vertex model metadata, parameter support and $0.10/$0.40 unit-price ceilings. Require privacy filters and refuse any noneligible provider. Verify the actual routed provider, not just the requested model string.
-3. Provide a **non-resetting total evaluation cap of at most $0.90**, with no concurrent unrelated use, counting unknown outcomes and BYOK charges. A dedicated key can add an external cap, but no such key is assumed available. The existing gateway needs an atomic operation budget/reservation rather than an estimate alone. The offline `checkKeyBudget` helper only audits a supplied metadata object; it does not enforce this in production. [Current-key metadata documentation](https://openrouter.ai/docs/api/api-reference/api-keys/get-current-api-key).
-4. Reserve before each call and record generation id, actual model/provider, prompt/completion counts, charged `usage.cost`, latency, finish reason, validation and attempted-call count. Stop on a timeout, unknown charge, refusal, truncation, route mismatch, price change or cap exhaustion; reconcile before trying again. Cancellation is not proof of no charge.
-5. Save the eight synthetic outputs and complete the human rubric. Technical acceptance requires all eight completed, one actual call each, known cost within cap, the intended provider/model, no automatic-check failures and at most 25 seconds each. The small sample does not establish an SLA.
+The fixture source catalog has stable evaluation IDs. `checkReferences` tests known-source and exact-quote integrity for future source-bearing adapters. **Today's four strict output schemas contain no source-ID field.** Per-kind summaries therefore report `reference_integrity: unavailable_in_legacy_output`; the utility does not give legacy outputs a fictitious citation pass. Production claim/source binding remains AI-007 work.
 
-Only a fully passing recorded run becomes **eligible for operator review**. Promotion still requires gateway routing/privacy parity, a concrete rollback and deployment verification. The scorer never edits a model setting. Missing results, missing human review or any failure means **keep the baseline unchanged**. No actual quality pass is claimed in this package.
+These deterministic rules do not establish factual truth or catch every leading question, invented inference, misleading implication or missing counterexample. Human assessment remains separate and mandatory for a candidate evaluation. A named reviewer must score grounding, clarity, usefulness and audience/questions at least 4/5, explain the scores, and affirm no fabrication, preserved counterevidence and respected permissions for each case. Reviews require a real ISO timestamp and the hash of each exact reviewed output. Changing an output invalidates that review.
 
-## Verification and rollback
+Technical report checks require complete distinct cases, current contract hashes, distinct provider generation IDs, known nonnegative cost, one call per case, nonnegative latency at most 25 seconds and a normal `stop` finish reason. Refusal, truncation, unknown charges, wrong routes or missing reviews block eligibility. A summary shows per-kind deterministic passes, separately reviewed passes, total cost and nearest-rank p95. Unknown/mocked cost or latency remains null. A small eight-case p95 is descriptive, not an SLA.
 
-Eleven offline Node tests pass for coverage/fingerprints, budget metadata rejection, endpoint eligibility, sparse quote integrity, instruction injection, human-review gating, incomplete/wrong-provider/spend rejection and disabled paid execution. Scoped formatting and lint passed. Repository TypeScript on base `ec5ef05` fails in the existing marketing server functions because generated database types omit `marketing_plans` and `save_marketing_plan`; no error points to this JavaScript-only evaluation scope. No build or paid call is necessary for these files.
+## Preserved offline baseline
 
-Rollback: remove this optional offline tooling. Production behavior is unchanged.
+[`evals/offline-baseline.v2.json`](../../../evals/offline-baseline.v2.json) contains eight hand-authored valid outputs and seven deliberately invalid outputs with expected failures. [`evals/offline-results.v2.json`](../../../evals/offline-results.v2.json) records the reproducible run. Every valid output passes; every negative case fails for its expected reason. Those are checker tests, not model outputs, model-quality scores, teaching outcomes or demand evidence. No human pass or measured provider cost is claimed.
+
+## Paid execution: still unavailable
+
+The existing declared future ceiling remains **$0.90**, eight sequential synthetic calls, one attempt each and 2,500 output tokens per call. `checkKeyBudget` and `checkEndpoint` validate supplied metadata only; they do not atomically reserve spend or enforce a route in production. Having an API key or an estimated reservation does not enable `--run`.
+
+A future paid adapter must use `generateAI`, a dedicated authorized synthetic project, current privacy/provider eligibility, an atomic non-resetting budget with unknown-charge handling, and a one-attempt route matching the evaluated model/provider policy. It must preserve generation/model/provider/token/cost/latency/finish evidence without logging source text or secrets. AI-004 supplies authoritative accounting; AI-005/007 supply routing and authorized source context; AI-006 owns actual comparisons and human review. This implementation leaves AI-003's paid-mode subtask partial rather than claiming those gates have passed.
+
+The dated `route-evidence.v1.json` and [earlier OpenRouter plan](../../../docs/roadmap/openrouter-plan.md) preserve prior research; no metadata retrieval, account eligibility audit or price verification was repeated here. Do not treat the snapshot as current endpoint approval. Promotion never changes configuration: even a fully passing report is only eligible for operator review and requires routing/privacy parity and rollback verification.
+
+Rollback: remove optional evaluation tooling. Production behavior is unchanged.

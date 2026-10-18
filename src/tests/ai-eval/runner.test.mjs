@@ -1,9 +1,9 @@
 import { test } from "node:test";
 import assert from "node:assert/strict";
 import { execFileSync } from "node:child_process";
-import { readFile, mkdtemp, writeFile, rm } from "node:fs/promises";
+import { readFile, mkdtemp, writeFile, rm, mkdir, copyFile } from "node:fs/promises";
 import { tmpdir } from "node:os";
-import { join } from "node:path";
+import { join, dirname } from "node:path";
 import {
   loadFixtures,
   checkKeyBudget,
@@ -13,8 +13,17 @@ import {
   estimatedReservation,
   MODEL,
   OUTPUT_CAP,
+  hash,
+  checkReferences,
+  runOfflineBaseline,
+  summarizeReport,
+  FIXTURE_PATH,
+  assembleFixtureContext,
 } from "../../../scripts/eval-ai.mjs";
 const fixtures = await loadFixtures();
+const baseline = JSON.parse(
+  await readFile(new URL("../../../evals/offline-baseline.v2.json", import.meta.url), "utf8"),
+);
 const endpoint = {
   data: {
     id: MODEL,
@@ -84,7 +93,7 @@ test("endpoint preflight fails closed on missing schema support, price increases
   assert.throws(() => checkEndpoint({ data: { id: MODEL, endpoints: [] } }));
 });
 test("sparse source checks reject fabricated or duplicated quotes instead of satisfying a forced count", () => {
-  const c = fixtures.cases.find((c) => c.id === "synthesis-edge-v1");
+  const c = fixtures.cases.find((c) => c.id === "synthesis-edge-v2");
   const data = { quotes: [c.source_quotes[0]], changes: [{}, {}, {}] };
   assert.deepEqual(semanticChecks(c, data), []);
   assert.ok(
@@ -113,23 +122,27 @@ function passing() {
     execution_path: "generateAI",
     version: fixtures.version,
     fixture_sha256: fixtures.fixture_sha256,
-    endpoint: { provider: "Google" },
+    endpoint: { provider: "Google", tag: "google-vertex", model: MODEL },
     results: fixtures.cases.map((c) => ({
       id: c.id,
+      kind: c.kind,
+      contract_sha256: c.contract_sha256,
+      output: baseline.cases.find((r) => r.id === c.id).output,
       status: "complete",
       model: MODEL,
       provider: "Google",
-      generation_id: "synthetic-generation",
+      generation_id: `synthetic-generation-${c.id}`,
       issues: [],
       actual_calls: 1,
       cost_usd: 0.001,
       latency_ms: 1000,
+      finish_reason: "stop",
     })),
   };
   const review = {
     fixture_sha256: fixtures.fixture_sha256,
     reviewer: "Test reviewer",
-    reviewed_at: "2026-10-18",
+    reviewed_at: "2026-10-18T12:00:00.000Z",
     cases: fixtures.cases.map((c) => ({
       id: c.id,
       grounding: 4,
@@ -140,6 +153,7 @@ function passing() {
       preserves_counterevidence: true,
       respects_permissions: true,
       reason: "Synthetic test fixture only.",
+      output_sha256: hash(JSON.stringify(baseline.cases.find((r) => r.id === c.id).output)),
     })),
   };
   return { report, review };
@@ -158,8 +172,13 @@ test("unknown spend, absent provider, duplicate cases, slow calls and changed pr
     (r) => (r.results[0].cost_usd = null),
     (r) => (r.results[0].provider = "Google AI Studio"),
     (r) => (r.results[0].latency_ms = 25001),
+    (r) => (r.results[0].latency_ms = -1),
+    (r) => (r.results[0].generation_id = r.results[1].generation_id),
+    (r) => (r.results[0].contract_sha256 = "stale"),
+    (r) => (r.results[0].finish_reason = "length"),
+    (r) => (r.endpoint.tag = "google-ai-studio"),
     (r) => (r.results[0].actual_calls = 2),
-    (r) => (r.results[0].issues = ["unmatched_quote"]),
+    (r) => (r.results[0].output = {}),
     (r) => (r.results[0].id = r.results[1].id),
     (r) => (r.fixture_sha256 = "changed"),
   ]) {
@@ -169,7 +188,7 @@ test("unknown spend, absent provider, duplicate cases, slow calls and changed pr
   }
 });
 test("evaluation fixtures contain no production project IDs or destinations", async () => {
-  const raw = await readFile(new URL("./fixtures.v1.json", import.meta.url), "utf8");
+  const raw = await readFile(new URL("./fixtures.v2.json", import.meta.url), "utf8");
   assert.equal(/https?:\/\//.test(raw), false);
   assert.equal(/sk-or-v1-|service_role|SUPABASE_SERVICE_ROLE_KEY/.test(raw), false);
 });
@@ -217,5 +236,152 @@ test("offline export stays not-run and CLI scoring independently rejects tampere
     assert.ok(scored.blockers.some((b) => b.includes("technical/spend")));
   } finally {
     await rm(parent, { recursive: true, force: true });
+  }
+});
+
+test("review is bound to each exact output and a real ISO date", () => {
+  for (const mutate of [
+    (_r, v) => (v.reviewed_at = "not-a-date"),
+    (_r, v) => (v.reviewed_at = "2026-02-30T12:00:00.000Z"),
+    (_r, v) => (v.cases[0].output_sha256 = "old-output"),
+    (r) => (r.results[0].output.questions[0] = "What happened in your previous meeting?"),
+  ]) {
+    const { report, review } = passing();
+    // Each call gets independent outputs; fixture baseline must remain immutable.
+    const copiedReport = structuredClone(report);
+    mutate(copiedReport, review);
+    assert.equal(promotionGate(copiedReport, review, fixtures).eligible_for_operator_review, false);
+  }
+});
+test("malformed run envelopes fail closed, and edited issue arrays cannot fake output quality", () => {
+  for (const results of [null, {}, [null], []]) {
+    const { report, review } = passing();
+    report.results = results;
+    assert.equal(promotionGate(report, review, fixtures).eligible_for_operator_review, false);
+  }
+  const { report, review } = passing();
+  report.results[0].output = { questions: ["Would you pay for this?"] };
+  report.results[0].issues = [];
+  assert.equal(promotionGate(report, review, fixtures).eligible_for_operator_review, false);
+});
+test("reference checker rejects foreign ids and mismatched quotes without crediting legacy outputs", async () => {
+  const c = fixtures.cases.find((c) => c.kind === "synthesis");
+  const source = c.source_catalog[0];
+  assert.deepEqual(checkReferences(c, [{ sourceId: source.id, quote: source.quote }]), []);
+  assert.deepEqual(checkReferences(c, [{ sourceId: "not-supplied", quote: source.quote }]), [
+    "unknown_source_id",
+  ]);
+  assert.deepEqual(checkReferences(c, [{ sourceId: source.id, quote: "Fabricated quote" }]), [
+    "source_quote_mismatch",
+  ]);
+  assert.deepEqual(checkReferences(c, [{ sourceId: source.id }]), ["invalid_reference"]);
+  assert.deepEqual(checkReferences(c, null), ["invalid_references"]);
+  const result = await runOfflineBaseline(fixtures);
+  assert.equal(result.all_expectations_passed, true);
+  assert.equal(result.model_evaluated, false);
+  assert.equal(result.paid_calls, 0);
+  assert.ok(
+    result.summary.every(
+      (s) =>
+        s.reference_integrity === "unavailable_in_legacy_output" &&
+        s.human_passed === 0 &&
+        s.cost_usd === null &&
+        s.p95_latency_ms === null,
+    ),
+  );
+});
+test("per-kind summaries distinguish software checks, reviewed outputs, known spend and p95", () => {
+  const { report, review } = passing();
+  report.results[0].latency_ms = 100;
+  report.results[1].latency_ms = 250;
+  const summary = summarizeReport(report, fixtures, review);
+  assert.equal(summary[0].p95_latency_ms, 250);
+  assert.equal(summary[0].cost_usd, 0.002);
+  assert.equal(summary[0].deterministic_passed, 2);
+  assert.equal(summary[0].human_passed, 2);
+  report.results[0].cost_usd = null;
+  assert.equal(summarizeReport(report, fixtures, review)[0].cost_usd, null);
+  review.reviewed_at = "not-a-date";
+  assert.equal(summarizeReport(report, fixtures, review)[0].human_passed, 0);
+  assert.equal(summarizeReport(report, fixtures, review)[0].human_pass_rate, null);
+});
+test("key and endpoint guards reject unknown ceilings and invalid reservations", () => {
+  for (const reservation of [NaN, Infinity, -1, 0, 1])
+    assert.throws(() => checkKeyBudget(key, reservation));
+  assert.throws(() => checkKeyBudget({ ...key, limit: 0.01, limit_remaining: 0.9 }, 0.001));
+  for (const cap of [undefined, null, NaN, -1]) {
+    const copy = structuredClone(endpoint);
+    copy.data.endpoints[0].max_completion_tokens = cap;
+    assert.throws(() => checkEndpoint(copy));
+  }
+});
+async function fixtureTree() {
+  const dir = await mkdtemp(join(tmpdir(), "first-ten-eval-bindings-"));
+  for (const path of [FIXTURE_PATH, ...Object.keys(fixtures.source_sha256)]) {
+    await mkdir(dirname(join(dir, path)), { recursive: true });
+    await copyFile(path, join(dir, path));
+  }
+  return dir;
+}
+test("v2 binds prompt content and identity even if someone refreshes only file hashes", async () => {
+  const dir = await fixtureTree();
+  try {
+    const path = "src/lib/prompts/private-v1.ts";
+    const changed = (await readFile(join(dir, path), "utf8")).replace(
+      "warm, practical coach",
+      "different, unreviewed coach",
+    );
+    await writeFile(join(dir, path), changed);
+    const fixture = JSON.parse(await readFile(join(dir, FIXTURE_PATH), "utf8"));
+    fixture.source_sha256[path] = hash(changed);
+    await writeFile(join(dir, FIXTURE_PATH), JSON.stringify(fixture));
+    await assert.rejects(loadFixtures(dir), /parity failed/);
+  } finally {
+    await rm(dir, { recursive: true, force: true });
+  }
+});
+test("v2 refuses missing prompt pins, wrong versions, changed schema, forged quote catalog or truncated evidence", async () => {
+  for (const mutate of [
+    (f) => delete f.source_sha256["src/lib/prompts/private-v1.ts"],
+    (f) => f.cases[0].contract.promptVersion++,
+    (f) => (f.cases[0].schema.properties.extra = { type: "string" }),
+    (f) => (f.cases[2].source_catalog[0].quote = "Not supplied"),
+    (f) => {
+      f.cases[2].input.interviews[0].answers[0].note += "x".repeat(100);
+      f.cases[2].user =
+        f.cases[2].user.slice(0, f.cases[2].user.indexOf("\n\n")) +
+        "\n\n" +
+        assembleFixtureContext(f.cases[2]);
+    },
+  ]) {
+    const dir = await fixtureTree();
+    try {
+      const f = JSON.parse(await readFile(join(dir, FIXTURE_PATH), "utf8"));
+      mutate(f);
+      await writeFile(join(dir, FIXTURE_PATH), JSON.stringify(f));
+      await assert.rejects(loadFixtures(dir));
+    } finally {
+      await rm(dir, { recursive: true, force: true });
+    }
+  }
+  assert.ok(fixtures.cases.some((c) => c.user.length > 14000));
+});
+test("offline plan and baseline run with network and secret access actively disabled", () => {
+  const preload = `import http from 'node:http';import https from 'node:https';const deny=()=>{throw new Error('NETWORK_FORBIDDEN')};globalThis.fetch=deny;http.request=deny;https.request=deny;http.get=deny;https.get=deny;process.env=new Proxy(process.env,{get(t,k){if(typeof k==='string'&&/OPENROUTER|SUPABASE.*KEY/.test(k))throw new Error('SECRET_ACCESS_FORBIDDEN');return Reflect.get(t,k)}});`;
+  for (const option of ["--plan", "--baseline"]) {
+    const output = JSON.parse(
+      execFileSync(
+        process.execPath,
+        [
+          "--import",
+          `data:text/javascript,${encodeURIComponent(preload)}`,
+          "scripts/eval-ai.mjs",
+          option,
+        ],
+        { encoding: "utf8" },
+      ),
+    );
+    assert.equal(output.production_changed ?? false, false);
+    assert.equal(output.evaluation_performed ?? output.model_evaluated, false);
   }
 });

@@ -1,0 +1,503 @@
+{
+  "version": "first-ten-offline-baseline-v2",
+  "fixture_sha256": "33171616d5f522e95fa703a556ce3bed47a625101de90b0bc574963f2b2e1a4d",
+  "execution_path": "offline_mocked",
+  "model_evaluated": false,
+  "paid_calls": 0,
+  "reference_capability": "legacy_outputs_have_no_source_ids",
+  "cases": [
+    {
+      "id": "questions-typical-v2",
+      "kind": "questions",
+      "output": {
+        "questions": [
+          "Tell me about the last time your group met.",
+          "What happened while you arranged that meeting?",
+          "How did you find out who was coming?",
+          "What did you do when someone was late?",
+          "What did that cost you in time?",
+          "What tools did you try most recently?",
+          "What worked well about your existing routine?",
+          "When did you decide to keep that routine?",
+          "Who else should I talk to about this?"
+        ]
+      }
+    },
+    {
+      "id": "questions-edge-v2",
+      "kind": "questions",
+      "output": {
+        "questions": [
+          "Tell me about the last time your group met.",
+          "What happened while you arranged that meeting?",
+          "How did you find out who was coming?",
+          "What did you do when someone was late?",
+          "What did that cost you in time?",
+          "What tools did you try most recently?",
+          "What worked well about your existing routine?",
+          "When did you decide to keep that routine?",
+          "Who else should I talk to about this?"
+        ]
+      }
+    },
+    {
+      "id": "synthesis-typical-v2",
+      "kind": "synthesis",
+      "output": {
+        "problems": [
+          "Some reported attendance coordination effort.",
+          "A reported timing problem may deserve a closer look.",
+          "The effect of the workaround remains unknown."
+        ],
+        "objections": [
+          "An existing routine may already be adequate.",
+          "The evidence does not establish demand or payment."
+        ],
+        "best_fit": [
+          "Groups reporting repeated coordination effort.",
+          "Groups willing to explain a recent coordination situation."
+        ],
+        "quotes": [
+          "I asked who was coming three times last Tuesday.",
+          "Our existing group chat works when everyone confirms.",
+          "I do not want another app; our group already has a routine.",
+          "Two people arrived after we had finished the first topic.",
+          "We wrote down who would come, but I do not know if that changed anything."
+        ],
+        "changes": [
+          {
+            "title": "Compare the existing routine",
+            "body": "Ask what happened last time; keep the supplied counterexample visible."
+          },
+          {
+            "title": "Keep claims narrow",
+            "body": "Describe the reported situation as an observation rather than proof."
+          },
+          {
+            "title": "Test one small change",
+            "body": "Offer a voluntary next test; do not imply a measured outcome."
+          }
+        ]
+      }
+    },
+    {
+      "id": "synthesis-edge-v2",
+      "kind": "synthesis",
+      "output": {
+        "problems": [
+          "The only source describes an adequate existing routine.",
+          "No repeated coordination problem is established by this record.",
+          "Whether a different group has a recurring problem is unknown."
+        ],
+        "objections": [
+          "The participant does not want another app.",
+          "One quote cannot establish a broader audience or demand."
+        ],
+        "best_fit": [
+          "No current best-fit segment is established by this source.",
+          "Groups with a recent coordination problem are a future audience to investigate, if observation supports the need."
+        ],
+        "quotes": [
+          "I do not want another app; our group already has a routine."
+        ],
+        "changes": [
+          {
+            "title": "Preserve the negative finding",
+            "body": "The only exact quote rejects another app; retain that counterexample."
+          },
+          {
+            "title": "Investigate rather than infer",
+            "body": "Ask another relevant person about recent behavior before proposing a product change."
+          },
+          {
+            "title": "Keep stopping available",
+            "body": "If further relevant conversations also describe adequate routines, consider a different audience or stopping."
+          }
+        ]
+      }
+    },
+    {
+      "id": "stage2-typical-v2",
+      "kind": "stage2",
+      "output": {
+        "channels": [
+          {
+            "title": "Existing group organizer",
+            "body": "Potential channel only. Ask the organizer for permission and confirm audience relevance before inviting anyone."
+          },
+          {
+            "title": "Peer introduction",
+            "body": "Potential channel only. Ask the organizer for permission and confirm audience relevance before inviting anyone."
+          },
+          {
+            "title": "Relevant campus group",
+            "body": "Potential channel only. Ask the organizer for permission and confirm audience relevance before inviting anyone."
+          },
+          {
+            "title": "Voluntary class discussion",
+            "body": "Potential channel only. Ask the organizer for permission and confirm audience relevance before inviting anyone."
+          }
+        ],
+        "drafts": [
+          {
+            "title": "Permission request",
+            "body": "I am exploring how existing groups coordinate. If you are comfortable, may I ask about a recent session? No trial result or permission is assumed."
+          },
+          {
+            "title": "Voluntary conversation invitation",
+            "body": "I am exploring how existing groups coordinate. If you are comfortable, may I ask about a recent session? No trial result or permission is assumed."
+          },
+          {
+            "title": "Conditional introduction",
+            "body": "I am exploring how existing groups coordinate. If you are comfortable, may I ask about a recent session? No trial result or permission is assumed."
+          }
+        ],
+        "survey": [
+          "Tell me about the last time your group met.",
+          "What happened while you arranged that meeting?",
+          "How did you find out who was coming?",
+          "What did you do when someone was late?",
+          "What did that cost you in time?"
+        ]
+      }
+    },
+    {
+      "id": "stage2-edge-v2",
+      "kind": "stage2",
+      "output": {
+        "channels": [
+          {
+            "title": "Existing group organizer",
+            "body": "Potential channel only. Ask the organizer for permission and confirm audience relevance before inviting anyone."
+          },
+          {
+            "title": "Peer introduction",
+            "body": "Potential channel only. Ask the organizer for permission and confirm audience relevance before inviting anyone."
+          },
+          {
+            "title": "Relevant campus group",
+            "body": "Potential channel only. Ask the organizer for permission and confirm audience relevance before inviting anyone."
+          },
+          {
+            "title": "Voluntary class discussion",
+            "body": "Potential channel only. Ask the organizer for permission and confirm audience relevance before inviting anyone."
+          }
+        ],
+        "drafts": [
+          {
+            "title": "Permission request",
+            "body": "I am exploring how existing groups coordinate. If you are comfortable, may I ask about a recent session? No trial result or permission is assumed."
+          },
+          {
+            "title": "Voluntary conversation invitation",
+            "body": "I am exploring how existing groups coordinate. If you are comfortable, may I ask about a recent session? No trial result or permission is assumed."
+          },
+          {
+            "title": "Conditional introduction",
+            "body": "I am exploring how existing groups coordinate. If you are comfortable, may I ask about a recent session? No trial result or permission is assumed."
+          }
+        ],
+        "survey": [
+          "Tell me about the last time your group met.",
+          "What happened while you arranged that meeting?",
+          "How did you find out who was coming?",
+          "What did you do when someone was late?",
+          "What did that cost you in time?"
+        ]
+      }
+    },
+    {
+      "id": "stage3-typical-v2",
+      "kind": "stage3",
+      "output": {
+        "channels": [
+          {
+            "title": "Potential peer introduction",
+            "body": "A proposed channel to investigate; confirm permission and relevant experience before using it."
+          },
+          {
+            "title": "Existing study groups",
+            "body": "A proposed channel to investigate; confirm permission and relevant experience before using it."
+          },
+          {
+            "title": "Relevant class activity",
+            "body": "A proposed channel to investigate; confirm permission and relevant experience before using it."
+          },
+          {
+            "title": "Organizer conversation",
+            "body": "A proposed channel to investigate; confirm permission and relevant experience before using it."
+          }
+        ],
+        "referral_asks": [
+          "If you later choose to try it and find it useful, may I ask whom else I should talk to?",
+          "Only if you are comfortable after a future trial, could you suggest a relevant person?",
+          "No referral is assumed: would an optional introduction feel appropriate after a useful trial?"
+        ],
+        "onboarding_questions": [
+          "Tell me about the last time your group met.",
+          "What happened while you arranged that meeting?",
+          "How did you find out who was coming?",
+          "What did you do when someone was late?"
+        ]
+      }
+    },
+    {
+      "id": "stage3-edge-v2",
+      "kind": "stage3",
+      "output": {
+        "channels": [
+          {
+            "title": "Potential peer introduction",
+            "body": "A proposed channel to investigate; confirm permission and relevant experience before using it."
+          },
+          {
+            "title": "Existing study groups",
+            "body": "A proposed channel to investigate; confirm permission and relevant experience before using it."
+          },
+          {
+            "title": "Relevant class activity",
+            "body": "A proposed channel to investigate; confirm permission and relevant experience before using it."
+          },
+          {
+            "title": "Organizer conversation",
+            "body": "A proposed channel to investigate; confirm permission and relevant experience before using it."
+          }
+        ],
+        "referral_asks": [
+          "If you later choose to try it and find it useful, may I ask whom else I should talk to?",
+          "Only if you are comfortable after a future trial, could you suggest a relevant person?",
+          "No referral is assumed: would an optional introduction feel appropriate after a useful trial?"
+        ],
+        "onboarding_questions": [
+          "Tell me about the last time your group met.",
+          "What happened while you arranged that meeting?",
+          "How did you find out who was coming?",
+          "What did you do when someone was late?"
+        ]
+      }
+    }
+  ],
+  "negative_cases": [
+    {
+      "id": "schema-rejected",
+      "caseId": "questions-typical-v2",
+      "output": {
+        "questions": [
+          "Tell me about the last time your group met.",
+          "What happened while you arranged that meeting?",
+          "How did you find out who was coming?",
+          "What did you do when someone was late?",
+          "What did that cost you in time?",
+          "What tools did you try most recently?",
+          "What worked well about your existing routine?",
+          "When did you decide to keep that routine?",
+          "Who else should I talk to about this?"
+        ],
+        "extra": "not allowed"
+      },
+      "expectedIssues": [
+        "output_schema_failed"
+      ]
+    },
+    {
+      "id": "invented-quote",
+      "caseId": "synthesis-typical-v2",
+      "output": {
+        "problems": [
+          "Some reported attendance coordination effort.",
+          "A reported timing problem may deserve a closer look.",
+          "The effect of the workaround remains unknown."
+        ],
+        "objections": [
+          "An existing routine may already be adequate.",
+          "The evidence does not establish demand or payment."
+        ],
+        "best_fit": [
+          "Groups reporting repeated coordination effort.",
+          "Groups willing to explain a recent coordination situation."
+        ],
+        "quotes": [
+          "An invented promise"
+        ],
+        "changes": [
+          {
+            "title": "Compare the existing routine",
+            "body": "Ask what happened last time; keep the supplied counterexample visible."
+          },
+          {
+            "title": "Keep claims narrow",
+            "body": "Describe the reported situation as an observation rather than proof."
+          },
+          {
+            "title": "Test one small change",
+            "body": "Offer a voluntary next test; do not imply a measured outcome."
+          }
+        ]
+      },
+      "expectedIssues": [
+        "unmatched_quote",
+        "quote_count_or_duplicates"
+      ]
+    },
+    {
+      "id": "duplicate-quote",
+      "caseId": "synthesis-typical-v2",
+      "output": {
+        "problems": [
+          "Some reported attendance coordination effort.",
+          "A reported timing problem may deserve a closer look.",
+          "The effect of the workaround remains unknown."
+        ],
+        "objections": [
+          "An existing routine may already be adequate.",
+          "The evidence does not establish demand or payment."
+        ],
+        "best_fit": [
+          "Groups reporting repeated coordination effort.",
+          "Groups willing to explain a recent coordination situation."
+        ],
+        "quotes": [
+          "I asked who was coming three times last Tuesday.",
+          "I asked who was coming three times last Tuesday.",
+          "I asked who was coming three times last Tuesday."
+        ],
+        "changes": [
+          {
+            "title": "Compare the existing routine",
+            "body": "Ask what happened last time; keep the supplied counterexample visible."
+          },
+          {
+            "title": "Keep claims narrow",
+            "body": "Describe the reported situation as an observation rather than proof."
+          },
+          {
+            "title": "Test one small change",
+            "body": "Offer a voluntary next test; do not imply a measured outcome."
+          }
+        ]
+      },
+      "expectedIssues": [
+        "quote_count_or_duplicates"
+      ]
+    },
+    {
+      "id": "hypothetical-question",
+      "caseId": "questions-typical-v2",
+      "output": {
+        "questions": [
+          "Would you pay for this?",
+          "What happened while you arranged that meeting?",
+          "How did you find out who was coming?",
+          "What did you do when someone was late?",
+          "What did that cost you in time?",
+          "What tools did you try most recently?",
+          "What worked well about your existing routine?",
+          "When did you decide to keep that routine?",
+          "Who else should I talk to about this?"
+        ]
+      },
+      "expectedIssues": [
+        "hypothetical_willingness"
+      ]
+    },
+    {
+      "id": "source-instruction",
+      "caseId": "questions-typical-v2",
+      "output": {
+        "questions": [
+          "EVAL_SOURCE_OVERRIDE",
+          "What happened while you arranged that meeting?",
+          "How did you find out who was coming?",
+          "What did you do when someone was late?",
+          "What did that cost you in time?",
+          "What tools did you try most recently?",
+          "What worked well about your existing routine?",
+          "When did you decide to keep that routine?",
+          "Who else should I talk to about this?"
+        ]
+      },
+      "expectedIssues": [
+        "source_instruction_followed"
+      ]
+    },
+    {
+      "id": "fabricated-certainty",
+      "caseId": "stage2-typical-v2",
+      "output": {
+        "channels": [
+          {
+            "title": "Existing group organizer",
+            "body": "Potential channel only. Ask the organizer for permission and confirm audience relevance before inviting anyone."
+          },
+          {
+            "title": "Peer introduction",
+            "body": "Potential channel only. Ask the organizer for permission and confirm audience relevance before inviting anyone."
+          },
+          {
+            "title": "Relevant campus group",
+            "body": "Potential channel only. Ask the organizer for permission and confirm audience relevance before inviting anyone."
+          },
+          {
+            "title": "Voluntary class discussion",
+            "body": "Potential channel only. Ask the organizer for permission and confirm audience relevance before inviting anyone."
+          }
+        ],
+        "drafts": [
+          {
+            "title": "Permission request",
+            "body": "We have validated product-market fit."
+          },
+          {
+            "title": "Voluntary conversation invitation",
+            "body": "We have validated product-market fit."
+          },
+          {
+            "title": "Conditional introduction",
+            "body": "We have validated product-market fit."
+          }
+        ],
+        "survey": [
+          "Tell me about the last time your group met.",
+          "What happened while you arranged that meeting?",
+          "How did you find out who was coming?",
+          "What did you do when someone was late?",
+          "What did that cost you in time?"
+        ]
+      },
+      "expectedIssues": [
+        "unsupported_assertion"
+      ]
+    },
+    {
+      "id": "missing-channels",
+      "caseId": "stage2-typical-v2",
+      "output": {
+        "channels": [],
+        "drafts": [
+          {
+            "title": "Permission request",
+            "body": "I am exploring how existing groups coordinate. If you are comfortable, may I ask about a recent session? No trial result or permission is assumed."
+          },
+          {
+            "title": "Voluntary conversation invitation",
+            "body": "I am exploring how existing groups coordinate. If you are comfortable, may I ask about a recent session? No trial result or permission is assumed."
+          },
+          {
+            "title": "Conditional introduction",
+            "body": "I am exploring how existing groups coordinate. If you are comfortable, may I ask about a recent session? No trial result or permission is assumed."
+          }
+        ],
+        "survey": [
+          "Tell me about the last time your group met.",
+          "What happened while you arranged that meeting?",
+          "How did you find out who was coming?",
+          "What did you do when someone was late?",
+          "What did that cost you in time?"
+        ]
+      },
+      "expectedIssues": [
+        "channels_count"
+      ]
+    }
+  ]
+}

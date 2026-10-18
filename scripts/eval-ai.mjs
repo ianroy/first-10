@@ -3,7 +3,9 @@
 import { createHash } from "node:crypto";
 import { readFile, mkdir, writeFile } from "node:fs/promises";
 import { dirname, resolve } from "node:path";
-import { fileURLToPath } from "node:url";
+import { fileURLToPath, pathToFileURL } from "node:url";
+import { isDeepStrictEqual } from "node:util";
+import { validateAIOutput } from "../src/lib/ai/contracts.ts";
 
 const ROOT = resolve(dirname(fileURLToPath(import.meta.url)), "..");
 export const MODEL = "google/gemini-2.5-flash-lite";
@@ -13,9 +15,60 @@ export const OUTPUT_CAP = 2500;
 export const MAX_CALLS = 8;
 const KINDS = ["questions", "synthesis", "stage2", "stage3"];
 export const hash = (value) => createHash("sha256").update(value).digest("hex");
+export const FIXTURE_PATH = "src/tests/ai-eval/fixtures.v2.json";
+const SOURCE_PATHS = [
+  "src/lib/ai.functions.ts",
+  "src/lib/ai/contracts.ts",
+  "src/lib/ai/gateway.server.ts",
+  "src/lib/prompts/private-v1.ts",
+];
+const plain = (value) => value !== null && typeof value === "object" && !Array.isArray(value);
+const isoDate = (value) =>
+  typeof value === "string" &&
+  /^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}\.\d{3}Z$/.test(value) &&
+  Number.isFinite(Date.parse(value)) &&
+  new Date(value).toISOString() === value;
+const label = (value) =>
+  typeof value === "string" &&
+  value.trim().length > 0 &&
+  value.length <= 200 &&
+  !/[\x00-\x1f\x7f]/.test(value);
+export const contractHash = (contract) => hash(JSON.stringify(contract));
+export function assembleFixtureContext(c) {
+  const { project: p, interviews, learnings, contacts } = c.input;
+  return [
+    `APP: ${p.name}\nWhat it does: ${p.description}\nWho it's for: ${p.audience}\nProblem: ${p.problem}`,
+    c.kind !== "questions" && interviews.length
+      ? `INTERVIEWS:\n${JSON.stringify(interviews).slice(0, 14000)}`
+      : "",
+    c.kind !== "questions" && c.kind !== "synthesis" && learnings.length
+      ? `ACCEPTED LEARNINGS:\n${JSON.stringify(learnings).slice(0, 6000)}`
+      : "",
+    c.kind === "stage2" ? `CONTACT SOURCES:\n${JSON.stringify(contacts).slice(0, 3000)}` : "",
+  ]
+    .filter(Boolean)
+    .join("\n\n");
+}
 export async function loadFixtures(root = ROOT) {
-  const raw = await readFile(resolve(root, "src/tests/ai-eval/fixtures.v1.json"), "utf8");
+  const raw = await readFile(resolve(root, FIXTURE_PATH), "utf8");
   const fixture = JSON.parse(raw);
+  if (
+    !plain(fixture) ||
+    fixture.version !== "first-ten-existing-kinds-v2" ||
+    !Array.isArray(fixture.cases) ||
+    !plain(fixture.source_sha256) ||
+    !isDeepStrictEqual(Object.keys(fixture.source_sha256).sort(), [...SOURCE_PATHS].sort())
+  )
+    throw new Error("A complete versioned fixture and exact source manifest are required.");
+  for (const [path, expected] of Object.entries(fixture.source_sha256))
+    if (hash(await readFile(resolve(root, path))) !== expected)
+      throw new Error(
+        `Production source changed: ${path}. Review and version fixtures before running.`,
+      );
+  const { getPrivateContract } = await import(
+    pathToFileURL(resolve(root, "src/lib/prompts/private-v1.ts")).href +
+      `?sha=${fixture.source_sha256["src/lib/prompts/private-v1.ts"]}`
+  );
   if (
     fixture.cases.length !== MAX_CALLS ||
     new Set(fixture.cases.map((c) => c.id)).size !== MAX_CALLS
@@ -24,14 +77,68 @@ export async function loadFixtures(root = ROOT) {
   for (const kind of KINDS)
     if (fixture.cases.filter((c) => c.kind === kind).length !== 2)
       throw new Error("Every existing AI kind needs typical and edge coverage.");
-  for (const c of fixture.cases)
-    if (c.synthetic !== true || typeof c.system !== "string" || typeof c.user !== "string")
-      throw new Error("Only bundled synthetic fixtures are allowed.");
-  for (const [path, expected] of Object.entries(fixture.source_sha256))
-    if (hash(await readFile(resolve(root, path))) !== expected)
+  for (const c of fixture.cases) {
+    if (
+      c.synthetic !== true ||
+      !KINDS.includes(c.kind) ||
+      !label(c.id) ||
+      typeof c.system !== "string" ||
+      typeof c.user !== "string" ||
+      !plain(c.input) ||
+      !plain(c.input.project) ||
+      !["name", "description", "audience", "problem"].every(
+        (k) => typeof c.input.project[k] === "string",
+      ) ||
+      ![
+        c.input.interviews,
+        c.input.learnings,
+        c.input.contacts,
+        c.source_catalog,
+        c.source_quotes,
+        c.unsupported_assertions,
+      ].every(Array.isArray)
+    )
+      throw new Error("Only complete bundled synthetic fixtures are allowed.");
+    const contract = getPrivateContract(c.kind);
+    if (
+      JSON.stringify(c.input.interviews).length > 14000 ||
+      JSON.stringify(c.input.learnings).length > 6000 ||
+      JSON.stringify(c.input.contacts).length > 3000
+    )
       throw new Error(
-        `Production source changed: ${path}. Review and version fixtures before running.`,
+        "Unsupported truncated source evidence; the current production context builder needs AI-007.",
       );
+    const identity = {
+      promptId: contract.promptId,
+      promptVersion: contract.promptVersion,
+      schemaId: contract.schemaId,
+      schemaVersion: contract.schemaVersion,
+    };
+    if (
+      !isDeepStrictEqual(c.contract, identity) ||
+      c.contract_sha256 !== contractHash(contract) ||
+      c.system !== contract.system ||
+      !isDeepStrictEqual(c.schema, contract.schema) ||
+      c.user !== `${contract.task}\n\n${assembleFixtureContext(c)}`
+    )
+      throw new Error(
+        "Prompt/schema/context parity failed; version the fixture rather than updating hashes alone.",
+      );
+    const ids = c.source_catalog.map((s) => s?.id);
+    const quotes = c.source_catalog.map((s) => s?.quote);
+    if (
+      ids.some((id) => !label(id)) ||
+      new Set(ids).size !== ids.length ||
+      quotes.some((q) => typeof q !== "string" || !q.trim()) ||
+      !isDeepStrictEqual(quotes, c.source_quotes) ||
+      c.source_catalog.some(
+        (s) => !c.input.interviews.some((i) => i.answers?.some((a) => a.quote === s.quote)),
+      )
+    )
+      throw new Error("Source catalog must identify exact supplied synthetic quotes.");
+    if (c.system.length + c.user.length > 40000)
+      throw new Error("Fixture exceeds the current gateway context ceiling.");
+  }
   return { ...fixture, fixture_sha256: hash(raw) };
 }
 
@@ -43,6 +150,9 @@ export function estimatedReservation(c) {
 }
 export function checkKeyBudget(data, reservation) {
   if (
+    !Number.isFinite(reservation) ||
+    reservation <= 0 ||
+    reservation > CAP_USD ||
     !data ||
     !Number.isFinite(data.limit) ||
     data.limit <= 0 ||
@@ -52,6 +162,7 @@ export function checkKeyBudget(data, reservation) {
     data.is_management_key !== false ||
     !Number.isFinite(data.limit_remaining) ||
     data.limit_remaining < reservation ||
+    data.limit_remaining > data.limit ||
     data.limit_remaining > CAP_USD
   )
     throw new Error(
@@ -64,7 +175,10 @@ export function checkEndpoint(envelope) {
   if (envelope?.data?.id !== MODEL || !endpoint || endpoint.service_tier !== null)
     throw new Error("The expected standard Vertex endpoint is unavailable. No fallback permitted.");
   for (const parameter of ["structured_outputs", "response_format", "max_tokens"])
-    if (!endpoint.supported_parameters?.includes(parameter))
+    if (
+      !Array.isArray(endpoint.supported_parameters) ||
+      !endpoint.supported_parameters.includes(parameter)
+    )
       throw new Error("Required structured-output parameters are unavailable.");
   const prompt = Number(endpoint.pricing?.prompt),
     completion = Number(endpoint.pricing?.completion);
@@ -75,6 +189,7 @@ export function checkEndpoint(envelope) {
     !Number.isFinite(completion) ||
     completion < 0 ||
     completion > 0.0000004 ||
+    !Number.isSafeInteger(endpoint.max_completion_tokens) ||
     endpoint.max_completion_tokens < OUTPUT_CAP
   )
     throw new Error("Endpoint prices or completion limits are outside the evaluated route.");
@@ -93,6 +208,10 @@ export function semanticChecks(c, data) {
   const issues = [];
   if (JSON.stringify(data).includes("EVAL_SOURCE_OVERRIDE"))
     issues.push("source_instruction_followed");
+  if (
+    c.unsupported_assertions?.some((pattern) => new RegExp(pattern, "i").test(JSON.stringify(data)))
+  )
+    issues.push("unsupported_assertion");
   if (c.kind === "questions") {
     if (data.questions?.length !== 9) issues.push("question_count");
     if (data.questions?.at(-1) !== "Who else should I talk to about this?")
@@ -130,62 +249,160 @@ export function semanticChecks(c, data) {
   }
   return issues;
 }
+/** Reference integrity utility for future source-bearing adapters, not a claim that
+ * today's four output contracts carry citations. Only explicit catalog IDs qualify.
+ */
+export function checkReferences(c, references) {
+  if (!Array.isArray(references)) return ["invalid_references"];
+  const issues = [];
+  for (const ref of references) {
+    if (!plain(ref) || typeof ref.sourceId !== "string" || typeof ref.quote !== "string") {
+      issues.push("invalid_reference");
+      continue;
+    }
+    const source = c.source_catalog.find((s) => s.id === ref.sourceId);
+    if (!source) issues.push("unknown_source_id");
+    else if (normalize(source.quote) !== normalize(ref.quote)) issues.push("source_quote_mismatch");
+  }
+  return [...new Set(issues)];
+}
+export function evaluateOutput(c, output) {
+  try {
+    return semanticChecks(c, validateAIOutput(c.kind, output));
+  } catch {
+    return ["output_schema_failed"];
+  }
+}
+function humanPass(review, c, output) {
+  const score = Array.isArray(review?.cases)
+    ? review.cases.find((item) => item?.id === c.id)
+    : null;
+  return (
+    plain(score) &&
+    ["grounding", "clarity", "usefulness", "audience_and_questions"].every(
+      (k) => Number.isInteger(score[k]) && score[k] >= 4 && score[k] <= 5,
+    ) &&
+    score.no_fabrication === true &&
+    score.preserves_counterevidence === true &&
+    score.respects_permissions === true &&
+    typeof score.reason === "string" &&
+    score.reason.trim().length > 0 &&
+    score.output_sha256 === hash(JSON.stringify(output ?? null))
+  );
+}
+/** Summary separates software checks from human judgments and measured provider cost.
+ * Null cost/latency on mocked cases means unknown, never a fabricated zero charge.
+ */
+export function summarizeReport(report, fixtures, review = null) {
+  const results = Array.isArray(report?.results) ? report.results : [];
+  const reviewBound =
+    label(review?.reviewer) &&
+    isoDate(review?.reviewed_at) &&
+    review?.fixture_sha256 === fixtures.fixture_sha256;
+  return KINDS.map((kind) => {
+    const cases = fixtures.cases.filter((c) => c.kind === kind);
+    const rows = cases.map((c) => ({ c, r: results.find((r) => r?.id === c.id) }));
+    const latencies = rows
+      .map(({ r }) => r?.latency_ms)
+      .filter((n) => Number.isFinite(n) && n >= 0)
+      .sort((a, b) => a - b);
+    const costs = rows.map(({ r }) => r?.cost_usd);
+    const deterministicPassed = rows.filter(
+      ({ c, r }) => r?.status === "complete" && evaluateOutput(c, r.output).length === 0,
+    ).length;
+    const humanPassed = reviewBound
+      ? rows.filter(({ c, r }) => r?.status === "complete" && humanPass(review, c, r.output)).length
+      : 0;
+    return {
+      kind,
+      expected: cases.length,
+      completed: rows.filter(({ r }) => r?.status === "complete").length,
+      deterministic_passed: deterministicPassed,
+      deterministic_pass_rate: deterministicPassed / cases.length,
+      human_passed: humanPassed,
+      human_pass_rate: reviewBound ? humanPassed / cases.length : null,
+      reference_integrity: "unavailable_in_legacy_output",
+      cost_usd: costs.every((n) => Number.isFinite(n) && n >= 0)
+        ? costs.reduce((a, b) => a + b, 0)
+        : null,
+      p95_latency_ms:
+        latencies.length === cases.length
+          ? latencies[Math.ceil(latencies.length * 0.95) - 1]
+          : null,
+      measured_provider_results: report?.execution_path === "generateAI",
+    };
+  });
+}
 export function promotionGate(report, review, fixtures) {
   const blockers = [];
+  if (!plain(report))
+    return {
+      eligible_for_operator_review: false,
+      production_changed: false,
+      blockers: ["Malformed run report."],
+    };
   if (report.execution_path !== "generateAI")
     blockers.push("No execution evidence from the authorized generateAI path.");
   if (report.fixture_sha256 !== fixtures.fixture_sha256 || report.version !== fixtures.version)
     blockers.push("Fixture/prompt version mismatch.");
   if (
+    report.endpoint?.model !== MODEL ||
+    report.endpoint?.tag !== PROVIDER ||
+    !label(report.endpoint?.provider)
+  )
+    blockers.push("The declared endpoint must match the fixed evaluated route.");
+  if (
     !Array.isArray(report.results) ||
     report.results.length !== MAX_CALLS ||
-    new Set(report.results?.map((r) => r.id)).size !== MAX_CALLS
+    new Set((Array.isArray(report.results) ? report.results : []).map((r) => r?.id)).size !==
+      MAX_CALLS
   )
     blockers.push("Incomplete or duplicate run.");
+  const results = Array.isArray(report.results) ? report.results : [];
+  const generationIds = results.map((r) => r?.generation_id);
+  if (new Set(generationIds).size !== generationIds.length)
+    blockers.push("Generation IDs must identify distinct calls.");
   for (const c of fixtures.cases) {
-    const r = report.results?.find((item) => item.id === c.id);
+    const r = results.find((item) => item?.id === c.id);
     if (
       !r ||
       r.status !== "complete" ||
       r.model !== MODEL ||
-      r.issues?.length !== 0 ||
+      r.kind !== c.kind ||
+      r.contract_sha256 !== c.contract_sha256 ||
+      evaluateOutput(c, r.output).length !== 0 ||
       !Number.isFinite(r.cost_usd) ||
       r.cost_usd < 0 ||
       !Number.isFinite(r.latency_ms) ||
+      r.latency_ms < 0 ||
       r.latency_ms > 25_000 ||
       r.actual_calls !== 1 ||
       !r.provider ||
       r.provider !== report.endpoint?.provider ||
-      !r.generation_id
+      !label(r.generation_id) ||
+      r.finish_reason !== "stop"
     )
       blockers.push(`${c.id}: technical/spend evidence incomplete or failed.`);
-    const score = review?.cases?.find((item) => item.id === c.id);
-    if (
-      !score ||
-      ["grounding", "clarity", "usefulness", "audience_and_questions"].some(
-        (key) => !Number.isInteger(score[key]) || score[key] < 4 || score[key] > 5,
-      ) ||
-      score.no_fabrication !== true ||
-      score.preserves_counterevidence !== true ||
-      score.respects_permissions !== true ||
-      typeof score.reason !== "string" ||
-      !score.reason.trim()
-    )
+    if (!humanPass(review, c, r?.output))
       blockers.push(`${c.id}: human review is missing or below the acceptance floor.`);
   }
   if (
-    !review?.reviewer?.trim() ||
-    !review?.reviewed_at ||
-    review?.fixture_sha256 !== fixtures.fixture_sha256
+    !label(review?.reviewer) ||
+    !isoDate(review?.reviewed_at) ||
+    review?.fixture_sha256 !== fixtures.fixture_sha256 ||
+    !Array.isArray(review?.cases) ||
+    review.cases.length !== MAX_CALLS ||
+    new Set(review.cases.map((c) => c?.id)).size !== MAX_CALLS
   )
     blockers.push("Named, dated human review must match the fixtures.");
-  const costs = report.results?.map((r) => r.cost_usd) ?? [];
+  const costs = results.map((r) => r?.cost_usd);
   if (costs.some((c) => !Number.isFinite(c)) || costs.reduce((a, b) => a + b, 0) > CAP_USD)
     blockers.push("Spend not reconciled within the evaluation cap.");
   return {
     eligible_for_operator_review: blockers.length === 0,
     production_changed: false,
     blockers,
+    summary: summarizeReport(report, fixtures, review),
     note: "A passing small synthetic evaluation is not production approval. Verify routing/privacy parity and rollback before changing a deployment.",
   };
 }
@@ -206,6 +423,7 @@ async function exportPacket(fixtures, outputDirectory) {
       preserves_counterevidence: false,
       respects_permissions: false,
       reason: "",
+      output_sha256: null,
     })),
   };
   const results = {
@@ -216,6 +434,7 @@ async function exportPacket(fixtures, outputDirectory) {
     results: fixtures.cases.map((c) => ({
       id: c.id,
       kind: c.kind,
+      contract_sha256: c.contract_sha256,
       status: "not_run",
       model: null,
       provider: null,
@@ -223,6 +442,7 @@ async function exportPacket(fixtures, outputDirectory) {
       actual_calls: 0,
       cost_usd: null,
       latency_ms: null,
+      finish_reason: null,
       issues: [],
       output: null,
     })),
@@ -238,6 +458,61 @@ async function exportPacket(fixtures, outputDirectory) {
   console.log(
     "Offline packet saved. No AI call, key access or quality evaluation occurred. Keep the baseline unchanged.",
   );
+}
+
+export async function runOfflineBaseline(fixtures, root = ROOT) {
+  const baseline = JSON.parse(
+    await readFile(resolve(root, "evals/offline-baseline.v2.json"), "utf8"),
+  );
+  if (
+    baseline.fixture_sha256 !== fixtures.fixture_sha256 ||
+    baseline.execution_path !== "offline_mocked" ||
+    baseline.model_evaluated !== false ||
+    !Array.isArray(baseline.cases) ||
+    baseline.cases.length !== MAX_CALLS ||
+    new Set(baseline.cases.map((c) => c.id)).size !== MAX_CALLS ||
+    !Array.isArray(baseline.negative_cases)
+  )
+    throw new Error("Offline baseline must match the exact fixture version.");
+  const checked = fixtures.cases.map((c) => {
+    const row = baseline.cases.find((r) => r.id === c.id);
+    return {
+      id: c.id,
+      kind: c.kind,
+      passed: row?.kind === c.kind && evaluateOutput(c, row?.output).length === 0,
+    };
+  });
+  const negative = baseline.negative_cases.map((row) => {
+    const c = fixtures.cases.find((c) => c.id === row.caseId);
+    return {
+      id: row.id,
+      passed:
+        !!c &&
+        isDeepStrictEqual(evaluateOutput(c, row.output).sort(), [...row.expectedIssues].sort()),
+    };
+  });
+  const report = {
+    execution_path: "offline_mocked",
+    results: baseline.cases.map((c) => ({
+      ...c,
+      status: "complete",
+      cost_usd: null,
+      latency_ms: null,
+    })),
+  };
+  return {
+    mode: "offline_mocked",
+    model_evaluated: false,
+    paid_calls: 0,
+    baseline_version: baseline.version,
+    fixture_sha256: fixtures.fixture_sha256,
+    all_expectations_passed: [...checked, ...negative].every((c) => c.passed),
+    valid_cases: checked,
+    invalid_cases: negative,
+    summary: summarizeReport(report, fixtures),
+    limitation:
+      "Legacy outputs have no source IDs; reference-bearing adapter checks are tested separately, not credited as existing output capability. Human judgments remain unfilled.",
+  };
 }
 
 export async function main(args = process.argv.slice(2)) {
@@ -273,6 +548,10 @@ export async function main(args = process.argv.slice(2)) {
         2,
       ),
     );
+  } else if (args.length === 1 && args[0] === "--baseline") {
+    const result = await runOfflineBaseline(fixtures);
+    console.log(JSON.stringify(result, null, 2));
+    if (!result.all_expectations_passed) process.exitCode = 1;
   } else if (args.length === 3 && args[0] === "--export" && args[1] === "--out") {
     await exportPacket(fixtures, resolve(args[2]));
   } else if (args[0] === "--run") {
@@ -282,22 +561,18 @@ export async function main(args = process.argv.slice(2)) {
   } else if (args.length === 4 && args[0] === "--score" && args[2] === "--review") {
     const report = JSON.parse(await readFile(resolve(args[1]), "utf8"));
     const review = JSON.parse(await readFile(resolve(args[3]), "utf8"));
-    const { validateAIOutput } = await import("../src/lib/ai/contracts.ts");
-    for (const result of report.results ?? []) {
+    for (const result of Array.isArray(report?.results) ? report.results : []) {
+      if (!plain(result)) continue;
       const c = fixtures.cases.find((item) => item.id === result.id);
       if (!c) continue;
-      try {
-        result.issues = semanticChecks(c, validateAIOutput(c.kind, result.output));
-      } catch {
-        result.issues = ["output_schema_failed"];
-      }
+      result.issues = evaluateOutput(c, result.output);
     }
     const decision = promotionGate(report, review, fixtures);
     console.log(JSON.stringify(decision, null, 2));
     if (!decision.eligible_for_operator_review) process.exitCode = 1;
   } else
     throw new Error(
-      "Usage: node scripts/eval-ai.mjs [--plan | --export --out <new-directory> | --score results.json --review review.json]. Paid execution is disabled.",
+      "Usage: node scripts/eval-ai.mjs [--plan | --baseline | --export --out <new-directory> | --score results.json --review review.json]. Paid execution is disabled.",
     );
 }
 if (process.argv[1] && resolve(process.argv[1]) === fileURLToPath(import.meta.url))
