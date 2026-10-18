@@ -17,7 +17,9 @@ jobs:
     runs-on: ubuntu-latest
     timeout-minutes: 15
     env:
-      POLICY_TEST_WORKDIR: ${{ runner.temp }}/firstten-policy-ci
+      # runner.temp is unavailable in job-level env expressions. This hosted
+      # Ubuntu runner is disposable; keep its test stack outside the checkout.
+      POLICY_TEST_WORKDIR: /tmp/firstten-policy-ci
       # Disposable local DB credentials only. No hosted project or repository secret is used.
       POLICY_TEST_DATABASE_URL: postgresql://postgres:postgres@127.0.0.1:54322/postgres
     steps:
