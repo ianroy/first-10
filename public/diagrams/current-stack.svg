@@ -1,0 +1,54 @@
+<svg
+  xmlns="http://www.w3.org/2000/svg"
+  viewBox="0 0 1000 510"
+  role="img"
+  aria-labelledby="title description"
+>
+  <title id="title">First Ten current application architecture</title>
+  <desc id="description">
+    A React and TanStack browser calls an authenticated server gateway. Supabase provides
+    authentication and project storage. The server requests drafts from OpenRouter and returns them
+    for human review. The provider key remains server-side. Vercel hosts the app.
+  </desc>
+  <defs>
+    <marker id="arrow" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto">
+      <path d="M0 0L8 4L0 8" fill="none" stroke="#285248" stroke-width="1.5" />
+    </marker>
+  </defs>
+  <rect width="1000" height="510" rx="28" fill="#f8f6ef" />
+  <g font-family="system-ui,sans-serif" fill="#193e35">
+    <text x="50" y="55" font-size="15" letter-spacing="3">FIRST TEN · UNDER THE HOOD</text>
+    <text x="50" y="96" font-size="31" font-weight="700">
+      Clear responsibilities. Human judgment.
+    </text>
+    <g fill="#fffef9" stroke="#bdc9c0" stroke-width="1.5">
+      <rect x="50" y="150" width="240" height="150" rx="18" />
+      <rect x="380" y="150" width="240" height="150" rx="18" />
+      <rect x="710" y="150" width="240" height="150" rx="18" />
+      <rect x="380" y="355" width="240" height="96" rx="18" />
+    </g>
+    <g stroke="#285248" stroke-width="2" fill="none" marker-end="url(#arrow)">
+      <path d="M300 225H366" />
+      <path d="M630 225H696" />
+      <path d="M500 310V341" />
+    </g>
+    <g font-size="22" font-weight="700">
+      <text x="73" y="192">Your workspace</text>
+      <text x="402" y="192">Server gateway</text>
+      <text x="732" y="192">OpenRouter</text>
+      <text x="402" y="391">Supabase</text>
+    </g>
+    <g font-size="15">
+      <text x="73" y="226">React + TanStack</text>
+      <text x="73" y="251">Capture, review, decide</text>
+      <text x="402" y="226">Authenticate + select context</text>
+      <text x="402" y="251">Provider key stays here</text>
+      <text x="732" y="226">Request a structured draft</text>
+      <text x="732" y="251">You review the response</text>
+      <text x="402" y="420">Auth + saved project records</text>
+      <text x="50" y="481">
+        Hosted on Vercel · Logical request flow · Current source: 2026-10-18
+      </text>
+    </g>
+  </g>
+</svg>

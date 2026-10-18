@@ -2548,7 +2548,7 @@
       "id": "WEB-001",
       "title": "Write the founder sales narrative and demo storyboard",
       "phase": "P2",
-      "status": "not_started",
+      "status": "in_progress",
       "owner": "agent",
       "size": "S",
       "kind": "documentation",
@@ -2592,14 +2592,25 @@
         {
           "date": "2026-10-17",
           "text": "Scheduled by Iteration 5; no implementation or validation claimed."
+        },
+        {
+          "date": "2026-10-18",
+          "text": "Claimed for the authorized autonomous demo run."
         }
       ],
-      "claim": null,
+      "claim": {
+        "owner": "marketing_worker",
+        "branch": "codex/web-001-autonomous",
+        "base_commit": "aca7e0d5c659989317c6f8fe4cf8a50351533089",
+        "worktree": "/Users/ianroy/.codex/worktrees/first-ten-value/First 10",
+        "started_at": "2026-10-18T03:35:50.898084+00:00",
+        "lease_expires_at": "2026-10-18T05:35:50.898084+00:00"
+      },
       "completion_evidence": [],
       "subtasks": [
         {
           "id": "WEB-001.s1",
-          "status": "not_started",
+          "status": "in_progress",
           "instruction": "Draft founder hero, concrete before/after workflow, honest limits, CTA and separate educator route.",
           "notes": []
         },
@@ -2699,7 +2710,7 @@
       "id": "WEB-003",
       "title": "Publish product and technical stack schematics",
       "phase": "P2",
-      "status": "not_started",
+      "status": "complete",
       "owner": "agent",
       "size": "S",
       "kind": "documentation",
@@ -2749,26 +2760,34 @@
         {
           "date": "2026-10-17",
           "text": "Scheduled by Iteration 5; no implementation or validation claimed."
+        },
+        {
+          "date": "2026-10-18",
+          "text": "Claimed for the authorized autonomous demo run."
+        },
+        {
+          "date": "2026-10-18",
+          "text": "Current-source React diagram, downloadable accessible SVG and developer Mermaid overview implemented. Typecheck, scoped ESLint, source links and SVG XML/title/description passed; actual local SVG render visually reviewed in browser."
         }
       ],
       "claim": null,
-      "completion_evidence": [],
+      "completion_evidence": ["docs/architecture/system-overview.md"],
       "subtasks": [
         {
           "id": "WEB-003.s1",
-          "status": "not_started",
+          "status": "complete",
           "instruction": "Trace browser/TanStack server/Supabase auth and RLS/OpenRouter/Vercel from current source.",
           "notes": []
         },
         {
           "id": "WEB-003.s2",
-          "status": "not_started",
+          "status": "complete",
           "instruction": "Create a public plain-language diagram and a developer Mermaid schematic with source commit/date.",
           "notes": []
         },
         {
           "id": "WEB-003.s3",
-          "status": "not_started",
+          "status": "complete",
           "instruction": "Separate implemented paths from planned class/collaboration paths and provide text equivalents.",
           "notes": []
         }
