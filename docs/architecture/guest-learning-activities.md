@@ -1,0 +1,59 @@
+# Genuine guest learning activities (CLS-008 first slice)
+
+An account-free class participant is a real class/team/principal from CLS-007. This feature never creates an `auth.users` row, owner-private project, fake project association or broad anonymous table policy. It implements a manual seven-step discovery activity and deliberate reviewed copies. Marketing Lab parity, additional activity kinds, full team portfolios, account transfer, retention/deletion and guest AI remain separate unfinished work. The parent CLS-008 task must not be marked complete from this slice alone.
+
+## Audience and lifecycle
+
+A newly created activity has an immutable `principal_private` or `team_shared` audience. Private work is the default. Creating a shared activity requires separate explicit audience confirmation; every current/future active principal admitted to that team can read and edit it. Its original author remains immutable. Raw interview records and structured participant quotes cannot be placed in a shared editable document; a team may record its own interpretation/observation summary, but must use a separately reviewed snapshot for participant words. Free text still needs human inspection for personal details. A team invitation or return key creates a distinct principal and cannot recover another principal's private work. Personal recovery restores the original principal and invalidates their prior sessions; keep that private key separate from team access.
+
+Private-to-team disclosure creates an immutable, selected, redacted reviewed snapshot. It never relabels or copies the full private workspace into an editable shared workspace. Team and teacher disclosures are separate deliberate audiences. A teacher's class role does not permit reading any activity document or raw private notes.
+
+All guest RPCs derive authority from the server's HttpOnly guest-session cookie. Class closure/expiry, principal revocation, team archive and session expiry end guest reads/writes/export acquisition. There is no account-author exception after class closure. Show the exact class deadline, disclose the shorter browser-session lifetime, preserve recovery instructions and offer PDFs before access ends. Downloaded files remain with their recipients. `retentionDays` does not implement or promise deletion; PRV-003 owns that policy and job. No email is required, no account transfer happens automatically, and losing private recovery access may mean losing the ability to retrieve that private work.
+
+## Manual learning document
+
+`GuestLearningDocument` contains `schemaVersion:1`, `discovery`, `interviews` and `permissions`. The pure discovery values reuse DISC-001's validated seven-step schema. Account contact references are forbidden. A result's optional interview reference must identify an actual completed permitted interview in this same guest document and match its preserved script. No account project/interview UUID is a guest access factor.
+
+1. Record a problem space and optional solution idea.
+2. Record and preserve a first falsifiable hypothesis; later attempts/pivots append versions rather than rewrite it. Prediction, population, situation, disconfirming observation and time window remain explicit. The record is student-reported, not verified independent authorship.
+3. Map up to five aliases, relationships and relevant experience; five is a scaffold, not proof of completeness.
+4. Record possible false positives, false negatives, missing perspectives and mitigations. These are sampling risks, not judgments about people.
+5. Edit a script, then preserve an exact version linked to its hypothesis and reviewed context. Later scripts append versions. Questions and opening/closing remain editable in a current draft.
+6. Export an exact script and blank worksheet, then conduct actual interviews outside the app. A PDF, checkbox or saved draft does not establish that an interview happened.
+7. Save reported observations, words, counterevidence, interpretation and a retain/narrow/pivot/test/stop decision with uncertainty and a next test. Unknowns and negative findings remain legitimate.
+
+Each guest interview records an alias, captured time, exact preserved script/question snapshot, optional notes/quotes, completion report and independent note/AI/sharing choices. Answers can be stored or completed only when note permission is reported granted. Historical/missing AI and sharing choices begin unknown. Completed answers remain fixed except explicit note withdrawal may clear notes/quotes and completion; linked observations must be removed before that save. The original script/identity remains preserved. Choices describe reports, not verified consent or interview authenticity.
+
+A link is `link_not_read`; it contains no fetched text. A reviewed own/permitted paste is `pasted_text`. Prompt and model-output captures are context, never customer observations. Existing owner-only public-source retrieval and `generateAI` cannot be reached by inventing a project for a guest. All guest responses carry `aiEnabled:false`. Recording an AI choice does not activate processing, and neither class entry nor team membership grants it. Manual guidance and templates remain usable.
+
+## Persistence and bounds
+
+Closed private tables contain genuine composite class/team/principal FKs. Only narrowly granted service RPCs operate on guest activity/session authority. The teacher's authenticated role has separate fresh bearer/database-checked snapshot functions. No role receives raw activity table privileges, including `service_role`.
+
+Every operation locks its real class before resolving current session authority, then locks the relevant guest scope/activity/thread. This serializes with current class closure, guest revocation and principal recovery operations. Cross-class/private foreign IDs are rejected before taking their row locks. A five-second database lock timeout and ten-second transport abort bound contention. The class lock deliberately serializes this first classroom implementation; realtime collaboration is not claimed.
+
+Saves are explicit CAS with stable mutation UUIDs and normalized bounded JSON. Retrying the same request never creates another revision. Reusing it for different work fails. A save response is `{record,savedRevision,replayed}`: `savedRevision` is that intent's original acknowledged revision; `record` is the current authorized saved state and may be newer. The UI must retain a sent snapshot and preserve edits made while the request was pending. It must never blindly replace a newer local draft with either an old receipt or a later shared version. Conflict/failure keeps local text, and scope switches key/reset subtrees and ignore late responses.
+
+Bounds are five private activities per principal, ten shared activities per team, 262,144 UTF-8 bytes per learning document, 307,200 per transport request, twenty interviews, twenty preserved hypotheses/scripts/contexts and five planned people. One principal has 120 admitted operations per minute and at most 2,000 ordinary stable-operation receipts. Receipts store metadata, not duplicated private documents. After capacity, bounded monotone privacy-reduction saves remain possible; already withdrawn choices cannot be regranted through that exception. Withdrawal of an existing reviewed copy is never blocked by ordinary receipt capacity. There is no silent history eviction or deletion of saved work.
+
+Hypotheses, scripts and context captures are append-only; exclusions cannot silently reintroduce a capture. Permission changes advance their own revision once, while unchanged choices retain that revision. New choices start revision one. Team/principal access generations advance on scope updates so revoking/reopening cannot resurrect an older disclosure.
+
+## Deliberate class/team handoff
+
+A guest chooses one published assignment and 1–12 permitted source fields. No source starts selected. The server derives selected text from the actual current authorized activity, requires the workspace's independent sharing choice and, for interview excerpts, completed/note/sharing eligibility. Reflection/next-test selections conservatively bind all current interview sharing/note choices, since exact intellectual lineage is not established. A sharing choice is not itself a recipient grant.
+
+Exact selected substrings, up to thirty explicit redaction phrases, automatic email/UUID removal and credential rejection produce the preview. This scrubber cannot promise all personal information is removed; students must inspect the exact audience payload. The private manifest captures source hashes/permission revisions; it never enters recipient DTOs. Generic snapshot-local `excerpt.N` labels replace raw source keys.
+
+The student separately affirms and confirms only the server preview ID/hash and a stable request UUID. Confirmation rechecks the whole source/authority binding, current thread version and deadline, then atomically creates one immutable version/grant/receipt/audit event using CLS-002's genuine `guest_team` thread FK. No invented account/project is inserted. Maximums remain fifty threads per principal, fifty previews per thread, twenty submitted versions, ten-minute previews, twelve selected fields and 40KB payload/manifests.
+
+Teacher or teammate recipient reads require the correct audience, active grant, exact captured class/assignment revisions/deadline, team/principal generations and current captured source-choice revisions. Changing an AI-only choice also conservatively requires new review. Withdrawal/regrant, close/reopen, deadline extension and assignment republish cannot revive an older copy. Content edits never rewrite an already submitted immutable payload; source existence/permission checks still apply. The original author can inspect their own snapshots only while their guest scope remains active. Only that principal can withdraw their publication. These controls cannot recall previously viewed/downloaded material.
+
+## API and PDF integration
+
+`src/lib/guest-activities/functions.ts` exports list/load/save activities and preview/confirm/get/list/withdraw submissions. All are POST with exact same-origin/session-bound CSRF, strict input/output parsing and private/no-store/no-referrer/noindex headers. `teacher.functions.ts` provides separate class-scoped teacher guest-copy reads/lists with a fresh bearer identity lookup. Existing account CLS-002 RPCs and their post-class author rights are unchanged.
+
+Coordinator integration must provide genuine guest export source scopes and a verified guest mount rather than passing a fake owner/project to `OwnerActivityExport`. Private activity PDFs are personal; team activity PDFs are team scoped; teacher PDFs derive exclusively from a freshly authorized submitted DTO. Reauthorize immediately before recipient download. Each implemented activity and preserved version needs a registered adapter and verified mount in export coverage, with actual long-text/Unicode/unknown/blank PDF render inspection. Individual PDFs do not complete EXP-003's full selected-team portfolios. The server has no PDF service, provider request, arbitrary URL fetch or export side effect.
+
+## Evidence
+
+Focused contracts/transport tests cover guest scope, no fake owner fields, exact script binding, independent permissions, preserved first attempts, explicit team creation, CSRF/origin/session rotation, fixed RPC mapping, bounded output and fresh teacher identity. SQL fixtures must be run in the reviewed disposable schema-only clone, with real separate-connection CAS/publication/closure/recovery races. Unrun tests and authored fixture statements are not completion evidence. The coordinator records final migration pins, combined regression results, browser journeys and actual PDF QA before enabling this surface.
