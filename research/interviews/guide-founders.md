@@ -1,93 +1,43 @@
-# Interview guide: student founders (R0-004)
+# Interview guide: student founders
 
-Goal: learn how student founders *actually* went from "I built it" to talking with customers, and where they got stuck. Tests A1-A6 and VP1, VP2, VP4, VP5 ([value-prop.md](../value-prop.md)).
+**VP-008 · protocol 1.0 · 2026-10-18.** Human-run R0-004a/b guide; no interviews completed by this revision. Follow the [value-test protocol](../value-test-plan.md) for eligibility, permissions, coding and staged sample. Target 5–8 eligible founders: first 3, then 2–5; aim for at least 2 course and 2 self-directed cases overall. Mixed contexts and gaps stay visible.
 
-**Do not pitch First Ten.** If they ask what you're working on, say so briefly *after* the last question. Once you describe your idea, they stop talking about their problems.
+## Before the interview
 
-## Who to recruit (5-8)
+Confirm adult student, working live app/prototype, concrete recruitment effort within 30 days, and self-reported low recurring use under the protocol’s screening definition. Idea-only projects and unresolved eligibility are adjacent cases, not eligible counts. Record relationship/recruiting source and prior exposure to First Ten.
 
-- Students who have built or launched something (app, site, product, service), or are building now.
-- Aim for a mix: at least 2 doing it **for a course** and at least 2 doing it **on their own** (needed for VP4).
-- At least 1 who launched and got almost no users (the core case).
-- Avoid close friends when you can; if you use them, tag the note `friend`.
+Use a private manual note route by default. Run the phone preflight before any app capture. Obtain manual-note permission separately from external AI processing, selected quote/artifact sharing and follow-up. Unknown is not granted. Do not record audio/video. Ask the participant to omit third-party names or private customer data. If notes are declined, do not reconstruct them afterward. Use the [shared note template](README.md#private-note-template); do not commit raw notes or contact details.
 
-## Before you start
+Suggested opening: “I’m learning how students find people to try what they’ve built and decide what to do next. I’m interested in what happened in your own process, including anything that worked well. This is voluntary; you can skip a question or stop. [Explain the private note/retention arrangements and record the separate choices.]”
 
-- 15-20 minutes, in person or video. Bring First Ten on your phone and use interview mode to take notes (dogfooding).
-- Say: "Is it okay if I take a few notes? I won't use your name, and I'll only use first names or roles in what I write up." Tick the consent box only if they say yes.
+Plan 20–30 minutes; adapt the pace and let the participant choose an accessible format. Do not pitch or display the product first. If asked, acknowledge that you are exploring a customer-discovery tool and offer details after their account. Record any earlier exposure rather than pretending the interview was unprimed.
 
-## Questions (past behavior only)
+## Recent-episode questions
 
-Ask in order; skip any that are already answered. Follow-ups: "Tell me more about that." "When was the last time?" "What happened next?" "Why was that hard?"
+Ask the core question before optional probes. Do not read hypothesis labels to participants. Neutral follow-ups: “What happened next?” “What led to that?” “What do you remember?” “Is there a redacted example you can choose to show?” Accept no example and uncertainty.
 
-| # | Question | Tests |
-|---|---|---|
-| F1 | Tell me about the last thing you built or started. Where is it now? | Context |
-| F2 | When you finished building it, what did you do next to get people using it? Walk me through that first week. | A1, VP2 |
-| F3 | Who was the first person outside your friends who tried it? How did that happen? | A1, A4 |
-| F4 | Think of a time you meant to reach out to someone about it and didn't. What got in the way? | VP2 |
-| F5 | What did the people you talked to say? And what did they *do* afterwards? | A2 |
-| F6 | How did you decide whether people really wanted it? When did you feel sure, or unsure? | A6, VP1 |
-| F7 | Did anyone give you more than words: their time again, an intro to someone, money, or using it more than once? Tell me about that. If not, what could someone have given you? | VP5 |
-| F8 | Who has asked to see what you learned, like an instructor, a teammate, an investor or family? What did you show them? | VP1 |
-| F9 | What have you used to help with finding or talking to customers: books, videos, templates, mentors, AI? What happened the last time you used it? | A3, A5, alternatives |
-| F10 | When did you last ask an AI for feedback on your idea? What did it say, and what did you do with it? | A5, Devil's Advocate |
-| F11 | Was this for a class or on your own? What deadlines or check-ins kept you going, or didn't? | VP4 |
-| F12 | Who else should I talk to about this? | Referral |
+| ID  | Core question                                                                                                       | Optional recent-behavior probe                                                                                                                                                                                                      | Coverage                              |
+| --- | ------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------- |
+| F1  | Tell me about the app as it is today and the last time someone used it.                                             | What was your role? Which work was for a course or self-directed? What dates/counts are known or unknown?                                                                                                                           | Eligibility/context; VP4              |
+| F2  | Walk me through your most recent effort to get someone to try it, from what prompted it to what happened afterward. | What did you actually do, and when? What went as expected? What went differently?                                                                                                                                                   | A1; VP2                               |
+| F3  | Who did you approach, and what made their experience relevant? How did you reach them?                              | Trace one actual route from contact/place to conversation/use. What do you know about where they came from, and what is unknown?                                                                                                    | A1, A4                                |
+| F4  | In that attempt, was there a point where the next step changed or did not happen?                                   | If yes, what was happening at that point, what else took priority, and what helped later? Ask for an attempt that went more smoothly too. Do not suggest fear as the answer.                                                        | A1; VP2                               |
+| F5  | What did that person say, and what happened after the conversation?                                                 | What was requested, agreed, actually completed, declined or still pending? What is self-report versus something you saw?                                                                                                            | A2; VP5                               |
+| F6  | Compare that with another person or route that led to a different result.                                           | After their open account: did an introduction or a particular community play a part? What access/rules did you encounter? Which relevant action followed, if any? Include useful warm contacts, no-response cases and other routes. | A2, A4; VP5                           |
+| F7  | What did you use to prepare for or keep track of the most recent conversation?                                      | What help, if any, did you use? What did you keep, change or ignore? What already worked well? Only ask about AI if used or as a neutral final coverage check, without assuming it was needed.                                      | A3, A6; VP2; actual alternatives      |
+| F8  | What decision did you make after that attempt?                                                                      | What led to it? What stayed the same? Was there anything that pointed another way? What did you do next, and what happened?                                                                                                         | A5; VP7                               |
+| F9  | Did anyone review or discuss that work with you?                                                                    | If yes, what did you show and what feedback/action followed? If no, how did you use your notes yourself? What could the reviewer tell from the material, and what remained unclear?                                                 | A5; VP1, VP6                          |
+| F10 | When did you next return to this work, if you did?                                                                  | What prompted that return: your own question, a requirement, a reminder or something else? Describe a prompt/checkpoint that helped or got in the way. No return is a valid answer.                                                 | A6; VP4, VP7                          |
+| F11 | Tell me about the last time you adopted, paid for or stopped using help with this work.                             | What was the alternative? Who chose/approved/paid? What was actually spent or done? If there was no purchase, record that without asking what they would pay.                                                                       | VP3, VP5; alternatives/buying context |
 
-**Closing ask (a small commitment, not a question)**: "Could I check back in with you in two weeks to hear how it's going?" Note whether they say yes, offer a time, or deflect.
+A3/A5/A6 discussion about an existing method is mechanism evidence, not evidence that First Ten improves it. Reserve app-specific conclusions for observed app use. Do not ask “If not, what could they have committed?” or treat agreement to another conversation as product demand.
 
-## What to listen for
+## Close without turning logistics into evidence
 
-- **Behavior beats opinion.** "I posted in two Discords and got no replies" is evidence. "I'd totally use a tool like that" is not; don't record it as support.
-- **Emotion words** around reaching out (awkward, scared, cringe, spammy): VP2.
-- **An audience for proof** (an instructor's checkpoint, a pitch, a co-founder): VP1.
-- **Commitments** they got or gave: VP5.
-- **Workarounds** (spreadsheets, notes apps, ChatGPT threads): alternatives and switching cost.
+Ask “Is there anything important about that experience I have missed?” Correct your paraphrase if needed. After the neutral section, an optional message/decision-record study must be labeled as a new exposure with its own source IDs and the protocol’s presentation order. Do not blend pitch reactions into the earlier account.
 
-## Note template
+A separate voluntary scheduling request may be: “May we contact you for the specific follow-up we discussed?” Record the permission and logistics privately. Do not score yes/no as willingness to use or buy. The participant can forward a neutral invitation if they choose; do not collect someone else’s contact details or send it automatically.
 
-Copy into `research/interviews/YYYY-MM-DD-founder-<firstname-or-role>.md`.
+## Afterward
 
-```markdown
-# Founder interview: <first name or role>, <date>
-
-- Segment: student founder · Context: course | self-directed · Stage: idea | building | launched, no users | first users
-- Recruited via: <how> · Friend? yes/no · Consent to notes: yes
-- Interviewer:
-
-## What they did (behavior, in order)
--
-
-## Quotes (exact words, at most 3, no names)
-- ""
-
-## Commitments observed
-- During the interview (closing ask):
-- From their own customers (F7):
-
-## Hypotheses
-| ID | Supports / Contradicts / No signal | Evidence (question #, short paraphrase) |
-|---|---|---|
-| A1 | | |
-| A2 | | |
-| A3 | | |
-| A5 | | |
-| A6 | | |
-| VP1 | | |
-| VP2 | | |
-| VP4 | | |
-| VP5 | | |
-
-## Surprises (things we didn't expect)
--
-
-## Referrals and follow-ups
--
-```
-
-## After each interview
-
-1. Write the note the same day (10 minutes).
-2. Update the tally in `research/interviews/README.md` (count of supports and contradicts per hypothesis).
-3. After 5 interviews, the agent runs R0-005 synthesis.
+Record exact versus paraphrased material, behavior versus interpretation, sources, dates and assistance in the private template. Code all A1–A6 and VP1–VP7, using `no_signal` where the role/episode supplies none; the goal is coverage without manufacturing answers. Ensure A4 is included. Update only non-identifying counts/coverage in the repository log when authorized, preserve negative cases and note unresolved eligibility. After the first three, amend prospectively if needed; final synthesis waits for its actual prerequisite evidence.
