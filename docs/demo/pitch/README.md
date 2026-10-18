@@ -21,7 +21,7 @@ Editable Spaces presentation: **First Ten — Babson teaching and product pitch*
 9. Protected aggregate admin view, actual deployed screen.
 10. Owner-requested architecture illustration, private data boundary, AI gateway, exact model IDs and the owner-stated pedagogy moat.
 11. Six named pedagogical concepts with student activities.
-12. Editable Crossing the Chasm adoption curve and planned timeline: October 2026 tests, November–December refinement, Spring 2027 release target of ten schools represented at the workshop.
+12. Editable Crossing the Chasm adoption curve, upper-right Scan to join QR and planned timeline: October 2026 tests, November–December refinement, Spring 2027 release target of ten schools represented at the workshop.
 13. Questions and founding-partner ask, verified QR and two semesters free offer.
 
 ## Delivery and fallback

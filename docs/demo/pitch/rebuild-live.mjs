@@ -82,7 +82,7 @@ const authoredSlides = [
   {
     title: "Crossing the Chasm",
     caption:
-      "Editable adaptation of Geoffrey Moore’s adoption curve. Our proposed entry is classroom pilots with early adopters; the intended bridge is a repeatable teaching package. Timeline: October 2026 tests in BUS 131A / BUS 232F at Brandeis; November–December refinement; Spring 2027 release target of ten schools represented at the Babson workshop. Dates and ten-school target are plans, not confirmed commitments.",
+      "Editable adaptation of Geoffrey Moore’s adoption curve. Our proposed entry is classroom pilots with early adopters; the intended bridge is a repeatable teaching package. Timeline: October 2026 tests in BUS 131A / BUS 232F at Brandeis; November–December refinement; Spring 2027 release target of ten schools represented at the Babson workshop. Dates and ten-school target are plans, not confirmed commitments. Scan the upper-right QR to join as a founding partner at https://first-10-three.vercel.app/founding-partners.",
   },
   {
     title: "Questions + an invitation",
@@ -370,6 +370,9 @@ export default async function rebuild({ presentation, input }) {
         ". EEF addresses school settings, not First Ten university efficacy. Owner-supplied BUS131 Week 6 activities inspired the marketing sequence. The main lab works manually. Presenter-only synthetic practice uses Gemini 2.5 Flash-Lite through OpenRouter on Google Vertex. The owner verified one production draft on 2026-10-18 at reported provider cost $0.000106. That single observed cost is not a forecast or a promise for other flows. General marketing AI remains planned; the existing four private AI kinds retain their separate baseline. A live AI call is not required for this presentation.";
     } else if (i === 11) {
       header(s, "GO TO MARKET", "Crossing the Chasm");
+      image(s, "pitch/founding-partners-qr.png", 1000, 24, 208, 208,
+        "Scan to join: https://first-10-three.vercel.app/founding-partners");
+      text(s, "Scan to join", 1038, 238, 170, 30, 20, ink, true);
       // Editable adaptation of Moore's adoption lifecycle. No measured percentages.
       const curve = (x, w, y0, c1, c2, y1, fill) =>
         s.shapes.add({
@@ -462,7 +465,7 @@ export default async function rebuild({ presentation, input }) {
         "#4D655A",
       );
       notes +=
-        " Primary sources checked 2026-10-18: https://geoffreyamoore.com/book/crossing-the-chasm/ and https://crossingthechasmbymoore.com/book/ (official book site with adoption-curve illustration). The gap separates visionary early adopters from pragmatist early-majority customers. Editable qualitative adaptation, not measured adoption data; no exact percentages or claim that First Ten has crossed it. Our proposed classroom-pilot entry and repeatable teaching-package bridge are strategic hypotheses. Owner-requested timeline: tests start October 2026 in BUS 131A and BUS 232F Brandeis teaching contexts, refine November–December using pilot feedback, Spring 2027 release target of ten schools represented at the Babson workshop. Ten is an ambition, not ten confirmed commitments or institutional endorsement. Course sources: " +
+        " Upper-right QR encodes https://first-10-three.vercel.app/founding-partners and reuses the verified final-slide code. Primary sources checked 2026-10-18: https://geoffreyamoore.com/book/crossing-the-chasm/ and https://crossingthechasmbymoore.com/book/ (official book site with adoption-curve illustration). The gap separates visionary early adopters from pragmatist early-majority customers. Editable qualitative adaptation, not measured adoption data; no exact percentages or claim that First Ten has crossed it. Our proposed classroom-pilot entry and repeatable teaching-package bridge are strategic hypotheses. Owner-requested timeline: tests start October 2026 in BUS 131A and BUS 232F Brandeis teaching contexts, refine November–December using pilot feedback, Spring 2027 release target of ten schools represented at the Babson workshop. Ten is an ambition, not ten confirmed commitments or institutional endorsement. Course sources: " +
         sources.bus131 +
         " ; " +
         sources.bus232 +

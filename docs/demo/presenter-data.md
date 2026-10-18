@@ -1,6 +1,6 @@
 # Fictional presenter workspace
 
-The dedicated account is `workshop-presenter@firstten-demo.invalid`. It is non-deliverable and receives no email. Its ordinary authenticated session owns only the reserved fictional StudyLoop project. A separate trusted `app_metadata.firstten_demo_admin === true` flag grants access to the limited aggregate dashboard. It has no teacher, collaborator, role-management or browser service-role grant.
+The dedicated account is `workshop-presenter@firstten-demo.invalid`. It is non-deliverable and receives no email. Its ordinary authenticated session owns the reserved fictional StudyLoop project and the separate fictional CampusSwap idea. A separate trusted `app_metadata.firstten_demo_admin === true` flag grants access to the limited aggregate dashboard. It has no teacher, collaborator, role-management or browser service-role grant.
 
 All sample people, conversations and drafts are authored teaching examples. The accepted synthesis means reviewed within the fictional case, not validated research. The proposed experiment has no recorded result. Account metadata marks the identity synthetic; project checklist metadata marks the fixture fictional and excluded from research/product metrics. Future analytics must enforce exclusion using trusted account metadata, not treat a client-editable checklist as authorization.
 

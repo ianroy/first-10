@@ -21,7 +21,7 @@ Statuses are `not_started`, `in_progress`, `blocked`, `complete`, `deferred`, `d
 ```yaml
 current_iteration: 5
 current_stage: P1_foundation_with_parallel_P2_and_R0
-status: in_progress
+status: paused_by_owner_for_presentation
 last_task_done: PARTNER-002
 next_task: AI-002
 next_parallel_wave: []
@@ -30,7 +30,7 @@ research_gate: not_passed
 foundation_gate: not_passed
 realtime_go: pending
 last_updated: 2026-10-18
-last_documentation_update: "2026-10-18: moved Market Opportunity to slide 5 before all four product demo slides; synchronized native deck, companions and presenter notes."
+last_documentation_update: "2026-10-18: owner paused product development for imminent presentation; saved live AI-origin checkpoint and added joining QR to Crossing the Chasm."
 resume_hint: >-
   Production 64bc86e includes complete MKT-006 manual planner controls and private partner
   Admin counts. Actual presenter login worked: 0 interest, 0 feedback, 0 distinct addresses
@@ -43,7 +43,9 @@ resume_hint: >-
   CI 39131773694 and database policies 39131773786 passed at 92c43ee.
   AI-002 saved-output links, owner metadata UI and atomic outreach replacement are implemented.
   Migration08000 is applied; 372 app tests and 659 SQL assertions pass; typecheck/lint/build pass.
-  New-deployment browser verification remains before task completion. Origin means source draft,
+  Deployed d564fa8; CampusSwap questions generated, reviewed, saved and reloaded with origin.
+  Reported cost $0.004239, Claude Sonnet4.5 via Amazon Bedrock. Product work paused by owner
+  for presentation/slide refinements; concurrency rehearsal and final handoff remain. Origin means source draft,
   not proof that edited wording is unchanged or that its claims are true.
   SEC-004 is complete as a foundation, with collaboration disabled and no class visibility.
   The ten-hour checkpoint was 13:29:45 UTC; the report and final live checks followed.
