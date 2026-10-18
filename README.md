@@ -4,9 +4,9 @@
 
 First Ten is a mobile-first app for student founders with a live prototype or app and few or no recurring users. It brings a people list, interview questions, notes, AI-assisted synthesis, experiments and outreach drafts into one guided workflow. The founder talks to people, checks the evidence and decides what to do.
 
-This is the **candidate value proposition** being tested. The existing app implements a three-stage ladder; research is now focused on whether that ladder helps founders make better decisions and take useful action. There are no founder interviews or pilot outcomes recorded in the research workspace yet, so improved acquisition, retention and willingness to pay remain unproven. This document does not establish a final positioning decision or change the live app's copy.
+This is the **candidate value proposition** being tested. The existing app implements a three-stage ladder; research is now focused on whether that ladder helps founders make better decisions and take useful action. There are no founder interviews or pilot outcomes recorded in the research workspace yet, so improved acquisition, retention and willingness to pay remain unproven. The public page explains this provisional proposition; no acquisition or learning-effect claim has been validated.
 
-- [Open First Ten](https://first-10-three.vercel.app) · [GitHub repository](https://github.com/ianroy/first-10)
+- [Open First Ten](https://first-10-three.vercel.app) · [Explore the fictional demo](https://first-10-three.vercel.app/demo) · [Teaching resources](https://first-10-three.vercel.app/teach) · [Workshop pitch](https://first-10-three.vercel.app/pitch/index.html) · [GitHub repository](https://github.com/ianroy/first-10)
 - Built for the Babson AI Academy by the [First Ten team](#team). First scaffolded in Lovable, then moved to GitHub, Vercel and Supabase.
 - [ProductSpec.md](ProductSpec.md) describes the current product and its boundaries. [FEATUREROADMAP_workplan.md](FEATUREROADMAP_workplan.md) is the source of truth for research, delivery gates and the next task.
 
@@ -29,6 +29,16 @@ The intended loop is:
 For example, a founder building a study planner might hear that a student already plans carefully but loses track when assignments change. A useful next move could be to test a change-notification flow with students who have that problem. The conversation does not establish that they will use or pay for it. This is an illustrative example, not a customer result.
 
 The proposed advantage is continuity from conversation to decision to follow-through. It still needs to earn its place alongside a founder's existing AI chat, documents, mentor and course tools. The app supports pieces of this loop today; claim-level evidence links and a structured decision record are research concepts.
+
+## A classroom process you can inspect
+
+The login-free **StudyLoop** example follows fictional perspectives through an interpretation, a counterexample, a choice and a proposed next test. Its resettable, deterministic flow needs no live model response and writes no product data. The example demonstrates a method; it does not claim that every source-linked interaction exists in the private app.
+
+The [teaching kit](public/teaching/resources.json) provides a complete 60-minute lesson (10 minutes own thinking, 20 evidence, 20 marketing-test design, 10 peer review), a one-week $0 marketing assignment, six editable handouts and a nine-page printable PDF. Students map an audience to a primary channel and an alternative, develop truthful content, define an observable useful action and reflect on whether to repeat, revise or stop. The full saved in-app Marketing Lab and its new AI kinds remain under construction.
+
+Six teaching concepts connect to visible activities: **experiential learning; generative, student-led thinking before AI; scaffolded practice; formative peer feedback; metacognition and reflection; responsible AI and human judgment**. Students keep their initial thinking, inspect disagreement and explain their decision. AI is optional; the rubric assesses reasoning and revision rather than customers, network size or AI usage. These are teaching design commitments, not measured learning gains. See the [pedagogy map](docs/teaching/pedagogy-map.md) for primary sources and limits.
+
+The original First Ten identity uses a conversation-shaped **10**, Field notebook colors and scalable light/dark assets. The [company values](docs/company-values.md) connect honest learning, human judgment, participant respect, accessibility, useful action, continuity and responsible resources to product decisions.
 
 ## What you can do today
 
@@ -59,7 +69,7 @@ The goals and unlock thresholds differ. They are workflow guides, not evidence t
 
 ## What we are testing next
 
-[Iteration 5](FEATUREROADMAP_workplan.md) stages the requested product expansion alongside research: economical AI, a new brand and demo landing page, teaching resources, durable personal workspaces, teacher and admin panels, and controlled sharing/collaboration. The [task registry and index](docs/roadmap/task-index.md) specify status, dependencies, subtasks and agent handoffs. These are planned capabilities, not shipped features.
+[Iteration 5](FEATUREROADMAP_workplan.md) stages the requested product expansion alongside research: economical AI, a new brand and demo landing page, teaching resources, durable personal workspaces, teacher and admin panels, and controlled sharing/collaboration. The [task registry and index](docs/roadmap/task-index.md) specify status, dependencies, subtasks and agent handoffs. The public demo, original brand, teaching kit and teaching page are implemented; teacher/admin panels, multi-project work, sharing and collaboration remain planned. The registry distinguishes each gate and its actual evidence.
 
 The primary pilot outcome to test is a **useful loop within 14 days**: a founder takes an external action and records a specific decision supported by observations, including counterevidence or unknowns, plus a next step. Voluntary return matters; course requirements and facilitator help will be recorded separately. Draft generation, interview totals and positive feedback alone are insufficient.
 
@@ -67,7 +77,7 @@ Research may change the audience, workflow or positioning. The owner-requested e
 
 ## Privacy and AI data flow
 
-Use first names for contacts and avoid sensitive information in free text. Supabase stores account authentication and project data; the database migration enables owner-based row-level security for the six application tables. The interview start checkbox confirms permission to take notes in that session. It is not a stored consent record or permission to publish quotes or send personal information to an AI provider.
+Use first names for contacts and avoid sensitive information in free text. Supabase stores account authentication and project data; the database migration enables owner-based row-level security for the six application tables. The deployed ownership migration also enforces matching project/contact ownership and immutable row identities; strict real database policy tests cover these boundaries. The interview start checkbox confirms permission to take notes in that session. It is not a stored consent record or permission to publish quotes or send personal information to an AI provider.
 
 When you request generation, the server sends selected context to **OpenRouter and the routed model provider**: project name, description, audience and problem; completed interview answers and tags for synthesis and outreach; accepted learnings for outreach; and contact relationship, relevance, source and stage fields for Stage 2. Contact first names are not selected for the AI context, but free-text notes can still identify people. Review what you record and agree appropriate data handling with participants before using it in AI generation.
 
@@ -98,14 +108,14 @@ Use the local URL printed by Vite; the wrapper can choose the port. Configure th
 | `OPENROUTER_MODEL`                                   | Server only, optional                    | Missing or blank uses the current `anthropic/claude-sonnet-4.5` baseline; set a supported explicit model to override |
 | `APP_URL`                                            | Server only, optional                    | OpenRouter request referer; code defaults to the recorded production URL                                             |
 | `NITRO_PRESET`                                       | Build                                    | Set to `vercel` when building for Vercel                                                                             |
-| `SUPABASE_SERVICE_ROLE_KEY`                          | Server only, unused by current app flows | Optional admin-client scaffold; bypasses RLS                                                                         |
+| `SUPABASE_SERVICE_ROLE_KEY`                          | Server only, unused by current app flows | Operator tooling for the isolated fictional presenter seeder; bypasses RLS and must never reach the browser          |
 | `SUPABASE_PROJECT_ID`, `VITE_SUPABASE_PROJECT_ID`    | Template metadata                        | Present in `.env.example`; not read by current application code                                                      |
 
 The template includes a blank `OPENROUTER_MODEL=` line; blank and missing values now select the baseline. Lower-cost routes require their model-evaluation tasks before promotion. `APP_URL` and `NITRO_PRESET` are additional supported settings not listed in that template. Keep real `.env` values out of Git. Never put the OpenRouter key or service-role key in a `VITE_` variable.
 
 ### Database
 
-The application schema is in [supabase/migrations/20261017000000_init.sql](supabase/migrations/20261017000000_init.sql): `projects`, `contacts`, `interviews`, `learnings`, `experiments` and `outreach`. Provision a development Supabase project, then apply the migration with the Supabase CLI:
+The application schema is in [supabase/migrations/20261017000000_init.sql](supabase/migrations/20261017000000_init.sql): `projects`, `contacts`, `interviews`, `learnings`, `experiments` and `outreach`. The additive [ownership migration](supabase/migrations/20261018000000_private_relationships.sql) strengthens relationships without rewriting content. Provision an explicitly selected development Supabase project, then apply pending migrations with the Supabase CLI:
 
 ```sh
 supabase link --project-ref <development-project-ref>
@@ -176,5 +186,11 @@ First Ten was created for the Babson AI Academy by:
 - [ProductSpec.md](ProductSpec.md): audience, value model, implemented behavior, architecture, data model and contributor conventions.
 - [FEATUREROADMAP_workplan.md](FEATUREROADMAP_workplan.md): current state, research questions, delivery gates and resumable task plan.
 - [research/value-prop.md](research/value-prop.md): earlier value-proposition canvas; read alongside the newer candidate thesis in roadmap §2.1.
-- [research/interviews/README.md](research/interviews/README.md): interview workspace and research records; guides await the current iteration's revisions.
+- [research/interviews/README.md](research/interviews/README.md): interview workspace and research records; neutral guides, screening, permission choices and pilot rules; no invented participant findings.
 - [AGENTS.md](AGENTS.md): repository instructions, including the required reading order and roadmap state update.
+
+## Demo and release checks
+
+Public checks: `npm run smoke -- https://first-10-three.vercel.app`. The redacted `/api/health` reports configuration shape/presence without keys; it does not prove authentication, database availability or model quality. The deployment smoke workflow and strict isolated database-policy CI are separate checks.
+
+The [presenter workspace](docs/demo/presenter-data.md) contains only clearly fictional examples in a dedicated account. Insert-only seeding is dry-run-first and preserves edits on repeat. The browser sign-in, source reads and saved-summary reload were verified. No real participant study or product adoption is implied. The pitch also has a downloadable, self-contained HTML fallback.

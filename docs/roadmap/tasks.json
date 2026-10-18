@@ -2876,7 +2876,7 @@
       "id": "WEB-004",
       "title": "Build the public landing page and connected CTAs",
       "phase": "P2",
-      "status": "not_started",
+      "status": "complete",
       "owner": "agent",
       "size": "S",
       "kind": "implementation",
@@ -2888,7 +2888,9 @@
         "src/components/marketing/**",
         "public/marketing/**",
         "src/tests/web-004/**",
-        "src/routes/index.test.tsx"
+        "src/routes/index.test.tsx",
+        "README.md",
+        "ProductSpec.md"
       ],
       "exclusive_locks": ["route-integration"],
       "read_first": [
@@ -2925,26 +2927,40 @@
         {
           "date": "2026-10-17",
           "text": "Scheduled by Iteration 5; no implementation or validation claimed."
+        },
+        {
+          "date": "2026-10-18",
+          "text": "Claimed for the authorized autonomous demo run."
+        },
+        {
+          "date": "2026-10-18",
+          "text": "Owner requests desktop-first presentation today. Coordinator reconciles README/ProductSpec with shipped public resources, ownership migration and actual provider/role limits during landing integration."
+        },
+        {
+          "date": "2026-10-18",
+          "text": "Desktop-first landing connects actual demo, teaching kit, auth and pitch; six pedagogical concepts and stack schematic. README/ProductSpec reconciled with shipped behavior; no testimonials, learning gains or unfinished role claims."
         }
       ],
       "claim": null,
-      "completion_evidence": [],
+      "completion_evidence": [
+        "src/tests/web-004/landing.test.tsx: 3 passed; typecheck and Vercel Nitro build passed; actual Chrome desktop and 390/320 layouts checked, no overflow or console errors; CTA route walkthrough passed."
+      ],
       "subtasks": [
         {
           "id": "WEB-004.s1",
-          "status": "not_started",
+          "status": "complete",
           "instruction": "Compose hero, workflow demo, concrete use cases, limits, stack and educator link.",
           "notes": []
         },
         {
           "id": "WEB-004.s2",
-          "status": "not_started",
+          "status": "complete",
           "instruction": "Wire start CTA to actual auth/setup and teaching CTA to the planned teaching route; label unavailable capabilities honestly.",
           "notes": []
         },
         {
           "id": "WEB-004.s3",
-          "status": "not_started",
+          "status": "complete",
           "instruction": "Add appropriate metadata, share preview and responsive/performance checks without fabricated testimonials.",
           "notes": []
         }

@@ -1,6 +1,6 @@
 # First Ten: execution roadmap
 
-Iteration 5 is the current plan. It expands the owner-requested product direction into small, inspectable tasks for coordinated parallel agents. **This pass creates the plan, values and execution tooling; it does not implement the proposed product features.** Iterations 1–4 and every original dated Note remain in [the historical archive](FEATUREROADMAP_history.md).
+Iteration 5 is the current plan. It expands the owner-requested product direction into small, inspectable tasks for coordinated parallel agents. The registry records the original plan and the implementation now being delivered. Public branding, the fictional demo and teaching resources have shipped; individual task evidence distinguishes the remaining work. Iterations 1–4 and every original dated Note remain in [the historical archive](FEATUREROADMAP_history.md).
 
 Read [ProductSpec.md](ProductSpec.md) first. Related: [README](README.md) · [company values](docs/company-values.md) · [task index](docs/roadmap/task-index.md) · [canonical task registry](docs/roadmap/tasks.json) · [legacy audit](docs/roadmap/legacy-audit.md) · [OpenRouter plan](docs/roadmap/openrouter-plan.md).
 
@@ -22,7 +22,7 @@ Statuses are `not_started`, `in_progress`, `blocked`, `complete`, `deferred`, `d
 current_iteration: 5
 current_stage: P1_foundation_with_parallel_P2_and_R0
 status: in_progress
-last_task_done: DEMO-001
+last_task_done: WEB-004
 next_task: WEB-004
 next_parallel_wave: [WEB-004, MKT-002, MKT-007]
 active_claims: []
@@ -34,8 +34,9 @@ last_documentation_update: "2026-10-17: DOC-002 added README team credits with n
 resume_hint: >-
   Autonomous 10-hour Babson implementation run is active; see docs/roadmap/autonomous-run.md.
   OPS-001, SEC-001, VP-007, WEB-001/003, BR-001, AI-001 and MKT-001 are integrated.
-  SEC-002 real policy harness, BR-002 tokens, VP-008 protocol and the event deck are claimed.
-  Prioritize ownership fixes, logo/favicon, a public fictional demo and educator lesson/page.
+  SEC-002/003 policy harness and ownership, BR-002 tokens, VP-008 protocol, original logo/favicon,
+  public fictional demo and teaching kit/page are integrated. User gives a final one-hour sprint:
+  prioritize desktop presentation and Marketing Lab, with parallel workers and frequent releases.
   Keep current/proposed labels honest; no paid AI calls yet. Human interviews/pilot remain open.
 ```
 
