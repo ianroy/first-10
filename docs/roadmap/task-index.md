@@ -44,7 +44,7 @@ Build truthful public materials from current capabilities while research continu
 
 | Task | Status | Subtasks complete | Owner | Size | Dependencies | Decisions | Write scope / locks |
 | --- | --- | --- | --- | --- | --- | --- | --- |
-| BR-001 Translate company values into two accessible brand directions | not_started | 0/3 | agent | S | VAL-001 | — | docs/brand/directions.md, docs/brand/previews/**; locks: — |
+| BR-001 Translate company values into two accessible brand directions | in_progress | 0/3 | agent | S | VAL-001 | — | docs/brand/directions.md, docs/brand/previews/**; locks: — |
 | BR-002 Implement semantic brand tokens and component foundations | not_started | 0/3 | agent | S | BR-001, OPS-001 | — | src/styles.css, src/components/ui/**, docs/brand/tokens.md (1 more; inspect --task); locks: design-system |
 | BR-003 Apply product voice and brand across authenticated journeys | not_started | 0/3 | agent | S | BR-002 | — | src/components/AppShell.tsx, src/components/RequireProject.tsx, src/routes/auth.tsx (7 more; inspect --task); locks: app-shell, route-integration |
 | WEB-001 Write the founder sales narrative and demo storyboard | not_started | 0/3 | agent | S | VP-007, VAL-001 | — | docs/marketing/landing-brief.md, docs/marketing/claims.md; locks: — |
@@ -139,7 +139,7 @@ Human studies can run alongside engineering; unsupported outcomes remain hypothe
 
 | Task | Status | Subtasks complete | Owner | Size | Dependencies | Decisions | Write scope / locks |
 | --- | --- | --- | --- | --- | --- | --- | --- |
-| VP-007 Audit the promise, evidence and actual alternatives | in_progress | 0/3 | agent | S | VP-001, DOC-001 | — | research/value-prop.md, research/claim-ledger.md; locks: — |
+| VP-007 Audit the promise, evidence and actual alternatives | complete | 3/3 | agent | S | VP-001, DOC-001 | — | research/value-prop.md, research/claim-ledger.md; locks: — |
 | VP-008 Revise interview guides and pre-register the learning protocol | not_started | 0/3 | agent | S | VP-007, VP-002 | — | research/value-test-plan.md, research/interviews/guide-founders.md, research/interviews/guide-instructors.md (2 more; inspect --task); locks: research-protocol |
 | R0-004a Learn from the first three eligible founders | not_started | 0/3 | human | M | VP-008 | — | research/interviews/*-founder-*.md, research/founder-sample.md; locks: — |
 | R0-004b Complete the founder sample and seek counterexamples | not_started | 0/3 | human | M | R0-004a | — | research/interviews/*-founder-*.md, research/founder-sample.md; locks: — |
