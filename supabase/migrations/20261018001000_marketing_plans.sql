@@ -49,7 +49,7 @@ BEGIN
   kind := shape->>'type';
   IF shape ? 'const' THEN
     IF v <> shape->'const' THEN RAISE EXCEPTION 'Invalid marketing constant' USING ERRCODE='22023'; END IF;
-    RETURN v;
+    RETURN shape->'const';
   ELSIF kind='object' THEN
     IF jsonb_typeof(v)<>'object' OR (SELECT count(*) FROM jsonb_object_keys(v))<>(SELECT count(*) FROM jsonb_object_keys(shape->'properties')) THEN RAISE EXCEPTION 'Invalid marketing object' USING ERRCODE='22023'; END IF;
     result := '{}'::jsonb;
