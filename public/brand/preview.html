@@ -1,0 +1,163 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>First Ten — logo verification</title>
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg?v=first-ten-1" />
+    <style>
+      * {
+        box-sizing: border-box;
+      }
+      body {
+        margin: 0;
+        background: #f7f5ec;
+        color: #173d35;
+        font-family: system-ui, sans-serif;
+        line-height: 1.5;
+      }
+      main {
+        max-width: 1100px;
+        margin: auto;
+        padding: 40px 24px;
+      }
+      h1 {
+        font-size: 24px;
+        margin: 0 0 8px;
+      }
+      p {
+        margin: 0 0 24px;
+        color: #53665c;
+      }
+      .sheet {
+        padding: 40px;
+        background: #fffef9;
+        border: 1px solid #bcc6b9;
+        border-radius: 20px;
+        margin: 20px 0;
+      }
+      .dark {
+        background: #102820;
+        color: #f7f5ec;
+      }
+      .projection {
+        width: 100%;
+        height: auto;
+        display: block;
+      }
+      .samples {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 32px;
+        align-items: center;
+      }
+      .sample {
+        display: grid;
+        gap: 12px;
+        justify-items: center;
+      }
+      .sample span {
+        font-size: 14px;
+      }
+      .marks img {
+        width: 64px;
+        height: 64px;
+      }
+      .note {
+        margin-top: 24px;
+        font-size: 14px;
+      }
+      .focus:focus-visible {
+        outline: 3px solid #a44426;
+        outline-offset: 4px;
+      }
+      @media (max-width: 600px) {
+        main {
+          padding: 24px 16px;
+        }
+        .sheet {
+          padding: 24px 16px;
+        }
+        .samples {
+          gap: 24px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <main>
+      <h1>First Ten / identity verification</h1>
+      <p>Original 10 + conversation mark. Real SVG and PNG exports, shown at intended sizes.</p>
+      <section class="sheet" aria-label="Light wordmark">
+        <img class="projection" src="/brand/wordmark.svg" alt="First Ten" width="289" height="64" />
+      </section>
+      <section class="sheet dark" aria-label="Dark wordmark">
+        <img
+          class="projection"
+          src="/brand/wordmark-on-dark.svg"
+          alt="First Ten"
+          width="289"
+          height="64"
+        />
+      </section>
+      <section class="sheet" aria-label="Browser icon sizes">
+        <div class="samples">
+          <div class="sample">
+            <img
+              src="/brand/icon-16.png"
+              width="16"
+              height="16"
+              alt="First Ten 16 pixel icon"
+            /><span>16 px</span>
+          </div>
+          <div class="sample">
+            <img
+              src="/brand/icon-32.png"
+              width="32"
+              height="32"
+              alt="First Ten 32 pixel icon"
+            /><span>32 px</span>
+          </div>
+          <div class="sample">
+            <img
+              src="/brand/icon-48.png"
+              width="48"
+              height="48"
+              alt="First Ten 48 pixel icon"
+            /><span>48 px</span>
+          </div>
+          <div class="sample">
+            <img
+              src="/apple-touch-icon.png"
+              width="90"
+              height="90"
+              alt="First Ten touch icon"
+            /><span>180 px / 2×</span>
+          </div>
+          <div class="sample">
+            <img src="/favicon.svg" width="128" height="128" alt="First Ten large icon" /><span
+              >SVG / 128 px</span
+            >
+          </div>
+        </div>
+      </section>
+      <section class="sheet" aria-label="Transparent and monochrome marks">
+        <div class="samples marks">
+          <div class="sample"><img src="/brand/mark.svg" alt="Color mark" /><span>Color</span></div>
+          <div class="sample">
+            <img src="/brand/mark-mono.svg" alt="Monochrome mark" /><span>One ink</span>
+          </div>
+          <div class="sample dark" style="padding: 12px; border-radius: 12px">
+            <img src="/brand/mark-on-dark.svg" alt="Inverse color mark" /><span>Dark</span>
+          </div>
+          <div class="sample dark" style="padding: 12px; border-radius: 12px">
+            <img src="/brand/mark-mono-inverse.svg" alt="White monochrome mark" /><span>White</span>
+          </div>
+        </div>
+        <p class="note">
+          A 16 px icon is for recognition. Use the full wordmark when introducing the company.
+        </p>
+      </section>
+    </main>
+  </body>
+</html>
