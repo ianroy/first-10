@@ -13,6 +13,7 @@ import {
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
+import { MarketingPlanExport } from "./MarketingPlanExport";
 import { ManualMeasurements } from "./ManualMeasurements";
 import { LiveMarketingPractice } from "./LiveMarketingPractice";
 import { loadMarketingPlan, saveMarketingPlan } from "@/lib/marketing.functions";
@@ -1132,6 +1133,14 @@ export function SavedMarketingLab({ project }: { project: Project }) {
           </Card>
         )}
       </fieldset>
+      {step === 4 && (
+        <MarketingPlanExport
+          key={project.id}
+          plan={plan}
+          projectName={project.name}
+          fictional={project.id === "f1d00000-0000-4000-8000-000000000010"}
+        />
+      )}
       <div className="flex flex-wrap items-center justify-between gap-3 border-t pt-5">
         <p className="text-xs text-muted-foreground">
           Explicit saves · private to this project · no automatic outreach
