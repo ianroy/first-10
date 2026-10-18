@@ -1,0 +1,112 @@
+import { execFileSync } from "node:child_process";
+import { readFileSync, readdirSync, writeFileSync } from "node:fs";
+import { randomBytes, createHash } from "node:crypto";
+import assert from "node:assert/strict";
+import { fileURLToPath } from "node:url";
+import { guestRaces } from "./races.mjs";
+import { buildSuite, parseTap } from "../../../scripts/test-policies.mjs";
+const root = fileURLToPath(new URL("../../../", import.meta.url)),
+  container = "supabase_db_hdwnnuvqqkkpontcdbwa";
+const database = "firstten_guest_entry_test_" + randomBytes(5).toString("hex");
+assert.match(database, /^firstten_guest_entry_test_[a-f0-9]{10}$/);
+const docker = (args, input) =>
+  execFileSync("docker", args, {
+    input,
+    encoding: "utf8",
+    stdio: ["pipe", "pipe", "pipe"],
+    timeout: 60000,
+    maxBuffer: 24000000,
+  });
+const [info] = JSON.parse(docker(["inspect", container]));
+assert.equal(info.Name, "/" + container);
+assert.equal(info.State.Running, true);
+const ports = info.NetworkSettings.Ports["5432/tcp"];
+assert(ports?.length && ports.every((p) => p.HostPort === "55322"));
+const sql = (db, text, user = "postgres") =>
+  docker(
+    ["exec", "-i", container, "psql", "-X", "-qAt", "-U", user, "-d", db, "-v", "ON_ERROR_STOP=1"],
+    text,
+  );
+let created = false,
+  phase = "clone setup";
+try {
+  assert.equal(
+    sql("postgres", `SELECT count(*) FROM pg_database WHERE datname='${database}'`).trim(),
+    "0",
+  );
+  const schema = docker([
+    "exec",
+    container,
+    "pg_dump",
+    "-U",
+    "postgres",
+    "-d",
+    "postgres",
+    "--schema-only",
+  ]);
+  sql("postgres", `CREATE DATABASE ${database} TEMPLATE template0;`);
+  created = true;
+  sql(database, schema, "supabase_admin");
+  assert.equal(sql(database, "SELECT count(*) FROM auth.users").trim(), "0");
+  const migration = readFileSync(
+    root + "/supabase/migrations/20261018018000_guest_class_entry.sql",
+    "utf8",
+  );
+  assert.equal(
+    createHash("sha256").update(migration).digest("hex"),
+    "75f663f3cf4fa72dddc8dd716ef0d35fd870688e9e17484d68f95f6c454f9e6a",
+  );
+  phase = "reviewed migration apply to empty clone";
+  // Before integration, apply the reviewed file to the empty schema clone.
+  // After root integrates18, the schema dump already contains these objects.
+  const installed =
+    sql(database, "SELECT to_regclass('firstten_private.guest_entry_links') IS NOT NULL").trim() ===
+    "t";
+  if (!installed) sql(database, migration);
+  // Bootstrap only migration-default policy singleton fixtures; source data never copied.
+  sql(
+    database,
+    "INSERT INTO firstten_private.demo_ai_budget(singleton,cap_cents,reserved_cents) VALUES(true,100,0) ON CONFLICT DO NOTHING;INSERT INTO firstten_private.project_collaboration_capability VALUES(true,false) ON CONFLICT DO NOTHING;INSERT INTO firstten_private.ai_usage_global_policy(singleton) VALUES(true) ON CONFLICT DO NOTHING;",
+  );
+  phase = "rolled-back policy suite";
+  const files = readdirSync(root + "/supabase/tests")
+    .filter((n) => n.endsWith(".sql"))
+    .sort()
+    .map((n) => readFileSync(root + "/supabase/tests/" + n, "utf8"));
+  const output = sql(database, buildSuite(files, true));
+  writeFileSync("/private/tmp/firstten-guest-policy-result.txt", output);
+  const tap = parseTap(output);
+  for (const f of tap.failures) console.log(f);
+  console.log(
+    JSON.stringify({
+      assertions: tap.assertions,
+      failures: tap.failures.length,
+      knownGaps: tap.knownGaps.length,
+      rolledBack: tap.cleanupOk,
+    }),
+  );
+  assert(tap.validPlan && tap.cleanupOk);
+  assert.equal(tap.failures.length, 0);
+  assert.equal(tap.knownGaps.length, 0);
+  phase = "real cross-session races";
+  const password = info.Config.Env.find((v) => v.startsWith("POSTGRES_PASSWORD="))?.slice(18);
+  assert(password);
+  await guestRaces({ database, password });
+} catch (error) {
+  writeFileSync("/private/tmp/firstten-guest-policy-error.txt", String(error.stderr ?? ""));
+  console.error(
+    "Clone verification failed at " + phase + "; raw diagnostic retained locally, not printed.",
+  );
+  process.exitCode = 1;
+} finally {
+  if (created) {
+    sql("postgres", `DROP DATABASE ${database} WITH(FORCE);`);
+    assert.equal(
+      sql("postgres", `SELECT count(*) FROM pg_database WHERE datname='${database}'`).trim(),
+      "0",
+    );
+    console.log(
+      "Exact newly created schema-only clone dropped and absence verified. Main local/hosted databases unchanged.",
+    );
+  }
+}
