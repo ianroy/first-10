@@ -126,7 +126,7 @@ Offer bounded, reviewed help with interviews, decisions and follow-through.
 | MKT-006 Plan a one-week test and measure useful action | complete | 3/3 | agent | S | MKT-003 | — | src/components/marketing-lab/TestPlanner.tsx, src/components/marketing-lab/ResultsReview.tsx, src/lib/marketing-metrics.ts (18 more; inspect --task); locks: marketing-editor |
 | DISC-002 Offer adjacent hypotheses and sampling-risk feedback through bounded AI | not_started | 0/3 | agent | M | DISC-001, AI-004, AI-007, AI-008 | — | src/lib/ai.functions.ts, src/lib/ai/**, src/lib/prompts/** (3 more; inspect --task); locks: disc-002-integration |
 | DISC-003 Connect hypothesis and people mapping to scripts and actionable pivots | not_started | 0/3 | agent | M | DISC-001, DISC-002, EV-003, EV-006 | — | src/components/discovery/**, src/lib/discovery*, src/lib/prompts/** (6 more; inspect --task); locks: disc-003-integration |
-| CTX-001 Safely retrieve and review public site and GitHub context | not_started | 0/3 | agent | M | DISC-001, AI-007 | — | src/lib/context/**, src/lib/context.functions.ts, src/components/discovery/** (3 more; inspect --task); locks: ctx-001-integration |
+| CTX-001 Safely retrieve and review public site and GitHub context | in_progress | 0/3 | agent | M | DISC-001, AI-007 | — | supabase/migrations/20261018019000_reviewed_public_context.sql, src/lib/context/**, src/lib/context.functions.ts (4 more; inspect --task); locks: ctx-001-integration |
 
 ## P6 — Sharing and collaborative design
 

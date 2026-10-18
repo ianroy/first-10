@@ -25,7 +25,7 @@ status: in_progress
 last_task_done: AI-007
 next_task: WS-004
 next_parallel_wave: [CLS-007, WS-004, CTX-001]
-active_claims: [CLS-007, WS-004]
+active_claims: [CLS-007, WS-004, CTX-001]
 research_gate: not_passed
 foundation_gate: not_passed
 realtime_go: pending

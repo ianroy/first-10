@@ -43,12 +43,12 @@ export const ACTIVITY_EXPORT_COVERAGE = [
   },
   {
     id: "interview-draft",
-    adapter: "interviewDraftActivity",
-    source: "src/routes/_authenticated/interview.tsx",
+    adapter: "interviewDraftActivities",
+    source: "src/components/interview-drafts/InterviewDraftSession.tsx",
     status: "mounted",
     scope: "owner",
     granularity:
-      "Current question/note/quote/tags/permission report; coordinator mount after privacy changes",
+      "Current or resumed incomplete notes, exact saved questions, tags, revision and permission limits; unsaved edits labeled",
   },
   {
     id: "saved-interview-drafts",

@@ -11563,7 +11563,7 @@
       "id": "CTX-001",
       "title": "Safely retrieve and review public site and GitHub context",
       "phase": "P5",
-      "status": "not_started",
+      "status": "in_progress",
       "owner": "agent",
       "size": "M",
       "kind": "implementation",
@@ -11571,12 +11571,13 @@
       "depends_on": ["DISC-001", "AI-007"],
       "requires_decisions": [],
       "write_scope": [
+        "supabase/migrations/20261018019000_reviewed_public_context.sql",
         "src/lib/context/**",
         "src/lib/context.functions.ts",
         "src/components/discovery/**",
         "src/tests/ctx-001/**",
-        "supabase/migrations/**",
-        "supabase/tests/ctx-001.sql"
+        "supabase/tests/ctx-001.sql",
+        "docs/architecture/public-context.md"
       ],
       "exclusive_locks": ["ctx-001-integration"],
       "read_first": [
@@ -11613,9 +11614,20 @@
         {
           "date": "2026-10-18",
           "text": "Explicit owner framework addition: first falsifiable hypothesis, adjacent hypotheses, five-person sampling map, bias feedback, pivotable printed scripts, interviews/results/actionable next steps and connected website/GitHub/prompt context."
+        },
+        {
+          "date": "2026-10-18",
+          "text": "First implementation slice: authenticated bounded public-site/GitHub retrieval, trusted unreviewed preview and explicit reviewed excerpt storage; no provider inclusion yet. Separate private-source processing permission is required; browser document text cannot forge retrieval/review. Reserve additive 19000 after pending 18000. Root serializes dependencies, generated types, PDFs/portfolio and publication. Parent remains in progress until reviewed-source PDF and source-fenced AI integration pass; do not broaden project descriptions or edit historical17000/evalv5."
         }
       ],
-      "claim": null,
+      "claim": {
+        "owner": "platform_admin",
+        "branch": "codex/public-context-20261018",
+        "base_commit": "2b0085f",
+        "worktree": "/private/tmp/first-ten-platform-admin",
+        "started_at": "2026-10-18T19:55:00Z",
+        "lease_expires_at": "2026-10-19T00:00:00Z"
+      },
       "completion_evidence": [],
       "subtasks": [
         {
