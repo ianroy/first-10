@@ -1,5 +1,7 @@
 -- No provider calls: transaction-scoped synthetic reservation/authorization checks.
 RESET ROLE;
+-- Transaction-local operator opening; never enables a hosted route.
+UPDATE firstten_private.ai_usage_global_policy SET global_stop=false,operator_reference='legacy-demo-policy-test' WHERE singleton;
 INSERT INTO auth.users(id,aud,role,email,encrypted_password,raw_app_meta_data,raw_user_meta_data,created_at,updated_at) VALUES('f1d00000-0000-4000-8000-000000000001','authenticated','authenticated','workshop-presenter@firstten-demo.invalid','','{}','{}',now(),now()) ON CONFLICT(id) DO NOTHING;
 INSERT INTO public.projects(id,user_id,name,checklist) VALUES('f1d00000-0000-4000-8000-000000000010','f1d00000-0000-4000-8000-000000000001','Fictional budget policy fixture','{}') ON CONFLICT(id) DO NOTHING;
 UPDATE auth.users SET raw_app_meta_data=coalesce(raw_app_meta_data,'{}')||'{"firstten_demo_admin":true,"synthetic":true,"firstten_demo_fixture":"first-ten-babson-2026-10-18-v1"}'::jsonb WHERE id='f1d00000-0000-4000-8000-000000000001';
