@@ -22,10 +22,10 @@ Statuses are `not_started`, `in_progress`, `blocked`, `complete`, `deferred`, `d
 current_iteration: 5
 current_stage: P1_foundation_with_parallel_P2_and_R0
 status: in_progress
-last_task_done: EXP-001
+last_task_done: WS-002
 next_task: PRV-001
-next_parallel_wave: [WS-002, PRV-001, EXP-002]
-active_claims: [PRV-001, WS-002, EXP-002]
+next_parallel_wave: [SEC-005, PRV-001, EXP-002]
+active_claims: [PRV-001, SEC-005, EXP-002]
 research_gate: not_passed
 foundation_gate: not_passed
 realtime_go: pending
@@ -44,7 +44,8 @@ resume_hint: >-
   EXP001 integrated91e5a4d: actual local PDF engine with frozen preview/select/redact;
   two/sevenpage generatedPDFs visually inspected.463combined app tests/typecheck/lint/build pass.
   AI003 offline improvements integrated43c8b2e; paid adapter still blocked on bounded budget.
-  Workers implementWS002 archive/cacheUI, PRV001 processingpermissions and EXP002 everyactivityPDF.
+  WS002 integrated0e33ea9 with455worker tests/typecheck/lint/build; deployed journey pending.
+  Workers implementSEC005 invitations, PRV001 processingpermissions and EXP002 everyactivityPDF.
   f60ed4e GitHubCI passed; live presenteradmin verified after hosted migrations.
   Existing Stage2 fictional marketing plan revision7 and private teaching planner persist.
   Guest classrooms, all activity PDFs, general AI budgets, sharing/realtime remain unfinished.
