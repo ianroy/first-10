@@ -8,7 +8,10 @@ export const Route = createFileRoute("/auth")({
   head: () => ({
     meta: [
       { title: "Sign in — First Ten" },
-      { name: "description", content: "Sign in to First Ten with a magic link. No password needed." },
+      {
+        name: "description",
+        content: "Sign in to First Ten with a magic link. No password needed.",
+      },
       { property: "og:title", content: "Sign in — First Ten" },
       { property: "og:description", content: "Sign in to First Ten with a magic link." },
     ],
@@ -25,7 +28,9 @@ function AuthPage() {
 
   useEffect(() => {
     supabase.auth.getSession().then(({ data }) => data.session && navigate({ to: "/dashboard" }));
-    const { data } = supabase.auth.onAuthStateChange((_e, s) => s && navigate({ to: "/dashboard" }));
+    const { data } = supabase.auth.onAuthStateChange(
+      (_e, s) => s && navigate({ to: "/dashboard" }),
+    );
     return () => data.subscription.unsubscribe();
   }, [navigate]);
 
@@ -37,7 +42,9 @@ function AuthPage() {
         <div className="mt-8 rounded-2xl bg-secondary p-5 text-secondary-foreground">
           <p className="font-semibold">Check your inbox</p>
           <p className="mt-1 text-sm">We sent a sign-in link to {email}. Open it on this device.</p>
-          <button className="mt-3 text-sm underline" onClick={() => setSent(false)}>Use a different email</button>
+          <button className="mt-3 text-sm underline" onClick={() => setSent(false)}>
+            Use a different email
+          </button>
         </div>
       ) : (
         <form
@@ -55,9 +62,18 @@ function AuthPage() {
             else setSent(true);
           }}
         >
-          <Input type="email" required placeholder="you@school.edu" value={email} onChange={(e) => setEmail(e.target.value)} className="h-14 rounded-2xl text-base" />
+          <Input
+            type="email"
+            required
+            placeholder="you@school.edu"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+            className="h-14 rounded-2xl text-base"
+          />
           {err && <p className="text-sm text-destructive">{err}</p>}
-          <Button size="xl" disabled={busy}>{busy ? "Sending…" : "Email me a magic link"}</Button>
+          <Button size="xl" disabled={busy}>
+            {busy ? "Sending…" : "Email me a magic link"}
+          </Button>
           <p className="text-center text-xs text-muted-foreground">No password. Just a link.</p>
         </form>
       )}

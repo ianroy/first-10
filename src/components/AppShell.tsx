@@ -52,10 +52,22 @@ export function AppShell({ title, children }: { title: string; children: ReactNo
 }
 
 export function Card({ children, className = "" }: { children: ReactNode; className?: string }) {
-  return <section className={`rounded-2xl border bg-card p-5 shadow-soft ${className}`}>{children}</section>;
+  return (
+    <section className={`rounded-2xl border bg-card p-5 shadow-soft ${className}`}>
+      {children}
+    </section>
+  );
 }
 
-export function Empty({ title, body, action }: { title: string; body: string; action?: ReactNode }) {
+export function Empty({
+  title,
+  body,
+  action,
+}: {
+  title: string;
+  body: string;
+  action?: ReactNode;
+}) {
   return (
     <div className="rounded-2xl border-2 border-dashed bg-card/50 p-6 text-center">
       <p className="font-display text-lg font-semibold">{title}</p>
@@ -76,7 +88,8 @@ export function DraftBadge() {
 export function PrivacyNote() {
   return (
     <p className="rounded-xl bg-secondary px-4 py-3 text-sm text-secondary-foreground">
-      First names only — no phone numbers or emails needed. Always ask “Mind if I take a few notes?” before writing anything down.
+      First names only — no phone numbers or emails needed. Always ask “Mind if I take a few notes?”
+      before writing anything down.
     </p>
   );
 }

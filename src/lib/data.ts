@@ -10,7 +10,13 @@ export type Experiment = Tables<"experiments">;
 export type Outreach = Tables<"outreach">;
 export type Answer = { q: string; note: string; quote: string };
 
-export const TAGS = ["has problem", "current workaround", "would use", "would pay", "gave referral"];
+export const TAGS = [
+  "has problem",
+  "current workaround",
+  "would use",
+  "would pay",
+  "gave referral",
+];
 export const PIPELINE = [
   { key: "contacted", label: "Contacted" },
   { key: "replied", label: "Replied" },

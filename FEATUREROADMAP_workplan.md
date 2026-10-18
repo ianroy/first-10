@@ -40,10 +40,10 @@ Status boxes: `[ ]` todo · `[~]` in progress · `[x]` done · `[!]` blocked (sa
 ```yaml
 current_iteration: 3
 current_stage: R0+R1     # R0 Research (value-prop track), R1 Foundations, R2 Core, R3 Growth (see §3)
-status: in_progress      # not_started | in_progress | paused | blocked
+status: paused           # not_started | in_progress | paused | blocked
 last_task_done: VP-002
-next_task: F-007
-resume_hint: "VP-001 and VP-002 done 2026-10-17 (research/value-prop.md, research/interviews/guide-*.md). Owner now runs R0-004 founder and VP-003 instructor interviews in parallel. Agent continues with the R1 carry-over starting at F-007, per Iteration 3's order of operations. Task definitions for F-*, R0-*, I2-* stay in their original sections; do not duplicate them."
+next_task: F-007 (finish)
+resume_hint: "PAUSED by owner 2026-10-17 mid F-007. Done locally and committed: lint fixes (prettier on src, typed outreach rows), stage unlock logic extracted to src/lib/stages.ts (learnings.tsx uses it), tests (src/lib/stages.test.ts, src/lib/data.test.ts, src/test/pages.test.tsx with src/test/fake-supabase.ts and src/test/render-page.tsx), CI workflow .github/workflows/ci.yml (bun: lint, typecheck, test, build), package.json typecheck script. 17 tests passed before two small typecheck fixes (index-signature access in stages.test.ts, FunctionComponent in render-page.tsx); typecheck, lint and tests were NOT re-run after those fixes, so first step on resume: run `npx bun run typecheck && npx bun run lint && npx bun run test` and check the CI run on GitHub. Then tick F-007 and continue with X-001. Local installs use `npx bun@1.3.5 install` (no global bun)."
 last_updated: 2026-10-17
 open_questions:
   - Who is the primary user: Babson/college student founders only, or any first-time founder?  (decide in VP-006)
@@ -304,10 +304,11 @@ Stage: R0 → R1. R0 tasks that need humans (R0-004/005) can run in parallel wit
   - Goal: Document what is sent to the LLM; add in-app note at AI buttons; add account data export and delete.
   - Done when: `/settings` has Export (JSON) and Delete account; PrivacyNote text updated; README privacy section matches.
   - Notes: Required before storing any third-party snippets (e.g. Community Finder).
-- [ ] **F-007 Test baseline** (M · deps: none · owner: agent)
+- [~] **F-007 Test baseline** (M · deps: none · owner: agent)
   - Goal: Tests for `stageProgress`, stage-unlock logic, AI schema parity, route render for each page (mock supabase).
   - Done when: `npm run test` green in CI; add GitHub Action running lint, test, build on PR.
   - Notes: Existing tests: `src/test/app-routing.test.tsx` only.
+  - Notes: 2026-10-17 IN PROGRESS (paused by owner). Shipped: `src/lib/stages.ts` (pure `unlockChecklist`, `itemDone`, `isReady`; learnings.tsx refactored to use them, behavior unchanged); fake Supabase client and `renderPage` helper (minimal router, avoids root head/stylesheets that jsdom can't load); render tests for all 8 pages plus the no-project redirect; unit tests for stage logic and `stageProgress`; CI workflow with bun 1.3.5 matching Vercel's lockfile. Repo-wide prettier run on `src/` (formatting-only churn). Remaining: re-run typecheck/lint/tests after the last two type fixes; confirm the GitHub Actions run is green. AI schema parity test moved to F-003 (needs prompts in their own module). Lint warnings (6, react-refresh) left as warnings.
 - [ ] **F-008 Non-destructive outreach regeneration** (S · deps: F-003 · owner: agent)
   - Goal: Regeneration archives prior rows (add `archived_at`) instead of deleting; allow restoring.
   - Done when: migration; UI shows "Previous versions"; test covers archive.
@@ -513,3 +514,4 @@ Generated 2026-10-17 by the regeneration prompt, with the owner's focus: underst
 | 2026-10-17 | Regeneration run: Iteration 2 planned (carry-over R1, R0 gate, I2-001..005, X-001, L-002, G-002). Reconciled F-002 (partial), F-009, F-010 done. Collapsed nothing: Iteration 1 is not finished. |
 | 2026-10-17 | Regeneration run (value-prop focus): Iteration 3 planned. Added §2.1 value proposition (two segments, VP1-VP5, one-liners, metrics), VP-001..VP-006, I3-001/I3-002 (conditional), G-003, P-001 final (pitch deck and architecture diagrams). Dropped R0-003 and G-002. Iteration 2 marked superseded; its task definitions kept. |
 | 2026-10-17 | VP-001 and VP-002 done: value-prop canvas with sourced alternatives, new hypothesis VP6 (proof it was real), founder and instructor interview guides with tally. Next: owner interviews (R0-004, VP-003); agent R1 carry-over from F-007. |
+| 2026-10-17 | Paused by owner mid F-007 (tests, stage-logic extraction and CI committed; final local re-check of typecheck/lint/tests pending). |

@@ -15,7 +15,12 @@ const titled = {
   },
 };
 function obj(props: Record<string, unknown>) {
-  return { type: "object", properties: props, required: Object.keys(props), additionalProperties: false };
+  return {
+    type: "object",
+    properties: props,
+    required: Object.keys(props),
+    additionalProperties: false,
+  };
 }
 
 const SCHEMAS: Record<Kind, object> = {
@@ -87,7 +92,10 @@ async function callAI(system: string, user: string, kind: Kind) {
         { role: "system", content: system },
         { role: "user", content: user },
       ],
-      response_format: { type: "json_schema", json_schema: { name: kind, strict: true, schema: SCHEMAS[kind] } },
+      response_format: {
+        type: "json_schema",
+        json_schema: { name: kind, strict: true, schema: SCHEMAS[kind] },
+      },
       provider: { require_parameters: true },
     }),
   });
@@ -113,7 +121,11 @@ export const generateAI = createServerFn({ method: "POST" })
     if (!p) throw new Error("Project not found");
     const [{ data: interviews }, { data: learnings }, { data: contacts }] = await Promise.all([
       sb.from("interviews").select("answers,tags").eq("project_id", p.id).eq("completed", true),
-      sb.from("learnings").select("title,body,data,kind").eq("project_id", p.id).eq("accepted", true),
+      sb
+        .from("learnings")
+        .select("title,body,data,kind")
+        .eq("project_id", p.id)
+        .eq("accepted", true),
       sb.from("contacts").select("relation,why,source,stage").eq("project_id", p.id),
     ]);
     const ctx = [
@@ -124,7 +136,9 @@ export const generateAI = createServerFn({ method: "POST" })
       data.kind !== "questions" && data.kind !== "synthesis" && learnings?.length
         ? `ACCEPTED LEARNINGS:\n${JSON.stringify(learnings).slice(0, 6000)}`
         : "",
-      data.kind === "stage2" ? `CONTACT SOURCES:\n${JSON.stringify(contacts ?? []).slice(0, 3000)}` : "",
+      data.kind === "stage2"
+        ? `CONTACT SOURCES:\n${JSON.stringify(contacts ?? []).slice(0, 3000)}`
+        : "",
     ]
       .filter(Boolean)
       .join("\n\n");
