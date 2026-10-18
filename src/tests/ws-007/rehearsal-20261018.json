@@ -1,0 +1,118 @@
+{
+  "date": "2026-10-18",
+  "source_baseline": "8c39dba",
+  "guards_sha256": "78e6c7d4b93a32f72e2d5e518127c2dc19e88baa8a0092b966948e4834d0b869",
+  "attempts": [
+    {
+      "harness_sha256": "ba09799895a1e374d7d8f936a679ee67c753ec186b5ac32f3c89ce6457a68ffb",
+      "result": "stopped_on_test_driver_bigint_string_comparison",
+      "database": "firstten_ws007_2736b95591c9",
+      "source_history_marker": "20261018003000",
+      "reviewed_applied_schema": "20261018024000",
+      "reviewed_schema24_migration_sha256": "9bd05330ef36dc72109419b2b9dcc297242cace0468d7a816b16d8e0a48e3634",
+      "source_state_before": {
+        "history_marker": "20261018003000",
+        "schema24_sentinel_present": true,
+        "schema25_sentinel_present": false
+      },
+      "source_state_after": {
+        "history_marker": "20261018003000",
+        "schema24_sentinel_present": true,
+        "schema25_sentinel_present": false
+      },
+      "schema24_sentinel": "firstten_private.marketing_submission_versions",
+      "absent_schema25_sentinel": "firstten_private.product_event_log",
+      "schema_sha256": "5eaf00872bc16575855f9a3ce42bb87756672976e98ac3487a619148b36209a5",
+      "fixtures": [
+        {
+          "owner": "c2070000-0000-4000-8000-000000000001",
+          "project": "c2070000-0000-4000-8000-000000000011",
+          "draft": "c2070000-0000-4000-8000-000000000021",
+          "contact": "c2070000-0000-4000-8000-000000000031",
+          "marker": "A1"
+        },
+        {
+          "owner": "c2070000-0000-4000-8000-000000000001",
+          "project": "c2070000-0000-4000-8000-000000000012",
+          "draft": "c2070000-0000-4000-8000-000000000022",
+          "contact": "c2070000-0000-4000-8000-000000000032",
+          "marker": "A2"
+        },
+        {
+          "owner": "c2070000-0000-4000-8000-000000000002",
+          "project": "c2070000-0000-4000-8000-000000000013",
+          "draft": "c2070000-0000-4000-8000-000000000023",
+          "contact": "c2070000-0000-4000-8000-000000000033",
+          "marker": "B1"
+        },
+        {
+          "owner": "c2070000-0000-4000-8000-000000000002",
+          "project": "c2070000-0000-4000-8000-000000000014",
+          "draft": "c2070000-0000-4000-8000-000000000024",
+          "contact": "c2070000-0000-4000-8000-000000000034",
+          "marker": "B2"
+        }
+      ],
+      "source_data_write_operations": 0,
+      "provider_calls": 0,
+      "complete": false,
+      "clone_absent": true
+    },
+    {
+      "harness_sha256": "793b3dfdff35ee7f4d7a942df3ab740872c8c50dc486daeda04b20b0bf7f88ea",
+      "result": "passed",
+      "observed_lock_races": 4,
+      "database": "firstten_ws007_619b3b604ba4",
+      "source_history_marker": "20261018003000",
+      "reviewed_applied_schema": "20261018024000",
+      "reviewed_schema24_migration_sha256": "9bd05330ef36dc72109419b2b9dcc297242cace0468d7a816b16d8e0a48e3634",
+      "source_state_before": {
+        "history_marker": "20261018003000",
+        "schema24_sentinel_present": true,
+        "schema25_sentinel_present": false
+      },
+      "source_state_after": {
+        "history_marker": "20261018003000",
+        "schema24_sentinel_present": true,
+        "schema25_sentinel_present": false
+      },
+      "schema24_sentinel": "firstten_private.marketing_submission_versions",
+      "absent_schema25_sentinel": "firstten_private.product_event_log",
+      "schema_sha256": "46d5e70720137b1c456f4ccc7a087ea29bf48c851a3dc58f51d963bc7a09f6f8",
+      "fixtures": [
+        {
+          "owner": "c2070000-0000-4000-8000-000000000001",
+          "project": "c2070000-0000-4000-8000-000000000011",
+          "draft": "c2070000-0000-4000-8000-000000000021",
+          "contact": "c2070000-0000-4000-8000-000000000031",
+          "marker": "A1"
+        },
+        {
+          "owner": "c2070000-0000-4000-8000-000000000001",
+          "project": "c2070000-0000-4000-8000-000000000012",
+          "draft": "c2070000-0000-4000-8000-000000000022",
+          "contact": "c2070000-0000-4000-8000-000000000032",
+          "marker": "A2"
+        },
+        {
+          "owner": "c2070000-0000-4000-8000-000000000002",
+          "project": "c2070000-0000-4000-8000-000000000013",
+          "draft": "c2070000-0000-4000-8000-000000000023",
+          "contact": "c2070000-0000-4000-8000-000000000033",
+          "marker": "B1"
+        },
+        {
+          "owner": "c2070000-0000-4000-8000-000000000002",
+          "project": "c2070000-0000-4000-8000-000000000014",
+          "draft": "c2070000-0000-4000-8000-000000000024",
+          "contact": "c2070000-0000-4000-8000-000000000034",
+          "marker": "B2"
+        }
+      ],
+      "source_data_write_operations": 0,
+      "provider_calls": 0,
+      "complete": true,
+      "clone_absent": true
+    }
+  ]
+}
