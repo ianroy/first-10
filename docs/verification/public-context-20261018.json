@@ -1,0 +1,48 @@
+{
+  "apis": {
+    "blockList": true,
+    "dnsResolver": true,
+    "httpsRequest": true,
+    "isIP": true
+  },
+  "checkedAt": "2026-10-18T23:21:00.841730+00:00",
+  "controlledPublicFixtures": [
+    "https://first-10-three.vercel.app/",
+    "https://github.com/ianroy/first-10 (docs/company-values.md)"
+  ],
+  "controlledResults": [
+    {
+      "aiIncluded": false,
+      "excerptSha256": "d15e6e75b0a839c963606571a2ec2eb97bb6e502b50d0926a32b7ff2dc4dfa81",
+      "ownerReviewedExcerpt": true,
+      "retrieved": true,
+      "url": "https://first-10-three.vercel.app/"
+    },
+    {
+      "aiIncluded": false,
+      "excerptSha256": "b484e503a904e30aa5aba849960500635320c5dcd0bf8a94504997111eeb65a1",
+      "ownerReviewedExcerpt": true,
+      "retrieved": true,
+      "url": "https://github.com/ianroy/first-10/blob/8768392b91a8251522f7bea073574578fe433cde/docs/company-values.md"
+    }
+  ],
+  "deployedCommit": "8768392",
+  "limits": "Controlled public-site/GitHub success does not prove every public host is retrievable. Existing fail-closed DNS/TLS/redirect/content guards remain. No AI or sharing permission added.",
+  "nodeVersion": "24.21.0",
+  "phase": "controlled_deployed_site_and_github_verified",
+  "priorFailedProbe": "Own public homepage rejected hidden hydration NUL; policy stopped, no preview stored.",
+  "proof": "/private/tmp/first-ten-pdf-qa/live-reviewed-public-sources.png",
+  "sources": {
+    "src/lib/context.functions.ts": "1a92810ff402c13a5c61ce8efa789391eb871068d56ce7bd64f9921fb27ab0d4",
+    "src/lib/context/contracts.ts": "03f9f65f29f9479694ccd12a8a63ebe21db6d7ad8d58c7d115bf87bbbcd876a7",
+    "src/lib/context/extract.server.ts": "0c486f66626450474f913f44b9c8c310e71dd7512e05211c03b74b1f52ba9137",
+    "src/lib/context/fetch-public.server.ts": "887688b31ee91627b95c911a617119f90ea7442da3d12098b4cfef07960ecd12",
+    "src/lib/context/github.server.ts": "f71faed6e8491d3e52c75da305f347ef078a134ad087b8417adb21f940234ccc",
+    "src/lib/context/retrieval.server.ts": "8b64fc8537bae033d7d17e351bff5a64f3c1af8a97420a9209d6503adf54717b",
+    "src/lib/context/runtime.server.ts": "1206b733e2a00c006395a554bf061d9597d9014eeeea6d5858943d5d184ec789",
+    "src/lib/context/url-policy.server.ts": "b971a53b4aacf6c9e53248b0a9ca1eac03fe73095bcb3901640cc83190bc64b3",
+    "supabase/migrations/20261018019000_reviewed_public_context.sql": "716c3248be6378af4c081c8ead50408b2426462ff948b2d4ef70b3d5f017d355"
+  },
+  "transportContract": "pinned-public-https-v1",
+  "verifiedAt": "2026-10-18T23:23:21.294955+00:00"
+}

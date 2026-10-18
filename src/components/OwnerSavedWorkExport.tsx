@@ -152,7 +152,7 @@ function SavedPortfolio({ project }: { project: Project }) {
           Discovery cycle:{" "}
           {plans.data?.discovery ? "saved workspace included" : "no saved workspace"}. Private
           incomplete interviews: {plans.data?.drafts?.length ?? 0} saved drafts included. Classroom
-          submissions and shared team spaces are separate features still in development.
+          submissions and guest team spaces use their own separate review and export controls.
         </p>
         <OwnerActivityExport project={project} activities={activities} allowPortfolio />
       </div>

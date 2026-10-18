@@ -34,7 +34,7 @@ const faqs = [
   ],
   [
     "Can teachers review a class?",
-    "Private educator lesson planning is available now, with clearly labeled fictional cohort examples in the workshop demo. Live class submissions, teacher access to student work, shared projects and event-funnel analytics remain planned. Use your existing private course submission method. The admin view is a protected count-only operational dashboard. No measured learning improvement or institutional endorsement is claimed.",
+    "Teachers can provision a private class or hackathon with account-free entry. Students save a manual seven-step discovery cycle and deliberately submit selected, reviewed copies; teachers do not receive raw private notes. Individual activity PDFs and selected guest portfolios are available. Full class bundles, broader collaboration and event-funnel analytics remain in development. The admin dashboard shows operational counts. FERPA-first is a design commitment, not certification or institutional endorsement.",
   ],
 ] as const;
 
@@ -171,8 +171,9 @@ export function LandingPage() {
             </div>
             <p className="mt-5 text-sm text-muted-foreground">
               Save the manual discovery cycle in your private workspace and export each activity as
-              a PDF. Adjacent-hypothesis AI and automatic website/repository retrieval are still in
-              development.
+              a PDF. You can explicitly retrieve bounded public-site or GitHub previews, review
+              exact excerpts and keep them privately. Adjacent-hypothesis AI and retrieved-source AI
+              advice remain in development.
             </p>
             <p className="mt-8 inline-flex items-center gap-2 rounded-full bg-secondary px-4 py-2 text-sm font-semibold">
               <Check className="size-4" aria-hidden="true" /> AI drafts. You review and decide.
@@ -242,15 +243,17 @@ export function LandingPage() {
                   Printable PDF · Editable worksheets · No account or AI required
                 </p>
                 <div className="mt-6 border-t border-primary-foreground/25 pt-5">
-                  <p className="font-bold">Building toward FERPA-first classes and hackathons</p>
+                  <p className="font-bold">FERPA-first classes and hackathons</p>
                   <p className="mt-2 leading-relaxed">
                     Provision a private space students can join with a team alias, without a
-                    personal account. Take every activity and the team’s work back out as PDFs.
+                    personal account. Save the seven-step discovery cycle, print an interview
+                    worksheet and export each activity as a PDF.
                   </p>
                   <p className="mt-2 text-sm">
-                    Activity PDFs are available now. Account-free class spaces and student-team
-                    review are in development. FERPA-first is our design commitment; institutional
-                    review remains separate.
+                    Account-free entry, private or explicitly shared team planning, reviewed teacher
+                    submissions and activity PDFs are available. Full class bundles and broader
+                    guest tools are in development. FERPA-first is our design commitment;
+                    institutional review remains separate.
                   </p>
                 </div>
               </div>

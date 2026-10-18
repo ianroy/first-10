@@ -2407,7 +2407,7 @@
       "id": "AI-005",
       "title": "Per-kind low-cost model routing with bounded fallbacks",
       "phase": "P1",
-      "status": "not_started",
+      "status": "blocked",
       "owner": "agent",
       "size": "S",
       "kind": "implementation",
@@ -2463,6 +2463,14 @@
         {
           "date": "2026-10-17",
           "text": "Scheduled by Iteration 5; no implementation or validation claimed."
+        },
+        {
+          "date": "2026-10-18",
+          "text": "Claimed first official-source model/endpoint/schema/privacy/price review after AI003 software completion. Worker scope initially docs/ai-model-policy.md only; no key access, paidcalls, activation or serving-source mutation. Immutablev6 fixtures stayvalid. Futureperkind/fallback activation requires actual qualityreview, endpointfullbillingbound and budgetgates; pricealone cannotpromote."
+        },
+        {
+          "date": "2026-10-18",
+          "text": "Officialreviewcf75cfc: exactGA2.5FlashLite GoogleCloudretirementOct20, noUTCtimegiven; fixedfictionalpractice sharesmodel/endpoint risk. google-vertex base slugadmitsregions; responseproviderGooglecannotproveexactregion. Defaultthinking/softbudget meansallinbillingbound notproven; catalogprices≠accounteligibility. Currenteightcaseconservativearithmetic$.846864 onlyifboundvalid;3.1comparatorwouldrequire$2.127152cannotreuse$.90plan. Doconlyno keyreads/provider/policymutations. s1publicfactsreviewcomplete; exactaccount/privacy/billablebound+quality/promotiongatesunmet; paidexecution remainsdisabled. Rootowns lifecyclecutoff followup; oldmodelmustnotbepromotedasdurabledefault."
         }
       ],
       "claim": null,
@@ -2470,19 +2478,19 @@
       "subtasks": [
         {
           "id": "AI-005.s1",
-          "status": "not_started",
+          "status": "complete",
           "instruction": "Recheck official model ids, endpoint schema support, price and data-policy eligibility.",
           "notes": []
         },
         {
           "id": "AI-005.s2",
-          "status": "not_started",
+          "status": "blocked",
           "instruction": "Set per-kind input/output limits and an explicit ordered fallback allowlist with maximum unit price.",
           "notes": []
         },
         {
           "id": "AI-005.s3",
-          "status": "not_started",
+          "status": "blocked",
           "instruction": "Keep existing overrides compatible; record actual routed model and never silently escalate to an expensive model or broaden privacy policy.",
           "notes": []
         }
@@ -4246,15 +4254,19 @@
         {
           "date": "2026-10-18",
           "text": "Claimed remaining autosave/resume behavior over completedWS004 atomic draft APIs. Actual implementation is in components/interview-drafts; added exact file to scope. No migration/API rewrite, AI activation or private text browser storage. Root owns generated files/docs/status. Preserve manualsave/withdrawal/completion, exact uncertain operation replay and revision conflict recovery."
+        },
+        {
+          "date": "2026-10-18",
+          "text": "Worker e154646 integrated85cac14; independent review finds no actionable blocker and22 focused unchangedWS004/newWS005 tests pass. Worker51 focused/full1036pass/type/lint/build. Root source/landing claims updated; oldcopy assertion updated to actual shipped review/private-note boundary, focusedlanding3pass; finalroot combined run underway. No API/migration/AI changes. Live acknowledgement/reload rehearsal afterpush remains."
         }
       ],
       "claim": {
-        "owner": "interview_autosave",
-        "branch": "codex/interview-autosave-20261018",
-        "base_commit": "d1362df",
-        "worktree": "/private/tmp/first-ten-interview-autosave",
-        "started_at": "2026-10-18T23:20:00Z",
-        "lease_expires_at": "2026-10-19T03:00:00Z"
+        "owner": "root",
+        "branch": "main",
+        "base_commit": "85cac14",
+        "worktree": "/Users/ianroy/Library/CloudStorage/Dropbox/Apps by Ian/Babson AI Academy/First 10",
+        "started_at": "2026-10-18T23:31:00Z",
+        "lease_expires_at": "2026-10-19T02:00:00Z"
       },
       "completion_evidence": [],
       "subtasks": [
@@ -11588,10 +11600,18 @@
         "src/components/guest/**",
         "src/tests/cls-008/**",
         "supabase/tests/cls-008.sql",
-        "docs/architecture/guest-learning-activities.md"
+        "docs/architecture/guest-learning-activities.md",
+        "supabase/migrations/20261018023000_guest_marketing_plans.sql",
+        "src/lib/guest-marketing/**",
+        "src/components/guest-marketing/**",
+        "src/tests/guest-marketing/**",
+        "supabase/tests/guest-marketing.sql",
+        "docs/architecture/guest-marketing.md"
       ],
       "exclusive_locks": [
-        "cls-008-integration"
+        "cls-008-integration",
+        "database-schema",
+        "generated-types"
       ],
       "read_first": [
         "ProductSpec.md",
@@ -11647,15 +11667,23 @@
         {
           "date": "2026-10-18",
           "text": "Live deployedc00327c: fictionalprincipalprivate cycle savedrevision7 with firsthypothesis/fivepeople/samplingrisks/preservedscript/privateincompleteinterview/decision. Reloadandexplicitreopenretainexactproblem+revision; exactscript+blankworksheet reports4pagePDF. Deliberateproblem/hypothesis/scriptteacherpreview/confirm works; teacher2pagePDF succeeds, rawprivatedraftabsent; withdrawalblocksfreshPDF and refreshremovescopy. Updatedfictionalclassinstructions reflect shippedmanualstudio and remainingAI/parity/deletionlimits. Proof/private/tmp/first-ten-pdf-qa/live-guest-discovery.png. BrowserPDF appstatus verified; filesystemdelivery not claimed."
+        },
+        {
+          "date": "2026-10-18",
+          "text": "Next coordinator-approved subworker guest_marketing_parity prepares remaining manualguest MarketingLab/outreach parity in isolatedbranch from8768392. Reserve additive23000 and new namespacedguestmarketing modules/components/tests only; design review before schema implementation/apply. Root retains join mounts/generatedtypes and existingguestsevenstep/reviewedsubmissions. NoAI/publicsharing/accountIDfacade; saveandallactivityPDFs required. BackendandUI singlewriter untilcontract reviewed."
+        },
+        {
+          "date": "2026-10-18",
+          "text": "Guest Marketing Lab continuation uses separate genuine guest private/team tables and closed manual five-step schema, resources/demo walkthrough/channel/content/outreach/test/measurement/reflection, individual PDFs and selected portfolio. Migration23 finalcandidate dfa6deade799c5711183b701432e582fcd045dec2a9643528bd1e3f12693ecb4 includes two scoped lookup indexes; originallocal/hosted23 NOT applied. Independent authority/guard review passes in principle; cloneharness CREATE-ack cleanup fix required before rehearsal approval. Teacher review for new marketing kind explicitly unavailable; no inherited raw access or AI. Worker branch/worktree /private/tmp/first-ten-guest-marketing codex/guest-marketing-20261018."
         }
       ],
       "claim": {
-        "owner": "root",
-        "branch": "main",
-        "base_commit": "c00327c",
-        "worktree": "/Users/ianroy/Library/CloudStorage/Dropbox/Apps by Ian/Babson AI Academy/First 10",
-        "started_at": "2026-10-18T23:20:00Z",
-        "lease_expires_at": "2026-10-19T02:00:00Z"
+        "owner": "guest_marketing_parity",
+        "branch": "codex/guest-marketing-20261018",
+        "base_commit": "8768392",
+        "worktree": "/private/tmp/first-ten-guest-marketing",
+        "started_at": "2026-10-18T23:25:00Z",
+        "lease_expires_at": "2026-10-19T03:00:00Z"
       },
       "completion_evidence": [],
       "subtasks": [
@@ -12525,7 +12553,7 @@
       "id": "CTX-001",
       "title": "Safely retrieve and review public site and GitHub context",
       "phase": "P5",
-      "status": "in_progress",
+      "status": "blocked",
       "owner": "agent",
       "size": "M",
       "kind": "implementation",
@@ -12609,27 +12637,24 @@
         {
           "date": "2026-10-18",
           "text": "ReviewedminimalHTMLfixf4f9562 integrated46926c5; staticparserconfirmed ignoredranges admit hydrationNUL only within omittedcontent, visiblecontrols/plaintext/GitHub/invalidUTF8 stillreject. Worker89focused/1002app tests, root1023combinedtests/type/lint/build pass. Deployedreceipt andcontrolledsite/GitHub nowpending afterpush; productionpolicy staysdisabled."
+        },
+        {
+          "date": "2026-10-18",
+          "text": "Approvedproductionretrieval nowverifiedon8768392: Node24.21capabilities, controlled ownhomepage andpublicGitHub docs/company-values.md pinned8768392b91a8251522f7bea073574578fe433cde retrievedsuccessfully. Exactreviewedexcerpts savedwithhashes,AI/sharingdisabled. Policy enabledreference root-8768392-network-verified-20261018, exactreceipt83724f78fa26d3bef1d3f866d7016da83184d2afd312ec3d617c681a52ff33c5 saved docs/verification/public-context-20261018.json. Failedfirstprobe stoppedbeforefix; no weakguards/fallback. s1/s2complete; s3reviewed-sourceAIprocessingadapter remainsunbuilt, parentinprogress. Reservationreleased; no currentcontextwriter."
         }
       ],
-      "claim": {
-        "owner": "retrieval_probe_audit",
-        "branch": "codex/context-html-controls-20261018",
-        "base_commit": "d530569",
-        "worktree": "/private/tmp/first-ten-context-html-controls",
-        "started_at": "2026-10-18T23:17:00Z",
-        "lease_expires_at": "2026-10-19T02:00:00Z"
-      },
+      "claim": null,
       "completion_evidence": [],
       "subtasks": [
         {
           "id": "CTX-001.s1",
-          "status": "in_progress",
+          "status": "complete",
           "instruction": "Allow explicit bounded retrieval of a public live-site URL or public GitHub repository description/readme/selected files, without credentials, executing code or following source instructions.",
           "notes": []
         },
         {
           "id": "CTX-001.s2",
-          "status": "in_progress",
+          "status": "complete",
           "instruction": "Enforce protocol/port/private-network and redirect protections, DNS/rebinding-safe outbound policy, byte/time/file-count limits and a preview; fail closed on unsupported hosts and keep manual paste.",
           "notes": []
         },

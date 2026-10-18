@@ -8,7 +8,7 @@ Defined for the Iteration 5 execution plan on 2026-10-17. These are operating co
 
 **Educator promise to test:** “Provision a private learning space, let students start without personal accounts, and take their evidence and decisions back out as PDFs.”
 
-**FERPA-first commitment:** minimize student identity data, keep private notes separate from intentionally submitted work, make institution-controlled processing explicit, and support portable PDF records of every activity. Guest classroom and universal export capabilities are new roadmap work; this is not a certification claim. [Design and execution requirements](privacy/ferpa-first-product-direction.md).
+**FERPA-first commitment:** minimize student identity data, keep private notes separate from intentionally submitted work, make institution-controlled processing explicit, and support portable PDF records of every activity. Account-free guest discovery, reviewed submissions and activity PDFs are implemented; broader guest tools and complete class bundles remain roadmap work. This is not a certification claim. [Design and execution requirements](privacy/ferpa-first-product-direction.md).
 
 | Value                         | What we do                                                                                                          | What we avoid                                                                                     |
 | ----------------------------- | ------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------- |
@@ -38,6 +38,6 @@ Speak to the next action and the reason for it. Celebrate useful learning, inclu
 
 ## Using these values
 
-Each feature's task should name the value it advances and its tradeoff. Review demos, prompts, classroom rubrics, empty/error states, access decisions and analytics against the same commitments. Values do not excuse hiding limits: the current app has no stored consent audit trail, autosave, shared workspace, teacher panel or admin analytics. The roadmap schedules those improvements without representing them as delivered.
+Each feature's task should name the value it advances and its tradeoff. Review demos, prompts, classroom rubrics, empty/error states, access decisions and analytics against the same commitments. Values do not excuse hiding limits: separate reported processing choices and history, acknowledged interview autosave, class/guest learning spaces, deliberately reviewed teacher copies and an aggregate admin view now exist. Full collaboration, automatic retention/deletion and adoption-funnel instrumentation remain unfinished. Check the current specification and task evidence before claiming availability.
 
 Record a deliberate change to these commitments in the roadmap's decision log. Public claims about learning effectiveness, customer acquisition or willingness to pay require actual evidence; these commitments alone do not establish any of those outcomes.

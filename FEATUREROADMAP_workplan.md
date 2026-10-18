@@ -25,7 +25,7 @@ status: in_progress
 last_task_done: AN-001
 next_task: CLS-008
 next_parallel_wave: [CLS-008, AI-003, CTX-001]
-active_claims: [CLS-008, CTX-001, WS-005]
+active_claims: [CLS-008, WS-005]
 research_gate: not_passed
 foundation_gate: not_passed
 realtime_go: pending
@@ -46,15 +46,20 @@ resume_hint: >-
   CLS002 complete: account21/guest22 selected submissions, real authorization/race tests and
   teacher/student mounts. Live guest preview/submit/teacher2pagePDF/withdrawal denial pass;
   raw private interview draft absent. Saved guestrevision7 reload and exact4page script PDF pass.
-  CTX production activation explicitly approved by user. First controlled own-public-site
-  retrieval failed safely without saved preview; root disabled policy immediately preserving
-  runtime receipt. Approval is resolved; read-only runtime/transport diagnostic underway.
+  CTX production activation explicitly approved. First controlledhomepage failedsafely; policy
+  stopped, parser-fixed and redeployed8768392. Bothhomepage+commitpinnedGitHub retrievaland
+  exactexcerptreview nowpasslive onNode24.21. Policyenabled withreceipt83724f78 (savedinrepo);
+  sourceAI/sharingexcluded. Reviewed-sourceprocessing/AIadapter remainsunfinished.
   General and guest AI remain off. AI003 bounded evaluation software worker has real compiled
   server-function runtime tests and eight-case isolated SQL parity; no paid calls. Final v6
   integration passes1023app tests,26Node checks, typecheck/lint/build. AI003 softwarecomplete;
   final8caseSQLprojectionmatches/rollback/drop verified. Historicalv2-v5 immutable; no paidcalls,
-  model-quality promotion or fabricatedreview. AN001 source-auditedeventcontract complete; no
-  telemetryactivation. WS005 isolated autosave worker underway over completedWS004 APIs.
+  model-quality promotion or fabricatedreview. AI005 officialreviewfinds2.5FlashLiteCloud
+  retirementOct20 andunprovenaccount/privacy/allinbillingbound; noqualitypromotion.
+  AN001 source-auditedeventcontract complete; no
+  telemetryactivation. WS005 integrated85cac14 after independentreview; fullroot gates/publication/live ACK/reload
+  rehearsal underway. Guest Marketing Lab separate23 candidate reviewed; isolatedclone awaits
+  CREATE-ack cleanup guard fix before approval. No23 applied originallocal orhosted.
   Broader guest MarketingLab/outreach parity, guest-to-account continuity, teacher bundles,
   source-fenced AI attachment, sharing, retention and real research gates remain unfinished.
   Keep independent work moving around task blockers; never mark the global goal complete early.

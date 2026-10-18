@@ -54,8 +54,13 @@ it("exposes the six teaching concepts and keeps current versus proposed claims i
     expect(screen.getByRole("heading", { name })).toBeVisible();
   expect(screen.getByText(/learning gains have not been measured/)).toBeVisible();
   fireEvent.click(screen.getByText("Can teachers review a class?"));
-  expect(screen.getByText(/Private educator lesson planning is available now/)).toBeVisible();
-  expect(screen.getByText(/Live class submissions, teacher access to student work/)).toBeVisible();
+  expect(screen.getByText(/Teachers can provision a private class or hackathon/)).toBeVisible();
+  expect(screen.getByText(/teachers do not receive raw private notes/)).toBeVisible();
+  expect(
+    screen.getByText(
+      /Full class bundles, broader collaboration and event-funnel analytics remain in development/,
+    ),
+  ).toBeVisible();
   expect(screen.getByText(/saved manual Stage 2 lab available now/)).toBeVisible();
 });
 
