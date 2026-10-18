@@ -28,6 +28,7 @@ import {
 } from "@/lib/discovery";
 import { loadDiscovery, saveDiscovery, adoptDiscoveryScript } from "@/lib/discovery.functions";
 import { ContextCaptures } from "./ContextCaptures";
+import { RemoteContextPanel } from "./RemoteContextPanel";
 const steps = [
   "Frame the idea",
   "Make it testable",
@@ -126,6 +127,7 @@ export function DiscoveryWorkspace({ project }: { project: Project }) {
   const [step, setStep] = useState(0);
   const [dirty, setDirty] = useState(false);
   const [contextDirty, setContextDirty] = useState(false);
+  const [remoteContextDirty, setRemoteContextDirty] = useState(false);
   const [busy, setBusy] = useState(false);
   const [loaded, setLoaded] = useState(false);
   const [error, setError] = useState("");
@@ -141,8 +143,8 @@ export function DiscoveryWorkspace({ project }: { project: Project }) {
     interviews = useInterviews(project.id);
   const refresh = useRefresh();
   const blocker = useBlocker({
-    shouldBlockFn: () => dirty || contextDirty || busy,
-    enableBeforeUnload: dirty || contextDirty || busy,
+    shouldBlockFn: () => dirty || contextDirty || remoteContextDirty || busy,
+    enableBeforeUnload: dirty || contextDirty || remoteContextDirty || busy,
     withResolver: true,
   });
   const selectedHypothesis = doc.hypotheses.find((h) => h.id === doc.selectedHypothesisId);
@@ -219,7 +221,7 @@ export function DiscoveryWorkspace({ project }: { project: Project }) {
     if (result.ok) {
       accept(result);
       setNotice(
-        (contextDirty
+        (contextDirty || remoteContextDirty
           ? "Workspace saved, but unadded context text is still local and was not saved. "
           : "Workspace saved. ") +
           "Hypothesis and script versions are retained; no interview or external action was recorded.",
@@ -1111,6 +1113,14 @@ export function DiscoveryWorkspace({ project }: { project: Project }) {
             </section>
           </div>
           <div className="mt-6 space-y-5">
+            <RemoteContextPanel
+              key={`${project.user_id}:${project.id}`}
+              projectId={project.id}
+              ownerId={project.user_id}
+              archived={!!project.archived_at}
+              disabled={busy}
+              onDirtyChange={setRemoteContextDirty}
+            />
             <ContextCaptures
               document={doc}
               update={update}
