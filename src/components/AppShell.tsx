@@ -10,6 +10,7 @@ import {
   LogOut,
   ArrowUpRight,
   Map,
+  Compass,
 } from "lucide-react";
 import { supabase } from "@/integrations/supabase/client";
 import { useProjectSelection } from "@/lib/project-selection";
@@ -17,6 +18,7 @@ import { CurrentProjectContext } from "@/lib/current-project";
 
 const tabs = [
   { to: "/dashboard", label: "Ladder", icon: Home },
+  { to: "/discovery", label: "Discovery cycle", icon: Compass },
   { to: "/contacts", label: "People", icon: Users },
   { to: "/interview", label: "Interview", icon: MessageCircle },
   { to: "/learnings", label: "Learnings", icon: BookOpen },
@@ -198,7 +200,7 @@ export function AppShell({ title, children }: { title: string; children: ReactNo
         aria-label="Mobile workspace"
         className="pb-safe fixed inset-x-0 bottom-0 z-20 border-t bg-card/95 backdrop-blur lg:hidden"
       >
-        <div className="mx-auto grid max-w-xl grid-cols-6">
+        <div className="mx-auto grid max-w-2xl grid-cols-7">
           {tabs.map(({ to, label, icon: Icon }) => (
             <Link
               key={to}

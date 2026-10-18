@@ -51,6 +51,54 @@ export type Database = {
           },
         ];
       };
+      discovery_workspaces: {
+        Row: {
+          created_at: string;
+          document: NonNullable<Json>;
+          history: NonNullable<Json>;
+          id: string;
+          last_mutation_hash: string;
+          last_mutation_id: string;
+          project_id: string;
+          revision: number;
+          updated_at: string;
+          user_id: string;
+        };
+        ComputedFields: never;
+        Insert: {
+          created_at?: string;
+          document: NonNullable<Json>;
+          history?: NonNullable<Json>;
+          id?: string;
+          last_mutation_hash: string;
+          last_mutation_id: string;
+          project_id: string;
+          revision: number;
+          updated_at?: string;
+          user_id?: string;
+        };
+        Update: {
+          created_at?: string;
+          document?: NonNullable<Json>;
+          history?: NonNullable<Json>;
+          id?: string;
+          last_mutation_hash?: string;
+          last_mutation_id?: string;
+          project_id?: string;
+          revision?: number;
+          updated_at?: string;
+          user_id?: string;
+        };
+        Relationships: [
+          {
+            foreignKeyName: "discovery_workspaces_project_id_user_id_fkey";
+            columns: ["project_id", "user_id"];
+            isOneToOne: false;
+            referencedRelation: "projects";
+            referencedColumns: ["id", "user_id"];
+          },
+        ];
+      };
       experiments: {
         Row: {
           change: string;
@@ -497,6 +545,17 @@ export type Database = {
         Args: { p_target_type: string; p_token: string };
         Returns: Json;
       };
+      adopt_discovery_script: {
+        Args: {
+          p_expected_origin_id: string;
+          p_expected_questions: Json;
+          p_expected_revision: number;
+          p_project_id: string;
+          p_script_id: string;
+        };
+        Returns: Json;
+      };
+      claim_ai_usage: { Args: { p_attempt_id: string; p_operation_id: string }; Returns: Json };
       create_owned_project: {
         Args: {
           p_audience: string;
@@ -522,6 +581,15 @@ export type Database = {
       };
       current_platform_admin: { Args: Record<PropertyKey, never>; Returns: boolean };
       current_project_role: { Args: { p_project_id: string }; Returns: string };
+      finish_ai_usage: {
+        Args: {
+          p_action: string;
+          p_attempt_id: string;
+          p_generation_id?: string;
+          p_operation_id: string;
+        };
+        Returns: Json;
+      };
       get_ai_generation_origin: {
         Args: { p_origin_id: string; p_project_id: string };
         Returns: Json;
@@ -539,6 +607,7 @@ export type Database = {
         Returns: Json;
       };
       list_project_members: { Args: { p_cursor?: string; p_project_id: string }; Returns: Json };
+      load_discovery_workspace: { Args: { p_project_id: string }; Returns: Json };
       project_collaboration_enabled: { Args: Record<PropertyKey, never>; Returns: boolean };
       record_ai_generation: { Args: { p_record: Json }; Returns: string };
       record_founding_partner: {
@@ -555,6 +624,17 @@ export type Database = {
         Args: { p_operation: string; p_outcome: string; p_request_id: string };
         Returns: string;
       };
+      reserve_ai_usage: {
+        Args: {
+          p_context_sha256: string;
+          p_input_bytes: number;
+          p_kind: string;
+          p_operation_id: string;
+          p_project_id: string;
+          p_user_id: string;
+        };
+        Returns: Json;
+      };
       reserve_demo_ai: { Args: { p_project_id: string; p_request_id: string }; Returns: Json };
       revoke_project_invitation: {
         Args: { p_invitation_id: string; p_project_id: string; p_request_id: string };
@@ -566,6 +646,15 @@ export type Database = {
           p_project_id: string;
           p_request_id: string;
           p_target_user_id: string;
+        };
+        Returns: Json;
+      };
+      save_discovery_workspace: {
+        Args: {
+          p_document: Json;
+          p_expected_revision: number;
+          p_mutation_id: string;
+          p_project_id: string;
         };
         Returns: Json;
       };
@@ -641,6 +730,20 @@ export type Database = {
           p_request_id: string;
           p_role: string;
           p_target_user_id: string;
+        };
+        Returns: Json;
+      };
+      settle_ai_usage: {
+        Args: {
+          p_attempt_id: string;
+          p_completion_tokens: number;
+          p_cost_usd: number;
+          p_generation_id: string;
+          p_model: string;
+          p_operation_id: string;
+          p_output_valid: boolean;
+          p_prompt_tokens: number;
+          p_provider: string;
         };
         Returns: Json;
       };

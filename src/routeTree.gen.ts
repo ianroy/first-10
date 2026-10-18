@@ -20,6 +20,7 @@ import { Route as AuthenticatedAccountRouteImport } from './routes/_authenticate
 import { Route as AuthenticatedAdminRouteImport } from './routes/_authenticated/admin'
 import { Route as AuthenticatedContactsRouteImport } from './routes/_authenticated/contacts'
 import { Route as AuthenticatedDashboardRouteImport } from './routes/_authenticated/dashboard'
+import { Route as AuthenticatedDiscoveryRouteImport } from './routes/_authenticated/discovery'
 import { Route as AuthenticatedInterviewRouteImport } from './routes/_authenticated/interview'
 import { Route as AuthenticatedLearningsRouteImport } from './routes/_authenticated/learnings'
 import { Route as AuthenticatedMarketingRouteImport } from './routes/_authenticated/marketing'
@@ -82,6 +83,11 @@ const AuthenticatedDashboardRoute = AuthenticatedDashboardRouteImport.update({
   path: '/dashboard',
   getParentRoute: () => AuthenticatedRouteRoute,
 } as any)
+const AuthenticatedDiscoveryRoute = AuthenticatedDiscoveryRouteImport.update({
+  id: '/discovery',
+  path: '/discovery',
+  getParentRoute: () => AuthenticatedRouteRoute,
+} as any)
 const AuthenticatedInterviewRoute = AuthenticatedInterviewRouteImport.update({
   id: '/interview',
   path: '/interview',
@@ -129,6 +135,7 @@ export interface FileRoutesByFullPath {
   '/admin': typeof AuthenticatedAdminRoute
   '/contacts': typeof AuthenticatedContactsRoute
   '/dashboard': typeof AuthenticatedDashboardRoute
+  '/discovery': typeof AuthenticatedDiscoveryRoute
   '/interview': typeof AuthenticatedInterviewRoute
   '/learnings': typeof AuthenticatedLearningsRoute
   '/marketing': typeof AuthenticatedMarketingRoute
@@ -148,6 +155,7 @@ export interface FileRoutesByTo {
   '/admin': typeof AuthenticatedAdminRoute
   '/contacts': typeof AuthenticatedContactsRoute
   '/dashboard': typeof AuthenticatedDashboardRoute
+  '/discovery': typeof AuthenticatedDiscoveryRoute
   '/interview': typeof AuthenticatedInterviewRoute
   '/learnings': typeof AuthenticatedLearningsRoute
   '/marketing': typeof AuthenticatedMarketingRoute
@@ -169,6 +177,7 @@ export interface FileRoutesById {
   '/_authenticated/admin': typeof AuthenticatedAdminRoute
   '/_authenticated/contacts': typeof AuthenticatedContactsRoute
   '/_authenticated/dashboard': typeof AuthenticatedDashboardRoute
+  '/_authenticated/discovery': typeof AuthenticatedDiscoveryRoute
   '/_authenticated/interview': typeof AuthenticatedInterviewRoute
   '/_authenticated/learnings': typeof AuthenticatedLearningsRoute
   '/_authenticated/marketing': typeof AuthenticatedMarketingRoute
@@ -190,6 +199,7 @@ export interface FileRouteTypes {
     | '/admin'
     | '/contacts'
     | '/dashboard'
+    | '/discovery'
     | '/interview'
     | '/learnings'
     | '/marketing'
@@ -209,6 +219,7 @@ export interface FileRouteTypes {
     | '/admin'
     | '/contacts'
     | '/dashboard'
+    | '/discovery'
     | '/interview'
     | '/learnings'
     | '/marketing'
@@ -229,6 +240,7 @@ export interface FileRouteTypes {
     | '/_authenticated/admin'
     | '/_authenticated/contacts'
     | '/_authenticated/dashboard'
+    | '/_authenticated/discovery'
     | '/_authenticated/interview'
     | '/_authenticated/learnings'
     | '/_authenticated/marketing'
@@ -328,6 +340,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthenticatedDashboardRouteImport
       parentRoute: typeof AuthenticatedRouteRoute
     }
+    '/_authenticated/discovery': {
+      id: '/_authenticated/discovery'
+      path: '/discovery'
+      fullPath: '/discovery'
+      preLoaderRoute: typeof AuthenticatedDiscoveryRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
     '/_authenticated/interview': {
       id: '/_authenticated/interview'
       path: '/interview'
@@ -385,6 +404,7 @@ interface AuthenticatedRouteRouteChildren {
   AuthenticatedAdminRoute: typeof AuthenticatedAdminRoute
   AuthenticatedContactsRoute: typeof AuthenticatedContactsRoute
   AuthenticatedDashboardRoute: typeof AuthenticatedDashboardRoute
+  AuthenticatedDiscoveryRoute: typeof AuthenticatedDiscoveryRoute
   AuthenticatedInterviewRoute: typeof AuthenticatedInterviewRoute
   AuthenticatedLearningsRoute: typeof AuthenticatedLearningsRoute
   AuthenticatedMarketingRoute: typeof AuthenticatedMarketingRoute
@@ -398,6 +418,7 @@ const AuthenticatedRouteRouteChildren: AuthenticatedRouteRouteChildren = {
   AuthenticatedAdminRoute: AuthenticatedAdminRoute,
   AuthenticatedContactsRoute: AuthenticatedContactsRoute,
   AuthenticatedDashboardRoute: AuthenticatedDashboardRoute,
+  AuthenticatedDiscoveryRoute: AuthenticatedDiscoveryRoute,
   AuthenticatedInterviewRoute: AuthenticatedInterviewRoute,
   AuthenticatedLearningsRoute: AuthenticatedLearningsRoute,
   AuthenticatedMarketingRoute: AuthenticatedMarketingRoute,

@@ -22,10 +22,10 @@ Statuses are `not_started`, `in_progress`, `blocked`, `complete`, `deferred`, `d
 current_iteration: 5
 current_stage: P1_foundation_with_parallel_P2_and_R0
 status: in_progress
-last_task_done: SEC-005
+last_task_done: AI-004
 next_task: DISC-001
-next_parallel_wave: [CLS-001, AI-004, DISC-001]
-active_claims: [AI-004, CLS-001, DISC-001]
+next_parallel_wave: [CLS-001, AI-007, DISC-001]
+active_claims: [AI-007, CLS-001, DISC-001]
 research_gate: not_passed
 foundation_gate: not_passed
 realtime_go: pending
@@ -52,14 +52,15 @@ resume_hint: >-
   EXP002 integrated currentactivityexports plus rootdesktopmounts;564combinedapptests,
   typecheck/lint/build pass.35adapterPDFpages inspected. Actualproduction2pageinterviewscript PDF downloaded/renderedandinspected; all9questions+origin.
   SEC005 completecef1ad9: realcompetingacceptance/replay passed;fixturesabsent/flagrestored.
-  CLS001 reserved next forclass/enrollment/guestresources; dispatchawaitsDISCtestchildslot. AI004foundation integratedf489e82;997SQLassertions andreal
-  budgetraces verifiedin disposableclone; no mainlocal/hosted14000apply. Stableintent/gatewaywiring active.
-  ProductionportfolioUI prepared31selectedactivities as42pages; actualdownloadfile notlocated.
-  Public landing/teach pages now explain the sevenstep method and context/evidence distinction;
-  9focusedpublictests/typecheck/scopedlint pass. Guidedworkspace is labeled indevelopment.
-  WorkerDISC001 builds owner-defined hypothesis/sampling/context learningcycle; AI004 budget
-  stays isolated in schema-only disposable localDB clone, no provider calls.
-  f60ed4e GitHubCI passed; live presenteradmin verified after hosted migrations.
+  CLS001 building real class/enrollment/guest resources, independent review fixes pending beforeapply.
+  AI004 complete: f489e82/06fc95d/143d94d, immutableevalv4 preserves historicalartifacts.
+  Generalpaid routes disabled; originalfixedcasecarveout preserved via reviewednarrowpolicy.
+  DISC001 integrated47a82bc plus rootNav/dashboard/savedportfolio/PDFcoverage; realoverlapping
+  save/replay/staleadoption races pass with fixtureabsenceverified.76newSQL/1073combinedrollback
+  assertions pass;661apptests/69files,typecheck/build pass. Hosted13000/14000 reviewednormalapply
+  succeeded, no seeds/roles/datadeletes/providercalls. ProductionUIjourney pending.
+  AI007 worker implements boundedwhole-record authorizedsource context; noJSONslicing/newpaidkinds.
+  WS004 interviewdraft persistence design underway read-only untilDISCclaimcloses.
   Existing Stage2 fictional marketing plan revision7 and private teaching planner persist.
   Guest classrooms, all activity PDFs, general AI budgets, sharing/realtime remain unfinished.
 ```

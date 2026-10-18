@@ -82,12 +82,22 @@ function Dashboard({ p }: { p: Project }) {
 
   return (
     <AppShell title={p.name || "Your ladder"}>
-      <Card className="bg-warm text-primary-foreground">
-        <p className="text-sm opacity-90">Your next step</p>
-        <p className="mt-1 font-display text-2xl font-bold">{next.t}</p>
+      <Card className="bg-primary text-primary-foreground">
+        <p className="text-sm opacity-90">Your discovery cycle</p>
+        <h2 className="mt-1 font-display text-2xl font-bold">Make an assumption you can test.</h2>
+        <p className="mt-3 max-w-2xl text-sm leading-relaxed opacity-90">
+          Frame your idea, preserve a first hypothesis, map five people and possible sampling risks,
+          then prepare a script and return with what you learned.
+        </p>
         <Button asChild variant="secondary" size="lg" className="mt-4 w-full rounded-xl">
-          <Link to={next.to}>Let’s go →</Link>
+          <Link to="/discovery">Open discovery cycle →</Link>
         </Button>
+        <Link
+          to={next.to}
+          className="mt-3 inline-flex min-h-11 items-center text-sm underline underline-offset-4"
+        >
+          Next in your ladder: {next.t} →
+        </Link>
       </Card>
 
       <div className="grid gap-3 xl:grid-cols-3">

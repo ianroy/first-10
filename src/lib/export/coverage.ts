@@ -1,6 +1,15 @@
 /** Every new learning activity must register a named PDF adapter and explicit source boundary here. */
 export const ACTIVITY_EXPORT_COVERAGE = [
   {
+    id: "discovery-cycle",
+    adapter: "discoveryActivities",
+    source: "src/components/discovery/DiscoveryWorkspace.tsx",
+    status: "mounted",
+    scope: "owner",
+    granularity:
+      "All seven steps, preserved hypotheses/scripts, sampling risks, reviewed context, exact script and blank interview worksheet; also saved portfolio",
+  },
+  {
     id: "idea",
     adapter: "ideaBriefActivity",
     source: "src/components/IdeaBriefExport.tsx",

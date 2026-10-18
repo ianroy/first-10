@@ -22,7 +22,7 @@ const faqs = [
   ],
   [
     "What does AI do?",
-    "It proposes editable questions, summaries and outreach drafts through OpenRouter. You provide the observations, check the draft and decide. The normal summary entry appears after five completed interviews. AI can make mistakes, and the app does not verify that a conversation happened.",
+    "AI is optional. The fixed fictional workshop practice uses OpenRouter; broader private-project drafting is paused while source, model and budget checks are completed. The manual Discovery cycle, interview tools and PDFs remain available. When enabled, AI drafts need your review and never verify that a conversation happened.",
   ],
   [
     "What happens to interview information?",
@@ -170,8 +170,9 @@ export function LandingPage() {
               <DiscoveryCycleOverview />
             </div>
             <p className="mt-5 text-sm text-muted-foreground">
-              The guided discovery workspace and context-aware AI extensions are in development.
-              Current interview tools, activity PDFs and the manual teaching method are available.
+              Save the manual discovery cycle in your private workspace and export each activity as
+              a PDF. Adjacent-hypothesis AI and automatic website/repository retrieval are still in
+              development.
             </p>
             <p className="mt-8 inline-flex items-center gap-2 rounded-full bg-secondary px-4 py-2 text-sm font-semibold">
               <Check className="size-4" aria-hidden="true" /> AI drafts. You review and decide.

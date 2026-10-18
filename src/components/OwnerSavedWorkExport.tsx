@@ -6,6 +6,8 @@ import { ownerPortfolioActivities } from "@/lib/export/adapters";
 import { marketingActivities, teacherActivities } from "@/lib/export/plan-adapters";
 import { loadMarketingPlan } from "@/lib/marketing.functions";
 import { loadTeacherPlan } from "@/lib/teacher.functions";
+import { loadDiscovery } from "@/lib/discovery.functions";
+import { discoveryActivities } from "@/lib/export/discovery-adapters";
 import { useWorkspaceIdentity } from "@/lib/project-selection";
 import {
   useContacts,
@@ -57,12 +59,13 @@ function SavedPortfolio({ project }: { project: Project }) {
     queryKey: ["portfolio-plans", project.user_id, project.id],
     retry: false,
     queryFn: async () => {
-      const [marketing, teacher] = await Promise.all([
+      const [marketing, teacher, discovery] = await Promise.all([
         loadMarketingPlan({ data: { projectId: project.id } }),
         loadTeacherPlan({ data: { projectId: project.id } }),
+        loadDiscovery({ data: { projectId: project.id } }),
       ]);
-      if (!marketing.ok || !teacher.ok) throw new Error("Saved plans unavailable");
-      return { marketing: marketing.plan, teacher: teacher.plan };
+      if (!marketing.ok || !teacher.ok || !discovery.ok) throw new Error("Saved plans unavailable");
+      return { marketing: marketing.plan, teacher: teacher.plan, discovery: discovery.workspace };
     },
   });
   const queries = [contacts, interviews, learnings, experiments, outreach, plans];
@@ -113,6 +116,14 @@ function SavedPortfolio({ project }: { project: Project }) {
           dirty: false,
         }),
       );
+    if (plans.data?.discovery)
+      activities.push(
+        ...discoveryActivities(plans.data.discovery.document, {
+          savedAt: plans.data.discovery.savedAt,
+          revision: plans.data.discovery.revision,
+          dirty: false,
+        }),
+      );
     return (
       <div className="mt-5">
         <p className="mb-3 text-xs text-muted-foreground">
@@ -121,8 +132,10 @@ function SavedPortfolio({ project }: { project: Project }) {
         </p>
         <p className="mb-3 text-xs text-muted-foreground">
           Marketing Lab: {plans.data?.marketing ? "saved plan included" : "no saved plan"}.{" "}
-          Instructor planning: {plans.data?.teacher ? "saved plan included" : "no saved plan"}.
-          Classroom submissions and shared team spaces are separate features still in development.
+          Instructor planning: {plans.data?.teacher ? "saved plan included" : "no saved plan"}.{" "}
+          Discovery cycle:{" "}
+          {plans.data?.discovery ? "saved workspace included" : "no saved workspace"}. Classroom
+          submissions and shared team spaces are separate features still in development.
         </p>
         <OwnerActivityExport project={project} activities={activities} allowPortfolio />
       </div>

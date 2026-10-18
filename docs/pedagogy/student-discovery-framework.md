@@ -1,8 +1,9 @@
 # The student discovery cycle
 
-Owner requirement, 2026-10-18. This is the intended main student journey. Existing
-idea, people, interview and learning screens support parts of it; the new
-hypothesis, sampling and connected-context workflow is not yet delivered.
+Owner requirement, 2026-10-18. This is the intended main student journey. The owner-private `/discovery` workspace now delivers the manual cycle, preserved
+hypothesis/script versions, sampling risks, reviewed link/paste captures, results
+and PDFs. Optional adjacent-hypothesis/sampling/script/decision AI and automatic
+source retrieval remain in development.
 
 1. **Frame a problem space or solution idea.** Start in the student's own words.
    A solution is a starting assumption, not evidence that the problem exists.

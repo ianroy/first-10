@@ -10,6 +10,8 @@ const h = vi.hoisted(() => ({
   plans: vi.fn(),
   marketing: vi.fn(),
   teacher: vi.fn(),
+  discovery: vi.fn(),
+  discoveryLoad: vi.fn(),
 }));
 vi.mock("@tanstack/react-query", () => ({ useQuery: h.plans }));
 vi.mock("@/lib/export/plan-adapters", () => ({
@@ -18,6 +20,8 @@ vi.mock("@/lib/export/plan-adapters", () => ({
 }));
 vi.mock("@/lib/marketing.functions", () => ({ loadMarketingPlan: vi.fn() }));
 vi.mock("@/lib/teacher.functions", () => ({ loadTeacherPlan: vi.fn() }));
+vi.mock("@/lib/discovery.functions", () => ({ loadDiscovery: h.discoveryLoad }));
+vi.mock("@/lib/export/discovery-adapters", () => ({ discoveryActivities: h.discovery }));
 vi.mock("@/lib/project-selection", () => ({ useWorkspaceIdentity: () => h.identity }));
 vi.mock("@/lib/data", () => ({
   useContacts: () => h.read(),
@@ -47,6 +51,7 @@ beforeEach(() => {
   });
   h.marketing.mockReturnValue([]);
   h.teacher.mockReturnValue([]);
+  h.discovery.mockReturnValue([]);
 });
 afterEach(cleanup);
 
@@ -92,6 +97,7 @@ describe("saved owner portfolio acquisition", () => {
       data: {
         marketing: { document: { schemaVersion: 1 }, savedAt: "2026-10-18T15:00:00Z", revision: 2 },
         teacher: null,
+        discovery: { document: { schemaVersion: 1 }, savedAt: "2026-10-18T15:00:00Z", revision: 3 },
       },
       refetch: vi.fn(),
     });
@@ -101,6 +107,11 @@ describe("saved owner portfolio acquisition", () => {
       { savedAt: "2026-10-18T15:00:00Z", revision: 2, dirty: false },
     );
     expect(screen.getByText(/Marketing Lab: saved plan included/)).toBeInTheDocument();
+    expect(h.discovery).toHaveBeenCalledWith(
+      { schemaVersion: 1 },
+      { savedAt: "2026-10-18T15:00:00Z", revision: 3, dirty: false },
+    );
+    expect(screen.getByText(/Discovery cycle: saved workspace included/)).toBeInTheDocument();
   });
   it("withholds the portfolio while loading or when adapter ownership checks reject records", () => {
     h.query.isPending = true;

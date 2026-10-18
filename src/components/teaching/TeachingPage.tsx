@@ -169,8 +169,9 @@ export function TeachingPage() {
           </h2>
           <p className="mt-4 mb-8 max-w-3xl leading-relaxed text-muted-foreground">
             Ask students to keep their first hypothesis, explain who could challenge it, and show
-            how an observation changes the next test. Use the sequence manually today; the saved
-            guided workspace and adjacent-hypothesis AI are being developed.
+            how an observation changes the next test. Students can save this manual sequence in the
+            private Discovery cycle and print every activity. Adjacent-hypothesis AI is still being
+            developed.
           </p>
           <DiscoveryCycleOverview />
           <p className="mt-5 text-sm text-muted-foreground">
@@ -356,9 +357,10 @@ export function TeachingPage() {
                     <strong className="text-foreground">Individual work, available now:</strong>{" "}
                     interview preparation, notes, editable learning drafts, experiments, a saved
                     manual Stage 2 Marketing Lab and private educator lesson planning. The workshop
-                    demo includes clearly labeled authored cohort examples. Initial question setup
-                    starts with AI; keep the lesson’s first thinking on paper or in a document.
-                    Interview notes save at wrap-up, so finish and save before leaving.
+                    demo includes clearly labeled authored cohort examples. Discovery cycle saves
+                    the student’s first hypothesis, sampling map and script versions. Questions can
+                    be written manually; external AI needs separate processing permission. Interview
+                    notes save at wrap-up, so finish and save before leaving.
                   </p>
                   <p className="mt-3">
                     <strong className="text-foreground">Planned:</strong> live class submissions,

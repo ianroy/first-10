@@ -74,7 +74,11 @@ describe("pages render", () => {
     expect(
       await screen.findByRole("heading", { level: 1, name: "StudyBuddy" }),
     ).toBeInTheDocument();
-    expect(screen.getByText(/your next step/i)).toBeInTheDocument();
+    expect(screen.getByRole("link", { name: /open discovery cycle/i })).toHaveAttribute(
+      "href",
+      "/discovery",
+    );
+    expect(screen.getByRole("link", { name: /next in your ladder/i })).toBeInTheDocument();
   });
 
   it("contacts", async () => {
