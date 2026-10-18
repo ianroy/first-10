@@ -10,6 +10,8 @@ import { loadDiscovery } from "@/lib/discovery.functions";
 import { discoveryActivities } from "@/lib/export/discovery-adapters";
 import { interviewDraftActivities } from "@/lib/export/interview-draft-adapters";
 import { loadPortfolioInterviewDrafts } from "@/lib/export/load-interview-drafts";
+import { loadPublicContext } from "@/lib/context.functions";
+import { publicContextActivities } from "@/lib/export/public-context-adapters";
 import { useWorkspaceIdentity } from "@/lib/project-selection";
 import {
   useContacts,
@@ -61,18 +63,21 @@ function SavedPortfolio({ project }: { project: Project }) {
     queryKey: ["portfolio-plans", project.user_id, project.id],
     retry: false,
     queryFn: async () => {
-      const [marketing, teacher, discovery, drafts] = await Promise.all([
+      const [marketing, teacher, discovery, drafts, publicContext] = await Promise.all([
         loadMarketingPlan({ data: { projectId: project.id } }),
         loadTeacherPlan({ data: { projectId: project.id } }),
         loadDiscovery({ data: { projectId: project.id } }),
         loadPortfolioInterviewDrafts(project.id),
+        loadPublicContext({ data: { projectId: project.id } }),
       ]);
-      if (!marketing.ok || !teacher.ok || !discovery.ok) throw new Error("Saved plans unavailable");
+      if (!marketing.ok || !teacher.ok || !discovery.ok || !publicContext.ok)
+        throw new Error("Saved plans unavailable");
       return {
         marketing: marketing.plan,
         teacher: teacher.plan,
         discovery: discovery.workspace,
         drafts,
+        publicContext,
       };
     },
   });
@@ -133,6 +138,8 @@ function SavedPortfolio({ project }: { project: Project }) {
         }),
       );
     activities.push(...interviewDraftActivities(project, plans.data?.drafts ?? []));
+    if (plans.data?.publicContext)
+      activities.push(...publicContextActivities(project, plans.data.publicContext));
     return (
       <div className="mt-5">
         <p className="mb-3 text-xs text-muted-foreground">

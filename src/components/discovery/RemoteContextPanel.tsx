@@ -2,6 +2,8 @@ import { useEffect, useRef, useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
+import { OwnerActivityExport } from "@/components/export/OwnerActivityExport";
+import { publicContextActivities } from "@/lib/export/public-context-adapters";
 import {
   loadPublicContext,
   retrievePublicContext,
@@ -546,6 +548,21 @@ export function RemoteContextPanel({
         <p className="mt-4 text-sm text-muted-foreground">
           No public-source previews or reviewed excerpts are saved for this idea.
         </p>
+      )}
+      {!busy && (rows.previews.length > 0 || rows.reviewed.length > 0) && (
+        <OwnerActivityExport
+          project={{ id: projectId, user_id: ownerId }}
+          activities={() =>
+            publicContextActivities(
+              { id: projectId, user_id: ownerId },
+              { ok: true, ...rows },
+              preview && draftDirty
+                ? { previewId: preview.id, label, excerpt, read, permitted }
+                : undefined,
+            )
+          }
+          allowPortfolio
+        />
       )}
     </details>
   );

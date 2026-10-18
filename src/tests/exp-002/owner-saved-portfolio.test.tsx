@@ -14,6 +14,7 @@ const h = vi.hoisted(() => ({
   discoveryLoad: vi.fn(),
   drafts: vi.fn(),
   draftLoad: vi.fn(),
+  publicContext: vi.fn(),
 }));
 vi.mock("@tanstack/react-query", () => ({ useQuery: h.plans }));
 vi.mock("@/lib/export/plan-adapters", () => ({
@@ -29,6 +30,10 @@ vi.mock("@/lib/export/load-interview-drafts", () => ({
   loadPortfolioInterviewDrafts: h.draftLoad,
 }));
 vi.mock("@/lib/project-selection", () => ({ useWorkspaceIdentity: () => h.identity }));
+vi.mock("@/lib/context.functions", () => ({ loadPublicContext: vi.fn() }));
+vi.mock("@/lib/export/public-context-adapters", () => ({
+  publicContextActivities: h.publicContext,
+}));
 vi.mock("@/lib/data", () => ({
   useContacts: () => h.read(),
   useInterviews: () => h.read(),
@@ -59,6 +64,7 @@ beforeEach(() => {
   h.teacher.mockReturnValue([]);
   h.discovery.mockReturnValue([]);
   h.drafts.mockReturnValue([]);
+  h.publicContext.mockReturnValue([]);
 });
 afterEach(cleanup);
 
@@ -106,6 +112,7 @@ describe("saved owner portfolio acquisition", () => {
         teacher: null,
         discovery: { document: { schemaVersion: 1 }, savedAt: "2026-10-18T15:00:00Z", revision: 3 },
         drafts: [{ id: "saved-private-draft" }],
+        publicContext: { ok: true, previews: [], reviewed: [{ id: "reviewed-source" }] },
       },
       refetch: vi.fn(),
     });
@@ -121,6 +128,11 @@ describe("saved owner portfolio acquisition", () => {
     );
     expect(screen.getByText(/Discovery cycle: saved workspace included/)).toBeInTheDocument();
     expect(h.drafts).toHaveBeenCalledWith(project, [{ id: "saved-private-draft" }]);
+    expect(h.publicContext).toHaveBeenCalledWith(project, {
+      ok: true,
+      previews: [],
+      reviewed: [{ id: "reviewed-source" }],
+    });
     expect(screen.getByText(/1 saved drafts included/)).toBeInTheDocument();
   });
   it("withholds the portfolio while loading or when adapter ownership checks reject records", () => {

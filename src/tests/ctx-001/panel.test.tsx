@@ -13,6 +13,9 @@ vi.mock("@/lib/context.functions", () => ({
   withdrawPublicContext: h.withdraw,
 }));
 import { RemoteContextPanel } from "@/components/discovery/RemoteContextPanel";
+vi.mock("@/components/export/OwnerActivityExport", () => ({
+  OwnerActivityExport: () => <div>Private source PDF export</div>,
+}));
 const projectId = "fa190000-0000-4000-8000-000000000010",
   ownerId = "fa190000-0000-4000-8000-000000000001";
 const preview = {

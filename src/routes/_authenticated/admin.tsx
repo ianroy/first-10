@@ -6,6 +6,7 @@ import { AppShell, Card } from "@/components/AppShell";
 import { RequireProject } from "@/components/RequireProject";
 import { Button } from "@/components/ui/button";
 import { getAdminSnapshot } from "@/lib/admin.functions";
+import { PublicContextReadiness } from "@/components/admin/PublicContextReadiness";
 
 export const Route = createFileRoute("/_authenticated/admin")({
   head: () => ({
@@ -14,10 +15,12 @@ export const Route = createFileRoute("/_authenticated/admin")({
       { name: "robots", content: "noindex, nofollow" },
     ],
   }),
-  component: () => <RequireProject>{() => <AdminPage />}</RequireProject>,
+  component: () => (
+    <RequireProject>{(project) => <AdminPage projectId={project.id} />}</RequireProject>
+  ),
 });
 
-function AdminPage() {
+function AdminPage({ projectId }: { projectId: string }) {
   const { user } = Route.useRouteContext();
   const load = useServerFn(getAdminSnapshot);
   const report = useQuery({
@@ -102,6 +105,7 @@ function AdminPage() {
                 : "Some counts could not be retrieved. Available values are shown; a dash means unavailable, not zero."}
             </p>
           )}
+          <PublicContextReadiness key={`${user.id}:${projectId}`} projectId={projectId} />
           <Card>
             <div className="flex flex-wrap items-start justify-between gap-4">
               <div>

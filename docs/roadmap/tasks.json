@@ -152,9 +152,14 @@
       "requires_decisions": [],
       "write_scope": [],
       "exclusive_locks": [],
-      "read_first": ["ProductSpec.md", "FEATUREROADMAP_workplan.md"],
+      "read_first": [
+        "ProductSpec.md",
+        "FEATUREROADMAP_workplan.md"
+      ],
       "goal": "Research workspace exists",
-      "steps": ["Inspect the linked completion evidence before reusing the result."],
+      "steps": [
+        "Inspect the linked completion evidence before reusing the result."
+      ],
       "acceptance": [
         "Historical result is linked; do not rerun completed implementation without a new reason."
       ],
@@ -177,7 +182,9 @@
         }
       ],
       "claim": null,
-      "completion_evidence": ["research/interviews/README.md"],
+      "completion_evidence": [
+        "research/interviews/README.md"
+      ],
       "subtasks": [
         {
           "id": "R0-001.s1",
@@ -200,9 +207,14 @@
       "requires_decisions": [],
       "write_scope": [],
       "exclusive_locks": [],
-      "read_first": ["ProductSpec.md", "FEATUREROADMAP_workplan.md"],
+      "read_first": [
+        "ProductSpec.md",
+        "FEATUREROADMAP_workplan.md"
+      ],
       "goal": "Supplied title-level signal brief captured",
-      "steps": ["Inspect the linked completion evidence before reusing the result."],
+      "steps": [
+        "Inspect the linked completion evidence before reusing the result."
+      ],
       "acceptance": [
         "Historical result is linked; do not rerun completed implementation without a new reason."
       ],
@@ -225,7 +237,9 @@
         }
       ],
       "claim": null,
-      "completion_evidence": ["research/inspiration/reddit-signals-2026-10.md"],
+      "completion_evidence": [
+        "research/inspiration/reddit-signals-2026-10.md"
+      ],
       "subtasks": [
         {
           "id": "R0-002.s1",
@@ -248,9 +262,14 @@
       "requires_decisions": [],
       "write_scope": [],
       "exclusive_locks": [],
-      "read_first": ["ProductSpec.md", "FEATUREROADMAP_workplan.md"],
+      "read_first": [
+        "ProductSpec.md",
+        "FEATUREROADMAP_workplan.md"
+      ],
       "goal": "Initial value canvas and alternatives scan",
-      "steps": ["Inspect the linked completion evidence before reusing the result."],
+      "steps": [
+        "Inspect the linked completion evidence before reusing the result."
+      ],
       "acceptance": [
         "Historical result is linked; do not rerun completed implementation without a new reason."
       ],
@@ -273,7 +292,9 @@
         }
       ],
       "claim": null,
-      "completion_evidence": ["research/value-prop.md"],
+      "completion_evidence": [
+        "research/value-prop.md"
+      ],
       "subtasks": [
         {
           "id": "VP-001.s1",
@@ -296,9 +317,14 @@
       "requires_decisions": [],
       "write_scope": [],
       "exclusive_locks": [],
-      "read_first": ["ProductSpec.md", "FEATUREROADMAP_workplan.md"],
+      "read_first": [
+        "ProductSpec.md",
+        "FEATUREROADMAP_workplan.md"
+      ],
       "goal": "Initial interview guides",
-      "steps": ["Inspect the linked completion evidence before reusing the result."],
+      "steps": [
+        "Inspect the linked completion evidence before reusing the result."
+      ],
       "acceptance": [
         "Historical result is linked; do not rerun completed implementation without a new reason."
       ],
@@ -347,9 +373,14 @@
       "requires_decisions": [],
       "write_scope": [],
       "exclusive_locks": [],
-      "read_first": ["ProductSpec.md", "FEATUREROADMAP_workplan.md"],
+      "read_first": [
+        "ProductSpec.md",
+        "FEATUREROADMAP_workplan.md"
+      ],
       "goal": "Test baseline and CI verified",
-      "steps": ["Inspect the linked completion evidence before reusing the result."],
+      "steps": [
+        "Inspect the linked completion evidence before reusing the result."
+      ],
       "acceptance": [
         "Historical result is linked; do not rerun completed implementation without a new reason."
       ],
@@ -372,7 +403,9 @@
         }
       ],
       "claim": null,
-      "completion_evidence": ["https://github.com/ianroy/first-10/actions/runs/39092157827"],
+      "completion_evidence": [
+        "https://github.com/ianroy/first-10/actions/runs/39092157827"
+      ],
       "subtasks": [
         {
           "id": "F-007.s1",
@@ -395,9 +428,14 @@
       "requires_decisions": [],
       "write_scope": [],
       "exclusive_locks": [],
-      "read_first": ["ProductSpec.md", "FEATUREROADMAP_workplan.md"],
+      "read_first": [
+        "ProductSpec.md",
+        "FEATUREROADMAP_workplan.md"
+      ],
       "goal": "Production Git connection recorded",
-      "steps": ["Inspect the linked completion evidence before reusing the result."],
+      "steps": [
+        "Inspect the linked completion evidence before reusing the result."
+      ],
       "acceptance": [
         "Historical result is linked; do not rerun completed implementation without a new reason."
       ],
@@ -420,7 +458,9 @@
         }
       ],
       "claim": null,
-      "completion_evidence": ["FEATUREROADMAP_history.md"],
+      "completion_evidence": [
+        "FEATUREROADMAP_history.md"
+      ],
       "subtasks": [
         {
           "id": "F-009a.s1",
@@ -443,9 +483,14 @@
       "requires_decisions": [],
       "write_scope": [],
       "exclusive_locks": [],
-      "read_first": ["ProductSpec.md", "FEATUREROADMAP_workplan.md"],
+      "read_first": [
+        "ProductSpec.md",
+        "FEATUREROADMAP_workplan.md"
+      ],
       "goal": "Production magic-link setup recorded",
-      "steps": ["Inspect the linked completion evidence before reusing the result."],
+      "steps": [
+        "Inspect the linked completion evidence before reusing the result."
+      ],
       "acceptance": [
         "Historical result is linked; do not rerun completed implementation without a new reason."
       ],
@@ -468,7 +513,9 @@
         }
       ],
       "claim": null,
-      "completion_evidence": ["FEATUREROADMAP_history.md"],
+      "completion_evidence": [
+        "FEATUREROADMAP_history.md"
+      ],
       "subtasks": [
         {
           "id": "F-010.s1",
@@ -491,9 +538,14 @@
       "requires_decisions": [],
       "write_scope": [],
       "exclusive_locks": [],
-      "read_first": ["ProductSpec.md", "FEATUREROADMAP_workplan.md"],
+      "read_first": [
+        "ProductSpec.md",
+        "FEATUREROADMAP_workplan.md"
+      ],
       "goal": "README and ProductSpec deepened",
-      "steps": ["Inspect the linked completion evidence before reusing the result."],
+      "steps": [
+        "Inspect the linked completion evidence before reusing the result."
+      ],
       "acceptance": [
         "Historical result is linked; do not rerun completed implementation without a new reason."
       ],
@@ -516,7 +568,9 @@
         }
       ],
       "claim": null,
-      "completion_evidence": ["https://github.com/ianroy/first-10/commit/7006f87"],
+      "completion_evidence": [
+        "https://github.com/ianroy/first-10/commit/7006f87"
+      ],
       "subtasks": [
         {
           "id": "DOC-001.s1",
@@ -539,9 +593,14 @@
       "requires_decisions": [],
       "write_scope": [],
       "exclusive_locks": [],
-      "read_first": ["ProductSpec.md", "FEATUREROADMAP_workplan.md"],
+      "read_first": [
+        "ProductSpec.md",
+        "FEATUREROADMAP_workplan.md"
+      ],
       "goal": "Record the independently committed team-credits documentation update.",
-      "steps": ["Inspect the linked completion evidence before reusing the result."],
+      "steps": [
+        "Inspect the linked completion evidence before reusing the result."
+      ],
       "acceptance": [
         "Historical result is linked; do not rerun completed implementation without a new reason."
       ],
@@ -589,9 +648,14 @@
       "requires_decisions": [],
       "write_scope": [],
       "exclusive_locks": [],
-      "read_first": ["ProductSpec.md", "FEATUREROADMAP_workplan.md"],
+      "read_first": [
+        "ProductSpec.md",
+        "FEATUREROADMAP_workplan.md"
+      ],
       "goal": "Company values and voice charter defined",
-      "steps": ["Inspect the linked completion evidence before reusing the result."],
+      "steps": [
+        "Inspect the linked completion evidence before reusing the result."
+      ],
       "acceptance": [
         "Historical result is linked; do not rerun completed implementation without a new reason."
       ],
@@ -614,7 +678,9 @@
         }
       ],
       "claim": null,
-      "completion_evidence": ["docs/company-values.md"],
+      "completion_evidence": [
+        "docs/company-values.md"
+      ],
       "subtasks": [
         {
           "id": "VAL-001.s1",
@@ -637,9 +703,14 @@
       "requires_decisions": [],
       "write_scope": [],
       "exclusive_locks": [],
-      "read_first": ["ProductSpec.md", "FEATUREROADMAP_workplan.md"],
+      "read_first": [
+        "ProductSpec.md",
+        "FEATUREROADMAP_workplan.md"
+      ],
       "goal": "Official OpenRouter model and cost shortlist",
-      "steps": ["Inspect the linked completion evidence before reusing the result."],
+      "steps": [
+        "Inspect the linked completion evidence before reusing the result."
+      ],
       "acceptance": [
         "Historical result is linked; do not rerun completed implementation without a new reason."
       ],
@@ -662,7 +733,9 @@
         }
       ],
       "claim": null,
-      "completion_evidence": ["docs/roadmap/openrouter-plan.md"],
+      "completion_evidence": [
+        "docs/roadmap/openrouter-plan.md"
+      ],
       "subtasks": [
         {
           "id": "AI-000.s1",
@@ -685,9 +758,14 @@
       "requires_decisions": [],
       "write_scope": [],
       "exclusive_locks": [],
-      "read_first": ["ProductSpec.md", "FEATUREROADMAP_workplan.md"],
+      "read_first": [
+        "ProductSpec.md",
+        "FEATUREROADMAP_workplan.md"
+      ],
       "goal": "Execution roadmap and task registry audited",
-      "steps": ["Inspect the linked completion evidence before reusing the result."],
+      "steps": [
+        "Inspect the linked completion evidence before reusing the result."
+      ],
       "acceptance": [
         "Historical result is linked; do not rerun completed implementation without a new reason."
       ],
@@ -739,7 +817,9 @@
       "size": "S",
       "kind": "implementation",
       "priority": 1,
-      "depends_on": ["F-007"],
+      "depends_on": [
+        "F-007"
+      ],
       "requires_decisions": [],
       "write_scope": [
         "eslint.config.js",
@@ -830,9 +910,14 @@
       "size": "S",
       "kind": "documentation",
       "priority": 2,
-      "depends_on": ["F-007"],
+      "depends_on": [
+        "F-007"
+      ],
       "requires_decisions": [],
-      "write_scope": ["docs/architecture/access-contract.md", "docs/architecture/api-contracts.md"],
+      "write_scope": [
+        "docs/architecture/access-contract.md",
+        "docs/architecture/api-contracts.md"
+      ],
       "exclusive_locks": [],
       "read_first": [
         "ProductSpec.md",
@@ -880,7 +965,9 @@
         }
       ],
       "claim": null,
-      "completion_evidence": ["474a912678bf37be144e6bd28b12c31969ec0a60"],
+      "completion_evidence": [
+        "474a912678bf37be144e6bd28b12c31969ec0a60"
+      ],
       "subtasks": [
         {
           "id": "SEC-001.s1",
@@ -911,7 +998,9 @@
       "size": "S",
       "kind": "implementation",
       "priority": 50,
-      "depends_on": ["OPS-001"],
+      "depends_on": [
+        "OPS-001"
+      ],
       "requires_decisions": [],
       "write_scope": [
         "scripts/smoke.mjs",
@@ -922,7 +1011,9 @@
         "src/routes/api.health.ts",
         "src/routeTree.gen.ts"
       ],
-      "exclusive_locks": ["delivery-config"],
+      "exclusive_locks": [
+        "delivery-config"
+      ],
       "read_first": [
         "ProductSpec.md",
         "FEATUREROADMAP_workplan.md",
@@ -1005,11 +1096,18 @@
       "size": "S",
       "kind": "research",
       "priority": 50,
-      "depends_on": ["OPS-002"],
+      "depends_on": [
+        "OPS-002"
+      ],
       "requires_decisions": [],
-      "write_scope": ["docs/operations/preview-environment.md"],
+      "write_scope": [
+        "docs/operations/preview-environment.md"
+      ],
       "exclusive_locks": [],
-      "read_first": ["ProductSpec.md", "FEATUREROADMAP_workplan.md"],
+      "read_first": [
+        "ProductSpec.md",
+        "FEATUREROADMAP_workplan.md"
+      ],
       "goal": "Complete the missing preview-environment portion of F-009.",
       "steps": [
         "Use the intended preview Vercel/Supabase environment, never silently point test mutations at production.",
@@ -1071,7 +1169,10 @@
       "size": "S",
       "kind": "implementation",
       "priority": 50,
-      "depends_on": ["SEC-001", "OPS-001"],
+      "depends_on": [
+        "SEC-001",
+        "OPS-001"
+      ],
       "requires_decisions": [],
       "write_scope": [
         "supabase/tests/**",
@@ -1079,7 +1180,9 @@
         ".github/workflows/policies.yml",
         "src/tests/sec-002/**"
       ],
-      "exclusive_locks": ["database-tests"],
+      "exclusive_locks": [
+        "database-tests"
+      ],
       "read_first": [
         "ProductSpec.md",
         "FEATUREROADMAP_workplan.md",
@@ -1158,7 +1261,9 @@
       "size": "S",
       "kind": "implementation",
       "priority": 50,
-      "depends_on": ["SEC-002"],
+      "depends_on": [
+        "SEC-002"
+      ],
       "requires_decisions": [],
       "write_scope": [
         "supabase/migrations/**",
@@ -1168,7 +1273,10 @@
         "supabase/tests/sec-003.sql",
         "src/routes/_authenticated/learnings.tsx"
       ],
-      "exclusive_locks": ["database-schema", "generated-types"],
+      "exclusive_locks": [
+        "database-schema",
+        "generated-types"
+      ],
       "read_first": [
         "ProductSpec.md",
         "FEATUREROADMAP_workplan.md",
@@ -1253,7 +1361,9 @@
       "size": "S",
       "kind": "implementation",
       "priority": 50,
-      "depends_on": ["SEC-003"],
+      "depends_on": [
+        "SEC-003"
+      ],
       "requires_decisions": [],
       "write_scope": [
         "supabase/migrations/20261018005000_project_members.sql",
@@ -1263,7 +1373,9 @@
         "src/lib/membership.functions.test.ts",
         "supabase/tests/sec-004.sql"
       ],
-      "exclusive_locks": ["project-membership-schema"],
+      "exclusive_locks": [
+        "project-membership-schema"
+      ],
       "read_first": [
         "ProductSpec.md",
         "FEATUREROADMAP_workplan.md",
@@ -1347,7 +1459,9 @@
       "size": "S",
       "kind": "implementation",
       "priority": 50,
-      "depends_on": ["SEC-004"],
+      "depends_on": [
+        "SEC-004"
+      ],
       "requires_decisions": [],
       "write_scope": [
         "supabase/migrations/20261018012000_scoped_invitations.sql",
@@ -1358,7 +1472,10 @@
         "supabase/tests/sec-005.sql",
         "scripts/check-invitation-concurrency.mjs"
       ],
-      "exclusive_locks": ["scoped-invitation-schema", "invite-route"],
+      "exclusive_locks": [
+        "scoped-invitation-schema",
+        "invite-route"
+      ],
       "read_first": [
         "ProductSpec.md",
         "FEATUREROADMAP_workplan.md",
@@ -1437,7 +1554,9 @@
       "size": "S",
       "kind": "implementation",
       "priority": 50,
-      "depends_on": ["SEC-003"],
+      "depends_on": [
+        "SEC-003"
+      ],
       "requires_decisions": [],
       "write_scope": [
         "supabase/migrations/20261018010000_platform_admin.sql",
@@ -1449,7 +1568,9 @@
         "src/components/AppShell.tsx",
         "src/tests/desktop-routes/admin-auth.test.ts"
       ],
-      "exclusive_locks": ["platform-admin-authoring"],
+      "exclusive_locks": [
+        "platform-admin-authoring"
+      ],
       "read_first": [
         "ProductSpec.md",
         "FEATUREROADMAP_workplan.md",
@@ -1535,7 +1656,9 @@
       "size": "S",
       "kind": "implementation",
       "priority": 50,
-      "depends_on": ["SEC-003"],
+      "depends_on": [
+        "SEC-003"
+      ],
       "requires_decisions": [],
       "write_scope": [
         "supabase/migrations/20261018011000_processing_consent.sql",
@@ -1554,7 +1677,11 @@
         "src/tests/ai-eval/**",
         "src/tests/ai-003/fixture-parity.test.ts"
       ],
-      "exclusive_locks": ["processing-consent-schema", "ai-entrypoint", "interview-flow"],
+      "exclusive_locks": [
+        "processing-consent-schema",
+        "ai-entrypoint",
+        "interview-flow"
+      ],
       "read_first": [
         "ProductSpec.md",
         "FEATUREROADMAP_workplan.md",
@@ -1629,7 +1756,10 @@
       "size": "S",
       "kind": "implementation",
       "priority": 50,
-      "depends_on": ["PRV-001", "SEC-004"],
+      "depends_on": [
+        "PRV-001",
+        "SEC-004"
+      ],
       "requires_decisions": [],
       "write_scope": [
         "src/routes/_authenticated/settings.tsx",
@@ -1641,7 +1771,11 @@
         "src/lib/account.functions.test.ts",
         "supabase/tests/prv-002.sql"
       ],
-      "exclusive_locks": ["database-schema", "generated-types", "route-integration"],
+      "exclusive_locks": [
+        "database-schema",
+        "generated-types",
+        "route-integration"
+      ],
       "read_first": [
         "ProductSpec.md",
         "FEATUREROADMAP_workplan.md",
@@ -1655,13 +1789,13 @@
         "Resolve shared ownership before deleting an owner; test auth/account and application record cleanup together."
       ],
       "acceptance": [
-        "Export excludes others’ private notes and secrets.",
-        "Deletion cannot remove another owner’s project; failure/retry does not orphan unauthorized shares."
+        "Export excludes others\u2019 private notes and secrets.",
+        "Deletion cannot remove another owner\u2019s project; failure/retry does not orphan unauthorized shares."
       ],
       "verification_profile": "product",
       "verification": [
-        "Export excludes others’ private notes and secrets.",
-        "Deletion cannot remove another owner’s project; failure/retry does not orphan unauthorized shares.",
+        "Export excludes others\u2019 private notes and secrets.",
+        "Deletion cannot remove another owner\u2019s project; failure/retry does not orphan unauthorized shares.",
         "Run lint (exclude generated .vercel until OPS-001), typecheck, focused tests and NITRO_PRESET=vercel build; record actual outcomes. For data/roles run real isolated RLS tests; for new AI run versioned fixtures and the budgeted per-kind evaluation."
       ],
       "metric": "Export/deletion completion and failures.",
@@ -1710,7 +1844,10 @@
       "size": "S",
       "kind": "documentation",
       "priority": 50,
-      "depends_on": ["SEC-003", "OPS-002"],
+      "depends_on": [
+        "SEC-003",
+        "OPS-002"
+      ],
       "requires_decisions": [],
       "write_scope": [
         "docs/operations/release-runbook.md",
@@ -1721,8 +1858,13 @@
         "scripts/rehearse-restore.py",
         "docs/operations/restore-rehearsal-2026-10-18.json"
       ],
-      "exclusive_locks": ["migration-coordination"],
-      "read_first": ["ProductSpec.md", "FEATUREROADMAP_workplan.md"],
+      "exclusive_locks": [
+        "migration-coordination"
+      ],
+      "read_first": [
+        "ProductSpec.md",
+        "FEATUREROADMAP_workplan.md"
+      ],
       "goal": "Give the integration agent a safe serial deployment path and data-preserving rollback.",
       "steps": [
         "Define additive migration, backfill, validation, generated types, compatible app release and feature enable order.",
@@ -1795,7 +1937,9 @@
       "size": "S",
       "kind": "implementation",
       "priority": 50,
-      "depends_on": ["OPS-001"],
+      "depends_on": [
+        "OPS-001"
+      ],
       "requires_decisions": [],
       "write_scope": [
         "src/lib/ai.functions.ts",
@@ -1806,7 +1950,11 @@
         "src/routes/_authenticated/interview.tsx",
         "src/routes/_authenticated/outreach.tsx"
       ],
-      "exclusive_locks": ["ai-entrypoint", "interview-flow", "route-integration"],
+      "exclusive_locks": [
+        "ai-entrypoint",
+        "interview-flow",
+        "route-integration"
+      ],
       "read_first": [
         "ProductSpec.md",
         "FEATUREROADMAP_workplan.md",
@@ -1856,7 +2004,9 @@
         }
       ],
       "claim": null,
-      "completion_evidence": ["src/lib/ai.test.ts"],
+      "completion_evidence": [
+        "src/lib/ai.test.ts"
+      ],
       "subtasks": [
         {
           "id": "AI-001.s1",
@@ -1887,7 +2037,10 @@
       "size": "S",
       "kind": "implementation",
       "priority": 50,
-      "depends_on": ["AI-001", "SEC-003"],
+      "depends_on": [
+        "AI-001",
+        "SEC-003"
+      ],
       "requires_decisions": [],
       "write_scope": [
         "src/lib/prompts/**",
@@ -1910,8 +2063,14 @@
         "src/tests/marketing-lab/persistence-ui.test.tsx",
         "scripts/check-ai-origin-concurrency.mjs"
       ],
-      "exclusive_locks": ["ai-provenance-schema"],
-      "read_first": ["ProductSpec.md", "FEATUREROADMAP_workplan.md", "src/lib/ai.functions.ts"],
+      "exclusive_locks": [
+        "ai-provenance-schema"
+      ],
+      "read_first": [
+        "ProductSpec.md",
+        "FEATUREROADMAP_workplan.md",
+        "src/lib/ai.functions.ts"
+      ],
       "goal": "Keep prompt/model/version and request identity with each generated result.",
       "steps": [
         "Extract current prompts without changing their wording or behavior.",
@@ -2015,7 +2174,10 @@
       "size": "S",
       "kind": "implementation",
       "priority": 50,
-      "depends_on": ["AI-002", "AI-004"],
+      "depends_on": [
+        "AI-002",
+        "AI-004"
+      ],
       "requires_decisions": [],
       "write_scope": [
         "evals/**",
@@ -2023,7 +2185,9 @@
         "src/tests/ai-eval/**",
         "src/tests/ai-003/**"
       ],
-      "exclusive_locks": ["package-manifest"],
+      "exclusive_locks": [
+        "package-manifest"
+      ],
       "read_first": [
         "ProductSpec.md",
         "FEATUREROADMAP_workplan.md",
@@ -2104,7 +2268,10 @@
       "size": "S",
       "kind": "implementation",
       "priority": 50,
-      "depends_on": ["AI-001", "SEC-003"],
+      "depends_on": [
+        "AI-001",
+        "SEC-003"
+      ],
       "requires_decisions": [],
       "write_scope": [
         "supabase/migrations/20261018014000_ai_usage_budget.sql",
@@ -2222,7 +2389,11 @@
       "size": "S",
       "kind": "implementation",
       "priority": 50,
-      "depends_on": ["AI-002", "AI-003", "AI-004"],
+      "depends_on": [
+        "AI-002",
+        "AI-003",
+        "AI-004"
+      ],
       "requires_decisions": [],
       "write_scope": [
         "src/lib/ai/model-policy.ts",
@@ -2232,14 +2403,16 @@
         "src/lib/ai/model-policy.test.ts",
         "src/lib/ai.functions.test.ts"
       ],
-      "exclusive_locks": ["ai-entrypoint"],
+      "exclusive_locks": [
+        "ai-entrypoint"
+      ],
       "read_first": [
         "ProductSpec.md",
         "FEATUREROADMAP_workplan.md",
         "docs/roadmap/openrouter-plan.md",
         "src/lib/ai.functions.ts"
       ],
-      "goal": "Use the lowest-cost eligible model that passes each kind’s evaluations.",
+      "goal": "Use the lowest-cost eligible model that passes each kind\u2019s evaluations.",
       "steps": [
         "Recheck official model ids, endpoint schema support, price and data-policy eligibility.",
         "Set per-kind input/output limits and an explicit ordered fallback allowlist with maximum unit price.",
@@ -2301,10 +2474,19 @@
       "size": "S",
       "kind": "research",
       "priority": 50,
-      "depends_on": ["AI-005", "AI-007"],
+      "depends_on": [
+        "AI-005",
+        "AI-007"
+      ],
       "requires_decisions": [],
-      "write_scope": ["evals/results/**", "docs/ai-model-policy.md", "src/lib/ai/model-policy.ts"],
-      "exclusive_locks": ["ai-entrypoint"],
+      "write_scope": [
+        "evals/results/**",
+        "docs/ai-model-policy.md",
+        "src/lib/ai/model-policy.ts"
+      ],
+      "exclusive_locks": [
+        "ai-entrypoint"
+      ],
       "read_first": [
         "ProductSpec.md",
         "FEATUREROADMAP_workplan.md",
@@ -2372,7 +2554,11 @@
       "size": "S",
       "kind": "implementation",
       "priority": 50,
-      "depends_on": ["AI-002", "PRV-001", "SEC-004"],
+      "depends_on": [
+        "AI-002",
+        "PRV-001",
+        "SEC-004"
+      ],
       "requires_decisions": [],
       "write_scope": [
         "src/lib/ai/context.server.ts",
@@ -2395,7 +2581,10 @@
         "src/tests/ai-002/**",
         "src/tests/prv-001/**"
       ],
-      "exclusive_locks": ["ai-entrypoint", "ai-context-schema"],
+      "exclusive_locks": [
+        "ai-entrypoint",
+        "ai-context-schema"
+      ],
       "read_first": [
         "ProductSpec.md",
         "FEATUREROADMAP_workplan.md",
@@ -2433,7 +2622,7 @@
         },
         {
           "date": "2026-10-18",
-          "text": "Claimed after budget boundary complete. Replace JSON slicing with deterministic whole-record authorized context, stable source IDs and exact-quote checks; new17000 RPC if needed, preserve published11000/v1–v4 bytes. General paid kinds stay disabled; no new discovery AI kinds/retrieval until their own adapter tasks. Worker sends source/schema design beforeapply."
+          "text": "Claimed after budget boundary complete. Replace JSON slicing with deterministic whole-record authorized context, stable source IDs and exact-quote checks; new17000 RPC if needed, preserve published11000/v1\u2013v4 bytes. General paid kinds stay disabled; no new discovery AI kinds/retrieval until their own adapter tasks. Worker sends source/schema design beforeapply."
         },
         {
           "date": "2026-10-18",
@@ -2442,7 +2631,7 @@
       ],
       "claim": null,
       "completion_evidence": [
-        "b276993 + b30605f + ab5933f (worker baa63d8/dd991c8/dcff96f): deterministic whole-record owner context, stable content/source/consent identities, atomic dispatch permission/version fence, exact quote/reference validation and content-free provenance; immutable evaluation v5 with original v1–v4 bytes preserved. Combined 751 app tests, 1333 rollback SQL assertions, typecheck, production build and lint (0 errors, 6 existing warnings) pass; 19 offline eval checks and actual-handler parity pass. Worker actual source-edit, withdrawal, linked-contact permission and duplicate-claim races passed in schema-only clone, dropped and verified absent. Hosted migrations 16 then 17 applied via reviewed normal CLI, no seeds/roles. No paid calls or route activation. UTF-8 payload caps are not tokenizer proof; visible source inspection remains AI-008 and model quality remains unmeasured."
+        "b276993 + b30605f + ab5933f (worker baa63d8/dd991c8/dcff96f): deterministic whole-record owner context, stable content/source/consent identities, atomic dispatch permission/version fence, exact quote/reference validation and content-free provenance; immutable evaluation v5 with original v1\u2013v4 bytes preserved. Combined 751 app tests, 1333 rollback SQL assertions, typecheck, production build and lint (0 errors, 6 existing warnings) pass; 19 offline eval checks and actual-handler parity pass. Worker actual source-edit, withdrawal, linked-contact permission and duplicate-claim races passed in schema-only clone, dropped and verified absent. Hosted migrations 16 then 17 applied via reviewed normal CLI, no seeds/roles. No paid calls or route activation. UTF-8 payload caps are not tokenizer proof; visible source inspection remains AI-008 and model quality remains unmeasured."
       ],
       "subtasks": [
         {
@@ -2474,7 +2663,11 @@
       "size": "S",
       "kind": "gate",
       "priority": 50,
-      "depends_on": ["AI-006", "AI-007", "AI-004"],
+      "depends_on": [
+        "AI-006",
+        "AI-007",
+        "AI-004"
+      ],
       "requires_decisions": [],
       "write_scope": [
         "evals/results/ai-gate.md",
@@ -2485,8 +2678,14 @@
         "src/lib/ai/model-policy.test.ts",
         "src/lib/ai.functions.test.ts"
       ],
-      "exclusive_locks": ["ai-entrypoint"],
-      "read_first": ["ProductSpec.md", "FEATUREROADMAP_workplan.md", "src/lib/ai.functions.ts"],
+      "exclusive_locks": [
+        "ai-entrypoint"
+      ],
+      "read_first": [
+        "ProductSpec.md",
+        "FEATUREROADMAP_workplan.md",
+        "src/lib/ai.functions.ts"
+      ],
       "goal": "Validate the full authenticated, metered, schema-checked generation path before new kinds.",
       "steps": [
         "Run cross-tenant/context injection, duplicate request and concurrent budget scenarios.",
@@ -2549,9 +2748,14 @@
       "size": "S",
       "kind": "documentation",
       "priority": 4,
-      "depends_on": ["VAL-001"],
+      "depends_on": [
+        "VAL-001"
+      ],
       "requires_decisions": [],
-      "write_scope": ["docs/brand/directions.md", "docs/brand/previews/**"],
+      "write_scope": [
+        "docs/brand/directions.md",
+        "docs/brand/previews/**"
+      ],
       "exclusive_locks": [],
       "read_first": [
         "ProductSpec.md",
@@ -2599,7 +2803,9 @@
         }
       ],
       "claim": null,
-      "completion_evidence": ["d8d78308ccb6fafcca82ea8a0d001796751bcfe8"],
+      "completion_evidence": [
+        "d8d78308ccb6fafcca82ea8a0d001796751bcfe8"
+      ],
       "subtasks": [
         {
           "id": "BR-001.s1",
@@ -2630,7 +2836,10 @@
       "size": "S",
       "kind": "implementation",
       "priority": 50,
-      "depends_on": ["BR-001", "OPS-001"],
+      "depends_on": [
+        "BR-001",
+        "OPS-001"
+      ],
       "requires_decisions": [],
       "write_scope": [
         "src/styles.css",
@@ -2638,7 +2847,9 @@
         "docs/brand/tokens.md",
         "src/tests/br-002/**"
       ],
-      "exclusive_locks": ["design-system"],
+      "exclusive_locks": [
+        "design-system"
+      ],
       "read_first": [
         "ProductSpec.md",
         "FEATUREROADMAP_workplan.md",
@@ -2718,7 +2929,9 @@
       "size": "S",
       "kind": "implementation",
       "priority": 50,
-      "depends_on": ["BR-002"],
+      "depends_on": [
+        "BR-002"
+      ],
       "requires_decisions": [],
       "write_scope": [
         "src/components/AppShell.tsx",
@@ -2736,7 +2949,10 @@
         "src/tests/desktop-routes/**",
         "src/test/pages.test.tsx"
       ],
-      "exclusive_locks": ["app-shell", "route-integration"],
+      "exclusive_locks": [
+        "app-shell",
+        "route-integration"
+      ],
       "read_first": [
         "ProductSpec.md",
         "FEATUREROADMAP_workplan.md",
@@ -2824,9 +3040,15 @@
       "size": "S",
       "kind": "documentation",
       "priority": 50,
-      "depends_on": ["VP-007", "VAL-001"],
+      "depends_on": [
+        "VP-007",
+        "VAL-001"
+      ],
       "requires_decisions": [],
-      "write_scope": ["docs/marketing/landing-brief.md", "docs/marketing/claims.md"],
+      "write_scope": [
+        "docs/marketing/landing-brief.md",
+        "docs/marketing/claims.md"
+      ],
       "exclusive_locks": [],
       "read_first": [
         "ProductSpec.md",
@@ -2874,7 +3096,9 @@
         }
       ],
       "claim": null,
-      "completion_evidence": ["006ec00995e5e38772d10e6647f14fd43e943978"],
+      "completion_evidence": [
+        "006ec00995e5e38772d10e6647f14fd43e943978"
+      ],
       "subtasks": [
         {
           "id": "WEB-001.s1",
@@ -2905,7 +3129,11 @@
       "size": "S",
       "kind": "implementation",
       "priority": 50,
-      "depends_on": ["WEB-001", "BR-002", "F-007"],
+      "depends_on": [
+        "WEB-001",
+        "BR-002",
+        "F-007"
+      ],
       "requires_decisions": [],
       "write_scope": [
         "src/components/demo/**",
@@ -2916,7 +3144,9 @@
         "src/tests/demo/**",
         "src/routes/__root.tsx"
       ],
-      "exclusive_locks": ["route-integration"],
+      "exclusive_locks": [
+        "route-integration"
+      ],
       "read_first": [
         "ProductSpec.md",
         "FEATUREROADMAP_workplan.md",
@@ -3000,7 +3230,9 @@
       "size": "S",
       "kind": "documentation",
       "priority": 50,
-      "depends_on": ["DOC-001"],
+      "depends_on": [
+        "DOC-001"
+      ],
       "requires_decisions": [],
       "write_scope": [
         "docs/architecture/system-overview.md",
@@ -3056,7 +3288,9 @@
         }
       ],
       "claim": null,
-      "completion_evidence": ["docs/architecture/system-overview.md"],
+      "completion_evidence": [
+        "docs/architecture/system-overview.md"
+      ],
       "subtasks": [
         {
           "id": "WEB-003.s1",
@@ -3087,7 +3321,13 @@
       "size": "S",
       "kind": "implementation",
       "priority": 50,
-      "depends_on": ["WEB-001", "WEB-002", "WEB-003", "BR-002", "EDU-002"],
+      "depends_on": [
+        "WEB-001",
+        "WEB-002",
+        "WEB-003",
+        "BR-002",
+        "EDU-002"
+      ],
       "requires_decisions": [],
       "write_scope": [
         "src/routes/index.tsx",
@@ -3098,7 +3338,9 @@
         "README.md",
         "ProductSpec.md"
       ],
-      "exclusive_locks": ["route-integration"],
+      "exclusive_locks": [
+        "route-integration"
+      ],
       "read_first": [
         "ProductSpec.md",
         "FEATUREROADMAP_workplan.md",
@@ -3181,9 +3423,15 @@
       "size": "S",
       "kind": "documentation",
       "priority": 50,
-      "depends_on": ["VAL-001", "VP-008"],
+      "depends_on": [
+        "VAL-001",
+        "VP-008"
+      ],
       "requires_decisions": [],
-      "write_scope": ["docs/teaching/**", "public/teaching/**"],
+      "write_scope": [
+        "docs/teaching/**",
+        "public/teaching/**"
+      ],
       "exclusive_locks": [],
       "read_first": [
         "ProductSpec.md",
@@ -3263,7 +3511,11 @@
       "size": "S",
       "kind": "implementation",
       "priority": 50,
-      "depends_on": ["EDU-001", "BR-002", "WEB-001"],
+      "depends_on": [
+        "EDU-001",
+        "BR-002",
+        "WEB-001"
+      ],
       "requires_decisions": [],
       "write_scope": [
         "src/routes/teach.tsx",
@@ -3273,7 +3525,9 @@
         "src/routes/teach.test.tsx",
         "src/routes/__root.tsx"
       ],
-      "exclusive_locks": ["route-integration"],
+      "exclusive_locks": [
+        "route-integration"
+      ],
       "read_first": [
         "ProductSpec.md",
         "FEATUREROADMAP_workplan.md",
@@ -3360,10 +3614,18 @@
       "size": "S",
       "kind": "research",
       "priority": 50,
-      "depends_on": ["EDU-001"],
+      "depends_on": [
+        "EDU-001"
+      ],
       "requires_decisions": [],
-      "write_scope": ["research/teaching-rehearsal.md", "docs/teaching/**", "public/teaching/**"],
-      "exclusive_locks": ["teaching-materials"],
+      "write_scope": [
+        "research/teaching-rehearsal.md",
+        "docs/teaching/**",
+        "public/teaching/**"
+      ],
+      "exclusive_locks": [
+        "teaching-materials"
+      ],
       "read_first": [
         "ProductSpec.md",
         "FEATUREROADMAP_workplan.md",
@@ -3436,7 +3698,11 @@
       "size": "S",
       "kind": "gate",
       "priority": 50,
-      "depends_on": ["WEB-004", "EDU-002", "BR-003"],
+      "depends_on": [
+        "WEB-004",
+        "EDU-002",
+        "BR-003"
+      ],
       "requires_decisions": [],
       "write_scope": [
         "src/routes/public-pages.test.tsx",
@@ -3518,7 +3784,9 @@
       "size": "S",
       "kind": "implementation",
       "priority": 50,
-      "depends_on": ["SEC-003"],
+      "depends_on": [
+        "SEC-003"
+      ],
       "requires_decisions": [],
       "write_scope": [
         "supabase/migrations/20261018009000_project_lifecycle.sql",
@@ -3527,7 +3795,9 @@
         "supabase/tests/ws-001.sql",
         "scripts/check-project-lifecycle-concurrency.mjs"
       ],
-      "exclusive_locks": ["project-lifecycle-authoring"],
+      "exclusive_locks": [
+        "project-lifecycle-authoring"
+      ],
       "read_first": [
         "ProductSpec.md",
         "FEATUREROADMAP_workplan.md",
@@ -3615,7 +3885,10 @@
       "size": "M",
       "kind": "implementation",
       "priority": 50,
-      "depends_on": ["WS-001", "SEC-004"],
+      "depends_on": [
+        "WS-001",
+        "SEC-004"
+      ],
       "requires_decisions": [],
       "write_scope": [
         "src/lib/data.ts",
@@ -3630,7 +3903,9 @@
         "src/lib/project-lifecycle.ts",
         "src/tests/ws-001/project-lifecycle.test.ts"
       ],
-      "exclusive_locks": ["workspace-lifecycle-ui"],
+      "exclusive_locks": [
+        "workspace-lifecycle-ui"
+      ],
       "read_first": [
         "ProductSpec.md",
         "FEATUREROADMAP_workplan.md",
@@ -3706,7 +3981,10 @@
       "size": "S",
       "kind": "implementation",
       "priority": 50,
-      "depends_on": ["WS-002", "BR-002"],
+      "depends_on": [
+        "WS-002",
+        "BR-002"
+      ],
       "requires_decisions": [],
       "write_scope": [
         "src/routes/_authenticated/workspace.tsx",
@@ -3716,7 +3994,10 @@
         "src/routes/_authenticated/workspace.test.tsx",
         "src/components/AppShell.test.tsx"
       ],
-      "exclusive_locks": ["app-shell", "route-integration"],
+      "exclusive_locks": [
+        "app-shell",
+        "route-integration"
+      ],
       "read_first": [
         "ProductSpec.md",
         "FEATUREROADMAP_workplan.md",
@@ -3790,7 +4071,10 @@
       "size": "S",
       "kind": "implementation",
       "priority": 50,
-      "depends_on": ["WS-002", "PRV-001"],
+      "depends_on": [
+        "WS-002",
+        "PRV-001"
+      ],
       "requires_decisions": [],
       "write_scope": [
         "supabase/migrations/20261018016000_interview_drafts.sql",
@@ -3804,7 +4088,10 @@
         "docs/pedagogy/interview-drafts.md",
         "src/tests/desktop-routes/workflows.test.tsx"
       ],
-      "exclusive_locks": ["interview-draft-schema", "interview-session-ui"],
+      "exclusive_locks": [
+        "interview-draft-schema",
+        "interview-session-ui"
+      ],
       "read_first": [
         "ProductSpec.md",
         "FEATUREROADMAP_workplan.md",
@@ -3843,7 +4130,7 @@
         },
         {
           "date": "2026-10-18",
-          "text": "Claimed after deployedDISCmanualcycle verified. Approved read-only design: exact questionsnapshot, private CAS saves/resume, separate processing choices, explicit atomic exactly-once completion via existing captureRPC, no completed counts/evidence beforecompletion. Forwardfix archival captureguard/pipeline-state preservation in16000. Rootfixes missedregenerateintent beforeworkerbranchsync. Rootserializes generatedtypes and15000→16000→17000 publication/apply; do not edit earlier migrations."
+          "text": "Claimed after deployedDISCmanualcycle verified. Approved read-only design: exact questionsnapshot, private CAS saves/resume, separate processing choices, explicit atomic exactly-once completion via existing captureRPC, no completed counts/evidence beforecompletion. Forwardfix archival captureguard/pipeline-state preservation in16000. Rootfixes missedregenerateintent beforeworkerbranchsync. Rootserializes generatedtypes and15000\u219216000\u219217000 publication/apply; do not edit earlier migrations."
         }
       ],
       "claim": null,
@@ -3880,7 +4167,9 @@
       "size": "S",
       "kind": "implementation",
       "priority": 50,
-      "depends_on": ["WS-004"],
+      "depends_on": [
+        "WS-004"
+      ],
       "requires_decisions": [],
       "write_scope": [
         "src/routes/_authenticated/interview.tsx",
@@ -3890,7 +4179,9 @@
         "src/routes/_authenticated/interview.test.tsx",
         "src/lib/useInterviewDraft.test.ts"
       ],
-      "exclusive_locks": ["interview-flow"],
+      "exclusive_locks": [
+        "interview-flow"
+      ],
       "read_first": [
         "ProductSpec.md",
         "FEATUREROADMAP_workplan.md",
@@ -3960,7 +4251,9 @@
       "size": "S",
       "kind": "implementation",
       "priority": 50,
-      "depends_on": ["WS-005"],
+      "depends_on": [
+        "WS-005"
+      ],
       "requires_decisions": [],
       "write_scope": [
         "supabase/migrations/**",
@@ -3971,7 +4264,11 @@
         "src/routes/_authenticated/interview.test.tsx",
         "supabase/tests/ws-006.sql"
       ],
-      "exclusive_locks": ["database-schema", "generated-types", "interview-flow"],
+      "exclusive_locks": [
+        "database-schema",
+        "generated-types",
+        "interview-flow"
+      ],
       "read_first": [
         "ProductSpec.md",
         "FEATUREROADMAP_workplan.md",
@@ -4041,7 +4338,10 @@
       "size": "S",
       "kind": "gate",
       "priority": 50,
-      "depends_on": ["WS-003", "WS-006"],
+      "depends_on": [
+        "WS-003",
+        "WS-006"
+      ],
       "requires_decisions": [],
       "write_scope": [
         "src/tests/workspace-journeys/**",
@@ -4122,9 +4422,15 @@
       "size": "S",
       "kind": "documentation",
       "priority": 50,
-      "depends_on": ["SEC-001", "PRV-001", "WS-002"],
+      "depends_on": [
+        "SEC-001",
+        "PRV-001",
+        "WS-002"
+      ],
       "requires_decisions": [],
-      "write_scope": ["docs/analytics/event-contract.md"],
+      "write_scope": [
+        "docs/analytics/event-contract.md"
+      ],
       "exclusive_locks": [],
       "read_first": [
         "ProductSpec.md",
@@ -4132,7 +4438,7 @@
         "src/lib/stages.ts",
         "src/lib/data.ts"
       ],
-      "goal": "Measure First Ten adoption separately from each founder’s customer pipeline.",
+      "goal": "Measure First Ten adoption separately from each founder\u2019s customer pipeline.",
       "steps": [
         "Define visits, signups, project creation, first completed interview, accepted learning/next action and return with windows/denominators.",
         "Specify server-authoritative events versus optional anonymous attribution, deduplication and retention.",
@@ -4194,7 +4500,11 @@
       "size": "S",
       "kind": "implementation",
       "priority": 50,
-      "depends_on": ["AN-001", "AI-004", "WS-006"],
+      "depends_on": [
+        "AN-001",
+        "AI-004",
+        "WS-006"
+      ],
       "requires_decisions": [],
       "write_scope": [
         "supabase/migrations/**",
@@ -4209,7 +4519,11 @@
         "src/lib/interview-drafts.functions.test.ts",
         "supabase/tests/an-002.sql"
       ],
-      "exclusive_locks": ["database-schema", "generated-types", "analytics-integration"],
+      "exclusive_locks": [
+        "database-schema",
+        "generated-types",
+        "analytics-integration"
+      ],
       "read_first": [
         "ProductSpec.md",
         "FEATUREROADMAP_workplan.md",
@@ -4278,7 +4592,11 @@
       "size": "S",
       "kind": "implementation",
       "priority": 50,
-      "depends_on": ["SEC-006", "AN-002", "AI-004"],
+      "depends_on": [
+        "SEC-006",
+        "AN-002",
+        "AI-004"
+      ],
       "requires_decisions": [],
       "write_scope": [
         "src/lib/admin-metrics.functions.ts",
@@ -4288,7 +4606,10 @@
         "src/lib/admin-metrics.functions.test.ts",
         "supabase/tests/adm-001.sql"
       ],
-      "exclusive_locks": ["database-schema", "generated-types"],
+      "exclusive_locks": [
+        "database-schema",
+        "generated-types"
+      ],
       "read_first": [
         "ProductSpec.md",
         "FEATUREROADMAP_workplan.md",
@@ -4361,7 +4682,10 @@
       "size": "S",
       "kind": "implementation",
       "priority": 50,
-      "depends_on": ["ADM-001", "BR-002"],
+      "depends_on": [
+        "ADM-001",
+        "BR-002"
+      ],
       "requires_decisions": [],
       "write_scope": [
         "src/routes/_authenticated/admin.tsx",
@@ -4369,7 +4693,9 @@
         "src/tests/adm-002/**",
         "src/routes/_authenticated/admin.test.tsx"
       ],
-      "exclusive_locks": ["route-integration"],
+      "exclusive_locks": [
+        "route-integration"
+      ],
       "read_first": [
         "ProductSpec.md",
         "FEATUREROADMAP_workplan.md",
@@ -4442,7 +4768,10 @@
       "size": "S",
       "kind": "implementation",
       "priority": 50,
-      "depends_on": ["ADM-002", "AI-008"],
+      "depends_on": [
+        "ADM-002",
+        "AI-008"
+      ],
       "requires_decisions": [],
       "write_scope": [
         "src/lib/ai.functions.ts",
@@ -4461,7 +4790,10 @@
         "src/lib/ai/context.server.test.ts",
         "src/routes/_authenticated/admin.test.tsx"
       ],
-      "exclusive_locks": ["ai-entrypoint", "route-integration"],
+      "exclusive_locks": [
+        "ai-entrypoint",
+        "route-integration"
+      ],
       "read_first": [
         "ProductSpec.md",
         "FEATUREROADMAP_workplan.md",
@@ -4492,7 +4824,7 @@
         "stop_and_report": "If a required contract, test environment, human observation, budget or permission is missing, record the specific blocker. Continue another ready task; do not fabricate data or widen the write scope.",
         "handoff": "Report changed files, base/result commit, exact checks and outcomes, artifact/source ids, residual risks and the next eligible task. Only the coordinator edits task status, shared generated files and the main roadmap.",
         "integration": "Use a clean task branch/worktree from the coordinator base. Commit only this write scope. Migrations, generated types, route tree, dependency locks and shared entry points are serialized by the coordinator; never hand-edit generated output.",
-        "kind_approval": "Implement and test this kind’s authorized context adapter after its data services exist. Register schema/prompt/route and capture a capped held-out evaluation against the approved baseline, with dates, endpoint, actual cost and review. Foundation AI-008 does not automatically approve a new kind. Keep the kind disabled until its own scope, quality and budget criteria pass."
+        "kind_approval": "Implement and test this kind\u2019s authorized context adapter after its data services exist. Register schema/prompt/route and capture a capped held-out evaluation against the approved baseline, with dates, endpoint, actual cost and review. Foundation AI-008 does not automatically approve a new kind. Keep the kind disabled until its own scope, quality and budget criteria pass."
       },
       "notes": [
         {
@@ -4532,7 +4864,11 @@
       "size": "S",
       "kind": "implementation",
       "priority": 50,
-      "depends_on": ["SEC-004", "SEC-005", "WS-002"],
+      "depends_on": [
+        "SEC-004",
+        "SEC-005",
+        "WS-002"
+      ],
       "requires_decisions": [],
       "write_scope": [
         "supabase/migrations/20261018015000_class_foundations.sql",
@@ -4544,7 +4880,10 @@
         "supabase/tests/cls-001.sql",
         "docs/architecture/class-foundations.md"
       ],
-      "exclusive_locks": ["class-foundation-schema", "class-membership-contract"],
+      "exclusive_locks": [
+        "class-foundation-schema",
+        "class-membership-contract"
+      ],
       "read_first": [
         "ProductSpec.md",
         "FEATUREROADMAP_workplan.md",
@@ -4560,12 +4899,12 @@
       ],
       "acceptance": [
         "Class enrollment alone does not grant project/private-note read access.",
-        "Students cannot self-promote or attach another user’s project; teachers see only enrolled metadata allowed by contract."
+        "Students cannot self-promote or attach another user\u2019s project; teachers see only enrolled metadata allowed by contract."
       ],
       "verification_profile": "product",
       "verification": [
         "Class enrollment alone does not grant project/private-note read access.",
-        "Students cannot self-promote or attach another user’s project; teachers see only enrolled metadata allowed by contract.",
+        "Students cannot self-promote or attach another user\u2019s project; teachers see only enrolled metadata allowed by contract.",
         "Run lint (exclude generated .vercel until OPS-001), typecheck, focused tests and NITRO_PRESET=vercel build; record actual outcomes. For data/roles run real isolated RLS tests; for new AI run versioned fixtures and the budgeted per-kind evaluation."
       ],
       "metric": "Unauthorized class/project access: zero.",
@@ -4638,7 +4977,10 @@
       "size": "S",
       "kind": "implementation",
       "priority": 50,
-      "depends_on": ["CLS-001", "PRV-001"],
+      "depends_on": [
+        "CLS-001",
+        "PRV-001"
+      ],
       "requires_decisions": [],
       "write_scope": [
         "supabase/migrations/20261018021000_reviewed_class_submissions.sql",
@@ -4650,7 +4992,10 @@
         "supabase/tests/cls-002.sql",
         "docs/architecture/reviewed-submissions.md"
       ],
-      "exclusive_locks": ["database-schema", "generated-types"],
+      "exclusive_locks": [
+        "database-schema",
+        "generated-types"
+      ],
       "read_first": [
         "ProductSpec.md",
         "FEATUREROADMAP_workplan.md",
@@ -4741,7 +5086,10 @@
       "size": "S",
       "kind": "implementation",
       "priority": 50,
-      "depends_on": ["CLS-002", "AN-002"],
+      "depends_on": [
+        "CLS-002",
+        "AN-002"
+      ],
       "requires_decisions": [],
       "write_scope": [
         "src/lib/teacher.functions.ts",
@@ -4751,7 +5099,10 @@
         "src/lib/teacher.functions.test.ts",
         "supabase/tests/cls-003.sql"
       ],
-      "exclusive_locks": ["database-schema", "generated-types"],
+      "exclusive_locks": [
+        "database-schema",
+        "generated-types"
+      ],
       "read_first": [
         "ProductSpec.md",
         "FEATUREROADMAP_workplan.md",
@@ -4767,12 +5118,12 @@
       ],
       "acceptance": [
         "Teacher progress does not reveal unrelated projects, private contacts or hidden draft content.",
-        "Feedback writes are scoped to the teacher’s class/submission and remain attributable."
+        "Feedback writes are scoped to the teacher\u2019s class/submission and remain attributable."
       ],
       "verification_profile": "product",
       "verification": [
         "Teacher progress does not reveal unrelated projects, private contacts or hidden draft content.",
-        "Feedback writes are scoped to the teacher’s class/submission and remain attributable.",
+        "Feedback writes are scoped to the teacher\u2019s class/submission and remain attributable.",
         "Run lint (exclude generated .vercel until OPS-001), typecheck, focused tests and NITRO_PRESET=vercel build; record actual outcomes. For data/roles run real isolated RLS tests; for new AI run versioned fixtures and the budgeted per-kind evaluation."
       ],
       "metric": "Cross-class leakage and unauthorized feedback: zero.",
@@ -4831,7 +5182,10 @@
       "size": "S",
       "kind": "implementation",
       "priority": 50,
-      "depends_on": ["CLS-003", "BR-002"],
+      "depends_on": [
+        "CLS-003",
+        "BR-002"
+      ],
       "requires_decisions": [],
       "write_scope": [
         "src/routes/_authenticated/teacher.tsx",
@@ -4839,7 +5193,9 @@
         "src/tests/cls-004/**",
         "src/routes/_authenticated/teacher.test.tsx"
       ],
-      "exclusive_locks": ["route-integration"],
+      "exclusive_locks": [
+        "route-integration"
+      ],
       "read_first": [
         "ProductSpec.md",
         "FEATUREROADMAP_workplan.md",
@@ -4912,7 +5268,10 @@
       "size": "S",
       "kind": "implementation",
       "priority": 50,
-      "depends_on": ["CLS-002", "WS-003"],
+      "depends_on": [
+        "CLS-002",
+        "WS-003"
+      ],
       "requires_decisions": [],
       "write_scope": [
         "src/routes/_authenticated/classes.tsx",
@@ -4920,7 +5279,9 @@
         "src/tests/cls-005/**",
         "src/routes/_authenticated/classes.test.tsx"
       ],
-      "exclusive_locks": ["route-integration"],
+      "exclusive_locks": [
+        "route-integration"
+      ],
       "read_first": [
         "ProductSpec.md",
         "FEATUREROADMAP_workplan.md",
@@ -4989,7 +5350,12 @@
       "size": "S",
       "kind": "implementation",
       "priority": 50,
-      "depends_on": ["CLS-004", "CLS-005", "EDU-001", "AI-008"],
+      "depends_on": [
+        "CLS-004",
+        "CLS-005",
+        "EDU-001",
+        "AI-008"
+      ],
       "requires_decisions": [],
       "write_scope": [
         "src/lib/ai.functions.ts",
@@ -5008,7 +5374,10 @@
         "src/lib/ai/context.server.test.ts",
         "src/routes/_authenticated/teacher.test.tsx"
       ],
-      "exclusive_locks": ["ai-entrypoint", "route-integration"],
+      "exclusive_locks": [
+        "ai-entrypoint",
+        "route-integration"
+      ],
       "read_first": [
         "ProductSpec.md",
         "FEATUREROADMAP_workplan.md",
@@ -5040,7 +5409,7 @@
         "stop_and_report": "If a required contract, test environment, human observation, budget or permission is missing, record the specific blocker. Continue another ready task; do not fabricate data or widen the write scope.",
         "handoff": "Report changed files, base/result commit, exact checks and outcomes, artifact/source ids, residual risks and the next eligible task. Only the coordinator edits task status, shared generated files and the main roadmap.",
         "integration": "Use a clean task branch/worktree from the coordinator base. Commit only this write scope. Migrations, generated types, route tree, dependency locks and shared entry points are serialized by the coordinator; never hand-edit generated output.",
-        "kind_approval": "Implement and test this kind’s authorized context adapter after its data services exist. Register schema/prompt/route and capture a capped held-out evaluation against the approved baseline, with dates, endpoint, actual cost and review. Foundation AI-008 does not automatically approve a new kind. Keep the kind disabled until its own scope, quality and budget criteria pass."
+        "kind_approval": "Implement and test this kind\u2019s authorized context adapter after its data services exist. Register schema/prompt/route and capture a capped held-out evaluation against the approved baseline, with dates, endpoint, actual cost and review. Foundation AI-008 does not automatically approve a new kind. Keep the kind disabled until its own scope, quality and budget criteria pass."
       },
       "notes": [
         {
@@ -5080,7 +5449,10 @@
       "size": "S",
       "kind": "implementation",
       "priority": 50,
-      "depends_on": ["AI-002", "WS-002"],
+      "depends_on": [
+        "AI-002",
+        "WS-002"
+      ],
       "requires_decisions": [],
       "write_scope": [
         "supabase/migrations/**",
@@ -5095,7 +5467,11 @@
         "src/routes/_authenticated/outreach.test.tsx",
         "supabase/tests/ev-001.sql"
       ],
-      "exclusive_locks": ["database-schema", "generated-types", "project-data-layer"],
+      "exclusive_locks": [
+        "database-schema",
+        "generated-types",
+        "project-data-layer"
+      ],
       "read_first": [
         "ProductSpec.md",
         "FEATUREROADMAP_workplan.md",
@@ -5165,7 +5541,11 @@
       "size": "S",
       "kind": "implementation",
       "priority": 50,
-      "depends_on": ["WS-002", "AI-007", "EV-001"],
+      "depends_on": [
+        "WS-002",
+        "AI-007",
+        "EV-001"
+      ],
       "requires_decisions": [],
       "write_scope": [
         "supabase/migrations/**",
@@ -5175,7 +5555,10 @@
         "src/lib/decisions.functions.test.ts",
         "supabase/tests/ev-002.sql"
       ],
-      "exclusive_locks": ["database-schema", "generated-types"],
+      "exclusive_locks": [
+        "database-schema",
+        "generated-types"
+      ],
       "read_first": [
         "ProductSpec.md",
         "FEATUREROADMAP_workplan.md",
@@ -5245,7 +5628,11 @@
       "size": "S",
       "kind": "implementation",
       "priority": 50,
-      "depends_on": ["EV-002", "EV-001", "BR-002"],
+      "depends_on": [
+        "EV-002",
+        "EV-001",
+        "BR-002"
+      ],
       "requires_decisions": [],
       "write_scope": [
         "src/routes/_authenticated/decisions.tsx",
@@ -5255,7 +5642,9 @@
         "src/routes/_authenticated/decisions.test.tsx",
         "src/routes/_authenticated/experiments.test.tsx"
       ],
-      "exclusive_locks": ["route-integration"],
+      "exclusive_locks": [
+        "route-integration"
+      ],
       "read_first": [
         "ProductSpec.md",
         "FEATUREROADMAP_workplan.md",
@@ -5325,7 +5714,9 @@
       "size": "S",
       "kind": "implementation",
       "priority": 50,
-      "depends_on": ["EV-002"],
+      "depends_on": [
+        "EV-002"
+      ],
       "requires_decisions": [],
       "write_scope": [
         "supabase/migrations/**",
@@ -5338,7 +5729,11 @@
         "src/routes/_authenticated/decisions.test.tsx",
         "supabase/tests/ev-004.sql"
       ],
-      "exclusive_locks": ["database-schema", "generated-types", "route-integration"],
+      "exclusive_locks": [
+        "database-schema",
+        "generated-types",
+        "route-integration"
+      ],
       "read_first": [
         "ProductSpec.md",
         "FEATUREROADMAP_workplan.md",
@@ -5408,7 +5803,10 @@
       "size": "S",
       "kind": "implementation",
       "priority": 50,
-      "depends_on": ["EV-003", "AI-008"],
+      "depends_on": [
+        "EV-003",
+        "AI-008"
+      ],
       "requires_decisions": [],
       "write_scope": [
         "src/lib/ai.functions.ts",
@@ -5425,7 +5823,9 @@
         "src/lib/ai/model-policy.test.ts",
         "src/lib/ai/context.server.test.ts"
       ],
-      "exclusive_locks": ["ai-entrypoint"],
+      "exclusive_locks": [
+        "ai-entrypoint"
+      ],
       "read_first": [
         "ProductSpec.md",
         "FEATUREROADMAP_workplan.md",
@@ -5456,7 +5856,7 @@
         "stop_and_report": "If a required contract, test environment, human observation, budget or permission is missing, record the specific blocker. Continue another ready task; do not fabricate data or widen the write scope.",
         "handoff": "Report changed files, base/result commit, exact checks and outcomes, artifact/source ids, residual risks and the next eligible task. Only the coordinator edits task status, shared generated files and the main roadmap.",
         "integration": "Use a clean task branch/worktree from the coordinator base. Commit only this write scope. Migrations, generated types, route tree, dependency locks and shared entry points are serialized by the coordinator; never hand-edit generated output.",
-        "kind_approval": "Implement and test this kind’s authorized context adapter after its data services exist. Register schema/prompt/route and capture a capped held-out evaluation against the approved baseline, with dates, endpoint, actual cost and review. Foundation AI-008 does not automatically approve a new kind. Keep the kind disabled until its own scope, quality and budget criteria pass."
+        "kind_approval": "Implement and test this kind\u2019s authorized context adapter after its data services exist. Register schema/prompt/route and capture a capped held-out evaluation against the approved baseline, with dates, endpoint, actual cost and review. Foundation AI-008 does not automatically approve a new kind. Keep the kind disabled until its own scope, quality and budget criteria pass."
       },
       "notes": [
         {
@@ -5496,7 +5896,10 @@
       "size": "S",
       "kind": "implementation",
       "priority": 50,
-      "depends_on": ["WS-007", "AI-008"],
+      "depends_on": [
+        "WS-007",
+        "AI-008"
+      ],
       "requires_decisions": [],
       "write_scope": [
         "src/lib/question-coach.ts",
@@ -5517,7 +5920,10 @@
         "src/lib/ai/context.server.test.ts",
         "src/routes/_authenticated/interview.test.tsx"
       ],
-      "exclusive_locks": ["ai-entrypoint", "interview-flow"],
+      "exclusive_locks": [
+        "ai-entrypoint",
+        "interview-flow"
+      ],
       "read_first": [
         "ProductSpec.md",
         "FEATUREROADMAP_workplan.md",
@@ -5548,7 +5954,7 @@
         "stop_and_report": "If a required contract, test environment, human observation, budget or permission is missing, record the specific blocker. Continue another ready task; do not fabricate data or widen the write scope.",
         "handoff": "Report changed files, base/result commit, exact checks and outcomes, artifact/source ids, residual risks and the next eligible task. Only the coordinator edits task status, shared generated files and the main roadmap.",
         "integration": "Use a clean task branch/worktree from the coordinator base. Commit only this write scope. Migrations, generated types, route tree, dependency locks and shared entry points are serialized by the coordinator; never hand-edit generated output.",
-        "kind_approval": "Implement and test this kind’s authorized context adapter after its data services exist. Register schema/prompt/route and capture a capped held-out evaluation against the approved baseline, with dates, endpoint, actual cost and review. Foundation AI-008 does not automatically approve a new kind. Keep the kind disabled until its own scope, quality and budget criteria pass."
+        "kind_approval": "Implement and test this kind\u2019s authorized context adapter after its data services exist. Register schema/prompt/route and capture a capped held-out evaluation against the approved baseline, with dates, endpoint, actual cost and review. Foundation AI-008 does not automatically approve a new kind. Keep the kind disabled until its own scope, quality and budget criteria pass."
       },
       "notes": [
         {
@@ -5588,7 +5994,11 @@
       "size": "S",
       "kind": "implementation",
       "priority": 50,
-      "depends_on": ["EV-001", "AI-008", "WEB-005"],
+      "depends_on": [
+        "EV-001",
+        "AI-008",
+        "WEB-005"
+      ],
       "requires_decisions": [],
       "write_scope": [
         "src/components/outreach/FirstAsk.tsx",
@@ -5609,7 +6019,10 @@
         "src/routes/_authenticated/outreach.test.tsx",
         "src/routes/_authenticated/dashboard.test.tsx"
       ],
-      "exclusive_locks": ["ai-entrypoint", "route-integration"],
+      "exclusive_locks": [
+        "ai-entrypoint",
+        "route-integration"
+      ],
       "read_first": [
         "ProductSpec.md",
         "FEATUREROADMAP_workplan.md",
@@ -5640,7 +6053,7 @@
         "stop_and_report": "If a required contract, test environment, human observation, budget or permission is missing, record the specific blocker. Continue another ready task; do not fabricate data or widen the write scope.",
         "handoff": "Report changed files, base/result commit, exact checks and outcomes, artifact/source ids, residual risks and the next eligible task. Only the coordinator edits task status, shared generated files and the main roadmap.",
         "integration": "Use a clean task branch/worktree from the coordinator base. Commit only this write scope. Migrations, generated types, route tree, dependency locks and shared entry points are serialized by the coordinator; never hand-edit generated output.",
-        "kind_approval": "Implement and test this kind’s authorized context adapter after its data services exist. Register schema/prompt/route and capture a capped held-out evaluation against the approved baseline, with dates, endpoint, actual cost and review. Foundation AI-008 does not automatically approve a new kind. Keep the kind disabled until its own scope, quality and budget criteria pass."
+        "kind_approval": "Implement and test this kind\u2019s authorized context adapter after its data services exist. Register schema/prompt/route and capture a capped held-out evaluation against the approved baseline, with dates, endpoint, actual cost and review. Foundation AI-008 does not automatically approve a new kind. Keep the kind disabled until its own scope, quality and budget criteria pass."
       },
       "notes": [
         {
@@ -5680,7 +6093,10 @@
       "size": "S",
       "kind": "implementation",
       "priority": 50,
-      "depends_on": ["CLS-002", "EV-003"],
+      "depends_on": [
+        "CLS-002",
+        "EV-003"
+      ],
       "requires_decisions": [],
       "write_scope": [
         "supabase/migrations/**",
@@ -5691,7 +6107,10 @@
         "src/components/sharing/PackPreview.test.tsx",
         "supabase/tests/shr-001.sql"
       ],
-      "exclusive_locks": ["database-schema", "generated-types"],
+      "exclusive_locks": [
+        "database-schema",
+        "generated-types"
+      ],
       "read_first": [
         "ProductSpec.md",
         "FEATUREROADMAP_workplan.md",
@@ -5760,7 +6179,10 @@
       "size": "S",
       "kind": "implementation",
       "priority": 50,
-      "depends_on": ["SHR-001", "SEC-005"],
+      "depends_on": [
+        "SHR-001",
+        "SEC-005"
+      ],
       "requires_decisions": [],
       "write_scope": [
         "supabase/migrations/**",
@@ -5772,7 +6194,11 @@
         "src/routes/share.$token.test.tsx",
         "supabase/tests/shr-002.sql"
       ],
-      "exclusive_locks": ["database-schema", "generated-types", "route-integration"],
+      "exclusive_locks": [
+        "database-schema",
+        "generated-types",
+        "route-integration"
+      ],
       "read_first": [
         "ProductSpec.md",
         "FEATUREROADMAP_workplan.md",
@@ -5841,7 +6267,11 @@
       "size": "S",
       "kind": "implementation",
       "priority": 50,
-      "depends_on": ["SEC-004", "WS-007", "EV-002"],
+      "depends_on": [
+        "SEC-004",
+        "WS-007",
+        "EV-002"
+      ],
       "requires_decisions": [],
       "write_scope": [
         "supabase/migrations/**",
@@ -5852,7 +6282,10 @@
         "src/lib/design-space.functions.test.ts",
         "supabase/tests/col-001.sql"
       ],
-      "exclusive_locks": ["database-schema", "generated-types"],
+      "exclusive_locks": [
+        "database-schema",
+        "generated-types"
+      ],
       "read_first": [
         "ProductSpec.md",
         "FEATUREROADMAP_workplan.md",
@@ -5921,7 +6354,10 @@
       "size": "S",
       "kind": "implementation",
       "priority": 50,
-      "depends_on": ["COL-001", "BR-002"],
+      "depends_on": [
+        "COL-001",
+        "BR-002"
+      ],
       "requires_decisions": [],
       "write_scope": [
         "src/routes/_authenticated/design.tsx",
@@ -5931,7 +6367,10 @@
         "src/routes/_authenticated/design.test.tsx",
         "src/lib/useDesignDocument.test.ts"
       ],
-      "exclusive_locks": ["route-integration", "design-editor"],
+      "exclusive_locks": [
+        "route-integration",
+        "design-editor"
+      ],
       "read_first": [
         "ProductSpec.md",
         "FEATUREROADMAP_workplan.md",
@@ -6000,7 +6439,9 @@
       "size": "S",
       "kind": "implementation",
       "priority": 50,
-      "depends_on": ["COL-002"],
+      "depends_on": [
+        "COL-002"
+      ],
       "requires_decisions": [],
       "write_scope": [
         "supabase/migrations/**",
@@ -6013,7 +6454,11 @@
         "src/components/design/History.test.tsx",
         "supabase/tests/col-003.sql"
       ],
-      "exclusive_locks": ["database-schema", "generated-types", "design-editor"],
+      "exclusive_locks": [
+        "database-schema",
+        "generated-types",
+        "design-editor"
+      ],
       "read_first": [
         "ProductSpec.md",
         "FEATUREROADMAP_workplan.md",
@@ -6082,7 +6527,10 @@
       "size": "S",
       "kind": "implementation",
       "priority": 50,
-      "depends_on": ["COL-002", "AI-008"],
+      "depends_on": [
+        "COL-002",
+        "AI-008"
+      ],
       "requires_decisions": [],
       "write_scope": [
         "src/lib/ai.functions.ts",
@@ -6101,7 +6549,10 @@
         "src/lib/ai/context.server.test.ts",
         "src/routes/_authenticated/design.test.tsx"
       ],
-      "exclusive_locks": ["ai-entrypoint", "design-editor"],
+      "exclusive_locks": [
+        "ai-entrypoint",
+        "design-editor"
+      ],
       "read_first": [
         "ProductSpec.md",
         "FEATUREROADMAP_workplan.md",
@@ -6117,12 +6568,12 @@
         "Apply only a user-selected suggestion against its expected revision; detect intervening edits."
       ],
       "acceptance": [
-        "AI cannot pull a member’s private interviews into the shared space.",
+        "AI cannot pull a member\u2019s private interviews into the shared space.",
         "Late AI responses never overwrite newer collaborative edits; all calls obey budget and schema policies."
       ],
       "verification_profile": "product",
       "verification": [
-        "AI cannot pull a member’s private interviews into the shared space.",
+        "AI cannot pull a member\u2019s private interviews into the shared space.",
         "Late AI responses never overwrite newer collaborative edits; all calls obey budget and schema policies.",
         "Run lint (exclude generated .vercel until OPS-001), typecheck, focused tests and NITRO_PRESET=vercel build; record actual outcomes. For data/roles run real isolated RLS tests; for new AI run versioned fixtures and the budgeted per-kind evaluation."
       ],
@@ -6133,7 +6584,7 @@
         "stop_and_report": "If a required contract, test environment, human observation, budget or permission is missing, record the specific blocker. Continue another ready task; do not fabricate data or widen the write scope.",
         "handoff": "Report changed files, base/result commit, exact checks and outcomes, artifact/source ids, residual risks and the next eligible task. Only the coordinator edits task status, shared generated files and the main roadmap.",
         "integration": "Use a clean task branch/worktree from the coordinator base. Commit only this write scope. Migrations, generated types, route tree, dependency locks and shared entry points are serialized by the coordinator; never hand-edit generated output.",
-        "kind_approval": "Implement and test this kind’s authorized context adapter after its data services exist. Register schema/prompt/route and capture a capped held-out evaluation against the approved baseline, with dates, endpoint, actual cost and review. Foundation AI-008 does not automatically approve a new kind. Keep the kind disabled until its own scope, quality and budget criteria pass."
+        "kind_approval": "Implement and test this kind\u2019s authorized context adapter after its data services exist. Register schema/prompt/route and capture a capped held-out evaluation against the approved baseline, with dates, endpoint, actual cost and review. Foundation AI-008 does not automatically approve a new kind. Keep the kind disabled until its own scope, quality and budget criteria pass."
       },
       "notes": [
         {
@@ -6173,11 +6624,23 @@
       "size": "S",
       "kind": "research",
       "priority": 50,
-      "depends_on": ["COL-002", "OPS-003"],
+      "depends_on": [
+        "COL-002",
+        "OPS-003"
+      ],
       "requires_decisions": [],
-      "write_scope": ["docs/architecture/realtime-decision.md", "prototypes/realtime/**"],
-      "exclusive_locks": ["realtime-spike"],
-      "read_first": ["ProductSpec.md", "FEATUREROADMAP_workplan.md", "docs/company-values.md"],
+      "write_scope": [
+        "docs/architecture/realtime-decision.md",
+        "prototypes/realtime/**"
+      ],
+      "exclusive_locks": [
+        "realtime-spike"
+      ],
+      "read_first": [
+        "ProductSpec.md",
+        "FEATUREROADMAP_workplan.md",
+        "docs/company-values.md"
+      ],
       "goal": "Choose realtime only after demonstrating durable convergence, authorization and affordable operation.",
       "steps": [
         "Compare a CRDT/OT approach and current supported transport/storage options using primary technical sources and current limits/prices.",
@@ -6239,8 +6702,13 @@
       "size": "S",
       "kind": "implementation",
       "priority": 50,
-      "depends_on": ["RT-001", "COL-003"],
-      "requires_decisions": ["realtime_go"],
+      "depends_on": [
+        "RT-001",
+        "COL-003"
+      ],
+      "requires_decisions": [
+        "realtime_go"
+      ],
       "write_scope": [
         "supabase/migrations/**",
         "src/lib/realtime/**",
@@ -6250,8 +6718,16 @@
         "src/lib/design-space.functions.test.ts",
         "supabase/tests/rt-002.sql"
       ],
-      "exclusive_locks": ["database-schema", "generated-types", "design-editor"],
-      "read_first": ["ProductSpec.md", "FEATUREROADMAP_workplan.md", "docs/company-values.md"],
+      "exclusive_locks": [
+        "database-schema",
+        "generated-types",
+        "design-editor"
+      ],
+      "read_first": [
+        "ProductSpec.md",
+        "FEATUREROADMAP_workplan.md",
+        "docs/company-values.md"
+      ],
       "goal": "Synchronize shared design content using the approved conflict-resolution contract.",
       "steps": [
         "Implement authenticated document-scoped subscriptions and durable validated operations/snapshots.",
@@ -6314,16 +6790,26 @@
       "size": "S",
       "kind": "gate",
       "priority": 50,
-      "depends_on": ["RT-002"],
-      "requires_decisions": ["realtime_go"],
+      "depends_on": [
+        "RT-002"
+      ],
+      "requires_decisions": [
+        "realtime_go"
+      ],
       "write_scope": [
         "src/components/design/**",
         "src/tests/realtime/**",
         "docs/qa/realtime-gate.md",
         "src/tests/rt-003/**"
       ],
-      "exclusive_locks": ["design-editor"],
-      "read_first": ["ProductSpec.md", "FEATUREROADMAP_workplan.md", "docs/company-values.md"],
+      "exclusive_locks": [
+        "design-editor"
+      ],
+      "read_first": [
+        "ProductSpec.md",
+        "FEATUREROADMAP_workplan.md",
+        "docs/company-values.md"
+      ],
       "goal": "Make live co-editing understandable and safe under real multi-client failure modes.",
       "steps": [
         "Show presence/cursors separately from durable saved state and connection status.",
@@ -6484,7 +6970,15 @@
       "size": "S",
       "kind": "gate",
       "priority": 50,
-      "depends_on": ["WEB-005", "WS-007", "CLS-004", "ADM-002", "EV-003", "COL-002", "REL-001"],
+      "depends_on": [
+        "WEB-005",
+        "WS-007",
+        "CLS-004",
+        "ADM-002",
+        "EV-003",
+        "COL-002",
+        "REL-001"
+      ],
       "requires_decisions": [],
       "write_scope": [
         "docs/qa/experience-release-gate.md",
@@ -6560,9 +7054,16 @@
       "size": "S",
       "kind": "gate",
       "priority": 50,
-      "depends_on": ["REL-001", "OPS-003", "F-009b"],
+      "depends_on": [
+        "REL-001",
+        "OPS-003",
+        "F-009b"
+      ],
       "requires_decisions": [],
-      "write_scope": ["docs/operations/staging-rehearsal.md", "src/tests/rel-003/**"],
+      "write_scope": [
+        "docs/operations/staging-rehearsal.md",
+        "src/tests/rel-003/**"
+      ],
       "exclusive_locks": [],
       "read_first": [
         "ProductSpec.md",
@@ -6632,9 +7133,17 @@
       "size": "S",
       "kind": "research",
       "priority": 50,
-      "depends_on": ["CLS-006", "EDU-002", "REL-001", "EDU-004"],
+      "depends_on": [
+        "CLS-006",
+        "EDU-002",
+        "REL-001",
+        "EDU-004"
+      ],
       "requires_decisions": [],
-      "write_scope": ["research/teaching-pilot/**", "docs/teaching/revisions.md"],
+      "write_scope": [
+        "research/teaching-pilot/**",
+        "docs/teaching/revisions.md"
+      ],
       "exclusive_locks": [],
       "read_first": [
         "ProductSpec.md",
@@ -6731,7 +7240,9 @@
         "AGENTS.md",
         "src/tests/rel-004/**"
       ],
-      "exclusive_locks": ["delivery-config"],
+      "exclusive_locks": [
+        "delivery-config"
+      ],
       "read_first": [
         "ProductSpec.md",
         "FEATUREROADMAP_workplan.md",
@@ -6800,11 +7311,20 @@
       "size": "S",
       "kind": "research",
       "priority": 50,
-      "depends_on": ["REL-004", "AN-002", "AI-008"],
+      "depends_on": [
+        "REL-004",
+        "AN-002",
+        "AI-008"
+      ],
       "requires_decisions": [],
-      "write_scope": ["research/usage-review.md"],
+      "write_scope": [
+        "research/usage-review.md"
+      ],
       "exclusive_locks": [],
-      "read_first": ["ProductSpec.md", "FEATUREROADMAP_workplan.md"],
+      "read_first": [
+        "ProductSpec.md",
+        "FEATUREROADMAP_workplan.md"
+      ],
       "goal": "Use measured operation to improve model policy and budgets.",
       "steps": [
         "Observe a documented initial window, target two weeks; record actual active users/calls and missing data.",
@@ -6866,11 +7386,21 @@
       "size": "S",
       "kind": "research",
       "priority": 50,
-      "depends_on": ["REL-004", "EV-005", "EV-006", "EV-007"],
+      "depends_on": [
+        "REL-004",
+        "EV-005",
+        "EV-006",
+        "EV-007"
+      ],
       "requires_decisions": [],
-      "write_scope": ["research/feature-use-review.md"],
+      "write_scope": [
+        "research/feature-use-review.md"
+      ],
       "exclusive_locks": [],
-      "read_first": ["ProductSpec.md", "FEATUREROADMAP_workplan.md"],
+      "read_first": [
+        "ProductSpec.md",
+        "FEATUREROADMAP_workplan.md"
+      ],
       "goal": "Assess usefulness and friction of decision, coaching and first-ask tools.",
       "steps": [
         "Observe participants using enabled tools with consent and record which features were actually available.",
@@ -6932,9 +7462,16 @@
       "size": "S",
       "kind": "research",
       "priority": 50,
-      "depends_on": ["L-001", "L-002", "EDU-003", "G-004"],
+      "depends_on": [
+        "L-001",
+        "L-002",
+        "EDU-003",
+        "G-004"
+      ],
       "requires_decisions": [],
-      "write_scope": ["research/release-learning-review.md"],
+      "write_scope": [
+        "research/release-learning-review.md"
+      ],
       "exclusive_locks": [],
       "read_first": [
         "ProductSpec.md",
@@ -6946,7 +7483,7 @@
       "steps": [
         "Compare research, teaching and usage findings against the candidate promise and values.",
         "Record unresolved risks and keep/change/remove choices; classify research completion separately from capability release.",
-        "Run the regeneration protocol for a focused 6–12-task follow-up without deleting outstanding obligations or history."
+        "Run the regeneration protocol for a focused 6\u201312-task follow-up without deleting outstanding obligations or history."
       ],
       "acceptance": [
         "Every conclusion links evidence or is labeled unknown; no automated completion based on elapsed time.",
@@ -6989,7 +7526,7 @@
         {
           "id": "REL-005.s3",
           "status": "not_started",
-          "instruction": "Run the regeneration protocol for a focused 6–12-task follow-up without deleting outstanding obligations or history.",
+          "instruction": "Run the regeneration protocol for a focused 6\u201312-task follow-up without deleting outstanding obligations or history.",
           "notes": []
         }
       ]
@@ -7003,9 +7540,15 @@
       "size": "S",
       "kind": "research",
       "priority": 3,
-      "depends_on": ["VP-001", "DOC-001"],
+      "depends_on": [
+        "VP-001",
+        "DOC-001"
+      ],
       "requires_decisions": [],
-      "write_scope": ["research/value-prop.md", "research/claim-ledger.md"],
+      "write_scope": [
+        "research/value-prop.md",
+        "research/claim-ledger.md"
+      ],
       "exclusive_locks": [],
       "read_first": [
         "ProductSpec.md",
@@ -7017,7 +7560,7 @@
       "goal": "Distinguish shipped capability, candidate value and unsupported competitive claims before reusing them publicly.",
       "steps": [
         "Read the current spec, landing copy, values and existing canvas; map every consequential claim to a source and current/planned/unknown status.",
-        "Inspect participants’ known alternatives without assuming First Ten wins; verify retained competitor capability or pricing claims against dated primary sources, or remove/mark them unverified.",
+        "Inspect participants\u2019 known alternatives without assuming First Ten wins; verify retained competitor capability or pricing claims against dated primary sources, or remove/mark them unverified.",
         "Revise the canvas and claim ledger around founder decision value, reviewer needs and an unresolved buying path; hand open questions to VP-008 and public-copy owners."
       ],
       "acceptance": [
@@ -7052,7 +7595,9 @@
         }
       ],
       "claim": null,
-      "completion_evidence": ["d507846bc2f0a8bc08489f7fbc962958ebde5854"],
+      "completion_evidence": [
+        "d507846bc2f0a8bc08489f7fbc962958ebde5854"
+      ],
       "subtasks": [
         {
           "id": "VP-007.s1",
@@ -7063,7 +7608,7 @@
         {
           "id": "VP-007.s2",
           "status": "complete",
-          "instruction": "Inspect participants’ known alternatives without assuming First Ten wins; verify retained competitor capability or pricing claims against dated primary sources, or remove/mark them unverified.",
+          "instruction": "Inspect participants\u2019 known alternatives without assuming First Ten wins; verify retained competitor capability or pricing claims against dated primary sources, or remove/mark them unverified.",
           "notes": []
         },
         {
@@ -7083,7 +7628,10 @@
       "size": "S",
       "kind": "research",
       "priority": 20,
-      "depends_on": ["VP-007", "VP-002"],
+      "depends_on": [
+        "VP-007",
+        "VP-002"
+      ],
       "requires_decisions": [],
       "write_scope": [
         "research/value-test-plan.md",
@@ -7092,7 +7640,9 @@
         "research/interviews/README.md",
         "research/recruitment-materials.md"
       ],
-      "exclusive_locks": ["research-protocol"],
+      "exclusive_locks": [
+        "research-protocol"
+      ],
       "read_first": [
         "ProductSpec.md",
         "FEATUREROADMAP_workplan.md",
@@ -7173,9 +7723,14 @@
       "size": "M",
       "kind": "research",
       "priority": 50,
-      "depends_on": ["VP-008"],
+      "depends_on": [
+        "VP-008"
+      ],
       "requires_decisions": [],
-      "write_scope": ["research/interviews/*-founder-*.md", "research/founder-sample.md"],
+      "write_scope": [
+        "research/interviews/*-founder-*.md",
+        "research/founder-sample.md"
+      ],
       "exclusive_locks": [],
       "read_first": [
         "ProductSpec.md",
@@ -7244,9 +7799,14 @@
       "size": "M",
       "kind": "research",
       "priority": 50,
-      "depends_on": ["R0-004a"],
+      "depends_on": [
+        "R0-004a"
+      ],
       "requires_decisions": [],
-      "write_scope": ["research/interviews/*-founder-*.md", "research/founder-sample.md"],
+      "write_scope": [
+        "research/interviews/*-founder-*.md",
+        "research/founder-sample.md"
+      ],
       "exclusive_locks": [],
       "read_first": [
         "ProductSpec.md",
@@ -7315,9 +7875,14 @@
       "size": "M",
       "kind": "research",
       "priority": 50,
-      "depends_on": ["VP-008"],
+      "depends_on": [
+        "VP-008"
+      ],
       "requires_decisions": [],
-      "write_scope": ["research/interviews/*-instructor-*.md", "research/instructor-sample.md"],
+      "write_scope": [
+        "research/interviews/*-instructor-*.md",
+        "research/instructor-sample.md"
+      ],
       "exclusive_locks": [],
       "read_first": [
         "ProductSpec.md",
@@ -7386,9 +7951,15 @@
       "size": "S",
       "kind": "research",
       "priority": 50,
-      "depends_on": ["R0-004b", "VP-007"],
+      "depends_on": [
+        "R0-004b",
+        "VP-007"
+      ],
       "requires_decisions": [],
-      "write_scope": ["research/message-test.md", "research/message-test-materials.md"],
+      "write_scope": [
+        "research/message-test.md",
+        "research/message-test-materials.md"
+      ],
       "exclusive_locks": [],
       "read_first": [
         "ProductSpec.md",
@@ -7403,12 +7974,12 @@
         "Record an actual next step accepted/completed/declined and reused-participant context; test any reviewer message separately when instructor participants are available."
       ],
       "acceptance": [
-        "Founder comparisons preserve participants’ own meaning and expectations, with order, source ids, sample overlap and missing follow-through disclosed.",
+        "Founder comparisons preserve participants\u2019 own meaning and expectations, with order, source ids, sample overlap and missing follow-through disclosed.",
         "No preference vote or small-sample behavior is described as causal conversion uplift; unavailable instructor responses do not prevent the founder result being recorded."
       ],
       "verification_profile": "research",
       "verification": [
-        "Founder comparisons preserve participants’ own meaning and expectations, with order, source ids, sample overlap and missing follow-through disclosed.",
+        "Founder comparisons preserve participants\u2019 own meaning and expectations, with order, source ids, sample overlap and missing follow-through disclosed.",
         "No preference vote or small-sample behavior is described as causal conversion uplift; unavailable instructor responses do not prevent the founder result being recorded."
       ],
       "metric": "Correctly understood audience/outcome/limits and completed next steps, reported as n/N with context rather than statistical winners.",
@@ -7457,9 +8028,15 @@
       "size": "S",
       "kind": "research",
       "priority": 50,
-      "depends_on": ["R0-004b", "VP-003"],
+      "depends_on": [
+        "R0-004b",
+        "VP-003"
+      ],
       "requires_decisions": [],
-      "write_scope": ["research/decision-record-template.md", "research/decision-record-review.md"],
+      "write_scope": [
+        "research/decision-record-template.md",
+        "research/decision-record-review.md"
+      ],
       "exclusive_locks": [],
       "read_first": [
         "ProductSpec.md",
@@ -7531,7 +8108,9 @@
       "size": "M",
       "kind": "research",
       "priority": 50,
-      "depends_on": ["VP-009"],
+      "depends_on": [
+        "VP-009"
+      ],
       "requires_decisions": [],
       "write_scope": [
         "research/pilot-plan.md",
@@ -7608,14 +8187,22 @@
       "size": "S",
       "kind": "research",
       "priority": 50,
-      "depends_on": ["R0-004b", "VP-003", "VP-004a", "VP-009", "VP-010"],
+      "depends_on": [
+        "R0-004b",
+        "VP-003",
+        "VP-004a",
+        "VP-009",
+        "VP-010"
+      ],
       "requires_decisions": [],
       "write_scope": [
         "research/synthesis.md",
         "research/interviews/README.md",
         "research/opportunity-ranking.md"
       ],
-      "exclusive_locks": ["research-synthesis"],
+      "exclusive_locks": [
+        "research-synthesis"
+      ],
       "read_first": [
         "ProductSpec.md",
         "FEATUREROADMAP_workplan.md",
@@ -7685,9 +8272,13 @@
       "size": "S",
       "kind": "research",
       "priority": 50,
-      "depends_on": ["R0-005"],
+      "depends_on": [
+        "R0-005"
+      ],
       "requires_decisions": [],
-      "write_scope": ["research/positioning-decision.md"],
+      "write_scope": [
+        "research/positioning-decision.md"
+      ],
       "exclusive_locks": [],
       "read_first": [
         "ProductSpec.md",
@@ -7703,12 +8294,12 @@
       ],
       "acceptance": [
         "Every substantive positioning/adoption claim has evidence or is marked a hypothesis; no automatic declaration that pricing or company-market fit is decided.",
-        "Decision distinguishes research confidence from the user’s authorization to implement and identifies which public statements may change in VP-006b."
+        "Decision distinguishes research confidence from the user\u2019s authorization to implement and identifies which public statements may change in VP-006b."
       ],
       "verification_profile": "research",
       "verification": [
         "Every substantive positioning/adoption claim has evidence or is marked a hypothesis; no automatic declaration that pricing or company-market fit is decided.",
-        "Decision distinguishes research confidence from the user’s authorization to implement and identifies which public statements may change in VP-006b."
+        "Decision distinguishes research confidence from the user\u2019s authorization to implement and identifies which public statements may change in VP-006b."
       ],
       "metric": "Unsupported decision claims and explicitly unresolved assumptions; next test or investment has a concrete reason.",
       "rollback": "Reopen or narrow the decision on contradictory evidence; retain prior decisions and avoid silently rewriting the public promise.",
@@ -7756,9 +8347,13 @@
       "size": "S",
       "kind": "research",
       "priority": 50,
-      "depends_on": ["VP-006a"],
+      "depends_on": [
+        "VP-006a"
+      ],
       "requires_decisions": [],
-      "write_scope": ["research/research-gate-review.md"],
+      "write_scope": [
+        "research/research-gate-review.md"
+      ],
       "exclusive_locks": [],
       "read_first": [
         "ProductSpec.md",
@@ -7827,7 +8422,11 @@
       "size": "S",
       "kind": "implementation",
       "priority": 50,
-      "depends_on": ["G-004", "WEB-004", "EDU-002"],
+      "depends_on": [
+        "G-004",
+        "WEB-004",
+        "EDU-002"
+      ],
       "requires_decisions": [],
       "write_scope": [
         "src/routes/index.tsx",
@@ -7843,7 +8442,12 @@
         "src/routes/auth.test.tsx",
         "src/routes/_authenticated/setup.test.tsx"
       ],
-      "exclusive_locks": ["public-copy", "readme", "product-spec", "route-integration"],
+      "exclusive_locks": [
+        "public-copy",
+        "readme",
+        "product-spec",
+        "route-integration"
+      ],
       "read_first": [
         "ProductSpec.md",
         "FEATUREROADMAP_workplan.md",
@@ -7912,7 +8516,9 @@
       "size": "M",
       "kind": "implementation",
       "priority": 50,
-      "depends_on": ["G-004"],
+      "depends_on": [
+        "G-004"
+      ],
       "requires_decisions": [],
       "write_scope": [
         "research/community-finder-activation.md",
@@ -7989,7 +8595,9 @@
       "size": "M",
       "kind": "implementation",
       "priority": 50,
-      "depends_on": ["G-004"],
+      "depends_on": [
+        "G-004"
+      ],
       "requires_decisions": [],
       "write_scope": [
         "research/voice-capture-activation.md",
@@ -8066,7 +8674,9 @@
       "size": "M",
       "kind": "implementation",
       "priority": 50,
-      "depends_on": ["G-004"],
+      "depends_on": [
+        "G-004"
+      ],
       "requires_decisions": [],
       "write_scope": [
         "research/follow-up-activation.md",
@@ -8099,7 +8709,7 @@
         "Run lint (exclude generated .vercel until OPS-001), typecheck, focused tests and NITRO_PRESET=vercel build; record actual outcomes. For data/roles run real isolated RLS tests; for new AI run versioned fixtures and the budgeted per-kind evaluation."
       ],
       "metric": "Agreed follow-ups completed on time, unwanted reminders and duplicate deliveries.",
-      "rollback": "Disable scheduling/delivery while preserving the founder’s list and completion history.",
+      "rollback": "Disable scheduling/delivery while preserving the founder\u2019s list and completion history.",
       "agent_notes": {
         "starting_point": "Activation: actual missed agreed follow-ups recur in observed use, participants identify reminders as useful, and notification/channel consent and scheduling infrastructure are defined. Deferred and unimplemented. The coordinator must record activation and split/schema/API dependencies before implementation; evidence gates do not automatically enable this task.",
         "stop_and_report": "If a required contract, test environment, human observation, budget or permission is missing, record the specific blocker. Continue another ready task; do not fabricate data or widen the write scope.",
@@ -8143,7 +8753,9 @@
       "size": "M",
       "kind": "implementation",
       "priority": 50,
-      "depends_on": ["G-004"],
+      "depends_on": [
+        "G-004"
+      ],
       "requires_decisions": [],
       "write_scope": [
         "research/offline-activation.md",
@@ -8159,7 +8771,7 @@
         "research/positioning-decision.md",
         "docs/architecture/access-contract.md"
       ],
-      "goal": "Preserve interview work through disconnection without leaking another account’s data or duplicating saves.",
+      "goal": "Preserve interview work through disconnection without leaking another account\u2019s data or duplicating saves.",
       "steps": [
         "Map device/account boundaries, offline draft lifecycle, conflicts and existing saved-draft behavior before adding caching.",
         "Implement minimal app-shell/offline draft support with queued idempotent saves, explicit sync/error state and account-switch/sign-out cleanup.",
@@ -8220,7 +8832,9 @@
       "size": "M",
       "kind": "implementation",
       "priority": 50,
-      "depends_on": ["G-004"],
+      "depends_on": [
+        "G-004"
+      ],
       "requires_decisions": [],
       "write_scope": [
         "research/public-survey-activation.md",
@@ -8297,7 +8911,9 @@
       "size": "M",
       "kind": "implementation",
       "priority": 50,
-      "depends_on": ["G-004"],
+      "depends_on": [
+        "G-004"
+      ],
       "requires_decisions": [],
       "write_scope": [
         "research/model-picker-activation.md",
@@ -8373,7 +8989,9 @@
       "size": "M",
       "kind": "implementation",
       "priority": 50,
-      "depends_on": ["G-004"],
+      "depends_on": [
+        "G-004"
+      ],
       "requires_decisions": [],
       "write_scope": [
         "research/pain-miner-activation.md",
@@ -8450,7 +9068,9 @@
       "size": "M",
       "kind": "implementation",
       "priority": 50,
-      "depends_on": ["G-004"],
+      "depends_on": [
+        "G-004"
+      ],
       "requires_decisions": [],
       "write_scope": [
         "research/test-swap-activation.md",
@@ -8527,7 +9147,9 @@
       "size": "M",
       "kind": "implementation",
       "priority": 50,
-      "depends_on": ["G-004"],
+      "depends_on": [
+        "G-004"
+      ],
       "requires_decisions": [],
       "write_scope": [
         "research/digest-activation.md",
@@ -8545,17 +9167,17 @@
       ],
       "goal": "Deliver a useful personal next-step summary without exporting private evidence to an unintended channel.",
       "steps": [
-        "Define the recipient’s intended outcome, safe summary fields, schedule/timezone, consent and unsubscribe behavior.",
+        "Define the recipient\u2019s intended outcome, safe summary fields, schedule/timezone, consent and unsubscribe behavior.",
         "Generate bounded summaries through generateAI only when permitted, or deterministic summaries otherwise; exclude raw interview text and instructor/private cross-scope data.",
         "Test opt-out, duplicate schedules, revoked permissions, empty progress and delivery failures; measure meaningful resumed actions rather than opens alone."
       ],
       "acceptance": [
-        "Digests are opt-in and scoped to the recipient’s current permissions; removal/opt-out prevents queued delivery.",
+        "Digests are opt-in and scoped to the recipient\u2019s current permissions; removal/opt-out prevents queued delivery.",
         "Private quotes and contact details are not included by default; unchanged/non-actionable state does not cause noisy delivery."
       ],
       "verification_profile": "product",
       "verification": [
-        "Digests are opt-in and scoped to the recipient’s current permissions; removal/opt-out prevents queued delivery.",
+        "Digests are opt-in and scoped to the recipient\u2019s current permissions; removal/opt-out prevents queued delivery.",
         "Private quotes and contact details are not included by default; unchanged/non-actionable state does not cause noisy delivery.",
         "Run lint (exclude generated .vercel until OPS-001), typecheck, focused tests and NITRO_PRESET=vercel build; record actual outcomes. For data/roles run real isolated RLS tests; for new AI run versioned fixtures and the budgeted per-kind evaluation."
       ],
@@ -8578,7 +9200,7 @@
         {
           "id": "HOLD-009.s1",
           "status": "deferred",
-          "instruction": "Define the recipient’s intended outcome, safe summary fields, schedule/timezone, consent and unsubscribe behavior.",
+          "instruction": "Define the recipient\u2019s intended outcome, safe summary fields, schedule/timezone, consent and unsubscribe behavior.",
           "notes": []
         },
         {
@@ -8604,7 +9226,10 @@
       "size": "S",
       "kind": "research",
       "priority": 50,
-      "depends_on": ["AN-002", "WEB-004"],
+      "depends_on": [
+        "AN-002",
+        "WEB-004"
+      ],
       "requires_decisions": [],
       "write_scope": [
         "research/traffic-experiment-plan.md",
@@ -8634,7 +9259,7 @@
         "The experiment plan specifies a primary outcome, denominator, exposure policy and stopping rule before enrollment; privacy controls and AN-002 are usable.",
         "No low-sample preference/conversion difference is declared causal proof of the value proposition; assignment can be pinned without losing existing data."
       ],
-      "metric": "Eligible exposure → signup → relevant first interview within seven days by variant, with missingness and uncertainty.",
+      "metric": "Eligible exposure \u2192 signup \u2192 relevant first interview within seven days by variant, with missingness and uncertainty.",
       "rollback": "Pin the factual baseline, stop new assignments and retain only the agreed minimal experiment data under retention policy.",
       "agent_notes": {
         "starting_point": "Activation requires a coordinator-recorded traffic/power or explicitly exploratory plan, validated attribution and privacy settings after AN-002/WEB-004. Manual VP-004a is sufficient for early comprehension learning; live A/B work is not currently started.",
@@ -8683,7 +9308,10 @@
       "requires_decisions": [],
       "write_scope": [],
       "exclusive_locks": [],
-      "read_first": ["ProductSpec.md", "FEATUREROADMAP_workplan.md"],
+      "read_first": [
+        "ProductSpec.md",
+        "FEATUREROADMAP_workplan.md"
+      ],
       "goal": "Retain the history of the superseded fake-door task without creating a misleading interest-only teacher product.",
       "steps": [
         "Read the legacy VP-005 intent and the newly authorized CLS class/teacher scope.",
@@ -8745,7 +9373,9 @@
       "size": "M",
       "kind": "implementation",
       "priority": 50,
-      "depends_on": ["F-007"],
+      "depends_on": [
+        "F-007"
+      ],
       "requires_decisions": [],
       "write_scope": [
         "vite.config.ts",
@@ -8757,7 +9387,10 @@
         "src/integrations/supabase/previewAuthStorage.ts",
         "docs/operations/scaffold-cleanup.md"
       ],
-      "exclusive_locks": ["delivery-config", "package-manifest"],
+      "exclusive_locks": [
+        "delivery-config",
+        "package-manifest"
+      ],
       "read_first": [
         "ProductSpec.md",
         "FEATUREROADMAP_workplan.md",
@@ -8826,9 +9459,17 @@
       "size": "M",
       "kind": "documentation",
       "priority": 12,
-      "depends_on": ["WEB-001", "BR-001", "MKT-001", "WEB-003"],
+      "depends_on": [
+        "WEB-001",
+        "BR-001",
+        "MKT-001",
+        "WEB-003"
+      ],
       "requires_decisions": [],
-      "write_scope": ["docs/demo/pitch/**", "public/pitch/**"],
+      "write_scope": [
+        "docs/demo/pitch/**",
+        "public/pitch/**"
+      ],
       "exclusive_locks": [],
       "read_first": [
         "ProductSpec.md",
@@ -8838,8 +9479,8 @@
       ],
       "goal": "Create a polished workshop pitch deck linking pedagogy, live demo, $0 marketing and current technical architecture.",
       "steps": [
-        "Write a 3–5 minute pitch with a 90-second fallback: classroom problem, founder evidence loop, StudyLoop demo, $0 marketing lab, named pedagogical concepts, stack and invitation.",
-        "Author the editable deck using the Presentations skill and selected brand; cite the owner’s slides/board and primary pedagogy sources, and label demo/planned material.",
+        "Write a 3\u20135 minute pitch with a 90-second fallback: classroom problem, founder evidence loop, StudyLoop demo, $0 marketing lab, named pedagogical concepts, stack and invitation.",
+        "Author the editable deck using the Presentations skill and selected brand; cite the owner\u2019s slides/board and primary pedagogy sources, and label demo/planned material.",
         "Render and inspect every slide; rehearse the live-demo handoff, preserve readable offline story and provide a presentable deck link/artifact."
       ],
       "acceptance": [
@@ -8866,7 +9507,7 @@
         },
         {
           "date": "2026-10-18",
-          "text": "Promoted by explicit owner request for tomorrow’s Babson pitch. Build an evidence-honest current-capability/proposed-roadmap deck with named pedagogy; no invented traction or research outcomes. Original outcome-based deck dependency is superseded by this event need."
+          "text": "Promoted by explicit owner request for tomorrow\u2019s Babson pitch. Build an evidence-honest current-capability/proposed-roadmap deck with named pedagogy; no invented traction or research outcomes. Original outcome-based deck dependency is superseded by this event need."
         },
         {
           "date": "2026-10-18",
@@ -8893,13 +9534,13 @@
         {
           "id": "P-001b.s1",
           "status": "complete",
-          "instruction": "Write a 3–5 minute pitch with a 90-second fallback: classroom problem, founder evidence loop, StudyLoop demo, $0 marketing lab, named pedagogical concepts, stack and invitation.",
+          "instruction": "Write a 3\u20135 minute pitch with a 90-second fallback: classroom problem, founder evidence loop, StudyLoop demo, $0 marketing lab, named pedagogical concepts, stack and invitation.",
           "notes": []
         },
         {
           "id": "P-001b.s2",
           "status": "complete",
-          "instruction": "Author the editable deck using the Presentations skill and selected brand; cite the owner’s slides/board and primary pedagogy sources, and label demo/planned material.",
+          "instruction": "Author the editable deck using the Presentations skill and selected brand; cite the owner\u2019s slides/board and primary pedagogy sources, and label demo/planned material.",
           "notes": []
         },
         {
@@ -8919,9 +9560,15 @@
       "size": "S",
       "kind": "documentation",
       "priority": 10,
-      "depends_on": ["SEC-001", "VP-007"],
+      "depends_on": [
+        "SEC-001",
+        "VP-007"
+      ],
       "requires_decisions": [],
-      "write_scope": ["docs/marketing/marketing-lab-contract.md", "docs/teaching/pedagogy-map.md"],
+      "write_scope": [
+        "docs/marketing/marketing-lab-contract.md",
+        "docs/teaching/pedagogy-map.md"
+      ],
       "exclusive_locks": [],
       "read_first": [
         "ProductSpec.md",
@@ -8929,7 +9576,7 @@
         "docs/demo/babson-pitch-brief.md",
         "docs/architecture/access-contract.md"
       ],
-      "goal": "Turn the owner’s audience/channel/content/funnel board into a coherent student-led experiment workflow.",
+      "goal": "Turn the owner\u2019s audience/channel/content/funnel board into a coherent student-led experiment workflow.",
       "steps": [
         "Map the supplied BUS131 slides and board to audience, evidence/unknowns, specific physical/digital channels, reviewed content, resource limits and a one-week test.",
         "Define typed versioned plan/channel/asset/test/measurement contracts, private data boundaries and separate AI kinds; specify stage-2 entry without silently changing current stage unlocks.",
@@ -8948,7 +9595,7 @@
       "metric": "Completed useful workflow, source/permission integrity, recovery failures and measured AI cost where applicable.",
       "rollback": "Disable the affected entry point/AI kind; preserve existing private records, prior plan revisions and the tested demonstration fallback.",
       "agent_notes": {
-        "starting_point": "Owner-requested addition during the autonomous run for tomorrow’s Babson demo. Use the approved marketing-lab contract and existing contracts; no fictional evidence may become a claim of real research.",
+        "starting_point": "Owner-requested addition during the autonomous run for tomorrow\u2019s Babson demo. Use the approved marketing-lab contract and existing contracts; no fictional evidence may become a claim of real research.",
         "stop_and_report": "Record the exact missing environment, permission, budget or human evidence, preserve partial work, and continue another eligible task. Do not bypass gates or widen access.",
         "handoff": "Report scoped files, commit, checks/results, migration/type contracts, measured spend, remaining blockers and rollback. Coordinator owns registry/status/integration."
       },
@@ -8967,7 +9614,9 @@
         }
       ],
       "claim": null,
-      "completion_evidence": ["ed2635e8bdc0c88676b7249846acdc3a239796a6"],
+      "completion_evidence": [
+        "ed2635e8bdc0c88676b7249846acdc3a239796a6"
+      ],
       "subtasks": [
         {
           "id": "MKT-001.s1",
@@ -8998,7 +9647,10 @@
       "size": "S",
       "kind": "implementation",
       "priority": 10,
-      "depends_on": ["MKT-001", "SEC-003"],
+      "depends_on": [
+        "MKT-001",
+        "SEC-003"
+      ],
       "requires_decisions": [],
       "write_scope": [
         "supabase/migrations/**",
@@ -9008,14 +9660,17 @@
         "src/lib/marketing-plan.test.ts",
         "supabase/tests/marketing.sql"
       ],
-      "exclusive_locks": ["database-schema", "generated-types"],
+      "exclusive_locks": [
+        "database-schema",
+        "generated-types"
+      ],
       "read_first": [
         "ProductSpec.md",
         "FEATUREROADMAP_workplan.md",
         "docs/demo/babson-pitch-brief.md",
         "docs/architecture/access-contract.md"
       ],
-      "goal": "Save a project’s marketing board with strict validation and conflict-safe revisions.",
+      "goal": "Save a project\u2019s marketing board with strict validation and conflict-safe revisions.",
       "steps": [
         "Create one private plan per project with owner/project consistency, JSON shape/size bounds and revision timestamps.",
         "Implement authenticated load/save with expected revision and safe defaults; preserve unknown measurements rather than inventing zeros or results.",
@@ -9034,7 +9689,7 @@
       "metric": "Completed useful workflow, source/permission integrity, recovery failures and measured AI cost where applicable.",
       "rollback": "Disable the affected entry point/AI kind; preserve existing private records, prior plan revisions and the tested demonstration fallback.",
       "agent_notes": {
-        "starting_point": "Owner-requested addition during the autonomous run for tomorrow’s Babson demo. Use the approved marketing-lab contract and existing contracts; no fictional evidence may become a claim of real research.",
+        "starting_point": "Owner-requested addition during the autonomous run for tomorrow\u2019s Babson demo. Use the approved marketing-lab contract and existing contracts; no fictional evidence may become a claim of real research.",
         "stop_and_report": "Record the exact missing environment, permission, budget or human evidence, preserve partial work, and continue another eligible task. Do not bypass gates or widen access.",
         "handoff": "Report scoped files, commit, checks/results, migration/type contracts, measured spend, remaining blockers and rollback. Coordinator owns registry/status/integration."
       },
@@ -9062,7 +9717,7 @@
       ],
       "claim": null,
       "completion_evidence": [
-        "ec5ef05 +00c06f4: 308 real isolated database assertions;43 new validator tests;four concurrent transaction cases;official local types regenerated. Hosted additive migration20261018001000 applied; actual browser created and saved revisions1–3 in the dedicated fictional project."
+        "ec5ef05 +00c06f4: 308 real isolated database assertions;43 new validator tests;four concurrent transaction cases;official local types regenerated. Hosted additive migration20261018001000 applied; actual browser created and saved revisions1\u20133 in the dedicated fictional project."
       ],
       "subtasks": [
         {
@@ -9094,7 +9749,10 @@
       "size": "S",
       "kind": "implementation",
       "priority": 10,
-      "depends_on": ["MKT-002", "BR-002"],
+      "depends_on": [
+        "MKT-002",
+        "BR-002"
+      ],
       "requires_decisions": [],
       "write_scope": [
         "src/routes/_authenticated/marketing.tsx",
@@ -9104,7 +9762,10 @@
         "src/tests/marketing-lab/**",
         "src/components/marketing/SavedMarketingLab.tsx"
       ],
-      "exclusive_locks": ["route-integration", "app-shell"],
+      "exclusive_locks": [
+        "route-integration",
+        "app-shell"
+      ],
       "read_first": [
         "ProductSpec.md",
         "FEATUREROADMAP_workplan.md",
@@ -9113,7 +9774,7 @@
       ],
       "goal": "Guide students from a focused audience to two reachable channels and an executable $0 plan.",
       "steps": [
-        "Start with students’ own audience/known evidence/unknowns and initial channel ideas before offering AI assistance.",
+        "Start with students\u2019 own audience/known evidence/unknowns and initial channel ideas before offering AI assistance.",
         "Build a physical/digital channel board with exact place/link, observation, access/permission state, effort/time and primary/alternative selection; cap current commitments at two chosen channels.",
         "Add saved/unsaved/conflict/retry states and stage-aware navigation using the explicitly supplied project id; retain current private project flow until WS-002 integration."
       ],
@@ -9130,7 +9791,7 @@
       "metric": "Completed useful workflow, source/permission integrity, recovery failures and measured AI cost where applicable.",
       "rollback": "Disable the affected entry point/AI kind; preserve existing private records, prior plan revisions and the tested demonstration fallback.",
       "agent_notes": {
-        "starting_point": "Owner-requested addition during the autonomous run for tomorrow’s Babson demo. Use the approved marketing-lab contract and existing contracts; no fictional evidence may become a claim of real research.",
+        "starting_point": "Owner-requested addition during the autonomous run for tomorrow\u2019s Babson demo. Use the approved marketing-lab contract and existing contracts; no fictional evidence may become a claim of real research.",
         "stop_and_report": "Record the exact missing environment, permission, budget or human evidence, preserve partial work, and continue another eligible task. Do not bypass gates or widen access.",
         "handoff": "Report scoped files, commit, checks/results, migration/type contracts, measured spend, remaining blockers and rollback. Coordinator owns registry/status/integration."
       },
@@ -9150,13 +9811,13 @@
       ],
       "claim": null,
       "completion_evidence": [
-        "Actual Chrome with dedicated hosted presenter: first thinking preserved server-side; two distinct channels and content saved through revisions1–4; one-week plan saved; route leave protected unsaved edits; reload retained original thinking. Seven recovery/CAS UI tests;153combinedtests,typecheck,lintandNitrobuildpass."
+        "Actual Chrome with dedicated hosted presenter: first thinking preserved server-side; two distinct channels and content saved through revisions1\u20134; one-week plan saved; route leave protected unsaved edits; reload retained original thinking. Seven recovery/CAS UI tests;153combinedtests,typecheck,lintandNitrobuildpass."
       ],
       "subtasks": [
         {
           "id": "MKT-003.s1",
           "status": "complete",
-          "instruction": "Start with students’ own audience/known evidence/unknowns and initial channel ideas before offering AI assistance.",
+          "instruction": "Start with students\u2019 own audience/known evidence/unknowns and initial channel ideas before offering AI assistance.",
           "notes": []
         },
         {
@@ -9182,7 +9843,10 @@
       "size": "S",
       "kind": "implementation",
       "priority": 10,
-      "depends_on": ["MKT-002", "AI-008"],
+      "depends_on": [
+        "MKT-002",
+        "AI-008"
+      ],
       "requires_decisions": [],
       "write_scope": [
         "src/lib/ai.functions.ts",
@@ -9193,7 +9857,9 @@
         "evals/results/marketing-channels/**",
         "src/components/marketing-lab/ChannelSuggestions.tsx"
       ],
-      "exclusive_locks": ["ai-entrypoint"],
+      "exclusive_locks": [
+        "ai-entrypoint"
+      ],
       "read_first": [
         "ProductSpec.md",
         "FEATUREROADMAP_workplan.md",
@@ -9219,7 +9885,7 @@
       "metric": "Completed useful workflow, source/permission integrity, recovery failures and measured AI cost where applicable.",
       "rollback": "Disable the affected entry point/AI kind; preserve existing private records, prior plan revisions and the tested demonstration fallback.",
       "agent_notes": {
-        "starting_point": "Owner-requested addition during the autonomous run for tomorrow’s Babson demo. Use the approved marketing-lab contract and existing contracts; no fictional evidence may become a claim of real research.",
+        "starting_point": "Owner-requested addition during the autonomous run for tomorrow\u2019s Babson demo. Use the approved marketing-lab contract and existing contracts; no fictional evidence may become a claim of real research.",
         "stop_and_report": "Record the exact missing environment, permission, budget or human evidence, preserve partial work, and continue another eligible task. Do not bypass gates or widen access.",
         "handoff": "Report scoped files, commit, checks/results, migration/type contracts, measured spend, remaining blockers and rollback. Coordinator owns registry/status/integration."
       },
@@ -9261,7 +9927,10 @@
       "size": "S",
       "kind": "implementation",
       "priority": 10,
-      "depends_on": ["MKT-003", "AI-008"],
+      "depends_on": [
+        "MKT-003",
+        "AI-008"
+      ],
       "requires_decisions": [],
       "write_scope": [
         "src/lib/ai.functions.ts",
@@ -9272,7 +9941,10 @@
         "evals/results/marketing-content/**",
         "src/components/marketing-lab/ContentStudio.tsx"
       ],
-      "exclusive_locks": ["ai-entrypoint", "marketing-editor"],
+      "exclusive_locks": [
+        "ai-entrypoint",
+        "marketing-editor"
+      ],
       "read_first": [
         "ProductSpec.md",
         "FEATUREROADMAP_workplan.md",
@@ -9298,7 +9970,7 @@
       "metric": "Completed useful workflow, source/permission integrity, recovery failures and measured AI cost where applicable.",
       "rollback": "Disable the affected entry point/AI kind; preserve existing private records, prior plan revisions and the tested demonstration fallback.",
       "agent_notes": {
-        "starting_point": "Owner-requested addition during the autonomous run for tomorrow’s Babson demo. Use the approved marketing-lab contract and existing contracts; no fictional evidence may become a claim of real research.",
+        "starting_point": "Owner-requested addition during the autonomous run for tomorrow\u2019s Babson demo. Use the approved marketing-lab contract and existing contracts; no fictional evidence may become a claim of real research.",
         "stop_and_report": "Record the exact missing environment, permission, budget or human evidence, preserve partial work, and continue another eligible task. Do not bypass gates or widen access.",
         "handoff": "Report scoped files, commit, checks/results, migration/type contracts, measured spend, remaining blockers and rollback. Coordinator owns registry/status/integration."
       },
@@ -9340,7 +10012,9 @@
       "size": "S",
       "kind": "implementation",
       "priority": 10,
-      "depends_on": ["MKT-003"],
+      "depends_on": [
+        "MKT-003"
+      ],
       "requires_decisions": [],
       "write_scope": [
         "src/components/marketing-lab/TestPlanner.tsx",
@@ -9365,7 +10039,9 @@
         "src/tests/marketing-lab/planning-fixture.ts",
         "src/tests/marketing-lab/persistence-ui.test.tsx"
       ],
-      "exclusive_locks": ["marketing-editor"],
+      "exclusive_locks": [
+        "marketing-editor"
+      ],
       "read_first": [
         "ProductSpec.md",
         "FEATUREROADMAP_workplan.md",
@@ -9391,7 +10067,7 @@
       "metric": "Completed useful workflow, source/permission integrity, recovery failures and measured AI cost where applicable.",
       "rollback": "Disable the affected entry point/AI kind; preserve existing private records, prior plan revisions and the tested demonstration fallback.",
       "agent_notes": {
-        "starting_point": "Owner-requested addition during the autonomous run for tomorrow’s Babson demo. Use the approved marketing-lab contract and existing contracts; no fictional evidence may become a claim of real research.",
+        "starting_point": "Owner-requested addition during the autonomous run for tomorrow\u2019s Babson demo. Use the approved marketing-lab contract and existing contracts; no fictional evidence may become a claim of real research.",
         "stop_and_report": "Record the exact missing environment, permission, budget or human evidence, preserve partial work, and continue another eligible task. Do not bypass gates or widen access.",
         "handoff": "Report scoped files, commit, checks/results, migration/type contracts, measured spend, remaining blockers and rollback. Coordinator owns registry/status/integration."
       },
@@ -9426,7 +10102,7 @@
         },
         {
           "date": "2026-10-18",
-          "text": "All remaining manual planner controls are delivered: reviewed tag adoption, owners, deadlines, prerequisites, completion rules, resources, test states, baseline/target and fallback. The actual production UI blocked starting a dependent action before its prerequisite was done. The explicitly fictional October 19–25 plan, October 26 review, two not-run actions and 50 estimated minutes within a 180-minute ceiling saved as revision 7 and survived reload. Original thinking is preserved; baseline remains unknown, target 3 is a planning threshold, and status is Draft. No campaign ran or outreach was sent. Precise native-select labels were verified after 64bc86e."
+          "text": "All remaining manual planner controls are delivered: reviewed tag adoption, owners, deadlines, prerequisites, completion rules, resources, test states, baseline/target and fallback. The actual production UI blocked starting a dependent action before its prerequisite was done. The explicitly fictional October 19\u201325 plan, October 26 review, two not-run actions and 50 estimated minutes within a 180-minute ceiling saved as revision 7 and survived reload. Original thinking is preserved; baseline remains unknown, target 3 is a planning threshold, and status is Draft. No campaign ran or outreach was sent. Precise native-select labels were verified after 64bc86e."
         }
       ],
       "claim": null,
@@ -9464,7 +10140,11 @@
       "size": "S",
       "kind": "implementation",
       "priority": 10,
-      "depends_on": ["MKT-001", "WEB-002", "BR-002"],
+      "depends_on": [
+        "MKT-001",
+        "WEB-002",
+        "BR-002"
+      ],
       "requires_decisions": [],
       "write_scope": [
         "src/components/demo/**",
@@ -9499,7 +10179,7 @@
       "metric": "Completed useful workflow, source/permission integrity, recovery failures and measured AI cost where applicable.",
       "rollback": "Disable the affected entry point/AI kind; preserve existing private records, prior plan revisions and the tested demonstration fallback.",
       "agent_notes": {
-        "starting_point": "Owner-requested addition during the autonomous run for tomorrow’s Babson demo. Use the approved marketing-lab contract and existing contracts; no fictional evidence may become a claim of real research.",
+        "starting_point": "Owner-requested addition during the autonomous run for tomorrow\u2019s Babson demo. Use the approved marketing-lab contract and existing contracts; no fictional evidence may become a claim of real research.",
         "stop_and_report": "Record the exact missing environment, permission, budget or human evidence, preserve partial work, and continue another eligible task. Do not bypass gates or widen access.",
         "handoff": "Report scoped files, commit, checks/results, migration/type contracts, measured spend, remaining blockers and rollback. Coordinator owns registry/status/integration."
       },
@@ -9563,9 +10243,18 @@
       "size": "S",
       "kind": "implementation",
       "priority": 10,
-      "depends_on": ["MKT-003", "MKT-004", "MKT-005", "MKT-006", "MKT-007"],
+      "depends_on": [
+        "MKT-003",
+        "MKT-004",
+        "MKT-005",
+        "MKT-006",
+        "MKT-007"
+      ],
       "requires_decisions": [],
-      "write_scope": ["src/tests/marketing-release/**", "docs/qa/marketing-gate.md"],
+      "write_scope": [
+        "src/tests/marketing-release/**",
+        "docs/qa/marketing-gate.md"
+      ],
       "exclusive_locks": [],
       "read_first": [
         "ProductSpec.md",
@@ -9576,7 +10265,7 @@
       "goal": "Confirm the $0 marketing feature works end to end before enabling it for real testers.",
       "steps": [
         "Exercise founder/teacher-review projection where implemented, two-account plan access, stage navigation, revisions and provider failures.",
-        "Run the actual browser path audience→channel→asset→test→measurement→reflection on desktop/mobile/keyboard.",
+        "Run the actual browser path audience\u2192channel\u2192asset\u2192test\u2192measurement\u2192reflection on desktop/mobile/keyboard.",
         "Check actual spend, permission disclosures and factual claims; fix critical failures and document enabled/manual/demo-only capabilities."
       ],
       "acceptance": [
@@ -9592,7 +10281,7 @@
       "metric": "Completed useful workflow, source/permission integrity, recovery failures and measured AI cost where applicable.",
       "rollback": "Disable the affected entry point/AI kind; preserve existing private records, prior plan revisions and the tested demonstration fallback.",
       "agent_notes": {
-        "starting_point": "Owner-requested addition during the autonomous run for tomorrow’s Babson demo. Use the approved marketing-lab contract and existing contracts; no fictional evidence may become a claim of real research.",
+        "starting_point": "Owner-requested addition during the autonomous run for tomorrow\u2019s Babson demo. Use the approved marketing-lab contract and existing contracts; no fictional evidence may become a claim of real research.",
         "stop_and_report": "Record the exact missing environment, permission, budget or human evidence, preserve partial work, and continue another eligible task. Do not bypass gates or widen access.",
         "handoff": "Report scoped files, commit, checks/results, migration/type contracts, measured spend, remaining blockers and rollback. Coordinator owns registry/status/integration."
       },
@@ -9614,7 +10303,7 @@
         {
           "id": "MKT-008.s2",
           "status": "not_started",
-          "instruction": "Run the actual browser path audience→channel→asset→test→measurement→reflection on desktop/mobile/keyboard.",
+          "instruction": "Run the actual browser path audience\u2192channel\u2192asset\u2192test\u2192measurement\u2192reflection on desktop/mobile/keyboard.",
           "notes": []
         },
         {
@@ -9634,7 +10323,9 @@
       "size": "S",
       "kind": "implementation",
       "priority": 10,
-      "depends_on": ["BR-001"],
+      "depends_on": [
+        "BR-001"
+      ],
       "requires_decisions": [],
       "write_scope": [
         "public/brand/**",
@@ -9645,7 +10336,10 @@
         "src/routes/__root.tsx",
         "docs/brand/logo.md"
       ],
-      "exclusive_locks": ["route-integration", "brand-assets"],
+      "exclusive_locks": [
+        "route-integration",
+        "brand-assets"
+      ],
       "read_first": [
         "ProductSpec.md",
         "FEATUREROADMAP_workplan.md",
@@ -9671,7 +10365,7 @@
       "metric": "Completed useful workflow, source/permission integrity, recovery failures and measured AI cost where applicable.",
       "rollback": "Disable the affected entry point/AI kind; preserve existing private records, prior plan revisions and the tested demonstration fallback.",
       "agent_notes": {
-        "starting_point": "Owner-requested addition during the autonomous run for tomorrow’s Babson demo. Use the approved marketing-lab contract and existing contracts; no fictional evidence may become a claim of real research.",
+        "starting_point": "Owner-requested addition during the autonomous run for tomorrow\u2019s Babson demo. Use the approved marketing-lab contract and existing contracts; no fictional evidence may become a claim of real research.",
         "stop_and_report": "Record the exact missing environment, permission, budget or human evidence, preserve partial work, and continue another eligible task. Do not bypass gates or widen access.",
         "handoff": "Report scoped files, commit, checks/results, migration/type contracts, measured spend, remaining blockers and rollback. Coordinator owns registry/status/integration."
       },
@@ -9723,7 +10417,10 @@
       "size": "S",
       "kind": "implementation",
       "priority": 10,
-      "depends_on": ["OPS-001", "SEC-003"],
+      "depends_on": [
+        "OPS-001",
+        "SEC-003"
+      ],
       "requires_decisions": [],
       "write_scope": [
         "scripts/seed-demo.mjs",
@@ -9738,7 +10435,9 @@
         "src/components/BrandLogo.tsx",
         "src/routes/demo.tsx"
       ],
-      "exclusive_locks": ["demo-data"],
+      "exclusive_locks": [
+        "demo-data"
+      ],
       "read_first": [
         "ProductSpec.md",
         "FEATUREROADMAP_workplan.md",
@@ -9764,7 +10463,7 @@
       "metric": "Completed useful workflow, source/permission integrity, recovery failures and measured AI cost where applicable.",
       "rollback": "Disable the affected entry point/AI kind; preserve existing private records, prior plan revisions and the tested demonstration fallback.",
       "agent_notes": {
-        "starting_point": "Owner-requested addition during the autonomous run for tomorrow’s Babson demo. Use the approved marketing-lab contract and existing contracts; no fictional evidence may become a claim of real research.",
+        "starting_point": "Owner-requested addition during the autonomous run for tomorrow\u2019s Babson demo. Use the approved marketing-lab contract and existing contracts; no fictional evidence may become a claim of real research.",
         "stop_and_report": "Record the exact missing environment, permission, budget or human evidence, preserve partial work, and continue another eligible task. Do not bypass gates or widen access.",
         "handoff": "Report scoped files, commit, checks/results, migration/type contracts, measured spend, remaining blockers and rollback. Coordinator owns registry/status/integration."
       },
@@ -9828,7 +10527,10 @@
       "size": "S",
       "kind": "implementation",
       "priority": 10,
-      "depends_on": ["DEMO-001", "SEC-003"],
+      "depends_on": [
+        "DEMO-001",
+        "SEC-003"
+      ],
       "requires_decisions": [],
       "write_scope": [
         "src/routes/auth.tsx",
@@ -9839,7 +10541,9 @@
         "src/tests/desktop-routes/**",
         "docs/demo/presenter-data.md"
       ],
-      "exclusive_locks": ["presenter-access"],
+      "exclusive_locks": [
+        "presenter-access"
+      ],
       "read_first": [
         "ProductSpec.md",
         "FEATUREROADMAP_workplan.md",
@@ -9864,7 +10568,7 @@
       "metric": "Zero unauthorized aggregate reads or exposed raw content; actual presenter login works.",
       "rollback": "Remove demo admin flag from trusted app_metadata and hide admin entry; retain ordinary private workspace and public demo.",
       "agent_notes": {
-        "starting_point": "Owner-requested addition during the autonomous run for tomorrow’s Babson demo. Use the approved marketing-lab contract and existing contracts; no fictional evidence may become a claim of real research.",
+        "starting_point": "Owner-requested addition during the autonomous run for tomorrow\u2019s Babson demo. Use the approved marketing-lab contract and existing contracts; no fictional evidence may become a claim of real research.",
         "stop_and_report": "Record the exact missing environment, permission, budget or human evidence, preserve partial work, and continue another eligible task. Do not bypass gates or widen access.",
         "handoff": "Report scoped files, commit, checks/results, migration/type contracts, measured spend, remaining blockers and rollback. Coordinator owns registry/status/integration."
       },
@@ -9921,7 +10625,11 @@
       "size": "S",
       "kind": "implementation",
       "priority": 5,
-      "depends_on": ["SEC-003", "DEMO-001", "BR-002"],
+      "depends_on": [
+        "SEC-003",
+        "DEMO-001",
+        "BR-002"
+      ],
       "requires_decisions": [],
       "write_scope": [
         "src/lib/data.ts",
@@ -9933,7 +10641,10 @@
         "src/routes/_authenticated/route.tsx",
         "src/tests/workspace-selection/**"
       ],
-      "exclusive_locks": ["project-selection", "route-integration"],
+      "exclusive_locks": [
+        "project-selection",
+        "route-integration"
+      ],
       "read_first": [
         "ProductSpec.md",
         "FEATUREROADMAP_workplan.md",
@@ -9965,7 +10676,7 @@
       "notes": [
         {
           "date": "2026-10-18",
-          "text": "Owner explicitly requested multiple ideas during the final sprint. This is the shipped single-owner subset; WS-001–007 retain their broader lifecycle, membership-aware routing, interview autosave/finalization and end-to-end acceptance gates."
+          "text": "Owner explicitly requested multiple ideas during the final sprint. This is the shipped single-owner subset; WS-001\u2013007 retain their broader lifecycle, membership-aware routing, interview autosave/finalization and end-to-end acceptance gates."
         }
       ],
       "claim": null,
@@ -10003,7 +10714,12 @@
       "size": "S",
       "kind": "implementation",
       "priority": 5,
-      "depends_on": ["SEC-003", "EDU-002", "BR-002", "DEMO-001"],
+      "depends_on": [
+        "SEC-003",
+        "EDU-002",
+        "BR-002",
+        "DEMO-001"
+      ],
       "requires_decisions": [],
       "write_scope": [
         "src/lib/teacher-plan.ts",
@@ -10017,7 +10733,10 @@
         "src/tests/teacher-planner/**",
         "supabase/tests/teacher-plans.sql"
       ],
-      "exclusive_locks": ["teacher-plan-schema", "route-integration"],
+      "exclusive_locks": [
+        "teacher-plan-schema",
+        "route-integration"
+      ],
       "read_first": [
         "ProductSpec.md",
         "FEATUREROADMAP_workplan.md",
@@ -10032,7 +10751,7 @@
         "Verify schema and real database isolation/concurrency, focused UI behavior and hosted presenter lesson seeding through the ordinary owner RPC."
       ],
       "acceptance": [
-        "A real private lesson plan saves with revision checks and does not expose another owner’s work. Student preview omits facilitator notes.",
+        "A real private lesson plan saves with revision checks and does not expose another owner\u2019s work. Student preview omits facilitator notes.",
         "Fictional StudyLoop, CampusSwap, QuietSpace and TutorLink cards are visibly authored examples; planned capacity 45 is an estimate, not enrollment. No live class feed, submissions, teacher grants or student progress is fabricated."
       ],
       "verification_profile": "product",
@@ -10051,7 +10770,7 @@
       "notes": [
         {
           "date": "2026-10-18",
-          "text": "Owner requested an explicit seeded educator dashboard. This delivered private planning and an authored cohort rehearsal; CLS-001–006 shared classes, memberships, reviewed submissions, student visibility and teacher AI remain not started. EDU-003 real-class pilot and EDU-004 instructor rehearsal remain open."
+          "text": "Owner requested an explicit seeded educator dashboard. This delivered private planning and an authored cohort rehearsal; CLS-001\u2013006 shared classes, memberships, reviewed submissions, student visibility and teacher AI remain not started. EDU-003 real-class pilot and EDU-004 instructor rehearsal remain open."
         }
       ],
       "claim": null,
@@ -10095,7 +10814,12 @@
       "size": "S",
       "kind": "implementation",
       "priority": 5,
-      "depends_on": ["DEMO-002", "WS-008", "EDU-005", "BR-003"],
+      "depends_on": [
+        "DEMO-002",
+        "WS-008",
+        "EDU-005",
+        "BR-003"
+      ],
       "requires_decisions": [],
       "write_scope": [
         "src/routes/auth.tsx",
@@ -10106,7 +10830,11 @@
         "src/tests/br-003/auth.test.tsx",
         "src/test/render-page.tsx"
       ],
-      "exclusive_locks": ["auth-entry", "route-integration", "app-shell"],
+      "exclusive_locks": [
+        "auth-entry",
+        "route-integration",
+        "app-shell"
+      ],
       "read_first": [
         "ProductSpec.md",
         "FEATUREROADMAP_workplan.md",
@@ -10143,7 +10871,7 @@
       ],
       "claim": null,
       "completion_evidence": [
-        "Implementation c16b3a3, integrated in f8bc878. src/tests/br-003/auth.test.tsx explicitly verifies Student → /dashboard, Educator → /teacher and Admin → /admin, with remembered reserved project selection and no privilege assignment.",
+        "Implementation c16b3a3, integrated in f8bc878. src/tests/br-003/auth.test.tsx explicitly verifies Student \u2192 /dashboard, Educator \u2192 /teacher and Admin \u2192 /admin, with remembered reserved project selection and no privilege assignment.",
         "Coordinator reports 19 focused auth/project checks and 219 combined application tests, typecheck, lint and build passing. Vercel deployment f8bc878 reached READY; production /auth was observed retaining the form. Credentials are never recorded in the registry."
       ],
       "subtasks": [
@@ -10176,7 +10904,12 @@
       "size": "S",
       "kind": "implementation",
       "priority": 5,
-      "depends_on": ["AI-001", "DEMO-002", "MKT-003", "SEC-003"],
+      "depends_on": [
+        "AI-001",
+        "DEMO-002",
+        "MKT-003",
+        "SEC-003"
+      ],
       "requires_decisions": [],
       "write_scope": [
         "src/lib/ai.functions.ts",
@@ -10191,7 +10924,11 @@
         "docs/demo/presenter-data.md",
         "supabase/tests/30_demo-ai-budget.sql"
       ],
-      "exclusive_locks": ["ai-gateway", "demo-ai-budget", "presenter-access"],
+      "exclusive_locks": [
+        "ai-gateway",
+        "demo-ai-budget",
+        "presenter-access"
+      ],
       "read_first": [
         "ProductSpec.md",
         "FEATUREROADMAP_workplan.md",
@@ -10226,7 +10963,7 @@
       "notes": [
         {
           "date": "2026-10-18",
-          "text": "Requested label AI-DEMO-001 is represented by canonical AI-009 to preserve the registry ID grammar. Implementation is integrated (68b1b41, c16b3a3, f8bc878) and automated verification passes, but no live-provider success or measured model quality is claimed. Parent remains in_progress until the coordinator records the deployed provider trial. This does not complete AI-002–008, general marketing AI or admin cost analytics."
+          "text": "Requested label AI-DEMO-001 is represented by canonical AI-009 to preserve the registry ID grammar. Implementation is integrated (68b1b41, c16b3a3, f8bc878) and automated verification passes, but no live-provider success or measured model quality is claimed. Parent remains in_progress until the coordinator records the deployed provider trial. This does not complete AI-002\u2013008, general marketing AI or admin cost analytics."
         },
         {
           "date": "2026-10-18",
@@ -10273,10 +11010,19 @@
       "size": "M",
       "kind": "implementation",
       "priority": 1,
-      "depends_on": ["DEMO-003", "WEB-004", "EDU-002"],
+      "depends_on": [
+        "DEMO-003",
+        "WEB-004",
+        "EDU-002"
+      ],
       "requires_decisions": [],
-      "write_scope": ["public/pitch/**", "docs/demo/pitch/**"],
-      "exclusive_locks": ["pitch-deck"],
+      "write_scope": [
+        "public/pitch/**",
+        "docs/demo/pitch/**"
+      ],
+      "exclusive_locks": [
+        "pitch-deck"
+      ],
       "read_first": [
         "ProductSpec.md",
         "FEATUREROADMAP_workplan.md",
@@ -10329,7 +11075,7 @@
         },
         {
           "date": "2026-10-18",
-          "text": "Owner-requested order update: native Market Opportunity moved to slide 5 before all four product demos (now slides 6–9). Slide IDs/content retained; all 13 current renders reviewed and online/offline companions, source map, presenter script and rebuild ordering synchronized."
+          "text": "Owner-requested order update: native Market Opportunity moved to slide 5 before all four product demos (now slides 6\u20139). Slide IDs/content retained; all 13 current renders reviewed and online/offline companions, source map, presenter script and rebuild ordering synchronized."
         },
         {
           "date": "2026-10-18",
@@ -10341,7 +11087,7 @@
         },
         {
           "date": "2026-10-18",
-          "text": "Owner revised order: four product demos5–8, architecture9, Teaching Design10, Market Opportunity11, Chasm12, Questions13. Replaced yellow teaching text block with actual Worksheet B rendered from teaching-kit PDF page4, blank lower paper removed; retained six pedagogy concepts beside worksheet. Native state27 and all13 renders regenerated; companions and speaker/source docs synchronized. Product development remains paused."
+          "text": "Owner revised order: four product demos5\u20138, architecture9, Teaching Design10, Market Opportunity11, Chasm12, Questions13. Replaced yellow teaching text block with actual Worksheet B rendered from teaching-kit PDF page4, blank lower paper removed; retained six pedagogy concepts beside worksheet. Native state27 and all13 renders regenerated; companions and speaker/source docs synchronized. Product development remains paused."
         },
         {
           "date": "2026-10-18",
@@ -10387,7 +11133,10 @@
       "size": "M",
       "kind": "implementation",
       "priority": 1,
-      "depends_on": ["WEB-004", "SEC-003"],
+      "depends_on": [
+        "WEB-004",
+        "SEC-003"
+      ],
       "requires_decisions": [],
       "write_scope": [
         "src/routes/founding-partners.tsx",
@@ -10396,7 +11145,9 @@
         "supabase/migrations/20261018004000_founding_partners.sql",
         "src/tests/founding-partners/**"
       ],
-      "exclusive_locks": ["founding-partner-intake"],
+      "exclusive_locks": [
+        "founding-partner-intake"
+      ],
       "read_first": [
         "ProductSpec.md",
         "FEATUREROADMAP_workplan.md",
@@ -10472,7 +11223,10 @@
       "size": "M",
       "kind": "implementation",
       "priority": 1,
-      "depends_on": ["PARTNER-001", "DEMO-002"],
+      "depends_on": [
+        "PARTNER-001",
+        "DEMO-002"
+      ],
       "requires_decisions": [],
       "write_scope": [
         "src/lib/admin.functions.ts",
@@ -10488,7 +11242,9 @@
         "src/components/teaching/TeachingPage.tsx",
         "src/tests/web-004/landing.test.tsx"
       ],
-      "exclusive_locks": ["admin-partner-counts"],
+      "exclusive_locks": [
+        "admin-partner-counts"
+      ],
       "read_first": [
         "ProductSpec.md",
         "FEATUREROADMAP_workplan.md",
@@ -10566,14 +11322,18 @@
       "size": "M",
       "kind": "planning",
       "priority": 25,
-      "depends_on": ["SEC-001"],
+      "depends_on": [
+        "SEC-001"
+      ],
       "requires_decisions": [],
       "write_scope": [
         "docs/privacy/ferpa-first-product-direction.md",
         "docs/privacy/guest-data-contract.md",
         "docs/architecture/access-contract.md"
       ],
-      "exclusive_locks": ["ferpa-001-integration"],
+      "exclusive_locks": [
+        "ferpa-001-integration"
+      ],
       "read_first": [
         "ProductSpec.md",
         "FEATUREROADMAP_workplan.md",
@@ -10655,7 +11415,12 @@
       "size": "M",
       "kind": "implementation",
       "priority": 25,
-      "depends_on": ["CLS-001", "SEC-005", "PRV-001", "FERPA-001"],
+      "depends_on": [
+        "CLS-001",
+        "SEC-005",
+        "PRV-001",
+        "FERPA-001"
+      ],
       "requires_decisions": [],
       "write_scope": [
         "supabase/migrations/20261018018000_guest_class_entry.sql",
@@ -10668,7 +11433,9 @@
         "supabase/tests/cls-007.sql",
         "docs/architecture/guest-class-entry.md"
       ],
-      "exclusive_locks": ["cls-007-integration"],
+      "exclusive_locks": [
+        "cls-007-integration"
+      ],
       "read_first": [
         "ProductSpec.md",
         "FEATUREROADMAP_workplan.md",
@@ -10706,7 +11473,7 @@
         },
         {
           "date": "2026-10-18",
-          "text": "Claimed afterCLS001 foundation. Build real teacher class/hackathon provision UI outside RequireProject and no-account public entry, separate class-entry/team/principal-private capabilities, HttpOnly sessions and recoverable return, QR. No student emails or fake accounts; no private class/team content untilCLS008. Guest/class AI startsdisabled; retention schedule requested not enforced untilPRV003. Reserved18000; root publishes/applies15000→16000→17000→18000 in order and owns package locks/generatedtypes/routeTree/AppShell links."
+          "text": "Claimed afterCLS001 foundation. Build real teacher class/hackathon provision UI outside RequireProject and no-account public entry, separate class-entry/team/principal-private capabilities, HttpOnly sessions and recoverable return, QR. No student emails or fake accounts; no private class/team content untilCLS008. Guest/class AI startsdisabled; retention schedule requested not enforced untilPRV003. Reserved18000; root publishes/applies15000\u219216000\u219217000\u219218000 in order and owns package locks/generatedtypes/routeTree/AppShell links."
         }
       ],
       "claim": null,
@@ -10743,7 +11510,11 @@
       "size": "M",
       "kind": "implementation",
       "priority": 25,
-      "depends_on": ["CLS-007", "CLS-002", "EXP-001"],
+      "depends_on": [
+        "CLS-007",
+        "CLS-002",
+        "EXP-001"
+      ],
       "requires_decisions": [],
       "write_scope": [
         "src/routes/join.tsx",
@@ -10754,7 +11525,9 @@
         "src/tests/cls-008/**",
         "supabase/tests/cls-008.sql"
       ],
-      "exclusive_locks": ["cls-008-integration"],
+      "exclusive_locks": [
+        "cls-008-integration"
+      ],
       "read_first": [
         "ProductSpec.md",
         "FEATUREROADMAP_workplan.md",
@@ -10823,7 +11596,9 @@
       "size": "M",
       "kind": "implementation",
       "priority": 25,
-      "depends_on": ["SEC-003"],
+      "depends_on": [
+        "SEC-003"
+      ],
       "requires_decisions": [],
       "write_scope": [
         "src/lib/export/**",
@@ -10834,7 +11609,9 @@
         "package-lock.json",
         "public/fonts/pdf/**"
       ],
-      "exclusive_locks": ["exp-001-integration"],
+      "exclusive_locks": [
+        "exp-001-integration"
+      ],
       "read_first": [
         "ProductSpec.md",
         "FEATUREROADMAP_workplan.md",
@@ -10905,7 +11682,10 @@
       "size": "M",
       "kind": "implementation",
       "priority": 25,
-      "depends_on": ["EXP-001", "FERPA-001"],
+      "depends_on": [
+        "EXP-001",
+        "FERPA-001"
+      ],
       "requires_decisions": [],
       "write_scope": [
         "src/lib/export/**",
@@ -10925,7 +11705,9 @@
         "src/components/demo/StudyLoopDemo.tsx",
         "src/components/marketing/LiveMarketingPractice.tsx"
       ],
-      "exclusive_locks": ["activity-export-adapters"],
+      "exclusive_locks": [
+        "activity-export-adapters"
+      ],
       "read_first": [
         "ProductSpec.md",
         "FEATUREROADMAP_workplan.md",
@@ -11004,7 +11786,12 @@
       "size": "M",
       "kind": "implementation",
       "priority": 25,
-      "depends_on": ["EXP-002", "CLS-003", "CLS-008", "SHR-001"],
+      "depends_on": [
+        "EXP-002",
+        "CLS-003",
+        "CLS-008",
+        "SHR-001"
+      ],
       "requires_decisions": [],
       "write_scope": [
         "src/lib/export/**",
@@ -11014,7 +11801,9 @@
         "src/tests/exp-003/**",
         "supabase/tests/exp-003.sql"
       ],
-      "exclusive_locks": ["exp-003-integration"],
+      "exclusive_locks": [
+        "exp-003-integration"
+      ],
       "read_first": [
         "ProductSpec.md",
         "FEATUREROADMAP_workplan.md",
@@ -11083,14 +11872,22 @@
       "size": "M",
       "kind": "research",
       "priority": 25,
-      "depends_on": ["FERPA-001", "CLS-008", "PRV-002", "EXP-003", "PRV-003"],
+      "depends_on": [
+        "FERPA-001",
+        "CLS-008",
+        "PRV-002",
+        "EXP-003",
+        "PRV-003"
+      ],
       "requires_decisions": [],
       "write_scope": [
         "docs/privacy/institution-review.md",
         "docs/privacy/agreements/**",
         "research/classroom-privacy-review.md"
       ],
-      "exclusive_locks": ["ferpa-002-integration"],
+      "exclusive_locks": [
+        "ferpa-002-integration"
+      ],
       "read_first": [
         "ProductSpec.md",
         "FEATUREROADMAP_workplan.md",
@@ -11159,7 +11956,11 @@
       "size": "M",
       "kind": "implementation",
       "priority": 25,
-      "depends_on": ["CLS-008", "PRV-002", "FERPA-001"],
+      "depends_on": [
+        "CLS-008",
+        "PRV-002",
+        "FERPA-001"
+      ],
       "requires_decisions": [],
       "write_scope": [
         "supabase/migrations/**",
@@ -11168,7 +11969,9 @@
         "src/tests/prv-003/**",
         "supabase/tests/prv-003.sql"
       ],
-      "exclusive_locks": ["prv-003-integration"],
+      "exclusive_locks": [
+        "prv-003-integration"
+      ],
       "read_first": [
         "ProductSpec.md",
         "FEATUREROADMAP_workplan.md",
@@ -11237,7 +12040,11 @@
       "size": "M",
       "kind": "implementation",
       "priority": 25,
-      "depends_on": ["WS-002", "SEC-005", "AI-007"],
+      "depends_on": [
+        "WS-002",
+        "SEC-005",
+        "AI-007"
+      ],
       "requires_decisions": [],
       "write_scope": [
         "supabase/migrations/20261018020000_archived_workspace_freeze.sql",
@@ -11259,9 +12066,17 @@
         "src/components/teaching/TeacherPlanner.tsx",
         "src/components/ConsentFields.tsx",
         "src/lib/consent.functions.ts",
-        "src/routes/_authenticated/account.tsx"
+        "src/routes/_authenticated/account.tsx",
+        "supabase/tests/sec-003.sql",
+        "supabase/tests/ws-001.sql",
+        "supabase/tests/cls-001.sql",
+        "supabase/tests/sec-004.sql",
+        "supabase/tests/teacher-plans.sql",
+        "supabase/tests/disc-001.sql"
       ],
-      "exclusive_locks": ["ws-009-integration"],
+      "exclusive_locks": [
+        "ws-009-integration"
+      ],
       "read_first": [
         "ProductSpec.md",
         "FEATUREROADMAP_workplan.md",
@@ -11304,6 +12119,14 @@
         {
           "date": "2026-10-18",
           "text": "Approved exact caller UI copy scopes for archive errors and obsolete account archive statement. Core consent.ts remains immutable-v5 bound and outside scope; use wrapper/local error handling without refreshing historical evaluation pins. Context19 owner read/withdraw forward guards must be coordinated with its worker."
+        },
+        {
+          "date": "2026-10-18",
+          "text": "Approved six existing SQL fixture updates for earlier42501 owner/column denial and a real archived Discovery mutation instead of no-op; positive/negative authorization coverage retained. Independent review caught and fixed DELETE-only generated-outreach replacement and contact-unlink AI-lineage broadening before apply. Reviewed20 pin5b6c7797 passes85 focused/1487 full SQL assertions and actual archive/write races in removed disposable clone. Backend/UI handoffs8d587bf/bda6308 held until19 lands; no original-local/hosted20 apply yet."
+        },
+        {
+          "date": "2026-10-18",
+          "text": "Integrated76b13f2/6731225. Reviewed20 SHA5b6c7797 applied after19 to dedicated local55322;1534 combined real SQL assertions passed and rolled back. Hosted dry-run listed only19/20, then both applied normally with no seeds/roles. Combined869 app tests/91 files, typecheck, lint and production build pass. Root production archive/read/export/restore rehearsal remains before completion; no raw content deletion or dispatch recall is claimed."
         }
       ],
       "claim": {
@@ -11318,19 +12141,19 @@
       "subtasks": [
         {
           "id": "WS-009.s1",
-          "status": "not_started",
+          "status": "complete",
           "instruction": "Inventory every legacy/new project mutation, generation, invite and snapshot endpoint; distinguish owner archive/restore from ordinary content writes.",
           "notes": []
         },
         {
           "id": "WS-009.s2",
-          "status": "not_started",
+          "status": "complete",
           "instruction": "Enforce archived project policy at server/database boundaries so ordinary changes/new generation/invites/snapshots fail while owner read/export/restore remain authorized; keep existing metadata-only behavior disclosed until applied.",
           "notes": []
         },
         {
           "id": "WS-009.s3",
-          "status": "not_started",
+          "status": "in_progress",
           "instruction": "Verify owner/editor/viewer/direct client/RPC attempts, pending saves across archive, restore, idempotent retries, export and no private data deletion.",
           "notes": []
         }
@@ -11345,7 +12168,11 @@
       "size": "M",
       "kind": "implementation",
       "priority": 15,
-      "depends_on": ["WS-002", "PRV-001", "EXP-001"],
+      "depends_on": [
+        "WS-002",
+        "PRV-001",
+        "EXP-001"
+      ],
       "requires_decisions": [],
       "write_scope": [
         "supabase/migrations/20261018013000_discovery_workspaces.sql",
@@ -11359,7 +12186,10 @@
         "docs/pedagogy/discovery-implementation.md",
         "scripts/check-discovery-concurrency.mjs"
       ],
-      "exclusive_locks": ["discovery-workspace-schema", "discovery-flow"],
+      "exclusive_locks": [
+        "discovery-workspace-schema",
+        "discovery-flow"
+      ],
       "read_first": [
         "ProductSpec.md",
         "FEATUREROADMAP_workplan.md",
@@ -11434,7 +12264,12 @@
       "size": "M",
       "kind": "implementation",
       "priority": 15,
-      "depends_on": ["DISC-001", "AI-004", "AI-007", "AI-008"],
+      "depends_on": [
+        "DISC-001",
+        "AI-004",
+        "AI-007",
+        "AI-008"
+      ],
       "requires_decisions": [],
       "write_scope": [
         "src/lib/ai.functions.ts",
@@ -11444,7 +12279,9 @@
         "src/tests/disc-002/**",
         "evals/**"
       ],
-      "exclusive_locks": ["disc-002-integration"],
+      "exclusive_locks": [
+        "disc-002-integration"
+      ],
       "read_first": [
         "ProductSpec.md",
         "FEATUREROADMAP_workplan.md",
@@ -11513,7 +12350,12 @@
       "size": "M",
       "kind": "implementation",
       "priority": 15,
-      "depends_on": ["DISC-001", "DISC-002", "EV-003", "EV-006"],
+      "depends_on": [
+        "DISC-001",
+        "DISC-002",
+        "EV-003",
+        "EV-006"
+      ],
       "requires_decisions": [],
       "write_scope": [
         "src/components/discovery/**",
@@ -11526,7 +12368,9 @@
         "supabase/migrations/**",
         "supabase/tests/disc-003.sql"
       ],
-      "exclusive_locks": ["disc-003-integration"],
+      "exclusive_locks": [
+        "disc-003-integration"
+      ],
       "read_first": [
         "ProductSpec.md",
         "FEATUREROADMAP_workplan.md",
@@ -11599,7 +12443,10 @@
       "size": "M",
       "kind": "implementation",
       "priority": 15,
-      "depends_on": ["DISC-001", "AI-007"],
+      "depends_on": [
+        "DISC-001",
+        "AI-007"
+      ],
       "requires_decisions": [],
       "write_scope": [
         "supabase/migrations/20261018019000_reviewed_public_context.sql",
@@ -11610,7 +12457,9 @@
         "supabase/tests/ctx-001.sql",
         "docs/architecture/public-context.md"
       ],
-      "exclusive_locks": ["ctx-001-integration"],
+      "exclusive_locks": [
+        "ctx-001-integration"
+      ],
       "read_first": [
         "ProductSpec.md",
         "FEATUREROADMAP_workplan.md",
@@ -11649,6 +12498,10 @@
         {
           "date": "2026-10-18",
           "text": "First implementation slice: authenticated bounded public-site/GitHub retrieval, trusted unreviewed preview and explicit reviewed excerpt storage; no provider inclusion yet. Separate private-source processing permission is required; browser document text cannot forge retrieval/review. Reserve additive 19000 after pending 18000. Root serializes dependencies, generated types, PDFs/portfolio and publication. Parent remains in progress until reviewed-source PDF and source-fenced AI integration pass; do not broaden project descriptions or edit historical17000/evalv5."
+        },
+        {
+          "date": "2026-10-18",
+          "text": "First slice integrated3df174d/c9671f0; final19 SHA716c3248 applied local and hosted before20, default retrieval policy disabled. Combined869 app tests/1534 SQL assertions pass, production build/typecheck/lint pass. New owner PDFs cover unsaved selection, whole preview, reviewed excerpt and withdrawal receipt plus fail-closed portfolio acquisition. Actual PDF visual QA passes at adapter8cf693b1:1/8/2/1/12 pages, all140 paragraphs/Unicode/end markers preserved, withdrawn source omitted. Admin capability-only runtime button performs no outbound request/toggle. Deployed runtime/network check and controlled operator activation pending. Reviewed public source AI adapter and new immutable evaluation remain unbuilt; parent stays in_progress, AI/sharing unknown."
         }
       ],
       "claim": {
@@ -11663,19 +12516,19 @@
       "subtasks": [
         {
           "id": "CTX-001.s1",
-          "status": "not_started",
+          "status": "in_progress",
           "instruction": "Allow explicit bounded retrieval of a public live-site URL or public GitHub repository description/readme/selected files, without credentials, executing code or following source instructions.",
           "notes": []
         },
         {
           "id": "CTX-001.s2",
-          "status": "not_started",
+          "status": "in_progress",
           "instruction": "Enforce protocol/port/private-network and redirect protections, DNS/rebinding-safe outbound policy, byte/time/file-count limits and a preview; fail closed on unsupported hosts and keep manual paste.",
           "notes": []
         },
         {
           "id": "CTX-001.s3",
-          "status": "not_started",
+          "status": "in_progress",
           "instruction": "Store selected source revisions/hash/retrieval time separately from author claims and customer evidence; apply processing permissions and attach only reviewed bounded snippets to generation and exports.",
           "notes": []
         }
@@ -11686,73 +12539,108 @@
     {
       "legacy_id": "DOC-001",
       "disposition": "complete",
-      "successors": ["DOC-001"],
+      "successors": [
+        "DOC-001"
+      ],
       "reason": "Committed and pushed; describes current code and candidate value. Original dated Notes remain in FEATUREROADMAP_history.md."
     },
     {
       "legacy_id": "DOC-002",
       "disposition": "complete",
-      "successors": ["DOC-002"],
+      "successors": [
+        "DOC-002"
+      ],
       "reason": "Concurrent completed commit a2d69a3 added team names and removed the old email link. Credits are preserved in README and the historical roadmap snapshot."
     },
     {
       "legacy_id": "F-001",
       "disposition": "deferred",
-      "successors": ["F-001"],
+      "successors": [
+        "F-001"
+      ],
       "reason": "Deferred. F-007 verifies the baseline but does not establish that wrapper cleanup is needed. Activation requires a recorded concrete reason and compatible replacement plan; retain Lovable history protections. Original dated Notes remain in FEATUREROADMAP_history.md."
     },
     {
       "legacy_id": "F-002",
       "disposition": "split",
-      "successors": ["AI-001", "AI-004", "AI-005"],
+      "successors": [
+        "AI-001",
+        "AI-004",
+        "AI-005"
+      ],
       "reason": "Existing timeout/retry is partial; complete strict runtime validation, bounded retries, accounting and evaluated routing before marking reliability done. Original dated Notes remain in FEATUREROADMAP_history.md."
     },
     {
       "legacy_id": "F-003",
       "disposition": "split",
-      "successors": ["AI-002", "AI-007"],
+      "successors": [
+        "AI-002",
+        "AI-007"
+      ],
       "reason": "Versioned prompts/schema parity and authorized grounded context are separate migration/integration tasks. Original dated Notes remain in FEATUREROADMAP_history.md."
     },
     {
       "legacy_id": "F-004",
       "disposition": "split",
-      "successors": ["AI-003", "AI-006", "AI-008"],
+      "successors": [
+        "AI-003",
+        "AI-006",
+        "AI-008"
+      ],
       "reason": "Offline harness, capped actual comparisons and release gate have distinct evidence. Original dated Notes remain in FEATUREROADMAP_history.md."
     },
     {
       "legacy_id": "F-005",
       "disposition": "split",
-      "successors": ["AI-004", "ADM-001", "ADM-002"],
+      "successors": [
+        "AI-004",
+        "ADM-001",
+        "ADM-002"
+      ],
       "reason": "Authoritative cost/usage ledger and protected aggregate dashboard; a UI graph alone cannot enforce budget. Original dated Notes remain in FEATUREROADMAP_history.md."
     },
     {
       "legacy_id": "F-006",
       "disposition": "split",
-      "successors": ["PRV-001", "PRV-002", "SEC-001", "SEC-003"],
+      "successors": [
+        "PRV-001",
+        "PRV-002",
+        "SEC-001",
+        "SEC-003"
+      ],
       "reason": "Persist processing/sharing choices, ownership consistency and scoped export/delete; existing local checkbox is insufficient. Original dated Notes remain in FEATUREROADMAP_history.md."
     },
     {
       "legacy_id": "F-007",
       "disposition": "complete",
-      "successors": ["F-007"],
+      "successors": [
+        "F-007"
+      ],
       "reason": "CI success verified for 7006f87 on 2026-10-17. Local typecheck, 17 tests, Vercel build and scoped lint passed in DOC-001. Six existing refresh warnings; schema parity stays with AI-002. Original dated Notes remain in FEATUREROADMAP_history.md."
     },
     {
       "legacy_id": "F-008",
       "disposition": "expanded",
-      "successors": ["EV-001"],
+      "successors": [
+        "EV-001"
+      ],
       "reason": "Preserve both outreach and synthesis with atomic history and explicit acceptance. Original dated Notes remain in FEATUREROADMAP_history.md."
     },
     {
       "legacy_id": "F-009",
       "disposition": "split",
-      "successors": ["F-009a", "F-009b"],
+      "successors": [
+        "F-009a",
+        "F-009b"
+      ],
       "reason": "Production connection was owner-confirmed; preview environment/auth acceptance remains not started. Original dated Notes remain in FEATUREROADMAP_history.md."
     },
     {
       "legacy_id": "F-010",
       "disposition": "complete",
-      "successors": ["F-010"],
+      "successors": [
+        "F-010"
+      ],
       "reason": "Owner confirmed sign-in and AI generation on 2026-10-17; not a new uptime claim. Original dated Notes remain in FEATUREROADMAP_history.md."
     },
     {
@@ -11770,79 +12658,109 @@
     {
       "legacy_id": "G-004",
       "disposition": "retained",
-      "successors": ["G-004"],
+      "successors": [
+        "G-004"
+      ],
       "reason": "Research decision is retained independently of engineering authorization; no automatic erasure of the owner-requested broader plan. Original dated Notes remain in FEATUREROADMAP_history.md."
     },
     {
       "legacy_id": "I2-001",
       "disposition": "revised",
-      "successors": ["EV-004"],
+      "successors": [
+        "EV-004"
+      ],
       "reason": "Keep distinct requested/agreed/fulfilled actions; avoid universal proof scoring or forced positive gates. Original dated Notes remain in FEATUREROADMAP_history.md."
     },
     {
       "legacy_id": "I2-002",
       "disposition": "revised",
-      "successors": ["EV-004", "EV-003"],
+      "successors": [
+        "EV-004",
+        "EV-003"
+      ],
       "reason": "UI distinguishes observed actions and decisions; original mandatory validation gate is not retained. Original dated Notes remain in FEATUREROADMAP_history.md."
     },
     {
       "legacy_id": "I2-003",
       "disposition": "retained",
-      "successors": ["EV-005"],
+      "successors": [
+        "EV-005"
+      ],
       "reason": "Optional grounded challenge through the shared, metered AI entry point. Original dated Notes remain in FEATUREROADMAP_history.md."
     },
     {
       "legacy_id": "I2-004",
       "disposition": "split",
-      "successors": ["EV-006"],
+      "successors": [
+        "EV-006"
+      ],
       "reason": "Deterministic cues plus optional evaluated low-cost rewrite; no truth/authenticity score. Original dated Notes remain in FEATUREROADMAP_history.md."
     },
     {
       "legacy_id": "I2-005",
       "disposition": "split",
-      "successors": ["AN-001", "AN-002"],
+      "successors": [
+        "AN-001",
+        "AN-002"
+      ],
       "reason": "Define funnel/events before collection; distinguish application adoption and founder-entered customer pipeline. Original dated Notes remain in FEATUREROADMAP_history.md."
     },
     {
       "legacy_id": "I3-001",
       "disposition": "split",
-      "successors": ["SHR-001", "SHR-002"],
+      "successors": [
+        "SHR-001",
+        "SHR-002"
+      ],
       "reason": "Reviewed immutable snapshot, then explicit scoped grants/revocation. Original dated Notes remain in FEATUREROADMAP_history.md."
     },
     {
       "legacy_id": "I3-002",
       "disposition": "expanded",
-      "successors": ["EV-007"],
+      "successors": [
+        "EV-007"
+      ],
       "reason": "Manual first-ask guidance plus bounded low-cost rewrite, never automatic sending. Original dated Notes remain in FEATUREROADMAP_history.md."
     },
     {
       "legacy_id": "L-001",
       "disposition": "retained",
-      "successors": ["L-001"],
+      "successors": [
+        "L-001"
+      ],
       "reason": "Scheduled by Iteration 5; no implementation or validation claimed. Original dated Notes remain in FEATUREROADMAP_history.md."
     },
     {
       "legacy_id": "L-002",
       "disposition": "retained",
-      "successors": ["L-002"],
+      "successors": [
+        "L-002"
+      ],
       "reason": "Scheduled by Iteration 5; no implementation or validation claimed. Original dated Notes remain in FEATUREROADMAP_history.md."
     },
     {
       "legacy_id": "P-001",
       "disposition": "split",
-      "successors": ["WEB-003", "P-001b"],
+      "successors": [
+        "WEB-003",
+        "P-001b"
+      ],
       "reason": "Current technical schematics are complete. The owner explicitly promoted an event pitch deck for the Babson workshop; current/proposed capabilities and fictional examples are labeled, with no invented outcome evidence. Original dated Notes remain in FEATUREROADMAP_history.md."
     },
     {
       "legacy_id": "R0-001",
       "disposition": "complete",
-      "successors": ["R0-001"],
+      "successors": [
+        "R0-001"
+      ],
       "reason": "Workspace created; no participant findings implied. Original dated Notes remain in FEATUREROADMAP_history.md."
     },
     {
       "legacy_id": "R0-002",
       "disposition": "complete",
-      "successors": ["R0-002"],
+      "successors": [
+        "R0-002"
+      ],
       "reason": "Inspiration only; direct Reddit audit remains cancelled. Original dated Notes remain in FEATUREROADMAP_history.md."
     },
     {
@@ -11854,115 +12772,159 @@
     {
       "legacy_id": "R0-004",
       "disposition": "split",
-      "successors": ["R0-004a", "R0-004b"],
+      "successors": [
+        "R0-004a",
+        "R0-004b"
+      ],
       "reason": "Human founder sample split into first three and remaining two to five eligible cases. Original dated Notes remain in FEATUREROADMAP_history.md."
     },
     {
       "legacy_id": "R0-004a",
       "disposition": "retained",
-      "successors": ["R0-004a"],
+      "successors": [
+        "R0-004a"
+      ],
       "reason": "Not started; requires human recruiting and interviews. Agents may prepare documents or analyze notes the human supplies, but may not contact participants. Original dated Notes remain in FEATUREROADMAP_history.md."
     },
     {
       "legacy_id": "R0-004b",
       "disposition": "retained",
-      "successors": ["R0-004b"],
+      "successors": [
+        "R0-004b"
+      ],
       "reason": "Not started. Completes the human founder-study portion of legacy R0-004 only when both R0-004a and R0-004b meet their criteria. Original dated Notes remain in FEATUREROADMAP_history.md."
     },
     {
       "legacy_id": "R0-005",
       "disposition": "retained",
-      "successors": ["R0-005"],
+      "successors": [
+        "R0-005"
+      ],
       "reason": "Not started. Engineering may proceed within the newly authorized plan while this evidence work remains open; feature delivery is not market validation. Original dated Notes remain in FEATUREROADMAP_history.md."
     },
     {
       "legacy_id": "VP-001",
       "disposition": "complete",
-      "successors": ["VP-001"],
+      "successors": [
+        "VP-001"
+      ],
       "reason": "Completed draft; unsupported/secondary-source claims still require VP-007 audit. Original dated Notes remain in FEATUREROADMAP_history.md."
     },
     {
       "legacy_id": "VP-002",
       "disposition": "complete",
-      "successors": ["VP-002"],
+      "successors": [
+        "VP-002"
+      ],
       "reason": "Guides exist; VP-008 revises tests and processing choices. Original dated Notes remain in FEATUREROADMAP_history.md."
     },
     {
       "legacy_id": "VP-003",
       "disposition": "retained",
-      "successors": ["VP-003"],
+      "successors": [
+        "VP-003"
+      ],
       "reason": "Not started. Agent prepares/organizes only; human conducts outreach and interviews. This study can proceed alongside founder interviews and engineering. Original dated Notes remain in FEATUREROADMAP_history.md."
     },
     {
       "legacy_id": "VP-004",
       "disposition": "split",
-      "successors": ["VP-004a", "VP-004b"],
+      "successors": [
+        "VP-004a",
+        "VP-004b"
+      ],
       "reason": "Manual comprehension/action study can run without traffic; live A/B requires its own traffic and attribution plan. Original dated Notes remain in FEATUREROADMAP_history.md."
     },
     {
       "legacy_id": "VP-004a",
       "disposition": "retained",
-      "successors": ["VP-004a"],
+      "successors": [
+        "VP-004a"
+      ],
       "reason": "Not started. Replaces the manual-study part of legacy VP-004; automated VP-004b remains separately deferred. No external contacts are sent by the agent. Original dated Notes remain in FEATUREROADMAP_history.md."
     },
     {
       "legacy_id": "VP-004b",
       "disposition": "deferred",
-      "successors": ["VP-004b"],
+      "successors": [
+        "VP-004b"
+      ],
       "reason": "Activation requires a coordinator-recorded traffic/power or explicitly exploratory plan, validated attribution and privacy settings after AN-002/WEB-004. Manual VP-004a is sufficient for early comprehension learning; live A/B work is not currently started. Original dated Notes remain in FEATUREROADMAP_history.md."
     },
     {
       "legacy_id": "VP-005",
       "disposition": "dropped",
-      "successors": ["VP-005"],
+      "successors": [
+        "VP-005"
+      ],
       "reason": "Dropped: the user now explicitly requests real class spaces and teacher workflows (CLS tasks). A fake-door interest table is superseded, not completed; no instructor purchase or efficacy claim follows from this scope decision. Original dated Notes remain in FEATUREROADMAP_history.md."
     },
     {
       "legacy_id": "VP-006",
       "disposition": "split",
-      "successors": ["VP-006a", "VP-006b"],
+      "successors": [
+        "VP-006a",
+        "VP-006b"
+      ],
       "reason": "Evidence decision and later production positioning rollout have separate checks. Original dated Notes remain in FEATUREROADMAP_history.md."
     },
     {
       "legacy_id": "VP-006a",
       "disposition": "retained",
-      "successors": ["VP-006a"],
+      "successors": [
+        "VP-006a"
+      ],
       "reason": "Not started. This replaces the decision part of legacy VP-006; it is not a blanket veto or completion gate for the newly authorized full engineering plan. Original dated Notes remain in FEATUREROADMAP_history.md."
     },
     {
       "legacy_id": "VP-006b",
       "disposition": "retained",
-      "successors": ["VP-006b"],
+      "successors": [
+        "VP-006b"
+      ],
       "reason": "Not started. Future evidence-based reconciliation of WEB-004/EDU-002, not a prerequisite that prevents their factual candidate materials from shipping earlier. If the actual teaching route differs, coordinator assigns that existing route before work; do not create a duplicate. Original dated Notes remain in FEATUREROADMAP_history.md."
     },
     {
       "legacy_id": "VP-007",
       "disposition": "retained",
-      "successors": ["VP-007"],
+      "successors": [
+        "VP-007"
+      ],
       "reason": "Not started. Extends the existing VP-007 research audit; DOC-001 updated product documentation but did not complete this task. No participant findings exist merely because a canvas exists. Original dated Notes remain in FEATUREROADMAP_history.md."
     },
     {
       "legacy_id": "VP-008",
       "disposition": "retained",
-      "successors": ["VP-008"],
+      "successors": [
+        "VP-008"
+      ],
       "reason": "Not started. Human studies are not autonomous recruiting authorization. The coordinator may prepare materials and organize supplied notes; people conduct recruiting/interviews. Original dated Notes remain in FEATUREROADMAP_history.md."
     },
     {
       "legacy_id": "VP-009",
       "disposition": "retained",
-      "successors": ["VP-009"],
+      "successors": [
+        "VP-009"
+      ],
       "reason": "Not started. Agents can prepare the prototype; human observations are required. This manual test does not complete the planned Evidence Pack or structured-decision implementation. Original dated Notes remain in FEATUREROADMAP_history.md."
     },
     {
       "legacy_id": "VP-010",
       "disposition": "retained",
-      "successors": ["VP-010"],
+      "successors": [
+        "VP-010"
+      ],
       "reason": "Not started. Human-owned participation and follow-up; the coordinator prepares materials and analyzes supplied evidence. This does not satisfy feature-specific or classroom pilots elsewhere in the plan. Original dated Notes remain in FEATUREROADMAP_history.md."
     },
     {
       "legacy_id": "X-001",
       "disposition": "expanded",
-      "successors": ["OPS-001", "OPS-002", "F-009b", "OPS-003"],
+      "successors": [
+        "OPS-001",
+        "OPS-002",
+        "F-009b",
+        "OPS-003"
+      ],
       "reason": "Repeatable local/CI, real isolated preview smoke and migration/restore procedures. Original dated Notes remain in FEATUREROADMAP_history.md."
     }
   ],
@@ -11970,115 +12932,173 @@
     {
       "legacy_id": "FB-01",
       "disposition": "deferred",
-      "successors": ["HOLD-001"],
+      "successors": [
+        "HOLD-001"
+      ],
       "reason": "Discovery of communities needs observed access friction and permitted source workflows."
     },
     {
       "legacy_id": "FB-02",
       "disposition": "scheduled",
-      "successors": ["EV-006"],
+      "successors": [
+        "EV-006"
+      ],
       "reason": "Question coaching uses deterministic feedback before cheap optional AI."
     },
     {
       "legacy_id": "FB-03",
       "disposition": "deferred",
-      "successors": ["HOLD-002"],
+      "successors": [
+        "HOLD-002"
+      ],
       "reason": "Voice adds consent/storage/transcription cost before capture friction is established."
     },
     {
       "legacy_id": "FB-04",
       "disposition": "scheduled",
-      "successors": ["AI-007", "EV-001", "EV-003"],
+      "successors": [
+        "AI-007",
+        "EV-001",
+        "EV-003"
+      ],
       "reason": "Ground sources, preserve reviewed versions, connect evidence to decisions."
     },
     {
       "legacy_id": "FB-05",
       "disposition": "revised",
-      "successors": ["EV-004"],
+      "successors": [
+        "EV-004"
+      ],
       "reason": "Distinct commitments and observed outcomes replace universal proof scores."
     },
     {
       "legacy_id": "FB-06",
       "disposition": "deferred",
-      "successors": ["HOLD-003"],
+      "successors": [
+        "HOLD-003"
+      ],
       "reason": "Follow-up demand must be observed; user controls all communication."
     },
     {
       "legacy_id": "FB-07",
       "disposition": "deferred",
-      "successors": ["HOLD-004"],
+      "successors": [
+        "HOLD-004"
+      ],
       "reason": "Online durable drafts ship first; full offline sync adds conflict/security complexity."
     },
     {
       "legacy_id": "FB-08",
       "disposition": "promoted",
-      "successors": ["WS-001", "WS-002", "WS-003", "WS-004", "WS-005", "WS-006", "WS-007"],
+      "successors": [
+        "WS-001",
+        "WS-002",
+        "WS-003",
+        "WS-004",
+        "WS-005",
+        "WS-006",
+        "WS-007"
+      ],
       "reason": "Owner explicitly requested saving/returning and different ideas; no longer waiting for research permission."
     },
     {
       "legacy_id": "FB-09",
       "disposition": "promoted",
-      "successors": ["CLS-001", "CLS-002", "CLS-003", "CLS-004", "CLS-005", "CLS-006"],
+      "successors": [
+        "CLS-001",
+        "CLS-002",
+        "CLS-003",
+        "CLS-004",
+        "CLS-005",
+        "CLS-006"
+      ],
       "reason": "Owner explicitly requested real teacher class spaces; reviewed submission boundaries replace fake door."
     },
     {
       "legacy_id": "FB-10",
       "disposition": "scheduled",
-      "successors": ["EV-002", "EV-003"],
+      "successors": [
+        "EV-002",
+        "EV-003"
+      ],
       "reason": "Link experiments to a decision, expected observation and later outcome."
     },
     {
       "legacy_id": "FB-11",
       "disposition": "deferred",
-      "successors": ["HOLD-005"],
+      "successors": [
+        "HOLD-005"
+      ],
       "reason": "Hosted survey distribution needs privacy/abuse scope and observed need."
     },
     {
       "legacy_id": "FB-12",
       "disposition": "split",
-      "successors": ["AI-004", "AI-005", "ADM-002", "HOLD-006"],
+      "successors": [
+        "AI-004",
+        "AI-005",
+        "ADM-002",
+        "HOLD-006"
+      ],
       "reason": "Internal cheap routing and usage/caps are scheduled; end-user model picker remains unproven."
     },
     {
       "legacy_id": "FB-13",
       "disposition": "scheduled",
-      "successors": ["SHR-001", "SHR-002"],
+      "successors": [
+        "SHR-001",
+        "SHR-002"
+      ],
       "reason": "Reviewed evidence snapshots and explicit revocable sharing."
     },
     {
       "legacy_id": "FB-14",
       "disposition": "scheduled",
-      "successors": ["EV-007"],
+      "successors": [
+        "EV-007"
+      ],
       "reason": "First-ask guidance with optional bounded rewrite."
     },
     {
       "legacy_id": "FB-15",
       "disposition": "scheduled",
-      "successors": ["EV-005"],
+      "successors": [
+        "EV-005"
+      ],
       "reason": "Evidence-linked challenge, optional and human-reviewed."
     },
     {
       "legacy_id": "FB-16",
       "disposition": "deferred",
-      "successors": ["HOLD-007"],
+      "successors": [
+        "HOLD-007"
+      ],
       "reason": "Pain-mining source rights and user need remain unresolved."
     },
     {
       "legacy_id": "FB-17",
       "disposition": "deferred",
-      "successors": ["HOLD-008"],
+      "successors": [
+        "HOLD-008"
+      ],
       "reason": "Peer participation is not customer relevance; network needs real demand and moderation scope."
     },
     {
       "legacy_id": "FB-18",
       "disposition": "deferred",
-      "successors": ["HOLD-009"],
+      "successors": [
+        "HOLD-009"
+      ],
       "reason": "Digest needs repeated-use evidence, events and explicit notification preferences."
     },
     {
       "legacy_id": "FB-19",
       "disposition": "scheduled",
-      "successors": ["EV-002", "EV-003", "EV-005"],
+      "successors": [
+        "EV-002",
+        "EV-003",
+        "EV-005"
+      ],
       "reason": "Manual research continues while requested implementation records evidence and next decisions."
     }
   ],
@@ -12088,12 +13108,12 @@
     "openrouter_limit_usd": 25,
     "openrouter_spend_usd": 0,
     "deployment": "Production deployment and safe tested migrations authorized; commit/push often. No other paid services.",
-    "demo_priority": "Tomorrow’s Babson mini hackathon presentation for 45 academics; strong educator story, reliable fictional sample data and polished walkthrough.",
+    "demo_priority": "Tomorrow\u2019s Babson mini hackathon presentation for 45 academics; strong educator story, reliable fictional sample data and polished walkthrough.",
     "real_testers": "Supabase authorized for testers; no specific people/contact channels named. No unsolicited external messaging.",
     "checkpoint_note": "Owner-directed final one-hour sprint superseded the original 13:29 UTC checkpoint; approximately 12:13 UTC per docs/roadmap/autonomous-run.md.",
     "synthetic_ai_budget_usd": 1,
-    "spend_note": "At this reconciliation cutoff no deployed provider trial is confirmed; AI-009 must record measured cost after the authorized request. The workshop reservation cap is separate from and within the owner’s total $25 limit.",
+    "spend_note": "At this reconciliation cutoff no deployed provider trial is confirmed; AI-009 must record measured cost after the authorized request. The workshop reservation cap is separate from and within the owner\u2019s total $25 limit.",
     "continuation_objective": "Owner explicitly requests continued building until every feasible authorized roadmap item is complete, verified and deployed; continue independent work around external blockers. No new time or token budget specified. Prior OpenRouter $25 total cap and no other paid services persist.",
-    "goal_control_note": "2026-10-18: get_goal reports the prior demo goal paused. create_goal rejected a duplicate unfinished goal; update_goal cannot resume. Codex app computer control is unavailable. User informed to use Resume goal or /goal resume; implementation continues in the active turn. Do not mark incomplete work complete to replace the goal."
+    "goal_control_note": "2026-10-18: fresh get_goal confirms active following user/app resumption. Continue full feasible roadmap across turns, retain actual completion/verification boundaries and $25 OpenRouter cap. Ordinary account usage available; no reset credits reported."
   }
 }

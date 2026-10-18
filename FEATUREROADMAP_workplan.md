@@ -34,9 +34,9 @@ last_documentation_update: "2026-10-18: AI-002 complete; resumed lifecycle/admin
 resume_hint: >-
   Owner explicitly requests continuing until every feasible authorized roadmap item is built,
   verified, committed, pushed and deployed. Preserve the $25 total OpenRouter cap and no
-  other paid services. Prior goal remains paused in the app; duplicate creation was rejected
-  and resume is unavailable to model tools. User informed to use Resume goal or /goal resume.
-  Work continues in the active turn; never falsely complete the old goal to replace it.
+  other paid services. Goal reactivated by the app/user control and verified active on
+  2026-10-18; continue across turns without marking incomplete work complete.
+  Ordinary account usage is available; no reset credits currently reported.
   DISC-001 is deployed: the fictional StudyLoop manual cycle was saved and reloaded at
   revision 7, including hypothesis, five-person bias map, script, context and decision.
   Existing interview questions and counts were preserved. AI feedback/retrieval are pending.
@@ -62,6 +62,11 @@ resume_hint: >-
   CTX-001 first retrieval/review slice in progress with19000; no provider inclusion yet.
   Migrations16/17/18 are published/applied. Next publication/apply order19,20,21.
   Root reviews pinned source, regenerates types and verifies combined gates.
+  Context19 and archive20 are integrated/applied local and hosted in order;1534 real SQL
+  assertions,869 app tests, typecheck/lint/build pass. Source retrieval remains disabled
+  until deployed runtime/network review. Preview/review/withdrawal PDFs and portfolio QA
+  pass (1/8/2/1/12 pages). New admin capability check changes no policy. WS009 awaits live
+  archive/read/export/restore rehearsal. CLS002 candidate21 awaits reviewed clone checks.
   General model quality, guest activities/submissions, sharing and retention remain unfinished.
 
 ```
@@ -337,3 +342,7 @@ Use this after a completed wave, a material scope/evidence change, or an explici
 | 2026-10-18 | Owner promoted a core Next 50 $0 marketing lab inspired by BUS131 slides/board: audience, physical/digital channels, AI content, measurable one-week test and reflection. Added MKT-001–008, fictional presenter-data seeding and original logo/favicon work. Pitch deck promoted for tomorrow with explicit pedagogy and truthful current/proposed claims. |
 
 **2026-10-18 — final-sprint reconciliation at f8bc878:** DEMO-002 completed for verified production count-only presenter access; WS-008, EDU-005 and DEMO-003 recorded complete for shipped narrow features. Coordinator reports 219 app tests, 391 real isolated SQL assertions, typecheck/lint/build green and Vercel READY. Hosted private teacher plan seeded through owner RPC at revision 1; actual local desktop shows four authored teams and 45 planned capacity, not enrollment. AI-009 remains in progress for the deployed provider trial, with no live-model success claimed. Shared-class, broad admin, research and realtime gates remain unchanged.
+
+**2026-10-18 — context/archive integration:** Reviewed19 then20 applied normally to dedicated local55322 and hosted after an exact dry-run; no seeds, role changes or new provider calls. Combined869 application tests/91 files and1534 rollback SQL assertions pass, plus typecheck, lint and production build. Source review PDFs preserve complete text and withdrawal boundaries; actual1/8/2/1/12-page visual QA passes. Retrieval policy stays disabled pending deployed runtime and controlled network review; reviewed-source AI inclusion remains unfinished. Archive protections await final production rehearsal. Candidate21 remains unapplied pending review and disposable-clone verification. Goal tool still reports paused; active-turn work continues while the user-facing resume control is required for automatic continuation.
+
+**2026-10-18 — goal resumed:** Fresh get_goal now reports active following user/app resumption. Ordinary Codex usage is available and no reset credits are reported. The preceding work changed source, hosted schema and verification evidence, so this is continued progress. Resume deployment and classroom integration from the exact preserved commits; do not restart work.

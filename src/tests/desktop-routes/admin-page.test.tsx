@@ -28,6 +28,9 @@ vi.mock("@tanstack/react-query", () => ({
 }));
 vi.mock("@tanstack/react-start", () => ({ useServerFn: () => vi.fn() }));
 vi.mock("@/lib/admin.functions", () => ({ getAdminSnapshot: vi.fn() }));
+vi.mock("@/components/admin/PublicContextReadiness", () => ({
+  PublicContextReadiness: () => <section>Public-source import readiness</section>,
+}));
 vi.mock("@/components/AppShell", () => ({
   AppShell: ({ children }: { children: ReactNode }) => <main>{children}</main>,
   Card: ({ children }: { children: ReactNode }) => <section>{children}</section>,
@@ -78,6 +81,7 @@ describe("admin operational presentation", () => {
     expect(screen.getByRole("alert")).toHaveTextContent("Admin access unavailable");
     expect(screen.queryByLabelText("Projects: 7")).not.toBeInTheDocument();
     expect(screen.queryByText("Server-verified admin access")).not.toBeInTheDocument();
+    expect(screen.queryByText("Public-source import readiness")).not.toBeInTheDocument();
   });
   it("refreshes deliberately and disables repeated requests while fetching", () => {
     const view = render(<Page />);

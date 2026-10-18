@@ -1,6 +1,15 @@
 /** Every new learning activity must register a named PDF adapter and explicit source boundary here. */
 export const ACTIVITY_EXPORT_COVERAGE = [
   {
+    id: "public-reference-review",
+    adapter: "publicContextActivities",
+    source: "src/components/discovery/RemoteContextPanel.tsx",
+    status: "mounted",
+    scope: "owner",
+    granularity:
+      "Each unreviewed preview, unsaved excerpt selection, reviewed reference and redacted withdrawal receipt; saved portfolio includes authorized records",
+  },
+  {
     id: "discovery-cycle",
     adapter: "discoveryActivities",
     source: "src/components/discovery/DiscoveryWorkspace.tsx",

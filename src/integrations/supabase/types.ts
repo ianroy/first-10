@@ -913,6 +913,16 @@ export type Database = {
         };
         Returns: Json;
       };
+      begin_public_context_retrieval: {
+        Args: {
+          p_actor: string;
+          p_kind: string;
+          p_operation_id: string;
+          p_project_id: string;
+          p_request_sha256: string;
+        };
+        Returns: Json;
+      };
       claim_ai_usage: { Args: { p_attempt_id: string; p_operation_id: string }; Returns: Json };
       claim_ai_usage_with_context: {
         Args: { p_attempt_id: string; p_manifest: Json; p_operation_id: string };
@@ -920,6 +930,10 @@ export type Database = {
       };
       complete_interview_draft: {
         Args: { p_draft_id: string; p_expected_revision: number; p_project_id: string };
+        Returns: Json;
+      };
+      complete_public_context_retrieval: {
+        Args: { p_attempt_id: string; p_operation_id: string; p_sources: Json };
         Returns: Json;
       };
       create_class: {
@@ -980,6 +994,10 @@ export type Database = {
         };
         Returns: Json;
       };
+      fail_public_context_retrieval: {
+        Args: { p_attempt_id: string; p_code: string; p_operation_id: string };
+        Returns: undefined;
+      };
       finish_ai_usage: {
         Args: {
           p_action: string;
@@ -1023,6 +1041,7 @@ export type Database = {
         Returns: Json;
       };
       list_project_members: { Args: { p_cursor?: string; p_project_id: string }; Returns: Json };
+      list_public_context: { Args: { p_project_id: string }; Returns: Json };
       load_discovery_workspace: { Args: { p_project_id: string }; Returns: Json };
       load_interview_draft: { Args: { p_draft_id: string; p_project_id: string }; Returns: Json };
       manage_guest_session: { Args: { p_operation: string; p_session: string }; Returns: Json };
@@ -1067,6 +1086,17 @@ export type Database = {
         Returns: Json;
       };
       reserve_demo_ai: { Args: { p_project_id: string; p_request_id: string }; Returns: Json };
+      review_public_context: {
+        Args: {
+          p_excerpt: string;
+          p_expected_hash: string;
+          p_label: string;
+          p_preview_id: string;
+          p_project_id: string;
+          p_storage_permission: boolean;
+        };
+        Returns: Json;
+      };
       revoke_class_invitation: {
         Args: { p_class_id: string; p_invitation_id: string; p_request_id: string };
         Returns: Json;
@@ -1244,6 +1274,10 @@ export type Database = {
           p_expected_revision: number;
           p_request_id: string;
         };
+        Returns: Json;
+      };
+      withdraw_public_context: {
+        Args: { p_expected_revision: number; p_project_id: string; p_source_id: string };
         Returns: Json;
       };
     };
