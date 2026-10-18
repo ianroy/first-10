@@ -3,7 +3,7 @@ import { z } from "zod";
 import type { SupabaseClient } from "@supabase/supabase-js";
 import type { Database } from "@/integrations/supabase/types";
 import type { Project } from "@/lib/data";
-import { requestStructuredDraft } from "./gateway.server";
+import { AIGatewayError, requestStructuredDraft } from "./gateway.server";
 export const DEMO_PROMPT_VERSION = "fictional-marketing-v1";
 const fixture = "first-ten-babson-2026-10-18-v1";
 const safeFailure =
@@ -120,9 +120,9 @@ export async function generateFictionalMarketingPractice({
     if (
       result.model !== "google/gemini-2.5-flash-lite" ||
       !result.provider ||
-      !/google.*vertex/i.test(result.provider)
+      !/^(?:Google|Google Vertex(?: AI)?)$/i.test(result.provider)
     )
-      throw new Error(safeFailure);
+      throw new AIGatewayError("PROVIDER_MISMATCH", safeFailure, 1);
     return {
       draft: result.data,
       metadata: {
@@ -137,7 +137,11 @@ export async function generateFictionalMarketingPractice({
         fictional: true as const,
       },
     };
-  } catch {
+  } catch (error) {
+    console.error(
+      "[FirstTen AI practice]",
+      error instanceof AIGatewayError ? error.code : "RESPONSE_VALIDATION",
+    );
     throw new Error(safeFailure);
   }
 }

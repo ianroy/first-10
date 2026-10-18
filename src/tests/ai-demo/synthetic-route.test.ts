@@ -12,7 +12,10 @@ const h = vi.hoisted(() => ({
 vi.mock("@tanstack/react-start/server", () => ({
   getRequest: () => new Request("https://fixture.test", { headers: { authorization: h.token } }),
 }));
-vi.mock("@/lib/ai/gateway.server", () => ({ requestStructuredDraft: h.request }));
+vi.mock("@/lib/ai/gateway.server", async (importOriginal) => ({
+  ...(await importOriginal<typeof import("@/lib/ai/gateway.server")>()),
+  requestStructuredDraft: h.request,
+}));
 import { generateFictionalMarketingPractice } from "@/lib/ai/demo-marketing.server";
 const owner = "f1d00000-0000-4000-8000-000000000001";
 const version = "first-ten-babson-2026-10-18-v1";
@@ -128,6 +131,24 @@ describe("fixed fictional economical AI practice", () => {
     await expect(generateFictionalMarketingPractice(context())).rejects.toThrow("unavailable");
     expect(h.request).toHaveBeenCalledOnce();
     expect(h.rpc).toHaveBeenCalledOnce();
+  });
+  it("accepts the official Google display name for the exclusively pinned Vertex route", async () => {
+    h.request.mockResolvedValueOnce({
+      data: { body: "Draft" },
+      model: "google/gemini-2.5-flash-lite",
+      provider: "Google",
+      usage: { cost: 0.0003 },
+    });
+    expect((await generateFictionalMarketingPractice(context())).metadata.provider).toBe("Google");
+  });
+  it("rejects Google AI Studio despite the shared model name", async () => {
+    h.request.mockResolvedValueOnce({
+      data: { body: "Draft" },
+      model: "google/gemini-2.5-flash-lite",
+      provider: "Google AI Studio",
+      usage: { cost: 0.0003 },
+    });
+    await expect(generateFictionalMarketingPractice(context())).rejects.toThrow("unavailable");
   });
   it("keeps unavailable cost unknown instead of treating it as free", async () => {
     h.request.mockResolvedValueOnce({
