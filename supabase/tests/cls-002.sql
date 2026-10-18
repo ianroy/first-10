@@ -170,3 +170,52 @@ END $fn$;
 SELECT is(public.preview_class_submission(firstten_policy_test.submission_spec(gen_random_uuid(),'c2120000-0000-4000-8000-000000000091'))->>'code','CAPACITY','21st immutable publication version explicitly denied');
 RESET ROLE;
 SELECT is((SELECT count(*)FROM firstten_private.class_submission_versions WHERE thread_id='c2120000-0000-4000-8000-000000000091'),20::bigint,'all20 prior immutable versions preserved at capacity');
+
+-- Receipt growth is bounded under the same thread/grant lock as publication.
+SELECT firstten_policy_test.set_actor('student');SET LOCAL ROLE authenticated;
+DO $fn$ DECLARE r jsonb;n integer;BEGIN
+ -- Earlier cases issued two submit intents on this thread; bring its receipts to80.
+ FOR n IN 1..73 LOOP
+  r:=public.confirm_class_submission((SELECT(result#>>'{data,id}')::uuid FROM firstten_policy_test.submission_results WHERE label='preview'),(SELECT result#>>'{data,hash}'FROM firstten_policy_test.submission_results WHERE label='preview'),gen_random_uuid());
+  IF r->>'ok'IS DISTINCT FROM'true'THEN RAISE EXCEPTION 'Receipt bound fixture failed';END IF;
+ END LOOP;
+END $fn$;
+SELECT is(public.confirm_class_submission((SELECT(result#>>'{data,id}')::uuid FROM firstten_policy_test.submission_results WHERE label='preview'),(SELECT result#>>'{data,hash}'FROM firstten_policy_test.submission_results WHERE label='preview'),gen_random_uuid())->>'code','CAPACITY','new consumed-preview intents stop at80 thread receipts');
+SELECT is(public.confirm_class_submission((SELECT(result#>>'{data,id}')::uuid FROM firstten_policy_test.submission_results WHERE label='preview'),(SELECT result#>>'{data,hash}'FROM firstten_policy_test.submission_results WHERE label='preview'),'c2120000-0000-4000-8000-000000000021')->>'ok','true','known submit request remains replayable after receipt capacity');
+DO $fn$ DECLARE r jsonb;n integer;BEGIN
+ FOR n IN 1..7 LOOP
+  r:=public.withdraw_class_submission((SELECT(result#>>'{data,id}')::uuid FROM firstten_policy_test.submission_results WHERE label='submitted'),gen_random_uuid());
+  IF r->>'ok'IS DISTINCT FROM'true'THEN RAISE EXCEPTION 'Withdrawal receipt fixture failed';END IF;
+ END LOOP;
+END $fn$;
+SELECT is(public.withdraw_class_submission((SELECT(result#>>'{data,id}')::uuid FROM firstten_policy_test.submission_results WHERE label='submitted'),gen_random_uuid())->>'code','CAPACITY','ninth withdrawal intent cannot grow already-withdrawn snapshot receipts');
+SELECT is(public.withdraw_class_submission((SELECT(result#>>'{data,id}')::uuid FROM firstten_policy_test.submission_results WHERE label='submitted'),'c2120000-0000-4000-8000-000000000024')->>'ok','true','known withdrawal intent replays after receipt capacity');
+SELECT is(public.withdraw_class_submission((SELECT(result->>'id')::uuid FROM firstten_policy_test.submission_results WHERE label='class_bound'),gen_random_uuid())#>>'{data,grantState}','withdrawn','first active withdrawal remains available after thread submit receipt cap');
+RESET ROLE;
+SELECT is((SELECT count(*)FROM firstten_private.class_submission_operations o JOIN firstten_private.class_submission_versions v ON v.id=o.result_snapshot_id WHERE o.operation='submit'AND v.thread_id=firstten_policy_test.id('submission_thread')),80::bigint,'submit receipts remain bounded at80');
+SELECT is((SELECT count(*)FROM firstten_private.class_submission_operations WHERE operation='withdraw'AND result_snapshot_id=(SELECT(result#>>'{data,id}')::uuid FROM firstten_policy_test.submission_results WHERE label='submitted')),8::bigint,'withdrawal receipts remain bounded at8');
+-- Redaction and identifier replacement can expand short input: final DTO bounds apply.
+UPDATE public.class_members SET display_label=repeat('a@b.co ',10)WHERE class_id=firstten_policy_test.id('submission_class')AND user_id=firstten_policy_test.id('student');
+SELECT firstten_policy_test.set_actor('student');SET LOCAL ROLE authenticated;
+SELECT is(public.preview_class_submission(firstten_policy_test.submission_spec(gen_random_uuid(),'c2120000-0000-4000-8000-000000000092'))->>'code','INVALID_INPUT','email-scrub expansion beyond80-character alias returns bounded actionable failure');
+RESET ROLE;
+UPDATE public.class_members SET display_label='foo@example.org'WHERE class_id=firstten_policy_test.id('submission_class')AND user_id=firstten_policy_test.id('student');
+SELECT firstten_policy_test.set_actor('student');SET LOCAL ROLE authenticated;
+INSERT INTO firstten_policy_test.submission_results SELECT 'email_alias_preview',public.preview_class_submission(firstten_policy_test.submission_spec(gen_random_uuid(),'c2120000-0000-4000-8000-000000000092'));
+SELECT is((SELECT result->>'ok'FROM firstten_policy_test.submission_results WHERE label='email_alias_preview'),'true','bounded scrubbed email alias can be previewed');
+INSERT INTO firstten_policy_test.submission_results SELECT 'email_alias_submission',public.confirm_class_submission((SELECT(result#>>'{data,id}')::uuid FROM firstten_policy_test.submission_results WHERE label='email_alias_preview'),(SELECT result#>>'{data,hash}'FROM firstten_policy_test.submission_results WHERE label='email_alias_preview'),gen_random_uuid());
+SELECT is((SELECT result#>>'{data,authorLabel}'FROM firstten_policy_test.submission_results WHERE label='email_alias_submission'),'[Email removed]','final alias is scrubbed and unchanged within bound');
+UPDATE public.projects SET problem=repeat('x',700)WHERE id=firstten_policy_test.id('submission_project');
+SELECT is(public.preview_class_submission(jsonb_set(firstten_policy_test.submission_spec(gen_random_uuid(),'c2120000-0000-4000-8000-000000000093'),'{redactions}','["x"]'))->>'code','INVALID_INPUT','short redaction expansion beyond6000 excerpt characters fails without truncation');
+UPDATE public.projects SET problem=repeat('x',600)WHERE id=firstten_policy_test.id('submission_project');
+INSERT INTO firstten_policy_test.submission_results SELECT 'redaction_boundary',public.preview_class_submission(jsonb_set(firstten_policy_test.submission_spec(gen_random_uuid(),'c2120000-0000-4000-8000-000000000093'),'{redactions}','["x"]'));
+SELECT is(char_length((SELECT result#>>'{data,payload,excerpts,0,text}'FROM firstten_policy_test.submission_results WHERE label='redaction_boundary')),6000,'exact final6000-character redaction output preserved without truncation');
+DO $fn$ DECLARE f text;r jsonb;n integer;BEGIN
+ FOREACH f IN ARRAY ARRAY['title','interpretation','uncertainty','decision','nextAction']LOOP
+  n:=CASE WHEN f='title'THEN 13 WHEN f='interpretation'THEN 301 ELSE 201 END;
+  r:=public.preview_class_submission(jsonb_set(jsonb_set(firstten_policy_test.submission_spec(gen_random_uuid(),'c2120000-0000-4000-8000-000000000094'),'{redactions}','["x"]'),ARRAY['reflection',f],to_jsonb(repeat('x',n))));
+  IF r->>'code'IS DISTINCT FROM'INVALID_INPUT'THEN RAISE EXCEPTION 'Expanded reflection field accepted: %',f;END IF;
+ END LOOP;
+END $fn$;
+SELECT pass('all five reflection DTO fields enforce their final post-redaction bounds');
+RESET ROLE;

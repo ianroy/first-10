@@ -144,7 +144,8 @@ export const submissionResult = <T extends z.ZodTypeAny>(schema: T) =>
 export function submissionMessage(code: SubmissionFailure["code"]) {
   return {
     AUTH_REQUIRED: "Sign in again to review your submissions.",
-    INVALID_INPUT: "Check the selected fields and review details.",
+    INVALID_INPUT:
+      "Check the selected fields, alias and review details. Redaction can expand text; shorten the selection or use more specific redaction phrases.",
     NOT_FOUND: "This class, assignment or submission is unavailable to your account.",
     FEATURE_DISABLED:
       "This source or audience is not available yet. Guest activity sources require their own authorized adapter.",
@@ -154,7 +155,7 @@ export function submissionMessage(code: SubmissionFailure["code"]) {
     IDEMPOTENCY_CONFLICT:
       "This request was used for different work. Review the current submission before continuing.",
     CAPACITY:
-      "This submission reached its preview or version capacity. Keep a private export and ask the teacher for another assignment.",
+      "This submission reached its preview, version or retry receipt capacity. Keep a private export and ask the teacher for another assignment.",
     EXPIRED: "This preview expired. Create a new preview before submitting.",
     UNAVAILABLE:
       "The request could not be confirmed. Reload the submission list before retrying; your source work is unchanged.",

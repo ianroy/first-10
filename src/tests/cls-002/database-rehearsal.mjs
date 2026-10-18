@@ -34,6 +34,14 @@ try {
     sql("postgres", `SELECT count(*) FROM pg_database WHERE datname='${database}'`).trim(),
     "0",
   );
+  assert.equal(
+    sql(
+      "postgres",
+      "SELECT to_regclass('firstten_private.class_submission_threads') IS NULL AND to_regprocedure('firstten_private.archived_write_guard()') IS NOT NULL AND to_regclass('firstten_private.public_context_previews') IS NOT NULL",
+    ).trim(),
+    "t",
+    "Source must be the dedicated through20 schema without21",
+  );
   const schema = docker([
     "exec",
     container,
@@ -54,7 +62,7 @@ try {
   );
   assert.equal(
     createHash("sha256").update(migration).digest("hex"),
-    "0179d38ce85d45eea80a391f9646a4777cbb313a398ab2bd0d93087b3be57314",
+    "2234095628e9e6ef186ec36cfc5ab37f7f333e4748c9baea27ea4cc915410af2",
   );
   phase = "reviewed migration apply to empty clone";
   // Before integration, apply the reviewed21 file to the empty schema clone.
@@ -71,10 +79,13 @@ try {
     "INSERT INTO firstten_private.demo_ai_budget(singleton,cap_cents,reserved_cents) VALUES(true,100,0) ON CONFLICT DO NOTHING;INSERT INTO firstten_private.project_collaboration_capability VALUES(true,false) ON CONFLICT DO NOTHING;INSERT INTO firstten_private.ai_usage_global_policy(singleton) VALUES(true) ON CONFLICT DO NOTHING;",
   );
   phase = "rolled-back policy suite";
-  const files = readdirSync(root + "/supabase/tests")
+  const policyRoot = process.env.FIRSTTEN_POLICY_BASE_ROOT ?? root;
+  const files = readdirSync(policyRoot + "/supabase/tests")
     .filter((n) => n.endsWith(".sql"))
     .sort()
-    .map((n) => readFileSync(root + "/supabase/tests/" + n, "utf8"));
+    .filter((n) => n !== "cls-002.sql")
+    .map((n) => readFileSync(policyRoot + "/supabase/tests/" + n, "utf8"));
+  files.push(readFileSync(root + "/supabase/tests/cls-002.sql", "utf8"));
   const output = sql(database, buildSuite(files, true));
   writeFileSync("/private/tmp/firstten-submission-policy-result.txt", output);
   const tap = parseTap(output);

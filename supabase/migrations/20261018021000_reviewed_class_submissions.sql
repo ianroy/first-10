@@ -37,6 +37,7 @@ CREATE TABLE firstten_private.class_submission_operations(
  target_id uuid NOT NULL,payload_hash text NOT NULL,result_snapshot_id uuid NOT NULL REFERENCES firstten_private.class_submission_versions(id) ON DELETE CASCADE,
  created_at timestamptz NOT NULL DEFAULT clock_timestamp(),PRIMARY KEY(actor_id,operation,request_id)
 );
+CREATE INDEX submission_operation_snapshot ON firstten_private.class_submission_operations(result_snapshot_id,operation);
 CREATE TABLE firstten_private.class_submission_audit(
  id uuid PRIMARY KEY DEFAULT gen_random_uuid(),actor_id uuid NOT NULL,class_id uuid NOT NULL,thread_id uuid NOT NULL,
  snapshot_id uuid,operation text NOT NULL CHECK(operation IN('preview','submit','withdraw')),request_id uuid NOT NULL,
@@ -147,14 +148,18 @@ BEGIN
   IF jsonb_typeof(spec->'reflection'->f)<>'string' OR char_length(spec->'reflection'->>f)>(CASE WHEN f='title'THEN 120 WHEN f='interpretation'THEN 3000 ELSE 2000 END)OR(f='title'AND char_length(btrim(spec->'reflection'->>f))=0)THEN RETURN jsonb_build_object('ok',false,'code','INVALID_INPUT');END IF;
   body:=spec->'reflection'->>f;
   FOR phrase IN SELECT value FROM jsonb_array_elements(spec->'redactions')LOOP body:=replace(body,phrase#>>'{}','[Redacted]');END LOOP;
-  payload:=payload||jsonb_build_object(f,firstten_private.submission_scrub(body));
+  body:=firstten_private.submission_scrub(body);
+  IF char_length(body)>(CASE WHEN f='title'THEN 120 WHEN f='interpretation'THEN 3000 ELSE 2000 END)OR(f='title'AND char_length(btrim(body))=0)THEN RETURN jsonb_build_object('ok',false,'code','INVALID_INPUT');END IF;
+  payload:=payload||jsonb_build_object(f,body);
  END LOOP;
  FOR item IN SELECT value FROM jsonb_array_elements(spec->'selections')LOOP
   source:=firstten_private.submission_source(p_project,p_owner,item);
   IF source IS NULL THEN RETURN jsonb_build_object('ok',false,'code','INVALID_INPUT');END IF;
   IF source?'denied'THEN RETURN jsonb_build_object('ok',false,'code','SHARING_REQUIRED');END IF;
   body:=source->>'text';FOR phrase IN SELECT value FROM jsonb_array_elements(spec->'redactions')LOOP body:=replace(body,phrase#>>'{}','[Redacted]');END LOOP;n:=n+1;
-  excerpts:=excerpts||jsonb_build_array(jsonb_build_object('key','excerpt.'||n,'label',source->>'label','text',firstten_private.submission_scrub(body),'sourceKind',source->>'kind','evidenceLabel','Owner-reported; selected and reviewed'));
+  body:=firstten_private.submission_scrub(body);
+  IF char_length(body)NOT BETWEEN 1 AND 6000 OR char_length(source->>'label')NOT BETWEEN 1 AND 120 THEN RETURN jsonb_build_object('ok',false,'code','INVALID_INPUT');END IF;
+  excerpts:=excerpts||jsonb_build_array(jsonb_build_object('key','excerpt.'||n,'label',source->>'label','text',body,'sourceKind',source->>'kind','evidenceLabel','Owner-reported; selected and reviewed'));
   manifest:=manifest||jsonb_build_array(source-'text'-'label');
  END LOOP;
  payload:=jsonb_set(payload,'{excerpts}',excerpts);
@@ -192,6 +197,7 @@ BEGIN
  cid:=(p_document->>'classId')::uuid;aid:=(p_document->>'assignmentId')::uuid;pid:=(p_document#>>'{source,projectId}')::uuid;tid:=(p_document->>'threadId')::uuid;rid:=(p_document->>'requestId')::uuid;
  IF cid IS NULL OR aid IS NULL OR pid IS NULL OR tid IS NULL OR rid IS NULL THEN RETURN jsonb_build_object('ok',false,'code','INVALID_INPUT');END IF;
  authority:=firstten_private.submission_authoring(cid,aid,pid,actor);IF authority IS NULL THEN RETURN jsonb_build_object('ok',false,'code','NOT_FOUND');END IF;
+ IF char_length(authority->>'label')NOT BETWEEN 1 AND 80 THEN RETURN jsonb_build_object('ok',false,'code','INVALID_INPUT');END IF;
  SELECT * INTO t FROM firstten_private.class_submission_threads WHERE id=tid FOR UPDATE;
  IF FOUND AND(t.author_user_id IS DISTINCT FROM actor OR t.project_id IS DISTINCT FROM pid OR t.class_id<>cid OR t.assignment_id<>aid OR t.source_type<>'account_project')THEN RETURN jsonb_build_object('ok',false,'code','NOT_FOUND');END IF;
  IF t.id IS NULL THEN
@@ -224,6 +230,7 @@ BEGIN
  SELECT * INTO t FROM firstten_private.class_submission_threads WHERE id=target AND author_user_id=actor AND source_type='account_project';
  IF NOT FOUND THEN RETURN jsonb_build_object('ok',false,'code','NOT_FOUND');END IF;
  authority:=firstten_private.submission_authoring(t.class_id,t.assignment_id,t.project_id,actor);IF authority IS NULL THEN RETURN jsonb_build_object('ok',false,'code','NOT_FOUND');END IF;
+ IF char_length(authority->>'label')NOT BETWEEN 1 AND 80 THEN RETURN jsonb_build_object('ok',false,'code','INVALID_INPUT');END IF;
  SELECT * INTO t FROM firstten_private.class_submission_threads WHERE id=target FOR UPDATE;
  SELECT * INTO preview FROM firstten_private.class_submission_previews WHERE id=p_preview_id AND thread_id=t.id FOR UPDATE;
  IF preview.binding_hash IS DISTINCT FROM p_preview_hash THEN RETURN jsonb_build_object('ok',false,'code','CHANGED');END IF;
@@ -234,6 +241,8 @@ BEGIN
   SELECT * INTO v FROM firstten_private.class_submission_versions WHERE id=op.result_snapshot_id;
   RETURN jsonb_build_object('ok',true,'data',firstten_private.submission_view(v));
  END IF;
+ -- The thread lock serializes new receipts, including consumed-preview retries.
+ IF(SELECT count(*)FROM firstten_private.class_submission_operations o JOIN firstten_private.class_submission_versions s ON s.id=o.result_snapshot_id WHERE o.operation='submit'AND s.thread_id=t.id)>=80 THEN RETURN jsonb_build_object('ok',false,'code','CAPACITY');END IF;
  IF preview.consumed_snapshot_id IS NOT NULL THEN
   SELECT * INTO v FROM firstten_private.class_submission_versions WHERE id=preview.consumed_snapshot_id;
   -- A new retry intent is still bound permanently to this original receipt.
@@ -325,6 +334,9 @@ BEGIN
  hash:=encode(sha256(convert_to(p_snapshot_id::text,'UTF8')),'hex');
  SELECT * INTO op FROM firstten_private.class_submission_operations WHERE actor_id=actor AND operation='withdraw'AND request_id=p_request_id;
  IF FOUND AND op.payload_hash<>hash THEN RETURN jsonb_build_object('ok',false,'code','IDEMPOTENCY_CONFLICT');END IF;
+ -- Known intents remain replayable. Only additional receipts for an already
+ -- withdrawn snapshot are capped; the first privacy reduction is always available.
+ IF op.request_id IS NULL AND g.state='withdrawn'AND(SELECT count(*)FROM firstten_private.class_submission_operations WHERE operation='withdraw'AND result_snapshot_id=v.id)>=8 THEN RETURN jsonb_build_object('ok',false,'code','CAPACITY');END IF;
  IF g.state='active'THEN
   UPDATE firstten_private.class_submission_grants SET state='withdrawn',revision=revision+1,withdrawn_at=clock_timestamp()WHERE snapshot_id=v.id;
   INSERT INTO firstten_private.class_submission_audit(actor_id,class_id,thread_id,snapshot_id,operation,request_id)VALUES(actor,t.class_id,t.id,v.id,'withdraw',p_request_id);
