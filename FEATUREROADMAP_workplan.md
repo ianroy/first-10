@@ -40,16 +40,17 @@ Status boxes: `[ ]` todo · `[~]` in progress · `[x]` done · `[!]` blocked (sa
 ```yaml
 current_iteration: 3
 current_stage: R0+R1     # R0 Research (value-prop track), R1 Foundations, R2 Core, R3 Growth (see §3)
-status: not_started      # not_started | in_progress | paused | blocked
-last_task_done: F-010
-next_task: VP-001
-resume_hint: "Iteration 3 generated 2026-10-17 with a value-proposition focus. It supersedes Iteration 2's ordering (nothing there had started). Follow the 'Order of operations' list in Iteration 3: VP-001 and VP-002 first (they unblock the human interviews), then the R1 carry-over starting with F-007. Task definitions for F-*, R0-*, I2-* stay in their original sections; do not duplicate them."
+status: in_progress      # not_started | in_progress | paused | blocked
+last_task_done: VP-002
+next_task: F-007
+resume_hint: "VP-001 and VP-002 done 2026-10-17 (research/value-prop.md, research/interviews/guide-*.md). Owner now runs R0-004 founder and VP-003 instructor interviews in parallel. Agent continues with the R1 carry-over starting at F-007, per Iteration 3's order of operations. Task definitions for F-*, R0-*, I2-* stay in their original sections; do not duplicate them."
 last_updated: 2026-10-17
 open_questions:
   - Who is the primary user: Babson/college student founders only, or any first-time founder?  (decide in VP-006)
   - Is the product free for students, cohort-licensed to schools, or paid per founder?        (decide in VP-006)
   - Is the instructor/program the real buyer, with students as users? (VP3; answer in VP-003)
   - Is fear of reaching out a bigger blocker than not knowing the method? (VP2; answer in R0-004)
+  - Do instructors doubt whether students' interviews were real, now that AI can fake research? (VP6; answer in VP-003)
   - Do commitments (deposits, pre-orders, LOIs) make sense for student founders with free apps, or should "commitment" include time, intros and repeat use? (VP5; answer in R0-004, shapes I2-001)
 ```
 
@@ -106,13 +107,14 @@ Why this goes deeper than the ladder:
 | Outreach/lead tools (e.g. Apollo) | Volume | Wrong stage, spammy, paid | Warm-first, community-respectful |
 | Instructors and mentors | Judgment | Scarce, after the fact | Always on; makes mentor time count |
 
-**Value hypotheses** (kill criteria detailed in `research/value-prop.md`, VP-001)
+**Value hypotheses** (full canvas, alternatives with sources, and confirm/kill signals in [research/value-prop.md](research/value-prop.md))
 
 - **VP1 Proof to show**: founders value evidence they can show others more than the ladder itself. Kill if founders never mention an audience for their evidence.
 - **VP2 Nerve, not knowledge**: the first outreach is blocked more by fear than by not knowing the method. Kill if most founders who stall cite time or method, not nerve.
 - **VP3 Instructor pull**: instructors would assign First Ten for visibility and gradable evidence; the program is the buyer. Kill if at most 1 of 3-5 instructors describes this pain in their current process.
 - **VP4 Accountability**: outside a course, founders stall after Stage 1 without external deadlines. Kill if self-directed founders reach Stage 2 at similar rates to course founders.
 - **VP5 Commitments fit students**: free-app founders can collect meaningful commitments (time, intros, repeat use, pre-signups), not only money. Kill if founders can't name one plausible commitment for their app.
+- **VP6 Proof it was real** (added in VP-001): as AI-made "research" and synthetic users spread, proof that conversations really happened (consent, timestamps, roles, quotes) gains value for instructors and founders. Kill if instructors are unconcerned about invented or synthetic interviews.
 
 **Candidate one-liners** (VP-004 message test)
 
@@ -364,7 +366,7 @@ Moved to Iteration 3's order of operations.
 - [ ] **I2-001 Commitments data model (Proof, Not Praise)** (S · deps: F-003, R0-005 · owner: agent)
   - Goal: Store evidence of real commitment, not compliments.
   - Done when: new migration adds `commitments(id, user_id, project_id, contact_id, kind, detail, value_cents null, committed_at, created_at)` with kinds `deposit|preorder|loi|intro|repeat_use|time|other`, owner-only RLS, types regenerated; unit tests for a `commitmentScore()` helper.
-  - Notes: Open question (§1): which kinds fit students with free apps. Resolve with R0-004 before finalizing kinds. Rollback: down-migration file plus feature flag in the UI.
+  - Notes: Open question (§1): which kinds fit students with free apps. Resolve with R0-004 before finalizing kinds. 2026-10-17 (VP-001): The Mom Test frames commitment as time, reputation or money; start the kinds from those three (e.g. time = follow-up meeting or repeat use; reputation = intro or public endorsement; money = deposit or pre-order). Rollback: down-migration file plus feature flag in the UI.
 - [ ] **I2-002 Commitment logging and evidence-based gates** (M · deps: I2-001 · owner: agent)
   - Goal: Founders log commitments; the Learnings page shows a validation scorecard; stage unlock considers evidence quality and diversity (not just counts), with a manual override.
   - Done when: Contacts/Interview screens can log a commitment in two taps; Learnings shows a scorecard ("N commitments from M different people; compliments don't count"); unlock checklist includes a commitment rule; tests cover gate logic; works at mobile width.
@@ -435,17 +437,19 @@ Generated 2026-10-17 by the regeneration prompt, with the owner's focus: underst
 
 ### New tasks
 
-- [ ] **VP-001 Value proposition canvas and alternatives scan** (S · deps: none · owner: agent)
+- [x] **VP-001 Value proposition canvas and alternatives scan** (S · deps: none · owner: agent)
   - Goal: Turn §2.1 into `research/value-prop.md`: a canvas for each segment, an alternatives table with real sources, and VP1-VP5, each with confirm and kill signals and the interview question that tests it.
   - Done when: the file exists; every claim about an alternative links a source checked that day (pricing page, docs or official site); no hypothesis is stated as fact; §2.1 links to the file.
   - Notes: Research only; no app code.
-- [ ] **VP-002 Interview guides for both segments** (S · deps: VP-001 · owner: agent)
+  - Notes: 2026-10-17 done: `research/value-prop.md`. Ten alternatives with sources (ChatGPT, The Mom Test, YC Startup School, Notion templates, Dovetail, AI-moderated interview platforms, Apollo, LaunchPad Central, AI practice personas, I-Corps-style programs). Findings to carry: (1) no scanned tool targets pre-audience founders doing their own first conversations; LaunchPad Central (built for NSF I-Corps) is the closest instructor-side competitor, verify in VP-003. (2) Poets&Quants (Sept 2026) and NYU (2026) on synthetic users and AI-only research led to new hypothesis VP6. (3) The Mom Test's commitment = time, reputation, money, which informs I2-001 kinds. (4) Students' alternatives are free, so a program buyer (VP3) looks like the more plausible business model. Test order: VP3, VP2, VP1, VP6, VP5, VP4.
+- [x] **VP-002 Interview guides for both segments** (S · deps: VP-001 · owner: agent)
   - Goal: Mom Test guides for student founders (used by R0-004) and for instructors and program leads (used by VP-003).
   - Done when: `research/interviews/guide-founders.md` and `guide-instructors.md` exist, each with at most 12 past-behavior questions, each mapped to a hypothesis (A1-A6, VP1-VP5); a note template with tags; a recruiting checklist (first names or roles only).
   - Notes: The instructor guide asks how last semester's discovery assignments actually ran and were graded. It does not pitch First Ten.
+  - Notes: 2026-10-17 done: `research/interviews/guide-founders.md` (F1-F12, closing time-commitment ask), `guide-instructors.md` (I1-I11, closing ask for a de-identified rubric), and `research/interviews/README.md` with a supports/contradicts tally per hypothesis and an interview log. Question ids are referenced from value-prop.md §5.
 - [ ] **VP-003 Instructor and program-lead interviews (3-5)** (M · deps: VP-002 · owner: human)
   - Goal: Learn how instructors run and assess customer discovery today, what breaks, and who decides on tools and budget.
-  - Done when: at least 3 notes in `research/interviews/` (roles, not names unless agreed), tagged with hypotheses; one-paragraph takeaway in Notes here.
+  - Done when: at least 3 notes in `research/interviews/` (roles, not names unless agreed), tagged with hypotheses (VP1, VP3, VP4, VP6); tally updated in `research/interviews/README.md`; one-paragraph takeaway in Notes here.
   - Notes: Candidates: entrepreneurship and AI Academy faculty, accelerator or program leads. This is the learning task for the value track.
 - [ ] **VP-004 Landing-page message test** (S · deps: I2-005, F-006 · owner: agent)
   - Goal: Test one-liners A, B and C from §2.1 on real visitors.
@@ -508,3 +512,4 @@ Generated 2026-10-17 by the regeneration prompt, with the owner's focus: underst
 | 2026-10-17 | Initial roadmap written: Iteration 1 (R0 research plus R1 foundations). Nothing executed yet. |
 | 2026-10-17 | Regeneration run: Iteration 2 planned (carry-over R1, R0 gate, I2-001..005, X-001, L-002, G-002). Reconciled F-002 (partial), F-009, F-010 done. Collapsed nothing: Iteration 1 is not finished. |
 | 2026-10-17 | Regeneration run (value-prop focus): Iteration 3 planned. Added §2.1 value proposition (two segments, VP1-VP5, one-liners, metrics), VP-001..VP-006, I3-001/I3-002 (conditional), G-003, P-001 final (pitch deck and architecture diagrams). Dropped R0-003 and G-002. Iteration 2 marked superseded; its task definitions kept. |
+| 2026-10-17 | VP-001 and VP-002 done: value-prop canvas with sourced alternatives, new hypothesis VP6 (proof it was real), founder and instructor interview guides with tally. Next: owner interviews (R0-004, VP-003); agent R1 carry-over from F-007. |
