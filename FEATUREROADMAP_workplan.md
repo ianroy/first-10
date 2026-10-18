@@ -22,25 +22,30 @@ Statuses are `not_started`, `in_progress`, `blocked`, `complete`, `deferred`, `d
 current_iteration: 5
 current_stage: P1_foundation_with_parallel_P2_and_R0
 status: in_progress
-last_task_done: SEC-004
+last_task_done: PARTNER-002
 next_task: AI-002
 next_parallel_wave: []
-active_claims: [AI-002, MKT-006, PARTNER-002]
+active_claims: [AI-002]
 research_gate: not_passed
 foundation_gate: not_passed
 realtime_go: pending
 last_updated: 2026-10-18
 last_documentation_update: "2026-10-18: reconciled deployed desktop demo, final pitch architecture/chasm/QR, private founding-partner intake and reviewed export."
 resume_hint: >-
-  Current batch has complete MKT-006 planner controls, count-only partner Admin visibility,
-  tested default-off SEC-004 membership foundation and AI-002 frozen contracts/success metadata.
-  Hosted05000/06000/07000 migrations applied normally. Official types regenerated.
-  Combined application tests/typecheck/lint/build pass;619realSQLassertionspassandrollback.
-  Deploy/currentproductionbrowserverificationofnewplanner/Admincountsisnext.
-  AI-002 remainsinprogress:durablelinkagetolatersavedoutputsisnotimplemented.
-  Two workersterminatedout-of-credits;roottookovertheirsavedsource. Noadditionalpaidcalls.
-  The13:29:45UTCten-hourcheckpointisarriving;broaderclassmembership/submissions,
-  generalAIbudgets,sharing,realtimeandhumanstudiesremainoutstanding.
+  Production 64bc86e includes complete MKT-006 manual planner controls and private partner
+  Admin counts. Actual presenter login worked: 0 interest, 0 feedback, 0 distinct addresses
+  and 1 excluded fixture. The fictional October 19–25 plan, October 26 review, two not-run
+  actions and 50 estimated minutes within a 180-minute ceiling saved as revision 7 and
+  survived reload. Status stays Draft, baseline unknown, and original thinking preserved.
+  Hosted migrations 05000/06000/07000 applied normally; official types are regenerated.
+  Combined 357 tests, typecheck, lint and build pass; 619 real SQL assertions pass with
+  rollback. The later label improvement passes 12 focused UI checks and live exact labels.
+  CI 39131773694 and database policies 39131773786 passed at 92c43ee.
+  AI-002 remains active: durable generation links to later saved outputs are missing.
+  Do not claim the request metadata ledger proves the origin of edited saved rows.
+  SEC-004 is complete as a foundation, with collaboration disabled and no class visibility.
+  The ten-hour checkpoint was 13:29:45 UTC; the report and final live checks followed.
+  General class spaces/submissions, AI budgets, sharing, realtime and human studies remain.
 
 ```
 

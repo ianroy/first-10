@@ -1422,7 +1422,7 @@
         },
         {
           "date": "2026-10-18",
-          "text": "Derivedowner/editor/viewerfoundationintegratedandmigrated. Existingprivate-tablepoliciesunchanged;freshidentity+six-fieldsummary+CAS/replay/auditverified. Operatorcapabilityremainsfalse;nocollaborationUI,invitation,enrollmentorstudentvisibilityclaimed."
+          "text": "Derived-owner and editor/viewer membership foundation is integrated and migrated. Existing private-table policies are unchanged. Fresh identity, six-field summary, revision checks, replay handling and private audit records were tested. The operator capability remains false: no collaboration UI, enrollment or student visibility is claimed."
         }
       ],
       "claim": null,
@@ -2070,14 +2070,14 @@
         },
         {
           "date": "2026-10-18",
-          "text": "Workerterminatedout-of-credits;roottookoverandfinishedfrozencontracts+metadata-onlysuccessledger,21focusedtests/typecheck/lintand619integratedSQLchecks. Hosted06000applied. Returnedstrictpayloadsremainunchanged. WHOLETASKNOTCOMPLETE:provenancecurrentlylinksrequest/project/kind,notlatersavedquestions/synthesis/outreach/surveyversions. CompleteexplicitdurableoutputlinkagebeforemarkingAI-002complete. Noadditionalpaidcalls."
+          "text": "The worker stopped with an out-of-credits error; root completed frozen prompt/schema contracts and the metadata-only success ledger. The focused 21 tests, typecheck, lint and combined 619 SQL assertions pass. Hosted migration 06000 is applied. Strict returned payloads remain unchanged. The whole task is still incomplete: records currently link request, project and kind, but not later saved questions, synthesis, outreach or survey versions. Add durable saved-output linkage before marking AI-002 complete. No additional paid call was made."
         }
       ],
       "claim": {
         "owner": "coordinator",
-        "branch": "codex/ai-provenance",
-        "base_commit": "c665e887f54c13cc273f9810a6a4deb47bac93bc",
-        "worktree": "/Users/ianroy/.codex/worktrees/first-ten-value/First 10",
+        "branch": "main",
+        "base_commit": "64bc86e5a06e6a9045f6e34d13fc39ca84b9b2e1",
+        "worktree": "/Users/ianroy/Library/CloudStorage/Dropbox/Apps by Ian/Babson AI Academy/First 10",
         "started_at": "2026-10-18T12:52:42.445453+00:00",
         "lease_expires_at": "2026-10-18T14:52:42.445453+00:00"
       },
@@ -2099,7 +2099,7 @@
         },
         {
           "id": "AI-002.s3",
-          "status": "in_progress",
+          "status": "complete",
           "instruction": "Verify required-property parity and backward reads of outputs without metadata.",
           "notes": []
         }
@@ -9791,7 +9791,7 @@
       "id": "MKT-006",
       "title": "Plan a one-week test and measure useful action",
       "phase": "P5",
-      "status": "in_progress",
+      "status": "complete",
       "owner": "agent",
       "size": "S",
       "kind": "implementation",
@@ -9883,29 +9883,27 @@
         {
           "date": "2026-10-18",
           "text": "Integrated worker9adcedf as66348f6. All304tests/37files passed on configuredNode22, typecheck/scopedlint/Vercelbuild passed. Localfictionaldesktopfixture verified tags/dependencies/manualteststart; CASsave/reload coveredinUIfixture. Rootfixedreviewfinding: completedprerequisitecannotbereopenedtodo/doing/blocked whiledownstreamactiondoing/done. Finalcombinedproductionverificationpending."
+        },
+        {
+          "date": "2026-10-18",
+          "text": "All remaining manual planner controls are delivered: reviewed tag adoption, owners, deadlines, prerequisites, completion rules, resources, test states, baseline/target and fallback. The actual production UI blocked starting a dependent action before its prerequisite was done. The explicitly fictional October 19–25 plan, October 26 review, two not-run actions and 50 estimated minutes within a 180-minute ceiling saved as revision 7 and survived reload. Original thinking is preserved; baseline remains unknown, target 3 is a planning threshold, and status is Draft. No campaign ran or outreach was sent. Precise native-select labels were verified after 64bc86e."
         }
       ],
-      "claim": {
-        "owner": "coordinator",
-        "branch": "codex/marketing-plan-completion",
-        "base_commit": "c665e887f54c13cc273f9810a6a4deb47bac93bc",
-        "worktree": "/Users/ianroy/.codex/worktrees/first-ten-ops/First 10",
-        "started_at": "2026-10-18T12:52:42.207155+00:00",
-        "lease_expires_at": "2026-10-18T14:52:42.207155+00:00"
-      },
+      "claim": null,
       "completion_evidence": [
-        "Partial slice2ddc1d1:254applicationtests/typecheck/lint/buildpassed; productionmanualmeasurementssave/reloadrevision5verified. Reviewed local export UI works; download completion could not be confirmed because browser download tooling stalled. No file-delivery claim. Remaining taggedURL/dependency/test-state controls need a later implementation slice."
+        "Partial slice2ddc1d1:254applicationtests/typecheck/lint/buildpassed; productionmanualmeasurementssave/reloadrevision5verified. Reviewed local export UI works; download completion could not be confirmed because browser download tooling stalled. No file-delivery claim. Remaining taggedURL/dependency/test-state controls need a later implementation slice.",
+        "66348f6+998263e+64bc86e;357combinedtests/typecheck/lint/build;12labUIchecksafterlabelpolish;productionrevision7save/reload;docs/demo/qa/marketing-planner-desktop-2026-10-18.png"
       ],
       "subtasks": [
         {
           "id": "MKT-006.s1",
-          "status": "in_progress",
+          "status": "complete",
           "instruction": "Define owner/deadline/dependencies/definition-of-done, time/resource limits, primary useful action, baseline/target and fallback without paid ads or assumed free resources.",
           "notes": []
         },
         {
           "id": "MKT-006.s2",
-          "status": "blocked",
+          "status": "complete",
           "instruction": "Create safe attributable destination URLs where supplied, record manual counts with date/source, and show reach/visits/useful action/return separately; no claim of automatic analytics integration.",
           "notes": []
         },
@@ -10980,7 +10978,7 @@
       "id": "PARTNER-002",
       "title": "Show private count-only founding-partner intake to the verified presenter admin",
       "phase": "P7",
-      "status": "in_progress",
+      "status": "complete",
       "owner": "agent",
       "size": "M",
       "kind": "implementation",
@@ -11044,33 +11042,32 @@
         {
           "date": "2026-10-18",
           "text": "Claimed for the authorized autonomous demo run."
+        },
+        {
+          "date": "2026-10-18",
+          "text": "Verified the count-only intake panel in production using the authorized presenter login: 0 interest requests, 0 feedback submissions, 0 distinct addresses and 1 known fixture excluded. A fresh server role check precedes the service RPC. No names, email addresses or school labels are returned. Counts do not establish adoption or enrollment. Missing values stay unavailable. Landing and teaching pages link to the two-semester invitation."
         }
       ],
-      "claim": {
-        "owner": "coordinator",
-        "branch": "main",
-        "base_commit": "ce383d660f6998a8c652561459041b272c9266cf",
-        "worktree": "/Users/ianroy/Library/CloudStorage/Dropbox/Apps by Ian/Babson AI Academy/First 10",
-        "started_at": "2026-10-18T12:57:36.115957+00:00",
-        "lease_expires_at": "2026-10-18T14:57:36.115957+00:00"
-      },
-      "completion_evidence": [],
+      "claim": null,
+      "completion_evidence": [
+        "df6e92a;92c43eeproduction;hosted07000;619combinedSQL;actualpresenterAdmin0interest/0feedback/0distinct/1excludedfixture;docs/demo/qa/admin-partners-desktop-2026-10-18.png"
+      ],
       "subtasks": [
         {
           "id": "PARTNER-002.s1",
-          "status": "in_progress",
+          "status": "complete",
           "instruction": "Add a service-only fixed aggregate projection with explicit reserved-fixture exclusion and real permission tests.",
           "notes": []
         },
         {
           "id": "PARTNER-002.s2",
-          "status": "not_started",
+          "status": "complete",
           "instruction": "Extend the freshly verified admin endpoint and desktop dashboard with private request/feedback counts, unknown/error states and honest metric definitions.",
           "notes": []
         },
         {
           "id": "PARTNER-002.s3",
-          "status": "not_started",
+          "status": "complete",
           "instruction": "Verify no role bypass or PII response, production migration and actual presenter dashboard.",
           "notes": []
         }
