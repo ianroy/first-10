@@ -8,8 +8,13 @@ import {
   previewSubmissionSchema,
 } from "@/lib/submissions/contracts";
 import type { z } from "zod";
+import { SubmissionPreviewExport } from "@/components/export/SubmittedSnapshotExport";
 type Source = z.infer<typeof previewSubmissionSchema>["source"];
-export type SubmissionSourceOption = { label: string; selection: SubmissionSelector };
+export type SubmissionSourceOption = {
+  label: string;
+  selection: SubmissionSelector;
+  text?: string;
+};
 type Props = {
   scopeKey: string;
   classId: string;
@@ -34,7 +39,16 @@ export function SubmissionPreview(props: Props) {
   ]);
   return <Preview key={identity} {...props} />;
 }
-function Preview({ classId, assignmentId, source, sourceOptions, threadId, onSubmitted }: Props) {
+function Preview({
+  scopeKey,
+  classId,
+  assignmentId,
+  source,
+  sourceOptions,
+  threadId,
+  onSubmitted,
+}: Props) {
+  const [excerpts, setExcerpts] = useState<Record<string, string>>({});
   const [selected, setSelected] = useState<string[]>([]),
     [title, setTitle] = useState("Discovery check-in");
   const [interpretation, setInterpretation] = useState(""),
@@ -68,7 +82,10 @@ function Preview({ classId, assignmentId, source, sourceOptions, threadId, onSub
     audience: "teacher" as const,
     selections: sourceOptions
       .filter((option) => selected.includes(JSON.stringify(option.selection)))
-      .map((option) => option.selection),
+      .map((option) => {
+        const excerpt = excerpts[JSON.stringify(option.selection)];
+        return excerpt === undefined ? option.selection : { ...option.selection, excerpt };
+      }),
     redactions: redactions
       .split("\n")
       .map((v) => v.trim())
@@ -130,31 +147,59 @@ function Preview({ classId, assignmentId, source, sourceOptions, threadId, onSub
             </p>
           )}
           {sourceOptions.map((option) => (
-            <label
-              key={JSON.stringify(option.selection)}
-              className="flex items-start gap-3 rounded-xl border p-3 text-sm"
-            >
-              <input
-                type="checkbox"
-                className="mt-1"
-                checked={selected.includes(JSON.stringify(option.selection))}
-                onChange={(event) => {
-                  setSelected((old) =>
-                    event.target.checked
-                      ? [...old, JSON.stringify(option.selection)]
-                      : old.filter((value) => value !== JSON.stringify(option.selection)),
-                  );
-                  setAffirmed(false);
-                }}
-              />
-              <span>
-                {option.label}
-                <span className="mt-1 block text-xs text-muted-foreground">
-                  Separate recorded sharing permission is required. Interview notes additionally
-                  require note-taking and linked-contact sharing permission.
+            <div key={JSON.stringify(option.selection)}>
+              <label className="flex items-start gap-3 rounded-xl border p-3 text-sm">
+                <input
+                  type="checkbox"
+                  className="mt-1"
+                  checked={selected.includes(JSON.stringify(option.selection))}
+                  onChange={(event) => {
+                    setSelected((old) =>
+                      event.target.checked
+                        ? [...old, JSON.stringify(option.selection)]
+                        : old.filter((value) => value !== JSON.stringify(option.selection)),
+                    );
+                    setAffirmed(false);
+                  }}
+                />
+                <span>
+                  {option.label}
+                  <span className="mt-1 block text-xs text-muted-foreground">
+                    Separate recorded sharing permission is required. Interview notes additionally
+                    require note-taking and linked-contact sharing permission.
+                  </span>
                 </span>
-              </span>
-            </label>
+              </label>
+              {selected.includes(JSON.stringify(option.selection)) && option.text !== undefined && (
+                <label className="mt-2 block text-sm">
+                  Exact source excerpt (optional; must match the saved text)
+                  <textarea
+                    className={field}
+                    maxLength={6000}
+                    value={excerpts[JSON.stringify(option.selection)] ?? ""}
+                    placeholder="Leave blank to use the full bounded field, or paste an exact permitted excerpt."
+                    onChange={(event) => {
+                      const key = JSON.stringify(option.selection);
+                      setExcerpts((old) => {
+                        const next = { ...old };
+                        if (event.target.value) next[key] = event.target.value;
+                        else delete next[key];
+                        return next;
+                      });
+                      setAffirmed(false);
+                    }}
+                  />
+                  <details className="mt-2">
+                    <summary className="min-h-11 cursor-pointer">
+                      Read your saved source field
+                    </summary>
+                    <p className="max-h-64 overflow-auto whitespace-pre-wrap rounded-xl border p-3">
+                      {option.text}
+                    </p>
+                  </details>
+                </label>
+              )}
+            </div>
           ))}
         </fieldset>
         <label className="block text-sm font-semibold">
@@ -217,6 +262,28 @@ function Preview({ classId, assignmentId, source, sourceOptions, threadId, onSub
             Audience: active teachers of this class
           </p>
           <SubmissionPayloadView payload={current.payload} />
+          <details>
+            <summary className="min-h-11 cursor-pointer font-semibold">
+              Save a private PDF of this unsubmitted preview
+            </summary>
+            <SubmissionPreviewExport
+              scopeKey={scopeKey}
+              preview={current}
+              reauthorize={async () => {
+                const requestId = intent.current?.id;
+                if (!requestId || !alive.current || latest.current !== fingerprint)
+                  throw new Error("This preview changed. Create a fresh preview.");
+                const fresh = await previewSubmission({ data: { ...specification, requestId } });
+                if (
+                  !alive.current ||
+                  latest.current !== fingerprint ||
+                  !fresh.ok ||
+                  JSON.stringify(fresh.data) !== JSON.stringify(current)
+                )
+                  throw new Error("This private preview is unavailable. Create a fresh preview.");
+              }}
+            />
+          </details>
           <p className="text-xs text-muted-foreground">
             Preview expires {new Date(current.expiresAt).toLocaleTimeString()}. Source or permission
             changes require a new preview. Teachers cannot retrieve the underlying private records

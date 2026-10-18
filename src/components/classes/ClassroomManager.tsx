@@ -18,11 +18,17 @@ import {
 } from "@/lib/guest-spaces/contracts";
 import type { z } from "zod";
 import { EntryLink } from "./EntryLink";
+import { AccountSubmissionWorkspace } from "./AccountSubmissionWorkspace";
+import { SubmissionList } from "./SubmissionList";
+import { SubmittedSnapshotExport } from "@/components/export/SubmittedSnapshotExport";
+import type { SubmissionView } from "@/lib/submissions/contracts";
 const button =
   "min-h-11 rounded-xl bg-primary px-4 py-2 font-semibold text-primary-foreground disabled:opacity-50";
 const field = "mt-2 block min-h-11 w-full rounded-xl border bg-background p-3";
 const nowPlusMonth = () => new Date(Date.now() + 30 * 86400000).toISOString().slice(0, 16);
 export function ClassroomManager({ userId }: { userId: string }) {
+  const [authorRefresh, setAuthorRefresh] = useState(0),
+    [authorExport, setAuthorExport] = useState<SubmissionView | null>(null);
   const [items, setItems] = useState<ClassSummary[]>([]),
     [cursor, setCursor] = useState<string | null>(null);
   const [selected, setSelected] = useState<string | null>(null),
@@ -70,9 +76,10 @@ export function ClassroomManager({ userId }: { userId: string }) {
         </div>
         <div className="rounded-2xl border bg-secondary/30 p-5 text-sm">
           <strong>Know the audience.</strong> Published instructions reach enrolled accounts and
-          admitted guests. Guests see their own team and alias, not a class roster. Activity saving,
-          submissions and guest PDFs are the next build; this entry space does not claim to save
-          learning work. Class AI is disabled. Retention is requested, not automatic deletion.
+          admitted guests. Guests see their own team and alias, not a class roster. Signed-in
+          students can deliberately submit selected reviewed versions. Guest activity saving, guest
+          submissions and guest PDFs remain the next build. Class AI is disabled. Retention is
+          requested, not automatic deletion.
         </div>
         {message && <p role="status">{message}</p>}
         {creating && (
@@ -126,6 +133,11 @@ export function ClassroomManager({ userId }: { userId: string }) {
             <ClassDetailPanel
               key={userId + ":" + selected}
               classId={selected}
+              userId={userId}
+              onSubmitted={() => {
+                setAuthorRefresh((n) => n + 1);
+                setAuthorExport(null);
+              }}
               onChanged={() => void refresh()}
             />
           ) : (
@@ -140,6 +152,15 @@ export function ClassroomManager({ userId }: { userId: string }) {
             </Card>
           )}
         </div>
+        <SubmissionList
+          scopeKey={userId}
+          mode="author"
+          refreshKey={authorRefresh}
+          onExport={setAuthorExport}
+        />
+        {authorExport && (
+          <SubmittedSnapshotExport scopeKey={userId} mode="author" view={authorExport} />
+        )}
       </div>
     </AppShell>
   );
@@ -273,7 +294,18 @@ function ClassForm({ current, onSaved }: { current?: ClassDetail; onSaved: (id: 
     </Card>
   );
 }
-function ClassDetailPanel({ classId, onChanged }: { classId: string; onChanged: () => void }) {
+function ClassDetailPanel({
+  classId,
+  userId,
+  onChanged,
+  onSubmitted,
+}: {
+  classId: string;
+  userId: string;
+  onChanged: () => void;
+  onSubmitted: () => void;
+}) {
+  const [teacherExport, setTeacherExport] = useState<SubmissionView | null>(null);
   const [detail, setDetail] = useState<ClassDetail | null>(null),
     [assignments, setAssignments] = useState<ClassAssignment[]>([]);
   const [members, setMembers] = useState<ClassMember[]>([]),
@@ -435,6 +467,32 @@ function ClassDetailPanel({ classId, onChanged }: { classId: string; onChanged: 
               <AssignmentForm classId={classId} onSaved={() => void refresh()} />
             )}
           </Card>
+          {detail.role === "student" && active && (
+            <AccountSubmissionWorkspace
+              userId={userId}
+              detail={detail}
+              assignments={assignments}
+              onAssociated={() => void refresh()}
+              onSubmitted={onSubmitted}
+            />
+          )}
+          {detail.role !== "student" && (
+            <>
+              <SubmissionList
+                scopeKey={userId + ":" + classId}
+                mode="teacher"
+                classId={classId}
+                onExport={setTeacherExport}
+              />
+              {teacherExport && (
+                <SubmittedSnapshotExport
+                  scopeKey={userId + ":" + classId}
+                  mode="teacher"
+                  view={teacherExport}
+                />
+              )}
+            </>
+          )}
           {detail.role !== "student" && (
             <GuestRoster classId={classId} owner={detail.role === "owner"} />
           )}
