@@ -13,6 +13,7 @@ import {
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
+import { ManualMeasurements } from "./ManualMeasurements";
 import { LiveMarketingPractice } from "./LiveMarketingPractice";
 import { loadMarketingPlan, saveMarketingPlan } from "@/lib/marketing.functions";
 import {
@@ -1065,6 +1066,11 @@ export function SavedMarketingLab({ project }: { project: Project }) {
         {step === 4 && (
           <Card>
             <h3 className="text-2xl font-bold">What did you learn?</h3>
+            <ManualMeasurements
+              plan={plan}
+              update={update}
+              fictional={project.id === "f1d00000-0000-4000-8000-000000000010"}
+            />
             <p className="my-4 text-sm text-muted-foreground">
               Record what you actually observed, including no participation. Unknown is different
               from zero. Classmate practice is not external adoption. Saved records remain drafts;
