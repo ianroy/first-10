@@ -42,13 +42,19 @@ The original First Ten identity uses a conversation-shaped **10**, Field noteboo
 
 ## What you can do today
 
-1. **Sign in and describe your app.** Use email and password, create an email/password account, or request an email sign-in link. Setup collects name, description, audience, problem and optional app link. The app uses one project per account.
+1. **Sign in and describe your app.** Use email and password, create an email/password account, or request an email sign-in link. Setup collects name, description, audience, problem and optional app link. Each account can keep multiple private ideas, with one selected at a time.
 2. **First 10 — learn from relevant people.** Add first names and why each person fits. Generate and edit interview questions about past behavior, save them, select a contact and confirm permission to take notes. Interview mode shows one question per screen with a note and optional exact quote. Save at the end to record the conversation and tags.
 3. **Review learnings and try a change.** After five saved, completed interviews, generate an editable synthesis of problems, objections, best-fit users, quotes and suggested changes. Review it against your notes before accepting it. Log an experiment with a hypothesis, change and result; the result can be updated later.
 4. **Next 50 — reach beyond the first group.** Once unlocked, generate suggested channels, editable outreach bodies and feedback-survey questions using your project, completed interviews, accepted learnings and contact-source notes. Copy drafts to send yourself and manually update contacts through Contacted → Replied → Tried it → Active → Paying. Channel suggestions are AI-generated, not verified community research; the survey is text to copy, not a hosted response-collection form.
 5. **Next 100 — try broader outreach.** Once unlocked, generate channel ideas, referral asks and onboarding questions. Enter your own sign-up, active and returning-user counts. These metrics are not connected to your app's analytics.
 
-The dashboard brings together the next-step suggestion, stage progress, contact pipeline and a timeline of learnings and experiments. A desktop sidebar and responsive panels support classroom projection; mobile keeps bottom navigation. **Account & saved work** shows the selected project and record counts, with a link to edit project details. It does not add project switching, account deletion or exports. All AI outputs need human review; the app never sends outreach to interviewees or customers.
+The dashboard brings together the next-step suggestion, stage progress, contact pipeline and a timeline of learnings and experiments. A desktop sidebar and responsive panels support classroom projection; mobile keeps bottom navigation. **Account & saved work** lists your ideas, opens a selected project, shows its record counts and links to edit its details. Choose **New idea** to start a separate project without replacing existing work. Account deletion and exports remain unavailable. All AI outputs need human review; the app never sends outreach to interviewees or customers.
+
+### Save another idea and return later
+
+Open **Account & saved work** to choose an existing idea or create a new one. Each keeps its own people, interviews, learnings, experiments, outreach and Marketing Lab plan. **New idea** opens `/setup?new=true` and creates a separate project; **Edit this idea** changes only the selected project.
+
+This browser remembers your selected idea separately for each signed-in account. Your projects are saved in Supabase and available on another device, where you can choose one from the account list. With no remembered choice, the app opens your earliest project. If a remembered project is missing or no longer accessible, it reports that problem instead of silently opening another; use Account & saved work to choose an available idea. Save your edits before leaving a workflow.
 
 ### The saved $0 Marketing Lab
 
@@ -71,11 +77,11 @@ The goals and unlock thresholds differ. They are workflow guides, not evidence t
 - Interview notes remain in the current session until the final save. There is no autosave or offline recovery.
 - Synthesis does not provide structured links from each claim to its source interview. Check generated quotes and interpretations against the original notes.
 - Regenerating a synthesis replaces it and resets acceptance. Regenerating outreach replaces the stage's saved drafts; Stage 2 regeneration also replaces the survey.
-- There is no automated follow-up, public evidence pack, interview authenticity check, cohort dashboard or multi-project switcher.
+- There is no automated follow-up, public evidence pack, interview authenticity check, cohort dashboard or shared project membership.
 
 ## What we are testing next
 
-[Iteration 5](FEATUREROADMAP_workplan.md) stages the requested product expansion alongside research: economical AI, a new brand and demo landing page, teaching resources, durable personal workspaces, teacher and admin panels, and controlled sharing/collaboration. The [task registry and index](docs/roadmap/task-index.md) specify status, dependencies, subtasks and agent handoffs. The public demo, original brand, teaching kit and teaching page are implemented; a narrow aggregate admin dashboard and manual saved Marketing Lab are also implemented. Teacher/class panels, broader platform administration, multi-project work, sharing and collaboration remain planned. The registry distinguishes each gate and its actual evidence.
+[Iteration 5](FEATUREROADMAP_workplan.md) stages the requested product expansion alongside research: economical AI, a new brand and demo landing page, teaching resources, durable personal workspaces, teacher and admin panels, and controlled sharing/collaboration. The [task registry and index](docs/roadmap/task-index.md) specify status, dependencies, subtasks and agent handoffs. The public demo, original brand, teaching kit and teaching page are implemented; a narrow aggregate admin dashboard and manual saved Marketing Lab are also implemented. Owner-only multiple ideas and project switching are implemented. Teacher/class panels, broader platform administration, sharing and collaboration remain planned. The registry distinguishes each gate and its actual evidence.
 
 The primary pilot outcome to test is a **useful loop within 14 days**: a founder takes an external action and records a specific decision supported by observations, including counterevidence or unknowns, plus a next step. Voluntary return matters; course requirements and facilitator help will be recorded separately. Draft generation, interview totals and positive feedback alone are insufficient.
 
@@ -161,7 +167,7 @@ Lint excludes generated `dist`, `.output`, `.vinxi` and `.vercel` output automat
 
 ## Architecture and deployment
 
-The app uses React 19, TanStack Start/Router/Query, Vite, Tailwind and shadcn/ui. Browser CRUD uses Supabase with the signed-in user's session. All AI generation goes through `generateAI` in [src/lib/ai.functions.ts](src/lib/ai.functions.ts), which authenticates the caller, loads context under their RLS permissions and requests JSON from OpenRouter. AI keys and prompt assembly stay server-side; the browser saves returned results.
+The app uses React 19, TanStack Start/Router/Query, Vite, Tailwind and shadcn/ui. Browser CRUD uses Supabase with the signed-in user's session. The authenticated route supplies the verified user ID to project selection; project and child-record query keys include that identity and the selected project so switching accounts or ideas does not reuse another scope's cached records. Browser selection is a convenience, while Supabase row-level security enforces ownership. All AI generation goes through `generateAI` in [src/lib/ai.functions.ts](src/lib/ai.functions.ts), which authenticates the caller, loads context under their RLS permissions and requests JSON from OpenRouter. AI keys and prompt assembly stay server-side; the browser saves returned results.
 
 The separate `/admin` dashboard is restricted to the trusted `app_metadata.firstten_demo_admin === true` flag, rechecked server-side against the current bearer token. It returns aggregate operational counts and the current presenter account’s contribution, with no notes, emails or raw-user list. Missing data is shown as unavailable; acquisition and retention funnels are not instrumented. This limited grant is not the planned general platform-admin role. See [presenter access and revocation](docs/demo/presenter-data.md). The dedicated presenter can use the `ianroy` username alias with a privately supplied password; public users create their own email account. Credentials never belong in Git.
 
