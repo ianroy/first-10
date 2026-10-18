@@ -351,3 +351,33 @@ it("does not cancel an in-flight save merely because the same scoped view object
   expect(screen.getByText("Saved revision 1.")).toBeInTheDocument();
   expect(h.list).toHaveBeenCalledTimes(1);
 });
+it("reports pending/local work to parent access controls and clears the report on unmount", async () => {
+  const changed = vi.fn();
+  const mounted = render(
+    <GuestLearningWorkspace view={view} csrf={csrf} onDirtyChange={changed} />,
+  );
+  await screen.findByRole("heading", { name: "One conversation. A clearer next move." });
+  expect(changed).toHaveBeenLastCalledWith(false);
+  fireEvent.change(screen.getByLabelText("What is your problem space?"), {
+    target: { value: "Keep this before changing access" },
+  });
+  await waitFor(() => expect(changed).toHaveBeenLastCalledWith(true));
+  const pending = deferred<Awaited<ReturnType<typeof h.save>>>();
+  h.save.mockReturnValueOnce(pending.promise);
+  fireEvent.click(screen.getByRole("button", { name: "Save activity" }));
+  expect(changed).toHaveBeenLastCalledWith(true);
+  mounted.unmount();
+  expect(changed).toHaveBeenLastCalledWith(false);
+  const sent = h.save.mock.calls[0]![0].data as SaveGuestActivityInput;
+  await act(async () =>
+    pending.resolve({
+      ok: true,
+      data: {
+        record: { ...record(sent.document), id: sent.activityId },
+        savedRevision: 1,
+        replayed: false,
+      },
+    }),
+  );
+  expect(changed).toHaveBeenLastCalledWith(false);
+});

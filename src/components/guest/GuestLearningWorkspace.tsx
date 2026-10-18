@@ -36,16 +36,14 @@ function matches(record: Header, view: Pick<GuestView, "classId" | "teamId" | "p
     (record.audience === "team_shared" || record.authorPrincipalId === view.principalId)
   );
 }
-export function GuestLearningWorkspace({ view, csrf }: { view: GuestView; csrf: string }) {
+type WorkspaceProps = { view: GuestView; csrf: string; onDirtyChange?: (dirty: boolean) => void };
+export function GuestLearningWorkspace(props: WorkspaceProps) {
+  const { view, csrf } = props;
   return (
-    <Workspace
-      key={`${view.classId}:${view.teamId}:${view.principalId}:${csrf}`}
-      view={view}
-      csrf={csrf}
-    />
+    <Workspace key={`${view.classId}:${view.teamId}:${view.principalId}:${csrf}`} {...props} />
   );
 }
-function Workspace({ view, csrf }: { view: GuestView; csrf: string }) {
+function Workspace({ view, csrf, onDirtyChange }: WorkspaceProps) {
   const [headers, setHeaders] = useState<Header[]>([]),
     [record, setRecord] = useState<GuestActivityRecord | null>(null),
     [document, setDocument] = useState<GuestLearningDocument>(createEmptyGuestLearning),
@@ -76,6 +74,18 @@ function Workspace({ view, csrf }: { view: GuestView; csrf: string }) {
   const { classId, teamId, principalId } = view;
   const normalized = prepareGuestLearningSave(document, record?.document ?? null),
     dirty = fingerprint(normalized) !== fingerprint(record?.document ?? createEmptyGuestLearning());
+  const hasUnsavedWork = dirty || contextDirty || handoffDirty || busy || uncertain;
+  const dirtyReporter = useRef(onDirtyChange);
+  dirtyReporter.current = onDirtyChange;
+  useEffect(() => {
+    onDirtyChange?.(hasUnsavedWork);
+  }, [hasUnsavedWork, onDirtyChange]);
+  useEffect(
+    () => () => {
+      dirtyReporter.current?.(false);
+    },
+    [],
+  );
   const blocker = useBlocker({
     shouldBlockFn: () => dirty || contextDirty || handoffDirty || busy || uncertain,
     enableBeforeUnload: dirty || contextDirty || handoffDirty || busy || uncertain,
