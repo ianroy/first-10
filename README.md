@@ -44,13 +44,19 @@ The original First Ten identity uses a conversation-shaped **10**, Field noteboo
 
 ## What you can do today
 
-1. **Sign in and describe your app.** Use email and password, create an email/password account, or request an email sign-in link. Setup collects name, description, audience, problem and optional app link. Each account can keep multiple private ideas, with one selected at a time.
+1. **Sign in and describe your app.** Use email and password, create an email/password account, or request an email sign-in link. Password sign-in offers **Student**, **Educator** and **Admin** destinations; choosing a destination grants no new permissions. Setup collects name, description, audience, problem and optional app link. Each account can keep multiple private ideas, with one selected at a time.
 2. **First 10 — learn from relevant people.** Add first names and why each person fits. Generate and edit interview questions about past behavior, save them, select a contact and confirm permission to take notes. Interview mode shows one question per screen with a note and optional exact quote. Save at the end to record the conversation and tags.
 3. **Review learnings and try a change.** After five saved, completed interviews, generate an editable synthesis of problems, objections, best-fit users, quotes and suggested changes. Review it against your notes before accepting it. Log an experiment with a hypothesis, change and result; the result can be updated later.
 4. **Next 50 — reach beyond the first group.** Once unlocked, generate suggested channels, editable outreach bodies and feedback-survey questions using your project, completed interviews, accepted learnings and contact-source notes. Copy drafts to send yourself and manually update contacts through Contacted → Replied → Tried it → Active → Paying. Channel suggestions are AI-generated, not verified community research; the survey is text to copy, not a hosted response-collection form.
 5. **Next 100 — try broader outreach.** Once unlocked, generate channel ideas, referral asks and onboarding questions. Enter your own sign-up, active and returning-user counts. These metrics are not connected to your app's analytics.
 
 The dashboard brings together the next-step suggestion, stage progress, contact pipeline and a timeline of learnings and experiments. A desktop sidebar and responsive panels support classroom projection; mobile keeps bottom navigation. **Account & saved work** lists your ideas, opens a selected project, shows its record counts and links to edit its details. Choose **New idea** to start a separate project without replacing existing work. Account deletion and exports remain unavailable. All AI outputs need human review; the app never sends outreach to interviewees or customers.
+
+### Choose a workspace at sign-in
+
+`/auth` remains available when an account is already signed in. Continue the current workspace or use another login; opening the page alone does not send an existing session away. Student opens the private project dashboard, Educator opens the private lesson planner, and Admin requires the trusted server-assigned aggregate permission. New accounts receive private project and lesson-planning tools, not admin access. The public `/demo` remains available without signing in.
+
+The known fictional presenter gets explicit **Open student demo**, **Open educator demo** and **Open admin demo** buttons. These launches select the reserved StudyLoop project and clear cached query results; they do not reset or overwrite saved project content. The password remains private. Educator planning and any authored sample-team preview are not enrollment, live student progress or permission to inspect another account.
 
 ### Save another idea and return later
 
@@ -116,7 +122,7 @@ cp .env.example .env
 npx bun@1.3.5 run dev
 ```
 
-Use the local URL printed by Vite; the wrapper can choose the port. Configure that origin's `/auth` callback in Supabase's allowed redirect URLs so magic-link sign-in can return to the app.
+Use the local URL printed by Vite; the wrapper can choose the port. Configure the origin’s auth callback URLs in Supabase’s allowed redirects. The app requests `/auth?callback=true&view=student`, `educator` or `admin` as the selected destination; account-creation redirects must retain ordinary-account permission limits. An email callback can continue to its validated destination, while an ordinary visit to `/auth` stays on the chooser.
 
 ### Environment variables
 
@@ -188,7 +194,7 @@ vercel link
 vercel deploy --prod
 ```
 
-Set `NITRO_PRESET=vercel` in the remote build environment as well as the required Supabase and OpenRouter values. The `VITE_*` settings must be available at build time. In Supabase Authentication, configure the Site URL and allowed `/auth` redirect URLs for production, local development and any previews being used. Confirm sign-in, project access and AI generation after deployment.
+Set `NITRO_PRESET=vercel` in the remote build environment as well as the required Supabase and OpenRouter values. The `VITE_*` settings must be available at build time. In Supabase Authentication, configure the Site URL and allowed `/auth` callback URLs, including the app’s `callback=true&view=...` query parameters, for production, local development and any previews being used. Confirm sign-in, project access and AI generation after deployment.
 
 The project remains connected to Lovable. Preserve published Git history: use ordinary commits and pushes, and keep the connected branch working.
 
