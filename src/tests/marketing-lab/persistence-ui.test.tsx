@@ -2,6 +2,7 @@ import type { ReactNode } from "react";
 import { cleanup, fireEvent, render, screen, waitFor } from "@testing-library/react";
 import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
 import { createEmptyMarketingPlan, type MarketingPlanV1 } from "@/lib/marketing-plan";
+import { planningFixture } from "./planning-fixture";
 import type { Project } from "@/lib/data";
 
 const gateway = vi.hoisted(() => ({ load: vi.fn(), save: vi.fn() }));
@@ -85,6 +86,49 @@ beforeEach(() => {
 afterEach(cleanup);
 
 describe("private Marketing Lab persistence UI", () => {
+  it("saves completed planning controls with the current revision and preserves them on reload", async () => {
+    const plan = planningFixture();
+    gateway.load.mockResolvedValue(loaded(plan));
+    gateway.save.mockImplementation(async ({ data }: { data: { document: MarketingPlanV1 } }) => ({
+      ok: true,
+      id: "f4000000-0000-4000-8000-000000000030",
+      revision: 4,
+      savedAt: "2026-10-18T13:00:00Z",
+      document: data.document,
+    }));
+    const view = render(<SavedMarketingLab project={project} />);
+    await screen.findByRole("heading", { name: "Your thinking comes first" });
+    fireEvent.click(screen.getByRole("button", { name: /Plan the test/ }));
+    fireEvent.change(screen.getByLabelText("Target count (blank means unknown)"), {
+      target: { value: "0" },
+    });
+    fireEvent.change(screen.getByLabelText("Action 2: Estimated minutes"), {
+      target: { value: "30" },
+    });
+    fireEvent.change(screen.getByLabelText("Test status"), { target: { value: "running" } });
+    fireEvent.click(screen.getByRole("button", { name: "Save draft" }));
+    await screen.findByText("Saved · revision 4");
+    const input = gateway.save.mock.calls[0]![0].data;
+    expect(input.expectedRevision).toBe(3);
+    expect(input.projectId).toBe(project.id);
+    expect(input.document.test.target).toBe(0);
+    expect(input.document.test.state).toBe("running");
+    expect(input.document.test.startedAt).toBeTruthy();
+    expect(input.document.test.tasks[1].estimatedMinutes).toBe(30);
+    expect(input.document.test.tasks[1].dependsOn).toEqual(plan.test.tasks[1]!.dependsOn);
+    expect(input.document.studentFirst).toEqual(plan.studentFirst);
+    view.unmount();
+    gateway.load.mockResolvedValue({
+      ...loaded(input.document),
+      plan: { ...loaded(input.document).plan, revision: 4 },
+    });
+    await open();
+    fireEvent.click(screen.getByRole("button", { name: /Plan the test/ }));
+    expect(screen.getByLabelText("Target count (blank means unknown)")).toHaveValue(0);
+    expect(screen.getByLabelText("Action 2: Estimated minutes")).toHaveValue(30);
+    expect(screen.getByLabelText("Test status")).toHaveValue("running");
+  });
+
   it("does not replace a failed load with an empty editable plan", async () => {
     gateway.load.mockResolvedValue({ ok: false, code: "UNAVAILABLE" });
     render(<SavedMarketingLab project={project} />);

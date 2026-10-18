@@ -14,6 +14,10 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { MarketingPlanExport } from "./MarketingPlanExport";
+import { TestPlanner } from "@/components/marketing-lab/TestPlanner";
+import { DestinationBuilder } from "./DestinationBuilder";
+import { ContentReadiness } from "./ContentReadiness";
+import { invalidateChangedLaunchReviews } from "@/lib/marketing-planning";
 import { ManualMeasurements } from "./ManualMeasurements";
 import { LiveMarketingPractice } from "./LiveMarketingPractice";
 import { loadMarketingPlan, saveMarketingPlan } from "@/lib/marketing.functions";
@@ -24,11 +28,10 @@ import {
   type MarketingPlanV1,
   type MarketingChannel,
   type MarketingAsset,
-  type MarketingTask,
   type SaveMarketingPlanInput,
 } from "@/lib/marketing-plan";
 import type { Project } from "@/lib/data";
-import { Check, ArrowRight, Save, Map, FileText, Clock, Lightbulb } from "lucide-react";
+import { Check, ArrowRight, Save, Map, FileText, Lightbulb } from "lucide-react";
 const steps = ["Think first", "Map channels", "Make content", "Plan the test", "Review learning"];
 const uid = () => crypto.randomUUID();
 function Field({ label, children, help }: { label: string; children: ReactNode; help?: string }) {
@@ -93,22 +96,6 @@ function asset(channelId: string): MarketingAsset {
       revisionMade: "",
       checkedOn: null,
     },
-  };
-}
-function task(): MarketingTask {
-  return {
-    id: uid(),
-    channelId: null,
-    assetId: null,
-    kind: "investigate",
-    title: "",
-    ownerLabel: "",
-    dueOn: null,
-    dependsOn: [],
-    doneMeans: "",
-    estimatedMinutes: null,
-    status: "todo",
-    completionNote: "",
   };
 }
 export function SavedMarketingLab({ project }: { project: Project }) {
@@ -177,6 +164,7 @@ export function SavedMarketingLab({ project }: { project: Project }) {
     if (!plan || busy || !canWrite) return;
     const next = structuredClone(plan);
     mutator(next);
+    invalidateChangedLaunchReviews(plan, next);
     pendingSave.current = null;
     setPlan(next);
     setDirty(true);
@@ -855,6 +843,13 @@ export function SavedMarketingLab({ project }: { project: Project }) {
                         onChange={(event) =>
                           update((next) => {
                             next.assets[index]![key] = event.target.value;
+                            next.assets[index]!.review = {
+                              truthful: false,
+                              disclosedBuilder: false,
+                              accessChecked: false,
+                              destinationChecked: false,
+                              checkedAt: null,
+                            };
                           })
                         }
                       />
@@ -868,6 +863,13 @@ export function SavedMarketingLab({ project }: { project: Project }) {
                         onChange={(event) =>
                           update((next) => {
                             next.assets[index]!.body = event.target.value;
+                            next.assets[index]!.review = {
+                              truthful: false,
+                              disclosedBuilder: false,
+                              accessChecked: false,
+                              destinationChecked: false,
+                              checkedAt: null,
+                            };
                           })
                         }
                       />
@@ -880,10 +882,28 @@ export function SavedMarketingLab({ project }: { project: Project }) {
                       onChange={(event) =>
                         update((next) => {
                           next.assets[index]!.destinationUrl = event.target.value || null;
+                          next.assets[index]!.review = {
+                            truthful: false,
+                            disclosedBuilder: false,
+                            accessChecked: false,
+                            destinationChecked: false,
+                            checkedAt: null,
+                          };
                         })
                       }
                     />
                   </Field>
+                  <DestinationBuilder
+                    label={`Draft ${index + 1}`}
+                    url={item.destinationUrl}
+                    onAdopt={(url) =>
+                      update((next) => {
+                        next.assets[index]!.destinationUrl = url;
+                        next.assets[index]!.review.destinationChecked = false;
+                        next.assets[index]!.review.checkedAt = null;
+                      })
+                    }
+                  />
                   <Field
                     label={`Draft ${index + 1}: Peer or self walkthrough notes`}
                     help="What did they understand, where did they hesitate, and what did you revise?"
@@ -898,172 +918,16 @@ export function SavedMarketingLab({ project }: { project: Project }) {
                     />
                   </Field>
                 </div>
+                <ContentReadiness
+                  asset={item}
+                  index={index}
+                  change={(mutate) => update((next) => mutate(next.assets[index]!))}
+                />
               </Card>
             ))}
           </>
         )}
-        {step === 3 && (
-          <>
-            <Card>
-              <Clock className="mb-3 size-7" />
-              <h3 className="text-2xl font-bold">A one-week test with a real limit</h3>
-              <p className="mt-3 text-sm text-muted-foreground">
-                Keep this as a draft while you check permission, content and the path to the useful
-                action. You run the test yourself; this app does not publish or verify completion.
-              </p>
-              <div className="mt-5 grid gap-4 lg:grid-cols-3">
-                {(["startOn", "endOn", "reviewOn"] as const).map((key) => (
-                  <Field
-                    key={key}
-                    label={
-                      key === "startOn"
-                        ? "Start date"
-                        : key === "endOn"
-                          ? "End date"
-                          : "Review date"
-                    }
-                  >
-                    <Input
-                      type="date"
-                      value={plan.test[key] ?? ""}
-                      onChange={(event) =>
-                        update((next) => {
-                          next.test[key] = event.target.value || null;
-                        })
-                      }
-                    />
-                  </Field>
-                ))}
-                <Field label="Available time (minutes)">
-                  <Input
-                    type="number"
-                    min={0}
-                    max={10080}
-                    value={plan.resources.availableMinutes ?? ""}
-                    onChange={(event) =>
-                      update((next) => {
-                        next.resources.availableMinutes =
-                          event.target.value === "" ? null : Number(event.target.value);
-                      })
-                    }
-                  />
-                </Field>
-                <Field label="Target useful actions (optional)">
-                  <Input
-                    type="number"
-                    min={0}
-                    value={plan.test.target ?? ""}
-                    onChange={(event) =>
-                      update((next) => {
-                        next.test.target =
-                          event.target.value === "" ? null : Number(event.target.value);
-                      })
-                    }
-                  />
-                </Field>
-                <Field label="Cash budget">
-                  <Input value="$0 — use existing resources" readOnly />
-                </Field>
-              </div>
-              <div className="mt-5 grid gap-4 lg:grid-cols-2">
-                {(
-                  [
-                    ["measurementPlan", "How will you observe the useful action?"],
-                    ["unknownBaselineOrTarget", "What baseline or target is still unknown?"],
-                    ["repeatIf", "Repeat if…"],
-                    ["reviseIf", "Revise if…"],
-                    ["stopIf", "Stop if…"],
-                  ] as const
-                ).map(([key, label]) => (
-                  <Field key={key} label={label}>
-                    <Textarea
-                      value={plan.test[key]}
-                      onChange={(event) =>
-                        update((next) => {
-                          next.test[key] = event.target.value;
-                        })
-                      }
-                    />
-                  </Field>
-                ))}
-                <Field label="Fallback if access, time or tools fail">
-                  <Textarea
-                    value={plan.resources.fallback}
-                    onChange={(event) =>
-                      update((next) => {
-                        next.resources.fallback = event.target.value;
-                      })
-                    }
-                  />
-                </Field>
-              </div>
-            </Card>
-            {plan.test.tasks.map((item, index) => (
-              <Card key={item.id}>
-                <h3 className="mb-4 font-bold">Action {index + 1}</h3>
-                <div className="grid gap-4 lg:grid-cols-2">
-                  {(
-                    [
-                      ["title", "Action"],
-                      ["ownerLabel", "Owner"],
-                      ["doneMeans", "What counts as done?"],
-                      ["completionNote", "What actually happened?"],
-                    ] as const
-                  ).map(([key, label]) => (
-                    <Field key={key} label={`Action ${index + 1}: ${label}`}>
-                      <Input
-                        value={item[key]}
-                        onChange={(event) =>
-                          update((next) => {
-                            next.test.tasks[index]![key] = event.target.value;
-                          })
-                        }
-                      />
-                    </Field>
-                  ))}
-                  <Field label={`Action ${index + 1}: Due date`}>
-                    <Input
-                      type="date"
-                      value={item.dueOn ?? ""}
-                      onChange={(event) =>
-                        update((next) => {
-                          next.test.tasks[index]!.dueOn = event.target.value || null;
-                        })
-                      }
-                    />
-                  </Field>
-                  <Field label={`Action ${index + 1}: Status`}>
-                    <select
-                      className="h-11 rounded-lg border bg-background px-3 text-sm"
-                      value={item.status}
-                      onChange={(event) =>
-                        update((next) => {
-                          next.test.tasks[index]!.status = event.target
-                            .value as MarketingTask["status"];
-                        })
-                      }
-                    >
-                      {["todo", "doing", "done", "blocked"].map((value) => (
-                        <option key={value}>{value}</option>
-                      ))}
-                    </select>
-                  </Field>
-                </div>
-              </Card>
-            ))}
-            <Button
-              variant="outline"
-              disabled={plan.test.tasks.length >= 24}
-              onClick={() =>
-                update((next) => {
-                  next.test.tasks.push(task());
-                })
-              }
-            >
-              Add an action
-            </Button>
-          </>
-        )}
+        {step === 3 && <TestPlanner plan={plan} update={update} />}
         {step === 4 && (
           <Card>
             <h3 className="text-2xl font-bold">What did you learn?</h3>

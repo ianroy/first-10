@@ -130,7 +130,8 @@ export function buildMarketingPlanMarkdown(
   list("Limitations", plan.resources.limitations);
   field("AI use setting", plan.resources.aiUse);
   field("Fallback", plan.resources.fallback);
-  field("Test state", plan.test.state);
+  field("Test state (owner recorded)", plan.test.state);
+  field("First manual start", plan.test.startedAt);
   field("Start", plan.test.startOn);
   field("End", plan.test.endOn);
   field("Review date", plan.test.reviewOn);
@@ -145,6 +146,9 @@ export function buildMarketingPlanMarkdown(
   for (const task of plan.test.tasks) {
     lines.push("", `### ${text(task.title || "Untitled action")}`, "");
     field("Owner", task.ownerLabel);
+    field("Action type", task.kind);
+    field("Channel", task.channelId ? channel(task.channelId) : "No specific channel");
+    field("Content draft", task.assetId ? asset(task.assetId) : "No specific draft");
     field("Due", task.dueOn);
     field("Status", task.status);
     field("Done means", task.doneMeans);
