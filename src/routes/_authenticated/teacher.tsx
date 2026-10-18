@@ -11,7 +11,12 @@ function TeacherPage() {
   return (
     <RequireProject>
       {(project) => (
-        <TeacherPlanner key={project.id} projectId={project.id} projectName={project.name} />
+        <TeacherPlanner
+          key={`${project.user_id}:${project.id}`}
+          projectId={project.id}
+          projectName={project.name}
+          projectOwnerId={project.user_id}
+        />
       )}
     </RequireProject>
   );

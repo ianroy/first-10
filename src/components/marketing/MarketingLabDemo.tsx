@@ -1,3 +1,5 @@
+import { ActivityExportLauncher } from "@/components/export/ActivityExportLauncher";
+import { marketingDemoActivities } from "@/lib/export/demo-adapters";
 import { useEffect, useId, useRef, useState } from "react";
 import {
   ArrowLeft,
@@ -526,6 +528,19 @@ function MarketingBoard({
           </div>
         </div>
       </div>
+      <ActivityExportLauncher
+        activities={marketingDemoActivities({
+          choiceId,
+          channelId,
+          thought,
+          sampleThinking,
+          thinkingReady,
+          draftOpen,
+          peerNote,
+          reflection,
+          reason,
+        })}
+      />
       <p className="mt-4 text-sm text-muted-foreground">
         This public example stays separate from your work. A saved manual Marketing Lab is available
         in the signed-in app at Stage 2. “Next 50” names a learning stage, not a promise of 50

@@ -1,3 +1,5 @@
+import { ActivityExportLauncher } from "@/components/export/ActivityExportLauncher";
+import { classroomExampleActivities } from "@/lib/export/demo-adapters";
 import { useEffect, useId, useState } from "react";
 import { ArrowDown, ArrowRight, BookOpen, MessageSquare, Users } from "lucide-react";
 import { classroomExamples, type ClassroomExampleId } from "@/lib/demo/classroom";
@@ -193,6 +195,7 @@ export function DemoClassOverview({ onDraftChange }: { onDraftChange?: (dirty: b
           </section>
         </aside>
       </div>
+      <ActivityExportLauncher activities={classroomExampleActivities(selected, comments)} />
       <p className="text-sm leading-relaxed text-muted-foreground">
         Use the six teaching principles below to discuss the work: experiential learning, student
         thinking before AI, scaffolding, peer feedback, reflection and responsible AI. These

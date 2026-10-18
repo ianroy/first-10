@@ -1,3 +1,6 @@
+import { OwnerActivityExport } from "@/components/export/OwnerActivityExport";
+import { teacherActivities } from "@/lib/export/plan-adapters";
+import { teachingReferenceActivities } from "@/lib/export/demo-adapters";
 import { useEffect, useId, useRef, useState, type ReactNode } from "react";
 import { useBlocker } from "@tanstack/react-router";
 import {
@@ -174,9 +177,11 @@ function PlanComparison({ plan }: { plan: TeacherPlanV1 }) {
 export function TeacherPlanner({
   projectId,
   projectName,
+  projectOwnerId,
 }: {
   projectId: string;
   projectName: string;
+  projectOwnerId?: string;
 }) {
   const prefix = useId();
   const [document, setDocument] = useState<TeacherPlanV1>(createEmptyTeacherPlan);
@@ -778,6 +783,15 @@ export function TeacherPlanner({
               </section>
             </TabsContent>
           </Tabs>
+        )}
+        {loaded && projectOwnerId && (
+          <OwnerActivityExport
+            project={{ id: projectId, user_id: projectOwnerId }}
+            activities={() => [
+              ...teacherActivities(document, { savedAt, revision, dirty }),
+              ...teachingReferenceActivities(agenda, rubric),
+            ]}
+          />
         )}
         <details className="rounded-2xl border border-border bg-card p-6">
           <summary className="cursor-pointer text-lg font-bold">

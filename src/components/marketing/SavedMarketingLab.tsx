@@ -1,3 +1,5 @@
+import { OwnerActivityExport } from "@/components/export/OwnerActivityExport";
+import { marketingActivities } from "@/lib/export/plan-adapters";
 import { useEffect, useRef, useState, type ReactNode } from "react";
 import { Link, useBlocker } from "@tanstack/react-router";
 import { AppShell, Card } from "@/components/AppShell";
@@ -928,6 +930,17 @@ export function SavedMarketingLab({ project }: { project: Project }) {
           </>
         )}
         {step === 3 && <TestPlanner plan={plan} update={update} />}
+        <OwnerActivityExport
+          project={project}
+          activities={() =>
+            marketingActivities(plan, {
+              savedAt,
+              revision,
+              dirty,
+              fictional: project.id === "f1d00000-0000-4000-8000-000000000010",
+            })
+          }
+        />
         {step === 4 && (
           <Card>
             <h3 className="text-2xl font-bold">What did you learn?</h3>

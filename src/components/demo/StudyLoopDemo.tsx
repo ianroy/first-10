@@ -1,3 +1,5 @@
+import { ActivityExportLauncher } from "@/components/export/ActivityExportLauncher";
+import { studyLoopActivities } from "@/lib/export/demo-adapters";
 import { useEffect, useId, useRef, useState, type ReactNode } from "react";
 import {
   ArrowDownRight,
@@ -419,6 +421,12 @@ export function StudyLoopDemo({
           )}
         </div>
       )}
+      <div className="px-5 pb-5 sm:px-8">
+        <ActivityExportLauncher
+          key={resetKey}
+          activities={studyLoopActivities({ choiceId, sourceId, step })}
+        />
+      </div>
       <p className="sr-only" role="status">
         {notice}
       </p>

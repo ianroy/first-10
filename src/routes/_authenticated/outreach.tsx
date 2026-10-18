@@ -1,3 +1,5 @@
+import { OwnerActivityExport } from "@/components/export/OwnerActivityExport";
+import { outreachActivities, projectActivities, contactActivities } from "@/lib/export/adapters";
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { useState } from "react";
 import { toast } from "sonner";
@@ -28,7 +30,9 @@ export const Route = createFileRoute("/_authenticated/outreach")({
       { name: "description", content: "Outreach plans, message drafts, pipeline and metrics." },
     ],
   }),
-  component: () => <RequireProject>{(p) => <OutreachPage p={p} />}</RequireProject>,
+  component: () => (
+    <RequireProject>{(p) => <OutreachPage key={`${p.user_id}:${p.id}`} p={p} />}</RequireProject>
+  ),
 });
 
 function OutreachPage({ p }: { p: Project }) {
@@ -126,6 +130,12 @@ function DraftItem({ o, copy }: { o: Outreach; copy?: boolean | undefined }) {
         }}
       />
       <AIOrigin projectId={o.project_id} originId={o.generation_origin_id} />
+      <OwnerActivityExport
+        project={{ id: o.project_id, user_id: o.user_id }}
+        activities={() =>
+          outreachActivities({ id: o.project_id, user_id: o.user_id }, [{ ...o, body }])
+        }
+      />
       {copy && (
         <Button
           variant="outline"
@@ -214,6 +224,15 @@ function Stage2({ p }: { p: Project }) {
             responses are not collected here.
           </p>
           <AIOrigin projectId={p.id} originId={p.survey_origin_id} />
+          <OwnerActivityExport
+            project={p}
+            activities={() =>
+              projectActivities({
+                ...p,
+                survey: sv === null ? p.survey : sv.split("\n"),
+              }).filter((o) => o.activity.key === "survey")
+            }
+          />
           <Textarea
             aria-labelledby="feedback-survey-title"
             aria-describedby="feedback-survey-help"
@@ -253,6 +272,7 @@ function Stage2({ p }: { p: Project }) {
         </Card>
       )}
       <Card>
+        <OwnerActivityExport project={p} activities={() => contactActivities(p, pipe)} />
         <div className="flex items-center justify-between">
           <h2 className="text-lg font-bold">Pipeline</h2>
           <Link to="/contacts" className="text-sm font-semibold text-primary">
@@ -330,12 +350,32 @@ function Stage3({ p }: { p: Project }) {
     returning: number;
   };
   const [mm, setMm] = useState(m);
+  const [metricTouched, setMetricTouched] = useState<Record<string, boolean>>({});
   const pct = (a: number, b: number) => (b ? Math.round((a / b) * 100) : 0);
 
   return (
     <div className="grid items-start gap-6 lg:grid-cols-2">
       <Card>
         <h2 className="text-lg font-bold">Your numbers</h2>
+        <OwnerActivityExport
+          project={p}
+          activities={() =>
+            projectActivities({
+              ...p,
+              checklist: {
+                ...check,
+                metrics: Object.fromEntries(
+                  Object.entries(mm).map(([key, value]) => [
+                    key,
+                    metricTouched[key]
+                      ? value
+                      : ((check["metrics"] as Record<string, unknown> | undefined)?.[key] ?? null),
+                  ]),
+                ),
+              } as NonNullable<import("@/integrations/supabase/types").Json>,
+            }).filter((o) => o.activity.key === "metrics")
+          }
+        />
         <p className="mb-3 text-sm text-muted-foreground">
           Manually entered counts, not automatic analytics. Use the same population and period for
           each comparison; keep dates and sources in your notes.
@@ -355,7 +395,10 @@ function Stage3({ p }: { p: Project }) {
                 min={0}
                 inputMode="numeric"
                 value={mm[k] ?? 0}
-                onChange={(e) => setMm({ ...mm, [k]: Number(e.target.value) })}
+                onChange={(e) => {
+                  setMm({ ...mm, [k]: Number(e.target.value) });
+                  setMetricTouched((old) => ({ ...old, [k]: true }));
+                }}
                 className="mt-1 h-12 rounded-xl text-center text-lg font-bold text-foreground"
               />
             </label>

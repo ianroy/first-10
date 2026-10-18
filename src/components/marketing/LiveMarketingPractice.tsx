@@ -1,3 +1,5 @@
+import { ActivityExportLauncher } from "@/components/export/ActivityExportLauncher";
+import { livePracticeActivities } from "@/lib/export/demo-adapters";
 import { useEffect, useId, useState } from "react";
 import { useServerFn } from "@tanstack/react-start";
 import { z } from "zod";
@@ -173,6 +175,9 @@ export function LiveMarketingPractice({
               </ol>
             </details>
           )}
+          <ActivityExportLauncher
+            activities={livePracticeActivities(result, body, previousDrafts)}
+          />
           <dl className="grid gap-2 rounded-xl bg-muted p-4 text-xs sm:grid-cols-2">
             <div>
               <dt className="font-semibold">Model and provider</dt>

@@ -1,3 +1,10 @@
+import { OwnerActivityExport } from "@/components/export/OwnerActivityExport";
+import {
+  projectActivities,
+  learningActivities,
+  experimentActivities,
+  experimentDraftActivity,
+} from "@/lib/export/adapters";
 import { createFileRoute } from "@tanstack/react-router";
 import { useEffect, useState } from "react";
 import { toast } from "sonner";
@@ -34,7 +41,9 @@ export const Route = createFileRoute("/_authenticated/learnings")({
       },
     ],
   }),
-  component: () => <RequireProject>{(p) => <Learnings p={p} />}</RequireProject>,
+  component: () => (
+    <RequireProject>{(p) => <Learnings key={`${p.user_id}:${p.id}`} p={p} />}</RequireProject>
+  ),
 });
 
 type Synth = {
@@ -92,6 +101,10 @@ function Learnings({ p }: { p: Project }) {
           <Experiments p={p} />
         </div>
       </div>
+      <OwnerActivityExport
+        project={p}
+        activities={() => projectActivities(p).filter((o) => o.activity.key === "checklist")}
+      />
     </AppShell>
   );
 }
@@ -178,6 +191,18 @@ function Synthesis({ p, synth }: { p: Project; synth: Learning | undefined }) {
         unsupported interpretations.
       </p>
       <AIOrigin projectId={p.id} originId={synth.generation_origin_id} />
+      <OwnerActivityExport
+        project={p}
+        activities={() =>
+          learningActivities(p, [
+            {
+              ...synth,
+              data: d,
+              accepted: synth.accepted && JSON.stringify(d) === JSON.stringify(synth.data),
+            },
+          ])
+        }
+      />
       <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-1 xl:grid-cols-2">
         {SECTIONS.map(([k, label]) => (
           <div key={k}>
@@ -321,7 +346,8 @@ function Checklist({
 }
 
 function Experiments({ p }: { p: Project }) {
-  const { data: exps = [] } = useExperiments(p.id);
+  const { data: exps = [], isLoading, error: sourceError } = useExperiments(p.id);
+  const [resultDrafts, setResultDrafts] = useState<Record<string, string>>({});
   const refresh = useRefresh();
   const [f, setF] = useState({ hypothesis: "", change: "", result: "" });
   return (
@@ -381,6 +407,18 @@ function Experiments({ p }: { p: Project }) {
           Log experiment
         </Button>
       </form>
+      {!isLoading && !sourceError && (
+        <OwnerActivityExport
+          project={p}
+          activities={() => [
+            experimentDraftActivity(f, p.stage),
+            ...experimentActivities(
+              p,
+              exps.map((x) => ({ ...x, result: resultDrafts[x.id] ?? x.result })),
+            ),
+          ]}
+        />
+      )}
       <ul className="mt-4 space-y-2">
         {exps.map((x) => (
           <li key={x.id} className="rounded-xl bg-muted p-3 text-sm">
@@ -392,7 +430,8 @@ function Experiments({ p }: { p: Project }) {
             </label>
             <Input
               id={`experiment-result-${x.id}`}
-              defaultValue={x.result}
+              value={resultDrafts[x.id] ?? x.result}
+              onChange={(e) => setResultDrafts((old) => ({ ...old, [x.id]: e.target.value }))}
               placeholder="Result…"
               className="mt-2 rounded-lg bg-background"
               onBlur={async (e) => {

@@ -1,3 +1,5 @@
+import { OwnerActivityExport } from "@/components/export/OwnerActivityExport";
+import { contactActivities, contactDraftActivity } from "@/lib/export/adapters";
 import { createFileRoute } from "@tanstack/react-router";
 import { useState } from "react";
 import { toast } from "sonner";
@@ -16,7 +18,9 @@ export const Route = createFileRoute("/_authenticated/contacts")({
       { name: "description", content: "Your warm list and outreach pipeline." },
     ],
   }),
-  component: () => <RequireProject>{(p) => <Contacts p={p} />}</RequireProject>,
+  component: () => (
+    <RequireProject>{(p) => <Contacts key={`${p.user_id}:${p.id}`} p={p} />}</RequireProject>
+  ),
 });
 
 const PROMPTS: Record<number, string[]> = {
@@ -27,7 +31,7 @@ const PROMPTS: Record<number, string[]> = {
 
 function Contacts({ p }: { p: Project }) {
   const [stage, setStage] = useState(Math.min(p.stage, 3));
-  const { data: contacts = [] } = useContacts(p.id);
+  const { data: contacts = [], isLoading, error: sourceError } = useContacts(p.id);
   const refresh = useRefresh();
   const [f, setF] = useState({ first_name: "", relation: "", why: "" });
   const list = contacts.filter((c) => c.stage === stage);
@@ -207,6 +211,12 @@ function Contacts({ p }: { p: Project }) {
           )}
         </section>
       </div>
+      {!isLoading && !sourceError && (
+        <OwnerActivityExport
+          project={p}
+          activities={() => [contactDraftActivity(f, stage), ...contactActivities(p, list)]}
+        />
+      )}
     </AppShell>
   );
 }
