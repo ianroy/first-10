@@ -255,8 +255,9 @@ export function SavedMarketingLab({ project }: { project: Project }) {
         <AlertDialogContent>
           <AlertDialogTitle>Keep your unsaved work?</AlertDialogTitle>
           <AlertDialogDescription>
-            Stay here to save your edits. Leaving now discards changes since your last confirmed
-            save.
+            Stay here to save your manual plan edits or copy any temporary AI practice text you want
+            to keep. Save draft saves the plan, not the AI practice preview. Leaving discards
+            unsaved edits and temporary practice drafts.
           </AlertDialogDescription>
           <AlertDialogFooter>
             <AlertDialogCancel
