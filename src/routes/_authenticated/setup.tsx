@@ -1,8 +1,9 @@
-import { createFileRoute, Link, useNavigate } from "@tanstack/react-router";
-import { useEffect, useState } from "react";
+import { createFileRoute, Link, useNavigate, useSearch } from "@tanstack/react-router";
+import { useState } from "react";
 import { toast } from "sonner";
 import { supabase } from "@/integrations/supabase/client";
-import { useProject, useRefresh } from "@/lib/data";
+import { useProject, useRefresh, type Project } from "@/lib/data";
+import { useProjectSelection } from "@/lib/project-selection";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
@@ -10,6 +11,8 @@ import { BrandLogo } from "@/components/BrandLogo";
 import { Label } from "@/components/ui/label";
 
 export const Route = createFileRoute("/_authenticated/setup")({
+  validateSearch: (search: Record<string, unknown>): { new?: boolean } =>
+    search["new"] === true || search["new"] === "true" ? { new: true } : {},
   head: () => ({
     meta: [
       { title: "Describe your app — First Ten" },
@@ -38,27 +41,43 @@ const fields = [
 ] as const;
 
 function Setup() {
-  const { data: project } = useProject();
+  const search = useSearch({ strict: false }) as { new?: boolean };
+  const query = useProject();
+  const newIdea = search.new === true;
+  const project = newIdea ? null : (query.data ?? null);
+  return (
+    <SetupForm
+      key={newIdea ? "new" : (project?.id ?? "first")}
+      project={project}
+      newIdea={newIdea}
+      loading={!newIdea && query.isLoading}
+      error={!newIdea ? query.error : null}
+    />
+  );
+}
+
+function SetupForm({
+  project,
+  newIdea,
+  loading,
+  error,
+}: {
+  project: Project | null;
+  newIdea: boolean;
+  loading: boolean;
+  error: Error | null;
+}) {
+  const selection = useProjectSelection();
   const refresh = useRefresh();
   const navigate = useNavigate();
-  const [form, setForm] = useState<{
-    name: string;
-    description: string;
-    audience: string;
-    problem: string;
-    link: string;
-  }>({ name: "", description: "", audience: "", problem: "", link: "" });
+  const [form, setForm] = useState({
+    name: project?.name ?? "",
+    description: project?.description ?? "",
+    audience: project?.audience ?? "",
+    problem: project?.problem ?? "",
+    link: project?.link ?? "",
+  });
   const [busy, setBusy] = useState(false);
-  useEffect(() => {
-    if (project)
-      setForm({
-        name: project.name,
-        description: project.description,
-        audience: project.audience,
-        problem: project.problem,
-        link: project.link,
-      });
-  }, [project]);
 
   return (
     <div className="mx-auto max-w-5xl px-6 py-8 lg:py-14">
@@ -68,7 +87,11 @@ function Setup() {
       <div className="grid items-start gap-10 lg:grid-cols-[.8fr_1.2fr]">
         <div>
           <p className="text-xs font-semibold uppercase tracking-widest text-primary">
-            {project ? "Your project" : "Start with your current idea"}
+            {newIdea
+              ? "A separate idea, a fresh ladder"
+              : project
+                ? "Your project"
+                : "Start with your current idea"}
           </p>
           <h1 className="mt-1 text-3xl font-bold">Tell us about your app</h1>
           <p className="mt-2 text-muted-foreground">
@@ -77,54 +100,119 @@ function Setup() {
           </p>
           <p className="mt-6 text-sm leading-relaxed text-muted-foreground">
             What have you built? Who has experienced the problem? A focused starting point helps you
-            choose a useful first conversation.
+            choose a useful first conversation. Creating a new idea keeps your other projects and
+            their saved work separate.
+          </p>
+          <p className="mt-4">
+            <Link
+              to="/account"
+              className="inline-flex min-h-11 items-center text-sm font-semibold underline"
+            >
+              Back to my ideas
+            </Link>
           </p>
         </div>
-        <form
-          className="space-y-5 rounded-3xl border bg-card p-6 shadow-soft lg:p-8"
-          onSubmit={async (e) => {
-            e.preventDefault();
-            setBusy(true);
-            const { error } = project
-              ? await supabase.from("projects").update(form).eq("id", project.id)
-              : await supabase.from("projects").insert(form);
-            setBusy(false);
-            if (error) {
-              toast.error(error.message);
-              return;
-            }
-            refresh("project");
-            navigate({ to: "/dashboard" });
-          }}
-        >
-          {fields.map((f) => (
-            <div key={f.k} className="space-y-1.5">
-              <Label htmlFor={`project-${f.k}`}>{f.l}</Label>
-              {"area" in f ? (
-                <Textarea
-                  id={`project-${f.k}`}
-                  required
-                  value={form[f.k]}
-                  placeholder={f.p}
-                  onChange={(e) => setForm({ ...form, [f.k]: e.target.value })}
-                  className="rounded-xl text-base"
-                />
-              ) : (
-                <Input
-                  id={`project-${f.k}`}
-                  required={f.k !== "link"}
-                  value={form[f.k]}
-                  placeholder={f.p}
-                  onChange={(e) => setForm({ ...form, [f.k]: e.target.value })}
-                  className="h-12 rounded-xl text-base"
-                />
-              )}
-            </div>
-          ))}
-          <Button size="xl" disabled={busy}>
-            {project ? "Save changes" : "Start my ladder"}
-          </Button>
-        </form>
+        {error ? (
+          <div role="alert" className="rounded-2xl border bg-card p-6">
+            <h2 className="font-bold">This project could not be opened</h2>
+            <p className="mt-2 text-sm">
+              Your saved work has not been changed. Choose an available idea from your account, or
+              try again.
+            </p>
+            <Link
+              to="/account"
+              className="mt-4 inline-flex min-h-11 items-center font-semibold underline"
+            >
+              Choose an idea
+            </Link>
+          </div>
+        ) : (
+          <form
+            className="space-y-5 rounded-3xl border bg-card p-6 shadow-soft lg:p-8"
+            onSubmit={async (e) => {
+              e.preventDefault();
+              if (!selection || loading || busy) return;
+              setBusy(true);
+              try {
+                const values = {
+                  ...form,
+                  name: form.name.trim(),
+                  description: form.description.trim(),
+                  audience: form.audience.trim(),
+                  problem: form.problem.trim(),
+                  link: form.link.trim(),
+                };
+                if (!values.name || !values.description || !values.audience || !values.problem)
+                  throw new Error("Describe the name, audience, problem and what your app does.");
+                const result =
+                  project && !newIdea
+                    ? await supabase
+                        .from("projects")
+                        .update(values)
+                        .eq("id", project.id)
+                        .eq("user_id", selection.userId)
+                        .select("id")
+                        .single()
+                    : await supabase
+                        .from("projects")
+                        .insert({ ...values, user_id: selection.userId })
+                        .select("id")
+                        .single();
+                if (result.error) throw result.error;
+                if (!result.data?.id)
+                  throw new Error("The save was not confirmed. Your text is still here.");
+                selection.selectProject(result.data.id);
+                refresh("project", "projects");
+                await navigate({ to: "/dashboard" });
+              } catch (failure) {
+                toast.error(
+                  failure instanceof Error
+                    ? failure.message
+                    : "Your idea could not be saved. Please try again.",
+                );
+              } finally {
+                setBusy(false);
+              }
+            }}
+          >
+            {loading && <p role="status">Opening your project…</p>}
+            <fieldset disabled={busy || loading || !selection} className="space-y-5">
+              {fields.map((f) => (
+                <div key={f.k} className="space-y-1.5">
+                  <Label htmlFor={`project-${f.k}`}>{f.l}</Label>
+                  {"area" in f ? (
+                    <Textarea
+                      id={`project-${f.k}`}
+                      required
+                      value={form[f.k]}
+                      placeholder={f.p}
+                      onChange={(e) => setForm({ ...form, [f.k]: e.target.value })}
+                      className="rounded-xl text-base"
+                    />
+                  ) : (
+                    <Input
+                      id={`project-${f.k}`}
+                      required={f.k !== "link"}
+                      value={form[f.k]}
+                      placeholder={f.p}
+                      onChange={(e) => setForm({ ...form, [f.k]: e.target.value })}
+                      className="h-12 rounded-xl text-base"
+                    />
+                  )}
+                </div>
+              ))}
+              <Button size="xl" disabled={busy}>
+                {busy
+                  ? "Saving…"
+                  : project && !newIdea
+                    ? "Save changes"
+                    : newIdea
+                      ? "Create new idea"
+                      : "Start my ladder"}
+              </Button>
+            </fieldset>
+          </form>
+        )}
       </div>
     </div>
   );

@@ -1,5 +1,6 @@
 import { useQuery, useQueryClient } from "@tanstack/react-query";
 import { supabase } from "@/integrations/supabase/client";
+import { useWorkspaceIdentity } from "@/lib/project-selection";
 import type { Tables } from "@/integrations/supabase/types";
 
 export type Project = Tables<"projects">;
@@ -26,27 +27,64 @@ export const PIPELINE = [
 ];
 export const REACHED = ["tried", "active", "paying"];
 
+export class SelectedProjectUnavailableError extends Error {
+  constructor() {
+    super("This selected project is unavailable. Choose another idea in Account & saved work.");
+    this.name = "SelectedProjectUnavailableError";
+  }
+}
+
 export function useProject() {
-  return useQuery({
-    queryKey: ["project"],
+  const scope = useWorkspaceIdentity();
+  const query = useQuery({
+    queryKey: ["project", scope.userId, scope.selectedProjectId],
+    enabled: !!scope.userId,
+    retry: false,
+    queryFn: async () => {
+      let request = supabase.from("projects").select("*").eq("user_id", scope.userId!);
+      if (scope.selectedProjectId) request = request.eq("id", scope.selectedProjectId);
+      const { data, error } = await request.order("created_at").order("id").limit(1).maybeSingle();
+      if (error) throw error;
+      if (!data && scope.selectedProjectId) throw new SelectedProjectUnavailableError();
+      return data;
+    },
+  });
+  return {
+    ...query,
+    isLoading: !scope.ready || query.isLoading,
+    error: scope.error ?? query.error,
+  };
+}
+
+export function useProjects() {
+  const scope = useWorkspaceIdentity();
+  const query = useQuery({
+    queryKey: ["projects", scope.userId],
+    enabled: !!scope.userId,
     queryFn: async () => {
       const { data, error } = await supabase
         .from("projects")
         .select("*")
+        .eq("user_id", scope.userId!)
         .order("created_at")
-        .limit(1)
-        .maybeSingle();
+        .order("id");
       if (error) throw error;
-      return data;
+      return data ?? [];
     },
   });
+  return {
+    ...query,
+    isLoading: !scope.ready || query.isLoading,
+    error: scope.error ?? query.error,
+  };
 }
 
 function listHook<T>(table: "contacts" | "interviews" | "learnings" | "experiments" | "outreach") {
-  return (projectId?: string) =>
-    useQuery({
-      queryKey: [table, projectId],
-      enabled: !!projectId,
+  return (projectId?: string) => {
+    const scope = useWorkspaceIdentity();
+    return useQuery({
+      queryKey: [table, scope.userId, projectId],
+      enabled: !!scope.userId && !!projectId,
       queryFn: async () => {
         const { data, error } = await supabase
           .from(table)
@@ -57,6 +95,7 @@ function listHook<T>(table: "contacts" | "interviews" | "learnings" | "experimen
         return (data ?? []) as T[];
       },
     });
+  };
 }
 export const useContacts = listHook<Contact>("contacts");
 export const useInterviews = listHook<Interview>("interviews");
@@ -66,7 +105,11 @@ export const useOutreach = listHook<Outreach>("outreach");
 
 export function useRefresh() {
   const qc = useQueryClient();
-  return (...keys: string[]) => keys.forEach((k) => qc.invalidateQueries({ queryKey: [k] }));
+  return (...keys: string[]) =>
+    keys.forEach((k) => {
+      void qc.invalidateQueries({ queryKey: [k] });
+      if (k === "project") void qc.invalidateQueries({ queryKey: ["projects"] });
+    });
 }
 
 export function stageProgress(contacts: Contact[], interviews: Interview[]) {
