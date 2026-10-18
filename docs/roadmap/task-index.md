@@ -37,7 +37,7 @@ Protect data and money before expanding access or AI behavior.
 | AI-006 Run bounded comparative model evaluations | not_started | 0/3 | agent | S | AI-005, AI-007 | — | evals/results/**, docs/ai-model-policy.md, src/lib/ai/model-policy.ts; locks: ai-entrypoint |
 | AI-007 Authorize and assemble traceable bounded context | not_started | 0/3 | agent | S | AI-002, PRV-001, SEC-004 | — | src/lib/ai/context.server.ts, src/lib/ai.functions.ts, src/lib/prompts/** (3 more; inspect --task); locks: ai-entrypoint |
 | AI-008 AI safety/cost regression gate | not_started | 0/3 | agent | S | AI-006, AI-007, AI-004 | — | evals/results/ai-gate.md, supabase/tests/ai-budget.sql, src/lib/ai/model-policy.ts (4 more; inspect --task); locks: ai-entrypoint |
-| AI-009 AI-DEMO-001: verify bounded fictional presenter AI practice | in_progress | 3/4 | agent | S | AI-001, DEMO-002, MKT-003, SEC-003 | — | src/lib/ai.functions.ts, src/lib/ai/contracts.ts, src/lib/ai/gateway.server.ts (8 more; inspect --task); locks: ai-gateway, demo-ai-budget, presenter-access |
+| AI-009 AI-DEMO-001: verify bounded fictional presenter AI practice | complete | 4/4 | agent | S | AI-001, DEMO-002, MKT-003, SEC-003 | — | src/lib/ai.functions.ts, src/lib/ai/contracts.ts, src/lib/ai/gateway.server.ts (8 more; inspect --task); locks: ai-gateway, demo-ai-budget, presenter-access |
 
 ## P2 — Brand, demos and teaching resources
 
@@ -148,6 +148,7 @@ Test cross-role behavior, rehearse releases, observe use and revise the plan.
 | REL-005 Review integrated outcomes and choose the next bounded wave | not_started | 0/3 | either | S | L-001, L-002, EDU-003, G-004 | — | research/release-learning-review.md; locks: — |
 | MKT-008 Verify the integrated marketing and AI journeys | not_started | 0/3 | agent | S | MKT-003, MKT-004, MKT-005, MKT-006, MKT-007 | — | src/tests/marketing-release/**, docs/qa/marketing-gate.md; locks: — |
 | DEMO-003 Keep sign-in explicit and launch the chosen student, educator or admin view | complete | 3/3 | agent | S | DEMO-002, WS-008, EDU-005, BR-003 | — | src/routes/auth.tsx, src/routes/_authenticated/route.tsx, src/components/RequireProject.tsx (4 more; inspect --task); locks: auth-entry, route-integration, app-shell |
+| PITCH-001 Rebuild the Babson pitch in the owner-requested slide flow | in_progress | 0/3 | agent | M | DEMO-003, WEB-004, EDU-002 | — | public/pitch/**, docs/demo/pitch/**; locks: pitch-deck |
 
 ## R0 — Continuous user and educator research
 

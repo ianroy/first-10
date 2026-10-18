@@ -72,7 +72,7 @@ Use **Save draft** and wait for confirmation. Saves check the current revision a
 
 ### Restricted fictional AI practice
 
-**Implemented in the current integration; live-provider verification pending.** The dedicated fictional presenter can request a temporary marketing invitation draft after preserving its initial Marketing Lab thinking. This practice sends only the fixed authored StudyLoop case to OpenRouter, not private project text, interview notes or the saved plan. The response can be reviewed and edited locally; it is not saved into the plan, copied into an asset or sent anywhere automatically.
+**Implemented and verified with a live fictional practice draft on 2026-10-18.** The dedicated fictional presenter can request a temporary marketing invitation draft after preserving its initial Marketing Lab thinking. This practice sends only the fixed authored StudyLoop case to OpenRouter, not private project text, interview notes or the saved plan. The response can be reviewed and edited locally; it is not saved into the plan, copied into an asset or sent anywhere automatically.
 
 This restricted path uses Gemini 2.5 Flash Lite through Vertex-only routing, requests zero-data-retention and no-data-collection eligibility, and makes one attempt with no provider fallback. Each request reserves 2¢ against a fixed $1 workshop allowance before calling the provider; failed or uncertain attempts retain that reservation. The existing four private AI workflows remain on their current baseline and are not covered by this workshop budget. This is neither general marketing AI nor a completed model-quality/privacy evaluation.
 

@@ -22,26 +22,26 @@ Statuses are `not_started`, `in_progress`, `blocked`, `complete`, `deferred`, `d
 current_iteration: 5
 current_stage: P1_foundation_with_parallel_P2_and_R0
 status: in_progress
-last_task_done: DEMO-003
-next_task: AI-009
-next_parallel_wave: [AI-009]
-active_claims: [AI-009]
+last_task_done: AI-009
+next_task: PITCH-001
+next_parallel_wave: []
+active_claims: [PITCH-001]
 research_gate: not_passed
 foundation_gate: not_passed
 realtime_go: pending
 last_updated: 2026-10-18
 last_documentation_update: "2026-10-18: reconciled owner-private ideas, educator planning/authored cohort, aggregate presenter view and three-dashboard sign-in; retained DOC-002 team-credit history."
 resume_hint: >-
-  Integrated release f8bc878 is deployed READY. DEMO-002 aggregate presenter verification,
-  WS-008 owner-private multiple ideas, EDU-005 private lesson planning/authored class preview,
-  and DEMO-003 explicit Student/Educator/Admin sign-in destinations are complete.
-  Coordinator reports 219 application tests, 391 real isolated SQL assertions, typecheck, lint
-  and build passing. Hosted presenter teacher plan is revision 1 with 45 planned capacity,
-  not enrollment. AI-009 owns the pending deployed fixed-case provider trial: global $1
-  workshop cap, 2-cent atomic reservations, one bounded Vertex ZDR attempt, no fallback.
-  Do not claim a live provider success, measured learning, real submissions or shared class
-  permissions. General WS/CLS/ADM and research gates remain open. Final-hour checkpoint
-  is approximately 12:13 UTC; preserve all saved work and the no-call public fallback.
+  Production 840d0eb includes tested Student/Educator/Admin presenter launches, saved fictional
+  StudyLoop work, four authored educator team examples and private lesson plan revision1.
+  AI-009 is complete: fixed-case live Gemini Flash Lite draft succeeded; UI cost $0.000106,
+  4c reserved across two attempts with first outcome cost unknown; $0.96 allowance remains.
+  Typecheck and 221 application tests pass; lint zero errors/six existing warnings. CI and
+  isolated real SQL policy jobs passed at f8bc878. PITCH-001 rebuild is active in an isolated
+  worker to follow the owner's new slide order, with four actual desktop screenshot assets.
+  Human studies, general class permissions, broader admin funnel and sharing remain open.
+  Final-hour checkpoint approximately12:13UTC; keep public/offline fallbacks and saved work.
+
 ```
 
 **Audit basis:** product source and documentation at `7006f87`, plus the concurrent team-credits commit `a2d69a3`, with repository research files rechecked. F-007 is now complete: [GitHub CI run 39092157827](https://github.com/ianroy/first-10/actions/runs/39092157827) succeeded for that commit. The earlier local typecheck, 17 tests, Vercel build and scoped lint results remain in history. Six existing lint warnings and generated `.vercel` scanning motivate OPS-001. A green code pipeline does not verify live auth, RLS, model quality, research outcomes or preview configuration.

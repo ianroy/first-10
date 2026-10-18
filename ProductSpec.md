@@ -242,13 +242,15 @@ Context is sliced by characters without a deterministic query order or a separat
 
 ### 5.1.1 Restricted fictional marketing practice
 
-**Integration implemented; live-provider verification pending as of this documentation pass.** `marketing_demo` branches inside the existing `generateAI` gateway before private interview/contact context is loaded. It requires a fresh verified user, the exact reserved presenter user/project, trusted synthetic/demo metadata, matching fixture markers and a completed initial-thinking timestamp in that owner’s Marketing Lab. Ordinary accounts and other projects cannot use it.
+**Implemented and verified with a live fictional practice draft on 2026-10-18.** `marketing_demo` branches inside the existing `generateAI` gateway before private interview/contact context is loaded. It requires a fresh verified user, the exact reserved presenter user/project, trusted synthetic/demo metadata, matching fixture markers and a completed initial-thinking timestamp in that owner’s Marketing Lab. Ordinary accounts and other projects cannot use it.
 
 [The practice handler](src/lib/ai/demo-marketing.server.ts) sends only the fixed authored StudyLoop scenario. Project descriptions, private notes, interviews, teacher plans and the student’s own initial-thinking text are not included. It returns a schema-checked proposed channel, hook, invitation body, CTA, access check, peer check, measurement suggestion and uncertainty. The UI presents an editable temporary preview, without saving it to a plan, copying it into an asset or publishing it. It is fictional practice, not a generated campaign grounded in the user’s private evidence.
 
 The configured model is `google/gemini-2.5-flash-lite`, restricted to `google-vertex`, with `allow_fallbacks:false`, `data_collection:"deny"`, `zdr:true`, required structured-output parameters and configured per-million-token price ceilings of $0.10 input/$0.40 output. Output is capped at 1,200 tokens. One attempt is allowed: no automatic retry or alternate-provider fallback. These are routing requirements, not a blanket retention or model-quality guarantee; an unavailable eligible route fails safely to the prepared example.
 
 Before any provider call, the private database RPC atomically reserves exactly 2¢ against a global $1 workshop cap. Duplicate reservation IDs are rejected, and unsuccessful/uncertain calls retain their reservation rather than assume a refund. The UI distinguishes provider-reported cost, when available, from the reserved-budget balance. Reservation is conservative accounting, not a claim of actual cost. The fixed prompt is versioned as `fictional-marketing-v1`. This narrow ledger does not meter the original four private kinds and does not complete general AI-004 spend controls, per-kind evaluation, quote grounding or provider-policy review.
+
+A production desktop trial returned a truthful, editable invitation with provider display name `Google` (the exclusively pinned Vertex route) and displayed cost `$0.000106`. Two attempts reserved 4¢ in total; the first discarded response has unknown actual cost and its reservation is retained. This is one synthetic smoke test, not comparative quality evaluation.
 
 ### 5.2 Provider contract and limits
 
