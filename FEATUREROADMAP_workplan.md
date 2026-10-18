@@ -348,7 +348,6 @@ Generated 2026-10-17 by the regeneration prompt. Stage: R1 → R2.
 | 2026-10-17 | New Supabase project `first-10` (hdwnnuvqqkkpontcdbwa) | Isolation from other projects | Reusing existing projects |
 | 2026-10-17 | LLM via OpenRouter, default `anthropic/claude-sonnet-4.5`, strict JSON schema, non-streaming | Model flexibility and one key; JSON outputs are small | Lovable AI gateway (only works inside Lovable) |
 | 2026-10-17 | Research before features, but Reddit audit cancelled; use supplied signal brief as inspiration plus founder interviews | Reddit unreachable to tools; owner chose the brief | Reddit API app, pasted URLs, Claude in Chrome (blocked) |
-
 | 2026-10-17 | First R2 slice = Proof Not Praise, Devil's Advocate, Interview Coach; Community Finder held | Highest signal-to-effort, least dependent on unresolved privacy work and interviews | Community Finder first; Pain Miner |
 
 ## 9. Iteration log (append only)
