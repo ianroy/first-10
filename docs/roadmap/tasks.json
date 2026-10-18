@@ -734,7 +734,7 @@
       "id": "OPS-001",
       "title": "Make local and CI verification repeatable",
       "phase": "P0",
-      "status": "not_started",
+      "status": "complete",
       "owner": "agent",
       "size": "S",
       "kind": "implementation",
@@ -784,26 +784,38 @@
         {
           "date": "2026-10-17",
           "text": "Scheduled by Iteration 5; no implementation or validation claimed."
+        },
+        {
+          "date": "2026-10-18",
+          "text": "Claimed for the authorized autonomous Babson demo run. Worker delivers an isolated commit; coordinator owns status and integration."
+        },
+        {
+          "date": "2026-10-18",
+          "text": "Worker verified lint before/after build (6 existing warnings), typecheck, 19 app/config tests, 20 roadmap tests, registry and Vercel build. Local Node26/shared installed dependencies; hosted Node22 verification follows push. Coordinator integrated normal cherry-pick."
         }
       ],
       "claim": null,
-      "completion_evidence": [],
+      "completion_evidence": [
+        "86c0735a9e091f82327e451cb88ca528fc86f621",
+        "src/tests/ops-001/lint-scope.test.ts",
+        ".github/workflows/ci.yml"
+      ],
       "subtasks": [
         {
           "id": "OPS-001.s1",
-          "status": "not_started",
+          "status": "complete",
           "instruction": "Inspect CI and the generated .vercel lint slowdown recorded in DOC-001.",
           "notes": []
         },
         {
           "id": "OPS-001.s2",
-          "status": "not_started",
+          "status": "complete",
           "instruction": "Exclude only generated output, add registry check/test commands, retain Bun 1.3.5 frozen install.",
           "notes": []
         },
         {
           "id": "OPS-001.s3",
-          "status": "not_started",
+          "status": "complete",
           "instruction": "Run lint/typecheck/test/build in order and document environment assumptions.",
           "notes": []
         }
@@ -813,7 +825,7 @@
       "id": "SEC-001",
       "title": "Define role, ownership and API contracts",
       "phase": "P0",
-      "status": "not_started",
+      "status": "in_progress",
       "owner": "agent",
       "size": "S",
       "kind": "documentation",
@@ -857,14 +869,25 @@
         {
           "date": "2026-10-17",
           "text": "Scheduled by Iteration 5; no implementation or validation claimed."
+        },
+        {
+          "date": "2026-10-18",
+          "text": "Claimed for the authorized autonomous Babson demo run. Worker delivers an isolated commit; coordinator owns status and integration."
         }
       ],
-      "claim": null,
+      "claim": {
+        "owner": "access_worker",
+        "branch": "codex/sec-001-autonomous",
+        "base_commit": "f3c45253d837d486f8a8cec4e3b353eabf7acb5a",
+        "worktree": "/Users/ianroy/.codex/worktrees/first-ten-access/First 10",
+        "started_at": "2026-10-18T03:30:28.647550+00:00",
+        "lease_expires_at": "2026-10-18T05:30:28.647550+00:00"
+      },
       "completion_evidence": [],
       "subtasks": [
         {
           "id": "SEC-001.s1",
-          "status": "not_started",
+          "status": "in_progress",
           "instruction": "Inventory all six tables and current user_id/project_id semantics.",
           "notes": []
         },
@@ -6479,7 +6502,7 @@
       "id": "VP-007",
       "title": "Audit the promise, evidence and actual alternatives",
       "phase": "R0",
-      "status": "not_started",
+      "status": "in_progress",
       "owner": "agent",
       "size": "S",
       "kind": "research",
@@ -6522,14 +6545,25 @@
         {
           "date": "2026-10-17",
           "text": "Not started. Extends the existing VP-007 research audit; DOC-001 updated product documentation but did not complete this task. No participant findings exist merely because a canvas exists."
+        },
+        {
+          "date": "2026-10-18",
+          "text": "Claimed for the authorized autonomous Babson demo run. Worker delivers an isolated commit; coordinator owns status and integration."
         }
       ],
-      "claim": null,
+      "claim": {
+        "owner": "value_worker",
+        "branch": "codex/vp-007-autonomous",
+        "base_commit": "f3c45253d837d486f8a8cec4e3b353eabf7acb5a",
+        "worktree": "/Users/ianroy/.codex/worktrees/first-ten-value/First 10",
+        "started_at": "2026-10-18T03:30:28.647550+00:00",
+        "lease_expires_at": "2026-10-18T05:30:28.647550+00:00"
+      },
       "completion_evidence": [],
       "subtasks": [
         {
           "id": "VP-007.s1",
-          "status": "not_started",
+          "status": "in_progress",
           "instruction": "Read the current spec, landing copy, values and existing canvas; map every consequential claim to a source and current/planned/unknown status.",
           "notes": []
         },
@@ -8751,5 +8785,14 @@
       "successors": ["EV-002", "EV-003", "EV-005"],
       "reason": "Manual research continues while requested implementation records evidence and next decisions."
     }
-  ]
+  ],
+  "run_policy": {
+    "started_at": "2026-10-18T03:29:45Z",
+    "checkpoint_at": "2026-10-18T13:29:45Z",
+    "openrouter_limit_usd": 25,
+    "openrouter_spend_usd": 0,
+    "deployment": "Production deployment and safe tested migrations authorized; commit/push often. No other paid services.",
+    "demo_priority": "Tomorrow’s Babson mini hackathon presentation for 45 academics; strong educator story, reliable fictional sample data and polished walkthrough.",
+    "real_testers": "Supabase authorized for testers; no specific people/contact channels named. No unsolicited external messaging."
+  }
 }

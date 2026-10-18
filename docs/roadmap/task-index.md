@@ -10,8 +10,8 @@ Define contracts and keep independent research moving; no product feature is rep
 
 | Task | Status | Subtasks complete | Owner | Size | Dependencies | Decisions | Write scope / locks |
 | --- | --- | --- | --- | --- | --- | --- | --- |
-| OPS-001 Make local and CI verification repeatable | not_started | 0/3 | agent | S | F-007 | — | eslint.config.js, .github/workflows/ci.yml, package.json (2 more; inspect --task); locks: — |
-| SEC-001 Define role, ownership and API contracts | not_started | 0/3 | agent | S | F-007 | — | docs/architecture/access-contract.md, docs/architecture/api-contracts.md; locks: — |
+| OPS-001 Make local and CI verification repeatable | complete | 3/3 | agent | S | F-007 | — | eslint.config.js, .github/workflows/ci.yml, package.json (2 more; inspect --task); locks: — |
+| SEC-001 Define role, ownership and API contracts | in_progress | 0/3 | agent | S | F-007 | — | docs/architecture/access-contract.md, docs/architecture/api-contracts.md; locks: — |
 
 ## P1 — Reliability, privacy and economical AI
 
@@ -139,7 +139,7 @@ Human studies can run alongside engineering; unsupported outcomes remain hypothe
 
 | Task | Status | Subtasks complete | Owner | Size | Dependencies | Decisions | Write scope / locks |
 | --- | --- | --- | --- | --- | --- | --- | --- |
-| VP-007 Audit the promise, evidence and actual alternatives | not_started | 0/3 | agent | S | VP-001, DOC-001 | — | research/value-prop.md, research/claim-ledger.md; locks: — |
+| VP-007 Audit the promise, evidence and actual alternatives | in_progress | 0/3 | agent | S | VP-001, DOC-001 | — | research/value-prop.md, research/claim-ledger.md; locks: — |
 | VP-008 Revise interview guides and pre-register the learning protocol | not_started | 0/3 | agent | S | VP-007, VP-002 | — | research/value-test-plan.md, research/interviews/guide-founders.md, research/interviews/guide-instructors.md (2 more; inspect --task); locks: research-protocol |
 | R0-004a Learn from the first three eligible founders | not_started | 0/3 | human | M | VP-008 | — | research/interviews/*-founder-*.md, research/founder-sample.md; locks: — |
 | R0-004b Complete the founder sample and seek counterexamples | not_started | 0/3 | human | M | R0-004a | — | research/interviews/*-founder-*.md, research/founder-sample.md; locks: — |
