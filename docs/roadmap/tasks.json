@@ -2367,7 +2367,7 @@
       "id": "AI-007",
       "title": "Authorize and assemble traceable bounded context",
       "phase": "P1",
-      "status": "in_progress",
+      "status": "complete",
       "owner": "agent",
       "size": "S",
       "kind": "implementation",
@@ -2434,33 +2434,32 @@
         {
           "date": "2026-10-18",
           "text": "Claimed after budget boundary complete. Replace JSON slicing with deterministic whole-record authorized context, stable source IDs and exact-quote checks; new17000 RPC if needed, preserve published11000/v1–v4 bytes. General paid kinds stay disabled; no new discovery AI kinds/retrieval until their own adapter tasks. Worker sends source/schema design beforeapply."
+        },
+        {
+          "date": "2026-10-18",
+          "text": "Completed the bounded owner-project context foundation. Future class/resource/aggregate scopes are typed but denied; incomplete drafts excluded. Existing cards receive their legacy draft shape after wrapper validation; no claim of a complete source-inspector UI, source authenticity or in-flight provider recall. General AI stays disabled pending model eligibility/quality and opening-budget review."
         }
       ],
-      "claim": {
-        "owner": "platform_admin",
-        "branch": "codex/bounded-ai-context-20261018",
-        "base_commit": "47a82bc",
-        "worktree": "/private/tmp/first-ten-platform-admin",
-        "started_at": "2026-10-18T15:58:09.277Z",
-        "lease_expires_at": "2026-10-18T18:58:09.278Z"
-      },
-      "completion_evidence": [],
+      "claim": null,
+      "completion_evidence": [
+        "b276993 + b30605f + ab5933f (worker baa63d8/dd991c8/dcff96f): deterministic whole-record owner context, stable content/source/consent identities, atomic dispatch permission/version fence, exact quote/reference validation and content-free provenance; immutable evaluation v5 with original v1–v4 bytes preserved. Combined 751 app tests, 1333 rollback SQL assertions, typecheck, production build and lint (0 errors, 6 existing warnings) pass; 19 offline eval checks and actual-handler parity pass. Worker actual source-edit, withdrawal, linked-contact permission and duplicate-claim races passed in schema-only clone, dropped and verified absent. Hosted migrations 16 then 17 applied via reviewed normal CLI, no seeds/roles. No paid calls or route activation. UTF-8 payload caps are not tokenizer proof; visible source inspection remains AI-008 and model quality remains unmeasured."
+      ],
       "subtasks": [
         {
           "id": "AI-007.s1",
-          "status": "not_started",
+          "status": "complete",
           "instruction": "Implement project-scope context authorization now. Define typed class-submission, teaching-resource and platform-aggregate contracts, but reject those scopes until the later authorized adapter task lands; never query nonexistent tables or fall back to private notes.",
           "notes": []
         },
         {
           "id": "AI-007.s2",
-          "status": "not_started",
+          "status": "complete",
           "instruction": "Select ordered relevant records, retain ids and whole records within token budgets; exclude drafts/private ungranted notes.",
           "notes": []
         },
         {
           "id": "AI-007.s3",
-          "status": "not_started",
+          "status": "complete",
           "instruction": "Require exact-quote/source matching and distinguish observation, inference and missing evidence in schemas.",
           "notes": []
         }
@@ -3853,7 +3852,7 @@
         "base_commit": "0263cf3",
         "worktree": "/private/tmp/first-ten-activity-pdf",
         "started_at": "2026-10-18T16:06:53.445Z",
-        "lease_expires_at": "2026-10-18T19:06:53.446Z"
+        "lease_expires_at": "2026-10-19T00:00:00Z"
       },
       "completion_evidence": [],
       "subtasks": [
@@ -10709,7 +10708,7 @@
         "base_commit": "0263cf3",
         "worktree": "/private/tmp/first-ten-project-lifecycle",
         "started_at": "2026-10-18T16:10:31.613Z",
-        "lease_expires_at": "2026-10-18T20:10:31.615Z"
+        "lease_expires_at": "2026-10-19T00:00:00Z"
       },
       "completion_evidence": [],
       "subtasks": [
@@ -12050,6 +12049,8 @@
     "real_testers": "Supabase authorized for testers; no specific people/contact channels named. No unsolicited external messaging.",
     "checkpoint_note": "Owner-directed final one-hour sprint superseded the original 13:29 UTC checkpoint; approximately 12:13 UTC per docs/roadmap/autonomous-run.md.",
     "synthetic_ai_budget_usd": 1,
-    "spend_note": "At this reconciliation cutoff no deployed provider trial is confirmed; AI-009 must record measured cost after the authorized request. The workshop reservation cap is separate from and within the owner’s total $25 limit."
+    "spend_note": "At this reconciliation cutoff no deployed provider trial is confirmed; AI-009 must record measured cost after the authorized request. The workshop reservation cap is separate from and within the owner’s total $25 limit.",
+    "continuation_objective": "Owner explicitly requests continued building until every feasible authorized roadmap item is complete, verified and deployed; continue independent work around external blockers. No new time or token budget specified. Prior OpenRouter $25 total cap and no other paid services persist.",
+    "goal_control_note": "2026-10-18: get_goal reports the prior demo goal paused. create_goal rejected a duplicate unfinished goal; update_goal cannot resume. Codex app computer control is unavailable. User informed to use Resume goal or /goal resume; implementation continues in the active turn. Do not mark incomplete work complete to replace the goal."
   }
 }

@@ -5,8 +5,9 @@ import * as core from "@/lib/export/adapters";
 import * as plans from "@/lib/export/plan-adapters";
 import * as demos from "@/lib/export/demo-adapters";
 import * as discovery from "@/lib/export/discovery-adapters";
+import * as drafts from "@/lib/export/interview-draft-adapters";
 it("binds every mounted activity inventory entry to a real pure adapter and source mount", () => {
-  const adapters = { ...core, ...plans, ...demos, ...discovery };
+  const adapters = { ...core, ...plans, ...demos, ...discovery, ...drafts };
   expect(new Set(ACTIVITY_EXPORT_COVERAGE.map((r) => r.id)).size).toBe(
     ACTIVITY_EXPORT_COVERAGE.length,
   );

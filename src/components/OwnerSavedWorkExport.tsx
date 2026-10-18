@@ -8,6 +8,8 @@ import { loadMarketingPlan } from "@/lib/marketing.functions";
 import { loadTeacherPlan } from "@/lib/teacher.functions";
 import { loadDiscovery } from "@/lib/discovery.functions";
 import { discoveryActivities } from "@/lib/export/discovery-adapters";
+import { interviewDraftActivities } from "@/lib/export/interview-draft-adapters";
+import { loadPortfolioInterviewDrafts } from "@/lib/export/load-interview-drafts";
 import { useWorkspaceIdentity } from "@/lib/project-selection";
 import {
   useContacts,
@@ -59,13 +61,19 @@ function SavedPortfolio({ project }: { project: Project }) {
     queryKey: ["portfolio-plans", project.user_id, project.id],
     retry: false,
     queryFn: async () => {
-      const [marketing, teacher, discovery] = await Promise.all([
+      const [marketing, teacher, discovery, drafts] = await Promise.all([
         loadMarketingPlan({ data: { projectId: project.id } }),
         loadTeacherPlan({ data: { projectId: project.id } }),
         loadDiscovery({ data: { projectId: project.id } }),
+        loadPortfolioInterviewDrafts(project.id),
       ]);
       if (!marketing.ok || !teacher.ok || !discovery.ok) throw new Error("Saved plans unavailable");
-      return { marketing: marketing.plan, teacher: teacher.plan, discovery: discovery.workspace };
+      return {
+        marketing: marketing.plan,
+        teacher: teacher.plan,
+        discovery: discovery.workspace,
+        drafts,
+      };
     },
   });
   const queries = [contacts, interviews, learnings, experiments, outreach, plans];
@@ -124,6 +132,7 @@ function SavedPortfolio({ project }: { project: Project }) {
           dirty: false,
         }),
       );
+    activities.push(...interviewDraftActivities(project, plans.data?.drafts ?? []));
     return (
       <div className="mt-5">
         <p className="mb-3 text-xs text-muted-foreground">
@@ -134,7 +143,8 @@ function SavedPortfolio({ project }: { project: Project }) {
           Marketing Lab: {plans.data?.marketing ? "saved plan included" : "no saved plan"}.{" "}
           Instructor planning: {plans.data?.teacher ? "saved plan included" : "no saved plan"}.{" "}
           Discovery cycle:{" "}
-          {plans.data?.discovery ? "saved workspace included" : "no saved workspace"}. Classroom
+          {plans.data?.discovery ? "saved workspace included" : "no saved workspace"}. Private
+          incomplete interviews: {plans.data?.drafts?.length ?? 0} saved drafts included. Classroom
           submissions and shared team spaces are separate features still in development.
         </p>
         <OwnerActivityExport project={project} activities={activities} allowPortfolio />

@@ -22,35 +22,40 @@ Statuses are `not_started`, `in_progress`, `blocked`, `complete`, `deferred`, `d
 current_iteration: 5
 current_stage: P1_foundation_with_parallel_P2_and_R0
 status: in_progress
-last_task_done: CLS-001
+last_task_done: AI-007
 next_task: WS-004
-next_parallel_wave: [CLS-007, AI-007, WS-004]
-active_claims: [AI-007, CLS-007, WS-004]
+next_parallel_wave: [CLS-007, WS-004, CTX-001]
+active_claims: [CLS-007, WS-004]
 research_gate: not_passed
 foundation_gate: not_passed
 realtime_go: pending
 last_updated: 2026-10-18
 last_documentation_update: "2026-10-18: AI-002 complete; resumed lifecycle/admin parallel work; added FERPA-first account-free class/hackathon spaces and PDF export of every activity/team."
 resume_hint: >-
-  Owner resumed full roadmap; current priorities FERPA-first no-account class spaces,
-  PDFs for every activity/team and the seven-step hypothesis-to-interview learning cycle.
-  DISC001 complete47a82bc/22ff272: live manualcycle saved/reloadedfictionalStudyLooprev7,
-  firsthypothesis/fivepeople/biasmap/script/context/observations/decision; exactscriptworksheet
-  previewgenerated4pages. Existing interviewquestions/count preserved. AIfeedback/retrieval pending.
-  AI004 completef489e82/06fc95d/143d94d with immutableevalv4. Hosted13/14 normalapplydone;
-  generalAI disabled with no routes/allowances/openingreview. Originalfixedcase1USDcarveout
-  preserved via narrowlyreviewed policy; no paidcalls inthisphase.
-  CLS001 integrateda3c6cbd with rootdualinvite route/typeintegration.705apptests/71files,
-  1192SQLrollbackassertions,typecheck/lint/build pass; actualblocked-expiry anddiscoveryCAS
-  races pass, newfixtureabsenceverified.15000hosted reviewed normalapply succeeded.
-  Three workers: CLS007 guestprovision/entry18000; WS004 interviewdrafts16000;
-  AI007 bounded/fencedsourcecontext17000. Root serializes publication/apply16→17→18;
-  never publishhigherreservedmigrationbeforelowerfiles.22ff272 CIapp checkfailed only
-  late13-beforepublished14 orderingguard; RLSjobpassed andcurrentguardbase22passes.
-  No historicalfileedit/rename/gitrewriting. NewcommitCI mustbeverified.
-  Worker17 candidateapproved onlyschema-onlydisposablelocalclone, no mainapplyuntil16ready.
-  GeneralAI/modelquality, classguestactivities/submissions/review/sharing/retention remainunfinished.
-  PresenterfictionalStudyLoop andCampusSwap active; demo/lesson/pitch preserved.
+  Owner explicitly requests continuing until every feasible authorized roadmap item is built,
+  verified, committed, pushed and deployed. Preserve the $25 total OpenRouter cap and no
+  other paid services. Prior goal remains paused in the app; duplicate creation was rejected
+  and resume is unavailable to model tools. User informed to use Resume goal or /goal resume.
+  Work continues in the active turn; never falsely complete the old goal to replace it.
+  DISC-001 is deployed: the fictional StudyLoop manual cycle was saved and reloaded at
+  revision 7, including hypothesis, five-person bias map, script, context and decision.
+  Existing interview questions and counts were preserved. AI feedback/retrieval are pending.
+  AI-004 accounting and immutable eval v4 shipped; general AI remains disabled, with no
+  routes, allowances or opening review. The original fixed $1 fictional practice is preserved.
+  CLS-001 foundations and scoped invitation UI are live through migration 15000. Both
+  GitHub checks for 02aeb1f passed; 705 app tests and 1192 rollback SQL assertions passed.
+  WS-004 migration 16000 is approved and applied only on dedicated local port 55322;
+  103 focused SQL assertions pass and actual completion races are under final verification.
+  Root is adding private saved drafts to the explicitly opened PDF portfolio, failing closed
+  on partial, stale or mismatched acquisition. UI handoff follows the backend handoff.
+  AI-007 is integrated b276993/b30605f/ab5933f with immutable v5. Combined 751 app tests,
+  1333 rollback SQL assertions, typecheck/lint/build and 19 offline eval checks pass. Hosted
+  migrations 16 then 17 applied normally after exact dry-run; no seeds, roles or paid calls.
+  General AI remains disabled; source inspection and model-quality gates remain outstanding.
+  CLS-007 migration 18000 is under review and not approved for apply. Entry/session source
+  and UI are being tested; review caught expiry, admission-counter and history-cap issues.
+  Publish and apply migrations in order 16, 17, 18. Regenerate types and verify combined gates.
+  General model quality, guest activities/submissions, sharing and retention remain unfinished.
 
 ```
 

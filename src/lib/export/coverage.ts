@@ -51,6 +51,15 @@ export const ACTIVITY_EXPORT_COVERAGE = [
       "Current question/note/quote/tags/permission report; coordinator mount after privacy changes",
   },
   {
+    id: "saved-interview-drafts",
+    adapter: "interviewDraftActivities",
+    source: "src/components/OwnerSavedWorkExport.tsx",
+    status: "mounted",
+    scope: "owner",
+    granularity:
+      "Each private saved incomplete interview, exact questions and permission limits; excluded from completed counts and shared projections",
+  },
+  {
     id: "interview-records",
     adapter: "interviewActivities",
     source: "src/routes/_authenticated/interview.tsx",

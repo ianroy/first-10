@@ -417,6 +417,75 @@ export type Database = {
           },
         ];
       };
+      interview_drafts: {
+        Row: {
+          completed_at: string | null;
+          completed_interview_id: string | null;
+          completion_request_id: string;
+          contact_id: string | null;
+          create_hash: string;
+          created_at: string;
+          document: Json | null;
+          id: string;
+          last_mutation_hash: string | null;
+          last_mutation_id: string | null;
+          project_id: string;
+          questions_origin_id: string | null;
+          questions_snapshot: NonNullable<Json>;
+          revision: number;
+          status: string;
+          updated_at: string;
+          user_id: string;
+        };
+        ComputedFields: never;
+        Insert: {
+          completed_at?: string | null;
+          completed_interview_id?: string | null;
+          completion_request_id?: string;
+          contact_id?: string | null;
+          create_hash: string;
+          created_at?: string;
+          document?: Json | null;
+          id: string;
+          last_mutation_hash?: string | null;
+          last_mutation_id?: string | null;
+          project_id: string;
+          questions_origin_id?: string | null;
+          questions_snapshot: NonNullable<Json>;
+          revision?: number;
+          status?: string;
+          updated_at?: string;
+          user_id: string;
+        };
+        Update: {
+          completed_at?: string | null;
+          completed_interview_id?: string | null;
+          completion_request_id?: string;
+          contact_id?: string | null;
+          create_hash?: string;
+          created_at?: string;
+          document?: Json | null;
+          id?: string;
+          last_mutation_hash?: string | null;
+          last_mutation_id?: string | null;
+          project_id?: string;
+          questions_origin_id?: string | null;
+          questions_snapshot?: NonNullable<Json>;
+          revision?: number;
+          status?: string;
+          updated_at?: string;
+          user_id?: string;
+        };
+        Relationships: [
+          {
+            foreignKeyName: "interview_drafts_project_id_user_id_fkey";
+            columns: ["project_id", "user_id"];
+            isOneToOne: false;
+            referencedRelation: "projects";
+            referencedColumns: ["id", "user_id"];
+          },
+        ];
+      };
       interviews: {
         Row: {
           answers: NonNullable<Json>;
@@ -845,12 +914,31 @@ export type Database = {
         Returns: Json;
       };
       claim_ai_usage: { Args: { p_attempt_id: string; p_operation_id: string }; Returns: Json };
+      claim_ai_usage_with_context: {
+        Args: { p_attempt_id: string; p_manifest: Json; p_operation_id: string };
+        Returns: Json;
+      };
+      complete_interview_draft: {
+        Args: { p_draft_id: string; p_expected_revision: number; p_project_id: string };
+        Returns: Json;
+      };
       create_class: {
         Args: { p_class_id: string; p_document: Json; p_request_id: string };
         Returns: Json;
       };
       create_class_invitation: {
         Args: { p_class_id: string; p_days: number; p_recipient_id: string; p_request_id: string };
+        Returns: Json;
+      };
+      create_interview_draft: {
+        Args: {
+          p_contact_id: string;
+          p_draft_id: string;
+          p_expected_origin_id: string;
+          p_expected_questions: Json;
+          p_note_status: string;
+          p_project_id: string;
+        };
         Returns: Json;
       };
       create_owned_project: {
@@ -892,6 +980,10 @@ export type Database = {
         Returns: Json;
       };
       get_ai_processing_context: { Args: { p_kind: string; p_project_id: string }; Returns: Json };
+      get_ai_processing_context_v2: {
+        Args: { p_kind: string; p_project_id: string };
+        Returns: Json;
+      };
       get_class: { Args: { p_class_id: string }; Returns: Json };
       get_founding_partner_counts: { Args: Record<PropertyKey, never>; Returns: Json };
       get_member_project_summary: { Args: { p_project_id: string }; Returns: Json };
@@ -907,6 +999,7 @@ export type Database = {
       list_class_assignments: { Args: { p_class_id: string; p_cursor?: string }; Returns: Json };
       list_class_invitations: { Args: { p_class_id: string; p_cursor?: string }; Returns: Json };
       list_class_members: { Args: { p_class_id: string; p_cursor?: string }; Returns: Json };
+      list_interview_drafts: { Args: { p_project_id: string }; Returns: Json };
       list_my_classes: { Args: { p_cursor?: string }; Returns: Json };
       list_project_invitations: {
         Args: { p_cursor?: string; p_project_id: string };
@@ -914,8 +1007,13 @@ export type Database = {
       };
       list_project_members: { Args: { p_cursor?: string; p_project_id: string }; Returns: Json };
       load_discovery_workspace: { Args: { p_project_id: string }; Returns: Json };
+      load_interview_draft: { Args: { p_draft_id: string; p_project_id: string }; Returns: Json };
       project_collaboration_enabled: { Args: Record<PropertyKey, never>; Returns: boolean };
       record_ai_generation: { Args: { p_record: Json }; Returns: string };
+      record_ai_generation_v2: {
+        Args: { p_grounding: Json; p_operation_id: string; p_record: Json };
+        Returns: string;
+      };
       record_founding_partner: {
         Args: {
           p_email: string;
@@ -1005,6 +1103,17 @@ export type Database = {
           p_survey?: Json;
         };
         Returns: undefined;
+      };
+      save_interview_draft: {
+        Args: {
+          p_contact_id: string;
+          p_document: Json;
+          p_draft_id: string;
+          p_expected_revision: number;
+          p_mutation_id: string;
+          p_project_id: string;
+        };
+        Returns: Json;
       };
       save_interview_with_consent: {
         Args: {
