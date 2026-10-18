@@ -14,6 +14,8 @@ type Props = {
   document: ActivityExportV1;
   /** Verified by the source adapter, never from a student-editable audience field. */
   permittedAudiences: readonly ExportAudience[];
+  /** Shared/guest mounts reauthorize the exact captured source before creating and delivering a copy. */
+  authorizeDownload?: () => Promise<void>;
 };
 const audienceLabels: Record<ExportAudience, string> = {
   owner: "My private copy",
@@ -23,7 +25,7 @@ const audienceLabels: Record<ExportAudience, string> = {
 };
 
 /** No source fetch, autosave, storage, AI, or implied submission. The caller owns acquisition authorization. */
-export function ActivityPdfExport({ document, permittedAudiences }: Props) {
+export function ActivityPdfExport({ document, permittedAudiences, authorizeDownload }: Props) {
   const id = useId();
   const [audience, setAudience] = useState<ExportAudience>(permittedAudiences[0] ?? "owner");
   const [activityKeys, setActivityKeys] = useState(
@@ -99,8 +101,12 @@ export function ActivityPdfExport({ document, permittedAudiences }: Props) {
     setError("");
     setSuccess("");
     try {
+      await authorizeDownload?.();
+      if (token !== generation.current || captured.fingerprint !== currentFingerprint.current)
+        return;
       const { createActivityPdf, downloadActivityPdf } = await import("@/lib/export/pdf");
       const result = await createActivityPdf(captured.snapshot);
+      await authorizeDownload?.();
       if (token !== generation.current || captured.fingerprint !== currentFingerprint.current)
         return;
       downloadActivityPdf(result.bytes, result.filename);

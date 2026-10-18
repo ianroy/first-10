@@ -13,6 +13,42 @@ beforeEach(() => {
 });
 afterEach(cleanup);
 describe("reviewed PDF selection", () => {
+  it("requires fresh authorization before shared PDF generation", async () => {
+    const authorize = vi
+      .fn()
+      .mockRejectedValue(new Error("This submitted version is no longer available."));
+    render(
+      <ActivityPdfExport
+        document={exportFixture()}
+        permittedAudiences={["teacher"]}
+        authorizeDownload={authorize}
+      />,
+    );
+    fireEvent.click(screen.getByRole("button", { name: "Review frozen copy" }));
+    fireEvent.click(screen.getByRole("button", { name: "Download PDF" }));
+    expect(await screen.findByRole("alert")).toHaveTextContent("no longer available");
+    expect(h.create).not.toHaveBeenCalled();
+    expect(h.download).not.toHaveBeenCalled();
+  });
+  it("withholds delivery if access is withdrawn while a PDF is generated", async () => {
+    const authorize = vi
+      .fn()
+      .mockResolvedValueOnce(undefined)
+      .mockRejectedValueOnce(new Error("Access changed; reopen the submission."));
+    render(
+      <ActivityPdfExport
+        document={exportFixture()}
+        permittedAudiences={["teacher"]}
+        authorizeDownload={authorize}
+      />,
+    );
+    fireEvent.click(screen.getByRole("button", { name: "Review frozen copy" }));
+    fireEvent.click(screen.getByRole("button", { name: "Download PDF" }));
+    expect(await screen.findByRole("alert")).toHaveTextContent("Access changed");
+    expect(h.create).toHaveBeenCalledOnce();
+    expect(authorize).toHaveBeenCalledTimes(2);
+    expect(h.download).not.toHaveBeenCalled();
+  });
   it("requires a fresh preview, redacts exact text and downloads only the reviewed snapshot", async () => {
     render(<ActivityPdfExport document={exportFixture()} permittedAudiences={["owner"]} />);
     expect(screen.getByRole("button", { name: "Download PDF" })).toBeDisabled();
