@@ -837,10 +837,11 @@ export function TeacherPlanner({
       >
         <AlertDialogContent>
           <AlertDialogHeader>
-            <AlertDialogTitle>Keep your unsaved lesson plan?</AlertDialogTitle>
+            <AlertDialogTitle>Keep your unsaved work?</AlertDialogTitle>
             <AlertDialogDescription>
-              Stay here to save your draft. Leaving discards changes since the last confirmed save.
-              No lesson is assigned to students from this page.
+              Stay here to save your lesson plan or copy any local practice comments. Leaving
+              discards unsaved plan changes and all local feedback drafts. Lesson-plan saves do not
+              save the practice comments. No lesson is assigned to students from this page.
             </AlertDialogDescription>
           </AlertDialogHeader>
           <AlertDialogFooter>
