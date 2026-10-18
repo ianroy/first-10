@@ -69,18 +69,27 @@ function Learnings({ p }: { p: Project }) {
 
   return (
     <AppShell title="Learnings">
-      {done < 5 && !synth ? (
-        <Empty
-          title={`${done}/5 interviews done`}
-          body="After 5 conversations, AI will help you spot patterns: top problems, objections, and who loves this most."
-        />
-      ) : (
-        <Synthesis p={p} synth={synth} />
-      )}
+      <p className="max-w-2xl text-muted-foreground">
+        Connect what you heard to a decision and a small next test. Keep disagreement and unanswered
+        questions visible.
+      </p>
+      <div className="grid items-start gap-6 lg:grid-cols-[minmax(0,1.35fr)_minmax(0,1fr)]">
+        <div className="min-w-0">
+          {done < 5 && !synth ? (
+            <Empty
+              title={`${done}/5 interviews done`}
+              body="After 5 completed interviews, you can request a draft summary of patterns, objections and possible audience fit. Review it against your notes; the count does not establish demand."
+            />
+          ) : (
+            <Synthesis p={p} synth={synth} />
+          )}
+        </div>
+        <div className="min-w-0 space-y-6">
+          {checklist && <Checklist p={p} check={check} {...checklist} />}
 
-      {checklist && <Checklist p={p} check={check} {...checklist} />}
-
-      <Experiments p={p} />
+          <Experiments p={p} />
+        </div>
+      </div>
     </AppShell>
   );
 }
@@ -133,7 +142,7 @@ function Synthesis({ p, synth }: { p: Project; synth: Learning | undefined }) {
       <Card className="text-center">
         <h2 className="text-xl font-bold">You’ve done 5+ interviews </h2>
         <p className="mt-1 text-sm text-muted-foreground">
-          Let’s turn your notes into clear patterns.
+          Request a draft, then check its patterns and quotes against your notes.
         </p>
         <Button size="xl" className="mt-4" disabled={busy} onClick={run}>
           {busy ? "Reading your notes…" : "Summarize my interviews"}
@@ -154,13 +163,17 @@ function Synthesis({ p, synth }: { p: Project; synth: Learning | undefined }) {
         )}
       </div>
       <p className="mb-3 text-sm text-muted-foreground">
-        One item per line. Fix anything that doesn’t sound right.
+        One item per line. Check quotes against the original notes, preserve disagreement and edit
+        unsupported interpretations.
       </p>
-      <div className="space-y-4">
+      <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-1 xl:grid-cols-2">
         {SECTIONS.map(([k, label]) => (
           <div key={k}>
-            <p className="mb-1 text-sm font-semibold">{label}</p>
+            <label htmlFor={`synthesis-${k}`} className="mb-2 block text-sm font-semibold">
+              {label}
+            </label>
             <Textarea
+              id={`synthesis-${k}`}
               rows={Math.max(3, d[k].length + 1)}
               value={d[k].join("\n")}
               onChange={(e) => setD({ ...d, [k]: e.target.value.split("\n") })}
@@ -168,12 +181,16 @@ function Synthesis({ p, synth }: { p: Project; synth: Learning | undefined }) {
             />
           </div>
         ))}
-        <div>
-          <p className="mb-1 text-sm font-semibold">3 suggested changes</p>
+        <div className="sm:col-span-2 lg:col-span-1 xl:col-span-2">
+          <h3 className="mb-2 text-base font-semibold">{d.changes.length} suggested changes</h3>
           <div className="space-y-2">
             {d.changes.map((c, i) => (
               <div key={i} className="rounded-xl bg-muted p-3">
+                <label htmlFor={`change-title-${i}`} className="mb-1 block text-sm font-semibold">
+                  Change {i + 1}
+                </label>
                 <Input
+                  id={`change-title-${i}`}
                   value={c.title}
                   onChange={(e) =>
                     setD({
@@ -185,7 +202,11 @@ function Synthesis({ p, synth }: { p: Project; synth: Learning | undefined }) {
                   }
                   className="mb-2 rounded-lg bg-background font-semibold"
                 />
+                <label htmlFor={`change-details-${i}`} className="mb-1 block text-sm font-semibold">
+                  Reason and next step
+                </label>
                 <Textarea
+                  id={`change-details-${i}`}
                   value={c.body}
                   rows={2}
                   onChange={(e) =>
@@ -202,7 +223,7 @@ function Synthesis({ p, synth }: { p: Project; synth: Learning | undefined }) {
             ))}
           </div>
         </div>
-        <div className="flex gap-2">
+        <div className="flex flex-wrap gap-2 sm:col-span-2 lg:col-span-1 xl:col-span-2">
           <Button
             variant="outline"
             className="flex-1 rounded-xl"
@@ -215,11 +236,11 @@ function Synthesis({ p, synth }: { p: Project; synth: Learning | undefined }) {
           </Button>
         </div>
         <button
-          className="w-full text-xs text-muted-foreground underline"
+          className="min-h-11 w-full rounded-lg text-sm text-muted-foreground underline sm:col-span-2 lg:col-span-1 xl:col-span-2"
           disabled={busy}
           onClick={run}
         >
-          {busy ? "Re-reading…" : "Regenerate with latest interviews"}
+          {busy ? "Re-reading…" : "Regenerate summary (replaces this draft)"}
         </button>
       </div>
     </Card>
@@ -257,6 +278,7 @@ function Checklist({
           <li key={it.k}>
             <button
               disabled={it.auto !== undefined}
+              aria-pressed={val(it)}
               onClick={() => toggle(it.k)}
               className="flex w-full items-center gap-3 rounded-xl p-2 text-left disabled:cursor-default"
             >
@@ -294,10 +316,11 @@ function Experiments({ p }: { p: Project }) {
     <Card>
       <h2 className="text-lg font-bold">Experiments</h2>
       <p className="mb-3 text-sm text-muted-foreground">
-        Small bets: “If I change X, then Y will happen.”
+        Write what you expect, what you will try and what actually happens. An inconclusive result
+        is still worth recording.
       </p>
       <form
-        className="space-y-2"
+        className="space-y-3"
         onSubmit={async (e) => {
           e.preventDefault();
           const { error } = await supabase
@@ -311,20 +334,32 @@ function Experiments({ p }: { p: Project }) {
           refresh("experiments");
         }}
       >
+        <label htmlFor="experiment-hypothesis" className="block text-sm font-semibold">
+          Hypothesis
+        </label>
         <Input
+          id="experiment-hypothesis"
           required
           placeholder="I think… (hypothesis)"
           value={f.hypothesis}
           onChange={(e) => setF({ ...f, hypothesis: e.target.value })}
           className="h-12 rounded-xl"
         />
+        <label htmlFor="experiment-change" className="block text-sm font-semibold">
+          Change to test
+        </label>
         <Input
+          id="experiment-change"
           placeholder="So I’ll change…"
           value={f.change}
           onChange={(e) => setF({ ...f, change: e.target.value })}
           className="h-12 rounded-xl"
         />
+        <label htmlFor="experiment-result" className="block text-sm font-semibold">
+          Result (optional for now)
+        </label>
         <Input
+          id="experiment-result"
           placeholder="What happened (fill in later)"
           value={f.result}
           onChange={(e) => setF({ ...f, result: e.target.value })}
@@ -340,7 +375,11 @@ function Experiments({ p }: { p: Project }) {
             <p className="text-[11px] font-semibold uppercase text-primary">Stage {x.stage}</p>
             <p className="font-semibold">{x.hypothesis}</p>
             {x.change && <p>Change: {x.change}</p>}
+            <label htmlFor={`experiment-result-${x.id}`} className="mt-3 block font-semibold">
+              Result for this experiment
+            </label>
             <Input
+              id={`experiment-result-${x.id}`}
               defaultValue={x.result}
               placeholder="Result…"
               className="mt-2 rounded-lg bg-background"

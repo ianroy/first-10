@@ -53,11 +53,16 @@ function Contacts({ p }: { p: Project }) {
 
   return (
     <AppShell title="People">
-      <div className="flex gap-2">
+      <p className="max-w-2xl text-muted-foreground">
+        Choose people who have experienced the problem. Knowing you is a starting point, not
+        evidence that your app fits their needs.
+      </p>
+      <div className="flex max-w-xl gap-2" role="group" aria-label="Contact stage">
         {[1, 2, 3].map((s) => (
           <button
             key={s}
             disabled={p.stage < s}
+            aria-pressed={stage === s}
             onClick={() => setStage(s)}
             className={`flex-1 rounded-xl py-2.5 text-sm font-semibold disabled:opacity-40 ${stage === s ? "bg-foreground text-background" : "bg-muted"}`}
           >
@@ -66,107 +71,142 @@ function Contacts({ p }: { p: Project }) {
         ))}
       </div>
       <PrivacyNote />
-      <Card>
-        <h2 className="text-lg font-bold">
-          {stage === 1 ? "Who do you already know?" : "Add someone you reached out to"}
-        </h2>
-        <p className="mb-3 text-sm text-muted-foreground">Tap a group to jog your memory.</p>
-        <div className="mb-3 flex flex-wrap gap-2">
-          {(PROMPTS[stage] ?? []).map((r) => (
-            <button
-              key={r}
-              type="button"
-              onClick={() => setF({ ...f, relation: r })}
-              className={`rounded-full border px-3 py-1.5 text-sm ${f.relation === r ? "border-primary bg-primary text-primary-foreground" : "bg-background"}`}
-            >
-              {r}
-            </button>
-          ))}
-        </div>
-        <form onSubmit={add} className="space-y-2">
-          <Input
-            required
-            placeholder="First name"
-            value={f.first_name}
-            onChange={(e) => setF({ ...f, first_name: e.target.value })}
-            className="h-12 rounded-xl text-base"
-          />
-          <Input
-            placeholder="How you know them"
-            value={f.relation}
-            onChange={(e) => setF({ ...f, relation: e.target.value })}
-            className="h-12 rounded-xl text-base"
-          />
-          <Input
-            placeholder="Why might they care?"
-            value={f.why}
-            onChange={(e) => setF({ ...f, why: e.target.value })}
-            className="h-12 rounded-xl text-base"
-          />
-          <Button size="xl">Add person</Button>
-        </form>
-      </Card>
+      <div className="grid items-start gap-6 lg:grid-cols-[minmax(0,0.9fr)_minmax(0,1.1fr)]">
+        <Card className="min-w-0">
+          <h2 className="text-lg font-bold">
+            {stage === 1 ? "Who do you already know?" : "Add someone you reached out to"}
+          </h2>
+          <p className="mb-3 text-sm text-muted-foreground">
+            Use a group as a prompt, then record why this person is relevant.
+          </p>
+          <div className="mb-3 flex flex-wrap gap-2">
+            {(PROMPTS[stage] ?? []).map((r) => (
+              <button
+                key={r}
+                type="button"
+                aria-pressed={f.relation === r}
+                onClick={() => setF({ ...f, relation: r })}
+                className={`min-h-10 rounded-full border px-3 py-1.5 text-sm ${f.relation === r ? "border-primary bg-primary text-primary-foreground" : "bg-background"}`}
+              >
+                {r}
+              </button>
+            ))}
+          </div>
+          <form onSubmit={add} className="space-y-3">
+            <label htmlFor="contact-first-name" className="block text-sm font-semibold">
+              First name
+            </label>
+            <Input
+              id="contact-first-name"
+              autoComplete="off"
+              required
+              placeholder="First name"
+              value={f.first_name}
+              onChange={(e) => setF({ ...f, first_name: e.target.value })}
+              className="h-12 rounded-xl text-base"
+            />
+            <label htmlFor="contact-relation" className="block text-sm font-semibold">
+              How you know them or found them
+            </label>
+            <Input
+              id="contact-relation"
+              placeholder="How you know them"
+              value={f.relation}
+              onChange={(e) => setF({ ...f, relation: e.target.value })}
+              className="h-12 rounded-xl text-base"
+            />
+            <label htmlFor="contact-relevance" className="block text-sm font-semibold">
+              Why this person?
+            </label>
+            <Input
+              id="contact-relevance"
+              aria-describedby="contact-relevance-help"
+              placeholder="A relevant situation or workaround"
+              value={f.why}
+              onChange={(e) => setF({ ...f, why: e.target.value })}
+              className="h-12 rounded-xl text-base"
+            />
+            <p id="contact-relevance-help" className="text-sm text-muted-foreground">
+              Name an experience of the problem; avoid sensitive personal details.
+            </p>
+            <Button size="xl">Add person</Button>
+          </form>
+        </Card>
 
-      {list.length === 0 ? (
-        <Empty
-          title="No one here yet"
-          body={
-            stage === 1
-              ? "Aim for 10–15 names. Think of who complains about the problem your app solves."
-              : "Add people as you message them, then move them along the pipeline."
-          }
-        />
-      ) : (
-        <ul className="space-y-2">
-          {list.map((c) => (
-            <li key={c.id} className="flex items-start gap-3 rounded-2xl border bg-card p-4">
-              <span className="flex size-10 shrink-0 items-center justify-center rounded-full bg-secondary font-bold text-secondary-foreground">
-                {c.first_name[0]}
-              </span>
-              <div className="min-w-0 flex-1">
-                <p className="font-semibold">
-                  {c.first_name}{" "}
-                  <span className="text-sm font-normal text-muted-foreground">· {c.relation}</span>
-                </p>
-                {c.why && <p className="text-sm text-muted-foreground">{c.why}</p>}
-                {stage > 1 ? (
-                  <select
-                    value={c.status}
-                    onChange={async (e) => {
-                      await supabase
-                        .from("contacts")
-                        .update({ status: e.target.value })
-                        .eq("id", c.id);
+        <section className="min-w-0" aria-labelledby="contact-list-title">
+          <div className="mb-4 flex items-center justify-between gap-3">
+            <h2 id="contact-list-title" className="text-xl font-bold">
+              People in this stage
+            </h2>
+            <span className="rounded-full bg-secondary px-3 py-1 text-sm font-semibold">
+              {list.length} added
+            </span>
+          </div>
+          {list.length === 0 ? (
+            <Empty
+              title="No one here yet"
+              body={
+                stage === 1
+                  ? "Start with one reachable person who has experienced the problem. Record what makes them relevant."
+                  : "Add people as you message them, then move them along the pipeline."
+              }
+            />
+          ) : (
+            <ul className="space-y-2">
+              {list.map((c) => (
+                <li key={c.id} className="flex items-start gap-3 rounded-2xl border bg-card p-4">
+                  <span className="flex size-10 shrink-0 items-center justify-center rounded-full bg-secondary font-bold text-secondary-foreground">
+                    {c.first_name[0]}
+                  </span>
+                  <div className="min-w-0 flex-1">
+                    <p className="break-words font-semibold">
+                      {c.first_name}{" "}
+                      <span className="text-sm font-normal text-muted-foreground">
+                        · {c.relation}
+                      </span>
+                    </p>
+                    {c.why && <p className="text-sm text-muted-foreground">{c.why}</p>}
+                    {stage > 1 ? (
+                      <select
+                        aria-label={`Status for ${c.first_name}`}
+                        value={c.status}
+                        onChange={async (e) => {
+                          await supabase
+                            .from("contacts")
+                            .update({ status: e.target.value })
+                            .eq("id", c.id);
+                          refresh("contacts");
+                        }}
+                        className="mt-2 min-h-11 max-w-full rounded-lg border bg-background px-3 py-2 text-sm"
+                      >
+                        {PIPELINE.map((s) => (
+                          <option key={s.key} value={s.key}>
+                            {s.label}
+                          </option>
+                        ))}
+                      </select>
+                    ) : (
+                      c.status === "interviewed" && (
+                        <p className="mt-1 text-xs font-semibold text-success">✓ Interviewed</p>
+                      )
+                    )}
+                  </div>
+                  <button
+                    aria-label={`Remove ${c.first_name}`}
+                    className="flex size-11 shrink-0 items-center justify-center rounded-lg text-muted-foreground hover:bg-muted"
+                    onClick={async () => {
+                      await supabase.from("contacts").delete().eq("id", c.id);
                       refresh("contacts");
                     }}
-                    className="mt-2 rounded-lg border bg-background px-2 py-1.5 text-sm"
                   >
-                    {PIPELINE.map((s) => (
-                      <option key={s.key} value={s.key}>
-                        {s.label}
-                      </option>
-                    ))}
-                  </select>
-                ) : (
-                  c.status === "interviewed" && (
-                    <p className="mt-1 text-xs font-semibold text-success">✓ Interviewed</p>
-                  )
-                )}
-              </div>
-              <button
-                aria-label="Remove"
-                className="p-1 text-muted-foreground"
-                onClick={async () => {
-                  await supabase.from("contacts").delete().eq("id", c.id);
-                  refresh("contacts");
-                }}
-              >
-                <Trash2 className="size-4" />
-              </button>
-            </li>
-          ))}
-        </ul>
-      )}
+                    <Trash2 aria-hidden="true" className="size-4" />
+                  </button>
+                </li>
+              ))}
+            </ul>
+          )}
+        </section>
+      </div>
     </AppShell>
   );
 }

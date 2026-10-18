@@ -37,7 +37,7 @@ function OutreachPage({ p }: { p: Project }) {
       <AppShell title="Outreach">
         <Empty
           title="Unlocks after your First 10"
-          body="Talk to people you know first. What they tell you becomes the words you use to reach the next 50."
+          body="Review the First 10 checklist and your accepted learnings before moving on. Those observations help shape the next outreach draft."
           action={
             <Button asChild className="rounded-xl">
               <Link to="/learnings">
@@ -50,11 +50,16 @@ function OutreachPage({ p }: { p: Project }) {
     );
   return (
     <AppShell title="Outreach">
-      <div className="flex gap-2">
+      <p className="max-w-2xl text-muted-foreground">
+        Turn reviewed learning into an outreach draft, then check the audience, claims and
+        permission before sending it yourself.
+      </p>
+      <div className="flex max-w-xl gap-2" role="group" aria-label="Outreach stage">
         {[2, 3].map((s) => (
           <button
             key={s}
             disabled={p.stage < s}
+            aria-pressed={tab === s}
             onClick={() => setTab(s)}
             className={`flex-1 rounded-xl py-2.5 text-sm font-semibold disabled:opacity-40 ${tab === s ? "bg-foreground text-background" : "bg-muted"}`}
           >
@@ -117,8 +122,11 @@ function DraftItem({ o, copy }: { o: Outreach; copy?: boolean | undefined }) {
   const [body, setBody] = useState(o.body);
   return (
     <div className="rounded-xl bg-muted p-3">
-      {o.title && <p className="mb-1 text-sm font-semibold">{o.title}</p>}
+      <label htmlFor={`outreach-${o.id}`} className="mb-2 block break-words text-sm font-semibold">
+        {o.title || "Draft text"}
+      </label>
       <Textarea
+        id={`outreach-${o.id}`}
         value={body}
         rows={copy ? 5 : 3}
         onChange={(e) => setBody(e.target.value)}
@@ -133,8 +141,9 @@ function DraftItem({ o, copy }: { o: Outreach; copy?: boolean | undefined }) {
       {copy && (
         <Button
           variant="outline"
+          aria-label={`Copy ${o.title || "draft"}`}
           size="sm"
-          className="mt-2 rounded-lg"
+          className="mt-2 min-h-11 rounded-lg"
           onClick={() => {
             navigator.clipboard.writeText(body);
             toast.success("Copied");
@@ -158,7 +167,7 @@ function Section({
 }) {
   if (!items.length) return null;
   return (
-    <Card>
+    <Card className="min-w-0">
       <div className="mb-3 flex items-center justify-between gap-2">
         <h2 className="text-lg font-bold">{title}</h2>
         <DraftBadge />
@@ -183,12 +192,13 @@ function Stage2({ p }: { p: Project }) {
   const pipe = contacts.filter((c) => c.stage === 2);
 
   return (
-    <>
+    <div className="grid items-start gap-6 lg:grid-cols-2">
       {items.length === 0 ? (
-        <Card className="text-center">
+        <Card className="min-w-0 text-center lg:col-span-2">
           <h2 className="text-xl font-bold">Build your plan for the next 50</h2>
           <p className="mt-1 text-sm text-muted-foreground">
-            Uses your referrals and accepted learnings to suggest where to go and what to say.
+            Uses your referrals and accepted learnings to draft places to investigate and messages
+            to review. Suggested channels and posting rules are not verified.
           </p>
           <Button size="xl" className="mt-4" disabled={busy} onClick={run}>
             {busy ? "Planning…" : "Create my outreach plan"}
@@ -196,20 +206,28 @@ function Stage2({ p }: { p: Project }) {
         </Card>
       ) : (
         <>
-          <Section title="Where to find people" items={items.filter((o) => o.kind === "channel")} />
+          <Section
+            title="Channels to investigate"
+            items={items.filter((o) => o.kind === "channel")}
+          />
           <Section title="Message drafts" items={items.filter((o) => o.kind === "draft")} copy />
         </>
       )}
       {survey.length > 0 && (
         <Card>
           <div className="mb-2 flex items-center justify-between gap-2">
-            <h2 className="text-lg font-bold">Feedback survey</h2>
+            <h2 id="feedback-survey-title" className="text-lg font-bold">
+              Feedback survey
+            </h2>
             <DraftBadge />
           </div>
-          <p className="mb-2 text-sm text-muted-foreground">
-            Send to people who tried it. One question per line.
+          <p id="feedback-survey-help" className="mb-2 text-sm text-muted-foreground">
+            Review for people who tried it. One question per line. Copy to your own form or message;
+            responses are not collected here.
           </p>
           <Textarea
+            aria-labelledby="feedback-survey-title"
+            aria-describedby="feedback-survey-help"
             rows={survey.length + 2}
             value={sv ?? survey.join("\n")}
             onChange={(e) => setSv(e.target.value)}
@@ -245,15 +263,6 @@ function Stage2({ p }: { p: Project }) {
           </div>
         </Card>
       )}
-      {items.length > 0 && (
-        <button
-          className="w-full text-xs text-muted-foreground underline"
-          disabled={busy}
-          onClick={run}
-        >
-          {busy ? "Re-planning…" : "Regenerate plan (replaces drafts)"}
-        </button>
-      )}
       <Card>
         <div className="flex items-center justify-between">
           <h2 className="text-lg font-bold">Pipeline</h2>
@@ -278,6 +287,11 @@ function Stage2({ p }: { p: Project }) {
                     {list.map((c) => (
                       <button
                         key={c.id}
+                        aria-label={
+                          si < PIPELINE.length - 1
+                            ? `Move ${c.first_name} to ${PIPELINE[si + 1]!.label}`
+                            : `${c.first_name}: ${s.label}`
+                        }
                         disabled={si === PIPELINE.length - 1}
                         onClick={async () => {
                           await supabase
@@ -286,7 +300,7 @@ function Stage2({ p }: { p: Project }) {
                             .eq("id", c.id);
                           refresh("contacts");
                         }}
-                        className="rounded-full border bg-background px-3 py-1.5 text-sm"
+                        className="min-h-11 rounded-full border bg-background px-3 py-2 text-sm"
                       >
                         {c.first_name} {si < PIPELINE.length - 1 && "→"}
                       </button>
@@ -296,12 +310,22 @@ function Stage2({ p }: { p: Project }) {
               );
             })}
             <p className="text-xs text-muted-foreground">
-              Tap a name to move them to the next step.
+              Select a person to record the next step only after it happens. These are manually
+              reported statuses.
             </p>
           </div>
         )}
       </Card>
-    </>
+      {items.length > 0 && (
+        <button
+          className="min-h-11 rounded-lg text-sm text-muted-foreground underline lg:col-span-2"
+          disabled={busy}
+          onClick={run}
+        >
+          {busy ? "Re-planning…" : "Regenerate plan (replaces drafts)"}
+        </button>
+      )}
+    </div>
   );
 }
 
@@ -320,10 +344,13 @@ function Stage3({ p }: { p: Project }) {
   const pct = (a: number, b: number) => (b ? Math.round((a / b) * 100) : 0);
 
   return (
-    <>
+    <div className="grid items-start gap-6 lg:grid-cols-2">
       <Card>
         <h2 className="text-lg font-bold">Your numbers</h2>
-        <p className="mb-3 text-sm text-muted-foreground">Update weekly. Rough counts are fine.</p>
+        <p className="mb-3 text-sm text-muted-foreground">
+          Manually entered counts, not automatic analytics. Use the same population and period for
+          each comparison; keep dates and sources in your notes.
+        </p>
         <div className="grid grid-cols-3 gap-2">
           {(
             [
@@ -374,8 +401,8 @@ function Stage3({ p }: { p: Project }) {
         <Card className="text-center">
           <h2 className="text-xl font-bold">Plan for the next 100</h2>
           <p className="mt-1 text-sm text-muted-foreground">
-            Scalable channels, referral asks, and onboarding questions — built from everything
-            you’ve learned.
+            Draft channels to investigate, referral requests and onboarding questions from your
+            learning. Check fit, access and claims before using them.
           </p>
           <Button size="xl" className="mt-4" disabled={busy} onClick={run}>
             {busy ? "Planning…" : "Create my growth plan"}
@@ -383,21 +410,24 @@ function Stage3({ p }: { p: Project }) {
         </Card>
       ) : (
         <>
-          <Section title="Scalable channels" items={items.filter((o) => o.kind === "channel")} />
+          <Section
+            title="Channels to investigate"
+            items={items.filter((o) => o.kind === "channel")}
+          />
           <Section title="Referral asks" items={items.filter((o) => o.kind === "referral")} copy />
           <Section
             title="Onboarding feedback questions"
             items={items.filter((o) => o.kind === "onboarding")}
           />
           <button
-            className="w-full text-xs text-muted-foreground underline"
+            className="min-h-11 rounded-lg text-sm text-muted-foreground underline lg:col-span-2"
             disabled={busy}
             onClick={run}
           >
-            {busy ? "Re-planning…" : "Regenerate plan"}
+            {busy ? "Re-planning…" : "Regenerate plan (replaces drafts)"}
           </button>
         </>
       )}
-    </>
+    </div>
   );
 }
