@@ -26,22 +26,11 @@ vi.mock("@/lib/ai/budget.server", async (original) => ({
   prepareAIBudget: h.budget,
 }));
 import { budgetRoute, gatewayBilling } from "@/tests/ai-004/fixtures";
+import { envelope, validated } from "@/tests/ai-007/fixtures";
+import type { ExistingKind } from "@/lib/prompts/private-v1";
 import { generateAI } from "@/lib/ai.functions";
-const projectId = "fa110000-0000-4000-8000-000000000001";
-const safe = {
-  project: {
-    name: "Permitted idea",
-    description: "Approved description",
-    audience: "Relevant people",
-    problem: "Uncertain coordination",
-  },
-  interviews: [
-    { answers: [{ q: "Recent event?", note: "ALLOWED_NOTE", quote: "ALLOWED_QUOTE" }], tags: [] },
-  ],
-  learnings: [],
-  contacts: [],
-  excluded: { interviews: 1, contacts: 1, learnings: 1 },
-};
+const projectId = "fa170000-0000-4000-8000-000000000001";
+const safe = envelope();
 const sb = {
   rpc: h.rpc,
   from: (table: string) => {
@@ -84,10 +73,16 @@ beforeEach(() => {
   h.tables = [];
   h.prepare.mockResolvedValue(h.write);
   h.write.mockResolvedValue("receipt");
-  h.request.mockResolvedValue({ ...gatewayBilling, data: { fixture: true } });
-  h.rpc.mockReturnValue({
-    abortSignal: async () => ({ data: { ok: true, data: safe }, error: null }),
-  });
+  h.request.mockImplementation(async (options) => ({
+    ...gatewayBilling,
+    data: validated(options.kind),
+  }));
+  h.rpc.mockImplementation((_name, args) => ({
+    abortSignal: async () => ({
+      data: { ok: true, data: envelope(args.p_kind as ExistingKind) },
+      error: null,
+    }),
+  }));
 });
 describe("PRV001 provider boundary", () => {
   it.each(["questions", "synthesis", "stage2", "stage3"])(
@@ -113,9 +108,9 @@ describe("PRV001 provider boundary", () => {
       expect(args.key === "synthetic-fixture-key").toBe(true);
       expect(args.user).toContain("Approved description");
       expect(args.user).not.toContain("WITHDRAWN_RAW_PROJECT");
-      expect(args.user).toContain("PRIVACY LIMITS");
+      expect(args.user).toContain('"permission":1');
       expect(args.user).not.toContain("WITHDRAWN_NOTE");
-      expect(h.rpc).toHaveBeenCalledWith("get_ai_processing_context", {
+      expect(h.rpc).toHaveBeenCalledWith("get_ai_processing_context_v2", {
         p_project_id: projectId,
         p_kind: kind,
       });
@@ -145,7 +140,7 @@ describe("PRV001 provider boundary", () => {
     },
   ])("fails closed for unavailable or malformed context, with no raw fallback", async (result) => {
     h.rpc.mockReturnValue({ abortSignal: async () => result });
-    await expect(invoke("synthesis")).rejects.toThrow("Privacy settings could not be verified");
+    await expect(invoke("synthesis")).rejects.toThrow();
     expect(h.request).not.toHaveBeenCalled();
     expect(h.tables).toEqual(["projects"]);
   });

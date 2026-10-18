@@ -1,9 +1,15 @@
 import { getRequest } from "@tanstack/react-start/server";
 import type { SupabaseClient } from "@supabase/supabase-js";
 import type { Database } from "@/integrations/supabase/types";
-import type { getPrivateContract } from "./private-v1";
+import type { GroundingReceipt } from "./grounding-v2";
 
-type Contract = ReturnType<typeof getPrivateContract>;
+type Contract = {
+  kind: "questions" | "synthesis" | "stage2" | "stage3";
+  promptId: string;
+  promptVersion: number;
+  schemaId: string;
+  schemaVersion: number;
+};
 type Metadata = {
   requestedModel: string;
   actualModel: string | null;
@@ -62,8 +68,8 @@ type GenerationRecord = ReturnType<typeof generationRecord>;
 // Narrow RPC boundary until the generated database definitions include this migration.
 type ProvenanceClient = {
   rpc(
-    name: "record_ai_generation",
-    args: { p_record: GenerationRecord },
+    name: "record_ai_generation" | "record_ai_generation_v2",
+    args: { p_record: GenerationRecord; p_operation_id?: string; p_grounding?: GroundingReceipt },
   ): { abortSignal(signal: AbortSignal): PromiseLike<{ data: unknown; error: unknown }> };
 };
 
@@ -86,13 +92,24 @@ export async function prepareProvenanceWriter(scope: {
   const { supabaseAdmin } = await import("@/integrations/supabase/client.server");
   const client = supabaseAdmin as unknown as ProvenanceClient;
   const requestId = crypto.randomUUID();
-  return async (result: Metadata) => {
+  return async (
+    result: Metadata,
+    context?: { operationId: string; grounding: GroundingReceipt },
+  ) => {
+    if (scope.contract.promptVersion === 2 && !context)
+      throw new Error("A source receipt is required for this AI draft.");
     // The service-only RPC rechecks current project ownership in the same transaction as the insert.
     try {
       const saved = await client
-        .rpc("record_ai_generation", {
-          p_record: generationRecord({ ...scope, requestId }, result),
-        })
+        .rpc(
+          scope.contract.promptVersion === 2 ? "record_ai_generation_v2" : "record_ai_generation",
+          {
+            ...(context
+              ? { p_operation_id: context.operationId, p_grounding: context.grounding }
+              : {}),
+            p_record: generationRecord({ ...scope, requestId }, result),
+          },
+        )
         .abortSignal(AbortSignal.timeout(10_000));
       if (saved.error || saved.data !== requestId) throw new Error("record unavailable");
       return requestId;

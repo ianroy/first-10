@@ -1,4 +1,4 @@
-import { validateAIOutput, type AIKind } from "./contracts";
+import { validateAIOutput, type AIKind, type AIOutput } from "./contracts";
 import { budgetRouteSchema, providerBudgetParameters, type BudgetRoute } from "./budget-contract";
 
 // Baseline identity is evidence/compatibility only. Paid routing requires an explicit DB policy.
@@ -93,7 +93,9 @@ function metadataFromEnvelope(envelope: unknown, requestedModel: string): Gatewa
 }
 
 /** Exactly one HTTP attempt. Errors carry only bounded billing metadata, never provider/source text. */
-export async function requestStructuredDraft(options: Options) {
+export async function requestStructuredDraft<T = AIOutput<AIKind>>(
+  options: Options & { outputValidator?: (value: unknown) => T },
+) {
   const now = options.now ?? Date.now;
   const started = now();
   const { kind, schema, system, user } = options;
@@ -215,12 +217,14 @@ export async function requestStructuredDraft(options: Options) {
   }
   let data;
   try {
-    data = validateAIOutput(kind, decoded);
+    data = options.outputValidator
+      ? options.outputValidator(decoded)
+      : validateAIOutput(kind, decoded);
   } catch {
     invalid(
       "INVALID_SCHEMA",
       "The AI draft did not match the expected format. Your saved work is unchanged.",
     );
   }
-  return { ...metadata, data: data! };
+  return { ...metadata, data: data! as T };
 }

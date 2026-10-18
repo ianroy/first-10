@@ -26,25 +26,15 @@ vi.mock("@/lib/ai/budget.server", async (original) => ({
   ...(await original<typeof import("@/lib/ai/budget.server")>()),
   prepareAIBudget: h.budget,
 }));
+import { envelope, validated } from "@/tests/ai-007/fixtures";
 import { generateAI } from "@/lib/ai.functions";
 import { AIGatewayError } from "@/lib/ai/gateway.server";
 import { budgetRoute, gatewayBilling } from "./fixtures";
 const operationId = "fa140000-0000-4000-8000-000000000111";
-const projectId = "fa140000-0000-4000-8000-000000000010";
+const projectId = "fa170000-0000-4000-8000-000000000001";
 const owner = "fa140000-0000-4000-8000-000000000001";
 const project = { id: projectId, user_id: owner, archived_at: null };
-const permitted = {
-  project: {
-    name: "Synthetic",
-    description: "Approved fictional fixture",
-    audience: "Fictional people",
-    problem: "Untested",
-  },
-  interviews: [],
-  learnings: [],
-  contacts: [],
-  excluded: { interviews: 1, contacts: 1, learnings: 1 },
-};
+const permitted = envelope("questions");
 const sb = {
   rpc: () => ({ abortSignal: h.context }),
   from: () => {
@@ -75,7 +65,10 @@ beforeEach(() => {
   h.cancel.mockResolvedValue({ state: "cancelled" });
   h.settle.mockResolvedValue({ state: "settled", resultAllowed: true });
   h.unknown.mockResolvedValue({ state: "unknown" });
-  h.request.mockResolvedValue({ ...gatewayBilling, data: { questions: ["Recent example?"] } });
+  h.request.mockResolvedValue({
+    ...gatewayBilling,
+    data: validated("questions", { questions: ["Recent example?"] }),
+  });
 });
 afterEach(() => vi.unstubAllEnvs());
 describe("generateAI atomic budget boundary", () => {
@@ -91,7 +84,7 @@ describe("generateAI atomic budget boundary", () => {
         operationId,
         userId: owner,
         projectId,
-        context: expect.objectContaining({ promptVersion: 1, schemaVersion: 1 }),
+        context: expect.objectContaining({ promptVersion: 2, schemaVersion: 2 }),
       }),
     );
     expect(h.context).toHaveBeenCalledTimes(2);
@@ -126,7 +119,10 @@ describe("generateAI atomic budget boundary", () => {
           ok: true,
           data: {
             ...permitted,
-            project: { ...permitted.project, description: "CHANGED_OR_REDACTED" },
+            project: {
+              ...permitted.project,
+              content: { ...permitted.project.content, description: "CHANGED_OR_REDACTED" },
+            },
           },
         },
         error: null,

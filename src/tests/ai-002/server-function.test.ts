@@ -24,6 +24,7 @@ vi.mock("@/lib/ai/budget.server", async (original) => ({
   prepareAIBudget: h.budget,
 }));
 import { budgetRoute, gatewayBilling } from "@/tests/ai-004/fixtures";
+import { envelope, validated } from "@/tests/ai-007/fixtures";
 import { generateAI } from "@/lib/ai.functions";
 import { validateAIOutput } from "@/lib/ai/contracts";
 import type { ExistingKind } from "@/lib/prompts/private-v1";
@@ -34,7 +35,7 @@ const outputs = {
   stage3: { channels: [], referral_asks: [], onboarding_questions: [] },
 };
 const project = {
-  id: "f2000000-0000-4000-8000-000000000001",
+  id: "fa170000-0000-4000-8000-000000000001",
   user_id: "f1000000-0000-4000-8000-000000000001",
   name: "Fixture",
   description: "PRIVATE",
@@ -42,25 +43,8 @@ const project = {
   problem: "Planning",
 };
 const sb = {
-  rpc: () => ({
-    abortSignal: async () => ({
-      data: {
-        ok: true,
-        data: {
-          project: {
-            name: project.name,
-            description: project.description,
-            audience: project.audience,
-            problem: project.problem,
-          },
-          interviews: [{ answers: [{ q: "Recent event?", note: "PRIVATE", quote: "" }], tags: [] }],
-          learnings: [],
-          contacts: [],
-          excluded: { interviews: 0, contacts: 0, learnings: 0 },
-        },
-      },
-      error: null,
-    }),
+  rpc: (_name: string, args: { p_kind: ExistingKind }) => ({
+    abortSignal: async () => ({ data: { ok: true, data: envelope(args.p_kind) }, error: null }),
   }),
   from: (table: string) => {
     const q = {
@@ -107,7 +91,7 @@ describe("generateAI legacy response compatibility", () => {
     "records successful %s metadata before returning unchanged strict output",
     async (kind) => {
       const result = {
-        data: outputs[kind],
+        data: validated(kind, outputs[kind]),
         ...gatewayBilling,
       };
       h.request.mockResolvedValue(result);
@@ -120,14 +104,20 @@ describe("generateAI legacy response compatibility", () => {
           projectOwnerId: project.user_id,
         }),
       );
-      expect(h.write).toHaveBeenCalledWith(result);
-      expect(h.request.mock.calls[0]?.[0].user).toContain("APP: Fixture\nWhat it does: PRIVATE");
+      expect(h.write).toHaveBeenCalledWith(
+        result,
+        expect.objectContaining({
+          operationId: "fa140000-0000-4000-8000-000000000111",
+          grounding: result.data.receipt,
+        }),
+      );
+      expect(h.request.mock.calls[0]?.[0].user).toContain("Approved description");
     },
   );
   it.each(Object.keys(outputs) as ExistingKind[])(
     "returns an opt-in receipt outside strict %s JSON",
     async (kind) => {
-      h.request.mockResolvedValue({ ...gatewayBilling, data: outputs[kind] });
+      h.request.mockResolvedValue({ ...gatewayBilling, data: validated(kind, outputs[kind]) });
       expect(await invoke(kind, true)).toEqual({
         data: outputs[kind],
         originId: "fa028000-0000-4000-8000-000000000001",
@@ -136,7 +126,10 @@ describe("generateAI legacy response compatibility", () => {
     },
   );
   it("never returns a successful draft when provenance cannot commit", async () => {
-    h.request.mockResolvedValue({ ...gatewayBilling, data: outputs.questions });
+    h.request.mockResolvedValue({
+      ...gatewayBilling,
+      data: validated("questions", outputs.questions),
+    });
     h.write.mockRejectedValue(new Error("Record failed"));
     await expect(invoke("questions")).rejects.toThrow("Record failed");
     expect(h.request).toHaveBeenCalledTimes(1);

@@ -4,44 +4,11 @@ import { requireSupabaseAuth } from "@/integrations/supabase/auth-middleware";
 import { aiRequestSchema } from "./ai/contracts";
 import { generateFictionalMarketingPractice } from "./ai/demo-marketing.server";
 import { requestStructuredDraft } from "./ai/gateway.server";
-import { getPrivateContract } from "./prompts/private-v1";
+import { loadBoundedAIContext } from "./ai/context.server";
+import { validateGroundedOutput } from "./prompts/grounding-v2";
 import { prepareProvenanceWriter } from "./prompts/provenance.server";
-import { loadAIProcessingContext } from "./consent";
 import { budgetInputBinding, prepareAIBudget, trustedGatewayUsage } from "./ai/budget.server";
 import type { SupabaseClient } from "@supabase/supabase-js";
-
-function assembledContext(
-  permitted: Awaited<ReturnType<typeof loadAIProcessingContext>>,
-  contract: ReturnType<typeof getPrivateContract>,
-  kind: ReturnType<typeof getPrivateContract>["kind"],
-) {
-  const { interviews, learnings, contacts, excluded } = permitted;
-  const safeProject = permitted.project;
-  const ctx = [
-    `APP: ${safeProject.name}\nWhat it does: ${safeProject.description}\nWho it's for: ${safeProject.audience}\nProblem: ${safeProject.problem}`,
-    kind !== "questions" && interviews?.length
-      ? `INTERVIEWS:\n${JSON.stringify(interviews).slice(0, 14000)}`
-      : "",
-    kind !== "questions" && kind !== "synthesis" && learnings?.length
-      ? `ACCEPTED LEARNINGS:\n${JSON.stringify(learnings).slice(0, 6000)}`
-      : "",
-    kind === "stage2" ? `CONTACT SOURCES:\n${JSON.stringify(contacts ?? []).slice(0, 3000)}` : "",
-    excluded.interviews + excluded.contacts + excluded.learnings > 0
-      ? `PRIVACY LIMITS: ${excluded.interviews} interview records, ${excluded.contacts} contact records and ${excluded.learnings} learning records are withheld. Do not infer their content or treat the available material as complete evidence.`
-      : "",
-  ]
-    .filter(Boolean)
-    .join("\n\n");
-  return {
-    system: contract.system,
-    user: `${contract.task}\n\n${ctx}`,
-    schema: contract.schema,
-    promptId: contract.promptId,
-    promptVersion: contract.promptVersion,
-    schemaId: contract.schemaId,
-    schemaVersion: contract.schemaVersion,
-  };
-}
 
 export const generateAI = createServerFn({ method: "POST" })
   .middleware([requireSupabaseAuth])
@@ -62,7 +29,12 @@ export const generateAI = createServerFn({ method: "POST" })
         project: p,
         operationId: data.operationId,
       });
-    const contract = getPrivateContract(data.kind);
+    const initial = await loadBoundedAIContext(
+      sb as unknown as Pick<SupabaseClient, "rpc">,
+      { type: "owner_project", projectId: p.id },
+      data.kind,
+    );
+    const { contract, assembled, packed } = initial;
     const recordSuccess = await prepareProvenanceWriter({
       supabase: sb,
       userId: context.userId,
@@ -70,14 +42,6 @@ export const generateAI = createServerFn({ method: "POST" })
       projectOwnerId: p.user_id,
       contract,
     });
-    // Fresh user verification above, then an owner-scoped permission snapshot immediately
-    // before the provider request. No raw child-table fallback when choices are unavailable.
-    const permitted = await loadAIProcessingContext(
-      sb as unknown as Pick<SupabaseClient, "rpc">,
-      p.id,
-      data.kind,
-    );
-    const assembled = assembledContext(permitted, contract, data.kind);
     const key = process.env["OPENROUTER_API_KEY"]?.trim();
     if (!key || key === "[SENSITIVE]")
       throw new Error(
@@ -93,6 +57,7 @@ export const generateAI = createServerFn({ method: "POST" })
       projectOwnerId: p.user_id,
       kind: data.kind,
       context: assembled,
+      contextFence: packed.manifest(budgetInputBinding(assembled).contextSha256),
     });
     let claimStarted = false;
     try {
@@ -104,13 +69,13 @@ export const generateAI = createServerFn({ method: "POST" })
         .single();
       if (freshError || !fresh || fresh.user_id !== context.userId || fresh.archived_at)
         throw new Error("Project access changed. Continue manually.");
-      const current = await loadAIProcessingContext(
+      const current = await loadBoundedAIContext(
         sb as unknown as Pick<SupabaseClient, "rpc">,
-        p.id,
+        { type: "owner_project", projectId: p.id },
         data.kind,
       );
       if (
-        budgetInputBinding(assembledContext(current, contract, data.kind)).contextSha256 !==
+        budgetInputBinding(current.assembled).contextSha256 !==
         budgetInputBinding(assembled).contextSha256
       )
         throw new Error(
@@ -128,6 +93,13 @@ export const generateAI = createServerFn({ method: "POST" })
           kind: data.kind,
           schema: contract.schema,
           route: budget.route,
+          outputValidator: (value) =>
+            validateGroundedOutput(
+              data.kind as "questions" | "synthesis" | "stage2" | "stage3",
+              value,
+              packed.sources,
+              packed.omissions,
+            ),
         });
       } catch (error) {
         const metadata =
@@ -163,8 +135,12 @@ export const generateAI = createServerFn({ method: "POST" })
         );
       }
       await budget.settle(usage);
-      const originId = await recordSuccess(result);
-      return data.withOrigin ? { data: result.data, originId } : result.data;
+      const grounded = result.data;
+      const originId = await recordSuccess(result, {
+        operationId: data.operationId,
+        grounding: grounded.receipt,
+      });
+      return data.withOrigin ? { data: grounded.draft, originId } : grounded.draft;
     } catch (error) {
       if (!claimStarted) {
         try {

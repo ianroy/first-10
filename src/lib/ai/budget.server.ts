@@ -1,6 +1,7 @@
 import { createHash, randomUUID } from "node:crypto";
 import { getRequest } from "@tanstack/react-start/server";
 import type { SupabaseClient } from "@supabase/supabase-js";
+import type { AIContextManifest } from "../prompts/context-v2";
 import type { Database } from "@/integrations/supabase/types";
 import {
   budgetKindSchema,
@@ -12,7 +13,12 @@ import {
   type TrustedUsage,
 } from "./budget-contract";
 
-type RpcName = "reserve_ai_usage" | "claim_ai_usage" | "finish_ai_usage" | "settle_ai_usage";
+type RpcName =
+  | "reserve_ai_usage"
+  | "claim_ai_usage_with_context"
+  | "claim_ai_usage"
+  | "finish_ai_usage"
+  | "settle_ai_usage";
 /** Internal adapter, never exposed as a browser server-function argument. */
 export type BudgetRpcClient = {
   rpc(
@@ -36,6 +42,8 @@ export type BudgetInput = {
   userId: string;
   projectId: string;
   kind: BudgetKind;
+  /** Trusted server assembly only, never accepted from a browser request. */
+  contextFence?: AIContextManifest;
   /** Exact already-authorized provider prompt, schema and version identities, without credentials. */
   context: {
     system: string;
@@ -106,6 +114,8 @@ export function trustedGatewayUsage(metadata: unknown, outputValid: boolean): Tr
 export async function createBudgetSession(client: BudgetRpcClient, input: BudgetInput) {
   const { contextSha256, inputBytes } = budgetInputBinding(input.context);
   budgetKindSchema.parse(input.kind);
+  if (input.contextFence && input.contextFence.contextHash !== contextSha256)
+    throw new AIBudgetError(input.operationId, "CONTEXT_BINDING_MISMATCH");
   let claimStarted = false;
   let attemptId: string | null = null;
   let last: BudgetReceipt;
@@ -151,9 +161,10 @@ export async function createBudgetSession(client: BudgetRpcClient, input: Budget
       if (claimStarted) throw new AIBudgetError(input.operationId, "ALREADY_CLAIMED");
       claimStarted = true;
       attemptId = randomUUID();
-      last = await call("claim_ai_usage", {
+      last = await call(input.contextFence ? "claim_ai_usage_with_context" : "claim_ai_usage", {
         p_operation_id: input.operationId,
         p_attempt_id: attemptId,
+        ...(input.contextFence ? { p_manifest: input.contextFence } : {}),
       });
       if (
         !last.dispatch ||
@@ -221,6 +232,7 @@ export async function prepareAIBudget(scope: {
   projectOwnerId: string;
   kind: BudgetKind;
   context: BudgetInput["context"];
+  contextFence?: AIContextManifest;
 }) {
   const operationId = scope.operationId;
   if (
