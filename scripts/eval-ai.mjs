@@ -6,6 +6,7 @@ import { dirname, resolve } from "node:path";
 import { fileURLToPath, pathToFileURL } from "node:url";
 import { isDeepStrictEqual } from "node:util";
 import { validateAIOutput } from "../src/lib/ai/contracts.ts";
+import { safeAIContextSchema } from "../src/lib/consent.ts";
 
 const ROOT = resolve(dirname(fileURLToPath(import.meta.url)), "..");
 export const MODEL = "google/gemini-2.5-flash-lite";
@@ -15,12 +16,14 @@ export const OUTPUT_CAP = 2500;
 export const MAX_CALLS = 8;
 const KINDS = ["questions", "synthesis", "stage2", "stage3"];
 export const hash = (value) => createHash("sha256").update(value).digest("hex");
-export const FIXTURE_PATH = "src/tests/ai-eval/fixtures.v2.json";
+export const FIXTURE_PATH = "src/tests/ai-eval/fixtures.v3.json";
 const SOURCE_PATHS = [
   "src/lib/ai.functions.ts",
   "src/lib/ai/contracts.ts",
   "src/lib/ai/gateway.server.ts",
   "src/lib/prompts/private-v1.ts",
+  "src/lib/consent.ts",
+  "supabase/migrations/20261018011000_processing_consent.sql",
 ];
 const plain = (value) => value !== null && typeof value === "object" && !Array.isArray(value);
 const isoDate = (value) =>
@@ -35,7 +38,13 @@ const label = (value) =>
   !/[\x00-\x1f\x7f]/.test(value);
 export const contractHash = (contract) => hash(JSON.stringify(contract));
 export function assembleFixtureContext(c) {
-  const { project: p, interviews, learnings, contacts } = c.input;
+  const {
+    project: p,
+    interviews,
+    learnings,
+    contacts,
+    excluded,
+  } = safeAIContextSchema.parse(c.permission_context);
   return [
     `APP: ${p.name}\nWhat it does: ${p.description}\nWho it's for: ${p.audience}\nProblem: ${p.problem}`,
     c.kind !== "questions" && interviews.length
@@ -45,16 +54,51 @@ export function assembleFixtureContext(c) {
       ? `ACCEPTED LEARNINGS:\n${JSON.stringify(learnings).slice(0, 6000)}`
       : "",
     c.kind === "stage2" ? `CONTACT SOURCES:\n${JSON.stringify(contacts).slice(0, 3000)}` : "",
+    excluded.interviews + excluded.contacts + excluded.learnings > 0
+      ? `PRIVACY LIMITS: ${excluded.interviews} interview records, ${excluded.contacts} contact records and ${excluded.learnings} learning records are withheld. Do not infer their content or treat the available material as complete evidence.`
+      : "",
   ]
     .filter(Boolean)
     .join("\n\n");
+}
+/** Synthetic eligibility snapshots exercise the RPC boundary. Real ownership and
+ * choice enforcement are separately checked by the rolled-back PRV policy suite. */
+export function derivePermissionFixture(c) {
+  const kept = (key) => c.input[key].filter((_, i) => !c.withheld_records[key].includes(i));
+  const interviews = kept("interviews").map((i) => ({
+    answers: i.answers.map((a) => ({ q: a.q ?? "", note: a.note ?? "", quote: a.quote ?? "" })),
+    tags: i.tags,
+  }));
+  const contacts = kept("contacts").map((c) => ({
+    relation: c.relation,
+    why: c.why,
+    source: c.source,
+    stage: c.stage,
+  }));
+  const learnings =
+    c.withheld_records.interviews.length + c.withheld_records.contacts.length === 0
+      ? kept("learnings").map((l) => ({ title: l.title, body: l.body, data: l.data, kind: l.kind }))
+      : [];
+  const needsEvidence = c.kind !== "questions";
+  const selectedLearnings = needsEvidence && c.kind !== "synthesis" ? learnings : [];
+  return {
+    project: c.input.project,
+    interviews: needsEvidence ? interviews : [],
+    learnings: selectedLearnings,
+    contacts: c.kind === "stage2" ? contacts : [],
+    excluded: {
+      interviews: needsEvidence ? c.withheld_records.interviews.length : 0,
+      contacts: needsEvidence ? c.withheld_records.contacts.length : 0,
+      learnings: needsEvidence ? c.input.learnings.length - selectedLearnings.length : 0,
+    },
+  };
 }
 export async function loadFixtures(root = ROOT) {
   const raw = await readFile(resolve(root, FIXTURE_PATH), "utf8");
   const fixture = JSON.parse(raw);
   if (
     !plain(fixture) ||
-    fixture.version !== "first-ten-existing-kinds-v2" ||
+    fixture.version !== "first-ten-existing-kinds-v3" ||
     !Array.isArray(fixture.cases) ||
     !plain(fixture.source_sha256) ||
     !isDeepStrictEqual(Object.keys(fixture.source_sha256).sort(), [...SOURCE_PATHS].sort())
@@ -99,6 +143,21 @@ export async function loadFixtures(root = ROOT) {
       ].every(Array.isArray)
     )
       throw new Error("Only complete bundled synthetic fixtures are allowed.");
+    if (
+      !plain(c.withheld_records) ||
+      !["interviews", "learnings", "contacts"].every(
+        (key) =>
+          Array.isArray(c.withheld_records[key]) &&
+          new Set(c.withheld_records[key]).size === c.withheld_records[key].length &&
+          c.withheld_records[key].every(
+            (i) => Number.isInteger(i) && i >= 0 && i < c.input[key].length,
+          ),
+      )
+    )
+      throw new Error("Explicit valid synthetic permission exclusions are required.");
+    const permitted = safeAIContextSchema.safeParse(c.permission_context);
+    if (!permitted.success || !isDeepStrictEqual(permitted.data, derivePermissionFixture(c)))
+      throw new Error("Permission-scoped fixture projection mismatch.");
     const contract = getPrivateContract(c.kind);
     if (
       JSON.stringify(c.input.interviews).length > 14000 ||
@@ -132,7 +191,8 @@ export async function loadFixtures(root = ROOT) {
       quotes.some((q) => typeof q !== "string" || !q.trim()) ||
       !isDeepStrictEqual(quotes, c.source_quotes) ||
       c.source_catalog.some(
-        (s) => !c.input.interviews.some((i) => i.answers?.some((a) => a.quote === s.quote)),
+        (s) =>
+          !c.permission_context.interviews.some((i) => i.answers?.some((a) => a.quote === s.quote)),
       )
     )
       throw new Error("Source catalog must identify exact supplied synthetic quotes.");
@@ -462,7 +522,7 @@ async function exportPacket(fixtures, outputDirectory) {
 
 export async function runOfflineBaseline(fixtures, root = ROOT) {
   const baseline = JSON.parse(
-    await readFile(resolve(root, "evals/offline-baseline.v2.json"), "utf8"),
+    await readFile(resolve(root, "evals/offline-baseline.v3.json"), "utf8"),
   );
   if (
     baseline.fixture_sha256 !== fixtures.fixture_sha256 ||

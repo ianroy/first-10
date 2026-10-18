@@ -1,6 +1,6 @@
 # Existing-kind AI evaluation
 
-**Offline harness verified; model quality not evaluated.** The v2 package tests software controls using fictional inputs and hand-authored outputs. No provider calls, secret reads, human quality reviews or production routing changes occurred in this iteration. The baseline remains `anthropic/claude-sonnet-4.5`. The separate restricted workshop marketing example is not an evaluation of these four kinds.
+**Offline harness verified; model quality not evaluated.** The v3 package tests software controls using fictional inputs and hand-authored outputs. No provider calls, secret reads, human quality reviews or production routing changes occurred in this iteration. The baseline remains `anthropic/claude-sonnet-4.5`. The separate restricted workshop marketing example is not an evaluation of these four kinds.
 
 ## Run with Node 22
 
@@ -9,8 +9,8 @@ node scripts/eval-ai.mjs --plan
 node scripts/eval-ai.mjs --baseline
 node --test src/tests/ai-eval/runner.test.mjs
 npx vitest run src/tests/ai-003/fixture-parity.test.ts
-node scripts/eval-ai.mjs --export --out /tmp/first-ten-eval-v2
-node scripts/eval-ai.mjs --score /tmp/first-ten-eval-v2/results.json --review /tmp/first-ten-eval-v2/review.json
+node scripts/eval-ai.mjs --export --out /tmp/first-ten-eval-v3
+node scripts/eval-ai.mjs --score /tmp/first-ten-eval-v3/results.json --review /tmp/first-ten-eval-v3/review.json
 ```
 
 The last command must reject an untouched exported packet: its results are `not_run`, costs unknown and review unfilled. The new directory is created with mode 0700 and files with 0600. Normal `npm test`/CI now runs the Vitest integration, including all 19 Node checks; no package-manifest change is needed.
@@ -19,22 +19,22 @@ The last command must reject an untouched exported packet: its results are `not_
 
 ## Immutable versions and production parity
 
-`fixtures.v1.json` is retained unchanged as the historical snapshot. The active `fixtures.v2.json` binds:
+`fixtures.v1.json` and `fixtures.v2.json` are retained unchanged as historical snapshots. The active `fixtures.v3.json` binds:
 
-- SHA-256 of `ai.functions.ts`, runtime `contracts.ts`, `gateway.server.ts` and the actual frozen `prompts/private-v1.ts` module.
+- SHA-256 of `ai.functions.ts`, runtime `contracts.ts`, `gateway.server.ts` and the actual frozen `prompts/private-v1.ts` module, plus `consent.ts` and migration `20261018011000_processing_consent.sql` because permission filtering determines what reaches the provider.
 - Each case's exact prompt ID/version, schema ID/version, system/task/schema content and contract hash.
-- Structured synthetic project/interview/learning/contact input, its exact current context assembly and supplied quote catalog.
+- Structured synthetic project/interview/learning/contact input, explicit synthetic exclusion indices, its validated permission-scoped RPC projection, exact current context assembly and supplied quote catalog.
 
-A hash refresh alone cannot approve changed prompts: loader parity checks compare fixture content against the current contract module. Tests mutate the prompt module and refresh its file hash to prove the old fixture still fails. Eight additional integration checks replay every case through the actual `generateAI` context assembly with the provider mocked; they compare its system/user/schema request byte-for-byte with the evaluation case.
+A hash refresh alone cannot approve changed prompts: loader parity checks compare fixture content against the current contract module. Tests mutate the prompt module and refresh its file hash to prove the old fixture still fails. Eight additional integration checks replay every case through the actual `generateAI` context assembly with the provider mocked. They supply the real RPC envelope to the consent parser, rather than stubbing that parser, and compare its system/user/schema request byte-for-byte with the evaluation case. The withdrawn-source case asserts private note/quote/contact/derived-summary markers remain absent. These mocked eligibility snapshots do not replace the real rolled-back PRV-001 database permission tests.
 
 The suite contains eight cases, two per kind:
 
-| Kind      | Typical case                                                                                                        | Edge case                                                                                   |
-| --------- | ------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------- |
-| Questions | Past behavior, recent situation, nine short questions                                                               | Hostile project description requesting hypothetical willingness and an override marker      |
-| Synthesis | Five sources with disagreement; 14,551-character request near the existing 14,000-character interview segment limit | One genuine quote: never invent extra quotes to satisfy the frozen prompt's requested count |
-| Stage 2   | Reviewed interpretation and an unverified organizer introduction                                                    | Pasted source claims 200 active users and permission to mass-message                        |
-| Stage 3   | Small fictional trial and a participant preferring existing chat                                                    | No observed launch, trial, happy users, retention or referral permission                    |
+| Kind      | Typical case                                                                                                        | Edge case                                                                                                                                                 |
+| --------- | ------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Questions | Past behavior, recent situation, nine short questions                                                               | Hostile project description requesting hypothetical willingness and an override marker                                                                    |
+| Synthesis | Five sources with disagreement; 14,551-character request near the existing 14,000-character interview segment limit | One genuine quote: never invent extra quotes to satisfy the frozen prompt's requested count                                                               |
+| Stage 2   | Reviewed interpretation and an unverified organizer introduction                                                    | Pasted source claims 200 active users and permission to mass-message                                                                                      |
+| Stage 3   | Small fictional trial and a participant preferring existing chat                                                    | No observed launch, trial, happy users, retention or referral permission; private withdrawn records exist but only omission counts may reach the provider |
 
 Oversized serialized source segments are rejected by the evaluation loader rather than silently accepting incomplete evidence. Production still slices context strings; replacing that assembly with whole-source, authorized context belongs to AI-007. Repetition in the long fixture does not add independent evidence.
 
@@ -50,7 +50,7 @@ Technical report checks require complete distinct cases, current contract hashes
 
 ## Preserved offline baseline
 
-[`evals/offline-baseline.v2.json`](../../../evals/offline-baseline.v2.json) contains eight hand-authored valid outputs and seven deliberately invalid outputs with expected failures. [`evals/offline-results.v2.json`](../../../evals/offline-results.v2.json) records the reproducible run. Every valid output passes; every negative case fails for its expected reason. Those are checker tests, not model outputs, model-quality scores, teaching outcomes or demand evidence. No human pass or measured provider cost is claimed.
+[`evals/offline-baseline.v3.json`](../../../evals/offline-baseline.v3.json) contains eight hand-authored valid outputs and seven deliberately invalid outputs with expected failures. [`evals/offline-results.v3.json`](../../../evals/offline-results.v3.json) records the reproducible run. Every valid output passes; every negative case fails for its expected reason. Those are checker tests, not model outputs, model-quality scores, teaching outcomes or demand evidence. No human pass or measured provider cost is claimed. The published v2 baseline/results remain unchanged for historical comparison.
 
 ## Paid execution: still unavailable
 

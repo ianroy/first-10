@@ -22,7 +22,7 @@ import {
 } from "../../../scripts/eval-ai.mjs";
 const fixtures = await loadFixtures();
 const baseline = JSON.parse(
-  await readFile(new URL("../../../evals/offline-baseline.v2.json", import.meta.url), "utf8"),
+  await readFile(new URL("../../../evals/offline-baseline.v3.json", import.meta.url), "utf8"),
 );
 const endpoint = {
   data: {
@@ -93,7 +93,7 @@ test("endpoint preflight fails closed on missing schema support, price increases
   assert.throws(() => checkEndpoint({ data: { id: MODEL, endpoints: [] } }));
 });
 test("sparse source checks reject fabricated or duplicated quotes instead of satisfying a forced count", () => {
-  const c = fixtures.cases.find((c) => c.id === "synthesis-edge-v2");
+  const c = fixtures.cases.find((c) => c.id === "synthesis-edge-v3");
   const data = { quotes: [c.source_quotes[0]], changes: [{}, {}, {}] };
   assert.deepEqual(semanticChecks(c, data), []);
   assert.ok(
@@ -188,7 +188,7 @@ test("unknown spend, absent provider, duplicate cases, slow calls and changed pr
   }
 });
 test("evaluation fixtures contain no production project IDs or destinations", async () => {
-  const raw = await readFile(new URL("./fixtures.v2.json", import.meta.url), "utf8");
+  const raw = await readFile(new URL("./fixtures.v3.json", import.meta.url), "utf8");
   assert.equal(/https?:\/\//.test(raw), false);
   assert.equal(/sk-or-v1-|service_role|SUPABASE_SERVICE_ROLE_KEY/.test(raw), false);
 });
@@ -323,7 +323,7 @@ async function fixtureTree() {
   }
   return dir;
 }
-test("v2 binds prompt content and identity even if someone refreshes only file hashes", async () => {
+test("v3 binds prompt content and identity even if someone refreshes only file hashes", async () => {
   const dir = await fixtureTree();
   try {
     const path = "src/lib/prompts/private-v1.ts";
@@ -340,12 +340,15 @@ test("v2 binds prompt content and identity even if someone refreshes only file h
     await rm(dir, { recursive: true, force: true });
   }
 });
-test("v2 refuses missing prompt pins, wrong versions, changed schema, forged quote catalog or truncated evidence", async () => {
+test("v3 refuses missing prompt pins, wrong versions, changed schema, forged quote catalog or truncated evidence", async () => {
   for (const mutate of [
     (f) => delete f.source_sha256["src/lib/prompts/private-v1.ts"],
     (f) => f.cases[0].contract.promptVersion++,
     (f) => (f.cases[0].schema.properties.extra = { type: "string" }),
     (f) => (f.cases[2].source_catalog[0].quote = "Not supplied"),
+    (f) => (f.cases[7].permission_context.interviews = f.cases[7].input.interviews),
+    (f) => (f.cases[7].permission_context.excluded.interviews = 0),
+    (f) => delete f.source_sha256["supabase/migrations/20261018011000_processing_consent.sql"],
     (f) => {
       f.cases[2].input.interviews[0].answers[0].note += "x".repeat(100);
       f.cases[2].user =
