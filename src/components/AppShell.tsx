@@ -11,6 +11,7 @@ import {
   ArrowUpRight,
   Map,
   Compass,
+  FolderOpen,
 } from "lucide-react";
 import { supabase } from "@/integrations/supabase/client";
 import { useProjectSelection } from "@/lib/project-selection";
@@ -94,6 +95,13 @@ export function AppShell({ title, children }: { title: string; children: ReactNo
               ? `Stage ${project.stage} · Learn, decide, try`
               : "Choose an idea for personal work"}
           </p>
+          <Link
+            to="/workspace"
+            className="mt-2 inline-flex min-h-11 items-center gap-2 text-xs font-semibold text-primary underline underline-offset-4"
+          >
+            <FolderOpen className="size-4" aria-hidden="true" />
+            My workspace · switch idea
+          </Link>
         </div>
         <nav aria-label="Workspace" className="space-y-1.5">
           {tabs.map(({ to, label, icon: Icon }) => (
