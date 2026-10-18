@@ -2,7 +2,7 @@
 
 **Turn real customer conversations into a clearer next move: who to focus on, what to change, and what to try next.**
 
-First Ten is a mobile-first app for student founders with a live prototype or app and few or no recurring users. It brings a people list, interview questions, notes, AI-assisted synthesis, experiments and outreach drafts into one guided workflow. The founder talks to people, checks the evidence and decides what to do.
+First Ten is a responsive web app for student founders with a live prototype or app and few or no recurring users. It brings a people list, interview questions, notes, AI-assisted synthesis, experiments and outreach drafts into one guided workflow. The founder talks to people, checks the evidence and decides what to do.
 
 This is the **candidate value proposition** being tested. The existing app implements a three-stage ladder; research is now focused on whether that ladder helps founders make better decisions and take useful action. There are no founder interviews or pilot outcomes recorded in the research workspace yet, so improved acquisition, retention and willingness to pay remain unproven. The public page explains this provisional proposition; no acquisition or learning-effect claim has been validated.
 
@@ -28,13 +28,13 @@ The intended loop is:
 
 For example, a founder building a study planner might hear that a student already plans carefully but loses track when assignments change. A useful next move could be to test a change-notification flow with students who have that problem. The conversation does not establish that they will use or pay for it. This is an illustrative example, not a customer result.
 
-The proposed advantage is continuity from conversation to decision to follow-through. It still needs to earn its place alongside a founder's existing AI chat, documents, mentor and course tools. The app supports pieces of this loop today; claim-level evidence links and a structured decision record are research concepts.
+The proposed advantage is continuity from conversation to decision to follow-through. It still needs to earn its place alongside a founder's existing AI chat, documents, mentor and course tools. The app supports pieces of this loop today; general claim-level evidence links and a source-linked decision record remain research concepts.
 
 ## A classroom process you can inspect
 
 The login-free **StudyLoop** example follows fictional perspectives through an interpretation, a counterexample, a choice and a proposed next test. Its resettable, deterministic flow needs no live model response and writes no product data. The example demonstrates a method; it does not claim that every source-linked interaction exists in the private app.
 
-The [teaching kit](public/teaching/resources.json) provides a complete 60-minute lesson (10 minutes own thinking, 20 evidence, 20 marketing-test design, 10 peer review), a one-week $0 marketing assignment, six editable handouts and a nine-page printable PDF. Students map an audience to a primary channel and an alternative, develop truthful content, define an observable useful action and reflect on whether to repeat, revise or stop. The full saved in-app Marketing Lab and its new AI kinds remain under construction.
+The [teaching kit](public/teaching/resources.json) provides a complete 60-minute lesson (10 minutes own thinking, 20 evidence, 20 marketing-test design, 10 peer review), a one-week $0 marketing assignment, six editable handouts and a nine-page printable PDF. Students map an audience to a primary channel and an alternative, develop truthful content, define an observable useful action and reflect on whether to repeat, revise or stop. The saved in-app Marketing Lab now supports a manual five-step plan at Stage 2. Its dedicated channel/content AI kinds remain planned; the teaching kit works without an account or AI.
 
 Six teaching concepts connect to visible activities: **experiential learning; generative, student-led thinking before AI; scaffolded practice; formative peer feedback; metacognition and reflection; responsible AI and human judgment**. Students keep their initial thinking, inspect disagreement and explain their decision. AI is optional; the rubric assesses reasoning and revision rather than customers, network size or AI usage. These are teaching design commitments, not measured learning gains. See the [pedagogy map](docs/teaching/pedagogy-map.md) for primary sources and limits.
 
@@ -42,13 +42,19 @@ The original First Ten identity uses a conversation-shaped **10**, Field noteboo
 
 ## What you can do today
 
-1. **Sign in and describe your app.** Email magic-link sign-in leads to Setup: name, description, audience, problem and optional app link. The app uses one project per account.
+1. **Sign in and describe your app.** Use email and password, create an email/password account, or request an email sign-in link. Setup collects name, description, audience, problem and optional app link. The app uses one project per account.
 2. **First 10 — learn from relevant people.** Add first names and why each person fits. Generate and edit interview questions about past behavior, save them, select a contact and confirm permission to take notes. Interview mode shows one question per screen with a note and optional exact quote. Save at the end to record the conversation and tags.
 3. **Review learnings and try a change.** After five saved, completed interviews, generate an editable synthesis of problems, objections, best-fit users, quotes and suggested changes. Review it against your notes before accepting it. Log an experiment with a hypothesis, change and result; the result can be updated later.
 4. **Next 50 — reach beyond the first group.** Once unlocked, generate suggested channels, editable outreach bodies and feedback-survey questions using your project, completed interviews, accepted learnings and contact-source notes. Copy drafts to send yourself and manually update contacts through Contacted → Replied → Tried it → Active → Paying. Channel suggestions are AI-generated, not verified community research; the survey is text to copy, not a hosted response-collection form.
 5. **Next 100 — try broader outreach.** Once unlocked, generate channel ideas, referral asks and onboarding questions. Enter your own sign-up, active and returning-user counts. These metrics are not connected to your app's analytics.
 
-The dashboard brings together the next-step suggestion, stage progress, contact pipeline and a timeline of learnings and experiments. All AI outputs need human review; the app never sends outreach to interviewees or customers.
+The dashboard brings together the next-step suggestion, stage progress, contact pipeline and a timeline of learnings and experiments. A desktop sidebar and responsive panels support classroom projection; mobile keeps bottom navigation. **Account & saved work** shows the selected project and record counts, with a link to edit project details. It does not add project switching, account deletion or exports. All AI outputs need human review; the app never sends outreach to interviewees or customers.
+
+### The saved $0 Marketing Lab
+
+At `/marketing`, Stage 2 opens **Think first → Map channels → Make content → Plan the test → Review learning**. Preserve your initial observations, audience, useful action and channel ideas before using the structured steps. Map physical or digital channels, choose a primary route and an alternative, draft truthful content, plan a one-week test and record a repeat/revise/stop reflection. The observation and reflection fields are entered manually; the page does not yet provide the full structured measurement ledger. There is no automatic publication, audience verification or analytics collection. $0 refers to new cash spend, not unlimited time, printing, travel or free AI.
+
+Use **Save draft** and wait for confirmation. Saves check the current revision and reject conflicting updates instead of overwriting another save. The database retains three previous snapshots; the page currently offers reloading the latest saved version, not a history-restore interface. Once completed, the initial thinking is preserved.
 
 ### What the ladder counts
 
@@ -69,7 +75,7 @@ The goals and unlock thresholds differ. They are workflow guides, not evidence t
 
 ## What we are testing next
 
-[Iteration 5](FEATUREROADMAP_workplan.md) stages the requested product expansion alongside research: economical AI, a new brand and demo landing page, teaching resources, durable personal workspaces, teacher and admin panels, and controlled sharing/collaboration. The [task registry and index](docs/roadmap/task-index.md) specify status, dependencies, subtasks and agent handoffs. The public demo, original brand, teaching kit and teaching page are implemented; teacher/admin panels, multi-project work, sharing and collaboration remain planned. The registry distinguishes each gate and its actual evidence.
+[Iteration 5](FEATUREROADMAP_workplan.md) stages the requested product expansion alongside research: economical AI, a new brand and demo landing page, teaching resources, durable personal workspaces, teacher and admin panels, and controlled sharing/collaboration. The [task registry and index](docs/roadmap/task-index.md) specify status, dependencies, subtasks and agent handoffs. The public demo, original brand, teaching kit and teaching page are implemented; a narrow aggregate admin dashboard and manual saved Marketing Lab are also implemented. Teacher/class panels, broader platform administration, multi-project work, sharing and collaboration remain planned. The registry distinguishes each gate and its actual evidence.
 
 The primary pilot outcome to test is a **useful loop within 14 days**: a founder takes an external action and records a specific decision supported by observations, including counterevidence or unknowns, plus a next step. Voluntary return matters; course requirements and facilitator help will be recorded separately. Draft generation, interview totals and positive feedback alone are insufficient.
 
@@ -77,7 +83,7 @@ Research may change the audience, workflow or positioning. The owner-requested e
 
 ## Privacy and AI data flow
 
-Use first names for contacts and avoid sensitive information in free text. Supabase stores account authentication and project data; the database migration enables owner-based row-level security for the six application tables. The deployed ownership migration also enforces matching project/contact ownership and immutable row identities; strict real database policy tests cover these boundaries. The interview start checkbox confirms permission to take notes in that session. It is not a stored consent record or permission to publish quotes or send personal information to an AI provider.
+Use first names for contacts and avoid sensitive information in free text. Supabase stores account authentication and project data; the database migration enables owner-based row-level security for the original six application tables. A seventh, `marketing_plans`, has owner-only reads and validated atomic saves; it grants no teacher or collaborator access. The deployed ownership migration also enforces matching project/contact ownership and immutable row identities; strict real database policy tests cover these boundaries. The interview start checkbox confirms permission to take notes in that session. It is not a stored consent record or permission to publish quotes or send personal information to an AI provider.
 
 When you request generation, the server sends selected context to **OpenRouter and the routed model provider**: project name, description, audience and problem; completed interview answers and tags for synthesis and outreach; accepted learnings for outreach; and contact relationship, relevance, source and stage fields for Stage 2. Contact first names are not selected for the AI context, but free-text notes can still identify people. Review what you record and agree appropriate data handling with participants before using it in AI generation.
 
@@ -100,22 +106,22 @@ Use the local URL printed by Vite; the wrapper can choose the port. Configure th
 
 ### Environment variables
 
-| Variable                                             | Scope                                    | Purpose                                                                                                              |
-| ---------------------------------------------------- | ---------------------------------------- | -------------------------------------------------------------------------------------------------------------------- |
-| `VITE_SUPABASE_URL`, `VITE_SUPABASE_PUBLISHABLE_KEY` | Browser/build                            | Public Supabase URL and publishable/anon key                                                                         |
-| `SUPABASE_URL`, `SUPABASE_PUBLISHABLE_KEY`           | Server                                   | Same project URL and publishable/anon key for authenticated AI requests                                              |
-| `OPENROUTER_API_KEY`                                 | Server only                              | Required for AI generation                                                                                           |
-| `OPENROUTER_MODEL`                                   | Server only, optional                    | Missing or blank uses the current `anthropic/claude-sonnet-4.5` baseline; set a supported explicit model to override |
-| `APP_URL`                                            | Server only, optional                    | OpenRouter request referer; code defaults to the recorded production URL                                             |
-| `NITRO_PRESET`                                       | Build                                    | Set to `vercel` when building for Vercel                                                                             |
-| `SUPABASE_SERVICE_ROLE_KEY`                          | Server only, unused by current app flows | Operator tooling for the isolated fictional presenter seeder; bypasses RLS and must never reach the browser          |
-| `SUPABASE_PROJECT_ID`, `VITE_SUPABASE_PROJECT_ID`    | Template metadata                        | Present in `.env.example`; not read by current application code                                                      |
+| Variable                                             | Scope                 | Purpose                                                                                                                                                                  |
+| ---------------------------------------------------- | --------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `VITE_SUPABASE_URL`, `VITE_SUPABASE_PUBLISHABLE_KEY` | Browser/build         | Public Supabase URL and publishable/anon key                                                                                                                             |
+| `SUPABASE_URL`, `SUPABASE_PUBLISHABLE_KEY`           | Server                | Same project URL and publishable/anon key for authenticated AI requests                                                                                                  |
+| `OPENROUTER_API_KEY`                                 | Server only           | Required for AI generation                                                                                                                                               |
+| `OPENROUTER_MODEL`                                   | Server only, optional | Missing or blank uses the current `anthropic/claude-sonnet-4.5` baseline; set a supported explicit model to override                                                     |
+| `APP_URL`                                            | Server only, optional | OpenRouter request referer; code defaults to the recorded production URL                                                                                                 |
+| `NITRO_PRESET`                                       | Build                 | Set to `vercel` when building for Vercel                                                                                                                                 |
+| `SUPABASE_SERVICE_ROLE_KEY`                          | Server only           | Aggregate admin reads after a fresh trusted-role check, plus operator tooling for the isolated fictional presenter seeder; bypasses RLS and must never reach the browser |
+| `SUPABASE_PROJECT_ID`, `VITE_SUPABASE_PROJECT_ID`    | Template metadata     | Present in `.env.example`; not read by current application code                                                                                                          |
 
 The template includes a blank `OPENROUTER_MODEL=` line; blank and missing values now select the baseline. Lower-cost routes require their model-evaluation tasks before promotion. `APP_URL` and `NITRO_PRESET` are additional supported settings not listed in that template. Keep real `.env` values out of Git. Never put the OpenRouter key or service-role key in a `VITE_` variable.
 
 ### Database
 
-The application schema is in [supabase/migrations/20261017000000_init.sql](supabase/migrations/20261017000000_init.sql): `projects`, `contacts`, `interviews`, `learnings`, `experiments` and `outreach`. The additive [ownership migration](supabase/migrations/20261018000000_private_relationships.sql) strengthens relationships without rewriting content. Provision an explicitly selected development Supabase project, then apply pending migrations with the Supabase CLI:
+The application schema is in [supabase/migrations/20261017000000_init.sql](supabase/migrations/20261017000000_init.sql): `projects`, `contacts`, `interviews`, `learnings`, `experiments` and `outreach`. The additive [ownership migration](supabase/migrations/20261018000000_private_relationships.sql) strengthens relationships without rewriting content. The [Marketing Lab migration](supabase/migrations/20261018001000_marketing_plans.sql) adds `marketing_plans`, with one plan per project, bounded versioned JSON, atomic revision checks, three prior snapshots and immutable completed initial thinking. Provision an explicitly selected development Supabase project, then apply pending migrations with the Supabase CLI:
 
 ```sh
 supabase link --project-ref <development-project-ref>
@@ -156,6 +162,8 @@ Lint excludes generated `dist`, `.output`, `.vinxi` and `.vercel` output automat
 ## Architecture and deployment
 
 The app uses React 19, TanStack Start/Router/Query, Vite, Tailwind and shadcn/ui. Browser CRUD uses Supabase with the signed-in user's session. All AI generation goes through `generateAI` in [src/lib/ai.functions.ts](src/lib/ai.functions.ts), which authenticates the caller, loads context under their RLS permissions and requests JSON from OpenRouter. AI keys and prompt assembly stay server-side; the browser saves returned results.
+
+The separate `/admin` dashboard is restricted to the trusted `app_metadata.firstten_demo_admin === true` flag, rechecked server-side against the current bearer token. It returns aggregate operational counts and the current presenter account’s contribution, with no notes, emails or raw-user list. Missing data is shown as unavailable; acquisition and retention funnels are not instrumented. This limited grant is not the planned general platform-admin role. See [presenter access and revocation](docs/demo/presenter-data.md). The dedicated presenter can use the `ianroy` username alias with a privately supplied password; public users create their own email account. Credentials never belong in Git.
 
 The repository retains the Lovable Vite wrapper, whose default build target is Cloudflare. The Vercel build uses `NITRO_PRESET=vercel`. The recorded hosting target is Vercel project `first-10`, with [this production URL](https://first-10-three.vercel.app); live deployment health and Git integration are not verified by this document.
 
