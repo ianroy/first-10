@@ -1,53 +1,35 @@
-# Presenter script
+# First Ten: three-minute presenter script
 
-Target: 3–5 minutes including a short live example. Timing below is a rehearsal plan, not an observed result.
+Use the thirteen-slide deck in order. The screenshots are a complete fallback; the pitch does not depend on signing in or running AI. Keep the word **fictional** when introducing StudyLoop or the educator teams. All six makers appear on the title slide.
 
-## Full pitch
+| Slide | Time | Suggested narration |
+| --- | --- | --- |
+| 1. First Ten | 10 sec | “We are the First Ten team from the Babson AI Academy. We built a workspace to help student founders turn customer conversations into a clearer next move.” |
+| 2. Problem | 20 sec | “The prototype can be the easy part. Approaching people is intimidating. Students may not know whom to ask, what to ask or what a polite answer means. We want to help them investigate whether relevant people will actually use what they built.” |
+| 3. Solution | 15 sec | “Students bring real features to real people. They review what supports the idea and what challenges it, then choose one small experiment. Meaningful use and real commitments help investigate willingness to pay. A conversation count alone cannot establish product-market fit.” |
+| 4. Value | 15 sec | “Here is fictional StudyLoop. Maya wants to know who will show up. Nora already has a reliable group. The next move is to test attendance confirmation with existing groups. The value we are testing is a clearer decision with visible reasoning.” |
+| 5. Student | 12 sec | “This is the deployed student workspace with fictional data. Contacts, interviews, reviewed learning and experiments sit within a private saved idea. People can return and switch between their own ideas.” |
+| 6. Marketing | 15 sec | “The $0 Marketing Lab starts with the student’s own thinking. They map reachable channels, make useful content, plan a bounded test and reflect. The main workflow saves manual work. Optional presenter AI practice uses only a fixed fictional case.” |
+| 7. Educator | 12 sec | “Educators can save a private lesson plan and preview a student assignment. These four teams are authored examples for teaching, not live submissions. Planned class capacity is not enrollment.” |
+| 8. Admin | 8 sec | “A protected admin view shows aggregate operational counts, labels the fictional contribution and leaves unknown funnel metrics unavailable.” |
+| 9. Market | 18 sec | “This map compares focus and delivery, not quality. Orbit and Venturekit support a broader venture journey. Facilitated classes remain a strong alternative. We are testing a compact discovery and experiment loop that an educator can bring into an assignment.” |
+| 10. Architecture | 10 sec | “The app sends AI requests through one server gateway. Keys stay server-side, saved work stays owner-private and drafts return for human review. The optional fictional practice uses a fixed case.” |
+| 11. Pedagogy | 15 sec | “The technology supports six teaching practices: experiential learning, student thinking before AI, scaffolding, peer feedback, reflection and responsible judgment. The app keeps saved work private. The student still decides what evidence means and what to do next.” |
+| 12. Go to market | 18 sec | “Our proposed beachhead is our own BUS 131A and BUS 232F teaching contexts at Brandeis, then interested fall-course collaborators. We want evidence that students complete a useful loop and explain a revision before expanding. These are proposed pilots, not confirmed adopters.” |
+| 13. Questions | 10 sec | “Which student decision would you want to see more clearly? You can explore the fictional demo and adapt the teaching kit today.” |
 
-**1 · 15 seconds**
+Total target: about three minutes. Adjust pacing in rehearsal; no actual rehearsal timing is claimed here.
 
-First Ten helps a student founder turn customer conversations into a clearer next move. For educators, the interesting part is seeing the student's reasoning: what they heard, what they think it means, and what they will try.
+## Optional live handoff
 
-**2 · 20 seconds**
+Open [the public fictional demo](https://first-10-three.vercel.app/demo) for a no-login walkthrough, or [the teaching kit](https://first-10-three.vercel.app/teach). The sign-in page offers Student, Educator and Admin destinations; a choice does not grant a permission. The known fictional presenter can launch the three demo views. Keep all credentials outside the deck and repository. Use the supplied screenshot slides if the network or session interrupts the walkthrough.
 
-We ask one classroom question: what did the student learn that changed their next move? A conversation count or a polished AI summary cannot answer that on its own. We want the source, the interpretation and the decision to stay connected.
+Presenter-only AI practice has one verified production response on 2026-10-18. It uses Gemini 2.5 Flash-Lite through OpenRouter with the Google Vertex route and only the fixed fictional case. The UI reported $0.000106 for that response; this is a single observation, not an estimate for all prompts. The first failed request retained its spend reservation. General marketing AI remains planned, and the existing four private AI kinds keep their separate baseline. No presentation step requires another paid call.
 
-**3 · 35 seconds plus a 30-second example**
+## If asked about outcomes
 
-This is StudyLoop, a fictional teaching example. The initial idea is to help students find study partners. Maya says the problem is knowing who will show up. Nora is a counterexample: her existing group already works. A possible next move is to test attendance confirmation with existing groups before building another discovery feed. We have not run that test or established demand.
+“We have a working prototype and a proposed teaching approach. We have not yet established customer demand, product-market fit or improved learning outcomes. We want to test whether students act, connect observations to a decision and return to inspect what happened.”
 
-Open the public `/demo` and show its observation, counterexample and decision steps. Keep the fictional label visible. If the page is unavailable, continue with this slide.
+## If asked about class management
 
-**4 · 35 seconds**
-
-For the Next 50, students build a $0 marketing plan. They identify an audience, choose one main channel and one alternative, create useful content, and define a small test. The channel might be a student club or an online community; they still have to check access and rules. The saved manual Marketing Lab preserves students’ initial thinking, then guides channels, content, a test and reflection. It opens for saving at Stage 2. Dedicated channel/content AI is planned; the existing outreach drafts use AI separately. Nothing is automatically posted. Zero cash does not mean zero effort or free AI.
-
-**5 · 40 seconds**
-
-The teaching concepts are visible in the work. Experiential learning means a real conversation or test. Student-led thinking comes before AI. Scaffolding gives the process a sequence. Formative peer feedback checks whether the plan makes sense to someone else. Metacognition asks what changed and why. Responsible AI means checking claims, permissions and suggestions. These are design commitments; we have not measured learning gains.
-
-**6 · 25 seconds**
-
-The downloadable lesson allocates 10 minutes to framing and own thinking, 20 to evidence, 20 to a marketing test and 10 to peer review. Students return after a week to compare what happened with their plan. Assess the quality of reasoning and reflection, rather than how many customers they acquired. The lesson can also use manual work and fictional examples.
-
-**7 · 25 seconds**
-
-The current stack is React and TanStack, Supabase for authentication and owner-scoped data, and one server AI gateway to OpenRouter. Requests and returned drafts are validated, with bounded time, retries and output. Keys stay server-side. The desktop workspace now includes saved-work tools and a narrow, server-authorized admin view of operational counts. It exposes no interview contents or user list. Class panels, general platform administration and collaboration remain planned.
-
-**8 · 15 seconds**
-
-Bring one idea, inspect the example, and adapt the lesson to your class. We would like to learn where your students need more support. First Ten is a working prototype, and its proposed value still needs testing.
-
-## 90-second fallback
-
-First Ten helps a student founder turn customer conversations into a clearer next move. It makes the reasoning visible: observation, interpretation, uncertainty and a proposed action.
-
-In our fictional StudyLoop example, Maya's concern is knowing who will attend, while Nora's existing group already works. The next experiment might be attendance confirmation for existing groups, rather than another way to discover strangers. No customer result is implied.
-
-The Next 50 workflow develops that learning into a $0 marketing test: an audience, one main channel, useful content, a target and a reflection. Students think first; the saved Marketing Lab is manual today, and dedicated AI help is planned. The process draws on experiential learning, scaffolding, formative peer feedback, metacognition and responsible AI. The available 60-minute lesson leads to a one-week test and reflection.
-
-Explore the example and adapt the lesson. The goal is a better next question and a defensible next action. We have not yet established learning gains or product demand.
-
-## Before presenting
-
-Open `/pitch/index.html`, `/demo` and `/teach` before the session. The lesson has six editable Markdown downloads, printable HTML and a nine-page PDF. For an optional private workspace view, use the presenter alias with the privately supplied password; never project credentials. `/account` shows saved work; `/admin` is operational counts, not adoption evidence. Keep the fictional banner visible. The manual `/marketing` save flow requires Stage 2; use the public marketing example or teaching worksheet if the presenter is still at Stage 1. Check the exact feature labels against the current release. Use the slide story if connectivity fails; do not depend on magic-link delivery, a provider response or live data entry. Do not portray an automated walkthrough as a student study.
+“The planner is private to its owner. The four class examples are fictional. Enrollment, student submissions, grades, shared review and broader role administration are not implemented.”
