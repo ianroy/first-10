@@ -29,6 +29,13 @@ it("connects the actual demo, teaching, pitch, stack and founder-entry journeys"
     "href",
     "/diagrams/current-stack.svg",
   );
+  expect(screen.getByRole("link", { name: "Become a founding partner" })).toHaveAttribute(
+    "href",
+    "/founding-partners",
+  );
+  expect(
+    screen.getByRole("heading", { name: "Shape the next classroom. Two semesters free." }),
+  ).toBeVisible();
   for (const link of view.container.querySelectorAll<HTMLAnchorElement>('a[href^="#"]'))
     expect(view.container.querySelector(link.getAttribute("href")!)).not.toBeNull();
 });

@@ -1,3 +1,4 @@
+import { FoundingPartnerInvite } from "@/components/partners/FoundingPartnerInvite";
 import { Link } from "@tanstack/react-router";
 import {
   ArrowDown,
@@ -267,6 +268,7 @@ export function LandingPage() {
               </div>
             </div>
           </section>
+          <FoundingPartnerInvite />
           <section aria-labelledby="pedagogy-title" className="py-12 sm:py-16">
             <h2 id="pedagogy-title" className="text-3xl font-bold sm:text-4xl">
               Teaching built into the workflow

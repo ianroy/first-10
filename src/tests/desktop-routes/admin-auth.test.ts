@@ -5,6 +5,7 @@ const h = vi.hoisted(() => ({
   getUser: vi.fn(),
   createClient: vi.fn(),
   from: vi.fn(),
+  rpc: vi.fn(),
   setStatus: vi.fn(),
   setHeader: vi.fn(),
   requests: [] as {
@@ -27,7 +28,9 @@ vi.mock("@tanstack/react-start/server", () => ({
   setResponseHeader: h.setHeader,
 }));
 vi.mock("@supabase/supabase-js", () => ({ createClient: h.createClient }));
-vi.mock("@/integrations/supabase/client.server", () => ({ supabaseAdmin: { from: h.from } }));
+vi.mock("@/integrations/supabase/client.server", () => ({
+  supabaseAdmin: { from: h.from, rpc: h.rpc },
+}));
 import { getAdminSnapshot } from "@/lib/admin.functions";
 
 beforeEach(() => {
@@ -38,6 +41,17 @@ beforeEach(() => {
   h.authorization = "Bearer valid-fixture-token";
   h.requests = [];
   h.unavailable.clear();
+  h.rpc.mockReturnValue({
+    abortSignal: async () => ({
+      data: {
+        interestRequests: 0,
+        feedbackSubmissions: 0,
+        distinctRespondents: 0,
+        excludedFixtures: 1,
+      },
+      error: null,
+    }),
+  });
   h.getUser.mockResolvedValue({
     data: { user: { id: "presenter-id", app_metadata: { firstten_demo_admin: true } } },
     error: null,
@@ -82,6 +96,7 @@ describe("server-only admin aggregate authorization", () => {
       await expect(getAdminSnapshot()).rejects.toThrow("Admin access denied.");
       expect(h.setStatus).toHaveBeenCalledWith(403);
       expect(h.from).not.toHaveBeenCalled();
+      expect(h.rpc).not.toHaveBeenCalled();
       expect(h.createClient).not.toHaveBeenCalled();
     },
   );
@@ -99,6 +114,7 @@ describe("server-only admin aggregate authorization", () => {
     expect(h.getUser).toHaveBeenCalledWith("valid-fixture-token");
     expect(h.setStatus).toHaveBeenCalledWith(403);
     expect(h.from).not.toHaveBeenCalled();
+    expect(h.rpc).not.toHaveBeenCalled();
   });
 
   it("fails closed for rejected or revoked auth, including lookup failure", async () => {
@@ -107,6 +123,7 @@ describe("server-only admin aggregate authorization", () => {
     h.getUser.mockRejectedValueOnce(new Error("provider detail"));
     await expect(getAdminSnapshot()).rejects.toThrow("Admin access denied.");
     expect(h.from).not.toHaveBeenCalled();
+    expect(h.rpc).not.toHaveBeenCalled();
     expect(h.setStatus).toHaveBeenCalledWith(403);
   });
 
@@ -119,6 +136,7 @@ describe("server-only admin aggregate authorization", () => {
     });
     await expect(getAdminSnapshot()).rejects.toThrow("Admin access denied.");
     expect(h.from).toHaveBeenCalledTimes(12);
+    expect(h.rpc).toHaveBeenCalledOnce();
     expect(h.getUser).toHaveBeenCalledTimes(2);
   });
 
@@ -126,6 +144,13 @@ describe("server-only admin aggregate authorization", () => {
     const result = await getAdminSnapshot();
     expect(result.status).toBe("ready");
     expect(result.metrics).toHaveLength(6);
+    expect(result.partners).toEqual({
+      interestRequests: 0,
+      feedbackSubmissions: 0,
+      distinctRespondents: 0,
+      excludedFixtures: 1,
+    });
+    expect(h.rpc).toHaveBeenCalledWith("get_founding_partner_counts");
     expect(result.metrics.every((m) => m.total === 7 && m.presenter === 2)).toBe(true);
     expect(h.requests).toHaveLength(12);
     expect(
@@ -170,6 +195,7 @@ describe("server-only admin aggregate authorization", () => {
     expect(unconfigured.status).toBe("unavailable");
     expect(unconfigured.metrics.every((m) => m.total === null && m.presenter === null)).toBe(true);
     expect(h.from).not.toHaveBeenCalled();
+    expect(h.rpc).not.toHaveBeenCalled();
     vi.stubEnv("SUPABASE_SERVICE_ROLE_KEY", "service-fixture-never-return");
     h.unavailable.add("interviews");
     const partial = await getAdminSnapshot();
@@ -179,5 +205,14 @@ describe("server-only admin aggregate authorization", () => {
       presenter: null,
     });
     expect(JSON.stringify(partial)).not.toContain("private database detail");
+  });
+  it("keeps malformed, unavailable or private partner RPC data out of the response", async () => {
+    for (const data of [null, { email: "private@example.test" }, { interestRequests: -1 }]) {
+      h.rpc.mockReturnValueOnce({ abortSignal: async () => ({ data, error: null }) });
+      const result = await getAdminSnapshot();
+      expect(result.partners).toBeNull();
+      expect(result.status).toBe("partial");
+      expect(JSON.stringify(result)).not.toContain("private@example.test");
+    }
   });
 });

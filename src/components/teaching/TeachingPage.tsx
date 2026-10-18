@@ -1,3 +1,4 @@
+import { FoundingPartnerInvite } from "@/components/partners/FoundingPartnerInvite";
 import { BrandLogo } from "@/components/BrandLogo";
 import { Link } from "@tanstack/react-router";
 import { ArrowRight, ArrowUpRight, Check, Download, NotebookPen } from "lucide-react";
@@ -393,6 +394,7 @@ export function TeachingPage() {
             </div>
           </div>
         </section>
+        <FoundingPartnerInvite />
         <section
           aria-label="Next step"
           className="flex flex-wrap items-center justify-between gap-6 rounded-2xl border border-border bg-card p-6 sm:p-8"

@@ -102,6 +102,56 @@ function AdminPage() {
                 : "Some counts could not be retrieved. Available values are shown; a dash means unavailable, not zero."}
             </p>
           )}
+          <Card>
+            <div className="flex flex-wrap items-start justify-between gap-4">
+              <div>
+                <p className="text-xs font-bold uppercase tracking-widest text-primary">
+                  Classroom invitation
+                </p>
+                <h2 className="mt-2 text-2xl font-bold">Founding-partner interest</h2>
+              </div>
+              <Link
+                to="/founding-partners"
+                className="inline-flex min-h-11 items-center gap-2 rounded-xl border px-4 text-sm font-semibold"
+              >
+                Open invitation <ArrowUpRight className="size-4" aria-hidden="true" />
+              </Link>
+            </div>
+            {snapshot.partners ? (
+              <>
+                <dl className="mt-6 grid gap-4 md:grid-cols-3">
+                  {[
+                    ["Interest requests", snapshot.partners.interestRequests],
+                    ["Feedback submissions", snapshot.partners.feedbackSubmissions],
+                    ["Distinct email addresses", snapshot.partners.distinctRespondents],
+                  ].map(([label, value]) => (
+                    <div key={label} className="rounded-xl bg-muted p-4">
+                      <dt className="text-sm font-semibold">{label}</dt>
+                      <dd className="mt-2 text-3xl font-bold" aria-label={`${label}: ${value}`}>
+                        {value}
+                      </dd>
+                    </div>
+                  ))}
+                </dl>
+                <p className="mt-4 text-sm text-muted-foreground">
+                  Known fixture submissions excluded: {snapshot.partners.excludedFixtures}. Email
+                  domains ending in .invalid, .test or .example, and example.com/org/net are
+                  excluded.
+                </p>
+              </>
+            ) : (
+              <p role="status" className="mt-4 text-sm text-muted-foreground">
+                Partner counts unavailable. Missing values are not zero.
+              </p>
+            )}
+            <p className="mt-4 max-w-4xl text-sm leading-relaxed text-muted-foreground">
+              These are all-time form records, not confirmed partners or active classrooms. An
+              address may submit more than once and is not a verified person or institution. Other
+              test records may remain. Classroom trial activation, school enrollment and conversion
+              are not tracked here; interest and feedback are separate counts, not sequential funnel
+              stages.
+            </p>
+          </Card>
           <div className="grid gap-4 sm:grid-cols-2 xl:grid-cols-3">
             {snapshot.metrics.map((metric) => (
               <Card key={metric.key} className="min-w-0">

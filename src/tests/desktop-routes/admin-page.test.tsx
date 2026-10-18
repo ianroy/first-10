@@ -87,4 +87,21 @@ describe("admin operational presentation", () => {
     view.rerender(<Page />);
     expect(screen.getByRole("button", { name: "Checking…" })).toBeDisabled();
   });
+  it("shows private intake counts separately from enrollment and unknown conversion", () => {
+    h.report.data!.partners = {
+      interestRequests: 0,
+      feedbackSubmissions: 1,
+      distinctRespondents: 1,
+      excludedFixtures: 2,
+    };
+    render(<Page />);
+    expect(screen.getByLabelText("Interest requests: 0")).toHaveTextContent("0");
+    expect(screen.getByLabelText("Feedback submissions: 1")).toHaveTextContent("1");
+    expect(screen.getByText(/Known fixture submissions excluded: 2/)).toBeVisible();
+    expect(screen.getByText(/not confirmed partners or active classrooms/)).toBeVisible();
+    expect(screen.getByRole("link", { name: "Open invitation" })).toHaveAttribute(
+      "href",
+      "/founding-partners",
+    );
+  });
 });

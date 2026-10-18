@@ -1,4 +1,6 @@
 import { createServerFn } from "@tanstack/react-start";
+import type { SupabaseClient } from "@supabase/supabase-js";
+import { parsePartnerCounts, type PartnerCounts } from "./admin-partners";
 
 export type AdminMetric = {
   key: string;
@@ -11,6 +13,7 @@ export type AdminSnapshot = {
   status: "ready" | "partial" | "unavailable";
   asOf: string;
   metrics: AdminMetric[];
+  partners?: PartnerCounts | null;
 };
 
 /** Count-only operational view. No client-supplied role, filters or target user IDs. */
@@ -89,20 +92,37 @@ export const getAdminSnapshot = createServerFn({ method: "GET" }).handler(
         return null;
       }
     };
-    const metrics = await Promise.all(
-      definitions.map(async ({ key, label, table }) => {
-        const [total, presenter] = await Promise.all([count(table, false), count(table, true)]);
-        return { key, label, total, presenter };
-      }),
-    );
+    const partnerCounts = async (): Promise<PartnerCounts | null> => {
+      try {
+        const client = supabaseAdmin as unknown as Pick<SupabaseClient, "rpc">;
+        const result = await client
+          .rpc("get_founding_partner_counts")
+          .abortSignal(AbortSignal.timeout(8000));
+        return result.error ? null : parsePartnerCounts(result.data);
+      } catch {
+        return null;
+      }
+    };
+    const [partners, metrics] = await Promise.all([
+      partnerCounts(),
+      Promise.all(
+        definitions.map(async ({ key, label, table }) => {
+          const [total, presenter] = await Promise.all([count(table, false), count(table, true)]);
+          return { key, label, total, presenter };
+        }),
+      ),
+    ]);
     return {
-      status: metrics.every((metric) => metric.total !== null && metric.presenter !== null)
-        ? "ready"
-        : metrics.every((metric) => metric.total === null)
-          ? "unavailable"
-          : "partial",
+      status:
+        partners !== null &&
+        metrics.every((metric) => metric.total !== null && metric.presenter !== null)
+          ? "ready"
+          : metrics.every((metric) => metric.total === null)
+            ? "unavailable"
+            : "partial",
       asOf: new Date().toISOString(),
       metrics,
+      partners,
     };
   },
 );
