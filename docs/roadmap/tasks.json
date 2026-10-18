@@ -1356,7 +1356,7 @@
       "id": "SEC-004",
       "title": "Project memberships and protected authorization helpers",
       "phase": "P1",
-      "status": "in_progress",
+      "status": "complete",
       "owner": "agent",
       "size": "S",
       "kind": "implementation",
@@ -1419,33 +1419,32 @@
         {
           "date": "2026-10-18",
           "text": "Coordinator serialized integration and generated types; worker schema writes narrowed to unique reserved migration filename. No worker applies hosted migrations or edits generated types. Distinct scoped authoring can run concurrently; actual migration apply remains serial."
+        },
+        {
+          "date": "2026-10-18",
+          "text": "Derivedowner/editor/viewerfoundationintegratedandmigrated. Existingprivate-tablepoliciesunchanged;freshidentity+six-fieldsummary+CAS/replay/auditverified. Operatorcapabilityremainsfalse;nocollaborationUI,invitation,enrollmentorstudentvisibilityclaimed."
         }
       ],
-      "claim": {
-        "owner": "value_critique",
-        "branch": "codex/project-memberships",
-        "base_commit": "c665e887f54c13cc273f9810a6a4deb47bac93bc",
-        "worktree": "/Users/ianroy/.codex/worktrees/first-ten-access/First 10",
-        "started_at": "2026-10-18T12:52:42.289072+00:00",
-        "lease_expires_at": "2026-10-18T14:52:42.289072+00:00"
-      },
-      "completion_evidence": [],
+      "claim": null,
+      "completion_evidence": [
+        "0038a2f;22APItests;619integratedrealSQLassertionsincluding16additionalwrite-denialcases;officialtypes;hosted05000applied;capabilityfalse"
+      ],
       "subtasks": [
         {
           "id": "SEC-004.s1",
-          "status": "in_progress",
+          "status": "complete",
           "instruction": "Add owner/editor/viewer membership with immutable creator semantics and per-content scope.",
           "notes": []
         },
         {
           "id": "SEC-004.s2",
-          "status": "not_started",
+          "status": "complete",
           "instruction": "Implement narrowly granted role/membership operations and non-recursive authorization helpers; fix search_path for privileged SQL.",
           "notes": []
         },
         {
           "id": "SEC-004.s3",
-          "status": "not_started",
+          "status": "complete",
           "instruction": "Keep legacy owner flows intact and test downgrade/removal and self-promotion attempts.",
           "notes": []
         }
@@ -2068,33 +2067,39 @@
         {
           "date": "2026-10-18",
           "text": "Coordinator serialized integration and generated types; worker schema writes narrowed to unique reserved migration filename. No worker applies hosted migrations or edits generated types. Distinct scoped authoring can run concurrently; actual migration apply remains serial."
+        },
+        {
+          "date": "2026-10-18",
+          "text": "Workerterminatedout-of-credits;roottookoverandfinishedfrozencontracts+metadata-onlysuccessledger,21focusedtests/typecheck/lintand619integratedSQLchecks. Hosted06000applied. Returnedstrictpayloadsremainunchanged. WHOLETASKNOTCOMPLETE:provenancecurrentlylinksrequest/project/kind,notlatersavedquestions/synthesis/outreach/surveyversions. CompleteexplicitdurableoutputlinkagebeforemarkingAI-002complete. Noadditionalpaidcalls."
         }
       ],
       "claim": {
-        "owner": "readme_update",
+        "owner": "coordinator",
         "branch": "codex/ai-provenance",
         "base_commit": "c665e887f54c13cc273f9810a6a4deb47bac93bc",
         "worktree": "/Users/ianroy/.codex/worktrees/first-ten-value/First 10",
         "started_at": "2026-10-18T12:52:42.445453+00:00",
         "lease_expires_at": "2026-10-18T14:52:42.445453+00:00"
       },
-      "completion_evidence": [],
+      "completion_evidence": [
+        "Partial7e86440:src/lib/prompts;supabase06000;21focusedtests;619combinedSQL;hostedmigrationapplied;durablesaved-outputlinkagepending"
+      ],
       "subtasks": [
         {
           "id": "AI-002.s1",
-          "status": "in_progress",
+          "status": "complete",
           "instruction": "Extract current prompts without changing their wording or behavior.",
           "notes": []
         },
         {
           "id": "AI-002.s2",
-          "status": "not_started",
+          "status": "in_progress",
           "instruction": "Add prompt-id/version/schema metadata and compatible persistence fields for all current outputs.",
           "notes": []
         },
         {
           "id": "AI-002.s3",
-          "status": "not_started",
+          "status": "in_progress",
           "instruction": "Verify required-property parity and backward reads of outputs without metadata.",
           "notes": []
         }
@@ -9807,7 +9812,16 @@
         "src/components/marketing/MarketingPlanExport.tsx",
         "src/lib/marketing-export.ts",
         "src/lib/marketing-export.test.ts",
-        "src/tests/marketing-lab/marketing-export.test.tsx"
+        "src/tests/marketing-lab/marketing-export.test.tsx",
+        "src/lib/marketing-planning.ts",
+        "src/lib/marketing-planning.test.ts",
+        "src/lib/marketing-destination.ts",
+        "src/lib/marketing-destination.test.ts",
+        "src/components/marketing/ContentReadiness.tsx",
+        "src/components/marketing/DestinationBuilder.tsx",
+        "src/tests/marketing-lab/planning-controls.test.tsx",
+        "src/tests/marketing-lab/planning-fixture.ts",
+        "src/tests/marketing-lab/persistence-ui.test.tsx"
       ],
       "exclusive_locks": [
         "marketing-editor"
@@ -9865,10 +9879,14 @@
         {
           "date": "2026-10-18",
           "text": "Claimed for the authorized autonomous demo run."
+        },
+        {
+          "date": "2026-10-18",
+          "text": "Integrated worker9adcedf as66348f6. All304tests/37files passed on configuredNode22, typecheck/scopedlint/Vercelbuild passed. Localfictionaldesktopfixture verified tags/dependencies/manualteststart; CASsave/reload coveredinUIfixture. Rootfixedreviewfinding: completedprerequisitecannotbereopenedtodo/doing/blocked whiledownstreamactiondoing/done. Finalcombinedproductionverificationpending."
         }
       ],
       "claim": {
-        "owner": "plan_audit",
+        "owner": "coordinator",
         "branch": "codex/marketing-plan-completion",
         "base_commit": "c665e887f54c13cc273f9810a6a4deb47bac93bc",
         "worktree": "/Users/ianroy/.codex/worktrees/first-ten-ops/First 10",
@@ -10954,6 +10972,106 @@
           "id": "PARTNER-001.s3",
           "status": "complete",
           "instruction": "Verify synthetic submission, privacy/role boundaries, QR decoding, deployment and the final slide handoff.",
+          "notes": []
+        }
+      ]
+    },
+    {
+      "id": "PARTNER-002",
+      "title": "Show private count-only founding-partner intake to the verified presenter admin",
+      "phase": "P7",
+      "status": "in_progress",
+      "owner": "agent",
+      "size": "M",
+      "kind": "implementation",
+      "priority": 1,
+      "depends_on": [
+        "PARTNER-001",
+        "DEMO-002"
+      ],
+      "requires_decisions": [],
+      "write_scope": [
+        "src/lib/admin.functions.ts",
+        "src/lib/admin-partners.ts",
+        "src/routes/_authenticated/admin.tsx",
+        "src/tests/desktop-routes/admin-auth.test.ts",
+        "src/tests/desktop-routes/admin-page.test.tsx",
+        "src/tests/admin-partners/**",
+        "supabase/migrations/20261018007000_partner_counts.sql",
+        "supabase/tests/50_partner_counts.sql",
+        "src/components/partners/FoundingPartnerInvite.tsx",
+        "src/components/marketing/LandingPage.tsx",
+        "src/components/teaching/TeachingPage.tsx",
+        "src/tests/web-004/landing.test.tsx"
+      ],
+      "exclusive_locks": [
+        "admin-partner-counts"
+      ],
+      "read_first": [
+        "ProductSpec.md",
+        "FEATUREROADMAP_workplan.md",
+        "docs/demo/presenter-data.md",
+        "docs/architecture/access-contract.md"
+      ],
+      "goal": "Make the classroom invitation operationally visible without exposing contact details or presenting requests as adoption.",
+      "steps": [
+        "Add a service-only fixed aggregate projection with explicit reserved-fixture exclusion and real permission tests.",
+        "Extend the freshly verified admin endpoint and desktop dashboard with private request/feedback counts, unknown/error states and honest metric definitions.",
+        "Verify no role bypass or PII response, production migration and actual presenter dashboard."
+      ],
+      "acceptance": [
+        "Ordinary and revoked users cannot retrieve intake counts; no names, emails or school labels cross the response.",
+        "Reserved-domain fixture records are excluded and counted separately; missing counts stay unavailable, and zero requests are not adoption.",
+        "Live presenter dashboard displays the verified counts; invitation and existing founder tools continue to work."
+      ],
+      "verification_profile": "product",
+      "verification": [
+        "Run focused server/UI/parser tests, typecheck/lint/build and real rollback-only SQL role/aggregation checks.",
+        "Apply additive migration normally and inspect the actual authenticated desktop dashboard."
+      ],
+      "metric": "Verified count-only operational visibility with zero PII response and no fabricated classroom/customer funnel.",
+      "rollback": "Revoke new aggregate RPC execution and keep original admin counts; preserve intake records.",
+      "agent_notes": {
+        "starting_point": "Narrow owner-directed final-sprint delivery reconciled after integration; preserve existing owner-only RLS and truthful fictional/current/proposed labels. Broader planned roles and lifecycle tasks are not implicitly complete.",
+        "stop_and_report": "Preserve private records and local drafts. Record missing environment, permission or verification; do not widen access, reset unrelated work or infer live evidence from fixtures.",
+        "handoff": "Coordinator records exact source revision, checks, deployment/browser evidence, pending checks, actual spend and rollback. Do not commit credentials or rewrite published history."
+      },
+      "notes": [
+        {
+          "date": "2026-10-18",
+          "text": "Evidence-backed addition: QR intake is now live but absent from admin. Show honest request counts to the existing trusted presenter admin; do not expose raw contacts, auto-enroll schools or infer conversions."
+        },
+        {
+          "date": "2026-10-18",
+          "text": "Claimed for the authorized autonomous demo run."
+        }
+      ],
+      "claim": {
+        "owner": "coordinator",
+        "branch": "main",
+        "base_commit": "ce383d660f6998a8c652561459041b272c9266cf",
+        "worktree": "/Users/ianroy/Library/CloudStorage/Dropbox/Apps by Ian/Babson AI Academy/First 10",
+        "started_at": "2026-10-18T12:57:36.115957+00:00",
+        "lease_expires_at": "2026-10-18T14:57:36.115957+00:00"
+      },
+      "completion_evidence": [],
+      "subtasks": [
+        {
+          "id": "PARTNER-002.s1",
+          "status": "in_progress",
+          "instruction": "Add a service-only fixed aggregate projection with explicit reserved-fixture exclusion and real permission tests.",
+          "notes": []
+        },
+        {
+          "id": "PARTNER-002.s2",
+          "status": "not_started",
+          "instruction": "Extend the freshly verified admin endpoint and desktop dashboard with private request/feedback counts, unknown/error states and honest metric definitions.",
+          "notes": []
+        },
+        {
+          "id": "PARTNER-002.s3",
+          "status": "not_started",
+          "instruction": "Verify no role bypass or PII response, production migration and actual presenter dashboard.",
           "notes": []
         }
       ]

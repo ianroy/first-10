@@ -32,6 +32,7 @@ const project: Project = {
   questions: [],
   survey: [],
   checklist: {},
+  updated_at: "2026-10-18T00:00:00Z",
   created_at: "2026-10-18T12:00:00Z",
 };
 function completed(): MarketingPlanV1 {

@@ -280,6 +280,51 @@ export type Database = {
           },
         ];
       };
+      project_members: {
+        Row: {
+          created_at: string;
+          created_by: string;
+          id: string;
+          project_id: string;
+          revision: number;
+          role: string;
+          state: string;
+          updated_at: string;
+          user_id: string;
+        };
+        ComputedFields: never;
+        Insert: {
+          created_at?: string;
+          created_by: string;
+          id?: string;
+          project_id: string;
+          revision?: number;
+          role: string;
+          state?: string;
+          updated_at?: string;
+          user_id: string;
+        };
+        Update: {
+          created_at?: string;
+          created_by?: string;
+          id?: string;
+          project_id?: string;
+          revision?: number;
+          role?: string;
+          state?: string;
+          updated_at?: string;
+          user_id?: string;
+        };
+        Relationships: [
+          {
+            foreignKeyName: "project_members_project_owner_fkey";
+            columns: ["project_id", "created_by"];
+            isOneToOne: false;
+            referencedRelation: "projects";
+            referencedColumns: ["id", "user_id"];
+          },
+        ];
+      };
       projects: {
         Row: {
           audience: string;
@@ -293,6 +338,7 @@ export type Database = {
           questions: NonNullable<Json>;
           stage: number;
           survey: NonNullable<Json>;
+          updated_at: string;
           user_id: string;
         };
         ComputedFields: never;
@@ -308,6 +354,7 @@ export type Database = {
           questions?: NonNullable<Json>;
           stage?: number;
           survey?: NonNullable<Json>;
+          updated_at?: string;
           user_id?: string;
         };
         Update: {
@@ -322,6 +369,7 @@ export type Database = {
           questions?: NonNullable<Json>;
           stage?: number;
           survey?: NonNullable<Json>;
+          updated_at?: string;
           user_id?: string;
         };
         Relationships: [];
@@ -376,6 +424,12 @@ export type Database = {
       [_ in never]: never;
     };
     Functions: {
+      current_project_role: { Args: { p_project_id: string }; Returns: string };
+      get_founding_partner_counts: { Args: Record<PropertyKey, never>; Returns: Json };
+      get_member_project_summary: { Args: { p_project_id: string }; Returns: Json };
+      list_project_members: { Args: { p_cursor?: string; p_project_id: string }; Returns: Json };
+      project_collaboration_enabled: { Args: Record<PropertyKey, never>; Returns: boolean };
+      record_ai_generation: { Args: { p_record: Json }; Returns: string };
       record_founding_partner: {
         Args: {
           p_email: string;
@@ -387,6 +441,15 @@ export type Database = {
         Returns: Json;
       };
       reserve_demo_ai: { Args: { p_project_id: string; p_request_id: string }; Returns: Json };
+      revoke_project_member: {
+        Args: {
+          p_expected_revision: number;
+          p_project_id: string;
+          p_request_id: string;
+          p_target_user_id: string;
+        };
+        Returns: Json;
+      };
       save_marketing_plan: {
         Args: {
           p_complete_student_first: boolean;
@@ -403,6 +466,16 @@ export type Database = {
           p_expected_revision: number;
           p_mutation_id: string;
           p_project_id: string;
+        };
+        Returns: Json;
+      };
+      set_project_member: {
+        Args: {
+          p_expected_revision: number;
+          p_project_id: string;
+          p_request_id: string;
+          p_role: string;
+          p_target_user_id: string;
         };
         Returns: Json;
       };
