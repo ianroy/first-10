@@ -26,7 +26,7 @@ vi.mock("@/lib/ai/budget.server", async (original) => ({
 import { budgetInputBinding } from "@/lib/ai/budget.server";
 import { budgetRoute, gatewayBilling } from "@/tests/ai-004/fixtures";
 import { generateAI } from "@/lib/ai.functions";
-import { getPrivateContract } from "@/lib/prompts/private-v1";
+import { getPrivateContractV2 } from "@/lib/prompts/private-v2";
 
 type Case = {
   id: string;
@@ -37,6 +37,8 @@ type Case = {
   permission_context: unknown;
   budget_binding_sha256: string;
   budget_input_bytes: number;
+  selected_source_identities: unknown[];
+  packing_omissions: Record<string, number>;
   input: {
     project: Record<string, string>;
     interviews: unknown[];
@@ -44,8 +46,11 @@ type Case = {
     contacts: unknown[];
   };
 };
-const fixtures = JSON.parse(readFileSync("src/tests/ai-eval/fixtures.v4.json", "utf8")) as {
+const fixtures = JSON.parse(readFileSync("src/tests/ai-eval/fixtures.v5.json", "utf8")) as {
   cases: Case[];
+};
+const baseline = JSON.parse(readFileSync("evals/offline-baseline.v5.json", "utf8")) as {
+  cases: { id: string; output: unknown }[];
 };
 afterEach(() => vi.unstubAllEnvs());
 beforeEach(() => {
@@ -87,6 +92,10 @@ describe("AI-003 reproducible evaluation inputs", () => {
         };
         return q;
       };
+      h.request.mockImplementation(async (options) => ({
+        ...gatewayBilling,
+        data: options.outputValidator(baseline.cases.find((row) => row.id === c.id)!.output),
+      }));
       await (generateAI as unknown as (args: unknown) => Promise<unknown>)({
         data: {
           kind: c.kind,
@@ -117,18 +126,21 @@ describe("AI-003 reproducible evaluation inputs", () => {
         contextSha256: c.budget_binding_sha256,
         inputBytes: c.budget_input_bytes,
       });
+      expect(scope.contextFence.sources).toEqual(c.selected_source_identities);
+      expect(scope.contextFence.omissions).toEqual(c.packing_omissions);
+      expect(scope.contextFence.contextHash).toBe(c.budget_binding_sha256);
       expect(h.claim).toHaveBeenCalledOnce();
       expect(h.settle).toHaveBeenCalledWith(expect.objectContaining({ outputValid: true }));
-      if (c.id === "stage3-edge-v4") {
+      if (c.id === "stage3-edge-v5") {
         const user = h.request.mock.calls[0]?.[0].user;
-        expect(user).toContain("PRIVACY LIMITS");
+        expect(user).toContain('"permission":');
         expect(user).not.toContain("WITHDRAWN_PRIVATE_NOTE");
         expect(user).not.toContain("WITHDRAWN_PRIVATE_QUOTE");
         expect(user).not.toContain("WITHDRAWN_DERIVED_SUMMARY");
         expect(user).not.toContain("WITHDRAWN_CONTACT_SOURCE");
       }
       expect(h.prepare).toHaveBeenCalledWith(
-        expect.objectContaining({ contract: getPrivateContract(c.kind) }),
+        expect.objectContaining({ contract: getPrivateContractV2(c.kind) }),
       );
     },
   );

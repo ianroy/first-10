@@ -5,8 +5,9 @@ import { readFile, mkdir, writeFile } from "node:fs/promises";
 import { dirname, resolve } from "node:path";
 import { fileURLToPath, pathToFileURL } from "node:url";
 import { isDeepStrictEqual } from "node:util";
-import { validateAIOutput } from "../src/lib/ai/contracts.ts";
-import { safeAIContextSchema } from "../src/lib/consent.ts";
+import { assembleAIContextV2 } from "../src/lib/prompts/context-v2.ts";
+import { validateGroundedOutput } from "../src/lib/prompts/grounding-v2.ts";
+import { derivePermissionFixtureV5, sourceCatalog } from "../src/tests/ai-eval/fixture-rpc-v5.mjs";
 
 const ROOT = resolve(dirname(fileURLToPath(import.meta.url)), "..");
 export const MODEL = "google/gemini-2.5-flash-lite";
@@ -16,8 +17,8 @@ export const OUTPUT_CAP = 2500;
 export const MAX_CALLS = 8;
 const KINDS = ["questions", "synthesis", "stage2", "stage3"];
 export const hash = (value) => createHash("sha256").update(value).digest("hex");
-export const FIXTURE_PATH = "src/tests/ai-eval/fixtures.v4.json";
-const SOURCE_PATHS = [
+export const FIXTURE_PATH = "src/tests/ai-eval/fixtures.v5.json";
+export const SOURCE_PATHS = [
   "src/lib/ai.functions.ts",
   "src/lib/ai/contracts.ts",
   "src/lib/ai/gateway.server.ts",
@@ -28,6 +29,12 @@ const SOURCE_PATHS = [
   "src/lib/ai/budget-contract.ts",
   "supabase/migrations/20261018014000_ai_usage_budget.sql",
   "src/hooks/useAIIntent.ts",
+  "src/lib/ai/context.server.ts",
+  "src/lib/prompts/context-v2.ts",
+  "src/lib/prompts/grounding-v2.ts",
+  "src/lib/prompts/private-v2.ts",
+  "src/lib/prompts/provenance.server.ts",
+  "supabase/migrations/20261018017000_ai_context_sources.sql",
 ];
 const plain = (value) => value !== null && typeof value === "object" && !Array.isArray(value);
 const isoDate = (value) =>
@@ -60,67 +67,16 @@ export function fixtureBudgetBinding(c) {
   return { contextSha256: hash(serialized), inputBytes: Buffer.byteLength(serialized, "utf8") };
 }
 export function assembleFixtureContext(c) {
-  const {
-    project: p,
-    interviews,
-    learnings,
-    contacts,
-    excluded,
-  } = safeAIContextSchema.parse(c.permission_context);
-  return [
-    `APP: ${p.name}\nWhat it does: ${p.description}\nWho it's for: ${p.audience}\nProblem: ${p.problem}`,
-    c.kind !== "questions" && interviews.length
-      ? `INTERVIEWS:\n${JSON.stringify(interviews).slice(0, 14000)}`
-      : "",
-    c.kind !== "questions" && c.kind !== "synthesis" && learnings.length
-      ? `ACCEPTED LEARNINGS:\n${JSON.stringify(learnings).slice(0, 6000)}`
-      : "",
-    c.kind === "stage2" ? `CONTACT SOURCES:\n${JSON.stringify(contacts).slice(0, 3000)}` : "",
-    excluded.interviews + excluded.contacts + excluded.learnings > 0
-      ? `PRIVACY LIMITS: ${excluded.interviews} interview records, ${excluded.contacts} contact records and ${excluded.learnings} learning records are withheld. Do not infer their content or treat the available material as complete evidence.`
-      : "",
-  ]
-    .filter(Boolean)
-    .join("\n\n");
+  return assembleAIContextV2(c.permission_context, c.permission_context.projectId, c.kind).assembled
+    .user;
 }
-/** Synthetic eligibility snapshots exercise the RPC boundary. Real ownership and
- * choice enforcement are separately checked by the rolled-back PRV policy suite. */
-export function derivePermissionFixture(c) {
-  const kept = (key) => c.input[key].filter((_, i) => !c.withheld_records[key].includes(i));
-  const interviews = kept("interviews").map((i) => ({
-    answers: i.answers.map((a) => ({ q: a.q ?? "", note: a.note ?? "", quote: a.quote ?? "" })),
-    tags: i.tags,
-  }));
-  const contacts = kept("contacts").map((c) => ({
-    relation: c.relation,
-    why: c.why,
-    source: c.source,
-    stage: c.stage,
-  }));
-  const learnings =
-    c.withheld_records.interviews.length + c.withheld_records.contacts.length === 0
-      ? kept("learnings").map((l) => ({ title: l.title, body: l.body, data: l.data, kind: l.kind }))
-      : [];
-  const needsEvidence = c.kind !== "questions";
-  const selectedLearnings = needsEvidence && c.kind !== "synthesis" ? learnings : [];
-  return {
-    project: c.input.project,
-    interviews: needsEvidence ? interviews : [],
-    learnings: selectedLearnings,
-    contacts: c.kind === "stage2" ? contacts : [],
-    excluded: {
-      interviews: needsEvidence ? c.withheld_records.interviews.length : 0,
-      contacts: needsEvidence ? c.withheld_records.contacts.length : 0,
-      learnings: needsEvidence ? c.input.learnings.length - selectedLearnings.length : 0,
-    },
-  };
-}
+export const derivePermissionFixture = derivePermissionFixtureV5;
 export async function loadFixtures(root = ROOT) {
   const raw = await readFile(resolve(root, FIXTURE_PATH), "utf8");
   const fixture = JSON.parse(raw);
   if (
     !plain(fixture) ||
-    fixture.version !== "first-ten-existing-kinds-v4" ||
+    fixture.version !== "first-ten-existing-kinds-v5" ||
     typeof fixture.source_commit !== "string" ||
     !/^[a-f0-9]{40}$/.test(fixture.source_commit) ||
     !Array.isArray(fixture.cases) ||
@@ -133,9 +89,9 @@ export async function loadFixtures(root = ROOT) {
       throw new Error(
         `Production source changed: ${path}. Review and version fixtures before running.`,
       );
-  const { getPrivateContract } = await import(
-    pathToFileURL(resolve(root, "src/lib/prompts/private-v1.ts")).href +
-      `?sha=${fixture.source_sha256["src/lib/prompts/private-v1.ts"]}`
+  const { assembleAIContextV2: actualAssemble } = await import(
+    pathToFileURL(resolve(root, "src/lib/prompts/context-v2.ts")).href +
+      `?sha=${fixture.source_sha256["src/lib/prompts/context-v2.ts"]}`
   );
   if (
     fixture.cases.length !== MAX_CALLS ||
@@ -179,18 +135,18 @@ export async function loadFixtures(root = ROOT) {
       )
     )
       throw new Error("Explicit valid synthetic permission exclusions are required.");
-    const permitted = safeAIContextSchema.safeParse(c.permission_context);
-    if (!permitted.success || !isDeepStrictEqual(permitted.data, derivePermissionFixture(c)))
+    if (!isDeepStrictEqual(c.permission_context, derivePermissionFixture(c)))
       throw new Error("Permission-scoped fixture projection mismatch.");
-    const contract = getPrivateContract(c.kind);
+    const { contract, packed, assembled } = actualAssemble(
+      c.permission_context,
+      c.permission_context.projectId,
+      c.kind,
+    );
     if (
-      JSON.stringify(c.input.interviews).length > 14000 ||
-      JSON.stringify(c.input.learnings).length > 6000 ||
-      JSON.stringify(c.input.contacts).length > 3000
+      !isDeepStrictEqual(c.selected_source_identities, packed.manifest("a".repeat(64)).sources) ||
+      !isDeepStrictEqual(c.packing_omissions, packed.omissions)
     )
-      throw new Error(
-        "Unsupported truncated source evidence; the current production context builder needs AI-007.",
-      );
+      throw new Error("Selected source/permission version or omission parity failed.");
     const identity = {
       promptId: contract.promptId,
       promptVersion: contract.promptVersion,
@@ -202,7 +158,7 @@ export async function loadFixtures(root = ROOT) {
       c.contract_sha256 !== contractHash(contract) ||
       c.system !== contract.system ||
       !isDeepStrictEqual(c.schema, contract.schema) ||
-      c.user !== `${contract.task}\n\n${assembleFixtureContext(c)}`
+      c.user !== assembled.user
     )
       throw new Error(
         "Prompt/schema/context parity failed; version the fixture rather than updating hashes alone.",
@@ -213,19 +169,14 @@ export async function loadFixtures(root = ROOT) {
       c.budget_input_bytes !== binding.inputBytes
     )
       throw new Error("Exact canonical budget input binding mismatch.");
-    const ids = c.source_catalog.map((s) => s?.id);
-    const quotes = c.source_catalog.map((s) => s?.quote);
     if (
-      ids.some((id) => !label(id)) ||
-      new Set(ids).size !== ids.length ||
-      quotes.some((q) => typeof q !== "string" || !q.trim()) ||
-      !isDeepStrictEqual(quotes, c.source_quotes) ||
-      c.source_catalog.some(
-        (s) =>
-          !c.permission_context.interviews.some((i) => i.answers?.some((a) => a.quote === s.quote)),
+      !isDeepStrictEqual(c.source_catalog, sourceCatalog(packed)) ||
+      !isDeepStrictEqual(
+        c.source_quotes,
+        c.source_catalog.map((s) => s.quote),
       )
     )
-      throw new Error("Source catalog must identify exact supplied synthetic quotes.");
+      throw new Error("Source catalog must identify exact selected authorized quotes.");
     if (c.system.length + c.user.length > 40000)
       throw new Error("Fixture exceeds the current gateway context ceiling.");
   }
@@ -341,7 +292,7 @@ export function semanticChecks(c, data) {
   return issues;
 }
 /** Reference integrity utility for future source-bearing adapters, not a claim that
- * today's four output contracts carry citations. Only explicit catalog IDs qualify.
+ * historical legacy drafts. Current v2 wrappers are validated against the complete selected catalog.
  */
 export function checkReferences(c, references) {
   if (!Array.isArray(references)) return ["invalid_references"];
@@ -351,15 +302,31 @@ export function checkReferences(c, references) {
       issues.push("invalid_reference");
       continue;
     }
-    const source = c.source_catalog.find((s) => s.id === ref.sourceId);
+    const source = c.source_catalog.some((s) => s.id === ref.sourceId);
     if (!source) issues.push("unknown_source_id");
-    else if (normalize(source.quote) !== normalize(ref.quote)) issues.push("source_quote_mismatch");
+    else if (
+      !c.source_catalog.some(
+        (s) => s.id === ref.sourceId && normalize(s.quote) === normalize(ref.quote),
+      )
+    )
+      issues.push("source_quote_mismatch");
   }
   return [...new Set(issues)];
 }
 export function evaluateOutput(c, output) {
   try {
-    return semanticChecks(c, validateAIOutput(c.kind, output));
+    const assembled = assembleAIContextV2(
+      c.permission_context,
+      c.permission_context.projectId,
+      c.kind,
+    );
+    const checked = validateGroundedOutput(
+      c.kind,
+      output,
+      assembled.packed.sources,
+      assembled.packed.omissions,
+    );
+    return semanticChecks(c, checked.draft);
   } catch {
     return ["output_schema_failed"];
   }
@@ -412,7 +379,7 @@ export function summarizeReport(report, fixtures, review = null) {
       deterministic_pass_rate: deterministicPassed / cases.length,
       human_passed: humanPassed,
       human_pass_rate: reviewBound ? humanPassed / cases.length : null,
-      reference_integrity: "unavailable_in_legacy_output",
+      reference_integrity: "validated_v2_source_references",
       cost_usd: costs.every((n) => Number.isFinite(n) && n >= 0)
         ? costs.reduce((a, b) => a + b, 0)
         : null,
@@ -553,7 +520,7 @@ async function exportPacket(fixtures, outputDirectory) {
 
 export async function runOfflineBaseline(fixtures, root = ROOT) {
   const baseline = JSON.parse(
-    await readFile(resolve(root, "evals/offline-baseline.v4.json"), "utf8"),
+    await readFile(resolve(root, "evals/offline-baseline.v5.json"), "utf8"),
   );
   if (
     baseline.fixture_sha256 !== fixtures.fixture_sha256 ||
@@ -602,7 +569,7 @@ export async function runOfflineBaseline(fixtures, root = ROOT) {
     invalid_cases: negative,
     summary: summarizeReport(report, fixtures),
     limitation:
-      "Legacy outputs have no source IDs; reference-bearing adapter checks are tested separately, not credited as existing output capability. Human judgments remain unfilled.",
+      "Version2 wrapper references and exact quotes are checked mechanically against authorized selected records. This is not factual truth, respondent authentication or model quality; human judgments remain unfilled.",
   };
 }
 

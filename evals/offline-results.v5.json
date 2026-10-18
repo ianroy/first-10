@@ -1,0 +1,143 @@
+{
+  "mode": "offline_mocked",
+  "model_evaluated": false,
+  "paid_calls": 0,
+  "baseline_version": "first-ten-offline-baseline-v5",
+  "fixture_sha256": "7d04da0568cd1d94d0888f67a7ec2bcaf08ad23bd1643eb489308b6661abccb4",
+  "all_expectations_passed": true,
+  "valid_cases": [
+    {
+      "id": "questions-typical-v5",
+      "kind": "questions",
+      "passed": true
+    },
+    {
+      "id": "questions-edge-v5",
+      "kind": "questions",
+      "passed": true
+    },
+    {
+      "id": "synthesis-typical-v5",
+      "kind": "synthesis",
+      "passed": true
+    },
+    {
+      "id": "synthesis-edge-v5",
+      "kind": "synthesis",
+      "passed": true
+    },
+    {
+      "id": "stage2-typical-v5",
+      "kind": "stage2",
+      "passed": true
+    },
+    {
+      "id": "stage2-edge-v5",
+      "kind": "stage2",
+      "passed": true
+    },
+    {
+      "id": "stage3-typical-v5",
+      "kind": "stage3",
+      "passed": true
+    },
+    {
+      "id": "stage3-edge-v5",
+      "kind": "stage3",
+      "passed": true
+    }
+  ],
+  "invalid_cases": [
+    {
+      "id": "schema-rejected",
+      "passed": true
+    },
+    {
+      "id": "invented-quote",
+      "passed": true
+    },
+    {
+      "id": "duplicate-quote",
+      "passed": true
+    },
+    {
+      "id": "hypothetical-question",
+      "passed": true
+    },
+    {
+      "id": "source-instruction",
+      "passed": true
+    },
+    {
+      "id": "fabricated-certainty",
+      "passed": true
+    },
+    {
+      "id": "missing-channels",
+      "passed": true
+    },
+    {
+      "id": "unknown-source-id",
+      "passed": true
+    },
+    {
+      "id": "hidden-withheld-evidence",
+      "passed": true
+    }
+  ],
+  "summary": [
+    {
+      "kind": "questions",
+      "expected": 2,
+      "completed": 2,
+      "deterministic_passed": 2,
+      "deterministic_pass_rate": 1,
+      "human_passed": 0,
+      "human_pass_rate": null,
+      "reference_integrity": "validated_v2_source_references",
+      "cost_usd": null,
+      "p95_latency_ms": null,
+      "measured_provider_results": false
+    },
+    {
+      "kind": "synthesis",
+      "expected": 2,
+      "completed": 2,
+      "deterministic_passed": 2,
+      "deterministic_pass_rate": 1,
+      "human_passed": 0,
+      "human_pass_rate": null,
+      "reference_integrity": "validated_v2_source_references",
+      "cost_usd": null,
+      "p95_latency_ms": null,
+      "measured_provider_results": false
+    },
+    {
+      "kind": "stage2",
+      "expected": 2,
+      "completed": 2,
+      "deterministic_passed": 2,
+      "deterministic_pass_rate": 1,
+      "human_passed": 0,
+      "human_pass_rate": null,
+      "reference_integrity": "validated_v2_source_references",
+      "cost_usd": null,
+      "p95_latency_ms": null,
+      "measured_provider_results": false
+    },
+    {
+      "kind": "stage3",
+      "expected": 2,
+      "completed": 2,
+      "deterministic_passed": 2,
+      "deterministic_pass_rate": 1,
+      "human_passed": 0,
+      "human_pass_rate": null,
+      "reference_integrity": "validated_v2_source_references",
+      "cost_usd": null,
+      "p95_latency_ms": null,
+      "measured_provider_results": false
+    }
+  ],
+  "limitation": "Version2 wrapper references and exact quotes are checked mechanically against authorized selected records. This is not factual truth, respondent authentication or model quality; human judgments remain unfilled."
+}

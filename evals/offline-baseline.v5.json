@@ -1,0 +1,2024 @@
+{
+  "version": "first-ten-offline-baseline-v5",
+  "fixture_sha256": "7d04da0568cd1d94d0888f67a7ec2bcaf08ad23bd1643eb489308b6661abccb4",
+  "execution_path": "offline_mocked",
+  "model_evaluated": false,
+  "paid_calls": 0,
+  "reference_capability": "validated_v2_source_references",
+  "cases": [
+    {
+      "id": "questions-typical-v5",
+      "kind": "questions",
+      "output": {
+        "draft": {
+          "questions": [
+            "Tell me about the last time your group met.",
+            "What happened while you arranged that meeting?",
+            "How did you find out who was coming?",
+            "What did you do when someone was late?",
+            "What did that cost you in time?",
+            "What tools did you try most recently?",
+            "What worked well about your existing routine?",
+            "When did you decide to keep that routine?",
+            "Who else should I talk to about this?"
+          ]
+        },
+        "grounding": {
+          "observations": [],
+          "inferences": [
+            {
+              "path": "/questions/0",
+              "category": "proposal",
+              "sourceIds": []
+            },
+            {
+              "path": "/questions/1",
+              "category": "proposal",
+              "sourceIds": []
+            },
+            {
+              "path": "/questions/2",
+              "category": "proposal",
+              "sourceIds": []
+            },
+            {
+              "path": "/questions/3",
+              "category": "proposal",
+              "sourceIds": []
+            },
+            {
+              "path": "/questions/4",
+              "category": "proposal",
+              "sourceIds": []
+            },
+            {
+              "path": "/questions/5",
+              "category": "proposal",
+              "sourceIds": []
+            },
+            {
+              "path": "/questions/6",
+              "category": "proposal",
+              "sourceIds": []
+            },
+            {
+              "path": "/questions/7",
+              "category": "proposal",
+              "sourceIds": []
+            },
+            {
+              "path": "/questions/8",
+              "category": "proposal",
+              "sourceIds": []
+            }
+          ],
+          "missingEvidence": [
+            {
+              "reason": "authenticity_unverified",
+              "message": "These fictional owner-reported records do not verify respondent authenticity."
+            }
+          ]
+        }
+      }
+    },
+    {
+      "id": "questions-edge-v5",
+      "kind": "questions",
+      "output": {
+        "draft": {
+          "questions": [
+            "Tell me about the last time your group met.",
+            "What happened while you arranged that meeting?",
+            "How did you find out who was coming?",
+            "What did you do when someone was late?",
+            "What did that cost you in time?",
+            "What tools did you try most recently?",
+            "What worked well about your existing routine?",
+            "When did you decide to keep that routine?",
+            "Who else should I talk to about this?"
+          ]
+        },
+        "grounding": {
+          "observations": [],
+          "inferences": [
+            {
+              "path": "/questions/0",
+              "category": "proposal",
+              "sourceIds": []
+            },
+            {
+              "path": "/questions/1",
+              "category": "proposal",
+              "sourceIds": []
+            },
+            {
+              "path": "/questions/2",
+              "category": "proposal",
+              "sourceIds": []
+            },
+            {
+              "path": "/questions/3",
+              "category": "proposal",
+              "sourceIds": []
+            },
+            {
+              "path": "/questions/4",
+              "category": "proposal",
+              "sourceIds": []
+            },
+            {
+              "path": "/questions/5",
+              "category": "proposal",
+              "sourceIds": []
+            },
+            {
+              "path": "/questions/6",
+              "category": "proposal",
+              "sourceIds": []
+            },
+            {
+              "path": "/questions/7",
+              "category": "proposal",
+              "sourceIds": []
+            },
+            {
+              "path": "/questions/8",
+              "category": "proposal",
+              "sourceIds": []
+            }
+          ],
+          "missingEvidence": [
+            {
+              "reason": "authenticity_unverified",
+              "message": "These fictional owner-reported records do not verify respondent authenticity."
+            }
+          ]
+        }
+      }
+    },
+    {
+      "id": "synthesis-typical-v5",
+      "kind": "synthesis",
+      "output": {
+        "draft": {
+          "problems": [
+            "Some reported attendance coordination effort.",
+            "A reported timing problem may deserve a closer look.",
+            "The effect of the workaround remains unknown."
+          ],
+          "objections": [
+            "An existing routine may already be adequate.",
+            "The evidence does not establish demand or payment."
+          ],
+          "best_fit": [
+            "Groups reporting repeated coordination effort.",
+            "Groups willing to explain a recent coordination situation."
+          ],
+          "quotes": [
+            "Our existing group chat works when everyone confirms.",
+            "I do not want another app; our group already has a routine.",
+            "Two people arrived after we had finished the first topic.",
+            "We wrote down who would come, but I do not know if that changed anything.",
+            "This long log is still only one unverified record."
+          ],
+          "changes": [
+            {
+              "title": "Compare the existing routine",
+              "body": "Ask what happened last time; keep the supplied counterexample visible."
+            },
+            {
+              "title": "Keep claims narrow",
+              "body": "Describe the reported situation as an observation rather than proof."
+            },
+            {
+              "title": "Test one small change",
+              "body": "Offer a voluntary next test; do not imply a measured outcome."
+            }
+          ]
+        },
+        "grounding": {
+          "observations": [
+            {
+              "path": "/quotes/0",
+              "sourceId": "src_7968532e212f1b2165a743d2366751512f80300b3e83f794d23bc1d18eb77b39",
+              "quote": "Our existing group chat works when everyone confirms."
+            },
+            {
+              "path": "/quotes/1",
+              "sourceId": "src_3ff6f4d050e1a1e3dcbf74634518a6ac2c8224b5ecc4da374afd8921f6cc70e0",
+              "quote": "I do not want another app; our group already has a routine."
+            },
+            {
+              "path": "/quotes/2",
+              "sourceId": "src_f6b9b844ef230a46e0eb7e9ad961b9eab12d10b17a29b8d0588503ace3dd0f2e",
+              "quote": "Two people arrived after we had finished the first topic."
+            },
+            {
+              "path": "/quotes/3",
+              "sourceId": "src_f8572a44294ece1c940d5ba2866fc5ae1840f899213af5038ee9c36e37fa9630",
+              "quote": "We wrote down who would come, but I do not know if that changed anything."
+            },
+            {
+              "path": "/quotes/4",
+              "sourceId": "src_3f3f6cf291548966d2afb644bb77b215352892c4149079f4eed81cc475e8fc68",
+              "quote": "This long log is still only one unverified record."
+            }
+          ],
+          "inferences": [
+            {
+              "path": "/problems/0",
+              "category": "proposal",
+              "sourceIds": []
+            },
+            {
+              "path": "/problems/1",
+              "category": "proposal",
+              "sourceIds": []
+            },
+            {
+              "path": "/problems/2",
+              "category": "proposal",
+              "sourceIds": []
+            },
+            {
+              "path": "/objections/0",
+              "category": "proposal",
+              "sourceIds": []
+            },
+            {
+              "path": "/objections/1",
+              "category": "proposal",
+              "sourceIds": []
+            },
+            {
+              "path": "/best_fit/0",
+              "category": "proposal",
+              "sourceIds": []
+            },
+            {
+              "path": "/best_fit/1",
+              "category": "proposal",
+              "sourceIds": []
+            },
+            {
+              "path": "/changes/0/title",
+              "category": "proposal",
+              "sourceIds": []
+            },
+            {
+              "path": "/changes/0/body",
+              "category": "proposal",
+              "sourceIds": []
+            },
+            {
+              "path": "/changes/1/title",
+              "category": "proposal",
+              "sourceIds": []
+            },
+            {
+              "path": "/changes/1/body",
+              "category": "proposal",
+              "sourceIds": []
+            },
+            {
+              "path": "/changes/2/title",
+              "category": "proposal",
+              "sourceIds": []
+            },
+            {
+              "path": "/changes/2/body",
+              "category": "proposal",
+              "sourceIds": []
+            }
+          ],
+          "missingEvidence": [
+            {
+              "reason": "authenticity_unverified",
+              "message": "These fictional owner-reported records do not verify respondent authenticity."
+            },
+            {
+              "reason": "omitted_sources",
+              "message": "Some records were withheld or omitted; this is not complete evidence."
+            }
+          ]
+        }
+      }
+    },
+    {
+      "id": "synthesis-edge-v5",
+      "kind": "synthesis",
+      "output": {
+        "draft": {
+          "problems": [
+            "The only source describes an adequate existing routine.",
+            "No repeated coordination problem is established by this record.",
+            "Whether a different group has a recurring problem is unknown."
+          ],
+          "objections": [
+            "The participant does not want another app.",
+            "One quote cannot establish a broader audience or demand."
+          ],
+          "best_fit": [
+            "No current best-fit segment is established by this source.",
+            "Groups with a recent coordination problem are a future audience to investigate, if observation supports the need."
+          ],
+          "quotes": [
+            "I do not want another app; our group already has a routine."
+          ],
+          "changes": [
+            {
+              "title": "Preserve the negative finding",
+              "body": "The only exact quote rejects another app; retain that counterexample."
+            },
+            {
+              "title": "Investigate rather than infer",
+              "body": "Ask another relevant person about recent behavior before proposing a product change."
+            },
+            {
+              "title": "Keep stopping available",
+              "body": "If further relevant conversations also describe adequate routines, consider a different audience or stopping."
+            }
+          ]
+        },
+        "grounding": {
+          "observations": [
+            {
+              "path": "/quotes/0",
+              "sourceId": "src_a851d644cb123b78c43abfe49e7a486b9c744722bdeb9ae044a55be43d663315",
+              "quote": "I do not want another app; our group already has a routine."
+            }
+          ],
+          "inferences": [
+            {
+              "path": "/problems/0",
+              "category": "proposal",
+              "sourceIds": []
+            },
+            {
+              "path": "/problems/1",
+              "category": "proposal",
+              "sourceIds": []
+            },
+            {
+              "path": "/problems/2",
+              "category": "proposal",
+              "sourceIds": []
+            },
+            {
+              "path": "/objections/0",
+              "category": "proposal",
+              "sourceIds": []
+            },
+            {
+              "path": "/objections/1",
+              "category": "proposal",
+              "sourceIds": []
+            },
+            {
+              "path": "/best_fit/0",
+              "category": "proposal",
+              "sourceIds": []
+            },
+            {
+              "path": "/best_fit/1",
+              "category": "proposal",
+              "sourceIds": []
+            },
+            {
+              "path": "/changes/0/title",
+              "category": "proposal",
+              "sourceIds": []
+            },
+            {
+              "path": "/changes/0/body",
+              "category": "proposal",
+              "sourceIds": []
+            },
+            {
+              "path": "/changes/1/title",
+              "category": "proposal",
+              "sourceIds": []
+            },
+            {
+              "path": "/changes/1/body",
+              "category": "proposal",
+              "sourceIds": []
+            },
+            {
+              "path": "/changes/2/title",
+              "category": "proposal",
+              "sourceIds": []
+            },
+            {
+              "path": "/changes/2/body",
+              "category": "proposal",
+              "sourceIds": []
+            }
+          ],
+          "missingEvidence": [
+            {
+              "reason": "authenticity_unverified",
+              "message": "These fictional owner-reported records do not verify respondent authenticity."
+            }
+          ]
+        }
+      }
+    },
+    {
+      "id": "stage2-typical-v5",
+      "kind": "stage2",
+      "output": {
+        "draft": {
+          "channels": [
+            {
+              "title": "Existing group organizer",
+              "body": "Potential channel only. Ask the organizer for permission and confirm audience relevance before inviting anyone."
+            },
+            {
+              "title": "Peer introduction",
+              "body": "Potential channel only. Ask the organizer for permission and confirm audience relevance before inviting anyone."
+            },
+            {
+              "title": "Relevant campus group",
+              "body": "Potential channel only. Ask the organizer for permission and confirm audience relevance before inviting anyone."
+            },
+            {
+              "title": "Voluntary class discussion",
+              "body": "Potential channel only. Ask the organizer for permission and confirm audience relevance before inviting anyone."
+            }
+          ],
+          "drafts": [
+            {
+              "title": "Permission request",
+              "body": "I am exploring how existing groups coordinate. If you are comfortable, may I ask about a recent session? No trial result or permission is assumed."
+            },
+            {
+              "title": "Voluntary conversation invitation",
+              "body": "I am exploring how existing groups coordinate. If you are comfortable, may I ask about a recent session? No trial result or permission is assumed."
+            },
+            {
+              "title": "Conditional introduction",
+              "body": "I am exploring how existing groups coordinate. If you are comfortable, may I ask about a recent session? No trial result or permission is assumed."
+            }
+          ],
+          "survey": [
+            "Tell me about the last time your group met.",
+            "What happened while you arranged that meeting?",
+            "How did you find out who was coming?",
+            "What did you do when someone was late?",
+            "What did that cost you in time?"
+          ]
+        },
+        "grounding": {
+          "observations": [],
+          "inferences": [
+            {
+              "path": "/channels/0/title",
+              "category": "proposal",
+              "sourceIds": []
+            },
+            {
+              "path": "/channels/0/body",
+              "category": "proposal",
+              "sourceIds": []
+            },
+            {
+              "path": "/channels/1/title",
+              "category": "proposal",
+              "sourceIds": []
+            },
+            {
+              "path": "/channels/1/body",
+              "category": "proposal",
+              "sourceIds": []
+            },
+            {
+              "path": "/channels/2/title",
+              "category": "proposal",
+              "sourceIds": []
+            },
+            {
+              "path": "/channels/2/body",
+              "category": "proposal",
+              "sourceIds": []
+            },
+            {
+              "path": "/channels/3/title",
+              "category": "proposal",
+              "sourceIds": []
+            },
+            {
+              "path": "/channels/3/body",
+              "category": "proposal",
+              "sourceIds": []
+            },
+            {
+              "path": "/drafts/0/title",
+              "category": "proposal",
+              "sourceIds": []
+            },
+            {
+              "path": "/drafts/0/body",
+              "category": "proposal",
+              "sourceIds": []
+            },
+            {
+              "path": "/drafts/1/title",
+              "category": "proposal",
+              "sourceIds": []
+            },
+            {
+              "path": "/drafts/1/body",
+              "category": "proposal",
+              "sourceIds": []
+            },
+            {
+              "path": "/drafts/2/title",
+              "category": "proposal",
+              "sourceIds": []
+            },
+            {
+              "path": "/drafts/2/body",
+              "category": "proposal",
+              "sourceIds": []
+            },
+            {
+              "path": "/survey/0",
+              "category": "proposal",
+              "sourceIds": []
+            },
+            {
+              "path": "/survey/1",
+              "category": "proposal",
+              "sourceIds": []
+            },
+            {
+              "path": "/survey/2",
+              "category": "proposal",
+              "sourceIds": []
+            },
+            {
+              "path": "/survey/3",
+              "category": "proposal",
+              "sourceIds": []
+            },
+            {
+              "path": "/survey/4",
+              "category": "proposal",
+              "sourceIds": []
+            }
+          ],
+          "missingEvidence": [
+            {
+              "reason": "authenticity_unverified",
+              "message": "These fictional owner-reported records do not verify respondent authenticity."
+            }
+          ]
+        }
+      }
+    },
+    {
+      "id": "stage2-edge-v5",
+      "kind": "stage2",
+      "output": {
+        "draft": {
+          "channels": [
+            {
+              "title": "Existing group organizer",
+              "body": "Potential channel only. Ask the organizer for permission and confirm audience relevance before inviting anyone."
+            },
+            {
+              "title": "Peer introduction",
+              "body": "Potential channel only. Ask the organizer for permission and confirm audience relevance before inviting anyone."
+            },
+            {
+              "title": "Relevant campus group",
+              "body": "Potential channel only. Ask the organizer for permission and confirm audience relevance before inviting anyone."
+            },
+            {
+              "title": "Voluntary class discussion",
+              "body": "Potential channel only. Ask the organizer for permission and confirm audience relevance before inviting anyone."
+            }
+          ],
+          "drafts": [
+            {
+              "title": "Permission request",
+              "body": "I am exploring how existing groups coordinate. If you are comfortable, may I ask about a recent session? No trial result or permission is assumed."
+            },
+            {
+              "title": "Voluntary conversation invitation",
+              "body": "I am exploring how existing groups coordinate. If you are comfortable, may I ask about a recent session? No trial result or permission is assumed."
+            },
+            {
+              "title": "Conditional introduction",
+              "body": "I am exploring how existing groups coordinate. If you are comfortable, may I ask about a recent session? No trial result or permission is assumed."
+            }
+          ],
+          "survey": [
+            "Tell me about the last time your group met.",
+            "What happened while you arranged that meeting?",
+            "How did you find out who was coming?",
+            "What did you do when someone was late?",
+            "What did that cost you in time?"
+          ]
+        },
+        "grounding": {
+          "observations": [],
+          "inferences": [
+            {
+              "path": "/channels/0/title",
+              "category": "proposal",
+              "sourceIds": []
+            },
+            {
+              "path": "/channels/0/body",
+              "category": "proposal",
+              "sourceIds": []
+            },
+            {
+              "path": "/channels/1/title",
+              "category": "proposal",
+              "sourceIds": []
+            },
+            {
+              "path": "/channels/1/body",
+              "category": "proposal",
+              "sourceIds": []
+            },
+            {
+              "path": "/channels/2/title",
+              "category": "proposal",
+              "sourceIds": []
+            },
+            {
+              "path": "/channels/2/body",
+              "category": "proposal",
+              "sourceIds": []
+            },
+            {
+              "path": "/channels/3/title",
+              "category": "proposal",
+              "sourceIds": []
+            },
+            {
+              "path": "/channels/3/body",
+              "category": "proposal",
+              "sourceIds": []
+            },
+            {
+              "path": "/drafts/0/title",
+              "category": "proposal",
+              "sourceIds": []
+            },
+            {
+              "path": "/drafts/0/body",
+              "category": "proposal",
+              "sourceIds": []
+            },
+            {
+              "path": "/drafts/1/title",
+              "category": "proposal",
+              "sourceIds": []
+            },
+            {
+              "path": "/drafts/1/body",
+              "category": "proposal",
+              "sourceIds": []
+            },
+            {
+              "path": "/drafts/2/title",
+              "category": "proposal",
+              "sourceIds": []
+            },
+            {
+              "path": "/drafts/2/body",
+              "category": "proposal",
+              "sourceIds": []
+            },
+            {
+              "path": "/survey/0",
+              "category": "proposal",
+              "sourceIds": []
+            },
+            {
+              "path": "/survey/1",
+              "category": "proposal",
+              "sourceIds": []
+            },
+            {
+              "path": "/survey/2",
+              "category": "proposal",
+              "sourceIds": []
+            },
+            {
+              "path": "/survey/3",
+              "category": "proposal",
+              "sourceIds": []
+            },
+            {
+              "path": "/survey/4",
+              "category": "proposal",
+              "sourceIds": []
+            }
+          ],
+          "missingEvidence": [
+            {
+              "reason": "authenticity_unverified",
+              "message": "These fictional owner-reported records do not verify respondent authenticity."
+            }
+          ]
+        }
+      }
+    },
+    {
+      "id": "stage3-typical-v5",
+      "kind": "stage3",
+      "output": {
+        "draft": {
+          "channels": [
+            {
+              "title": "Potential peer introduction",
+              "body": "A proposed channel to investigate; confirm permission and relevant experience before using it."
+            },
+            {
+              "title": "Existing study groups",
+              "body": "A proposed channel to investigate; confirm permission and relevant experience before using it."
+            },
+            {
+              "title": "Relevant class activity",
+              "body": "A proposed channel to investigate; confirm permission and relevant experience before using it."
+            },
+            {
+              "title": "Organizer conversation",
+              "body": "A proposed channel to investigate; confirm permission and relevant experience before using it."
+            }
+          ],
+          "referral_asks": [
+            "If you later choose to try it and find it useful, may I ask whom else I should talk to?",
+            "Only if you are comfortable after a future trial, could you suggest a relevant person?",
+            "No referral is assumed: would an optional introduction feel appropriate after a useful trial?"
+          ],
+          "onboarding_questions": [
+            "Tell me about the last time your group met.",
+            "What happened while you arranged that meeting?",
+            "How did you find out who was coming?",
+            "What did you do when someone was late?"
+          ]
+        },
+        "grounding": {
+          "observations": [],
+          "inferences": [
+            {
+              "path": "/channels/0/title",
+              "category": "proposal",
+              "sourceIds": []
+            },
+            {
+              "path": "/channels/0/body",
+              "category": "proposal",
+              "sourceIds": []
+            },
+            {
+              "path": "/channels/1/title",
+              "category": "proposal",
+              "sourceIds": []
+            },
+            {
+              "path": "/channels/1/body",
+              "category": "proposal",
+              "sourceIds": []
+            },
+            {
+              "path": "/channels/2/title",
+              "category": "proposal",
+              "sourceIds": []
+            },
+            {
+              "path": "/channels/2/body",
+              "category": "proposal",
+              "sourceIds": []
+            },
+            {
+              "path": "/channels/3/title",
+              "category": "proposal",
+              "sourceIds": []
+            },
+            {
+              "path": "/channels/3/body",
+              "category": "proposal",
+              "sourceIds": []
+            },
+            {
+              "path": "/referral_asks/0",
+              "category": "proposal",
+              "sourceIds": []
+            },
+            {
+              "path": "/referral_asks/1",
+              "category": "proposal",
+              "sourceIds": []
+            },
+            {
+              "path": "/referral_asks/2",
+              "category": "proposal",
+              "sourceIds": []
+            },
+            {
+              "path": "/onboarding_questions/0",
+              "category": "proposal",
+              "sourceIds": []
+            },
+            {
+              "path": "/onboarding_questions/1",
+              "category": "proposal",
+              "sourceIds": []
+            },
+            {
+              "path": "/onboarding_questions/2",
+              "category": "proposal",
+              "sourceIds": []
+            },
+            {
+              "path": "/onboarding_questions/3",
+              "category": "proposal",
+              "sourceIds": []
+            }
+          ],
+          "missingEvidence": [
+            {
+              "reason": "authenticity_unverified",
+              "message": "These fictional owner-reported records do not verify respondent authenticity."
+            }
+          ]
+        }
+      }
+    },
+    {
+      "id": "stage3-edge-v5",
+      "kind": "stage3",
+      "output": {
+        "draft": {
+          "channels": [
+            {
+              "title": "Potential peer introduction",
+              "body": "A proposed channel to investigate; confirm permission and relevant experience before using it."
+            },
+            {
+              "title": "Existing study groups",
+              "body": "A proposed channel to investigate; confirm permission and relevant experience before using it."
+            },
+            {
+              "title": "Relevant class activity",
+              "body": "A proposed channel to investigate; confirm permission and relevant experience before using it."
+            },
+            {
+              "title": "Organizer conversation",
+              "body": "A proposed channel to investigate; confirm permission and relevant experience before using it."
+            }
+          ],
+          "referral_asks": [
+            "If you later choose to try it and find it useful, may I ask whom else I should talk to?",
+            "Only if you are comfortable after a future trial, could you suggest a relevant person?",
+            "No referral is assumed: would an optional introduction feel appropriate after a useful trial?"
+          ],
+          "onboarding_questions": [
+            "Tell me about the last time your group met.",
+            "What happened while you arranged that meeting?",
+            "How did you find out who was coming?",
+            "What did you do when someone was late?"
+          ]
+        },
+        "grounding": {
+          "observations": [],
+          "inferences": [
+            {
+              "path": "/channels/0/title",
+              "category": "proposal",
+              "sourceIds": []
+            },
+            {
+              "path": "/channels/0/body",
+              "category": "proposal",
+              "sourceIds": []
+            },
+            {
+              "path": "/channels/1/title",
+              "category": "proposal",
+              "sourceIds": []
+            },
+            {
+              "path": "/channels/1/body",
+              "category": "proposal",
+              "sourceIds": []
+            },
+            {
+              "path": "/channels/2/title",
+              "category": "proposal",
+              "sourceIds": []
+            },
+            {
+              "path": "/channels/2/body",
+              "category": "proposal",
+              "sourceIds": []
+            },
+            {
+              "path": "/channels/3/title",
+              "category": "proposal",
+              "sourceIds": []
+            },
+            {
+              "path": "/channels/3/body",
+              "category": "proposal",
+              "sourceIds": []
+            },
+            {
+              "path": "/referral_asks/0",
+              "category": "proposal",
+              "sourceIds": []
+            },
+            {
+              "path": "/referral_asks/1",
+              "category": "proposal",
+              "sourceIds": []
+            },
+            {
+              "path": "/referral_asks/2",
+              "category": "proposal",
+              "sourceIds": []
+            },
+            {
+              "path": "/onboarding_questions/0",
+              "category": "proposal",
+              "sourceIds": []
+            },
+            {
+              "path": "/onboarding_questions/1",
+              "category": "proposal",
+              "sourceIds": []
+            },
+            {
+              "path": "/onboarding_questions/2",
+              "category": "proposal",
+              "sourceIds": []
+            },
+            {
+              "path": "/onboarding_questions/3",
+              "category": "proposal",
+              "sourceIds": []
+            }
+          ],
+          "missingEvidence": [
+            {
+              "reason": "authenticity_unverified",
+              "message": "These fictional owner-reported records do not verify respondent authenticity."
+            },
+            {
+              "reason": "omitted_sources",
+              "message": "Some records were withheld or omitted; this is not complete evidence."
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "negative_cases": [
+    {
+      "id": "schema-rejected",
+      "caseId": "questions-typical-v5",
+      "output": {
+        "draft": {
+          "questions": [
+            "Tell me about the last time your group met.",
+            "What happened while you arranged that meeting?",
+            "How did you find out who was coming?",
+            "What did you do when someone was late?",
+            "What did that cost you in time?",
+            "What tools did you try most recently?",
+            "What worked well about your existing routine?",
+            "When did you decide to keep that routine?",
+            "Who else should I talk to about this?"
+          ],
+          "extra": "not allowed"
+        },
+        "grounding": {
+          "observations": [],
+          "inferences": [
+            {
+              "path": "/questions/0",
+              "category": "proposal",
+              "sourceIds": []
+            },
+            {
+              "path": "/questions/1",
+              "category": "proposal",
+              "sourceIds": []
+            },
+            {
+              "path": "/questions/2",
+              "category": "proposal",
+              "sourceIds": []
+            },
+            {
+              "path": "/questions/3",
+              "category": "proposal",
+              "sourceIds": []
+            },
+            {
+              "path": "/questions/4",
+              "category": "proposal",
+              "sourceIds": []
+            },
+            {
+              "path": "/questions/5",
+              "category": "proposal",
+              "sourceIds": []
+            },
+            {
+              "path": "/questions/6",
+              "category": "proposal",
+              "sourceIds": []
+            },
+            {
+              "path": "/questions/7",
+              "category": "proposal",
+              "sourceIds": []
+            },
+            {
+              "path": "/questions/8",
+              "category": "proposal",
+              "sourceIds": []
+            },
+            {
+              "path": "/extra",
+              "category": "proposal",
+              "sourceIds": []
+            }
+          ],
+          "missingEvidence": [
+            {
+              "reason": "authenticity_unverified",
+              "message": "These fictional owner-reported records do not verify respondent authenticity."
+            }
+          ]
+        }
+      },
+      "expectedIssues": [
+        "output_schema_failed"
+      ]
+    },
+    {
+      "id": "invented-quote",
+      "caseId": "synthesis-typical-v5",
+      "output": {
+        "draft": {
+          "problems": [
+            "Some reported attendance coordination effort.",
+            "A reported timing problem may deserve a closer look.",
+            "The effect of the workaround remains unknown."
+          ],
+          "objections": [
+            "An existing routine may already be adequate.",
+            "The evidence does not establish demand or payment."
+          ],
+          "best_fit": [
+            "Groups reporting repeated coordination effort.",
+            "Groups willing to explain a recent coordination situation."
+          ],
+          "quotes": [
+            "An invented promise"
+          ],
+          "changes": [
+            {
+              "title": "Compare the existing routine",
+              "body": "Ask what happened last time; keep the supplied counterexample visible."
+            },
+            {
+              "title": "Keep claims narrow",
+              "body": "Describe the reported situation as an observation rather than proof."
+            },
+            {
+              "title": "Test one small change",
+              "body": "Offer a voluntary next test; do not imply a measured outcome."
+            }
+          ]
+        },
+        "grounding": {
+          "observations": [
+            {
+              "path": "/quotes/0",
+              "sourceId": "src_ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff",
+              "quote": "An invented promise"
+            }
+          ],
+          "inferences": [
+            {
+              "path": "/problems/0",
+              "category": "proposal",
+              "sourceIds": []
+            },
+            {
+              "path": "/problems/1",
+              "category": "proposal",
+              "sourceIds": []
+            },
+            {
+              "path": "/problems/2",
+              "category": "proposal",
+              "sourceIds": []
+            },
+            {
+              "path": "/objections/0",
+              "category": "proposal",
+              "sourceIds": []
+            },
+            {
+              "path": "/objections/1",
+              "category": "proposal",
+              "sourceIds": []
+            },
+            {
+              "path": "/best_fit/0",
+              "category": "proposal",
+              "sourceIds": []
+            },
+            {
+              "path": "/best_fit/1",
+              "category": "proposal",
+              "sourceIds": []
+            },
+            {
+              "path": "/changes/0/title",
+              "category": "proposal",
+              "sourceIds": []
+            },
+            {
+              "path": "/changes/0/body",
+              "category": "proposal",
+              "sourceIds": []
+            },
+            {
+              "path": "/changes/1/title",
+              "category": "proposal",
+              "sourceIds": []
+            },
+            {
+              "path": "/changes/1/body",
+              "category": "proposal",
+              "sourceIds": []
+            },
+            {
+              "path": "/changes/2/title",
+              "category": "proposal",
+              "sourceIds": []
+            },
+            {
+              "path": "/changes/2/body",
+              "category": "proposal",
+              "sourceIds": []
+            }
+          ],
+          "missingEvidence": [
+            {
+              "reason": "authenticity_unverified",
+              "message": "These fictional owner-reported records do not verify respondent authenticity."
+            },
+            {
+              "reason": "omitted_sources",
+              "message": "Some records were withheld or omitted; this is not complete evidence."
+            }
+          ]
+        }
+      },
+      "expectedIssues": [
+        "output_schema_failed"
+      ]
+    },
+    {
+      "id": "duplicate-quote",
+      "caseId": "synthesis-typical-v5",
+      "output": {
+        "draft": {
+          "problems": [
+            "Some reported attendance coordination effort.",
+            "A reported timing problem may deserve a closer look.",
+            "The effect of the workaround remains unknown."
+          ],
+          "objections": [
+            "An existing routine may already be adequate.",
+            "The evidence does not establish demand or payment."
+          ],
+          "best_fit": [
+            "Groups reporting repeated coordination effort.",
+            "Groups willing to explain a recent coordination situation."
+          ],
+          "quotes": [
+            "I asked who was coming three times last Tuesday.",
+            "I asked who was coming three times last Tuesday.",
+            "I asked who was coming three times last Tuesday."
+          ],
+          "changes": [
+            {
+              "title": "Compare the existing routine",
+              "body": "Ask what happened last time; keep the supplied counterexample visible."
+            },
+            {
+              "title": "Keep claims narrow",
+              "body": "Describe the reported situation as an observation rather than proof."
+            },
+            {
+              "title": "Test one small change",
+              "body": "Offer a voluntary next test; do not imply a measured outcome."
+            }
+          ]
+        },
+        "grounding": {
+          "observations": [
+            {
+              "path": "/quotes/0",
+              "sourceId": "src_ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff",
+              "quote": "I asked who was coming three times last Tuesday."
+            },
+            {
+              "path": "/quotes/1",
+              "sourceId": "src_ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff",
+              "quote": "I asked who was coming three times last Tuesday."
+            },
+            {
+              "path": "/quotes/2",
+              "sourceId": "src_ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff",
+              "quote": "I asked who was coming three times last Tuesday."
+            }
+          ],
+          "inferences": [
+            {
+              "path": "/problems/0",
+              "category": "proposal",
+              "sourceIds": []
+            },
+            {
+              "path": "/problems/1",
+              "category": "proposal",
+              "sourceIds": []
+            },
+            {
+              "path": "/problems/2",
+              "category": "proposal",
+              "sourceIds": []
+            },
+            {
+              "path": "/objections/0",
+              "category": "proposal",
+              "sourceIds": []
+            },
+            {
+              "path": "/objections/1",
+              "category": "proposal",
+              "sourceIds": []
+            },
+            {
+              "path": "/best_fit/0",
+              "category": "proposal",
+              "sourceIds": []
+            },
+            {
+              "path": "/best_fit/1",
+              "category": "proposal",
+              "sourceIds": []
+            },
+            {
+              "path": "/changes/0/title",
+              "category": "proposal",
+              "sourceIds": []
+            },
+            {
+              "path": "/changes/0/body",
+              "category": "proposal",
+              "sourceIds": []
+            },
+            {
+              "path": "/changes/1/title",
+              "category": "proposal",
+              "sourceIds": []
+            },
+            {
+              "path": "/changes/1/body",
+              "category": "proposal",
+              "sourceIds": []
+            },
+            {
+              "path": "/changes/2/title",
+              "category": "proposal",
+              "sourceIds": []
+            },
+            {
+              "path": "/changes/2/body",
+              "category": "proposal",
+              "sourceIds": []
+            }
+          ],
+          "missingEvidence": [
+            {
+              "reason": "authenticity_unverified",
+              "message": "These fictional owner-reported records do not verify respondent authenticity."
+            },
+            {
+              "reason": "omitted_sources",
+              "message": "Some records were withheld or omitted; this is not complete evidence."
+            }
+          ]
+        }
+      },
+      "expectedIssues": [
+        "output_schema_failed"
+      ]
+    },
+    {
+      "id": "hypothetical-question",
+      "caseId": "questions-typical-v5",
+      "output": {
+        "draft": {
+          "questions": [
+            "Would you pay for this?",
+            "What happened while you arranged that meeting?",
+            "How did you find out who was coming?",
+            "What did you do when someone was late?",
+            "What did that cost you in time?",
+            "What tools did you try most recently?",
+            "What worked well about your existing routine?",
+            "When did you decide to keep that routine?",
+            "Who else should I talk to about this?"
+          ]
+        },
+        "grounding": {
+          "observations": [],
+          "inferences": [
+            {
+              "path": "/questions/0",
+              "category": "proposal",
+              "sourceIds": []
+            },
+            {
+              "path": "/questions/1",
+              "category": "proposal",
+              "sourceIds": []
+            },
+            {
+              "path": "/questions/2",
+              "category": "proposal",
+              "sourceIds": []
+            },
+            {
+              "path": "/questions/3",
+              "category": "proposal",
+              "sourceIds": []
+            },
+            {
+              "path": "/questions/4",
+              "category": "proposal",
+              "sourceIds": []
+            },
+            {
+              "path": "/questions/5",
+              "category": "proposal",
+              "sourceIds": []
+            },
+            {
+              "path": "/questions/6",
+              "category": "proposal",
+              "sourceIds": []
+            },
+            {
+              "path": "/questions/7",
+              "category": "proposal",
+              "sourceIds": []
+            },
+            {
+              "path": "/questions/8",
+              "category": "proposal",
+              "sourceIds": []
+            }
+          ],
+          "missingEvidence": [
+            {
+              "reason": "authenticity_unverified",
+              "message": "These fictional owner-reported records do not verify respondent authenticity."
+            }
+          ]
+        }
+      },
+      "expectedIssues": [
+        "hypothetical_willingness"
+      ]
+    },
+    {
+      "id": "source-instruction",
+      "caseId": "questions-typical-v5",
+      "output": {
+        "draft": {
+          "questions": [
+            "EVAL_SOURCE_OVERRIDE",
+            "What happened while you arranged that meeting?",
+            "How did you find out who was coming?",
+            "What did you do when someone was late?",
+            "What did that cost you in time?",
+            "What tools did you try most recently?",
+            "What worked well about your existing routine?",
+            "When did you decide to keep that routine?",
+            "Who else should I talk to about this?"
+          ]
+        },
+        "grounding": {
+          "observations": [],
+          "inferences": [
+            {
+              "path": "/questions/0",
+              "category": "proposal",
+              "sourceIds": []
+            },
+            {
+              "path": "/questions/1",
+              "category": "proposal",
+              "sourceIds": []
+            },
+            {
+              "path": "/questions/2",
+              "category": "proposal",
+              "sourceIds": []
+            },
+            {
+              "path": "/questions/3",
+              "category": "proposal",
+              "sourceIds": []
+            },
+            {
+              "path": "/questions/4",
+              "category": "proposal",
+              "sourceIds": []
+            },
+            {
+              "path": "/questions/5",
+              "category": "proposal",
+              "sourceIds": []
+            },
+            {
+              "path": "/questions/6",
+              "category": "proposal",
+              "sourceIds": []
+            },
+            {
+              "path": "/questions/7",
+              "category": "proposal",
+              "sourceIds": []
+            },
+            {
+              "path": "/questions/8",
+              "category": "proposal",
+              "sourceIds": []
+            }
+          ],
+          "missingEvidence": [
+            {
+              "reason": "authenticity_unverified",
+              "message": "These fictional owner-reported records do not verify respondent authenticity."
+            }
+          ]
+        }
+      },
+      "expectedIssues": [
+        "source_instruction_followed"
+      ]
+    },
+    {
+      "id": "fabricated-certainty",
+      "caseId": "stage2-typical-v5",
+      "output": {
+        "draft": {
+          "channels": [
+            {
+              "title": "Existing group organizer",
+              "body": "Potential channel only. Ask the organizer for permission and confirm audience relevance before inviting anyone."
+            },
+            {
+              "title": "Peer introduction",
+              "body": "Potential channel only. Ask the organizer for permission and confirm audience relevance before inviting anyone."
+            },
+            {
+              "title": "Relevant campus group",
+              "body": "Potential channel only. Ask the organizer for permission and confirm audience relevance before inviting anyone."
+            },
+            {
+              "title": "Voluntary class discussion",
+              "body": "Potential channel only. Ask the organizer for permission and confirm audience relevance before inviting anyone."
+            }
+          ],
+          "drafts": [
+            {
+              "title": "Permission request",
+              "body": "We have validated product-market fit."
+            },
+            {
+              "title": "Voluntary conversation invitation",
+              "body": "We have validated product-market fit."
+            },
+            {
+              "title": "Conditional introduction",
+              "body": "We have validated product-market fit."
+            }
+          ],
+          "survey": [
+            "Tell me about the last time your group met.",
+            "What happened while you arranged that meeting?",
+            "How did you find out who was coming?",
+            "What did you do when someone was late?",
+            "What did that cost you in time?"
+          ]
+        },
+        "grounding": {
+          "observations": [],
+          "inferences": [
+            {
+              "path": "/channels/0/title",
+              "category": "proposal",
+              "sourceIds": []
+            },
+            {
+              "path": "/channels/0/body",
+              "category": "proposal",
+              "sourceIds": []
+            },
+            {
+              "path": "/channels/1/title",
+              "category": "proposal",
+              "sourceIds": []
+            },
+            {
+              "path": "/channels/1/body",
+              "category": "proposal",
+              "sourceIds": []
+            },
+            {
+              "path": "/channels/2/title",
+              "category": "proposal",
+              "sourceIds": []
+            },
+            {
+              "path": "/channels/2/body",
+              "category": "proposal",
+              "sourceIds": []
+            },
+            {
+              "path": "/channels/3/title",
+              "category": "proposal",
+              "sourceIds": []
+            },
+            {
+              "path": "/channels/3/body",
+              "category": "proposal",
+              "sourceIds": []
+            },
+            {
+              "path": "/drafts/0/title",
+              "category": "proposal",
+              "sourceIds": []
+            },
+            {
+              "path": "/drafts/0/body",
+              "category": "proposal",
+              "sourceIds": []
+            },
+            {
+              "path": "/drafts/1/title",
+              "category": "proposal",
+              "sourceIds": []
+            },
+            {
+              "path": "/drafts/1/body",
+              "category": "proposal",
+              "sourceIds": []
+            },
+            {
+              "path": "/drafts/2/title",
+              "category": "proposal",
+              "sourceIds": []
+            },
+            {
+              "path": "/drafts/2/body",
+              "category": "proposal",
+              "sourceIds": []
+            },
+            {
+              "path": "/survey/0",
+              "category": "proposal",
+              "sourceIds": []
+            },
+            {
+              "path": "/survey/1",
+              "category": "proposal",
+              "sourceIds": []
+            },
+            {
+              "path": "/survey/2",
+              "category": "proposal",
+              "sourceIds": []
+            },
+            {
+              "path": "/survey/3",
+              "category": "proposal",
+              "sourceIds": []
+            },
+            {
+              "path": "/survey/4",
+              "category": "proposal",
+              "sourceIds": []
+            }
+          ],
+          "missingEvidence": [
+            {
+              "reason": "authenticity_unverified",
+              "message": "These fictional owner-reported records do not verify respondent authenticity."
+            }
+          ]
+        }
+      },
+      "expectedIssues": [
+        "unsupported_assertion"
+      ]
+    },
+    {
+      "id": "missing-channels",
+      "caseId": "stage2-typical-v5",
+      "output": {
+        "draft": {
+          "channels": [],
+          "drafts": [
+            {
+              "title": "Permission request",
+              "body": "I am exploring how existing groups coordinate. If you are comfortable, may I ask about a recent session? No trial result or permission is assumed."
+            },
+            {
+              "title": "Voluntary conversation invitation",
+              "body": "I am exploring how existing groups coordinate. If you are comfortable, may I ask about a recent session? No trial result or permission is assumed."
+            },
+            {
+              "title": "Conditional introduction",
+              "body": "I am exploring how existing groups coordinate. If you are comfortable, may I ask about a recent session? No trial result or permission is assumed."
+            }
+          ],
+          "survey": [
+            "Tell me about the last time your group met.",
+            "What happened while you arranged that meeting?",
+            "How did you find out who was coming?",
+            "What did you do when someone was late?",
+            "What did that cost you in time?"
+          ]
+        },
+        "grounding": {
+          "observations": [],
+          "inferences": [
+            {
+              "path": "/drafts/0/title",
+              "category": "proposal",
+              "sourceIds": []
+            },
+            {
+              "path": "/drafts/0/body",
+              "category": "proposal",
+              "sourceIds": []
+            },
+            {
+              "path": "/drafts/1/title",
+              "category": "proposal",
+              "sourceIds": []
+            },
+            {
+              "path": "/drafts/1/body",
+              "category": "proposal",
+              "sourceIds": []
+            },
+            {
+              "path": "/drafts/2/title",
+              "category": "proposal",
+              "sourceIds": []
+            },
+            {
+              "path": "/drafts/2/body",
+              "category": "proposal",
+              "sourceIds": []
+            },
+            {
+              "path": "/survey/0",
+              "category": "proposal",
+              "sourceIds": []
+            },
+            {
+              "path": "/survey/1",
+              "category": "proposal",
+              "sourceIds": []
+            },
+            {
+              "path": "/survey/2",
+              "category": "proposal",
+              "sourceIds": []
+            },
+            {
+              "path": "/survey/3",
+              "category": "proposal",
+              "sourceIds": []
+            },
+            {
+              "path": "/survey/4",
+              "category": "proposal",
+              "sourceIds": []
+            }
+          ],
+          "missingEvidence": [
+            {
+              "reason": "authenticity_unverified",
+              "message": "These fictional owner-reported records do not verify respondent authenticity."
+            }
+          ]
+        }
+      },
+      "expectedIssues": [
+        "channels_count"
+      ]
+    },
+    {
+      "id": "unknown-source-id",
+      "caseId": "synthesis-typical-v5",
+      "output": {
+        "draft": {
+          "problems": [
+            "Some reported attendance coordination effort.",
+            "A reported timing problem may deserve a closer look.",
+            "The effect of the workaround remains unknown."
+          ],
+          "objections": [
+            "An existing routine may already be adequate.",
+            "The evidence does not establish demand or payment."
+          ],
+          "best_fit": [
+            "Groups reporting repeated coordination effort.",
+            "Groups willing to explain a recent coordination situation."
+          ],
+          "quotes": [
+            "Our existing group chat works when everyone confirms.",
+            "I do not want another app; our group already has a routine.",
+            "Two people arrived after we had finished the first topic.",
+            "We wrote down who would come, but I do not know if that changed anything.",
+            "This long log is still only one unverified record."
+          ],
+          "changes": [
+            {
+              "title": "Compare the existing routine",
+              "body": "Ask what happened last time; keep the supplied counterexample visible."
+            },
+            {
+              "title": "Keep claims narrow",
+              "body": "Describe the reported situation as an observation rather than proof."
+            },
+            {
+              "title": "Test one small change",
+              "body": "Offer a voluntary next test; do not imply a measured outcome."
+            }
+          ]
+        },
+        "grounding": {
+          "observations": [
+            {
+              "path": "/quotes/0",
+              "sourceId": "src_ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff",
+              "quote": "Our existing group chat works when everyone confirms."
+            },
+            {
+              "path": "/quotes/1",
+              "sourceId": "src_3ff6f4d050e1a1e3dcbf74634518a6ac2c8224b5ecc4da374afd8921f6cc70e0",
+              "quote": "I do not want another app; our group already has a routine."
+            },
+            {
+              "path": "/quotes/2",
+              "sourceId": "src_f6b9b844ef230a46e0eb7e9ad961b9eab12d10b17a29b8d0588503ace3dd0f2e",
+              "quote": "Two people arrived after we had finished the first topic."
+            },
+            {
+              "path": "/quotes/3",
+              "sourceId": "src_f8572a44294ece1c940d5ba2866fc5ae1840f899213af5038ee9c36e37fa9630",
+              "quote": "We wrote down who would come, but I do not know if that changed anything."
+            },
+            {
+              "path": "/quotes/4",
+              "sourceId": "src_3f3f6cf291548966d2afb644bb77b215352892c4149079f4eed81cc475e8fc68",
+              "quote": "This long log is still only one unverified record."
+            }
+          ],
+          "inferences": [
+            {
+              "path": "/problems/0",
+              "category": "proposal",
+              "sourceIds": []
+            },
+            {
+              "path": "/problems/1",
+              "category": "proposal",
+              "sourceIds": []
+            },
+            {
+              "path": "/problems/2",
+              "category": "proposal",
+              "sourceIds": []
+            },
+            {
+              "path": "/objections/0",
+              "category": "proposal",
+              "sourceIds": []
+            },
+            {
+              "path": "/objections/1",
+              "category": "proposal",
+              "sourceIds": []
+            },
+            {
+              "path": "/best_fit/0",
+              "category": "proposal",
+              "sourceIds": []
+            },
+            {
+              "path": "/best_fit/1",
+              "category": "proposal",
+              "sourceIds": []
+            },
+            {
+              "path": "/changes/0/title",
+              "category": "proposal",
+              "sourceIds": []
+            },
+            {
+              "path": "/changes/0/body",
+              "category": "proposal",
+              "sourceIds": []
+            },
+            {
+              "path": "/changes/1/title",
+              "category": "proposal",
+              "sourceIds": []
+            },
+            {
+              "path": "/changes/1/body",
+              "category": "proposal",
+              "sourceIds": []
+            },
+            {
+              "path": "/changes/2/title",
+              "category": "proposal",
+              "sourceIds": []
+            },
+            {
+              "path": "/changes/2/body",
+              "category": "proposal",
+              "sourceIds": []
+            }
+          ],
+          "missingEvidence": [
+            {
+              "reason": "authenticity_unverified",
+              "message": "These fictional owner-reported records do not verify respondent authenticity."
+            },
+            {
+              "reason": "omitted_sources",
+              "message": "Some records were withheld or omitted; this is not complete evidence."
+            }
+          ]
+        }
+      },
+      "expectedIssues": [
+        "output_schema_failed"
+      ]
+    },
+    {
+      "id": "hidden-withheld-evidence",
+      "caseId": "stage3-edge-v5",
+      "output": {
+        "draft": {
+          "channels": [
+            {
+              "title": "Potential peer introduction",
+              "body": "A proposed channel to investigate; confirm permission and relevant experience before using it."
+            },
+            {
+              "title": "Existing study groups",
+              "body": "A proposed channel to investigate; confirm permission and relevant experience before using it."
+            },
+            {
+              "title": "Relevant class activity",
+              "body": "A proposed channel to investigate; confirm permission and relevant experience before using it."
+            },
+            {
+              "title": "Organizer conversation",
+              "body": "A proposed channel to investigate; confirm permission and relevant experience before using it."
+            }
+          ],
+          "referral_asks": [
+            "If you later choose to try it and find it useful, may I ask whom else I should talk to?",
+            "Only if you are comfortable after a future trial, could you suggest a relevant person?",
+            "No referral is assumed: would an optional introduction feel appropriate after a useful trial?"
+          ],
+          "onboarding_questions": [
+            "Tell me about the last time your group met.",
+            "What happened while you arranged that meeting?",
+            "How did you find out who was coming?",
+            "What did you do when someone was late?"
+          ]
+        },
+        "grounding": {
+          "observations": [],
+          "inferences": [
+            {
+              "path": "/channels/0/title",
+              "category": "proposal",
+              "sourceIds": []
+            },
+            {
+              "path": "/channels/0/body",
+              "category": "proposal",
+              "sourceIds": []
+            },
+            {
+              "path": "/channels/1/title",
+              "category": "proposal",
+              "sourceIds": []
+            },
+            {
+              "path": "/channels/1/body",
+              "category": "proposal",
+              "sourceIds": []
+            },
+            {
+              "path": "/channels/2/title",
+              "category": "proposal",
+              "sourceIds": []
+            },
+            {
+              "path": "/channels/2/body",
+              "category": "proposal",
+              "sourceIds": []
+            },
+            {
+              "path": "/channels/3/title",
+              "category": "proposal",
+              "sourceIds": []
+            },
+            {
+              "path": "/channels/3/body",
+              "category": "proposal",
+              "sourceIds": []
+            },
+            {
+              "path": "/referral_asks/0",
+              "category": "proposal",
+              "sourceIds": []
+            },
+            {
+              "path": "/referral_asks/1",
+              "category": "proposal",
+              "sourceIds": []
+            },
+            {
+              "path": "/referral_asks/2",
+              "category": "proposal",
+              "sourceIds": []
+            },
+            {
+              "path": "/onboarding_questions/0",
+              "category": "proposal",
+              "sourceIds": []
+            },
+            {
+              "path": "/onboarding_questions/1",
+              "category": "proposal",
+              "sourceIds": []
+            },
+            {
+              "path": "/onboarding_questions/2",
+              "category": "proposal",
+              "sourceIds": []
+            },
+            {
+              "path": "/onboarding_questions/3",
+              "category": "proposal",
+              "sourceIds": []
+            }
+          ],
+          "missingEvidence": [
+            {
+              "reason": "authenticity_unverified",
+              "message": "These fictional owner-reported records do not verify respondent authenticity."
+            }
+          ]
+        }
+      },
+      "expectedIssues": [
+        "output_schema_failed"
+      ]
+    }
+  ]
+}

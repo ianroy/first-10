@@ -1,7 +1,7 @@
 import { test } from "node:test";
 import assert from "node:assert/strict";
 import { execFileSync } from "node:child_process";
-import { readFile, mkdtemp, writeFile, rm, mkdir, copyFile } from "node:fs/promises";
+import { readFile, mkdtemp, writeFile, rm, mkdir, copyFile, symlink } from "node:fs/promises";
 import { tmpdir } from "node:os";
 import { join, dirname } from "node:path";
 import {
@@ -22,7 +22,7 @@ import {
 } from "../../../scripts/eval-ai.mjs";
 const fixtures = await loadFixtures();
 const baseline = JSON.parse(
-  await readFile(new URL("../../../evals/offline-baseline.v4.json", import.meta.url), "utf8"),
+  await readFile(new URL("../../../evals/offline-baseline.v5.json", import.meta.url), "utf8"),
 );
 const endpoint = {
   data: {
@@ -93,7 +93,7 @@ test("endpoint preflight fails closed on missing schema support, price increases
   assert.throws(() => checkEndpoint({ data: { id: MODEL, endpoints: [] } }));
 });
 test("sparse source checks reject fabricated or duplicated quotes instead of satisfying a forced count", () => {
-  const c = fixtures.cases.find((c) => c.id === "synthesis-edge-v4");
+  const c = fixtures.cases.find((c) => c.id === "synthesis-edge-v5");
   const data = { quotes: [c.source_quotes[0]], changes: [{}, {}, {}] };
   assert.deepEqual(semanticChecks(c, data), []);
   assert.ok(
@@ -188,7 +188,7 @@ test("unknown spend, absent provider, duplicate cases, slow calls and changed pr
   }
 });
 test("evaluation fixtures contain no production project IDs or destinations", async () => {
-  const raw = await readFile(new URL("./fixtures.v4.json", import.meta.url), "utf8");
+  const raw = await readFile(new URL("./fixtures.v5.json", import.meta.url), "utf8");
   assert.equal(/https?:\/\//.test(raw), false);
   assert.equal(/sk-or-v1-|service_role|SUPABASE_SERVICE_ROLE_KEY/.test(raw), false);
 });
@@ -244,7 +244,7 @@ test("review is bound to each exact output and a real ISO date", () => {
     (_r, v) => (v.reviewed_at = "not-a-date"),
     (_r, v) => (v.reviewed_at = "2026-02-30T12:00:00.000Z"),
     (_r, v) => (v.cases[0].output_sha256 = "old-output"),
-    (r) => (r.results[0].output.questions[0] = "What happened in your previous meeting?"),
+    (r) => (r.results[0].output.draft.questions[0] = "What happened in your previous meeting?"),
   ]) {
     const { report, review } = passing();
     // Each call gets independent outputs; fixture baseline must remain immutable.
@@ -264,7 +264,7 @@ test("malformed run envelopes fail closed, and edited issue arrays cannot fake o
   report.results[0].issues = [];
   assert.equal(promotionGate(report, review, fixtures).eligible_for_operator_review, false);
 });
-test("reference checker rejects foreign ids and mismatched quotes without crediting legacy outputs", async () => {
+test("reference checker rejects foreign ids and mismatched quotes in current v2 wrapper outputs", async () => {
   const c = fixtures.cases.find((c) => c.kind === "synthesis");
   const source = c.source_catalog[0];
   assert.deepEqual(checkReferences(c, [{ sourceId: source.id, quote: source.quote }]), []);
@@ -283,7 +283,7 @@ test("reference checker rejects foreign ids and mismatched quotes without credit
   assert.ok(
     result.summary.every(
       (s) =>
-        s.reference_integrity === "unavailable_in_legacy_output" &&
+        s.reference_integrity === "validated_v2_source_references" &&
         s.human_passed === 0 &&
         s.cost_usd === null &&
         s.p95_latency_ms === null,
@@ -321,9 +321,10 @@ async function fixtureTree() {
     await mkdir(dirname(join(dir, path)), { recursive: true });
     await copyFile(path, join(dir, path));
   }
+  await symlink(join(process.cwd(), "node_modules"), join(dir, "node_modules"), "dir");
   return dir;
 }
-test("v4 binds prompt content and identity even if someone refreshes only file hashes", async () => {
+test("v5 binds prompt content and identity even if someone refreshes only file hashes", async () => {
   const dir = await fixtureTree();
   try {
     const path = "src/lib/prompts/private-v1.ts";
@@ -340,9 +341,15 @@ test("v4 binds prompt content and identity even if someone refreshes only file h
     await rm(dir, { recursive: true, force: true });
   }
 });
-test("v4 refuses missing prompt pins, wrong versions, changed schema, forged quote catalog or truncated evidence", async () => {
+test("v5 refuses missing prompt pins, wrong versions, changed schema, forged quote catalog or changed evidence", async () => {
+  let mutationIndex = 0;
   for (const mutate of [
     (f) => delete f.source_sha256["src/lib/prompts/private-v1.ts"],
+    (f) => delete f.source_sha256["src/lib/prompts/private-v2.ts"],
+    (f) => delete f.source_sha256["src/lib/prompts/context-v2.ts"],
+    (f) => delete f.source_sha256["supabase/migrations/20261018017000_ai_context_sources.sql"],
+    (f) => f.cases[0].selected_source_identities[0].consentRevision++,
+    (f) => f.cases[0].packing_omissions.budget++,
     (f) => (f.source_commit = "unverified"),
     (f) => f.cases[0].contract.promptVersion++,
     (f) => (f.cases[0].budget_binding_sha256 = "0".repeat(64)),
@@ -351,15 +358,12 @@ test("v4 refuses missing prompt pins, wrong versions, changed schema, forged quo
     (f) => delete f.source_sha256["supabase/migrations/20261018014000_ai_usage_budget.sql"],
     (f) => (f.cases[0].schema.properties.extra = { type: "string" }),
     (f) => (f.cases[2].source_catalog[0].quote = "Not supplied"),
-    (f) => (f.cases[7].permission_context.interviews = f.cases[7].input.interviews),
-    (f) => (f.cases[7].permission_context.excluded.interviews = 0),
+    (f) => (f.cases[7].permission_context.sources = [{ type: "interview", content: "private" }]),
+    (f) => (f.cases[7].permission_context.omissions.permission = 0),
     (f) => delete f.source_sha256["supabase/migrations/20261018011000_processing_consent.sql"],
     (f) => {
-      f.cases[2].input.interviews[0].answers[0].note += "x".repeat(100);
-      f.cases[2].user =
-        f.cases[2].user.slice(0, f.cases[2].user.indexOf("\n\n")) +
-        "\n\n" +
-        assembleFixtureContext(f.cases[2]);
+      f.cases[2].input.interviews[1].answers[0].note += "x".repeat(100);
+      f.cases[2].user = assembleFixtureContext(f.cases[2]);
     },
   ]) {
     const dir = await fixtureTree();
@@ -367,8 +371,9 @@ test("v4 refuses missing prompt pins, wrong versions, changed schema, forged quo
       const f = JSON.parse(await readFile(join(dir, FIXTURE_PATH), "utf8"));
       mutate(f);
       await writeFile(join(dir, FIXTURE_PATH), JSON.stringify(f));
-      await assert.rejects(loadFixtures(dir));
+      await assert.rejects(loadFixtures(dir), `Mutation ${mutationIndex} must be rejected`);
     } finally {
+      mutationIndex++;
       await rm(dir, { recursive: true, force: true });
     }
   }
