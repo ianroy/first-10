@@ -479,9 +479,9 @@ export function SavedMarketingLab({ project }: { project: Project }) {
                 <li>5. Use the result to repeat, revise or stop.</li>
               </ol>
               <p className="mt-5 text-xs leading-relaxed text-muted-foreground">
-                AI is optional. This saved lab currently supports your own work. New AI
-                channel/content proposals are not enabled until their source, cost and quality
-                checks pass.
+                AI is optional. This lab saves your own work. The workshop’s AI practice uses only
+                the fictional StudyLoop case. AI proposals grounded in private project evidence
+                remain planned.
               </p>
             </Card>
           </div>
