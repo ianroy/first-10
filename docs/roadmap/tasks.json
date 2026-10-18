@@ -1049,7 +1049,7 @@
       "id": "SEC-002",
       "title": "Database policy test harness with distinct identities",
       "phase": "P1",
-      "status": "not_started",
+      "status": "in_progress",
       "owner": "agent",
       "size": "S",
       "kind": "implementation",
@@ -1097,14 +1097,25 @@
         {
           "date": "2026-10-17",
           "text": "Scheduled by Iteration 5; no implementation or validation claimed."
+        },
+        {
+          "date": "2026-10-18",
+          "text": "Claimed for the authorized autonomous demo run."
         }
       ],
-      "claim": null,
+      "claim": {
+        "owner": "policy_worker",
+        "branch": "codex/sec-002-autonomous",
+        "base_commit": "ea513579d638ce82525c7d134a047c3703ba34c1",
+        "worktree": "/Users/ianroy/.codex/worktrees/first-ten-access/First 10",
+        "started_at": "2026-10-18T03:38:10.500203+00:00",
+        "lease_expires_at": "2026-10-18T05:38:10.500203+00:00"
+      },
       "completion_evidence": [],
       "subtasks": [
         {
           "id": "SEC-002.s1",
-          "status": "not_started",
+          "status": "in_progress",
           "instruction": "Use a disposable local/test database and seed unrelated owners and project/contact pairs.",
           "notes": []
         },
@@ -2299,7 +2310,7 @@
       "id": "BR-001",
       "title": "Translate company values into two accessible brand directions",
       "phase": "P2",
-      "status": "in_progress",
+      "status": "complete",
       "owner": "agent",
       "size": "S",
       "kind": "documentation",
@@ -2347,33 +2358,30 @@
         {
           "date": "2026-10-18",
           "text": "Claimed after OPS-001 for a stage-ready academic/entrepreneurship brand direction. User delegates routine design decisions."
+        },
+        {
+          "date": "2026-10-18",
+          "text": "Field notebook selected; 76 contrast checks, desktop/mobile layouts and keyboard focus passed. Actual CSS follows BR-002."
         }
       ],
-      "claim": {
-        "owner": "brand_worker",
-        "branch": "codex/br-001-autonomous",
-        "base_commit": "84003f6fcbd7c9facdbc2bbafd2e5c09db3b8d0a",
-        "worktree": "/Users/ianroy/.codex/worktrees/first-ten-ops/First 10",
-        "started_at": "2026-10-18T03:34:01.551568+00:00",
-        "lease_expires_at": "2026-10-18T05:34:01.551568+00:00"
-      },
-      "completion_evidence": [],
+      "claim": null,
+      "completion_evidence": ["d8d78308ccb6fafcca82ea8a0d001796751bcfe8"],
       "subtasks": [
         {
           "id": "BR-001.s1",
-          "status": "in_progress",
+          "status": "complete",
           "instruction": "Show two compact directions on a hero, mobile interview card and lesson page.",
           "notes": []
         },
         {
           "id": "BR-001.s2",
-          "status": "not_started",
+          "status": "complete",
           "instruction": "Define semantic colors, typography, spacing, focus, status and reduced-motion choices; check contrast for actual pairings.",
           "notes": []
         },
         {
           "id": "BR-001.s3",
-          "status": "not_started",
+          "status": "complete",
           "instruction": "Select and document one direction against the values charter and learning context; avoid success theater and color-only meaning.",
           "notes": []
         }
@@ -2545,7 +2553,7 @@
       "id": "WEB-001",
       "title": "Write the founder sales narrative and demo storyboard",
       "phase": "P2",
-      "status": "in_progress",
+      "status": "complete",
       "owner": "agent",
       "size": "S",
       "kind": "documentation",
@@ -2593,33 +2601,30 @@
         {
           "date": "2026-10-18",
           "text": "Claimed for the authorized autonomous demo run."
+        },
+        {
+          "date": "2026-10-18",
+          "text": "Founder/educator narrative, StudyLoop storyboard, six pedagogical concepts and 27-claim map integrated. Formatting and 29 local links passed."
         }
       ],
-      "claim": {
-        "owner": "marketing_worker",
-        "branch": "codex/web-001-autonomous",
-        "base_commit": "aca7e0d5c659989317c6f8fe4cf8a50351533089",
-        "worktree": "/Users/ianroy/.codex/worktrees/first-ten-value/First 10",
-        "started_at": "2026-10-18T03:35:50.898084+00:00",
-        "lease_expires_at": "2026-10-18T05:35:50.898084+00:00"
-      },
-      "completion_evidence": [],
+      "claim": null,
+      "completion_evidence": ["006ec00995e5e38772d10e6647f14fd43e943978"],
       "subtasks": [
         {
           "id": "WEB-001.s1",
-          "status": "in_progress",
+          "status": "complete",
           "instruction": "Draft founder hero, concrete before/after workflow, honest limits, CTA and separate educator route.",
           "notes": []
         },
         {
           "id": "WEB-001.s2",
-          "status": "not_started",
+          "status": "complete",
           "instruction": "Tie each factual claim to current code/docs; label proposed capabilities and fictional examples.",
           "notes": []
         },
         {
           "id": "WEB-001.s3",
-          "status": "not_started",
+          "status": "complete",
           "instruction": "Storyboard a conversation-to-evidence-to-next-action demo and stack explainer without implying customer traction.",
           "notes": []
         }
@@ -2640,9 +2645,11 @@
         "src/components/demo/**",
         "src/lib/demo/**",
         "public/demo/**",
-        "src/tests/web-002/**"
+        "src/tests/web-002/**",
+        "src/routes/demo.tsx",
+        "src/tests/demo/**"
       ],
-      "exclusive_locks": [],
+      "exclusive_locks": ["route-integration"],
       "read_first": [
         "ProductSpec.md",
         "FEATUREROADMAP_workplan.md",
@@ -5947,7 +5954,8 @@
         "EV-004",
         "EV-005",
         "EV-006",
-        "EV-007"
+        "EV-007",
+        "MKT-008"
       ],
       "requires_decisions": [],
       "write_scope": [
@@ -8341,15 +8349,15 @@
     {
       "id": "P-001b",
       "title": "Factual five-minute sales/pitch deck after release evidence",
-      "phase": "HOLD",
-      "status": "deferred",
+      "phase": "P2",
+      "status": "not_started",
       "owner": "agent",
       "size": "M",
       "kind": "documentation",
-      "priority": 50,
-      "depends_on": ["REL-005"],
+      "priority": 12,
+      "depends_on": ["WEB-001", "BR-001", "MKT-001", "WEB-003"],
       "requires_decisions": [],
-      "write_scope": ["docs/pitch/**"],
+      "write_scope": ["docs/demo/pitch/**", "public/pitch/**"],
       "exclusive_locks": [],
       "read_first": [
         "ProductSpec.md",
@@ -8357,21 +8365,21 @@
         "research/claim-ledger.md",
         "research/synthesis.md"
       ],
-      "goal": "Tell the value story using delivered capabilities, labeled examples and actual evidence rather than planned traction.",
+      "goal": "Create a polished workshop pitch deck linking pedagogy, live demo, $0 marketing and current technical architecture.",
       "steps": [
-        "Activate when a pitch/review use is scheduled after REL-005; audit current release and research evidence, separating observed outcomes, fictional demo and remaining hypotheses.",
-        "Create a concise deck with speaker notes, founder/teacher messages, current walkthrough, honest evidence status, business-model hypothesis and a concrete ask; reuse WEB-003 schematics only when still accurate.",
-        "Render/check the artifact, verify each claim/number/source and have the human time a rehearsal; preserve a usable export and source files."
+        "Write a 3–5 minute pitch with a 90-second fallback: classroom problem, founder evidence loop, StudyLoop demo, $0 marketing lab, named pedagogical concepts, stack and invitation.",
+        "Author the editable deck using the Presentations skill and selected brand; cite the owner’s slides/board and primary pedagogy sources, and label demo/planned material.",
+        "Render and inspect every slide; rehearse the live-demo handoff, preserve readable offline story and provide a presentable deck link/artifact."
       ],
       "acceptance": [
-        "Every capability/metric/testimonial is supported or visibly labeled sample/planned/unmeasured; no nonexistent table, teacher feature or evaluation result appears as shipped.",
-        "The deck renders without clipping, links to dated sources and fits the timed five-minute human rehearsal or records the missing rehearsal explicitly."
+        "Landing and deck name the same core pedagogical concepts and show a visible student activity for each.",
+        "No invented testimonials, adoption, learning gains or unshipped features appear as factual outcomes; each slide is legible and the demo handoff works."
       ],
       "verification_profile": "documentation",
       "verification": [
-        "Every capability/metric/testimonial is supported or visibly labeled sample/planned/unmeasured; no nonexistent table, teacher feature or evaluation result appears as shipped.",
-        "The deck renders without clipping, links to dated sources and fits the timed five-minute human rehearsal or records the missing rehearsal explicitly.",
-        "Check source claims, links, dates and rendered/readable diagrams or artifacts; run roadmap --check after coordinator updates. No product pass inferred from documentation."
+        "Landing and deck name the same core pedagogical concepts and show a visible student activity for each.",
+        "No invented testimonials, adoption, learning gains or unshipped features appear as factual outcomes; each slide is legible and the demo handoff works.",
+        "Render every slide, review actual text fit/readability and link/source facts; rehearse timing and offline fallback."
       ],
       "metric": "Claim/source coverage, factual comprehension and actual rehearsal duration; not investor interest or revenue without evidence.",
       "rollback": "Replace the deck with the last factual version and remove stale screenshots/claims; retain editable source and ordinary Git history.",
@@ -8384,6 +8392,10 @@
         {
           "date": "2026-10-17",
           "text": "Deferred pitch-deck portion of legacy P-001. WEB-003 delivers factual schematics earlier; this deck is not a dependency for public pages or engineering and requires current REL-005 release evidence plus a real presentation purpose."
+        },
+        {
+          "date": "2026-10-18",
+          "text": "Promoted by explicit owner request for tomorrow’s Babson pitch. Build an evidence-honest current-capability/proposed-roadmap deck with named pedagogy; no invented traction or research outcomes. Original outcome-based deck dependency is superseded by this event need."
         }
       ],
       "claim": null,
@@ -8391,20 +8403,784 @@
       "subtasks": [
         {
           "id": "P-001b.s1",
-          "status": "deferred",
-          "instruction": "Activate when a pitch/review use is scheduled after REL-005; audit current release and research evidence, separating observed outcomes, fictional demo and remaining hypotheses.",
+          "status": "not_started",
+          "instruction": "Write a 3–5 minute pitch with a 90-second fallback: classroom problem, founder evidence loop, StudyLoop demo, $0 marketing lab, named pedagogical concepts, stack and invitation.",
           "notes": []
         },
         {
           "id": "P-001b.s2",
-          "status": "deferred",
-          "instruction": "Create a concise deck with speaker notes, founder/teacher messages, current walkthrough, honest evidence status, business-model hypothesis and a concrete ask; reuse WEB-003 schematics only when still accurate.",
+          "status": "not_started",
+          "instruction": "Author the editable deck using the Presentations skill and selected brand; cite the owner’s slides/board and primary pedagogy sources, and label demo/planned material.",
           "notes": []
         },
         {
           "id": "P-001b.s3",
-          "status": "deferred",
-          "instruction": "Render/check the artifact, verify each claim/number/source and have the human time a rehearsal; preserve a usable export and source files.",
+          "status": "not_started",
+          "instruction": "Render and inspect every slide; rehearse the live-demo handoff, preserve readable offline story and provide a presentable deck link/artifact.",
+          "notes": []
+        }
+      ]
+    },
+    {
+      "id": "MKT-001",
+      "title": "Define the $0 marketing lab and its teaching contract",
+      "phase": "P2",
+      "status": "not_started",
+      "owner": "agent",
+      "size": "S",
+      "kind": "documentation",
+      "priority": 10,
+      "depends_on": ["SEC-001", "VP-007"],
+      "requires_decisions": [],
+      "write_scope": ["docs/marketing/marketing-lab-contract.md", "docs/teaching/pedagogy-map.md"],
+      "exclusive_locks": [],
+      "read_first": [
+        "ProductSpec.md",
+        "FEATUREROADMAP_workplan.md",
+        "docs/demo/babson-pitch-brief.md",
+        "docs/architecture/access-contract.md"
+      ],
+      "goal": "Turn the owner’s audience/channel/content/funnel board into a coherent student-led experiment workflow.",
+      "steps": [
+        "Map the supplied BUS131 slides and board to audience, evidence/unknowns, specific physical/digital channels, reviewed content, resource limits and a one-week test.",
+        "Define typed versioned plan/channel/asset/test/measurement contracts, private data boundaries and separate AI kinds; specify stage-2 entry without silently changing current stage unlocks.",
+        "Name the pedagogy with source links and visible product practices: experiential learning, student-generated thinking before AI, scaffolding, formative feedback, reflection and responsible AI."
+      ],
+      "acceptance": [
+        "A less experienced agent can implement the exact workflow and data contracts without inventing fake community verification, free printing or adoption results.",
+        "The landing/lesson/deck can explain the educational mechanism; no claim of proven First Ten learning efficacy."
+      ],
+      "verification_profile": "product",
+      "verification": [
+        "A less experienced agent can implement the exact workflow and data contracts without inventing fake community verification, free printing or adoption results.",
+        "The landing/lesson/deck can explain the educational mechanism; no claim of proven First Ten learning efficacy.",
+        "Run applicable lint/typecheck/focused tests/build and actual browser walkthrough; real isolated policy tests for database/auth work, capped per-kind evaluation for paid AI. Record unrun checks honestly."
+      ],
+      "metric": "Completed useful workflow, source/permission integrity, recovery failures and measured AI cost where applicable.",
+      "rollback": "Disable the affected entry point/AI kind; preserve existing private records, prior plan revisions and the tested demonstration fallback.",
+      "agent_notes": {
+        "starting_point": "Owner-requested addition during the autonomous run for tomorrow’s Babson demo. Use the approved marketing-lab contract and existing contracts; no fictional evidence may become a claim of real research.",
+        "stop_and_report": "Record the exact missing environment, permission, budget or human evidence, preserve partial work, and continue another eligible task. Do not bypass gates or widen access.",
+        "handoff": "Report scoped files, commit, checks/results, migration/type contracts, measured spend, remaining blockers and rollback. Coordinator owns registry/status/integration."
+      },
+      "notes": [
+        {
+          "date": "2026-10-18",
+          "text": "Explicitly requested by owner: Next 50 $0 marketing activity inspired by BUS131 slides and whiteboard; pedagogy must appear in landing/pitch; original logo and fixed favicon requested."
+        }
+      ],
+      "claim": null,
+      "completion_evidence": [],
+      "subtasks": [
+        {
+          "id": "MKT-001.s1",
+          "status": "not_started",
+          "instruction": "Map the supplied BUS131 slides and board to audience, evidence/unknowns, specific physical/digital channels, reviewed content, resource limits and a one-week test.",
+          "notes": []
+        },
+        {
+          "id": "MKT-001.s2",
+          "status": "not_started",
+          "instruction": "Define typed versioned plan/channel/asset/test/measurement contracts, private data boundaries and separate AI kinds; specify stage-2 entry without silently changing current stage unlocks.",
+          "notes": []
+        },
+        {
+          "id": "MKT-001.s3",
+          "status": "not_started",
+          "instruction": "Name the pedagogy with source links and visible product practices: experiential learning, student-generated thinking before AI, scaffolding, formative feedback, reflection and responsible AI.",
+          "notes": []
+        }
+      ]
+    },
+    {
+      "id": "MKT-002",
+      "title": "Persist versioned private marketing plans",
+      "phase": "P3",
+      "status": "not_started",
+      "owner": "agent",
+      "size": "S",
+      "kind": "implementation",
+      "priority": 10,
+      "depends_on": ["MKT-001", "SEC-003"],
+      "requires_decisions": [],
+      "write_scope": [
+        "supabase/migrations/**",
+        "src/integrations/supabase/types.ts",
+        "src/lib/marketing.functions.ts",
+        "src/lib/marketing-plan.ts",
+        "src/lib/marketing-plan.test.ts",
+        "supabase/tests/marketing.sql"
+      ],
+      "exclusive_locks": ["database-schema", "generated-types"],
+      "read_first": [
+        "ProductSpec.md",
+        "FEATUREROADMAP_workplan.md",
+        "docs/demo/babson-pitch-brief.md",
+        "docs/architecture/access-contract.md"
+      ],
+      "goal": "Save a project’s marketing board with strict validation and conflict-safe revisions.",
+      "steps": [
+        "Create one private plan per project with owner/project consistency, JSON shape/size bounds and revision timestamps.",
+        "Implement authenticated load/save with expected revision and safe defaults; preserve unknown measurements rather than inventing zeros or results.",
+        "Test two unrelated identities, forged project references, stale concurrent writes and migration compatibility."
+      ],
+      "acceptance": [
+        "A user cannot read/update another project plan or use a conflicting save to silently overwrite it.",
+        "The plan survives reload and schema errors preserve previous saved content."
+      ],
+      "verification_profile": "product",
+      "verification": [
+        "A user cannot read/update another project plan or use a conflicting save to silently overwrite it.",
+        "The plan survives reload and schema errors preserve previous saved content.",
+        "Run applicable lint/typecheck/focused tests/build and actual browser walkthrough; real isolated policy tests for database/auth work, capped per-kind evaluation for paid AI. Record unrun checks honestly."
+      ],
+      "metric": "Completed useful workflow, source/permission integrity, recovery failures and measured AI cost where applicable.",
+      "rollback": "Disable the affected entry point/AI kind; preserve existing private records, prior plan revisions and the tested demonstration fallback.",
+      "agent_notes": {
+        "starting_point": "Owner-requested addition during the autonomous run for tomorrow’s Babson demo. Use the approved marketing-lab contract and existing contracts; no fictional evidence may become a claim of real research.",
+        "stop_and_report": "Record the exact missing environment, permission, budget or human evidence, preserve partial work, and continue another eligible task. Do not bypass gates or widen access.",
+        "handoff": "Report scoped files, commit, checks/results, migration/type contracts, measured spend, remaining blockers and rollback. Coordinator owns registry/status/integration."
+      },
+      "notes": [
+        {
+          "date": "2026-10-18",
+          "text": "Explicitly requested by owner: Next 50 $0 marketing activity inspired by BUS131 slides and whiteboard; pedagogy must appear in landing/pitch; original logo and fixed favicon requested."
+        }
+      ],
+      "claim": null,
+      "completion_evidence": [],
+      "subtasks": [
+        {
+          "id": "MKT-002.s1",
+          "status": "not_started",
+          "instruction": "Create one private plan per project with owner/project consistency, JSON shape/size bounds and revision timestamps.",
+          "notes": []
+        },
+        {
+          "id": "MKT-002.s2",
+          "status": "not_started",
+          "instruction": "Implement authenticated load/save with expected revision and safe defaults; preserve unknown measurements rather than inventing zeros or results.",
+          "notes": []
+        },
+        {
+          "id": "MKT-002.s3",
+          "status": "not_started",
+          "instruction": "Test two unrelated identities, forged project references, stale concurrent writes and migration compatibility.",
+          "notes": []
+        }
+      ]
+    },
+    {
+      "id": "MKT-003",
+      "title": "Build the guided Next 50 marketing workspace",
+      "phase": "P4",
+      "status": "not_started",
+      "owner": "agent",
+      "size": "S",
+      "kind": "implementation",
+      "priority": 10,
+      "depends_on": ["MKT-002", "BR-002"],
+      "requires_decisions": [],
+      "write_scope": [
+        "src/routes/_authenticated/marketing.tsx",
+        "src/components/marketing-lab/**",
+        "src/components/AppShell.tsx",
+        "src/routes/_authenticated/outreach.tsx",
+        "src/tests/marketing-lab/**"
+      ],
+      "exclusive_locks": ["route-integration", "app-shell"],
+      "read_first": [
+        "ProductSpec.md",
+        "FEATUREROADMAP_workplan.md",
+        "docs/demo/babson-pitch-brief.md",
+        "docs/architecture/access-contract.md"
+      ],
+      "goal": "Guide students from a focused audience to two reachable channels and an executable $0 plan.",
+      "steps": [
+        "Start with students’ own audience/known evidence/unknowns and initial channel ideas before offering AI assistance.",
+        "Build a physical/digital channel board with exact place/link, observation, access/permission state, effort/time and primary/alternative selection; cap current commitments at two chosen channels.",
+        "Add saved/unsaved/conflict/retry states and stage-aware navigation using the explicitly supplied project id; retain current private project flow until WS-002 integration."
+      ],
+      "acceptance": [
+        "A stage-2 user can create/save/resume a complete plan with clear permission and resource questions.",
+        "The UI does not equate a suggested channel with permission, verified live research or customer demand."
+      ],
+      "verification_profile": "product",
+      "verification": [
+        "A stage-2 user can create/save/resume a complete plan with clear permission and resource questions.",
+        "The UI does not equate a suggested channel with permission, verified live research or customer demand.",
+        "Run applicable lint/typecheck/focused tests/build and actual browser walkthrough; real isolated policy tests for database/auth work, capped per-kind evaluation for paid AI. Record unrun checks honestly."
+      ],
+      "metric": "Completed useful workflow, source/permission integrity, recovery failures and measured AI cost where applicable.",
+      "rollback": "Disable the affected entry point/AI kind; preserve existing private records, prior plan revisions and the tested demonstration fallback.",
+      "agent_notes": {
+        "starting_point": "Owner-requested addition during the autonomous run for tomorrow’s Babson demo. Use the approved marketing-lab contract and existing contracts; no fictional evidence may become a claim of real research.",
+        "stop_and_report": "Record the exact missing environment, permission, budget or human evidence, preserve partial work, and continue another eligible task. Do not bypass gates or widen access.",
+        "handoff": "Report scoped files, commit, checks/results, migration/type contracts, measured spend, remaining blockers and rollback. Coordinator owns registry/status/integration."
+      },
+      "notes": [
+        {
+          "date": "2026-10-18",
+          "text": "Explicitly requested by owner: Next 50 $0 marketing activity inspired by BUS131 slides and whiteboard; pedagogy must appear in landing/pitch; original logo and fixed favicon requested."
+        }
+      ],
+      "claim": null,
+      "completion_evidence": [],
+      "subtasks": [
+        {
+          "id": "MKT-003.s1",
+          "status": "not_started",
+          "instruction": "Start with students’ own audience/known evidence/unknowns and initial channel ideas before offering AI assistance.",
+          "notes": []
+        },
+        {
+          "id": "MKT-003.s2",
+          "status": "not_started",
+          "instruction": "Build a physical/digital channel board with exact place/link, observation, access/permission state, effort/time and primary/alternative selection; cap current commitments at two chosen channels.",
+          "notes": []
+        },
+        {
+          "id": "MKT-003.s3",
+          "status": "not_started",
+          "instruction": "Add saved/unsaved/conflict/retry states and stage-aware navigation using the explicitly supplied project id; retain current private project flow until WS-002 integration.",
+          "notes": []
+        }
+      ]
+    },
+    {
+      "id": "MKT-004",
+      "title": "Add economical AI channel suggestions",
+      "phase": "P4",
+      "status": "not_started",
+      "owner": "agent",
+      "size": "S",
+      "kind": "implementation",
+      "priority": 10,
+      "depends_on": ["MKT-002", "AI-008"],
+      "requires_decisions": [],
+      "write_scope": [
+        "src/lib/ai.functions.ts",
+        "src/lib/ai/model-policy.ts",
+        "src/lib/ai/context.server.ts",
+        "src/lib/prompts/marketing-channels.ts",
+        "evals/fixtures/marketing-channels/**",
+        "evals/results/marketing-channels/**",
+        "src/components/marketing-lab/ChannelSuggestions.tsx"
+      ],
+      "exclusive_locks": ["ai-entrypoint"],
+      "read_first": [
+        "ProductSpec.md",
+        "FEATUREROADMAP_workplan.md",
+        "docs/demo/babson-pitch-brief.md",
+        "docs/architecture/access-contract.md"
+      ],
+      "goal": "Use authorized reviewed learning to propose plausible places to investigate.",
+      "steps": [
+        "Add marketing_channels through generateAI with strict input/output schema, plan/project scope and whole-record authorized context.",
+        "Evaluate an eligible cheap route; distinguish supplied observation from model hypothesis and never fabricate verified links, current rules or access.",
+        "Let the student review/edit/adopt suggestions into the saved board; meter every attempt and keep manual channel creation."
+      ],
+      "acceptance": [
+        "All suggestions are labeled proposals with a verification/permission question, and citations refer only to supplied authorized sources.",
+        "Per-kind quality/privacy/budget tests pass before enabling paid generation."
+      ],
+      "verification_profile": "product",
+      "verification": [
+        "All suggestions are labeled proposals with a verification/permission question, and citations refer only to supplied authorized sources.",
+        "Per-kind quality/privacy/budget tests pass before enabling paid generation.",
+        "Run applicable lint/typecheck/focused tests/build and actual browser walkthrough; real isolated policy tests for database/auth work, capped per-kind evaluation for paid AI. Record unrun checks honestly."
+      ],
+      "metric": "Completed useful workflow, source/permission integrity, recovery failures and measured AI cost where applicable.",
+      "rollback": "Disable the affected entry point/AI kind; preserve existing private records, prior plan revisions and the tested demonstration fallback.",
+      "agent_notes": {
+        "starting_point": "Owner-requested addition during the autonomous run for tomorrow’s Babson demo. Use the approved marketing-lab contract and existing contracts; no fictional evidence may become a claim of real research.",
+        "stop_and_report": "Record the exact missing environment, permission, budget or human evidence, preserve partial work, and continue another eligible task. Do not bypass gates or widen access.",
+        "handoff": "Report scoped files, commit, checks/results, migration/type contracts, measured spend, remaining blockers and rollback. Coordinator owns registry/status/integration."
+      },
+      "notes": [
+        {
+          "date": "2026-10-18",
+          "text": "Explicitly requested by owner: Next 50 $0 marketing activity inspired by BUS131 slides and whiteboard; pedagogy must appear in landing/pitch; original logo and fixed favicon requested."
+        }
+      ],
+      "claim": null,
+      "completion_evidence": [],
+      "subtasks": [
+        {
+          "id": "MKT-004.s1",
+          "status": "not_started",
+          "instruction": "Add marketing_channels through generateAI with strict input/output schema, plan/project scope and whole-record authorized context.",
+          "notes": []
+        },
+        {
+          "id": "MKT-004.s2",
+          "status": "not_started",
+          "instruction": "Evaluate an eligible cheap route; distinguish supplied observation from model hypothesis and never fabricate verified links, current rules or access.",
+          "notes": []
+        },
+        {
+          "id": "MKT-004.s3",
+          "status": "not_started",
+          "instruction": "Let the student review/edit/adopt suggestions into the saved board; meter every attempt and keep manual channel creation.",
+          "notes": []
+        }
+      ]
+    },
+    {
+      "id": "MKT-005",
+      "title": "Generate reviewed content tailored to each channel",
+      "phase": "P4",
+      "status": "not_started",
+      "owner": "agent",
+      "size": "S",
+      "kind": "implementation",
+      "priority": 10,
+      "depends_on": ["MKT-003", "AI-008"],
+      "requires_decisions": [],
+      "write_scope": [
+        "src/lib/ai.functions.ts",
+        "src/lib/ai/model-policy.ts",
+        "src/lib/ai/context.server.ts",
+        "src/lib/prompts/marketing-content.ts",
+        "evals/fixtures/marketing-content/**",
+        "evals/results/marketing-content/**",
+        "src/components/marketing-lab/ContentStudio.tsx"
+      ],
+      "exclusive_locks": ["ai-entrypoint", "marketing-editor"],
+      "read_first": [
+        "ProductSpec.md",
+        "FEATUREROADMAP_workplan.md",
+        "docs/demo/babson-pitch-brief.md",
+        "docs/architecture/access-contract.md"
+      ],
+      "goal": "Help students make one usable asset whose promise and next action fit a chosen channel.",
+      "steps": [
+        "Add marketing_content kind for a selected saved channel, truthful value proposition, destination and format: community post, organizer email/DM, demo script, social caption or flyer text.",
+        "Generate bounded low-cost drafts with hook, truthful support, builder disclosure, CTA and channel-specific review checks; no auto-send/post, fabricated testimonials or unsupplied claims.",
+        "Provide edit/copy/save/version handling and a peer comprehension check; retain manual writing and previous content on failures."
+      ],
+      "acceptance": [
+        "A student can make and revise a real channel-specific draft, inspect what context was used and copy it deliberately.",
+        "Source/claim/schema/cost evaluation passes and late responses never overwrite a newer plan revision."
+      ],
+      "verification_profile": "product",
+      "verification": [
+        "A student can make and revise a real channel-specific draft, inspect what context was used and copy it deliberately.",
+        "Source/claim/schema/cost evaluation passes and late responses never overwrite a newer plan revision.",
+        "Run applicable lint/typecheck/focused tests/build and actual browser walkthrough; real isolated policy tests for database/auth work, capped per-kind evaluation for paid AI. Record unrun checks honestly."
+      ],
+      "metric": "Completed useful workflow, source/permission integrity, recovery failures and measured AI cost where applicable.",
+      "rollback": "Disable the affected entry point/AI kind; preserve existing private records, prior plan revisions and the tested demonstration fallback.",
+      "agent_notes": {
+        "starting_point": "Owner-requested addition during the autonomous run for tomorrow’s Babson demo. Use the approved marketing-lab contract and existing contracts; no fictional evidence may become a claim of real research.",
+        "stop_and_report": "Record the exact missing environment, permission, budget or human evidence, preserve partial work, and continue another eligible task. Do not bypass gates or widen access.",
+        "handoff": "Report scoped files, commit, checks/results, migration/type contracts, measured spend, remaining blockers and rollback. Coordinator owns registry/status/integration."
+      },
+      "notes": [
+        {
+          "date": "2026-10-18",
+          "text": "Explicitly requested by owner: Next 50 $0 marketing activity inspired by BUS131 slides and whiteboard; pedagogy must appear in landing/pitch; original logo and fixed favicon requested."
+        }
+      ],
+      "claim": null,
+      "completion_evidence": [],
+      "subtasks": [
+        {
+          "id": "MKT-005.s1",
+          "status": "not_started",
+          "instruction": "Add marketing_content kind for a selected saved channel, truthful value proposition, destination and format: community post, organizer email/DM, demo script, social caption or flyer text.",
+          "notes": []
+        },
+        {
+          "id": "MKT-005.s2",
+          "status": "not_started",
+          "instruction": "Generate bounded low-cost drafts with hook, truthful support, builder disclosure, CTA and channel-specific review checks; no auto-send/post, fabricated testimonials or unsupplied claims.",
+          "notes": []
+        },
+        {
+          "id": "MKT-005.s3",
+          "status": "not_started",
+          "instruction": "Provide edit/copy/save/version handling and a peer comprehension check; retain manual writing and previous content on failures.",
+          "notes": []
+        }
+      ]
+    },
+    {
+      "id": "MKT-006",
+      "title": "Plan a one-week test and measure useful action",
+      "phase": "P5",
+      "status": "not_started",
+      "owner": "agent",
+      "size": "S",
+      "kind": "implementation",
+      "priority": 10,
+      "depends_on": ["MKT-003"],
+      "requires_decisions": [],
+      "write_scope": [
+        "src/components/marketing-lab/TestPlanner.tsx",
+        "src/components/marketing-lab/ResultsReview.tsx",
+        "src/lib/marketing-metrics.ts",
+        "src/lib/marketing-metrics.test.ts",
+        "src/lib/marketing.functions.ts"
+      ],
+      "exclusive_locks": ["marketing-editor"],
+      "read_first": [
+        "ProductSpec.md",
+        "FEATUREROADMAP_workplan.md",
+        "docs/demo/babson-pitch-brief.md",
+        "docs/architecture/access-contract.md"
+      ],
+      "goal": "Connect each channel/asset to a small test, honest funnel counts and a next decision.",
+      "steps": [
+        "Define owner/deadline/dependencies/definition-of-done, time/resource limits, primary useful action, baseline/target and fallback without paid ads or assumed free resources.",
+        "Create safe attributable destination URLs where supplied, record manual counts with date/source, and show reach/visits/useful action/return separately; no claim of automatic analytics integration.",
+        "Calculate rates only from valid labeled denominators and record repeat/revise/stop plus supporting evidence; offer a readable export/copy of the plan."
+      ],
+      "acceptance": [
+        "Unknown baseline/results remain unknown; test/demo/classmate/outside-user records are distinguishable.",
+        "A zero or missing denominator never yields a misleading conversion rate, and $0 cash is not represented as unlimited time or free AI."
+      ],
+      "verification_profile": "product",
+      "verification": [
+        "Unknown baseline/results remain unknown; test/demo/classmate/outside-user records are distinguishable.",
+        "A zero or missing denominator never yields a misleading conversion rate, and $0 cash is not represented as unlimited time or free AI.",
+        "Run applicable lint/typecheck/focused tests/build and actual browser walkthrough; real isolated policy tests for database/auth work, capped per-kind evaluation for paid AI. Record unrun checks honestly."
+      ],
+      "metric": "Completed useful workflow, source/permission integrity, recovery failures and measured AI cost where applicable.",
+      "rollback": "Disable the affected entry point/AI kind; preserve existing private records, prior plan revisions and the tested demonstration fallback.",
+      "agent_notes": {
+        "starting_point": "Owner-requested addition during the autonomous run for tomorrow’s Babson demo. Use the approved marketing-lab contract and existing contracts; no fictional evidence may become a claim of real research.",
+        "stop_and_report": "Record the exact missing environment, permission, budget or human evidence, preserve partial work, and continue another eligible task. Do not bypass gates or widen access.",
+        "handoff": "Report scoped files, commit, checks/results, migration/type contracts, measured spend, remaining blockers and rollback. Coordinator owns registry/status/integration."
+      },
+      "notes": [
+        {
+          "date": "2026-10-18",
+          "text": "Explicitly requested by owner: Next 50 $0 marketing activity inspired by BUS131 slides and whiteboard; pedagogy must appear in landing/pitch; original logo and fixed favicon requested."
+        }
+      ],
+      "claim": null,
+      "completion_evidence": [],
+      "subtasks": [
+        {
+          "id": "MKT-006.s1",
+          "status": "not_started",
+          "instruction": "Define owner/deadline/dependencies/definition-of-done, time/resource limits, primary useful action, baseline/target and fallback without paid ads or assumed free resources.",
+          "notes": []
+        },
+        {
+          "id": "MKT-006.s2",
+          "status": "not_started",
+          "instruction": "Create safe attributable destination URLs where supplied, record manual counts with date/source, and show reach/visits/useful action/return separately; no claim of automatic analytics integration.",
+          "notes": []
+        },
+        {
+          "id": "MKT-006.s3",
+          "status": "not_started",
+          "instruction": "Calculate rates only from valid labeled denominators and record repeat/revise/stop plus supporting evidence; offer a readable export/copy of the plan.",
+          "notes": []
+        }
+      ]
+    },
+    {
+      "id": "MKT-007",
+      "title": "Extend the public demo with the marketing board",
+      "phase": "P2",
+      "status": "not_started",
+      "owner": "agent",
+      "size": "S",
+      "kind": "implementation",
+      "priority": 10,
+      "depends_on": ["MKT-001", "WEB-002", "BR-002"],
+      "requires_decisions": [],
+      "write_scope": [
+        "src/components/demo/**",
+        "src/lib/demo/**",
+        "src/routes/demo.tsx",
+        "public/demo/**",
+        "docs/demo/marketing-rehearsal.md"
+      ],
+      "exclusive_locks": ["route-integration"],
+      "read_first": [
+        "ProductSpec.md",
+        "FEATUREROADMAP_workplan.md",
+        "docs/demo/babson-pitch-brief.md",
+        "docs/architecture/access-contract.md"
+      ],
+      "goal": "Show the full discovery-to-$0-reach learning loop reliably on stage.",
+      "steps": [
+        "Continue StudyLoop from its chosen audience into a sample channel board with one campus-club route and one digital alternative.",
+        "Let visitors choose a channel, inspect a labeled sample content draft and define/inspect a proposed measurement; show peer-check and reflection prompts.",
+        "Keep reset/deep-link/keyboard/mobile behavior deterministic without login, provider calls or production writes; distinguish sample numbers and proposed results."
+      ],
+      "acceptance": [
+        "The extended demo completes without paid AI or network data and clearly explains student reasoning and human review.",
+        "No fictional quote, generated asset or example count is represented as real traction or class-study evidence."
+      ],
+      "verification_profile": "product",
+      "verification": [
+        "The extended demo completes without paid AI or network data and clearly explains student reasoning and human review.",
+        "No fictional quote, generated asset or example count is represented as real traction or class-study evidence.",
+        "Run applicable lint/typecheck/focused tests/build and actual browser walkthrough; real isolated policy tests for database/auth work, capped per-kind evaluation for paid AI. Record unrun checks honestly."
+      ],
+      "metric": "Completed useful workflow, source/permission integrity, recovery failures and measured AI cost where applicable.",
+      "rollback": "Disable the affected entry point/AI kind; preserve existing private records, prior plan revisions and the tested demonstration fallback.",
+      "agent_notes": {
+        "starting_point": "Owner-requested addition during the autonomous run for tomorrow’s Babson demo. Use the approved marketing-lab contract and existing contracts; no fictional evidence may become a claim of real research.",
+        "stop_and_report": "Record the exact missing environment, permission, budget or human evidence, preserve partial work, and continue another eligible task. Do not bypass gates or widen access.",
+        "handoff": "Report scoped files, commit, checks/results, migration/type contracts, measured spend, remaining blockers and rollback. Coordinator owns registry/status/integration."
+      },
+      "notes": [
+        {
+          "date": "2026-10-18",
+          "text": "Explicitly requested by owner: Next 50 $0 marketing activity inspired by BUS131 slides and whiteboard; pedagogy must appear in landing/pitch; original logo and fixed favicon requested."
+        }
+      ],
+      "claim": null,
+      "completion_evidence": [],
+      "subtasks": [
+        {
+          "id": "MKT-007.s1",
+          "status": "not_started",
+          "instruction": "Continue StudyLoop from its chosen audience into a sample channel board with one campus-club route and one digital alternative.",
+          "notes": []
+        },
+        {
+          "id": "MKT-007.s2",
+          "status": "not_started",
+          "instruction": "Let visitors choose a channel, inspect a labeled sample content draft and define/inspect a proposed measurement; show peer-check and reflection prompts.",
+          "notes": []
+        },
+        {
+          "id": "MKT-007.s3",
+          "status": "not_started",
+          "instruction": "Keep reset/deep-link/keyboard/mobile behavior deterministic without login, provider calls or production writes; distinguish sample numbers and proposed results.",
+          "notes": []
+        }
+      ]
+    },
+    {
+      "id": "MKT-008",
+      "title": "Verify the integrated marketing and AI journeys",
+      "phase": "P7",
+      "status": "not_started",
+      "owner": "agent",
+      "size": "S",
+      "kind": "implementation",
+      "priority": 10,
+      "depends_on": ["MKT-003", "MKT-004", "MKT-005", "MKT-006", "MKT-007"],
+      "requires_decisions": [],
+      "write_scope": ["src/tests/marketing-release/**", "docs/qa/marketing-gate.md"],
+      "exclusive_locks": [],
+      "read_first": [
+        "ProductSpec.md",
+        "FEATUREROADMAP_workplan.md",
+        "docs/demo/babson-pitch-brief.md",
+        "docs/architecture/access-contract.md"
+      ],
+      "goal": "Confirm the $0 marketing feature works end to end before enabling it for real testers.",
+      "steps": [
+        "Exercise founder/teacher-review projection where implemented, two-account plan access, stage navigation, revisions and provider failures.",
+        "Run the actual browser path audience→channel→asset→test→measurement→reflection on desktop/mobile/keyboard.",
+        "Check actual spend, permission disclosures and factual claims; fix critical failures and document enabled/manual/demo-only capabilities."
+      ],
+      "acceptance": [
+        "No unauthorized content, lost acknowledged plan, unbounded AI call or automatic external outreach occurs.",
+        "The presenter can distinguish the live feature, fictional public demo and unperformed market experiment."
+      ],
+      "verification_profile": "product",
+      "verification": [
+        "No unauthorized content, lost acknowledged plan, unbounded AI call or automatic external outreach occurs.",
+        "The presenter can distinguish the live feature, fictional public demo and unperformed market experiment.",
+        "Run applicable lint/typecheck/focused tests/build and actual browser walkthrough; real isolated policy tests for database/auth work, capped per-kind evaluation for paid AI. Record unrun checks honestly."
+      ],
+      "metric": "Completed useful workflow, source/permission integrity, recovery failures and measured AI cost where applicable.",
+      "rollback": "Disable the affected entry point/AI kind; preserve existing private records, prior plan revisions and the tested demonstration fallback.",
+      "agent_notes": {
+        "starting_point": "Owner-requested addition during the autonomous run for tomorrow’s Babson demo. Use the approved marketing-lab contract and existing contracts; no fictional evidence may become a claim of real research.",
+        "stop_and_report": "Record the exact missing environment, permission, budget or human evidence, preserve partial work, and continue another eligible task. Do not bypass gates or widen access.",
+        "handoff": "Report scoped files, commit, checks/results, migration/type contracts, measured spend, remaining blockers and rollback. Coordinator owns registry/status/integration."
+      },
+      "notes": [
+        {
+          "date": "2026-10-18",
+          "text": "Explicitly requested by owner: Next 50 $0 marketing activity inspired by BUS131 slides and whiteboard; pedagogy must appear in landing/pitch; original logo and fixed favicon requested."
+        }
+      ],
+      "claim": null,
+      "completion_evidence": [],
+      "subtasks": [
+        {
+          "id": "MKT-008.s1",
+          "status": "not_started",
+          "instruction": "Exercise founder/teacher-review projection where implemented, two-account plan access, stage navigation, revisions and provider failures.",
+          "notes": []
+        },
+        {
+          "id": "MKT-008.s2",
+          "status": "not_started",
+          "instruction": "Run the actual browser path audience→channel→asset→test→measurement→reflection on desktop/mobile/keyboard.",
+          "notes": []
+        },
+        {
+          "id": "MKT-008.s3",
+          "status": "not_started",
+          "instruction": "Check actual spend, permission disclosures and factual claims; fix critical failures and document enabled/manual/demo-only capabilities.",
+          "notes": []
+        }
+      ]
+    },
+    {
+      "id": "BR-004",
+      "title": "Create the First Ten logo and replace the favicon",
+      "phase": "P2",
+      "status": "not_started",
+      "owner": "agent",
+      "size": "S",
+      "kind": "implementation",
+      "priority": 10,
+      "depends_on": ["BR-001"],
+      "requires_decisions": [],
+      "write_scope": [
+        "public/brand/**",
+        "public/favicon.svg",
+        "public/favicon.ico",
+        "public/favicon-32.png",
+        "public/apple-touch-icon.png",
+        "src/routes/__root.tsx",
+        "docs/brand/logo.md"
+      ],
+      "exclusive_locks": ["route-integration", "brand-assets"],
+      "read_first": [
+        "ProductSpec.md",
+        "FEATUREROADMAP_workplan.md",
+        "docs/demo/babson-pitch-brief.md",
+        "docs/architecture/access-contract.md"
+      ],
+      "goal": "Give the company a recognizable scalable mark across browser tabs, app, landing and pitch.",
+      "steps": [
+        "Design an original vector mark/wordmark consistent with the selected brand and values, with clear small-size geometry.",
+        "Export SVG and practical favicon/touch-icon sizes; remove legacy branding from the app head and provide correct icon links.",
+        "Inspect 16/32px appearance, transparent/light/dark variants and projected large use; document safe clear space and asset paths."
+      ],
+      "acceptance": [
+        "The deployed browser tab shows the new recognizable First Ten icon without broken links or stale legacy assets.",
+        "The logo remains legible in monochrome/small sizes and all source/export assets are available."
+      ],
+      "verification_profile": "product",
+      "verification": [
+        "The deployed browser tab shows the new recognizable First Ten icon without broken links or stale legacy assets.",
+        "The logo remains legible in monochrome/small sizes and all source/export assets are available.",
+        "Run applicable lint/typecheck/focused tests/build and actual browser walkthrough; real isolated policy tests for database/auth work, capped per-kind evaluation for paid AI. Record unrun checks honestly."
+      ],
+      "metric": "Completed useful workflow, source/permission integrity, recovery failures and measured AI cost where applicable.",
+      "rollback": "Disable the affected entry point/AI kind; preserve existing private records, prior plan revisions and the tested demonstration fallback.",
+      "agent_notes": {
+        "starting_point": "Owner-requested addition during the autonomous run for tomorrow’s Babson demo. Use the approved marketing-lab contract and existing contracts; no fictional evidence may become a claim of real research.",
+        "stop_and_report": "Record the exact missing environment, permission, budget or human evidence, preserve partial work, and continue another eligible task. Do not bypass gates or widen access.",
+        "handoff": "Report scoped files, commit, checks/results, migration/type contracts, measured spend, remaining blockers and rollback. Coordinator owns registry/status/integration."
+      },
+      "notes": [
+        {
+          "date": "2026-10-18",
+          "text": "Explicitly requested by owner: Next 50 $0 marketing activity inspired by BUS131 slides and whiteboard; pedagogy must appear in landing/pitch; original logo and fixed favicon requested."
+        }
+      ],
+      "claim": null,
+      "completion_evidence": [],
+      "subtasks": [
+        {
+          "id": "BR-004.s1",
+          "status": "not_started",
+          "instruction": "Design an original vector mark/wordmark consistent with the selected brand and values, with clear small-size geometry.",
+          "notes": []
+        },
+        {
+          "id": "BR-004.s2",
+          "status": "not_started",
+          "instruction": "Export SVG and practical favicon/touch-icon sizes; remove legacy branding from the app head and provide correct icon links.",
+          "notes": []
+        },
+        {
+          "id": "BR-004.s3",
+          "status": "not_started",
+          "instruction": "Inspect 16/32px appearance, transparent/light/dark variants and projected large use; document safe clear space and asset paths.",
+          "notes": []
+        }
+      ]
+    },
+    {
+      "id": "DEMO-001",
+      "title": "Seed isolated fictional presenter data safely",
+      "phase": "P3",
+      "status": "not_started",
+      "owner": "agent",
+      "size": "S",
+      "kind": "implementation",
+      "priority": 10,
+      "depends_on": ["OPS-001", "SEC-003"],
+      "requires_decisions": [],
+      "write_scope": [
+        "scripts/seed-demo.mjs",
+        "scripts/seed-demo.test.mjs",
+        "docs/demo/presenter-data.md",
+        "src/lib/demo/fixtures.ts"
+      ],
+      "exclusive_locks": ["demo-data"],
+      "read_first": [
+        "ProductSpec.md",
+        "FEATUREROADMAP_workplan.md",
+        "docs/demo/babson-pitch-brief.md",
+        "docs/architecture/access-contract.md"
+      ],
+      "goal": "Prepare a repeatable rich demonstration account without replacing existing private records.",
+      "steps": [
+        "Build a dry-run-first seeder with explicit target allowlist, dedicated demo metadata and clearly fictional StudyLoop records.",
+        "Use deterministic ids and ownership checks for idempotent inserts/upserts only within the dedicated fixture account/project; do not email people or reset production.",
+        "Apply to isolated local fixtures first, then authorized Supabase target; verify counts, project access and repeat execution preserving unrelated data."
+      ],
+      "acceptance": [
+        "All fixture content is labeled fictional and excluded from claims of real research/adoption.",
+        "Repeated seeding is safe, wrong-target guards pass and existing user/project data remains intact."
+      ],
+      "verification_profile": "product",
+      "verification": [
+        "All fixture content is labeled fictional and excluded from claims of real research/adoption.",
+        "Repeated seeding is safe, wrong-target guards pass and existing user/project data remains intact.",
+        "Run applicable lint/typecheck/focused tests/build and actual browser walkthrough; real isolated policy tests for database/auth work, capped per-kind evaluation for paid AI. Record unrun checks honestly."
+      ],
+      "metric": "Completed useful workflow, source/permission integrity, recovery failures and measured AI cost where applicable.",
+      "rollback": "Disable the affected entry point/AI kind; preserve existing private records, prior plan revisions and the tested demonstration fallback.",
+      "agent_notes": {
+        "starting_point": "Owner-requested addition during the autonomous run for tomorrow’s Babson demo. Use the approved marketing-lab contract and existing contracts; no fictional evidence may become a claim of real research.",
+        "stop_and_report": "Record the exact missing environment, permission, budget or human evidence, preserve partial work, and continue another eligible task. Do not bypass gates or widen access.",
+        "handoff": "Report scoped files, commit, checks/results, migration/type contracts, measured spend, remaining blockers and rollback. Coordinator owns registry/status/integration."
+      },
+      "notes": [
+        {
+          "date": "2026-10-18",
+          "text": "Explicitly requested by owner: Next 50 $0 marketing activity inspired by BUS131 slides and whiteboard; pedagogy must appear in landing/pitch; original logo and fixed favicon requested."
+        }
+      ],
+      "claim": null,
+      "completion_evidence": [],
+      "subtasks": [
+        {
+          "id": "DEMO-001.s1",
+          "status": "not_started",
+          "instruction": "Build a dry-run-first seeder with explicit target allowlist, dedicated demo metadata and clearly fictional StudyLoop records.",
+          "notes": []
+        },
+        {
+          "id": "DEMO-001.s2",
+          "status": "not_started",
+          "instruction": "Use deterministic ids and ownership checks for idempotent inserts/upserts only within the dedicated fixture account/project; do not email people or reset production.",
+          "notes": []
+        },
+        {
+          "id": "DEMO-001.s3",
+          "status": "not_started",
+          "instruction": "Apply to isolated local fixtures first, then authorized Supabase target; verify counts, project access and repeat execution preserving unrelated data.",
           "notes": []
         }
       ]
