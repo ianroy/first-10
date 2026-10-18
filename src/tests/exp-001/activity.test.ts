@@ -13,6 +13,26 @@ const select = (audience: ExportAudience = "owner") => ({
   sectionKeys: ["observations", "plan"],
 });
 describe("strict, frozen activity export scope", () => {
+  it("keeps genuine guest private and team work distinct from submitted teacher copies", () => {
+    const doc = exportFixture();
+    doc.activities[0]!.sourceScope = "guest_principal_private";
+    doc.activities[1]!.sourceScope = "guest_team_shared";
+    expect(
+      freezeActivityExport(doc, select(), { allowedAudiences: ["owner"] }).activities,
+    ).toHaveLength(2);
+    expect(() => freezeActivityExport(doc, select("team"), { allowedAudiences: ["team"] })).toThrow(
+      "Private source",
+    );
+    const teamSelection = { ...select("team"), activityKeys: ["marketing"] };
+    expect(
+      freezeActivityExport(doc, teamSelection, { allowedAudiences: ["team"] }).activities[0]!
+        .sourceScope,
+    ).toBe("guest_team_shared");
+    for (const audience of ["teacher", "external"] as const)
+      expect(() =>
+        freezeActivityExport(doc, { ...teamSelection, audience }, { allowedAudiences: [audience] }),
+      ).toThrow("Private source");
+  });
   it("rejects accidental account metadata, duplicate selectors and malformed tables", () => {
     expect(
       activityExportSchema.safeParse({ ...exportFixture(), email: "private@example.test" }).success,

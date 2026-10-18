@@ -38,7 +38,13 @@ export const activityExportSchema = z
             key,
             title: label,
             kind: label,
-            sourceScope: z.enum(["owner_private", "submitted_snapshot", "fictional"]),
+            sourceScope: z.enum([
+              "owner_private",
+              "guest_principal_private",
+              "guest_team_shared",
+              "submitted_snapshot",
+              "fictional",
+            ]),
             status: z.enum(["draft", "reviewed", "submitted"]),
             fictional: z.boolean(),
             updatedAt: z.string().datetime({ offset: true }).nullable(),
@@ -82,6 +88,17 @@ export const activityExportSchema = z
   });
 export type ActivityExportV1 = z.infer<typeof activityExportSchema>;
 export type ActivityExportBlock = z.infer<typeof blockSchema>;
+
+/** Audience limits supplement fresh source authorization; they never grant access by themselves. */
+export function permitsActivityAudience(
+  sourceScope: ActivityExportV1["activities"][number]["sourceScope"],
+  audience: ExportAudience,
+): boolean {
+  if (sourceScope === "owner_private" || sourceScope === "guest_principal_private")
+    return audience === "owner";
+  if (sourceScope === "guest_team_shared") return audience === "owner" || audience === "team";
+  return true;
+}
 
 export type ExportSelection = {
   audience: ExportAudience;
@@ -153,7 +170,7 @@ export function freezeActivityExport(
   const activities = doc.activities
     .filter((a) => selection.activityKeys.includes(a.key))
     .map((a) => {
-      if (selection.audience !== "owner" && a.sourceScope === "owner_private")
+      if (!permitsActivityAudience(a.sourceScope, selection.audience))
         throw new Error(
           "Private source material is available only in an owner export. Select an authorized submitted snapshot for other audiences.",
         );

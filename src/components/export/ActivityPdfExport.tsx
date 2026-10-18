@@ -5,6 +5,7 @@ import { Textarea } from "@/components/ui/textarea";
 import {
   exportSnapshotText,
   freezeActivityExport,
+  permitsActivityAudience,
   type ActivityExportV1,
   type ExportAudience,
   type FrozenActivityExport,
@@ -30,9 +31,7 @@ export function ActivityPdfExport({ document, permittedAudiences, authorizeDownl
   const [audience, setAudience] = useState<ExportAudience>(permittedAudiences[0] ?? "owner");
   const [activityKeys, setActivityKeys] = useState(
     document.activities
-      .filter(
-        (a) => (permittedAudiences[0] ?? "owner") === "owner" || a.sourceScope !== "owner_private",
-      )
+      .filter((a) => permitsActivityAudience(a.sourceScope, permittedAudiences[0] ?? "owner"))
       .map((a) => a.key),
   );
   const [sectionKeys, setSectionKeys] = useState(
@@ -152,7 +151,7 @@ export function ActivityPdfExport({ document, permittedAudiences, authorizeDownl
                 setAudience(next);
                 setActivityKeys(
                   document.activities
-                    .filter((a) => next === "owner" || a.sourceScope !== "owner_private")
+                    .filter((a) => permitsActivityAudience(a.sourceScope, next))
                     .map((a) => a.key),
                 );
               }}
@@ -172,7 +171,7 @@ export function ActivityPdfExport({ document, permittedAudiences, authorizeDownl
           <fieldset className="max-h-[28rem] space-y-3 overflow-y-auto rounded-xl border p-3">
             <legend className="mb-2 font-semibold">Select activities and sections</legend>
             {document.activities.map((a) => {
-              const permitted = audience === "owner" || a.sourceScope !== "owner_private";
+              const permitted = permitsActivityAudience(a.sourceScope, audience);
               return (
                 <div key={a.key} className="rounded-xl border p-3">
                   <label className="flex min-h-11 items-center gap-3 font-semibold">
