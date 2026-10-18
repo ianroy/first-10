@@ -1,0 +1,96 @@
+/* Generated from tokens.json by node contrast.mjs --write. */
+:root[data-direction="notebook"][data-mode="light"] {
+  --background: #F7F5EC;
+  --foreground: #173D35;
+  --card: #FFFEF9;
+  --primary: #245B49;
+  --primary-foreground: #FFFFFF;
+  --muted: #EAEDE3;
+  --muted-foreground: #53665C;
+  --secondary: #DFEADF;
+  --secondary-foreground: #24483A;
+  --accent: #F2CB6B;
+  --accent-foreground: #443516;
+  --draft: #F7E6B2;
+  --draft-foreground: #63490B;
+  --success: #DFEADF;
+  --success-foreground: #20543D;
+  --destructive: #FBE4DF;
+  --destructive-foreground: #9B3324;
+  --border: #BCC6B9;
+  --input: #718479;
+  --ring: #A44426;
+  color-scheme: light;
+}
+
+:root[data-direction="notebook"][data-mode="dark"] {
+  --background: #102820;
+  --foreground: #F7F5EC;
+  --card: #17382E;
+  --primary: #A9D4B6;
+  --primary-foreground: #102820;
+  --muted: #284D3D;
+  --muted-foreground: #B8CABB;
+  --secondary: #284D3D;
+  --secondary-foreground: #DCEADD;
+  --accent: #F2CB6B;
+  --accent-foreground: #443516;
+  --draft: #594920;
+  --draft-foreground: #FFE5A3;
+  --success: #244A36;
+  --success-foreground: #BDE5BE;
+  --destructive: #57332E;
+  --destructive-foreground: #FFD2C7;
+  --border: #456353;
+  --input: #839C89;
+  --ring: #F2CB6B;
+  color-scheme: dark;
+}
+
+:root[data-direction="ledger"][data-mode="light"] {
+  --background: #F3F5FA;
+  --foreground: #252C47;
+  --card: #FFFFFF;
+  --primary: #354F88;
+  --primary-foreground: #FFFFFF;
+  --muted: #E7ECF6;
+  --muted-foreground: #57617D;
+  --secondary: #E3EAF7;
+  --secondary-foreground: #354F88;
+  --accent: #FFD3A6;
+  --accent-foreground: #593819;
+  --draft: #FFF0C2;
+  --draft-foreground: #654A0C;
+  --success: #E0EEE8;
+  --success-foreground: #25543F;
+  --destructive: #FBE4DF;
+  --destructive-foreground: #9B3324;
+  --border: #B8C3D8;
+  --input: #7F8BA8;
+  --ring: #A24E1D;
+  color-scheme: light;
+}
+
+:root[data-direction="ledger"][data-mode="dark"] {
+  --background: #171D32;
+  --foreground: #F3F5FA;
+  --card: #202A43;
+  --primary: #B8C9F0;
+  --primary-foreground: #171D32;
+  --muted: #303D5E;
+  --muted-foreground: #C0C8DB;
+  --secondary: #303D5E;
+  --secondary-foreground: #E3EAF7;
+  --accent: #FFD3A6;
+  --accent-foreground: #593819;
+  --draft: #574923;
+  --draft-foreground: #FFE9AB;
+  --success: #274A3D;
+  --success-foreground: #C1E4D0;
+  --destructive: #57332E;
+  --destructive-foreground: #FFD2C7;
+  --border: #4B5B7A;
+  --input: #8799BF;
+  --ring: #E3B78D;
+  color-scheme: dark;
+}

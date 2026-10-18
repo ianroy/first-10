@@ -1,0 +1,197 @@
+<!doctype html>
+<html lang="en" data-direction="notebook" data-mode="light">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>First Ten — brand direction study</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@500;700;800&family=Figtree:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="themes.css" />
+    <link rel="stylesheet" href="preview.css" />
+  </head>
+  <body>
+    <a class="skip" href="#content">Skip to preview</a>
+    <div class="study-bar">
+      <span><strong>Brand study</strong> · fictional examples</span>
+      <div class="study-controls" role="group" aria-label="Brand direction">
+        <button type="button" data-choice="notebook" aria-pressed="true">A · Field notebook</button>
+        <button type="button" data-choice="ledger" aria-pressed="false">B · Learning ledger</button>
+        <button type="button" id="theme" aria-pressed="false">Dark preview</button>
+      </div>
+    </div>
+    <div class="site-wrap">
+      <header class="site-header">
+        <a class="wordmark" href="#content" aria-label="First Ten home preview"
+          ><svg viewBox="0 0 40 44" aria-hidden="true">
+            <path d="M8 3h25v38H8z" />
+            <path d="M8 3v38M3 11h10M3 22h10M3 33h10M18 12h8M18 20h8M18 28h5" /></svg
+          >First Ten<span class="wordmark-dot" aria-hidden="true">.</span></a
+        >
+        <nav aria-label="Preview sections">
+          <a href="#conversation">For founders</a><a href="#lesson">For educators</a>
+        </nav>
+      </header>
+      <main id="content">
+        <section class="hero" aria-labelledby="hero-title">
+          <div class="hero-copy">
+            <p class="eyebrow">Build. Listen. Learn.</p>
+            <h1 id="hero-title">Your next move<br />starts with<br /><span>real people.</span></h1>
+            <p class="intro">
+              Turn customer conversations into a decision you can explain — and a next step you can
+              try.
+            </p>
+            <div class="actions">
+              <a class="button primary" href="#conversation"
+                >Explore a conversation <span aria-hidden="true">↗</span></a
+              ><a class="text-link" href="#lesson"
+                >Bring it to your classroom <span aria-hidden="true">→</span></a
+              >
+            </div>
+            <p class="micro">AI helps draft. People provide the evidence. You decide.</p>
+          </div>
+          <article class="evidence-sheet" aria-labelledby="case-title">
+            <div class="sheet-top">
+              <span class="eyebrow">A change of mind</span
+              ><span class="badge draft">Fictional example</span>
+            </div>
+            <h2 id="case-title">StudyLoop</h2>
+            <p class="case-intro">A study-partner app finds a different problem.</p>
+            <div class="source">
+              <span class="small-label">01 / What Maya said</span>
+              <blockquote>
+                “I don’t need more people. I need to know who’s actually showing up.”
+              </blockquote>
+            </div>
+            <div class="counter">
+              <span class="small-label">02 / What challenges it</span>
+              <p>Nora’s group already works. She doesn’t want another app.</p>
+            </div>
+            <div class="next-move">
+              <span class="small-label">03 / A next decision</span>
+              <p>
+                <strong>Test attendance confirmations</strong> with existing groups before building
+                a discovery feed.
+              </p>
+              <span class="badge secondary">Proposed test · not a result</span>
+            </div>
+            <div class="sheet-footer">
+              <span>Observation → interpretation → next test</span><span aria-hidden="true">↳</span>
+            </div>
+          </article>
+        </section>
+        <section class="workbench" aria-label="Interface samples">
+          <div class="conversation-column">
+            <div class="section-heading">
+              <p class="eyebrow">In the conversation</p>
+              <h2>Make room to listen.</h2>
+              <p>One useful question. Enough space for an honest answer.</p>
+            </div>
+            <article class="interview-card" id="conversation" aria-labelledby="question-title">
+              <div class="card-top">
+                <span class="badge secondary">StudyLoop · Maya</span
+                ><span class="question-count">Question 3 of 9</span>
+              </div>
+              <div class="progress" aria-hidden="true"><span></span></div>
+              <h3 id="question-title">
+                Tell me about the last time your study group tried to meet.
+              </h3>
+              <p class="hint">Listen for what happened, what they tried and what got in the way.</p>
+              <label for="notes">Your notes <span>(preview only)</span></label>
+              <textarea id="notes" rows="4">
+Last Tuesday, three people confirmed in the chat. Only one came. Maya messaged everyone separately.</textarea>
+              <p class="privacy">
+                Ask permission before taking notes. Leave out sensitive details.
+              </p>
+              <div class="card-actions">
+                <button type="button" class="button secondary" id="back">Back</button
+                ><button type="button" class="button primary" id="next">
+                  Next question <span aria-hidden="true">→</span>
+                </button>
+              </div>
+              <p class="micro" id="preview-status" role="status">
+                Preview only. Nothing entered here is saved.
+              </p>
+            </article>
+          </div>
+          <div class="lesson-column" id="lesson">
+            <div class="section-heading">
+              <p class="eyebrow">In the classroom</p>
+              <h2>Teach the reasoning.</h2>
+              <p>A scaffold for experiential learning, feedback and reflection.</p>
+            </div>
+            <article class="lesson-card" aria-labelledby="lesson-title">
+              <div class="card-top">
+                <span class="lesson-number">Lesson 01</span
+                ><span class="badge secondary">60 minutes · pairs</span>
+              </div>
+              <h3 id="lesson-title">Learn by doing.<br />Show your reasoning.</h3>
+              <p>Think first. Use AI second. Keep your reasoning visible.</p>
+              <ol class="lesson-steps">
+                <li>
+                  <span>01</span>
+                  <div>
+                    <strong>Practice a conversation in pairs</strong>
+                    <p>Ask about a recent moment. Keep the exact words.</p>
+                  </div>
+                </li>
+                <li>
+                  <span>02</span>
+                  <div>
+                    <strong>Write your own interpretation</strong>
+                    <p>Invite a peer to challenge it before asking AI for alternatives.</p>
+                  </div>
+                </li>
+                <li>
+                  <span>03</span>
+                  <div>
+                    <strong>Reflect, revise, choose a next test</strong>
+                    <p>Explain what changed and what could change your mind.</p>
+                  </div>
+                </li>
+              </ol>
+              <div class="assessment">
+                <strong>Assess the reasoning.</strong>
+                <p>
+                  Look for relevant observations, uncertainty and a justified next step. Interview
+                  counts are not proof.
+                </p>
+              </div>
+              <p class="micro">
+                <strong>Next lesson concept:</strong> the Next 50 $0 marketing lab — map channels,
+                draft content and learn from a funnel.
+              </p>
+              <p class="micro">Lesson previews · teaching material planned for delivery.</p>
+            </article>
+          </div>
+        </section>
+        <section class="state-strip" aria-label="Example interface states">
+          <div class="state saved">
+            <strong>✓ Example saved state</strong>
+            <p>Saved at 2:14. You can return to this draft.</p>
+          </div>
+          <div class="state error">
+            <strong>! Example error state</strong>
+            <p>Could not save. Keep this page open and try again.</p>
+          </div>
+          <div class="state draft">
+            <strong>✎ Example AI state</strong>
+            <p>AI draft. Check the sources before using it.</p>
+          </div>
+        </section>
+        <p class="state-note">
+          State samples illustrate the design language. They do not represent a save, error or AI
+          call in this preview.
+        </p>
+      </main>
+      <footer>
+        <span>First Ten · Learn from people. Decide with care.</span
+        ><span id="direction-label">A / Field notebook · selected direction</span>
+      </footer>
+    </div>
+    <script src="preview.js"></script>
+  </body>
+</html>
