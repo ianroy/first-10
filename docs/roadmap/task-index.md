@@ -37,6 +37,7 @@ Protect data and money before expanding access or AI behavior.
 | AI-006 Run bounded comparative model evaluations | not_started | 0/3 | agent | S | AI-005, AI-007 | — | evals/results/**, docs/ai-model-policy.md, src/lib/ai/model-policy.ts; locks: ai-entrypoint |
 | AI-007 Authorize and assemble traceable bounded context | not_started | 0/3 | agent | S | AI-002, PRV-001, SEC-004 | — | src/lib/ai/context.server.ts, src/lib/ai.functions.ts, src/lib/prompts/** (3 more; inspect --task); locks: ai-entrypoint |
 | AI-008 AI safety/cost regression gate | not_started | 0/3 | agent | S | AI-006, AI-007, AI-004 | — | evals/results/ai-gate.md, supabase/tests/ai-budget.sql, src/lib/ai/model-policy.ts (4 more; inspect --task); locks: ai-entrypoint |
+| AI-009 AI-DEMO-001: verify bounded fictional presenter AI practice | in_progress | 3/4 | agent | S | AI-001, DEMO-002, MKT-003, SEC-003 | — | src/lib/ai.functions.ts, src/lib/ai/contracts.ts, src/lib/ai/gateway.server.ts (8 more; inspect --task); locks: ai-gateway, demo-ai-budget, presenter-access |
 
 ## P2 — Brand, demos and teaching resources
 
@@ -75,6 +76,7 @@ Make account/project identity, saved drafts and switching safe before shared wor
 | WS-007 Verify multi-project save and return journeys | not_started | 0/3 | agent | S | WS-003, WS-006 | — | src/tests/workspace-journeys/**, docs/qa/workspace-gate.md, src/tests/ws-007/**; locks: — |
 | MKT-002 Persist versioned private marketing plans | complete | 3/3 | agent | S | MKT-001, SEC-003 | — | supabase/migrations/**, src/integrations/supabase/types.ts, src/lib/marketing.functions.ts (3 more; inspect --task); locks: database-schema, generated-types |
 | DEMO-001 Seed isolated fictional presenter data safely | complete | 3/3 | agent | S | OPS-001, SEC-003 | — | scripts/seed-demo.mjs, scripts/seed-demo.test.mjs, docs/demo/presenter-data.md (8 more; inspect --task); locks: demo-data |
+| WS-008 Ship owner-private multiple ideas and safe project switching | complete | 3/3 | agent | S | SEC-003, DEMO-001, BR-002 | — | src/lib/data.ts, src/lib/project-selection.tsx, src/lib/current-project.ts (5 more; inspect --task); locks: project-selection, route-integration |
 
 ## P4 — Class spaces, teacher tools and admin analytics
 
@@ -96,7 +98,8 @@ Separate class membership, reviewed submissions and platform aggregates.
 | MKT-003 Build the guided Next 50 marketing workspace | complete | 3/3 | agent | S | MKT-002, BR-002 | — | src/routes/_authenticated/marketing.tsx, src/components/marketing-lab/**, src/components/AppShell.tsx (3 more; inspect --task); locks: route-integration, app-shell |
 | MKT-004 Add economical AI channel suggestions | not_started | 0/3 | agent | S | MKT-002, AI-008 | — | src/lib/ai.functions.ts, src/lib/ai/model-policy.ts, src/lib/ai/context.server.ts (4 more; inspect --task); locks: ai-entrypoint |
 | MKT-005 Generate reviewed content tailored to each channel | not_started | 0/3 | agent | S | MKT-003, AI-008 | — | src/lib/ai.functions.ts, src/lib/ai/model-policy.ts, src/lib/ai/context.server.ts (4 more; inspect --task); locks: ai-entrypoint, marketing-editor |
-| DEMO-002 Deliver the authorized presenter login and aggregate admin view | in_progress | 1/3 | agent | S | DEMO-001, SEC-003 | — | src/routes/auth.tsx, src/routes/_authenticated/admin.tsx, src/routes/_authenticated/account.tsx (4 more; inspect --task); locks: presenter-access |
+| DEMO-002 Deliver the authorized presenter login and aggregate admin view | complete | 3/3 | agent | S | DEMO-001, SEC-003 | — | src/routes/auth.tsx, src/routes/_authenticated/admin.tsx, src/routes/_authenticated/account.tsx (4 more; inspect --task); locks: presenter-access |
+| EDU-005 Deliver private educator planning and an authored classroom preview | complete | 4/4 | agent | S | SEC-003, EDU-002, BR-002, DEMO-001 | — | src/lib/teacher-plan.ts, src/lib/teacher.functions.ts, supabase/migrations/20261018002000_teacher_plans.sql (7 more; inspect --task); locks: teacher-plan-schema, route-integration |
 
 ## P5 — Evidence and AI product improvements
 
@@ -144,6 +147,7 @@ Test cross-role behavior, rehearse releases, observe use and revise the plan.
 | L-002 Review whether shipped evidence tools improve next actions | not_started | 0/3 | human | S | REL-004, EV-005, EV-006, EV-007 | — | research/feature-use-review.md; locks: — |
 | REL-005 Review integrated outcomes and choose the next bounded wave | not_started | 0/3 | either | S | L-001, L-002, EDU-003, G-004 | — | research/release-learning-review.md; locks: — |
 | MKT-008 Verify the integrated marketing and AI journeys | not_started | 0/3 | agent | S | MKT-003, MKT-004, MKT-005, MKT-006, MKT-007 | — | src/tests/marketing-release/**, docs/qa/marketing-gate.md; locks: — |
+| DEMO-003 Keep sign-in explicit and launch the chosen student, educator or admin view | complete | 3/3 | agent | S | DEMO-002, WS-008, EDU-005, BR-003 | — | src/routes/auth.tsx, src/routes/_authenticated/route.tsx, src/components/RequireProject.tsx (4 more; inspect --task); locks: auth-entry, route-integration, app-shell |
 
 ## R0 — Continuous user and educator research
 

@@ -22,22 +22,26 @@ Statuses are `not_started`, `in_progress`, `blocked`, `complete`, `deferred`, `d
 current_iteration: 5
 current_stage: P1_foundation_with_parallel_P2_and_R0
 status: in_progress
-last_task_done: MKT-003
-next_task: DEMO-002
-next_parallel_wave: [DEMO-002]
-active_claims: [DEMO-002]
+last_task_done: DEMO-003
+next_task: AI-009
+next_parallel_wave: [AI-009]
+active_claims: [AI-009]
 research_gate: not_passed
 foundation_gate: not_passed
 realtime_go: pending
 last_updated: 2026-10-18
-last_documentation_update: "2026-10-17: DOC-002 added README team credits with names only; removed the existing email link."
+last_documentation_update: "2026-10-18: reconciled owner-private ideas, educator planning/authored cohort, aggregate presenter view and three-dashboard sign-in; retained DOC-002 team-credit history."
 resume_hint: >-
-  Autonomous 10-hour Babson implementation run is active; see docs/roadmap/autonomous-run.md.
-  OPS-001, SEC-001, VP-007, WEB-001/003, BR-001, AI-001 and MKT-001 are integrated.
-  SEC-002/003 policy harness and ownership, BR-002 tokens, VP-008 protocol, original logo/favicon,
-  public fictional demo and teaching kit/page are integrated. User gives a final one-hour sprint:
-  prioritize desktop presentation and Marketing Lab, with parallel workers and frequent releases.
-  Keep current/proposed labels honest; no paid AI calls yet. Human interviews/pilot remain open.
+  Integrated release f8bc878 is deployed READY. DEMO-002 aggregate presenter verification,
+  WS-008 owner-private multiple ideas, EDU-005 private lesson planning/authored class preview,
+  and DEMO-003 explicit Student/Educator/Admin sign-in destinations are complete.
+  Coordinator reports 219 application tests, 391 real isolated SQL assertions, typecheck, lint
+  and build passing. Hosted presenter teacher plan is revision 1 with 45 planned capacity,
+  not enrollment. AI-009 owns the pending deployed fixed-case provider trial: global $1
+  workshop cap, 2-cent atomic reservations, one bounded Vertex ZDR attempt, no fallback.
+  Do not claim a live provider success, measured learning, real submissions or shared class
+  permissions. General WS/CLS/ADM and research gates remain open. Final-hour checkpoint
+  is approximately 12:13 UTC; preserve all saved work and the no-call public fallback.
 ```
 
 **Audit basis:** product source and documentation at `7006f87`, plus the concurrent team-credits commit `a2d69a3`, with repository research files rechecked. F-007 is now complete: [GitHub CI run 39092157827](https://github.com/ianroy/first-10/actions/runs/39092157827) succeeded for that commit. The earlier local typecheck, 17 tests, Vercel build and scoped lint results remain in history. Six existing lint warnings and generated `.vercel` scanning motivate OPS-001. A green code pipeline does not verify live auth, RLS, model quality, research outcomes or preview configuration.
@@ -288,6 +292,8 @@ Use this after a completed wave, a material scope/evidence change, or an explici
 | 2026-10-17 | Economical per-kind OpenRouter policy follows eligibility, budgets and actual evaluations                                                                               | Listed token price alone does not establish quality, data policy or total cost                                                                        | An expensive automatic fallback or client-selected arbitrary model                                    |
 | 2026-10-17 | Deliver versioned asynchronous collaboration before conditional realtime                                                                                                | Durable saving, conflict handling and live revocation need independent proof                                                                          | Presence mistaken for saved state or simultaneous editing that loses updates                          |
 | 2026-10-17 | F-007 complete from verified CI; split production connection from missing preview scope                                                                                 | CI run 39092157827 is green for 7006f87; no new preview or model test was performed                                                                   | Keeping verified CI pending or marking all of F-009 complete                                          |
+| 2026-10-18 | Record the final-sprint owner-private subset as WS-008, EDU-005 and DEMO-003; complete DEMO-002 only for verified presenter aggregate access. | Existing broader lifecycle, class membership, student visibility and platform-admin gates remain open. Four authored team examples and 45 planned capacity are not live enrollment. | Treating a seeded presenter experience as a shipped shared classroom or measured learning outcome. |
+| 2026-10-18 | Canonical AI-009 tracks the requested AI-DEMO-001 fixed fictional practice route with a $1 workshop reservation cap within the $25 overall authorization. | One bounded Vertex ZDR request is allowed only after exact presenter authorization and atomic reservation; deployed provider verification is still pending. | Promoting the general model baseline from offline fixtures or silently broadening routing when the restricted route fails. |
 
 ## 9. Iteration log (append only)
 
@@ -307,3 +313,5 @@ Use this after a completed wave, a material scope/evidence change, or an explici
 | 2026-10-18 | Autonomous run activated with owner authorization to commit/push often and deploy; $25 total OpenRouter cap, no other paid services. Tomorrow’s Babson workshop/mini hackathon is the primary delivery context. First parallel wave claimed. |
 
 | 2026-10-18 | Owner promoted a core Next 50 $0 marketing lab inspired by BUS131 slides/board: audience, physical/digital channels, AI content, measurable one-week test and reflection. Added MKT-001–008, fictional presenter-data seeding and original logo/favicon work. Pitch deck promoted for tomorrow with explicit pedagogy and truthful current/proposed claims. |
+
+**2026-10-18 — final-sprint reconciliation at f8bc878:** DEMO-002 completed for verified production count-only presenter access; WS-008, EDU-005 and DEMO-003 recorded complete for shipped narrow features. Coordinator reports 219 app tests, 391 real isolated SQL assertions, typecheck/lint/build green and Vercel READY. Hosted private teacher plan seeded through owner RPC at revision 1; actual local desktop shows four authored teams and 45 planned capacity, not enrollment. AI-009 remains in progress for the deployed provider trial, with no live-model success claimed. Shared-class, broad admin, research and realtime gates remain unchanged.

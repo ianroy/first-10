@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "updated_at": "2026-10-18",
+  "updated_at": "2026-10-18T11:45:53.883336+00:00",
   "iteration": 5,
   "max_parallel_agents": 3,
   "phases": [
@@ -3210,6 +3210,10 @@
         {
           "date": "2026-10-17",
           "text": "Added during final audit so teaching usability can be studied before the full class/admin/collaboration release. Human-owned rehearsal does not block provisional resources being published with honest limits."
+        },
+        {
+          "date": "2026-10-18",
+          "text": "DEMO-002/003 and EDU-005 provide presenter aggregate counts, three-view navigation, private lesson planning and authored cohort examples only. They do not supply shared class roles, live submissions/activity, platform funnel analytics, instructor study evidence or a real class pilot; this task remains open."
         }
       ],
       "claim": null,
@@ -3366,6 +3370,10 @@
         {
           "date": "2026-10-17",
           "text": "Scheduled by Iteration 5; no implementation or validation claimed."
+        },
+        {
+          "date": "2026-10-18",
+          "text": "WS-008 now delivers the narrow single-owner multiple-idea selection/create/recovery subset. Preserve that working behavior when executing this broader lifecycle/membership/draft task; its own remaining acceptance and prerequisites are unchanged."
         }
       ],
       "claim": null,
@@ -3451,6 +3459,10 @@
         {
           "date": "2026-10-17",
           "text": "Scheduled by Iteration 5; no implementation or validation claimed."
+        },
+        {
+          "date": "2026-10-18",
+          "text": "WS-008 now delivers the narrow single-owner multiple-idea selection/create/recovery subset. Preserve that working behavior when executing this broader lifecycle/membership/draft task; its own remaining acceptance and prerequisites are unchanged."
         }
       ],
       "claim": null,
@@ -3531,6 +3543,10 @@
         {
           "date": "2026-10-17",
           "text": "Scheduled by Iteration 5; no implementation or validation claimed."
+        },
+        {
+          "date": "2026-10-18",
+          "text": "WS-008 now delivers the narrow single-owner multiple-idea selection/create/recovery subset. Preserve that working behavior when executing this broader lifecycle/membership/draft task; its own remaining acceptance and prerequisites are unchanged."
         }
       ],
       "claim": null,
@@ -3849,6 +3865,10 @@
         {
           "date": "2026-10-17",
           "text": "Scheduled by Iteration 5; no implementation or validation claimed."
+        },
+        {
+          "date": "2026-10-18",
+          "text": "WS-008 now delivers the narrow single-owner multiple-idea selection/create/recovery subset. Preserve that working behavior when executing this broader lifecycle/membership/draft task; its own remaining acceptance and prerequisites are unchanged."
         }
       ],
       "claim": null,
@@ -4084,6 +4104,10 @@
         {
           "date": "2026-10-17",
           "text": "Scheduled by Iteration 5; no implementation or validation claimed."
+        },
+        {
+          "date": "2026-10-18",
+          "text": "DEMO-002/003 and EDU-005 provide presenter aggregate counts, three-view navigation, private lesson planning and authored cohort examples only. They do not supply shared class roles, live submissions/activity, platform funnel analytics, instructor study evidence or a real class pilot; this task remains open."
         }
       ],
       "claim": null,
@@ -4161,6 +4185,10 @@
         {
           "date": "2026-10-17",
           "text": "Scheduled by Iteration 5; no implementation or validation claimed."
+        },
+        {
+          "date": "2026-10-18",
+          "text": "DEMO-002/003 and EDU-005 provide presenter aggregate counts, three-view navigation, private lesson planning and authored cohort examples only. They do not supply shared class roles, live submissions/activity, platform funnel analytics, instructor study evidence or a real class pilot; this task remains open."
         }
       ],
       "claim": null,
@@ -4333,6 +4361,10 @@
         {
           "date": "2026-10-17",
           "text": "Scheduled by Iteration 5; no implementation or validation claimed."
+        },
+        {
+          "date": "2026-10-18",
+          "text": "DEMO-002/003 and EDU-005 provide presenter aggregate counts, three-view navigation, private lesson planning and authored cohort examples only. They do not supply shared class roles, live submissions/activity, platform funnel analytics, instructor study evidence or a real class pilot; this task remains open."
         }
       ],
       "claim": null,
@@ -4569,6 +4601,10 @@
         {
           "date": "2026-10-17",
           "text": "Scheduled by Iteration 5; no implementation or validation claimed."
+        },
+        {
+          "date": "2026-10-18",
+          "text": "DEMO-002/003 and EDU-005 provide presenter aggregate counts, three-view navigation, private lesson planning and authored cohort examples only. They do not supply shared class roles, live submissions/activity, platform funnel analytics, instructor study evidence or a real class pilot; this task remains open."
         }
       ],
       "claim": null,
@@ -6355,6 +6391,10 @@
         {
           "date": "2026-10-17",
           "text": "Scheduled by Iteration 5; no implementation or validation claimed."
+        },
+        {
+          "date": "2026-10-18",
+          "text": "DEMO-002/003 and EDU-005 provide presenter aggregate counts, three-view navigation, private lesson planning and authored cohort examples only. They do not supply shared class roles, live submissions/activity, platform funnel analytics, instructor study evidence or a real class pilot; this task remains open."
         }
       ],
       "claim": null,
@@ -9453,7 +9493,7 @@
       "id": "DEMO-002",
       "title": "Deliver the authorized presenter login and aggregate admin view",
       "phase": "P4",
-      "status": "in_progress",
+      "status": "complete",
       "owner": "agent",
       "size": "S",
       "kind": "implementation",
@@ -9510,21 +9550,21 @@
         {
           "date": "2026-10-18",
           "text": "Claimed for the authorized autonomous demo run."
+        },
+        {
+          "date": "2026-10-18",
+          "text": "Production presenter login and count-only aggregate verification are now complete. Release the old presenter-access claim. This task does not complete SEC-006, AN-002, ADM-001 or ADM-002; event funnels, full platform permissions and customer analytics remain open."
         }
       ],
-      "claim": {
-        "owner": "coordinator",
-        "branch": "main",
-        "base_commit": "00c06f404f868486ab0f9f3971078cb53c9f9c0e",
-        "worktree": "/Users/ianroy/Library/CloudStorage/Dropbox/Apps by Ian/Babson AI Academy/First 10",
-        "started_at": "2026-10-18T11:25:54.821808+00:00",
-        "lease_expires_at": "2026-10-18T13:25:54.821808+00:00"
-      },
-      "completion_evidence": [],
+      "claim": null,
+      "completion_evidence": [
+        "docs/demo/presenter-data.md records actual hosted presenter sign-in, fresh trusted-admin authorization and production aggregate count verification. No raw notes, emails, user list or exports are returned. src/tests/desktop-routes/admin-auth.test.ts covers forged/revoked roles, live role rechecks, unavailable counts and no-cache responses.",
+        "Coordinator completion handoff on 2026-10-18: production operational counts verified; integrated release f8bc878 passes 219 application tests, typecheck, source lint and build, plus 391 real isolated SQL assertions. Counts include synthetic/test rows and are not adoption or class activity evidence. Later three-destination launch correction is tracked separately as DEMO-003."
+      ],
       "subtasks": [
         {
           "id": "DEMO-002.s1",
-          "status": "in_progress",
+          "status": "complete",
           "instruction": "Support email/password, ordinary signup and existing magic links while preserving the no-login public example.",
           "notes": []
         },
@@ -9536,8 +9576,361 @@
         },
         {
           "id": "DEMO-002.s3",
-          "status": "blocked",
+          "status": "complete",
           "instruction": "Show live count-only totals with presenter contribution, missing-data states and explicit uninstrumented-funnel labels; verify denied/revoked access and actual desktop login.",
+          "notes": []
+        }
+      ]
+    },
+    {
+      "id": "WS-008",
+      "title": "Ship owner-private multiple ideas and safe project switching",
+      "phase": "P3",
+      "status": "complete",
+      "owner": "agent",
+      "size": "S",
+      "kind": "implementation",
+      "priority": 5,
+      "depends_on": ["SEC-003", "DEMO-001", "BR-002"],
+      "requires_decisions": [],
+      "write_scope": [
+        "src/lib/data.ts",
+        "src/lib/project-selection.tsx",
+        "src/lib/current-project.ts",
+        "src/components/RequireProject.tsx",
+        "src/routes/_authenticated/account.tsx",
+        "src/routes/_authenticated/setup.tsx",
+        "src/routes/_authenticated/route.tsx",
+        "src/tests/workspace-selection/**"
+      ],
+      "exclusive_locks": ["project-selection", "route-integration"],
+      "read_first": [
+        "ProductSpec.md",
+        "FEATUREROADMAP_workplan.md",
+        "docs/demo/presenter-data.md",
+        "docs/architecture/access-contract.md"
+      ],
+      "goal": "Let an authenticated owner create a separate idea, choose among their own projects and recover a missing remembered selection without changing another idea or account.",
+      "steps": [
+        "List projects for a verified owner and scope cached/remembered selection to that account; treat remembered storage as convenience, never authorization.",
+        "Create a separate idea through explicit new mode, edit only the selected owned project and retain account-picker access when a remembered project is missing or unauthorized.",
+        "Verify cross-account selection isolation, malformed storage, new-project behavior and preservation of existing private work."
+      ],
+      "acceptance": [
+        "Only verified-owner projects can be read or selected; stale/foreign selections fail visibly instead of silently loading another project.",
+        "Creating a new idea does not overwrite an existing idea. Membership, archive, delete, class association and collaboration are outside this task."
+      ],
+      "verification_profile": "product",
+      "verification": [
+        "Run src/tests/workspace-selection/selection.test.tsx covering owner scope, cross-account cache/storage, unavailable selections, create-new and selected-project edit behavior.",
+        "Run combined application checks and inspect the account/project selection recovery flow."
+      ],
+      "metric": "Seven focused selection tests pass; zero cross-account selection or silent overwrite paths in tested cases.",
+      "rollback": "Hide create-new and project-switch entry points if needed while preserving all owned project rows and the explicit selected-project authorization boundary.",
+      "agent_notes": {
+        "starting_point": "Narrow owner-directed final-sprint delivery reconciled after integration; preserve existing owner-only RLS and truthful fictional/current/proposed labels. Broader planned roles and lifecycle tasks are not implicitly complete.",
+        "stop_and_report": "Preserve private records and local drafts. Record missing environment, permission or verification; do not widen access, reset unrelated work or infer live evidence from fixtures.",
+        "handoff": "Coordinator records exact source revision, checks, deployment/browser evidence, pending checks, actual spend and rollback. Do not commit credentials or rewrite published history."
+      },
+      "notes": [
+        {
+          "date": "2026-10-18",
+          "text": "Owner explicitly requested multiple ideas during the final sprint. This is the shipped single-owner subset; WS-001–007 retain their broader lifecycle, membership-aware routing, interview autosave/finalization and end-to-end acceptance gates."
+        }
+      ],
+      "claim": null,
+      "completion_evidence": [
+        "Implementation commit 8184821 and documentation commit 864526a. Seven focused project-selection tests cover the seven owner/new/edit/recovery cases in src/tests/workspace-selection/selection.test.tsx.",
+        "Coordinator integrated verification at f8bc878: 219 application tests, typecheck, source lint and build pass; all existing owner-only database policies remain in force."
+      ],
+      "subtasks": [
+        {
+          "id": "WS-008.s1",
+          "status": "complete",
+          "instruction": "List projects for a verified owner and scope cached/remembered selection to that account; treat remembered storage as convenience, never authorization.",
+          "notes": []
+        },
+        {
+          "id": "WS-008.s2",
+          "status": "complete",
+          "instruction": "Create a separate idea through explicit new mode, edit only the selected owned project and retain account-picker access when a remembered project is missing or unauthorized.",
+          "notes": []
+        },
+        {
+          "id": "WS-008.s3",
+          "status": "complete",
+          "instruction": "Verify cross-account selection isolation, malformed storage, new-project behavior and preservation of existing private work.",
+          "notes": []
+        }
+      ]
+    },
+    {
+      "id": "EDU-005",
+      "title": "Deliver private educator planning and an authored classroom preview",
+      "phase": "P4",
+      "status": "complete",
+      "owner": "agent",
+      "size": "S",
+      "kind": "implementation",
+      "priority": 5,
+      "depends_on": ["SEC-003", "EDU-002", "BR-002", "DEMO-001"],
+      "requires_decisions": [],
+      "write_scope": [
+        "src/lib/teacher-plan.ts",
+        "src/lib/teacher.functions.ts",
+        "supabase/migrations/20261018002000_teacher_plans.sql",
+        "src/routes/_authenticated/teacher.tsx",
+        "src/components/teaching/TeacherPlanner.tsx",
+        "src/components/teaching/DemoClassOverview.tsx",
+        "src/lib/demo/classroom.ts",
+        "src/tests/teacher-plan/**",
+        "src/tests/teacher-planner/**",
+        "supabase/tests/teacher-plans.sql"
+      ],
+      "exclusive_locks": ["teacher-plan-schema", "route-integration"],
+      "read_first": [
+        "ProductSpec.md",
+        "FEATUREROADMAP_workplan.md",
+        "docs/demo/presenter-data.md",
+        "docs/architecture/access-contract.md"
+      ],
+      "goal": "Give the owner a useful saved lesson plan and a clearly fictional educator dashboard without implying enrollment, live student submissions, grading or teacher access to private student data.",
+      "steps": [
+        "Persist one owner-private, versioned lesson plan per project with bounded fields, explicit project identity, CAS revisions, idempotent retries and owner-only authorization.",
+        "Build the educator planning UI with all lesson fields, a teaching-kit starter, 60-minute reference agenda, peer rubric, six principles, student-task preview excluding private facilitator notes and explicit save/conflict/leave states.",
+        "For the reserved presenter project only, show four authored team examples with observation, assumption, counterexample, decision and proposed next step; keep practice comments local, unsent and guarded on navigation.",
+        "Verify schema and real database isolation/concurrency, focused UI behavior and hosted presenter lesson seeding through the ordinary owner RPC."
+      ],
+      "acceptance": [
+        "A real private lesson plan saves with revision checks and does not expose another owner’s work. Student preview omits facilitator notes.",
+        "Fictional StudyLoop, CampusSwap, QuietSpace and TutorLink cards are visibly authored examples; planned capacity 45 is an estimate, not enrollment. No live class feed, submissions, teacher grants or student progress is fabricated."
+      ],
+      "verification_profile": "product",
+      "verification": [
+        "Run teacher schema tests and real isolated SQL authorization, size, idempotency and transaction-overlap checks.",
+        "Run src/tests/teacher-planner tests for fields/save/retry/conflict, source links, preview privacy, presenter-only cohort cards, local-only comments and navigation protection.",
+        "Inspect the actual integrated desktop teacher route and verify hosted presenter plan revision via owner RPC; do not treat the separate in-memory visual fixture as database proof."
+      ],
+      "metric": "17 focused educator UI tests pass; hosted presenter lesson exists at revision 1; authored cohort shows four teams and capacity remains explicitly planned.",
+      "rollback": "Hide the educator entry or fictional overview; retain private lesson documents and revisions. Revoke teacher-plan RPC execution before any unsafe schema rollback; do not delete presenter or unrelated work.",
+      "agent_notes": {
+        "starting_point": "Narrow owner-directed final-sprint delivery reconciled after integration; preserve existing owner-only RLS and truthful fictional/current/proposed labels. Broader planned roles and lifecycle tasks are not implicitly complete.",
+        "stop_and_report": "Preserve private records and local drafts. Record missing environment, permission or verification; do not widen access, reset unrelated work or infer live evidence from fixtures.",
+        "handoff": "Coordinator records exact source revision, checks, deployment/browser evidence, pending checks, actual spend and rollback. Do not commit credentials or rewrite published history."
+      },
+      "notes": [
+        {
+          "date": "2026-10-18",
+          "text": "Owner requested an explicit seeded educator dashboard. This delivered private planning and an authored cohort rehearsal; CLS-001–006 shared classes, memberships, reviewed submissions, student visibility and teacher AI remain not started. EDU-003 real-class pilot and EDU-004 instructor rehearsal remain open."
+        }
+      ],
+      "claim": null,
+      "completion_evidence": [
+        "Backend integrated 6c27603; UI integrated 5ef10d4; authored educator overview e1c2015 and feedback-leave clarification 2e311d9. Twenty teacher schema tests, 17 educator UI tests and four true concurrent SQL transaction scenarios passed during task delivery.",
+        "Coordinator handoff 2026-10-18: teacher-plan migration applied to hosted project; Babson private lesson seeded through owner RPC at revision 1. Actual local desktop using hosted data shows four authored teams and 45 planned capacity, explicitly not enrollment. Combined release f8bc878: 219 app tests and 391 real isolated SQL assertions, typecheck, lint and build pass."
+      ],
+      "subtasks": [
+        {
+          "id": "EDU-005.s1",
+          "status": "complete",
+          "instruction": "Persist one owner-private, versioned lesson plan per project with bounded fields, explicit project identity, CAS revisions, idempotent retries and owner-only authorization.",
+          "notes": []
+        },
+        {
+          "id": "EDU-005.s2",
+          "status": "complete",
+          "instruction": "Build the educator planning UI with all lesson fields, a teaching-kit starter, 60-minute reference agenda, peer rubric, six principles, student-task preview excluding private facilitator notes and explicit save/conflict/leave states.",
+          "notes": []
+        },
+        {
+          "id": "EDU-005.s3",
+          "status": "complete",
+          "instruction": "For the reserved presenter project only, show four authored team examples with observation, assumption, counterexample, decision and proposed next step; keep practice comments local, unsent and guarded on navigation.",
+          "notes": []
+        },
+        {
+          "id": "EDU-005.s4",
+          "status": "complete",
+          "instruction": "Verify schema and real database isolation/concurrency, focused UI behavior and hosted presenter lesson seeding through the ordinary owner RPC.",
+          "notes": []
+        }
+      ]
+    },
+    {
+      "id": "DEMO-003",
+      "title": "Keep sign-in explicit and launch the chosen student, educator or admin view",
+      "phase": "P7",
+      "status": "complete",
+      "owner": "agent",
+      "size": "S",
+      "kind": "implementation",
+      "priority": 5,
+      "depends_on": ["DEMO-002", "WS-008", "EDU-005", "BR-003"],
+      "requires_decisions": [],
+      "write_scope": [
+        "src/routes/auth.tsx",
+        "src/routes/_authenticated/route.tsx",
+        "src/components/RequireProject.tsx",
+        "src/components/AppShell.tsx",
+        "src/routes/_authenticated/admin.tsx",
+        "src/tests/br-003/auth.test.tsx",
+        "src/test/render-page.tsx"
+      ],
+      "exclusive_locks": ["auth-entry", "route-integration", "app-shell"],
+      "read_first": [
+        "ProductSpec.md",
+        "FEATUREROADMAP_workplan.md",
+        "docs/demo/presenter-data.md",
+        "docs/architecture/access-contract.md"
+      ],
+      "goal": "Fix the presenter path that redirected an existing session into setup, and provide explicit Student, Educator and Admin destinations without granting a role from the UI selection.",
+      "steps": [
+        "Keep the sign-in form reachable when a session already exists; show session context instead of automatically forcing setup.",
+        "Offer Student, Educator and Admin destination choices; after explicit presenter sign-in, select only the reserved presenter project and route to the chosen dashboard.",
+        "Preserve server-side owner/admin checks, normal signup and email-link flows; verify all three launch targets and the deployed sign-in form."
+      ],
+      "acceptance": [
+        "Existing-session /auth stays on the sign-in page; the requested dedicated presenter identity reaches the explicitly selected dashboard after sign-in.",
+        "Destination selection changes navigation only. Ordinary signup cannot set admin/teacher privileges; unauthorized aggregate access still fails closed."
+      ],
+      "verification_profile": "product",
+      "verification": [
+        "Run auth tests for existing-session form retention, all three destination launches, reserved project selection, alias/error handling, ordinary signup and email links.",
+        "Run combined typecheck, tests, lint and build, deploy f8bc878 and inspect the production sign-in form; record further end-to-end production walkthrough observations separately."
+      ],
+      "metric": "All three destination tests pass; deployed /auth visibly retains its form instead of an automatic setup redirect.",
+      "rollback": "Remove dashboard destination shortcuts while retaining explicit sign-in and server authorization; preserve the owned presenter project and every saved plan.",
+      "agent_notes": {
+        "starting_point": "Narrow owner-directed final-sprint delivery reconciled after integration; preserve existing owner-only RLS and truthful fictional/current/proposed labels. Broader planned roles and lifecycle tasks are not implicitly complete.",
+        "stop_and_report": "Preserve private records and local drafts. Record missing environment, permission or verification; do not widen access, reset unrelated work or infer live evidence from fixtures.",
+        "handoff": "Coordinator records exact source revision, checks, deployment/browser evidence, pending checks, actual spend and rollback. Do not commit credentials or rewrite published history."
+      },
+      "notes": [
+        {
+          "date": "2026-10-18",
+          "text": "This is a narrow navigation correction and three-view presenter launch. It neither implements general role switching nor completes the planned membership, classroom or platform-admin access model."
+        }
+      ],
+      "claim": null,
+      "completion_evidence": [
+        "Implementation c16b3a3, integrated in f8bc878. src/tests/br-003/auth.test.tsx explicitly verifies Student → /dashboard, Educator → /teacher and Admin → /admin, with remembered reserved project selection and no privilege assignment.",
+        "Coordinator reports 19 focused auth/project checks and 219 combined application tests, typecheck, lint and build passing. Vercel deployment f8bc878 reached READY; production /auth was observed retaining the form. Credentials are never recorded in the registry."
+      ],
+      "subtasks": [
+        {
+          "id": "DEMO-003.s1",
+          "status": "complete",
+          "instruction": "Keep the sign-in form reachable when a session already exists; show session context instead of automatically forcing setup.",
+          "notes": []
+        },
+        {
+          "id": "DEMO-003.s2",
+          "status": "complete",
+          "instruction": "Offer Student, Educator and Admin destination choices; after explicit presenter sign-in, select only the reserved presenter project and route to the chosen dashboard.",
+          "notes": []
+        },
+        {
+          "id": "DEMO-003.s3",
+          "status": "complete",
+          "instruction": "Preserve server-side owner/admin checks, normal signup and email-link flows; verify all three launch targets and the deployed sign-in form.",
+          "notes": []
+        }
+      ]
+    },
+    {
+      "id": "AI-009",
+      "title": "AI-DEMO-001: verify bounded fictional presenter AI practice",
+      "phase": "P1",
+      "status": "in_progress",
+      "owner": "agent",
+      "size": "S",
+      "kind": "implementation",
+      "priority": 5,
+      "depends_on": ["AI-001", "DEMO-002", "MKT-003", "SEC-003"],
+      "requires_decisions": [],
+      "write_scope": [
+        "src/lib/ai.functions.ts",
+        "src/lib/ai/contracts.ts",
+        "src/lib/ai/gateway.server.ts",
+        "src/lib/ai/demo-marketing.server.ts",
+        "src/components/marketing/LiveMarketingPractice.tsx",
+        "src/components/marketing/SavedMarketingLab.tsx",
+        "supabase/migrations/20261018003000_demo_ai_budget.sql",
+        "src/tests/ai-demo/**",
+        "src/tests/ai-eval/**",
+        "docs/demo/presenter-data.md",
+        "supabase/tests/30_demo-ai-budget.sql"
+      ],
+      "exclusive_locks": ["ai-gateway", "demo-ai-budget", "presenter-access"],
+      "read_first": [
+        "ProductSpec.md",
+        "FEATUREROADMAP_workplan.md",
+        "docs/demo/presenter-data.md",
+        "docs/architecture/access-contract.md"
+      ],
+      "goal": "Verify one explicitly requested fixed-case marketing draft through the existing generateAI gateway, with a private atomic workshop reservation budget and no private project content transmitted.",
+      "steps": [
+        "Authorize only the reserved owner/project with fresh trusted synthetic/admin metadata, matching fixture markers and a server-checked student-first completion stamp; dispatch fixed fictional text before reading general project evidence.",
+        "Reserve 2 cents atomically from a fixed global 1-dollar workshop cap before the single provider request; retain every reservation after failed or ambiguous outcomes and fail closed on missing configuration or budget.",
+        "Use the existing generateAI gateway for google/gemini-2.5-flash-lite, Google Vertex only, ZDR/data-collection deny, price filters, 1200 output tokens, one attempt and no fallback; runtime-check output and protect temporary edits.",
+        "After deployment, run one explicit authorized presenter request, record provider/model/routing/cost and reservation evidence, review the returned draft, and leave the task open if any live-provider check fails."
+      ],
+      "acceptance": [
+        "No private notes, project descriptions, student work or editable plan text enter the provider request; the request contains only the versioned authored case.",
+        "Wrong identity, revoked trusted metadata, unfinished first thinking, unavailable reservation or missing key produce no provider call.",
+        "A successful deployed provider trial identifies the requested model/provider and reviewable fictional output with observed cost or explicitly unknown cost and retained reservation. No baseline/general AI route is promoted by this trial."
+      ],
+      "verification_profile": "product",
+      "verification": [
+        "Run src/tests/ai-demo gateway, server-authorization and UI cases; run the real isolated SQL budget/authorization assertions, including global exhaustion and retained reservations.",
+        "Perform the bounded live provider call only after the deployed gate is ready; inspect actual returned model/provider and content, and record measured spend without keys, tokens or private payloads.",
+        "Keep the public prepared marketing example and manual saved lab usable if the provider route is unavailable; do not classify offline fixtures as an actual model-quality pass."
+      ],
+      "metric": "At most 50 two-cent reservations in this workshop ledger; no retries/fallback; first deployed provider result and actual spend still pending at this audit cutoff.",
+      "rollback": "Disable the marketing_demo UI/dispatch or revoke reserve_demo_ai execution; retain the immutable reservation ledger, saved plans and the free prepared example. Never refund uncertain provider outcomes or broaden provider routing to make the demo work.",
+      "agent_notes": {
+        "starting_point": "Narrow owner-directed final-sprint delivery reconciled after integration; preserve existing owner-only RLS and truthful fictional/current/proposed labels. Broader planned roles and lifecycle tasks are not implicitly complete.",
+        "stop_and_report": "Preserve private records and local drafts. Record missing environment, permission or verification; do not widen access, reset unrelated work or infer live evidence from fixtures.",
+        "handoff": "Coordinator records exact source revision, checks, deployment/browser evidence, pending checks, actual spend and rollback. Do not commit credentials or rewrite published history."
+      },
+      "notes": [
+        {
+          "date": "2026-10-18",
+          "text": "Requested label AI-DEMO-001 is represented by canonical AI-009 to preserve the registry ID grammar. Implementation is integrated (68b1b41, c16b3a3, f8bc878) and automated verification passes, but no live-provider success or measured model quality is claimed. Parent remains in_progress until the coordinator records the deployed provider trial. This does not complete AI-002–008, general marketing AI or admin cost analytics."
+        }
+      ],
+      "claim": {
+        "owner": "coordinator",
+        "branch": "main",
+        "base_commit": "f8bc878",
+        "worktree": "/Users/ianroy/Library/CloudStorage/Dropbox/Apps by Ian/Babson AI Academy/First 10",
+        "started_at": "2026-10-18T11:45:53.883336+00:00",
+        "lease_expires_at": "2026-10-18T12:45:53.883336+00:00"
+      },
+      "completion_evidence": [],
+      "subtasks": [
+        {
+          "id": "AI-009.s1",
+          "status": "complete",
+          "instruction": "Authorize only the reserved owner/project with fresh trusted synthetic/admin metadata, matching fixture markers and a server-checked student-first completion stamp; dispatch fixed fictional text before reading general project evidence.",
+          "notes": []
+        },
+        {
+          "id": "AI-009.s2",
+          "status": "complete",
+          "instruction": "Reserve 2 cents atomically from a fixed global 1-dollar workshop cap before the single provider request; retain every reservation after failed or ambiguous outcomes and fail closed on missing configuration or budget.",
+          "notes": []
+        },
+        {
+          "id": "AI-009.s3",
+          "status": "complete",
+          "instruction": "Use the existing generateAI gateway for google/gemini-2.5-flash-lite, Google Vertex only, ZDR/data-collection deny, price filters, 1200 output tokens, one attempt and no fallback; runtime-check output and protect temporary edits.",
+          "notes": []
+        },
+        {
+          "id": "AI-009.s4",
+          "status": "not_started",
+          "instruction": "After deployment, run one explicit authorized presenter request, record provider/model/routing/cost and reservation evidence, review the returned draft, and leave the task open if any live-provider check fails.",
           "notes": []
         }
       ]
@@ -9945,11 +10338,14 @@
   ],
   "run_policy": {
     "started_at": "2026-10-18T03:29:45Z",
-    "checkpoint_at": "2026-10-18T13:29:45Z",
+    "checkpoint_at": "2026-10-18T12:13:00Z",
     "openrouter_limit_usd": 25,
     "openrouter_spend_usd": 0,
     "deployment": "Production deployment and safe tested migrations authorized; commit/push often. No other paid services.",
     "demo_priority": "Tomorrow’s Babson mini hackathon presentation for 45 academics; strong educator story, reliable fictional sample data and polished walkthrough.",
-    "real_testers": "Supabase authorized for testers; no specific people/contact channels named. No unsolicited external messaging."
+    "real_testers": "Supabase authorized for testers; no specific people/contact channels named. No unsolicited external messaging.",
+    "checkpoint_note": "Owner-directed final one-hour sprint superseded the original 13:29 UTC checkpoint; approximately 12:13 UTC per docs/roadmap/autonomous-run.md.",
+    "synthetic_ai_budget_usd": 1,
+    "spend_note": "At this reconciliation cutoff no deployed provider trial is confirmed; AI-009 must record measured cost after the authorized request. The workshop reservation cap is separate from and within the owner’s total $25 limit."
   }
 }
