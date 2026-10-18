@@ -7,6 +7,11 @@ const h = vi.hoisted(() => ({
   supabase: null as unknown as FakeSupabase,
   generate: vi.fn(),
   capture: vi.fn(),
+  draftList: vi.fn(),
+  draftCreate: vi.fn(),
+  draftLoad: vi.fn(),
+  draftSave: vi.fn(),
+  draftComplete: vi.fn(),
   getConsent: vi.fn(),
   setConsent: vi.fn(),
 }));
@@ -20,6 +25,13 @@ vi.mock("@/lib/consent.functions", () => ({
   saveInterviewWithConsent: h.capture,
   getProcessingConsent: h.getConsent,
   setProcessingConsent: h.setConsent,
+}));
+vi.mock("@/lib/interview-drafts.functions", () => ({
+  listInterviewDrafts: h.draftList,
+  createInterviewDraft: h.draftCreate,
+  loadInterviewDraft: h.draftLoad,
+  saveInterviewDraft: h.draftSave,
+  completeInterviewDraft: h.draftComplete,
 }));
 import { Route as Contacts } from "@/routes/_authenticated/contacts";
 import { Route as Learnings } from "@/routes/_authenticated/learnings";
@@ -55,6 +67,11 @@ const page = (route: { options: { component?: unknown } }) =>
   route.options.component as Parameters<typeof renderPage>[0];
 beforeEach(() => {
   h.generate.mockClear();
+  h.draftList.mockReset().mockResolvedValue({ ok: true, drafts: [] });
+  h.draftCreate.mockReset();
+  h.draftLoad.mockReset();
+  h.draftSave.mockReset();
+  h.draftComplete.mockReset();
   h.capture.mockReset().mockResolvedValue({ interviewId: "saved-interview", replayed: false });
   h.getConsent.mockImplementation(async ({ data }: { data: Record<string, unknown> }) => ({
     ...data,
@@ -185,40 +202,75 @@ describe("desktop workflow layout preserves actions and accessible inputs", () =
     expect(h.generate).not.toHaveBeenCalled();
   });
 
-  it("retains interview permission gating and saves labeled notes/quotes only at wrap-up", async () => {
+  it("saves exact private draft notes separately before explicit reviewed completion", async () => {
     h.supabase = createFakeSupabase({
       projects: [{ ...project, stage: 1 }],
       contacts: [{ ...contact, stage: 1, status: "to_contact" }],
+    });
+    let record = {
+      id: "draft-1",
+      projectId: "p1",
+      contactId: "c1",
+      revision: 1,
+      status: "active",
+      questions: project.questions,
+      originId: null,
+      createdAt: "2026-10-18T15:00:00Z",
+      savedAt: "2026-10-18T15:00:00Z",
+      completedAt: null,
+      interviewId: null,
+      document: {
+        schemaVersion: 1,
+        policyVersion: 1,
+        answers: project.questions.map((q) => ({ q, note: "", quote: "" })),
+        choices: { noteStatus: "granted", aiStatus: "unknown", sharingStatus: "unknown" },
+        tags: [],
+        currentQuestion: 0,
+      },
+    };
+    h.draftCreate.mockResolvedValue({ ok: true, draft: record });
+    h.draftLoad.mockImplementation(async () => ({ ok: true, draft: structuredClone(record) }));
+    h.draftSave.mockImplementation(async ({ data }) => {
+      record = { ...record, revision: 2, document: data.document };
+      return { ok: true, draft: structuredClone(record) };
+    });
+    h.draftComplete.mockResolvedValue({
+      ok: true,
+      interviewId: "saved-interview",
+      replayed: false,
+      completedRevision: 2,
     });
     renderPage(page(Interview), "/interview");
     expect(await screen.findByLabelText("Question 1")).toHaveValue(project.questions[0]);
     const begin = await screen.findByRole("button", { name: "Begin" });
     expect(begin).toBeDisabled();
-    fireEvent.click(screen.getByRole("button", { name: "Avery" }));
-    expect(begin).toBeDisabled();
+    fireEvent.change(screen.getByLabelText("Person for this conversation"), {
+      target: { value: "c1" },
+    });
     fireEvent.click(screen.getByRole("checkbox", { name: /I asked if it’s okay to take notes/ }));
     fireEvent.click(begin);
-    expect(screen.getByText(/Notes save only when you choose Save interview/)).toBeVisible();
-    fireEvent.change(screen.getByLabelText("Conversation notes"), {
+    fireEvent.change(await screen.findByLabelText("Conversation notes"), {
       target: { value: "Fictional note for the fixture" },
     });
     fireEvent.change(screen.getByLabelText("Exact quote (optional)"), {
       target: { value: "Fictional exact words" },
     });
-    expect(h.supabase.calls.filter((c) => c.table === "interviews")).toHaveLength(0);
+    expect(h.capture).not.toHaveBeenCalled();
+    expect(h.draftComplete).not.toHaveBeenCalled();
     fireEvent.click(screen.getByRole("button", { name: "Next" }));
     fireEvent.click(screen.getByRole("button", { name: "Next" }));
-    fireEvent.click(screen.getByRole("button", { name: "Save interview" }));
-    await waitFor(() =>
-      expect(h.capture).toHaveBeenCalledWith({
-        data: expect.objectContaining({
-          projectId: "p1",
-          contactId: "c1",
-          noteStatus: "granted",
-          aiStatus: "unknown",
-          sharingStatus: "unknown",
-          policyVersion: 1,
-          requestId: expect.any(String),
+    expect(screen.getByRole("button", { name: "Complete interview" })).toBeDisabled();
+    fireEvent.click(screen.getByRole("button", { name: "Save draft" }));
+    await screen.findByText(/Draft saved\. It is still incomplete/);
+    expect(h.draftSave).toHaveBeenCalledWith({
+      data: expect.objectContaining({
+        projectId: "p1",
+        draftId: "draft-1",
+        contactId: "c1",
+        expectedRevision: 1,
+        mutationId: expect.any(String),
+        document: expect.objectContaining({
+          choices: { noteStatus: "granted", aiStatus: "unknown", sharingStatus: "unknown" },
           answers: [
             {
               q: project.questions[0],
@@ -229,7 +281,15 @@ describe("desktop workflow layout preserves actions and accessible inputs", () =
           ],
         }),
       }),
-    );
+    });
+    fireEvent.click(screen.getByRole("checkbox", { name: /I conducted this conversation/ }));
+    fireEvent.click(screen.getByRole("button", { name: "Complete interview" }));
+    fireEvent.click(await screen.findByRole("button", { name: "Confirm completion" }));
+    await screen.findByRole("heading", { name: "Interview completion receipt" });
+    expect(h.draftComplete).toHaveBeenCalledExactlyOnceWith({
+      data: { projectId: "p1", draftId: "draft-1", expectedRevision: 2 },
+    });
+    expect(h.capture).not.toHaveBeenCalled();
     expect(h.generate).not.toHaveBeenCalled();
   });
 

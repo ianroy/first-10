@@ -1,37 +1,24 @@
+import { InterviewDraftList } from "@/components/interview-drafts/InterviewDraftList";
+import { InterviewDraftSession } from "@/components/interview-drafts/InterviewDraftSession";
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { useState } from "react";
 import { toast } from "sonner";
 import { useServerFn } from "@tanstack/react-start";
-import { Plus, Trash2, X } from "lucide-react";
+import { Plus, Trash2 } from "lucide-react";
 import { supabase } from "@/integrations/supabase/client";
 import { generateAI } from "@/lib/ai.functions";
 import { useAIIntent } from "@/hooks/useAIIntent";
 import { recordedAIOutput } from "@/lib/ai/saved-output";
 import { AIOrigin } from "@/components/AIOrigin";
 import { OwnerActivityExport } from "@/components/export/OwnerActivityExport";
-import {
-  projectActivities,
-  interviewActivities,
-  interviewDraftActivity,
-  section,
-} from "@/lib/export/adapters";
-import { ConsentFields, SavedConsentFields } from "@/components/ConsentFields";
-import { saveInterviewWithConsent } from "@/lib/consent.functions";
-import { unknownConsent, type ConsentChoices, type ConsentScope } from "@/lib/consent";
+import { projectActivities, interviewActivities, section } from "@/lib/export/adapters";
+import { SavedConsentFields } from "@/components/ConsentFields";
+import { type ConsentScope } from "@/lib/consent";
 import { AppShell, Card, DraftBadge, Empty, PrivacyNote } from "@/components/AppShell";
 import { RequireProject } from "@/components/RequireProject";
 import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
-import {
-  TAGS,
-  useContacts,
-  useInterviews,
-  useLearnings,
-  useRefresh,
-  type Answer,
-  type Project,
-} from "@/lib/data";
+import { useContacts, useInterviews, useLearnings, useRefresh, type Project } from "@/lib/data";
 
 export const Route = createFileRoute("/_authenticated/interview")({
   head: () => ({
@@ -45,17 +32,17 @@ export const Route = createFileRoute("/_authenticated/interview")({
 
 function InterviewPage({ p }: { p: Project }) {
   const questions = (p.questions as string[]) ?? [];
-  const [session, setSession] = useState<{ contactId: string | null } | null>(null);
-  if (session)
+  const [draftId, setDraftId] = useState<string | null>(null);
+  if (draftId)
     return (
-      <Session
-        p={p}
-        questions={questions}
-        contactId={session.contactId}
-        onDone={() => setSession(null)}
+      <InterviewDraftSession
+        key={`${p.user_id}:${p.id}:${draftId}`}
+        project={p}
+        draftId={draftId}
+        onDone={() => setDraftId(null)}
       />
     );
-  return <Prep p={p} questions={questions} onStart={(contactId) => setSession({ contactId })} />;
+  return <Prep p={p} questions={questions} onStart={setDraftId} />;
 }
 
 function Prep({
@@ -65,7 +52,7 @@ function Prep({
 }: {
   p: Project;
   questions: string[];
-  onStart: (id: string | null) => void;
+  onStart: (id: string) => void;
 }) {
   const gen = useServerFn(generateAI);
   const intent = useAIIntent(p.id, "questions");
@@ -76,8 +63,6 @@ function Prep({
   const [busy, setBusy] = useState(false);
   const [draft, setDraft] = useState<string[] | null>(null);
   const [draftOrigin, setDraftOrigin] = useState<string | null | undefined>(undefined);
-  const [who, setWho] = useState("");
-  const [asked, setAsked] = useState(false);
   const [privacyTarget, setPrivacyTarget] = useState(`project:${p.id}`);
   const privacyRecords = [
     { kind: "project" as const, id: p.id, label: "This idea" },
@@ -105,7 +90,6 @@ function Prep({
     targetId: selectedPrivacy.id,
   };
   const qs = draft ?? questions;
-  const pending = contacts.filter((c) => c.stage === 1 && c.status !== "interviewed");
   const exportActivities = () => {
     const script = projectActivities({
       ...p,
@@ -320,55 +304,11 @@ function Prep({
           </Card>
         </div>
         <div className="min-w-0 space-y-6">
-          {questions.length > 0 && !draft && (
-            <Card>
-              <h2 className="text-lg font-bold">Start an interview</h2>
-              {pending.length === 0 ? (
-                <p className="mt-1 text-sm text-muted-foreground">
-                  No one left on your list.{" "}
-                  <Link to="/contacts" className="text-primary underline">
-                    Add people
-                  </Link>{" "}
-                  first.
-                </p>
-              ) : (
-                <div className="mt-3 flex flex-wrap gap-2">
-                  {pending.map((c) => (
-                    <button
-                      key={c.id}
-                      aria-pressed={who === c.id}
-                      onClick={() => setWho(c.id)}
-                      className={`rounded-full border px-4 py-2 text-sm ${who === c.id ? "border-primary bg-primary text-primary-foreground" : ""}`}
-                    >
-                      {c.first_name}
-                    </button>
-                  ))}
-                </div>
-              )}
-              <label className="mt-4 flex items-start gap-3 rounded-xl bg-secondary p-3 text-sm text-secondary-foreground">
-                <input
-                  type="checkbox"
-                  checked={asked}
-                  onChange={(e) => setAsked(e.target.checked)}
-                  className="mt-0.5 size-5 accent-primary"
-                />
-                I asked if it’s okay to take notes, and they said yes.
-              </label>
-              <p className="mt-3 text-sm text-muted-foreground">
-                Permission to take notes is separate from permission to send content to AI or share
-                it. Your note-permission report is saved with the interview at wrap-up; it is not
-                independently verified.
-              </p>
-              <Button
-                size="xl"
-                className="mt-3"
-                disabled={!who || !asked}
-                onClick={() => onStart(who)}
-              >
-                Begin
-              </Button>
-            </Card>
-          )}
+          <InterviewDraftList
+            project={p}
+            onResume={onStart}
+            canStart={questions.length > 0 && !draft}
+          />
 
           {questions.length === 0 && !draft && <PrivacyNote />}
 
@@ -408,209 +348,5 @@ function Prep({
       </div>
       <OwnerActivityExport project={p} activities={exportActivities} />
     </AppShell>
-  );
-}
-
-function Session({
-  p,
-  questions,
-  contactId,
-  onDone,
-}: {
-  p: Project;
-  questions: string[];
-  contactId: string | null;
-  onDone: () => void;
-}) {
-  const refresh = useRefresh();
-  const capture = useServerFn(saveInterviewWithConsent);
-  const [i, setI] = useState(0);
-  const [answers, setAnswers] = useState<Answer[]>(
-    questions.map((q) => ({ q, note: "", quote: "" })),
-  );
-  const [tags, setTags] = useState<string[]>([]);
-  const [saving, setSaving] = useState(false);
-  const [choices, setChoices] = useState<ConsentChoices>({
-    ...unknownConsent,
-    noteStatus: "granted",
-  });
-  const [requestId] = useState(() => crypto.randomUUID());
-  const last = i === questions.length;
-  const set = (k: "note" | "quote", v: string) =>
-    setAnswers((a) => a.map((x, j) => (j === i ? { ...x, [k]: v } : x)));
-
-  const finish = async () => {
-    setSaving(true);
-    try {
-      if (choices.noteStatus !== "granted")
-        throw new Error(
-          "Reported permission to keep notes is required before saving this interview.",
-        );
-      await capture({
-        data: {
-          projectId: p.id,
-          contactId,
-          answers,
-          tags: tags as (
-            "has problem" | "current workaround" | "would use" | "would pay" | "gave referral"
-          )[],
-          noteStatus: "granted",
-          aiStatus: choices.aiStatus,
-          sharingStatus: choices.sharingStatus,
-          policyVersion: 1,
-          requestId,
-        },
-      });
-    } catch (error) {
-      toast.error(error instanceof Error ? error.message : "Interview was not saved.");
-      setSaving(false);
-      return;
-    }
-    setSaving(false);
-    refresh("interviews", "contacts");
-    toast.success("Interview saved. Nice work! ");
-    onDone();
-  };
-
-  return (
-    <div className="mx-auto flex min-h-screen max-w-5xl flex-col px-5 pt-5 sm:px-8 sm:pt-8">
-      <div className="flex items-center justify-between">
-        <p className="text-sm font-semibold text-muted-foreground">
-          {last ? "Wrap up" : `Question ${i + 1} of ${questions.length}`}
-        </p>
-        <button
-          aria-label="Exit"
-          onClick={() => confirm("Leave without saving?") && onDone()}
-          className="flex size-11 items-center justify-center rounded-lg hover:bg-muted"
-        >
-          <X className="size-5" />
-        </button>
-      </div>
-      <p className="mt-2 max-w-2xl text-sm text-muted-foreground">
-        Notes save only when you choose Save interview at wrap-up. Leaving or refreshing before then
-        can lose this session.
-      </p>
-      <div
-        className="mt-3 h-1.5 rounded-full bg-muted"
-        role="progressbar"
-        aria-label="Interview progress"
-        aria-valuemin={0}
-        aria-valuemax={questions.length}
-        aria-valuenow={i}
-      >
-        <div
-          className="h-full rounded-full bg-primary"
-          style={{ width: `${(i / questions.length) * 100}%` }}
-        />
-      </div>
-      <div className="flex-1 py-6">
-        {!last ? (
-          <div className="grid items-start gap-8 lg:grid-cols-[minmax(0,0.9fr)_minmax(0,1.1fr)]">
-            <div>
-              <p className="mb-3 text-xs font-semibold uppercase tracking-widest text-primary">
-                Listen, then follow the story
-              </p>
-              <h1 className="text-3xl font-bold leading-tight sm:text-4xl">{questions[i]}</h1>
-              <p className="mt-5 max-w-md text-muted-foreground">
-                Try “What happened next?” or “How did you handle that?” Keep exact words only when
-                you captured them accurately.
-              </p>
-            </div>
-            <div className="rounded-2xl border bg-card p-5 sm:p-6">
-              <label htmlFor="interview-notes" className="block text-sm font-semibold">
-                Conversation notes
-              </label>
-              <Textarea
-                id="interview-notes"
-                value={answers[i]?.note ?? ""}
-                onChange={(e) => set("note", e.target.value)}
-                placeholder="Quick notes…"
-                rows={5}
-                className="mt-2 min-h-48 rounded-xl text-base"
-              />
-              <label htmlFor="interview-quote" className="mt-5 block text-sm font-semibold">
-                Exact quote (optional)
-              </label>
-              <Input
-                id="interview-quote"
-                value={answers[i]?.quote ?? ""}
-                onChange={(e) => set("quote", e.target.value)}
-                placeholder="“Exact words they said” (optional)"
-                className="mt-2 h-12 rounded-xl text-base italic"
-              />
-            </div>
-          </div>
-        ) : (
-          <>
-            <h1 className="text-3xl font-bold">What did you hear?</h1>
-            <p className="mt-2 max-w-2xl text-muted-foreground">
-              Select the themes you heard. Statements about willingness to use or pay are not
-              observed use or payment.
-            </p>
-            <div className="mt-5 grid gap-3 sm:grid-cols-2">
-              {TAGS.map((t) => (
-                <button
-                  key={t}
-                  aria-pressed={tags.includes(t)}
-                  onClick={() =>
-                    setTags((x) => (x.includes(t) ? x.filter((y) => y !== t) : [...x, t]))
-                  }
-                  className={`rounded-2xl border-2 p-4 text-left text-base font-semibold capitalize ${tags.includes(t) ? "border-primary bg-primary/10" : "bg-card"}`}
-                >
-                  {tags.includes(t) ? "✓ " : ""}
-                  {t}
-                </button>
-              ))}
-            </div>
-            <div className="mt-6">
-              <ConsentFields
-                value={choices}
-                onChange={setChoices}
-                disabled={saving}
-                label="Choices saved with this interview"
-              />
-            </div>
-          </>
-        )}
-      </div>
-      <div className="mb-5">
-        <OwnerActivityExport
-          project={p}
-          activities={[
-            interviewDraftActivity(p, {
-              questions,
-              answers,
-              tags,
-              consentChoices: choices,
-            }),
-          ]}
-        />
-      </div>
-      <div className="pb-safe sticky bottom-0 flex gap-2 bg-background pt-2">
-        <Button
-          variant="outline"
-          size="xl"
-          className="w-1/3"
-          disabled={i === 0}
-          onClick={() => setI(i - 1)}
-        >
-          Back
-        </Button>
-        {last ? (
-          <Button
-            size="xl"
-            className="flex-1"
-            disabled={saving || choices.noteStatus !== "granted"}
-            onClick={finish}
-          >
-            {saving ? "Saving…" : "Save interview"}
-          </Button>
-        ) : (
-          <Button size="xl" className="flex-1" onClick={() => setI(i + 1)}>
-            Next
-          </Button>
-        )}
-      </div>
-    </div>
   );
 }
