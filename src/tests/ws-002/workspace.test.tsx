@@ -170,13 +170,17 @@ describe("workspace lifecycle and stale-operation boundaries", () => {
     );
     fireEvent.click(screen.getByRole("button", { name: "Confirm archive" }));
     expect(await screen.findByRole("button", { name: "Restore Alpha" })).toBeVisible();
-    expect(screen.getByRole("status")).toHaveTextContent("Alpha is archived");
+    expect(screen.getByRole("status", { name: "Idea lifecycle result" })).toHaveTextContent(
+      "Alpha is archived",
+    );
     expect(screen.queryByRole("button", { name: "Open Alpha" })).not.toBeInTheDocument();
     expect(h.client.tables["contacts"]![0]!["first_name"]).toBe("Alpha person");
     fireEvent.click(screen.getByRole("button", { name: "Restore Alpha" }));
     fireEvent.click(screen.getByRole("button", { name: "Confirm restore" }));
     expect(await screen.findByRole("button", { name: "Open Alpha" })).toBeVisible();
-    expect(screen.getByRole("status")).toHaveTextContent("Alpha is active");
+    expect(screen.getByRole("status", { name: "Idea lifecycle result" })).toHaveTextContent(
+      "Alpha is active",
+    );
     expect(h.client.tables["projects"]![0]!["lifecycle_revision"]).toBe(2);
   });
   it("shows actual latest active state after a stale archive acknowledgement", async () => {
@@ -197,7 +201,11 @@ describe("workspace lifecycle and stale-operation boundaries", () => {
     mount(<AccountPage />);
     fireEvent.click(await screen.findByRole("button", { name: "Archive Alpha" }));
     fireEvent.click(screen.getByRole("button", { name: "Confirm archive" }));
-    await waitFor(() => expect(screen.getByRole("status")).toHaveTextContent("Alpha is active"));
+    await waitFor(() =>
+      expect(screen.getByRole("status", { name: "Idea lifecycle result" })).toHaveTextContent(
+        "Alpha is active",
+      ),
+    );
     expect(screen.getByRole("button", { name: "Open Alpha" })).toBeVisible();
   });
   it("ignores a pending new-idea result after switching to another idea", async () => {
@@ -279,13 +287,19 @@ describe("workspace lifecycle and stale-operation boundaries", () => {
     h.client.tables["projects"]![0]!["lifecycle_revision"] = 2;
     fireEvent.click(screen.getByRole("button", { name: "Confirm archive" }));
     await waitFor(() =>
-      expect(screen.getByRole("status")).toHaveTextContent("changed in another session"),
+      expect(screen.getByRole("status", { name: "Idea lifecycle result" })).toHaveTextContent(
+        "changed in another session",
+      ),
     );
     expect(screen.queryByRole("button", { name: "Confirm archive" })).not.toBeInTheDocument();
     expect(h.client.tables["projects"]![0]!["archived_at"]).toBeNull();
     fireEvent.click(screen.getByRole("button", { name: "Archive Alpha" }));
     fireEvent.click(screen.getByRole("button", { name: "Confirm archive" }));
-    await waitFor(() => expect(screen.getByRole("status")).toHaveTextContent("Alpha is archived"));
+    await waitFor(() =>
+      expect(screen.getByRole("status", { name: "Idea lifecycle result" })).toHaveTextContent(
+        "Alpha is archived",
+      ),
+    );
   });
   it("restores an explicit archived selection after reload without choosing another idea", async () => {
     window.localStorage.setItem(selectionStorageKey(USER), A);

@@ -1531,7 +1531,7 @@
       "id": "PRV-001",
       "title": "Persist consent choices and explain AI/sharing data flow",
       "phase": "P1",
-      "status": "in_progress",
+      "status": "complete",
       "owner": "agent",
       "size": "S",
       "kind": "implementation",
@@ -1596,31 +1596,26 @@
           "text": "Coordinator approved immutable evalv3/source bindings and actual-handler parity updates required by permission-scoped context, preserving published v1/v2 bytes. Reviewed11000 hash67346a6e applied only to dedicated local55322 successfully; real SQL testing continues. Hosted not yet applied."
         }
       ],
-      "claim": {
-        "owner": "platform_admin",
-        "branch": "codex/processing-consent-20261018",
-        "base_commit": "43c8b2e",
-        "worktree": "/private/tmp/first-ten-platform-admin",
-        "started_at": "2026-10-18T14:58:29.216525+00:00",
-        "lease_expires_at": "2026-10-18T16:58:29.216525+00:00"
-      },
-      "completion_evidence": [],
+      "claim": null,
+      "completion_evidence": [
+        "75ab467 (worker4b4ffdb): persisted versioned owner-reported note/AI/sharing choices, safe filtered context, atomic interview capture, manual question path.79newSQL assertions/873worker total pass;935combinedSQL including invitation foundation pass+rollback.496worker app tests, typecheck/lint/build pass. Immutable evalv3 and synthetic-key tests integrated in followup commits; hostedapply/deployedjourney pending coordinator."
+      ],
       "subtasks": [
         {
           "id": "PRV-001.s1",
-          "status": "in_progress",
+          "status": "complete",
           "instruction": "Map exactly which fields reach Supabase/OpenRouter/recipient views.",
           "notes": []
         },
         {
           "id": "PRV-001.s2",
-          "status": "not_started",
+          "status": "complete",
           "instruction": "Define versioned choices and timestamps; do not backfill historical consent as granted.",
           "notes": []
         },
         {
           "id": "PRV-001.s3",
-          "status": "not_started",
+          "status": "complete",
           "instruction": "Build reusable UI/policy checks and a non-AI route where appropriate; document withdrawal behavior.",
           "notes": []
         }
@@ -2021,7 +2016,7 @@
       "size": "S",
       "kind": "implementation",
       "priority": 50,
-      "depends_on": ["AI-002"],
+      "depends_on": ["AI-002", "AI-004"],
       "requires_decisions": [],
       "write_scope": [
         "evals/**",
@@ -2105,7 +2100,7 @@
       "id": "AI-004",
       "title": "Authoritative usage ledger and atomic spend reservation",
       "phase": "P1",
-      "status": "not_started",
+      "status": "in_progress",
       "owner": "agent",
       "size": "S",
       "kind": "implementation",
@@ -2113,16 +2108,14 @@
       "depends_on": ["AI-001", "SEC-003"],
       "requires_decisions": [],
       "write_scope": [
-        "supabase/migrations/**",
-        "src/integrations/supabase/types.ts",
-        "src/lib/ai.functions.ts",
+        "supabase/migrations/20261018014000_ai_usage_budget.sql",
         "src/lib/ai/budget.server.ts",
+        "src/lib/ai/budget-contract.ts",
         "src/tests/ai-004/**",
-        "src/lib/ai.functions.test.ts",
-        "src/lib/ai/budget.server.test.ts",
-        "supabase/tests/ai-004.sql"
+        "supabase/tests/ai-004.sql",
+        "docs/ai-budget-operations.md"
       ],
-      "exclusive_locks": ["database-schema", "generated-types", "ai-entrypoint"],
+      "exclusive_locks": ["ai-usage-ledger-schema", "ai-budget-service"],
       "read_first": [
         "ProductSpec.md",
         "FEATUREROADMAP_workplan.md",
@@ -2157,14 +2150,25 @@
         {
           "date": "2026-10-17",
           "text": "Scheduled by Iteration 5; no implementation or validation claimed."
+        },
+        {
+          "date": "2026-10-18",
+          "text": "WorkerimplementsbudgetDB/service inisolatedscope; rootlater seriallywiresgenerateAI/gateway withnewimmutableevalversion. No paidcalls/defaultautomaticbudgetgrants. Existingfixedcase1USDledger mustcounttoward25USDtotalrunauthorization."
         }
       ],
-      "claim": null,
+      "claim": {
+        "owner": "platform_admin",
+        "branch": "codex/ai-usage-budget-20261018",
+        "base_commit": "d789ebd",
+        "worktree": "/private/tmp/first-ten-platform-admin",
+        "started_at": "2026-10-18T15:29:24.838928+00:00",
+        "lease_expires_at": "2026-10-18T17:29:24.838928+00:00"
+      },
       "completion_evidence": [],
       "subtasks": [
         {
           "id": "AI-004.s1",
-          "status": "not_started",
+          "status": "in_progress",
           "instruction": "Reserve a worst-case bounded charge atomically before generation using a scoped idempotency key.",
           "notes": []
         },
@@ -10870,6 +10874,10 @@
         {
           "date": "2026-10-18",
           "text": "Coordinator serial integration also owns src/components/OwnerSavedWorkExport.tsx and dashboard.tsx for a current-owner saved-work portfolio, plus final interview/setup/account export mounting after their active route workers finish. Worker adapters/launcher remain isolated; no teacher-team access inferred."
+        },
+        {
+          "date": "2026-10-18",
+          "text": "aad4e13 integrated23currentactivityareas + rootsetup/interview/account/dashboard savedportfolio mounts.564combinedapptests/typecheck/lint/build pass;35actualadapterPDFpages inspected. Rootreviewfixed exact3consentstates, setupfictionalmarker, cached-refetchincompleteportfolio and coveragebindings. Hosted11000/12000 normalapplysucceeded; actualdeployedPDFdownloadverification next."
         }
       ],
       "claim": {
@@ -10884,19 +10892,19 @@
       "subtasks": [
         {
           "id": "EXP-002.s1",
-          "status": "in_progress",
+          "status": "complete",
           "instruction": "Create exhaustive current/future activity export inventory: idea, people/pipeline, questions, interview draft/completed notes, synthesis, experiments, outreach/survey/metrics, every Marketing Lab step, teacher plans/assignments/feedback and shared evidence/design/decision activities.",
           "notes": []
         },
         {
           "id": "EXP-002.s2",
-          "status": "not_started",
+          "status": "complete",
           "instruction": "Wire individually named PDF export actions to every currently implemented activity, preserving reviewed selections, manual edits, AI-origin metadata and unknown/not-run labels; mark unfinished feature adapters pending.",
           "notes": []
         },
         {
           "id": "EXP-002.s3",
-          "status": "not_started",
+          "status": "in_progress",
           "instruction": "Add coverage enforcement so every newly registered activity provides a PDF adapter and inspect actual downloads/rendered PDFs across existing activities; do not count the generic teaching-kit PDF as learner-data export.",
           "notes": []
         }

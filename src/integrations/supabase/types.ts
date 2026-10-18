@@ -286,6 +286,57 @@ export type Database = {
           },
         ];
       };
+      processing_consents: {
+        Row: {
+          ai_status: string;
+          evidence_invalidated: boolean;
+          note_status: string;
+          policy_version: number;
+          project_id: string;
+          reported_at: string;
+          revision: number;
+          sharing_status: string;
+          target_id: string;
+          target_kind: string;
+          user_id: string;
+        };
+        ComputedFields: never;
+        Insert: {
+          ai_status: string;
+          evidence_invalidated?: boolean;
+          note_status: string;
+          policy_version: number;
+          project_id: string;
+          reported_at?: string;
+          revision: number;
+          sharing_status: string;
+          target_id: string;
+          target_kind: string;
+          user_id: string;
+        };
+        Update: {
+          ai_status?: string;
+          evidence_invalidated?: boolean;
+          note_status?: string;
+          policy_version?: number;
+          project_id?: string;
+          reported_at?: string;
+          revision?: number;
+          sharing_status?: string;
+          target_id?: string;
+          target_kind?: string;
+          user_id?: string;
+        };
+        Relationships: [
+          {
+            foreignKeyName: "processing_consents_project_id_user_id_fkey";
+            columns: ["project_id", "user_id"];
+            isOneToOne: false;
+            referencedRelation: "projects";
+            referencedColumns: ["id", "user_id"];
+          },
+        ];
+      };
       project_members: {
         Row: {
           created_at: string;
@@ -442,6 +493,10 @@ export type Database = {
       [_ in never]: never;
     };
     Functions: {
+      accept_project_invitation: {
+        Args: { p_target_type: string; p_token: string };
+        Returns: Json;
+      };
       create_owned_project: {
         Args: {
           p_audience: string;
@@ -454,15 +509,35 @@ export type Database = {
         };
         Returns: Json;
       };
+      create_project_invitation: {
+        Args: {
+          p_days?: number;
+          p_project_id: string;
+          p_recipient_id: string;
+          p_request_id?: string;
+          p_role: string;
+          p_target_type: string;
+        };
+        Returns: Json;
+      };
       current_platform_admin: { Args: Record<PropertyKey, never>; Returns: boolean };
       current_project_role: { Args: { p_project_id: string }; Returns: string };
       get_ai_generation_origin: {
         Args: { p_origin_id: string; p_project_id: string };
         Returns: Json;
       };
+      get_ai_processing_context: { Args: { p_kind: string; p_project_id: string }; Returns: Json };
       get_founding_partner_counts: { Args: Record<PropertyKey, never>; Returns: Json };
       get_member_project_summary: { Args: { p_project_id: string }; Returns: Json };
       get_platform_admin_authorization: { Args: Record<PropertyKey, never>; Returns: Json };
+      get_processing_consent: {
+        Args: { p_project_id: string; p_target_id: string; p_target_kind: string };
+        Returns: Json;
+      };
+      list_project_invitations: {
+        Args: { p_cursor?: string; p_project_id: string };
+        Returns: Json;
+      };
       list_project_members: { Args: { p_cursor?: string; p_project_id: string }; Returns: Json };
       project_collaboration_enabled: { Args: Record<PropertyKey, never>; Returns: boolean };
       record_ai_generation: { Args: { p_record: Json }; Returns: string };
@@ -481,6 +556,10 @@ export type Database = {
         Returns: string;
       };
       reserve_demo_ai: { Args: { p_project_id: string; p_request_id: string }; Returns: Json };
+      revoke_project_invitation: {
+        Args: { p_invitation_id: string; p_project_id: string; p_request_id: string };
+        Returns: Json;
+      };
       revoke_project_member: {
         Args: {
           p_expected_revision: number;
@@ -499,6 +578,20 @@ export type Database = {
           p_survey?: Json;
         };
         Returns: undefined;
+      };
+      save_interview_with_consent: {
+        Args: {
+          p_ai_status: string;
+          p_answers: Json;
+          p_contact_id: string;
+          p_note_status: string;
+          p_policy_version: number;
+          p_project_id: string;
+          p_request_id: string;
+          p_sharing_status: string;
+          p_tags: string[];
+        };
+        Returns: Json;
       };
       save_marketing_plan: {
         Args: {
@@ -525,6 +618,19 @@ export type Database = {
           p_expected_revision: number;
           p_project_id: string;
           p_request_id: string;
+        };
+        Returns: Json;
+      };
+      set_processing_consent: {
+        Args: {
+          p_ai_status: string;
+          p_expected_revision: number;
+          p_note_status: string;
+          p_policy_version: number;
+          p_project_id: string;
+          p_sharing_status: string;
+          p_target_id: string;
+          p_target_kind: string;
         };
         Returns: Json;
       };

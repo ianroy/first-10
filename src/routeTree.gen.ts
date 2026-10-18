@@ -14,6 +14,7 @@ import { Route as AuthenticatedRouteRouteImport } from './routes/_authenticated/
 import { Route as AuthRouteImport } from './routes/auth'
 import { Route as DemoRouteImport } from './routes/demo'
 import { Route as FoundingPartnersRouteImport } from './routes/founding-partners'
+import { Route as InviteRouteImport } from './routes/invite'
 import { Route as TeachRouteImport } from './routes/teach'
 import { Route as AuthenticatedAccountRouteImport } from './routes/_authenticated/account'
 import { Route as AuthenticatedAdminRouteImport } from './routes/_authenticated/admin'
@@ -49,6 +50,11 @@ const DemoRoute = DemoRouteImport.update({
 const FoundingPartnersRoute = FoundingPartnersRouteImport.update({
   id: '/founding-partners',
   path: '/founding-partners',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const InviteRoute = InviteRouteImport.update({
+  id: '/invite',
+  path: '/invite',
   getParentRoute: () => rootRouteImport,
 } as any)
 const TeachRoute = TeachRouteImport.update({
@@ -117,6 +123,7 @@ export interface FileRoutesByFullPath {
   '/auth': typeof AuthRoute
   '/demo': typeof DemoRoute
   '/founding-partners': typeof FoundingPartnersRoute
+  '/invite': typeof InviteRoute
   '/teach': typeof TeachRoute
   '/account': typeof AuthenticatedAccountRoute
   '/admin': typeof AuthenticatedAdminRoute
@@ -135,6 +142,7 @@ export interface FileRoutesByTo {
   '/auth': typeof AuthRoute
   '/demo': typeof DemoRoute
   '/founding-partners': typeof FoundingPartnersRoute
+  '/invite': typeof InviteRoute
   '/teach': typeof TeachRoute
   '/account': typeof AuthenticatedAccountRoute
   '/admin': typeof AuthenticatedAdminRoute
@@ -155,6 +163,7 @@ export interface FileRoutesById {
   '/auth': typeof AuthRoute
   '/demo': typeof DemoRoute
   '/founding-partners': typeof FoundingPartnersRoute
+  '/invite': typeof InviteRoute
   '/teach': typeof TeachRoute
   '/_authenticated/account': typeof AuthenticatedAccountRoute
   '/_authenticated/admin': typeof AuthenticatedAdminRoute
@@ -175,6 +184,7 @@ export interface FileRouteTypes {
     | '/auth'
     | '/demo'
     | '/founding-partners'
+    | '/invite'
     | '/teach'
     | '/account'
     | '/admin'
@@ -193,6 +203,7 @@ export interface FileRouteTypes {
     | '/auth'
     | '/demo'
     | '/founding-partners'
+    | '/invite'
     | '/teach'
     | '/account'
     | '/admin'
@@ -212,6 +223,7 @@ export interface FileRouteTypes {
     | '/auth'
     | '/demo'
     | '/founding-partners'
+    | '/invite'
     | '/teach'
     | '/_authenticated/account'
     | '/_authenticated/admin'
@@ -232,6 +244,7 @@ export interface RootRouteChildren {
   AuthRoute: typeof AuthRoute
   DemoRoute: typeof DemoRoute
   FoundingPartnersRoute: typeof FoundingPartnersRoute
+  InviteRoute: typeof InviteRoute
   TeachRoute: typeof TeachRoute
   ApiHealthRoute: typeof ApiHealthRoute
 }
@@ -271,6 +284,13 @@ declare module '@tanstack/react-router' {
       path: '/founding-partners'
       fullPath: '/founding-partners'
       preLoaderRoute: typeof FoundingPartnersRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/invite': {
+      id: '/invite'
+      path: '/invite'
+      fullPath: '/invite'
+      preLoaderRoute: typeof InviteRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/teach': {
@@ -395,6 +415,7 @@ const rootRouteChildren: RootRouteChildren = {
   AuthRoute: AuthRoute,
   DemoRoute: DemoRoute,
   FoundingPartnersRoute: FoundingPartnersRoute,
+  InviteRoute: InviteRoute,
   TeachRoute: TeachRoute,
   ApiHealthRoute: ApiHealthRoute,
 }

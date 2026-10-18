@@ -8,9 +8,17 @@ import type {
   Answer,
 } from "@/lib/data";
 import type { ActivityExportV1, ActivityExportBlock, ExportValue } from "./activity";
+import type { ConsentChoices } from "@/lib/consent";
 
 export type PdfActivity = ActivityExportV1["activities"][number];
 export type ActivityOffer = { activity: PdfActivity; originId?: string | null };
+export type IdeaBrief = {
+  name: string;
+  description: string;
+  audience: string;
+  problem: string;
+  link: string;
+};
 export type ExportProject = Pick<
   Project,
   | "id"
@@ -210,6 +218,27 @@ function originNote(originId: string | null | undefined): ExportValue {
     : "No recorded AI origin; may be legacy or manually written work.";
 }
 
+export function ideaBriefActivity(brief: IdeaBrief, fictional = false): ActivityOffer {
+  return activity(
+    "idea-form",
+    "Idea and audience - current form",
+    [
+      section("idea-form.brief", "Starting assumptions to test", [
+        ["App name", brief.name],
+        ["What it does", brief.description],
+        ["Audience", brief.audience],
+        ["Problem", brief.problem],
+        ["Owner-supplied URL (not verified)", brief.link],
+        [
+          "Save state",
+          "Current form contents; may include unsaved edits. Exporting does not create or save an idea.",
+        ],
+      ]),
+    ],
+    { kind: "Idea preparation", fictional },
+  );
+}
+
 export function projectActivities(p: ExportProject): ActivityOffer[] {
   const checklist = record(p.checklist),
     metrics = record(checklist["metrics"]);
@@ -357,6 +386,7 @@ export function interviewDraftActivity(
     tags: string[];
     contactAlias?: string;
     noteTakingPermission?: boolean;
+    consentChoices?: ConsentChoices;
   },
 ) {
   return activity(
@@ -368,9 +398,12 @@ export function interviewDraftActivity(
         ["Questions", draft.questions.join("\n")],
         ["Tags (self-reported)", draft.tags.join("\n")],
         ["Permission to take notes (local checkbox)", draft.noteTakingPermission ?? null],
+        ["Note-taking choice (owner reported)", draft.consentChoices?.noteStatus ?? null],
+        ["AI-processing choice (owner reported)", draft.consentChoices?.aiStatus ?? null],
+        ["Sharing choice (owner reported)", draft.consentChoices?.sharingStatus ?? null],
         [
           "Permission limits",
-          "Note-taking permission does not establish permission for AI, sharing or publication. This draft is not marked complete or saved by exporting.",
+          "These are current self-reported choices, not independently verified consent or an access grant. Note-taking permission does not establish permission for AI, sharing or publication. This draft is not marked complete or saved by exporting.",
         ],
       ]),
       ...draft.answers.map((answer, i) =>

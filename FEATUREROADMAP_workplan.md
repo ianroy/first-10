@@ -22,10 +22,10 @@ Statuses are `not_started`, `in_progress`, `blocked`, `complete`, `deferred`, `d
 current_iteration: 5
 current_stage: P1_foundation_with_parallel_P2_and_R0
 status: in_progress
-last_task_done: WS-002
-next_task: PRV-001
-next_parallel_wave: [SEC-005, PRV-001, EXP-002]
-active_claims: [PRV-001, SEC-005, EXP-002]
+last_task_done: PRV-001
+next_task: DISC-001
+next_parallel_wave: [SEC-005, AI-004, EXP-002]
+active_claims: [AI-004, SEC-005, EXP-002]
 research_gate: not_passed
 foundation_gate: not_passed
 realtime_go: pending
@@ -47,7 +47,12 @@ resume_hint: >-
   two/sevenpage generatedPDFs visually inspected.463combined app tests/typecheck/lint/build pass.
   AI003 offline improvements integrated43c8b2e; paid adapter still blocked on bounded budget.
   WS002 integrated0e33ea9 with455worker tests/typecheck/lint/build; deployed journey pending.
-  Workers implementSEC005 invitations, PRV001 processingpermissions and EXP002 everyactivityPDF.
+  PRV001 integrated75ab467 plus synthetic-key tests and immutableevalv3;935combinedrealSQL
+  passwithrollback through12000. Hosted11000/12000 reviewed dryrun and normalapply both succeeded.
+  EXP002 integrated currentactivityexports plus rootdesktopmounts;564combinedapptests,
+  typecheck/lint/build pass.35adapterPDFpages inspected. Productiondownloadproof next.
+  Workers finishSEC005 actualrace and AI004budgetfoundation.
+  NextreadyDISC001 builds owner-defined hypothesis/sampling/context learningcycle.
   f60ed4e GitHubCI passed; live presenteradmin verified after hosted migrations.
   Existing Stage2 fictional marketing plan revision7 and private teaching planner persist.
   Guest classrooms, all activity PDFs, general AI budgets, sharing/realtime remain unfinished.

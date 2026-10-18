@@ -9,6 +9,8 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { BrandLogo } from "@/components/BrandLogo";
+import { IdeaBriefExport } from "@/components/IdeaBriefExport";
+import { isFictionalExportProject } from "@/lib/export/adapters";
 import { Label } from "@/components/ui/label";
 
 export const Route = createFileRoute("/_authenticated/setup")({
@@ -284,6 +286,14 @@ function SetupForm({
               </Button>
             </fieldset>
           </form>
+        )}
+        {!error && !loading && selection && (
+          <div className="lg:col-start-2">
+            <IdeaBriefExport
+              brief={form}
+              fictional={isFictionalExportProject(project ?? { user_id: selection.userId })}
+            />
+          </div>
         )}
       </div>
     </div>

@@ -99,6 +99,21 @@ describe("explicit activity adapters", () => {
     offers.forEach((o) => expect(frozen([o]).activities).toHaveLength(1));
     expect(offers.every((o) => /part \d+\/\d+/.test(o.activity.title))).toBe(true);
   });
+  it("preserves unknown, declined and withdrawn processing choices without turning them into a boolean grant", () => {
+    const { project } = savedFixture();
+    const text = textOf([
+      interviewDraftActivity(project, {
+        questions: ["What happened last time?"],
+        answers: [],
+        tags: [],
+        consentChoices: { noteStatus: "withdrawn", aiStatus: "unknown", sharingStatus: "declined" },
+      }),
+    ]);
+    expect(text).toContain("Note-taking choice (owner reported): withdrawn");
+    expect(text).toContain("AI-processing choice (owner reported): unknown");
+    expect(text).toContain("Sharing choice (owner reported): declined");
+    expect(text).toContain("not independently verified consent or an access grant");
+  });
   it("exports every marketing step and per-record choices without converting unrun counts into results", () => {
     const plan = createEmptyMarketingPlan();
     plan.studentFirst.columns = [{ id: "heading", title: "My original grouping" }];

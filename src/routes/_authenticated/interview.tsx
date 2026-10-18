@@ -7,6 +7,13 @@ import { supabase } from "@/integrations/supabase/client";
 import { generateAI } from "@/lib/ai.functions";
 import { recordedAIOutput } from "@/lib/ai/saved-output";
 import { AIOrigin } from "@/components/AIOrigin";
+import { OwnerActivityExport } from "@/components/export/OwnerActivityExport";
+import {
+  projectActivities,
+  interviewActivities,
+  interviewDraftActivity,
+  section,
+} from "@/lib/export/adapters";
 import { ConsentFields, SavedConsentFields } from "@/components/ConsentFields";
 import { saveInterviewWithConsent } from "@/lib/consent.functions";
 import { unknownConsent, type ConsentChoices, type ConsentScope } from "@/lib/consent";
@@ -97,6 +104,39 @@ function Prep({
   };
   const qs = draft ?? questions;
   const pending = contacts.filter((c) => c.stage === 1 && c.status !== "interviewed");
+  const exportActivities = () => {
+    const script = projectActivities({
+      ...p,
+      questions: qs,
+      questions_origin_id: draftOrigin === undefined ? p.questions_origin_id : draftOrigin,
+    }).find((offer) => offer.activity.key === "questions")!;
+    script.activity.title = draft
+      ? "Interview script - current unsaved edits"
+      : "Interview script - saved questions";
+    script.activity.sections.push(
+      section("questions.fieldwork", "Before the conversation", [
+        [
+          "Opening",
+          "Explain what you are learning. Ask whether it is okay to take notes. Participation is optional; people may skip a question or stop.",
+        ],
+        [
+          "Listen for",
+          "A recent concrete situation, actual behavior, workarounds and a counterexample. Avoid pitching or hypothetical willingness to pay.",
+        ],
+        [
+          "Save state",
+          draft
+            ? "Current unsaved editor contents; exporting does not save these questions."
+            : "Questions saved in this idea; interviewing and permission are not verified by this PDF.",
+        ],
+        [
+          "Field notes",
+          "For each question, record observations, exact words only when accurate, and uncertainty. Do not include sensitive identifying details.",
+        ],
+      ]),
+    );
+    return [script, ...interviewActivities(p, interviews)];
+  };
 
   const save = async (list: string[]) => {
     const { error } = await supabase
@@ -356,6 +396,7 @@ function Prep({
           </div>
         </div>
       </div>
+      <OwnerActivityExport project={p} activities={exportActivities} />
     </AppShell>
   );
 }
@@ -521,6 +562,19 @@ function Session({
             </div>
           </>
         )}
+      </div>
+      <div className="mb-5">
+        <OwnerActivityExport
+          project={p}
+          activities={[
+            interviewDraftActivity(p, {
+              questions,
+              answers,
+              tags,
+              consentChoices: choices,
+            }),
+          ]}
+        />
       </div>
       <div className="pb-safe sticky bottom-0 flex gap-2 bg-background pt-2">
         <Button

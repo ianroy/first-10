@@ -272,8 +272,9 @@ export function LandingPage() {
                     personal account. Take every activity and the team’s work back out as PDFs.
                   </p>
                   <p className="mt-2 text-sm">
-                    Account-free class spaces and student activity exports are in development.
-                    FERPA-first is our design commitment; institutional review remains separate.
+                    Activity PDFs are available now. Account-free class spaces and student-team
+                    review are in development. FERPA-first is our design commitment; institutional
+                    review remains separate.
                   </p>
                 </div>
               </div>

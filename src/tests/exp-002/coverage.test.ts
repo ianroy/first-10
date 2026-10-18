@@ -14,7 +14,9 @@ it("binds every mounted activity inventory entry to a real pure adapter and sour
     if (row.status === "mounted") {
       const source = readFileSync(row.source, "utf8");
       expect(source, row.id).toContain(`${row.adapter}(`);
-      expect(source, row.id).toMatch(/<(OwnerActivityExport|ActivityExportLauncher)/);
+      expect(source, row.id).toMatch(
+        /<(OwnerActivityExport|ActivityExportLauncher|ActivityPdfExport)/,
+      );
     }
   }
   expect(ACTIVITY_EXPORT_COVERAGE.map((r) => r.id)).toEqual(

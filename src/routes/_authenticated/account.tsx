@@ -3,6 +3,8 @@ import { useEffect, useState } from "react";
 import { supabase } from "@/integrations/supabase/client";
 import { setOwnedProjectArchived } from "@/lib/project-lifecycle";
 import { AppShell, Card } from "@/components/AppShell";
+import { OwnerSavedWorkExport } from "@/components/OwnerSavedWorkExport";
+import { InvitationPanel } from "@/components/invitations/InvitationPanel";
 import {
   useContacts,
   useInterviews,
@@ -27,6 +29,9 @@ function Account() {
   const current = useProject();
   const navigate = useNavigate();
   const project = current.error ? null : (current.data ?? null);
+  const exportProject = selection?.selectedProjectId
+    ? projects.data?.find((idea) => idea.id === selection.selectedProjectId)
+    : project;
   const [confirmation, setConfirmation] = useState<{ idea: Project; requestId: string } | null>(
     null,
   );
@@ -119,7 +124,11 @@ function Account() {
           </div>
         )}
         {notice && (
-          <p role="status" className="rounded-xl border bg-card p-4 text-sm">
+          <p
+            role="status"
+            aria-label="Idea lifecycle result"
+            className="rounded-xl border bg-card p-4 text-sm"
+          >
             {notice}
           </p>
         )}
@@ -257,6 +266,18 @@ function Account() {
             </Card>
           </div>
         </div>
+        {exportProject && (
+          <OwnerSavedWorkExport
+            key={`${exportProject.user_id}:${exportProject.id}`}
+            project={exportProject}
+          />
+        )}
+        {exportProject && (
+          <InvitationPanel
+            key={`invite:${exportProject.user_id}:${exportProject.id}`}
+            projectId={exportProject.id}
+          />
+        )}
       </AppShell>
     </CurrentProjectContext.Provider>
   );

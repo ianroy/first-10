@@ -30,9 +30,7 @@ current-state adapter and verification here and in the registry.
 | Selected saved portfolio  | Explicit chosen batches of owned saved records plus separately loaded saved marketing/teacher plans                                                                                                                           | Coordinator dashboard/account integration; no claim that unsaved edits from other pages are included            |
 
 Coordinator-owned integration files are `interview.tsx`, `setup.tsx`, `account.tsx`,
-`dashboard.tsx`, `OwnerSavedWorkExport.tsx` and `IdeaBriefExport.tsx`. Their final
-mount checks run on the combined branch. The registry labels these integration
-points separately; adapters alone do not prove a shipped route.
+`dashboard.tsx`, `OwnerSavedWorkExport.tsx` and `IdeaBriefExport.tsx`. Their combined mount checks now pass, including current-form edits, exact permission states and cache-refetch completeness. Coverage entries bind each mounted source to a real adapter; adapters alone do not prove a shipped route.
 
 ## Selection and privacy
 

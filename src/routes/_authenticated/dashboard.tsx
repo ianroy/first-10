@@ -2,6 +2,7 @@ import { createFileRoute, Link } from "@tanstack/react-router";
 import { Lock, Pencil } from "lucide-react";
 import { AppShell, Card, Empty } from "@/components/AppShell";
 import { RequireProject } from "@/components/RequireProject";
+import { OwnerSavedWorkExport } from "@/components/OwnerSavedWorkExport";
 import { Button } from "@/components/ui/button";
 import {
   PIPELINE,
@@ -168,6 +169,8 @@ function Dashboard({ p }: { p: Project }) {
           )}
         </div>
       </div>
+
+      <OwnerSavedWorkExport key={`${p.user_id}:${p.id}`} project={p} />
 
       <p className="text-xs text-muted-foreground">
         The ladder is a learning scaffold. Counts do not establish demand; outreach statuses are
