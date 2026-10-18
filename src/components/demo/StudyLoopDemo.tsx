@@ -70,15 +70,25 @@ function SourceReview() {
 }
 
 /** Pure in-memory example. No auth, persistence, analytics, product hooks or network calls. */
-export function StudyLoopDemo({ continuation }: { continuation?: ReactNode }) {
+export function StudyLoopDemo({
+  continuation,
+  initialChoiceId,
+  onReset,
+  focusOnMount = false,
+}: {
+  continuation?: ReactNode | ((context: { choiceId: ChoiceId; reset: () => void }) => ReactNode);
+  initialChoiceId?: ChoiceId | undefined;
+  onReset?: () => void;
+  focusOnMount?: boolean;
+}) {
   const instanceId = useId();
-  const [step, setStep] = useState(0);
+  const [step, setStep] = useState(initialChoiceId ? 4 : 0);
   const [sourceId, setSourceId] = useState<SourceId>("studyloop-maya");
-  const [choiceId, setChoiceId] = useState<ChoiceId | null>(null);
+  const [choiceId, setChoiceId] = useState<ChoiceId | null>(initialChoiceId ?? null);
   const [notice, setNotice] = useState("");
   const [resetKey, setResetKey] = useState(0);
   const headingRef = useRef<HTMLHeadingElement>(null);
-  const shouldFocus = useRef(false);
+  const shouldFocus = useRef(focusOnMount);
   const activeSource = sources.find((source) => source.id === sourceId) ?? sources[0];
   const selectedChoice = choices.find((choice) => choice.id === choiceId);
   const currentStep = steps[step]!;
@@ -103,6 +113,7 @@ export function StudyLoopDemo({ continuation }: { continuation?: ReactNode }) {
     setChoiceId(null);
     setResetKey((value) => value + 1);
     setNotice("Example reset. Step 1 of 5. Maya is open; no decision selected.");
+    onReset?.();
   }
   function selectSource(id: SourceId) {
     setSourceId(id);
@@ -385,9 +396,11 @@ export function StudyLoopDemo({ continuation }: { continuation?: ReactNode }) {
           )}
         </div>
       </div>
-      {step === 4 && (
+      {step === 4 && choiceId && (
         <div className="border-t border-border px-5 py-6 sm:px-8">
-          {continuation ?? (
+          {(typeof continuation === "function"
+            ? continuation({ choiceId, reset })
+            : continuation) ?? (
             <div className="flex items-start gap-3">
               <Search aria-hidden="true" className="mt-1 size-5 shrink-0 text-primary" />
               <div>

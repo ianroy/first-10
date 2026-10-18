@@ -1,10 +1,14 @@
 import { BrandLogo } from "@/components/BrandLogo";
+import { useState } from "react";
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { ArrowUpRight, FileText } from "lucide-react";
 
+import { MarketingLabDemo } from "@/components/marketing/MarketingLabDemo";
 import { StudyLoopDemo } from "@/components/demo/StudyLoopDemo";
 
 export const Route = createFileRoute("/demo")({
+  validateSearch: (search: Record<string, unknown>): { view?: "marketing" } =>
+    search["view"] === "marketing" ? { view: "marketing" } : {},
   head: () => ({
     meta: [
       { title: "First Ten — Explore the StudyLoop example" },
@@ -25,6 +29,10 @@ export const Route = createFileRoute("/demo")({
 });
 
 function DemoPage() {
+  const { view } = Route.useSearch();
+  const navigate = Route.useNavigate();
+  const [focusReset, setFocusReset] = useState(false);
+  const [entryVersion, setEntryVersion] = useState(0);
   return (
     <div className="mx-auto max-w-6xl px-4 pb-12 sm:px-8">
       <a href="#studyloop" className="sr-only focus:not-sr-only focus:inline-block focus:py-3">
@@ -52,7 +60,8 @@ function DemoPage() {
           </h1>
           <div className="mt-4 flex flex-wrap items-end justify-between gap-4">
             <p className="max-w-2xl text-lg text-muted-foreground">
-              Follow StudyLoop’s fictional path from four conversations to one proposed test.
+              Follow StudyLoop’s fictional path from four conversations to a proposed test and a $0
+              marketing plan.
             </p>
             <a
               href="/demo/studyloop.html"
@@ -63,8 +72,38 @@ function DemoPage() {
             </a>
           </div>
         </div>
+        <div className="mb-5 flex flex-wrap items-center gap-3 text-sm">
+          <Link
+            to="/demo"
+            search={{ view: "marketing" }}
+            hash="marketing-lab"
+            onClick={() => {
+              setFocusReset(false);
+              setEntryVersion((version) => version + 1);
+            }}
+            className="inline-flex min-h-11 items-center rounded-lg border border-input px-4 font-semibold text-primary"
+          >
+            Jump to the $0 Marketing Lab <ArrowUpRight aria-hidden="true" className="ml-2 size-4" />
+          </Link>
+          {view === "marketing" && (
+            <p className="text-muted-foreground">
+              Shortcut: attendance-confirmation example selected. Reset to start with the sources.
+            </p>
+          )}
+        </div>
         <div id="studyloop" className="scroll-mt-4">
-          <StudyLoopDemo />
+          <StudyLoopDemo
+            key={`${view ?? "discovery"}-${entryVersion}`}
+            initialChoiceId={view === "marketing" ? "confirmations" : undefined}
+            focusOnMount={focusReset}
+            onReset={() => {
+              setFocusReset(true);
+              void navigate({ search: {}, hash: "", replace: true, resetScroll: false });
+            }}
+            continuation={({ choiceId, reset }) => (
+              <MarketingLabDemo choiceId={choiceId} onReset={reset} />
+            )}
+          />
         </div>
         <footer className="mt-6 flex flex-wrap justify-between gap-4 text-sm text-muted-foreground">
           <p className="max-w-3xl">
