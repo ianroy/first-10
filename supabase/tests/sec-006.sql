@@ -78,3 +78,8 @@ SELECT throws_ok($$SELECT firstten_private.set_platform_admin(firstten_policy_te
 RESET ROLE;
 SELECT is((SELECT count(*) FROM firstten_private.admin_audit WHERE subject_id=firstten_policy_test.id('admin') AND operation='role_revoked'),1::bigint,'revocation preserves append-only operator audit');
 SELECT is((SELECT count(*) FROM firstten_private.admin_audit WHERE actor_id=firstten_policy_test.id('admin')),1::bigint,'revoked replay does not add or mutate audit history');
+INSERT INTO firstten_private.platform_admins(user_id,enabled,revision) VALUES(firstten_policy_test.id('unrelated'),false,9007199254740991);
+SELECT throws_ok($$SELECT firstten_private.set_platform_admin(firstten_policy_test.id('unrelated'),true,9007199254740991,'SEC-006-exhaustion')$$,'22003','Admin grant revision exhausted','exhausted revision cannot overflow a JSON-safe integer');
+SELECT is((SELECT enabled FROM firstten_private.platform_admins WHERE user_id=firstten_policy_test.id('unrelated')),false,'exhausted grant remains disabled');
+SELECT throws_ok($$SELECT firstten_private.set_platform_admin(firstten_policy_test.id('unrelated'),true,9007199254740992,'SEC-006-unsafe')$$,'22023','Invalid operator request','unsafe expected revision is rejected');
+SELECT throws_ok($$INSERT INTO firstten_private.platform_admins(user_id,enabled,revision) VALUES(firstten_policy_test.id('teacher'),false,9007199254740992)$$,'23514',NULL,'table constraint also rejects unsafe grant revisions');

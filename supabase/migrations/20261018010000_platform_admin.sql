@@ -2,10 +2,13 @@
 -- Bootstrap/revoke only through a reviewed SQL session as the migration owner:
 -- SELECT firstten_private.set_platform_admin(<verified auth UUID>,true,0,<operator ticket>);
 -- No initial grants; presenter demo metadata retains its existing separate scope.
+BEGIN;
+SET LOCAL lock_timeout = '5s';
+
 CREATE TABLE firstten_private.platform_admins (
  user_id uuid PRIMARY KEY REFERENCES auth.users(id) ON DELETE CASCADE,
  enabled boolean NOT NULL,
- revision bigint NOT NULL CHECK (revision > 0),
+ revision bigint NOT NULL CHECK (revision BETWEEN 1 AND 9007199254740991),
  created_at timestamptz NOT NULL DEFAULT now(),
  updated_at timestamptz NOT NULL DEFAULT now()
 );
@@ -38,7 +41,7 @@ CREATE FUNCTION firstten_private.set_platform_admin(p_user_id uuid,p_enabled boo
 RETURNS jsonb LANGUAGE plpgsql SECURITY DEFINER SET search_path=pg_catalog AS $$
 DECLARE current_grant firstten_private.platform_admins%ROWTYPE; next_revision bigint;
 BEGIN
- IF p_user_id IS NULL OR p_enabled IS NULL OR p_expected_revision IS NULL OR p_expected_revision<0
+ IF p_user_id IS NULL OR p_enabled IS NULL OR p_expected_revision IS NULL OR p_expected_revision<0 OR p_expected_revision>9007199254740991
  OR p_operator_reference IS NULL OR p_operator_reference !~ '^[A-Za-z0-9][A-Za-z0-9._:/-]{0,79}$' THEN
   RAISE EXCEPTION 'Invalid operator request' USING ERRCODE='22023';
  END IF;
@@ -48,6 +51,9 @@ BEGIN
  SELECT * INTO current_grant FROM firstten_private.platform_admins WHERE user_id=p_user_id FOR UPDATE;
  IF coalesce(current_grant.revision,0)<>p_expected_revision THEN
   RAISE EXCEPTION 'Admin grant revision conflict' USING ERRCODE='40001';
+ END IF;
+ IF p_expected_revision=9007199254740991 THEN
+  RAISE EXCEPTION 'Admin grant revision exhausted' USING ERRCODE='22003';
  END IF;
  next_revision:=p_expected_revision+1;
  INSERT INTO firstten_private.platform_admins(user_id,enabled,revision)
@@ -98,3 +104,5 @@ END;
 $$;
 REVOKE ALL ON FUNCTION public.record_platform_admin_action(text,text,uuid) FROM PUBLIC,anon,authenticated,service_role;
 GRANT EXECUTE ON FUNCTION public.record_platform_admin_action(text,text,uuid) TO authenticated;
+
+COMMIT;
