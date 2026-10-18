@@ -21,8 +21,8 @@ Protect data and money before expanding access or AI behavior.
 | --- | --- | --- | --- | --- | --- | --- | --- |
 | OPS-002 Preview/deploy smoke checks without secret exposure | not_started | 0/3 | agent | S | OPS-001 | — | scripts/smoke.mjs, .github/workflows/smoke.yml, package.json (1 more; inspect --task); locks: delivery-config |
 | F-009b Configure isolated preview environment and auth redirects | not_started | 0/3 | either | S | OPS-002 | — | docs/operations/preview-environment.md; locks: — |
-| SEC-002 Database policy test harness with distinct identities | in_progress | 0/3 | agent | S | SEC-001, OPS-001 | — | supabase/tests/**, scripts/test-policies.mjs, .github/workflows/policies.yml (1 more; inspect --task); locks: database-tests |
-| SEC-003 Harden existing project/contact relationships | not_started | 0/3 | agent | S | SEC-002 | — | supabase/migrations/**, src/integrations/supabase/types.ts, supabase/tests/ownership.sql (2 more; inspect --task); locks: database-schema, generated-types |
+| SEC-002 Database policy test harness with distinct identities | complete | 3/3 | agent | S | SEC-001, OPS-001 | — | supabase/tests/**, scripts/test-policies.mjs, .github/workflows/policies.yml (1 more; inspect --task); locks: database-tests |
+| SEC-003 Harden existing project/contact relationships | in_progress | 0/3 | agent | S | SEC-002 | — | supabase/migrations/**, src/integrations/supabase/types.ts, supabase/tests/ownership.sql (2 more; inspect --task); locks: database-schema, generated-types |
 | SEC-004 Project memberships and protected authorization helpers | not_started | 0/3 | agent | S | SEC-003 | — | supabase/migrations/**, src/integrations/supabase/types.ts, src/lib/permissions/** (4 more; inspect --task); locks: database-schema, generated-types |
 | SEC-005 Scoped invitation acceptance and revocation | not_started | 0/3 | agent | S | SEC-004 | — | supabase/migrations/**, src/lib/invitations.functions.ts, src/routes/invite.tsx (5 more; inspect --task); locks: database-schema, generated-types, route-integration |
 | SEC-006 Platform admin role and audited privileged boundary | not_started | 0/3 | agent | S | SEC-003 | — | supabase/migrations/**, src/lib/admin-auth.server.ts, src/lib/admin-audit.server.ts (4 more; inspect --task); locks: database-schema, generated-types |
@@ -45,7 +45,7 @@ Build truthful public materials from current capabilities while research continu
 | Task | Status | Subtasks complete | Owner | Size | Dependencies | Decisions | Write scope / locks |
 | --- | --- | --- | --- | --- | --- | --- | --- |
 | BR-001 Translate company values into two accessible brand directions | complete | 3/3 | agent | S | VAL-001 | — | docs/brand/directions.md, docs/brand/previews/**; locks: — |
-| BR-002 Implement semantic brand tokens and component foundations | in_progress | 0/3 | agent | S | BR-001, OPS-001 | — | src/styles.css, src/components/ui/**, docs/brand/tokens.md (1 more; inspect --task); locks: design-system |
+| BR-002 Implement semantic brand tokens and component foundations | complete | 3/3 | agent | S | BR-001, OPS-001 | — | src/styles.css, src/components/ui/**, docs/brand/tokens.md (1 more; inspect --task); locks: design-system |
 | BR-003 Apply product voice and brand across authenticated journeys | not_started | 0/3 | agent | S | BR-002 | — | src/components/AppShell.tsx, src/components/RequireProject.tsx, src/routes/auth.tsx (7 more; inspect --task); locks: app-shell, route-integration |
 | WEB-001 Write the founder sales narrative and demo storyboard | complete | 3/3 | agent | S | VP-007, VAL-001 | — | docs/marketing/landing-brief.md, docs/marketing/claims.md; locks: — |
 | WEB-002 Build a deterministic interactive product demo | not_started | 0/3 | agent | S | WEB-001, BR-002, F-007 | — | src/components/demo/**, src/lib/demo/**, public/demo/** (3 more; inspect --task); locks: route-integration |
@@ -58,7 +58,7 @@ Build truthful public materials from current capabilities while research continu
 | P-001b Factual five-minute sales/pitch deck after release evidence | in_progress | 0/3 | agent | M | WEB-001, BR-001, MKT-001, WEB-003 | — | docs/demo/pitch/**, public/pitch/**; locks: — |
 | MKT-001 Define the $0 marketing lab and its teaching contract | complete | 3/3 | agent | S | SEC-001, VP-007 | — | docs/marketing/marketing-lab-contract.md, docs/teaching/pedagogy-map.md; locks: — |
 | MKT-007 Extend the public demo with the marketing board | not_started | 0/3 | agent | S | MKT-001, WEB-002, BR-002 | — | src/components/demo/**, src/lib/demo/**, src/routes/demo.tsx (2 more; inspect --task); locks: route-integration |
-| BR-004 Create the First Ten logo and replace the favicon | not_started | 0/3 | agent | S | BR-001 | — | public/brand/**, public/favicon.svg, public/favicon.ico (4 more; inspect --task); locks: route-integration, brand-assets |
+| BR-004 Create the First Ten logo and replace the favicon | in_progress | 0/3 | agent | S | BR-001 | — | public/brand/**, public/favicon.svg, public/favicon.ico (4 more; inspect --task); locks: route-integration, brand-assets |
 
 ## P3 — Personal workspace and reliable return
 

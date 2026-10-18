@@ -50,4 +50,8 @@ The canonical registry owns current task/subtask/claim state. Recheck readiness 
 
 - User steering: make the Next50 $0 Marketing Lab core, using supplied BUS131 slides/board; name pedagogical concepts in landing and pitch; create an original logo and matching favicon. MKT-001–008, BR-004 and DEMO-001 added; event pitch deck promoted.
 - AI-001 implemented and verified locally: strict input/output shapes, bounded HTTP attempts/deadline, blank-model fallback, failure handling and token ceiling; 40 app/gateway tests, typecheck, lint and Vercel build pass. No paid calls were made.
-- Pitch deck draft created in Spaces: page_984affe9853c8191a5f8caf0d446aba3, artifact_external_f6f8a2ee-e468-4ec9-a57f-99e5f0f9fb49. Cover only; full slide authoring/review remains pending.
+- Pitch deck draft created in Spaces: page_984affe9853c8191a5f8caf0d446aba3, artifact_external_f6f8a2ee-e468-4ec9-a57f-99e5f0f9fb49. Nine slides authored and rendered; demo/teaching handoff, logo and final rehearsal remain pending.
+
+- 03:54 UTC: BR-002 and SEC-002 integrated. Combined 45 app tests, typecheck, lint (six inherited warnings), eight target-safeguard tests and Vercel build passed. Policy baseline has 163 real assertions/9 explicit integrity gaps; strict mode and injected regressions fail as intended. SEC-003 owns the fixes.
+- Production aggregate-only relationship audit found zero invalid project/owner/contact relationships across all six checks. No records changed or private content exposed.
+- BR-004 original logo/favicon, VP-008 research preparation and SEC-003 ownership fixes are active in separate worktrees. Pitch has nine editable slides; release-dependent checks remain open. OpenRouter spending remains $0.00.
