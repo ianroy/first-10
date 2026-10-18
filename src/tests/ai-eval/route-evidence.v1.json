@@ -1,0 +1,31 @@
+{
+  "checked_at": "2026-10-18",
+  "method": "Unauthenticated read-only public endpoint JSON and official documentation; no generation",
+  "model": "google/gemini-2.5-flash-lite",
+  "endpoint_source": "https://openrouter.ai/api/v1/models/google/gemini-2.5-flash-lite/endpoints",
+  "standard_vertex_tags_seen": ["google-vertex", "google-vertex/eu"],
+  "provider_name_in_metadata": "Google",
+  "supported_parameters_seen": [
+    "reasoning",
+    "include_reasoning",
+    "structured_outputs",
+    "response_format",
+    "max_tokens",
+    "temperature",
+    "top_p",
+    "seed",
+    "tools",
+    "tool_choice",
+    "stop"
+  ],
+  "prompt_usd_per_token": 0.0000001,
+  "completion_usd_per_token": 0.0000004,
+  "context_length": 1048576,
+  "max_completion_tokens": 65535,
+  "service_tier": null,
+  "account_eligibility_verified": false,
+  "endpoint_zdr_field_present": false,
+  "paid_evaluation_performed": false,
+  "quality_decision": "not_evaluated",
+  "production_promotion": false
+}
