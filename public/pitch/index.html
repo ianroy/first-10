@@ -1,0 +1,438 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>First Ten — workshop pitch</title>
+    <meta
+      name="description"
+      content="A fictional product walkthrough and classroom teaching proposal for First Ten."
+    />
+    <link rel="icon" href="../favicon.svg?v=first-ten-1" type="image/svg+xml" />
+    <style>
+      :root {
+        color-scheme: dark;
+        font:
+          16px/1.5 system-ui,
+          sans-serif;
+        color: #f7f5ec;
+        background: #102820;
+      }
+      * {
+        box-sizing: border-box;
+      }
+      body {
+        margin: 0;
+      }
+      main {
+        max-width: 1440px;
+        margin: auto;
+        padding: 16px;
+      }
+      .toolbar {
+        display: flex;
+        flex-wrap: wrap;
+        align-items: center;
+        gap: 12px;
+        justify-content: space-between;
+        margin-bottom: 16px;
+      }
+      h1 {
+        font-size: 18px;
+        margin: 0;
+      }
+      nav,
+      .controls {
+        display: flex;
+        align-items: center;
+        flex-wrap: wrap;
+        gap: 8px;
+      }
+      button,
+      a {
+        font: inherit;
+        min-height: 44px;
+        padding: 8px 14px;
+        border-radius: 8px;
+        border: 1px solid #a9d4b6;
+        color: #f7f5ec;
+        background: #17382e;
+        cursor: pointer;
+        text-decoration: none;
+      }
+      button:hover,
+      a:hover {
+        background: #245b49;
+      }
+      button:disabled {
+        opacity: 0.5;
+        cursor: default;
+      }
+      :focus-visible {
+        outline: 3px solid #f2cb6b;
+        outline-offset: 4px;
+      }
+      figure {
+        margin: 0;
+      }
+      .slide {
+        display: none;
+      }
+      .slide.active {
+        display: block;
+      }
+      img {
+        width: 100%;
+        height: auto;
+        display: block;
+        background: #f7f5ec;
+      }
+      figcaption {
+        max-width: 1000px;
+        margin: 14px auto;
+        color: #c4d8ca;
+      }
+      .controls {
+        justify-content: center;
+        margin: 16px 0;
+      }
+      output {
+        min-width: 8ch;
+        text-align: center;
+      }
+      .hint {
+        font-size: 14px;
+        text-align: center;
+        color: #a9d4b6;
+        margin: 8px;
+      }
+      details {
+        max-width: 1000px;
+        margin: 24px auto;
+        padding: 16px;
+        border: 1px solid #74977f;
+        border-radius: 8px;
+      }
+      summary {
+        cursor: pointer;
+        font-weight: 700;
+      }
+      .limits {
+        max-width: 1000px;
+        margin: 24px auto;
+        font-size: 14px;
+        color: #c4d8ca;
+      }
+      .limits a {
+        display: inline;
+        padding: 0;
+        border: 0;
+        min-height: auto;
+        background: none;
+        text-decoration: underline;
+      }
+      .presenting main {
+        max-width: none;
+        padding: 0;
+      }
+      .presenting .toolbar,
+      .presenting figcaption,
+      .presenting .hint,
+      .presenting details,
+      .presenting .limits {
+        display: none;
+      }
+      .presenting #slides {
+        height: calc(100vh - 76px);
+        display: grid;
+        place-items: center;
+      }
+      .presenting .slide.active {
+        width: 100%;
+      }
+      .presenting img {
+        max-height: calc(100vh - 76px);
+        object-fit: contain;
+        background: #102820;
+      }
+      @media (max-width: 600px) {
+        main {
+          padding: 8px;
+        }
+        h1 {
+          width: 100%;
+        }
+        figcaption {
+          font-size: 14px;
+        }
+      }
+      @media print {
+        :root {
+          color-scheme: light;
+          color: #173d35;
+          background: white;
+        }
+        main {
+          padding: 0;
+        }
+        .toolbar,
+        .controls,
+        .hint,
+        details {
+          display: none;
+        }
+        .slide {
+          display: block;
+          break-after: page;
+          page-break-after: always;
+        }
+        img {
+          width: 100%;
+        }
+        figcaption {
+          color: #173d35;
+        }
+        .limits {
+          color: #173d35;
+        }
+      }
+      @page {
+        size: landscape;
+        margin: 10mm;
+      }
+    </style>
+  </head>
+  <body>
+    <main>
+      <header class="toolbar">
+        <h1>First Ten · workshop pitch</h1>
+        <nav aria-label="Presentation tools">
+          <a href="./offline.html" download="first-ten-pitch.html">Download offline deck</a>
+          <button id="present" type="button">Present</button>
+          <a href="/">Visit First Ten</a>
+        </nav>
+      </header>
+      <section id="slides" aria-label="Presentation slides">
+        <figure class="slide active" aria-label="Slide 1 of 9">
+          <img
+            src="slides/01.png"
+            width="1280"
+            height="720"
+            alt="First Ten. Customer conversations. Student decisions. A classroom workspace for evidence, experimentation and reflection."
+          />
+          <figcaption>
+            First Ten helps a student founder turn customer conversations into a clearer next move.
+            For educators, the candidate value is seeing what students heard, what they think it
+            means and what they plan to try.
+          </figcaption>
+        </figure>
+        <figure class="slide" aria-label="Slide 2 of 9">
+          <img
+            src="slides/02.png"
+            width="1280"
+            height="720"
+            alt="The classroom question: What did the student learn that changed their next move? Keep source, interpretation and decision connected."
+          />
+          <figcaption>
+            A conversation count or polished AI summary cannot answer this question alone. Inspect
+            the source, the interpretation, the uncertainty and the proposed decision.
+          </figcaption>
+        </figure>
+        <figure class="slide" aria-label="Slide 3 of 9">
+          <img
+            src="slides/03.png"
+            width="1280"
+            height="720"
+            alt="Fictional StudyLoop example: Maya wants attendance certainty; Nora's existing group already works. Proposed decision: test attendance confirmation before another discovery feed."
+          />
+          <figcaption>
+            All people, quotes and observations in StudyLoop are fictional teaching material. Maya's
+            concern suggests one possible problem; Nora is a counterexample. The
+            attendance-confirmation experiment is proposed, with no result or adoption implied.
+          </figcaption>
+        </figure>
+        <figure class="slide" aria-label="Slide 4 of 9">
+          <img
+            src="slides/04.png"
+            width="1280"
+            height="720"
+            alt="The Next 50, $0 Marketing Lab: define an audience; choose a primary channel and alternative; create truthful useful content; run a bounded test and reflect. Students draft first, then review optional AI suggestions."
+          />
+          <figcaption>
+            The marketing workflow is being built. Students investigate access and community rules,
+            choose one primary route, make one useful asset and define an observable outcome.
+            Nothing posts automatically. Zero cash does not mean zero time or AI cost.
+          </figcaption>
+        </figure>
+        <figure class="slide" aria-label="Slide 5 of 9">
+          <img
+            src="slides/05.png"
+            width="1280"
+            height="720"
+            alt="Pedagogy: experiential learning; student-led thinking before AI; scaffolding; formative peer feedback; metacognition and reflection; responsible AI and human judgment."
+          />
+          <figcaption>
+            Talk to someone or try a test. Write before asking AI. Follow an evidence-to-action
+            sequence. Ask a peer to explain the plan. Reflect on what changed. Check claims and
+            permissions. These are teaching design commitments; learning gains have not been
+            measured.
+          </figcaption>
+        </figure>
+        <figure class="slide" aria-label="Slide 6 of 9">
+          <img
+            src="slides/06.png"
+            width="1280"
+            height="720"
+            alt="Proposed lesson: 10 minutes think first, 20 inspect evidence, 20 build a $0 test, 10 peer check. After one week compare the result and repeat, revise or stop."
+          />
+          <figcaption>
+            Proposed 60-minute lesson plus a one-week follow-up. Assess evidence, reasoning,
+            feasible action and respectful participation. Offer manual and accessible alternatives.
+            Grades do not depend on acquiring customers or using paid AI.
+          </figcaption>
+        </figure>
+        <figure class="slide" aria-label="Slide 7 of 9">
+          <img
+            src="slides/07.png"
+            width="1280"
+            height="720"
+            alt="Current stack: React and TanStack student workspace, Supabase Auth and owner-scoped Postgres, one validated server AI gateway, OpenRouter, hosted on Vercel. Class and collaboration roles are being built."
+          />
+          <figcaption>
+            The current gateway validates requests and JSON drafts with bounded time, retries and
+            output. Keys stay server-side. Class, admin, sharing and collaboration capabilities
+            remain proposed until their own permission and release gates pass.
+          </figcaption>
+        </figure>
+        <figure class="slide" aria-label="Slide 8 of 9">
+          <img
+            src="slides/08.png"
+            width="1280"
+            height="720"
+            alt="Bring one idea. Leave with a better next question. Explore the fictional StudyLoop example, adapt the lesson and tell us where students need support. first-10-three.vercel.app."
+          />
+          <figcaption>
+            A working prototype and proposed classroom use. Inspect the example and adapt the
+            lesson; no institutional endorsement, customer traction or learning-effect result is
+            implied.
+          </figcaption>
+        </figure>
+        <figure class="slide" aria-label="Slide 9 of 9">
+          <img
+            src="slides/09.png"
+            width="1280"
+            height="720"
+            alt="Sources and limits: owner-supplied BUS131 slides and classroom board; Babson entrepreneurship teaching methods; EEF metacognition guidance in schools; current repository. StudyLoop is fictional and outcomes are unmeasured."
+          />
+          <figcaption>
+            Primary context: owner-supplied BUS131 Week 6 Marketing Workshop and classroom board,
+            Babson's entrepreneurship teaching methods and EEF's school-level metacognition
+            guidance. These sources do not demonstrate this app's efficacy.
+          </figcaption>
+        </figure>
+      </section>
+      <div class="controls" aria-label="Slide navigation">
+        <button id="previous" type="button" disabled>Previous</button>
+        <output id="position" aria-live="polite">1 / 9</output>
+        <button id="next" type="button">Next</button>
+        <button id="exit" type="button" hidden>Exit presentation</button>
+      </div>
+      <p class="hint">Use Left/Right arrows, Home or End. Print includes all nine slides.</p>
+      <details>
+        <summary>90-second fallback script</summary>
+        <p>
+          First Ten helps a student founder turn customer conversations into a clearer next move. It
+          makes the reasoning visible: observation, interpretation, uncertainty and a proposed
+          action.
+        </p>
+        <p>
+          In fictional StudyLoop, Maya's concern is knowing who will attend, while Nora's existing
+          group already works. The next experiment might be attendance confirmation for existing
+          groups, rather than another way to discover strangers. No customer result is implied.
+        </p>
+        <p>
+          The Next 50 workflow develops that learning into a $0 marketing test: an audience, one
+          main channel, useful content, a target and reflection. Students think first; optional AI
+          helps develop drafts they must check. The process draws on experiential learning,
+          scaffolding, formative peer feedback, metacognition and responsible AI. A proposed
+          60-minute lesson leads to a one-week test and reflection.
+        </p>
+        <p>
+          Explore the example and adapt the lesson. The aim is a better next question and a
+          defensible next action. We have not yet established learning gains or product demand.
+        </p>
+      </details>
+      <p class="limits">
+        Draft release snapshot, 2026-10-18. Editable primary deck remains in Spaces; this companion
+        is a presentation and offline fallback. Sources:
+        <a
+          href="https://entrepreneurship.babson.edu/four-approaches-to-teaching-an-entrepreneurship-method/"
+          >Babson teaching methods</a
+        >
+        and
+        <a
+          href="https://educationendowmentfoundation.org.uk/education-evidence/guidance-reports/metacognition"
+          >EEF metacognition guidance</a
+        >. EEF addresses school settings, not measured outcomes for First Ten.
+      </p>
+    </main>
+    <script>
+      const slides = [...document.querySelectorAll(".slide")];
+      const previous = document.querySelector("#previous");
+      const next = document.querySelector("#next");
+      const position = document.querySelector("#position");
+      let current = 0;
+      function show(index) {
+        current = Math.min(slides.length - 1, Math.max(0, index));
+        slides.forEach((slide, i) => {
+          slide.classList.toggle("active", i === current);
+          slide.setAttribute("aria-hidden", String(i !== current));
+        });
+        previous.disabled = current === 0;
+        next.disabled = current === slides.length - 1;
+        position.textContent = `${current + 1} / ${slides.length}`;
+      }
+      previous.addEventListener("click", () => show(current - 1));
+      next.addEventListener("click", () => show(current + 1));
+      document.addEventListener("keydown", (event) => {
+        if (
+          event.altKey ||
+          event.ctrlKey ||
+          event.metaKey ||
+          /INPUT|TEXTAREA|SELECT/.test(event.target.tagName)
+        )
+          return;
+        if (event.key === "ArrowRight") {
+          event.preventDefault();
+          show(current + 1);
+        }
+        if (event.key === "ArrowLeft") {
+          event.preventDefault();
+          show(current - 1);
+        }
+        if (event.key === "Home") {
+          event.preventDefault();
+          show(0);
+        }
+        if (event.key === "End") {
+          event.preventDefault();
+          show(slides.length - 1);
+        }
+      });
+      const present = document.querySelector("#present");
+      const exit = document.querySelector("#exit");
+      function presentationMode(active) {
+        document.body.classList.toggle("presenting", active);
+        exit.hidden = !active;
+        if (active) next.focus();
+        else present.focus();
+      }
+      present.addEventListener("click", () => presentationMode(true));
+      exit.addEventListener("click", () => presentationMode(false));
+      document.addEventListener("keydown", (event) => {
+        if (event.key === "Escape") presentationMode(false);
+      });
+      show(0);
+    </script>
+  </body>
+</html>

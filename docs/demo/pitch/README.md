@@ -22,10 +22,17 @@ Editable Spaces presentation: **First Ten — Babson teaching and product pitch*
 ## Release checklist
 
 - [x] Author all slides and inspect the rendered pages for fit and readability.
-- [ ] Add the original First Ten logo after BR-004 lands.
+- [x] Add the original First Ten logo after BR-004 lands.
 - [ ] Reconcile current/proposed feature labels with the tested release.
 - [ ] Rehearse the `/demo` handoff after WEB-002 is deployed.
 - [ ] Rehearse the teaching-page link after EDU-002 is deployed.
 - [ ] Record actual presentation and fallback timing.
+- [x] Verify browser navigation, presentation mode and a self-contained offline companion.
 
 The deck is a draft until those release-dependent checks are complete. It must remain usable as a narrative if the network, sign-in or AI provider is unavailable. The presentation does not require a live AI call. Keep the fictional example labels visible when showing a screenshot or skipping to the demo.
+
+## Static and offline companion
+
+`/pitch/index.html` is a keyboard-accessible presentation companion with visible captions, nine reviewed slide images, a text fallback and a viewport-fitted presentation mode. Its **Download offline deck** link saves a self-contained HTML file with all slide images embedded; no login, provider call, fonts or script CDN is required. Keep the editable Spaces deck as the primary source.
+
+To refresh after live-deck edits, copy its nine reviewed PNG exports to `public/pitch/slides/01.png` through `09.png`, then run `node docs/demo/pitch/build-offline.mjs`. Inspect the changed slides and both the online/offline companion. Do not confuse an old export with the current live artifact.

@@ -55,3 +55,9 @@ The canonical registry owns current task/subtask/claim state. Recheck readiness 
 - 03:54 UTC: BR-002 and SEC-002 integrated. Combined 45 app tests, typecheck, lint (six inherited warnings), eight target-safeguard tests and Vercel build passed. Policy baseline has 163 real assertions/9 explicit integrity gaps; strict mode and injected regressions fail as intended. SEC-003 owns the fixes.
 - Production aggregate-only relationship audit found zero invalid project/owner/contact relationships across all six checks. No records changed or private content exposed.
 - BR-004 original logo/favicon, VP-008 research preparation and SEC-003 ownership fixes are active in separate worktrees. Pitch has nine editable slides; release-dependent checks remain open. OpenRouter spending remains $0.00.
+
+- 03:56 UTC: GitHub application CI and isolated database-policy CI both passed at0b995da. Initial policy workflow validation failure (runner.temp in job env) was repaired in an ordinary commit.
+- OPS-002 local checks:49 app tests,5 HTTP runner fixtures,typecheck,scoped lint,Vercel build. Actual local good configuration passes; disposable missing-browser-config fixture returns503 and smoke exits1 without printing values. Public health only validates configuration shape/presence; no provider, database, auth or browser success is inferred. Hosted smoke observation follows deployment.
+
+- 03:58 UTC: public deployment smoke GitHub run39095466598 passed. BR-004 deployed atd0af778; root head has ICO/PNG/SVG/touch-icon links with versioned favicon URLs. Original logo now appears in editable pitch cover/closing.
+- 04:02 UTC: Nine-slide static pitch companion and self-contained offline HTML authored. Actual browser checks passed Next, End, Escape, viewport-fitted presentation mode and offline-file rendering; all9 image payloads embedded with no external asset dependency. Final live-demo/teaching handoff and timed rehearsal await public routes.
