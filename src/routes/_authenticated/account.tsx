@@ -252,9 +252,10 @@ function Account() {
                 until you restore it or choose another idea.
               </p>
               <p className="mt-3 text-sm leading-relaxed text-muted-foreground">
-                An interview in progress saves at wrap-up. Save edits before leaving a page.
-                Creating another idea does not copy or replace existing work. Class workspaces and
-                collaboration are still planned.
+                Save an incomplete interview to return to its exact script and notes later. Save
+                edits before leaving a page. Creating another idea does not copy or replace existing
+                work. Classes have separate access and reviewed submissions; broader collaboration
+                remains in development.
               </p>
               <Link
                 to="/teach"

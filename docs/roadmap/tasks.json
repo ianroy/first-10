@@ -5039,10 +5039,22 @@
         {
           "date": "2026-10-18",
           "text": "Claimed shared reviewed-submission foundation after live guest entry passes. Reserve21 after19/20. Establish immutable server-derived preview and deliberate snapshot/audience/withdrawal semantics before guest activity adapters. No teacher read of raw private notes, no fake guest user/project IDs. Root owns eventual mount, PDFs/portfolio and generated files; worker sends schema/scope design before apply. CLS008 depends on this foundation and implements guest work/exports next."
+        },
+        {
+          "date": "2026-10-18",
+          "text": "Source4fa2d0c retained after credit interruption. Independent read-only reviewer approves guarded schema-only clone after fixes for bounded replay receipts and post-redaction DTO/alias bounds. Worker submission_finish owns same isolated checkout; original local/hosted21 still unapplied."
+        },
+        {
+          "date": "2026-10-18",
+          "text": "Final source21dd10bf6999 applied only dedicatedlocal55322 after reviewed clone1618 SQL assertions and actual concurrent confirmation/withdrawal tests passed. Root1618 combined rollback assertions also pass; official types regenerated. UI/PDF handoffb0f14a0 integrated1855926 with47 focused/918 worker app tests/typecheck/lint/Vercelbuild and actual3x9page PDF QA. Root addscoverage and final combined gates/hosted/live verification; parent notcomplete yet. Guest22 must retain separate identities/APIs."
+        },
+        {
+          "date": "2026-10-18",
+          "text": "Root combined965 app tests/98files,1618 rollback SQL assertions, typecheck/lint/Vercelbuild allpass, exportcoverage mounts bound. Normal hosted dry-run lists only21 and no seeds/roles;21 normal apply completed. Finalproductionstudent/teacher UI check remains beforecompletion. Guest contracts remainunmounted and22unapplied."
         }
       ],
       "claim": {
-        "owner": "lifecycle",
+        "owner": "submission_finish",
         "branch": "codex/reviewed-class-submissions-20261018",
         "base_commit": "5caaabf",
         "worktree": "/private/tmp/first-ten-project-lifecycle",
@@ -5053,25 +5065,25 @@
       "subtasks": [
         {
           "id": "CLS-002.s1",
-          "status": "not_started",
+          "status": "in_progress",
           "instruction": "Define a versioned submission snapshot containing selected/redacted evidence and reflection.",
           "notes": []
         },
         {
           "id": "CLS-002.s2",
-          "status": "not_started",
+          "status": "in_progress",
           "instruction": "Show exactly what the teacher sees before affirmative submission; record scope/version/choice.",
           "notes": []
         },
         {
           "id": "CLS-002.s3",
-          "status": "not_started",
+          "status": "in_progress",
           "instruction": "Implement withdrawal, class access expiry and retention rules without broad SELECT on source interviews.",
           "notes": []
         },
         {
           "id": "CLS-002.s4",
-          "status": "not_started",
+          "status": "in_progress",
           "instruction": "Add a discriminated account_project versus guest_team submission source or a separate guest submission relation. Each immutable snapshot has its own class/assignment and verified actor/team; guest submission requires no personal account/project.",
           "notes": []
         }
@@ -11505,7 +11517,7 @@
       "id": "CLS-008",
       "title": "Account-free team activities, return access and reviewed classroom handoff",
       "phase": "P4",
-      "status": "not_started",
+      "status": "in_progress",
       "owner": "agent",
       "size": "M",
       "kind": "implementation",
@@ -11517,13 +11529,13 @@
       ],
       "requires_decisions": [],
       "write_scope": [
-        "src/routes/join.tsx",
+        "supabase/migrations/20261018022000_guest_learning_activities.sql",
+        "src/lib/guest-activities/**",
         "src/routes/workshop/**",
         "src/components/guest/**",
-        "src/lib/guest-activities/**",
-        "supabase/migrations/**",
         "src/tests/cls-008/**",
-        "supabase/tests/cls-008.sql"
+        "supabase/tests/cls-008.sql",
+        "docs/architecture/guest-learning-activities.md"
       ],
       "exclusive_locks": [
         "cls-008-integration"
@@ -11562,9 +11574,24 @@
         {
           "date": "2026-10-18",
           "text": "Owner explicitly added as core product value; preserve privacy boundaries and show status truthfully."
+        },
+        {
+          "date": "2026-10-18",
+          "text": "Coordinator authorizes preparation of real guest learning activities on isolated22 scope while CLS00221 verification finishes; integration/apply is gated on CLS002 source and real SQL results. No fake auth/project IDs. Default private-principal work, explicit shared-team copy, exact class/session authorization, permission-led selected teacher snapshots and truthful access expiry. Root owns join/export scopes/coverage/generated files and serial schema integration. Full activity/PDF parity remains required; seven-step first slice alone cannot complete parent. No guest AI activation."
+        },
+        {
+          "date": "2026-10-18",
+          "text": "Backend contracts c2c27fc/b6442b2 integrateda2d8bed/eb24983; candidate22 remains unapplied pending reviewed schema-only clone. Independent review found no authority blocker at b2b5 pin; routine syntax-only fixa173 follows clone parse failure (cleaned clone). Desktop worker guest_desktop isolated /private/tmp/first-ten-guest-desktop branchcodex/guest-desktop-20261018 baseeb24983 ownscomponents/guest +guestPDFadapter+UItests; backendworker retainsmigration/API. Root ownsjoin/commonexportaudiences/coverage. Realguestprivate/team scopes are now distinct in PDFengine; AIoff and broaderactivityparity unfinished."
         }
       ],
-      "claim": null,
+      "claim": {
+        "owner": "guest_design",
+        "branch": "codex/guest-activities-20261018",
+        "base_commit": "4c8ccb0",
+        "worktree": "/private/tmp/first-ten-guest-activities",
+        "started_at": "2026-10-18T20:45:00Z",
+        "lease_expires_at": "2026-10-19T02:00:00Z"
+      },
       "completion_evidence": [],
       "subtasks": [
         {
@@ -12035,7 +12062,7 @@
       "id": "WS-009",
       "title": "Enforce archived-workspace write and generation boundaries",
       "phase": "P3",
-      "status": "in_progress",
+      "status": "complete",
       "owner": "agent",
       "size": "M",
       "kind": "implementation",
@@ -12129,15 +12156,10 @@
           "text": "Integrated76b13f2/6731225. Reviewed20 SHA5b6c7797 applied after19 to dedicated local55322;1534 combined real SQL assertions passed and rolled back. Hosted dry-run listed only19/20, then both applied normally with no seeds/roles. Combined869 app tests/91 files, typecheck, lint and production build pass. Root production archive/read/export/restore rehearsal remains before completion; no raw content deletion or dispatch recall is claimed."
         }
       ],
-      "claim": {
-        "owner": "plan_audit",
-        "branch": "codex/archive-freeze-20261018",
-        "base_commit": "41da669",
-        "worktree": "/private/tmp/first-ten-activity-pdf",
-        "started_at": "2026-10-18T20:02:00Z",
-        "lease_expires_at": "2026-10-19T00:30:00Z"
-      },
-      "completion_evidence": [],
+      "claim": null,
+      "completion_evidence": [
+        "76b13f2/6731225/4c8ccb0: archived content/generation/grant freeze with narrowly restrictive privacy exceptions, owner recovery and retryable lock conflicts.869 app tests/1534 real rollback SQL assertions/typecheck/lint/build pass; actual archive/write overlap races passed. Hosted20 applied normally after19, Vercel READY and both4c8 CI checks passed. Production CampusSwap fictional idea archived while a separate setup editor retained unsaved QA text; stale save rejected and local text retained. Archived owner portfolio acquired and frozen preview showed original saved problem, no QA replacement; app reported one-page PDF download started (browser download-event observation failed, so no filesystem delivery claim). CampusSwap restored and presenter returned to StudyLoop. Proof /private/tmp/first-ten-pdf-qa/live-archived-owner-export.png. Real generated PDFs were separately rendered/inspected during export QA. No real research, role grant or provider traffic."
+      ],
       "subtasks": [
         {
           "id": "WS-009.s1",
@@ -12153,7 +12175,7 @@
         },
         {
           "id": "WS-009.s3",
-          "status": "in_progress",
+          "status": "complete",
           "instruction": "Verify owner/editor/viewer/direct client/RPC attempts, pending saves across archive, restore, idempotent retries, export and no private data deletion.",
           "notes": []
         }
@@ -12502,6 +12524,10 @@
         {
           "date": "2026-10-18",
           "text": "First slice integrated3df174d/c9671f0; final19 SHA716c3248 applied local and hosted before20, default retrieval policy disabled. Combined869 app tests/1534 SQL assertions pass, production build/typecheck/lint pass. New owner PDFs cover unsaved selection, whole preview, reviewed excerpt and withdrawal receipt plus fail-closed portfolio acquisition. Actual PDF visual QA passes at adapter8cf693b1:1/8/2/1/12 pages, all140 paragraphs/Unicode/end markers preserved, withdrawn source omitted. Admin capability-only runtime button performs no outbound request/toggle. Deployed runtime/network check and controlled operator activation pending. Reviewed public source AI adapter and new immutable evaluation remain unbuilt; parent stays in_progress, AI/sharing unknown."
+        },
+        {
+          "date": "2026-10-18",
+          "text": "Deployed ownercapabilityprobe verified Node24.21.0/directAPIavailability on4c8; official24.21 HTTPS/net andDNS primarydocs inspected. Source/runtime receipt62773cab9c88... prepared; hostedactivation rejected by automaticapprovalreview for persistent production outboundpolicy and lackof exactuserapproval. Asyncquestion pending explicit enable/keepdisabled; no policychangeoccurred, no bypass. Continue otherwork. Retrieval/AI adapterparentstillinprogress; generalAIoff."
         }
       ],
       "claim": {

@@ -1,6 +1,24 @@
 /** Every new learning activity must register a named PDF adapter and explicit source boundary here. */
 export const ACTIVITY_EXPORT_COVERAGE = [
   {
+    id: "reviewed-class-submission",
+    adapter: "submittedSnapshotDocument",
+    source: "src/components/export/SubmittedSnapshotExport.tsx",
+    status: "mounted",
+    scope: "submitted-snapshot",
+    granularity:
+      "Each immutable author or currently authorized teacher copy; fresh exact-source authorization before generation and delivery",
+  },
+  {
+    id: "private-class-submission-preview",
+    adapter: "submissionPreviewDocument",
+    source: "src/components/export/SubmittedSnapshotExport.tsx",
+    status: "mounted",
+    scope: "owner",
+    granularity:
+      "Each current unsubmitted selected/redacted private review; never a teacher access grant",
+  },
+  {
     id: "public-reference-review",
     adapter: "publicContextActivities",
     source: "src/components/discovery/RemoteContextPanel.tsx",
@@ -223,8 +241,8 @@ export const ACTIVITY_EXPORT_COVERAGE = [
 ] as const;
 export const PENDING_EXPORT_CAPABILITIES = [
   "Guest activities and guest-to-account continuity",
-  "Verified class/team membership and submitted snapshots",
+  "Account-free guest/team activity and submission export mounts",
   "Teacher-authorized student/team portfolio bundles",
   "Shared collaborative activities and permission-aware export selection",
-  "New seven-step discovery/hypothesis/bias-map/script workflow (DISC-001/002/003)",
+  "New AI-assisted discovery/hypothesis/bias-map/script activities (DISC-002/003); the manual cycle already exports",
 ] as const;

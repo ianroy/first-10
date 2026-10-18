@@ -3,8 +3,7 @@
 Version: 2026-10-18. Source registry: `src/lib/export/coverage.ts`.
 
 This inventory covers current learning activities, including local drafts. It does
-not claim that class membership, guest continuity or shared student submissions
-exist. Every new activity must register a named export, its source authority,
+not claim guest activity/PDF parity or complete team bundles. Account class membership and deliberately reviewed submitted versions now have their own boundaries. Every new activity must register a named export, its source authority,
 current-state adapter and verification here and in the registry.
 
 ## Current adapter coverage
@@ -12,6 +11,8 @@ current-state adapter and verification here and in the registry.
 | Activity                  | Export choices and current state                                                                                                                                                                                              | Source boundary                                                                                                 |
 | ------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------- |
 | Idea / audience / problem | Named idea brief; setup coordinator also mounts unsaved current form                                                                                                                                                          | Selected owner project                                                                                          |
+| Public-source reviews | Each unreviewed preview, unsaved selection, exact reviewed excerpt and withdrawal receipt; complete source text in bounded parts | Fresh current owner list; retrieved reference is not customer evidence or AI permission |
+| Reviewed class submissions | Private unsubmitted preview and each immutable author/currently authorized teacher version | Server-derived selected/redacted snapshot only; fresh exact DTO authorization before generation and delivery; no private source IDs |
 | Discovery cycle | All seven steps, separate sampling risks, preserved hypothesis/script versions, reviewed context, results/reflection, exact selected script and blank note worksheet | Owner-private current edits or saved workspace; excluded context text omitted |
 | Interview preparation     | Current question list and recorded origin when available                                                                                                                                                                      | Owner; interview route integrated by coordinator                                                                |
 | People and relevance      | Each contact, relationship, relevance, source, stage and status; separate new-person draft                                                                                                                                    | Owner-loaded records; ownership checked                                                                         |
@@ -77,8 +78,8 @@ pagination and hostile-text checks remain in EXP-001.
 
 ## Explicitly pending
 
-Guest sessions, membership-authorized classroom/student/team bundles, actual
-submitted snapshots and permission-aware collaborative exports require their own
-adapters when those features exist. New AI discovery activities must extend the
+Guest learning work, account-free activity PDFs, teacher-authorized student/team portfolio bundles and permission-aware collaborative exports still require their own adapters and verified mounts. Account submitted snapshots now have individual PDF adapters; guest entry alone does not add activity exports. New AI discovery activities must extend the
 current manual-cycle adapters when delivered. Account privacy JSON and aggregate administrator operational views
 are not learning-activity PDFs and do not grant access to private source notes.
+
+The reviewed-submission adapter was verified with three actual9-page PDFs (teacher active, withdrawn author and private unsubmitted preview), all12 selected field markers, Unicode and generic keys preserved; no active PDF annotations or internal UUIDs. Source-review QA covers1/8/2/1/12-page private outputs including whole long preview and text-free withdrawal. The shared PDF engine rechecks the exact current authorized source before generation and again before delivery; failed/revoked acquisition never falls back to cached private records.

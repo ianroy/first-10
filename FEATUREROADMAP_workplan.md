@@ -22,10 +22,10 @@ Statuses are `not_started`, `in_progress`, `blocked`, `complete`, `deferred`, `d
 current_iteration: 5
 current_stage: P1_foundation_with_parallel_P2_and_R0
 status: in_progress
-last_task_done: CLS-007
+last_task_done: WS-009
 next_task: CTX-001
-next_parallel_wave: [CTX-001, WS-009, CLS-002]
-active_claims: [CTX-001, WS-009, CLS-002]
+next_parallel_wave: [CTX-001, CLS-002, CLS-008]
+active_claims: [CTX-001, CLS-002, CLS-008]
 research_gate: not_passed
 foundation_gate: not_passed
 realtime_go: pending
@@ -66,7 +66,10 @@ resume_hint: >-
   assertions,869 app tests, typecheck/lint/build pass. Source retrieval remains disabled
   until deployed runtime/network review. Preview/review/withdrawal PDFs and portfolio QA
   pass (1/8/2/1/12 pages). New admin capability check changes no policy. WS009 awaits live
-  archive/read/export/restore rehearsal. CLS002 candidate21 awaits reviewed clone checks.
+  archive/read/export/restore rehearsal now passed; WS009 complete. CLS00221 finaldd10bf
+  applied dedicatedlocal only;1618 rollback SQL +actual confirmation/withdraw races pass.
+  Student/teacher mounts and9page reviewed-snapshot PDFs integrated; hosted/live pending.
+  Guest22 independently reviewed; guardedclone rehearsal and desktop7stepUI underway.
   General model quality, guest activities/submissions, sharing and retention remain unfinished.
 
 ```
@@ -346,3 +349,7 @@ Use this after a completed wave, a material scope/evidence change, or an explici
 **2026-10-18 — context/archive integration:** Reviewed19 then20 applied normally to dedicated local55322 and hosted after an exact dry-run; no seeds, role changes or new provider calls. Combined869 application tests/91 files and1534 rollback SQL assertions pass, plus typecheck, lint and production build. Source review PDFs preserve complete text and withdrawal boundaries; actual1/8/2/1/12-page visual QA passes. Retrieval policy stays disabled pending deployed runtime and controlled network review; reviewed-source AI inclusion remains unfinished. Archive protections await final production rehearsal. Candidate21 remains unapplied pending review and disposable-clone verification. Goal tool still reports paused; active-turn work continues while the user-facing resume control is required for automatic continuation.
 
 **2026-10-18 — goal resumed:** Fresh get_goal now reports active following user/app resumption. Ordinary Codex usage is available and no reset credits are reported. The preceding work changed source, hosted schema and verification evidence, so this is continued progress. Resume deployment and classroom integration from the exact preserved commits; do not restart work.
+
+**2026-10-18 — archive completion and classroom integration:** Production stale-edit save rejected while local QA text remained; archived owner portfolio retained original saved problem and the app reported a1page PDF download started. Download-event observation timed out, so no local delivered-file claim; all earlier actualPDF rendering evidence remains separate. CampusSwap restored and StudyLoop presenter view recovered. WS009 complete. CLS002 final21dd10bf applied dedicatedlocal after exact clone+root1618 real rollback assertions and actual confirmation/withdrawal races; hosted21 not yet.918 worker app tests and3x9page reviewed-copy PDF QA pass; root combined/deployment verification next. Guest22 backend/contracts reviewed, isolated desktop UI underway; generalAI and guestAI remain disabled.
+
+**2026-10-18 — verified submission publication:** Root combined965 app tests/98files and1618 rollback SQL assertions pass, plus typecheck/lint/Vercelbuild; exact reviewed21 applied hosted after dry-run listed only21/no seeds/roles. Production UI check remains. Public-context ownercapabilityprobe confirms deployed Node24.21.0, but automaticapprovalreview rejected production retrievalpolicy activation; explicituserdecision pending, gate unchanged. Otherwork continues; guest22 guardedclone currently reports1697SQL and11actualSQLDTO checks with remainingraceharness correction underway. No guest22 original/hostedapply.
