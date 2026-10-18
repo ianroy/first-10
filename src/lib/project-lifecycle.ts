@@ -62,6 +62,13 @@ const responseSchema = z.union([
     .strict(),
 ]);
 type Client = SupabaseClient<Database>;
+/** Optional UI actor binding. The expected id only constrains the verified JWT;
+ * it is never sent as project ownership or used as an authorization grant. */
+export type LifecycleActor = {
+  accessToken: string;
+  expectedUserId: string;
+  isCurrent: () => boolean;
+};
 type Operation = "create_owned_project" | "set_owned_project_archived";
 async function execute<I>(
   client: Client,
@@ -69,19 +76,31 @@ async function execute<I>(
   schema: z.ZodType<I, z.ZodTypeDef, unknown>,
   operation: Operation,
   args: (input: I) => Record<string, string | boolean | number | null>,
+  actor?: LifecycleActor,
 ): Promise<ProjectLifecycleResult> {
   const parsed = schema.safeParse(value);
   if (!parsed.success) return { ok: false, code: "INVALID_INPUT" };
   try {
     // No service key, supplied owner id or claimed role. The database rechecks
     // auth.uid() and current ownership under a row lock before every replay.
-    const verified = await client.auth.getUser();
-    if (verified.error || !verified.data.user?.id) return { ok: false, code: "AUTH_REQUIRED" };
-    // Narrow adapter until the coordinator regenerates the official DB types.
+    if (actor && (!actor.accessToken || !actor.isCurrent()))
+      return { ok: false, code: "AUTH_REQUIRED" };
+    const verified = actor
+      ? await client.auth.getUser(actor.accessToken)
+      : await client.auth.getUser();
+    if (
+      verified.error ||
+      !verified.data.user?.id ||
+      (actor && (verified.data.user.id !== actor.expectedUserId || !actor.isCurrent()))
+    )
+      return { ok: false, code: "AUTH_REQUIRED" };
+    // The operation allowlist and strict schemas bound this generic RPC adapter.
     const rpc = client as unknown as Pick<SupabaseClient, "rpc">;
-    const result = await rpc
-      .rpc(operation, args(parsed.data))
-      .abortSignal(AbortSignal.timeout(8000));
+    const request = rpc.rpc(operation, args(parsed.data));
+    // Per-request header only: never mutate the shared client. This preserves
+    // the verified actor if the SDK's current session changes before fetch.
+    if (actor) request.setHeader("Authorization", `Bearer ${actor.accessToken}`);
+    const result = await request.abortSignal(AbortSignal.timeout(8000));
     if (result.error) return { ok: false, code: "UNAVAILABLE" };
     const output = responseSchema.safeParse(result.data);
     return output.success ? output.data : { ok: false, code: "UNAVAILABLE" };
@@ -93,16 +112,24 @@ async function execute<I>(
 export function createOwnedProject(
   client: Client,
   value: unknown,
+  actor?: LifecycleActor,
 ): Promise<ProjectLifecycleResult> {
-  return execute(client, value, createOwnedProjectSchema, "create_owned_project", (input) => ({
-    p_project_id: input.projectId,
-    p_request_id: input.requestId,
-    p_name: input.name,
-    p_description: input.description,
-    p_audience: input.audience,
-    p_problem: input.problem,
-    p_link: input.link,
-  }));
+  return execute(
+    client,
+    value,
+    createOwnedProjectSchema,
+    "create_owned_project",
+    (input) => ({
+      p_project_id: input.projectId,
+      p_request_id: input.requestId,
+      p_name: input.name,
+      p_description: input.description,
+      p_audience: input.audience,
+      p_problem: input.problem,
+      p_link: input.link,
+    }),
+    actor,
+  );
 }
 /** Archive/restore changes no content or selection. Refresh project caches on success;
  * on conflict refetch the owner row and require a new explicit user action. */

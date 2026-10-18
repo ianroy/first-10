@@ -6,6 +6,30 @@ type Tables = Record<string, Row[]>;
 export type FakeSupabase = ReturnType<typeof createFakeSupabase>;
 
 export function createFakeSupabase(tables: Tables = {}, user: Row | null = { id: "user-1" }) {
+  // Older page fixtures omit child owner defaults. Normalize from the real
+  // parent fixture, never from the viewer: explicit/foreign owners stay intact.
+  const privateChildren = new Set([
+    "contacts",
+    "interviews",
+    "learnings",
+    "experiments",
+    "outreach",
+  ]);
+  tables = Object.fromEntries(
+    Object.entries(tables).map(([table, rows]) => [
+      table,
+      privateChildren.has(table)
+        ? rows.map((row) => {
+            const parent = tables["projects"]?.find(
+              (project) => project["id"] === row["project_id"],
+            );
+            return row["user_id"] === undefined && parent?.["user_id"]
+              ? { ...row, user_id: parent["user_id"] }
+              : row;
+          })
+        : rows,
+    ]),
+  );
   const calls: { table: string; op: string; payload?: unknown }[] = [];
 
   function query(table: string) {
@@ -16,9 +40,12 @@ export function createFakeSupabase(tables: Tables = {}, user: Row | null = { id:
     let single: "single" | "maybe" | undefined;
     let ascending = true;
     let orderBy: string | undefined;
+    let signal: AbortSignal | undefined;
 
     const rows = () => {
-      let r = (tables[table] ?? []).filter((row) => filters.every(([k, v]) => row[k] === v));
+      let r = (tables[table] ?? []).filter((row) =>
+        filters.every(([k, v]) => (v === null ? row[k] == null : row[k] === v)),
+      );
       if (orderBy) {
         const key = orderBy;
         r = [...r].sort(
@@ -29,6 +56,7 @@ export function createFakeSupabase(tables: Tables = {}, user: Row | null = { id:
     };
 
     const run = () => {
+      if (signal?.aborted) throw new DOMException("Query cancelled", "AbortError");
       if (op !== "select") {
         calls.push({ table, op, payload });
         return { data: null, error: null };
@@ -43,6 +71,8 @@ export function createFakeSupabase(tables: Tables = {}, user: Row | null = { id:
     const b = {
       select: () => b,
       eq: (k: string, v: unknown) => (filters.push([k, v]), b),
+      is: (k: string, v: unknown) => (filters.push([k, v]), b),
+      abortSignal: (value: AbortSignal) => ((signal = value), b),
       order: (k: string, o?: { ascending?: boolean }) => (
         (orderBy = k),
         (ascending = o?.ascending ?? true),

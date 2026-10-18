@@ -34,18 +34,34 @@ export class SelectedProjectUnavailableError extends Error {
   }
 }
 
+export class SelectedProjectArchivedError extends Error {
+  constructor() {
+    super(
+      "This selected idea is archived. Restore it or choose another idea in Account & saved work.",
+    );
+    this.name = "SelectedProjectArchivedError";
+  }
+}
+
 export function useProject() {
   const scope = useWorkspaceIdentity();
   const query = useQuery({
     queryKey: ["project", scope.userId, scope.selectedProjectId],
-    enabled: !!scope.userId,
+    enabled: scope.ready && !!scope.userId,
     retry: false,
-    queryFn: async () => {
+    queryFn: async ({ signal }) => {
       let request = supabase.from("projects").select("*").eq("user_id", scope.userId!);
       if (scope.selectedProjectId) request = request.eq("id", scope.selectedProjectId);
-      const { data, error } = await request.order("created_at").order("id").limit(1).maybeSingle();
+      else request = request.is("archived_at", null);
+      const { data, error } = await request
+        .order("created_at")
+        .order("id")
+        .limit(1)
+        .abortSignal(signal)
+        .maybeSingle();
       if (error) throw error;
       if (!data && scope.selectedProjectId) throw new SelectedProjectUnavailableError();
+      if (data?.archived_at) throw new SelectedProjectArchivedError();
       return data;
     },
   });
@@ -60,14 +76,15 @@ export function useProjects() {
   const scope = useWorkspaceIdentity();
   const query = useQuery({
     queryKey: ["projects", scope.userId],
-    enabled: !!scope.userId,
-    queryFn: async () => {
+    enabled: scope.ready && !!scope.userId,
+    queryFn: async ({ signal }) => {
       const { data, error } = await supabase
         .from("projects")
         .select("*")
         .eq("user_id", scope.userId!)
         .order("created_at")
-        .order("id");
+        .order("id")
+        .abortSignal(signal);
       if (error) throw error;
       return data ?? [];
     },
@@ -84,13 +101,15 @@ function listHook<T>(table: "contacts" | "interviews" | "learnings" | "experimen
     const scope = useWorkspaceIdentity();
     return useQuery({
       queryKey: [table, scope.userId, projectId],
-      enabled: !!scope.userId && !!projectId,
-      queryFn: async () => {
+      enabled: scope.ready && !!scope.userId && !!projectId,
+      queryFn: async ({ signal }) => {
         const { data, error } = await supabase
           .from(table)
           .select("*")
           .eq("project_id", projectId!)
-          .order("created_at", { ascending: false });
+          .eq("user_id", scope.userId!)
+          .order("created_at", { ascending: false })
+          .abortSignal(signal);
         if (error) throw error;
         return (data ?? []) as T[];
       },

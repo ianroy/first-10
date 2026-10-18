@@ -12,6 +12,7 @@ import {
   Map,
 } from "lucide-react";
 import { supabase } from "@/integrations/supabase/client";
+import { useProjectSelection } from "@/lib/project-selection";
 import { CurrentProjectContext } from "@/lib/current-project";
 
 const tabs = [
@@ -24,10 +25,12 @@ const tabs = [
 ] as const;
 
 export function AppShell({ title, children }: { title: string; children: ReactNode }) {
+  const selection = useProjectSelection();
   const [admin, setAdmin] = useState(false);
   const [signoutError, setSignoutError] = useState("");
   useEffect(() => {
     let active = true;
+    setAdmin(false);
     const request = supabase.auth.getUser?.();
     request
       ?.then(async ({ data }) => {
@@ -48,7 +51,7 @@ export function AppShell({ title, children }: { title: string; children: ReactNo
     return () => {
       active = false;
     };
-  }, []);
+  }, [selection?.userId]);
   const project = useContext(CurrentProjectContext);
   const checklist = project?.checklist;
   const marker =
@@ -156,8 +159,10 @@ export function AppShell({ title, children }: { title: string; children: ReactNo
             className="flex min-h-11 shrink-0 items-center justify-center gap-2 rounded-xl border bg-card px-3 text-sm text-muted-foreground hover:bg-muted"
             onClick={async () => {
               const { error } = await supabase.auth.signOut();
-              if (!error) window.location.assign("/auth");
-              else setSignoutError("Sign-out could not be confirmed. Please try again.");
+              if (!error) {
+                selection?.clearWorkspace();
+                window.location.assign("/auth");
+              } else setSignoutError("Sign-out could not be confirmed. Please try again.");
             }}
           >
             <LogOut className="size-4" aria-hidden="true" />

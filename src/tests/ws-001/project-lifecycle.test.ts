@@ -33,13 +33,15 @@ function client({
   authError = null as unknown,
 } = {}) {
   const abortSignal = vi.fn().mockResolvedValue({ data, error });
-  const rpc = vi.fn().mockReturnValue({ abortSignal });
+  const setHeader = vi.fn();
+  const rpc = vi.fn().mockReturnValue({ abortSignal, setHeader });
   const getUser = vi.fn().mockResolvedValue({ data: { user }, error: authError });
   return {
     api: { auth: { getUser }, rpc } as unknown as SupabaseClient<Database>,
     rpc,
     getUser,
     abortSignal,
+    setHeader,
   };
 }
 describe("owner project lifecycle contracts", () => {
@@ -186,5 +188,52 @@ describe("owner project lifecycle contracts", () => {
         link: "x".repeat(2048),
       }).success,
     ).toBe(true);
+  });
+  it("pins a verified creation actor to a per-request Authorization header", async () => {
+    const c = client();
+    const guard = {
+      accessToken: "synthetic-test-token",
+      expectedUserId: actorId,
+      isCurrent: () => true,
+    };
+    expect(await createOwnedProject(c.api, create, guard)).toEqual({ ok: true, data: summary });
+    expect(c.getUser).toHaveBeenCalledExactlyOnceWith("synthetic-test-token");
+    expect(c.setHeader).toHaveBeenCalledExactlyOnceWith(
+      "Authorization",
+      "Bearer synthetic-test-token",
+    );
+    expect(c.rpc.mock.calls[0]?.[1]).not.toHaveProperty("user_id");
+    expect(c.rpc.mock.calls[0]?.[1]).not.toHaveProperty("p_user_id");
+  });
+  it("does not create A's draft under a changed B identity", async () => {
+    const c = client({ user: { id: "f9100000-0000-4000-8000-000000000099" } });
+    expect(
+      await createOwnedProject(c.api, create, {
+        accessToken: "synthetic-test-token",
+        expectedUserId: actorId,
+        isCurrent: () => true,
+      }),
+    ).toEqual({ ok: false, code: "AUTH_REQUIRED" });
+    expect(c.rpc).not.toHaveBeenCalled();
+  });
+  it("does not dispatch a create after the workspace changes during token verification", async () => {
+    const c = client();
+    let release: ((value: unknown) => void) | undefined;
+    c.getUser.mockImplementation(
+      () =>
+        new Promise((resolve) => {
+          release = resolve;
+        }),
+    );
+    let current = true;
+    const pending = createOwnedProject(c.api, create, {
+      accessToken: "synthetic-test-token",
+      expectedUserId: actorId,
+      isCurrent: () => current,
+    });
+    current = false;
+    release?.({ data: { user: { id: actorId } }, error: null });
+    expect(await pending).toEqual({ ok: false, code: "AUTH_REQUIRED" });
+    expect(c.rpc).not.toHaveBeenCalled();
   });
 });

@@ -1,4 +1,7 @@
 import { createFileRoute, Link, useNavigate } from "@tanstack/react-router";
+import { useEffect, useState } from "react";
+import { supabase } from "@/integrations/supabase/client";
+import { setOwnedProjectArchived } from "@/lib/project-lifecycle";
 import { AppShell, Card } from "@/components/AppShell";
 import {
   useContacts,
@@ -24,6 +27,66 @@ function Account() {
   const current = useProject();
   const navigate = useNavigate();
   const project = current.error ? null : (current.data ?? null);
+  const [confirmation, setConfirmation] = useState<{ idea: Project; requestId: string } | null>(
+    null,
+  );
+  const [busy, setBusy] = useState(false);
+  const [notice, setNotice] = useState("");
+  useEffect(() => {
+    setConfirmation(null);
+    setBusy(false);
+    setNotice("");
+  }, [selection?.scopeToken]);
+  useEffect(() => {
+    if (project && selection && !selection.selectedProjectId) selection.selectProject(project.id);
+  }, [project, selection]);
+  const requestLifecycle = async () => {
+    if (!selection || !confirmation || busy) return;
+    const token = selection.scopeToken;
+    const { idea, requestId } = confirmation;
+    setBusy(true);
+    setNotice("");
+    const archived = !idea.archived_at;
+    const result = await setOwnedProjectArchived(supabase, {
+      projectId: idea.id,
+      requestId,
+      archived,
+      expectedRevision: idea.lifecycle_revision,
+    });
+    if (!selection.isCurrentScope(token)) return;
+    // Read current owner-authorized rows even after an idempotent replay: an old
+    // acknowledgement must never overwrite a newer restore/archive in the cache.
+    try {
+      const latest = await projects.refetch({ throwOnError: true });
+      await current.refetch();
+      if (!selection.isCurrentScope(token)) return;
+      if (result.ok) {
+        const actual = latest.data?.find((row) => row.id === idea.id);
+        setNotice(
+          actual
+            ? `${actual.name} is ${actual.archived_at ? "archived" : "active"}. Your saved work is retained.`
+            : "Latest saved state refreshed. This idea is unavailable.",
+        );
+        setConfirmation(null);
+      } else if (result.code === "UNAVAILABLE") {
+        setNotice(
+          "The change could not be confirmed. Review the refreshed list and retry this same request; your saved work has not been deleted.",
+        );
+      } else {
+        setNotice(
+          result.code === "REVISION_CONFLICT"
+            ? "This idea changed in another session. The latest state is shown. Review it and choose the action again."
+            : "This change is unavailable. Review your ideas and sign-in before trying again.",
+        );
+        setConfirmation(null);
+      }
+    } catch {
+      if (selection.isCurrentScope(token))
+        setNotice("Latest saved state could not be refreshed. Retry before making another change.");
+    } finally {
+      if (selection.isCurrentScope(token)) setBusy(false);
+    }
+  };
   return (
     <CurrentProjectContext.Provider value={project}>
       <AppShell title="Account & saved work">
@@ -54,6 +117,46 @@ function Account() {
               Choose another idea below. We have not switched projects or changed your saved work.
             </p>
           </div>
+        )}
+        {notice && (
+          <p role="status" className="rounded-xl border bg-card p-4 text-sm">
+            {notice}
+          </p>
+        )}
+        {confirmation && (
+          <section
+            aria-label="Confirm idea lifecycle change"
+            className="rounded-2xl border border-primary bg-card p-5"
+          >
+            <h3 className="text-lg font-bold">
+              {confirmation.idea.archived_at ? "Restore" : "Archive"} {confirmation.idea.name}?
+            </h3>
+            <p className="mt-2 text-sm">
+              {confirmation.idea.archived_at
+                ? "Return this idea to your active list. Its people, conversations and saved work are retained."
+                : "Keep all saved work and move this idea to the archived list. You can restore it here. Archive organizes your list; it does not prevent changes from an already open session."}
+            </p>
+            <div className="mt-4 flex flex-wrap gap-3">
+              <button
+                disabled={busy}
+                onClick={() => void requestLifecycle()}
+                className="min-h-11 rounded-xl bg-primary px-4 font-semibold text-primary-foreground"
+              >
+                {busy
+                  ? "Checking saved state…"
+                  : confirmation.idea.archived_at
+                    ? "Confirm restore"
+                    : "Confirm archive"}
+              </button>
+              <button
+                disabled={busy}
+                onClick={() => setConfirmation(null)}
+                className="min-h-11 rounded-xl border px-4 font-semibold"
+              >
+                Cancel
+              </button>
+            </div>
+          </section>
         )}
         <div className="grid items-start gap-6 xl:grid-cols-[1.3fr_1fr]">
           <Card>
@@ -92,20 +195,34 @@ function Account() {
                         </p>
                         <p className="mt-3 text-xs font-semibold">
                           Stage {idea.stage}
+                          {idea.archived_at ? " · Archived" : " · Active"}
                           {project?.id === idea.id ? " · Current idea" : ""}
                         </p>
                       </div>
+                      {!idea.archived_at && (
+                        <button
+                          disabled={!selection || busy}
+                          className="inline-flex min-h-11 items-center gap-2 rounded-xl border bg-card px-4 text-sm font-semibold"
+                          aria-label={`Open ${idea.name}`}
+                          onClick={async () => {
+                            selection?.selectProject(idea.id);
+                            await navigate({ to: "/dashboard" });
+                          }}
+                        >
+                          Open idea
+                          <ArrowUpRight className="size-4" aria-hidden="true" />
+                        </button>
+                      )}
                       <button
-                        disabled={!selection}
-                        className="inline-flex min-h-11 items-center gap-2 rounded-xl border bg-card px-4 text-sm font-semibold"
-                        aria-label={`Open ${idea.name}`}
-                        onClick={async () => {
-                          selection?.selectProject(idea.id);
-                          await navigate({ to: "/dashboard" });
+                        disabled={!selection || busy}
+                        aria-label={`${idea.archived_at ? "Restore" : "Archive"} ${idea.name}`}
+                        className="inline-flex min-h-11 items-center rounded-xl border bg-card px-4 text-sm font-semibold"
+                        onClick={() => {
+                          setNotice("");
+                          setConfirmation({ idea, requestId: crypto.randomUUID() });
                         }}
                       >
-                        Open idea
-                        <ArrowUpRight className="size-4" aria-hidden="true" />
+                        {idea.archived_at ? "Restore idea" : "Archive idea"}
                       </button>
                     </div>
                   </li>
@@ -120,8 +237,10 @@ function Account() {
               <h3 className="text-xl font-bold">Private to your account</h3>
               <p className="mt-3 text-sm leading-relaxed text-muted-foreground">
                 Saved ideas remain available when you sign in again, including on another device.
-                This browser remembers which idea you selected; choose it from this list on a
-                different device.
+                This browser remembers which idea you selected; workspace links open that idea. With
+                no selection, your earliest active idea opens. Choose from this list on a different
+                device. An archived or unavailable selection stays visible as a recovery prompt
+                until you restore it or choose another idea.
               </p>
               <p className="mt-3 text-sm leading-relaxed text-muted-foreground">
                 An interview in progress saves at wrap-up. Save edits before leaving a page.

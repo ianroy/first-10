@@ -1,8 +1,9 @@
 import { createFileRoute, Link, useNavigate, useSearch } from "@tanstack/react-router";
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { toast } from "sonner";
 import { supabase } from "@/integrations/supabase/client";
 import { useProject, useRefresh, type Project } from "@/lib/data";
+import { createOwnedProject } from "@/lib/project-lifecycle";
 import { useProjectSelection } from "@/lib/project-selection";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -41,16 +42,22 @@ const fields = [
 ] as const;
 
 function Setup() {
+  const selection = useProjectSelection();
   const search = useSearch({ strict: false }) as { new?: boolean };
   const query = useProject();
   const newIdea = search.new === true;
   const project = newIdea ? null : (query.data ?? null);
+  const pinDefault =
+    !newIdea && !!project && !!selection && !selection.selectedProjectId && !query.error;
+  useEffect(() => {
+    if (pinDefault && project) selection?.selectProject(project.id);
+  }, [pinDefault, project, selection]);
   return (
     <SetupForm
-      key={newIdea ? "new" : (project?.id ?? "first")}
+      key={`${selection?.userId}:${selection?.selectedProjectId}:${newIdea ? "new" : (project?.id ?? "first")}`}
       project={project}
       newIdea={newIdea}
-      loading={!newIdea && query.isLoading}
+      loading={!newIdea && (query.isLoading || pinDefault)}
       error={!newIdea ? query.error : null}
     />
   );
@@ -78,6 +85,14 @@ function SetupForm({
     link: project?.link ?? "",
   });
   const [busy, setBusy] = useState(false);
+  const mounted = useRef(true);
+  const creation = useRef<{ projectId: string; requestId: string; payload: string } | null>(null);
+  useEffect(() => {
+    mounted.current = true;
+    return () => {
+      mounted.current = false;
+    };
+  }, []);
 
   return (
     <div className="mx-auto max-w-5xl px-6 py-8 lg:py-14">
@@ -144,34 +159,91 @@ function SetupForm({
                 };
                 if (!values.name || !values.description || !values.audience || !values.problem)
                   throw new Error("Describe the name, audience, problem and what your app does.");
-                const result =
-                  project && !newIdea
-                    ? await supabase
-                        .from("projects")
-                        .update(values)
-                        .eq("id", project.id)
-                        .eq("user_id", selection.userId)
-                        .select("id")
-                        .single()
-                    : await supabase
-                        .from("projects")
-                        .insert({ ...values, user_id: selection.userId })
-                        .select("id")
-                        .single();
-                if (result.error) throw result.error;
-                if (!result.data?.id)
-                  throw new Error("The save was not confirmed. Your text is still here.");
-                selection.selectProject(result.data.id);
+                const token = selection.scopeToken;
+                const stillHere = () => mounted.current && selection.isCurrentScope(token);
+                let savedId: string;
+                if (project && !newIdea) {
+                  const verified = await supabase.auth.getUser();
+                  if (!stillHere()) return;
+                  if (verified.error || verified.data.user?.id !== selection.userId)
+                    throw new Error("Sign in again before saving this idea.");
+                  const result = await supabase
+                    .from("projects")
+                    .update(values)
+                    .eq("id", project.id)
+                    .eq("user_id", selection.userId)
+                    .is("archived_at", null)
+                    .select("id")
+                    .single();
+                  if (!stillHere()) return;
+                  if (result.error || !result.data?.id)
+                    throw new Error(
+                      "The save could not be confirmed. Your text is still here; check Account & saved work if this idea was archived.",
+                    );
+                  savedId = result.data.id;
+                } else {
+                  const payload = JSON.stringify(values);
+                  if (!creation.current)
+                    creation.current = {
+                      projectId: crypto.randomUUID(),
+                      requestId: crypto.randomUUID(),
+                      payload,
+                    };
+                  if (creation.current.payload !== payload)
+                    throw new Error(
+                      "A previous create may have saved. Retry its original text or open Account & saved work before starting another idea.",
+                    );
+                  const session = await supabase.auth.getSession();
+                  if (!stillHere()) return;
+                  if (session.error || !session.data.session?.access_token)
+                    throw new Error("Sign in again before creating this idea.");
+                  const result = await createOwnedProject(
+                    supabase,
+                    {
+                      ...values,
+                      projectId: creation.current.projectId,
+                      requestId: creation.current.requestId,
+                    },
+                    {
+                      accessToken: session.data.session.access_token,
+                      expectedUserId: selection.userId,
+                      isCurrent: stillHere,
+                    },
+                  );
+                  if (!stillHere()) return;
+                  if (!result.ok)
+                    throw new Error(
+                      result.code === "UNAVAILABLE"
+                        ? "Creation could not be confirmed. Retry with the same text; the same request will not create a duplicate."
+                        : "This idea could not be created. Check Account & saved work before retrying.",
+                    );
+                  savedId = result.data.id;
+                }
+                // An acknowledged create can be an old retry. Re-authorize the
+                // actual latest owner row before selecting/navigating to it.
+                const latest = await supabase
+                  .from("projects")
+                  .select("id,archived_at")
+                  .eq("id", savedId)
+                  .eq("user_id", selection.userId)
+                  .maybeSingle();
+                if (!stillHere()) return;
+                if (latest.error || !latest.data || latest.data.archived_at)
+                  throw new Error(
+                    "The idea was saved but cannot be opened now. Review its latest state in Account & saved work.",
+                  );
+                selection.selectProject(savedId);
                 refresh("project", "projects");
                 await navigate({ to: "/dashboard" });
               } catch (failure) {
+                if (!mounted.current) return;
                 toast.error(
                   failure instanceof Error
                     ? failure.message
                     : "Your idea could not be saved. Please try again.",
                 );
               } finally {
-                setBusy(false);
+                if (mounted.current) setBusy(false);
               }
             }}
           >

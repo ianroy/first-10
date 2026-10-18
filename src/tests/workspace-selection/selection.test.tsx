@@ -42,6 +42,9 @@ const project = (id: string, owner: string, name: string): Row => ({
   problem: "A recent problem",
   link: "",
   stage: 1,
+  archived_at: null,
+  lifecycle_revision: 0,
+  updated_at: "2026-10-18T00:00:00Z",
   questions: [],
   survey: [],
   checklist: {},
@@ -74,6 +77,10 @@ function memoryClient() {
       userId = id;
     },
     auth: {
+      getSession: async () => ({
+        data: { session: userId ? { user: { id: userId }, access_token: "fixture-token" } : null },
+        error: null,
+      }),
       getUser: vi.fn(async () => ({
         data: { user: userId ? { id: userId, app_metadata: {} } : null },
         error: null,
@@ -81,6 +88,35 @@ function memoryClient() {
       onAuthStateChange: () => ({ data: { subscription: { unsubscribe() {} } } }),
       signOut: async () => ({ error: null }),
     },
+    rpc: vi.fn((operation: string, args: Record<string, unknown>) => ({
+      setHeader: () => {},
+      abortSignal: async () => {
+        if (operation === "get_platform_admin_authorization") return { data: null, error: null };
+        if (operation !== "create_owned_project") throw new Error("Unexpected RPC");
+        const row: Row = {
+          ...project(String(args["p_project_id"]), userId!, String(args["p_name"])),
+          description: args["p_description"],
+          audience: args["p_audience"],
+          problem: args["p_problem"],
+          link: args["p_link"],
+        };
+        tables["projects"]!.push(row);
+        calls.push({ table: "projects", operation: "rpc_create", filters: [], payload: row });
+        return {
+          error: null,
+          data: {
+            ok: true,
+            data: {
+              id: row["id"],
+              name: row["name"],
+              archivedAt: null,
+              lifecycleRevision: 0,
+              updatedAt: row["updated_at"],
+            },
+          },
+        };
+      },
+    })),
     from(table: string) {
       const filters: [string, unknown][] = [];
       let operation = "select";
@@ -113,6 +149,11 @@ function memoryClient() {
           filters.push([key, value]);
           return query;
         },
+        is: (key: string, value: unknown) => {
+          filters.push([key, value]);
+          return query;
+        },
+        abortSignal: () => query,
         order: () => query,
         limit: (count: number) => {
           limit = count;
@@ -333,7 +374,7 @@ describe("owner project selection", () => {
     fireEvent.click(screen.getByRole("button", { name: "Create new idea" }));
     await waitFor(() => expect(screen.getByTestId("current")).toHaveTextContent("New idea"));
     expect(h.client.tables["projects"]?.find((p) => p["id"] === A)?.["name"]).toBe("Alpha");
-    expect(h.client.calls.filter((c) => c.operation === "insert")).toHaveLength(1);
+    expect(h.client.calls.filter((c) => c.operation === "rpc_create")).toHaveLength(1);
     expect(h.client.calls.filter((c) => c.operation === "update")).toHaveLength(0);
   });
   it("ordinary setup edits only the selected owner project", async () => {
