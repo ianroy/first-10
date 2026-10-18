@@ -1,6 +1,6 @@
 import { fileURLToPath } from "node:url";
 // Run this callback inside the existing connected Artifact Session, in small batches.
-// It preserves the deck and its first nine slide IDs while replacing the requested narrative.
+// It preserves the deck and slide IDs while replacing the requested narrative.
 const cream = "#F7F5EC",
   ink = "#173D35",
   forest = "#102820",
@@ -19,7 +19,7 @@ const sources = {
     "https://www.brandeis.edu/programs/business/course-schedule/course?acad_year=2026&class_section=1&crse_id=DEFINITION-3-13833&strm=1253",
   bus232: "https://www.brandeis.edu/global/impact/2023/asper-center.pdf",
 };
-export const slides = [
+const authoredSlides = [
   {
     title: "First Ten",
     caption:
@@ -90,6 +90,10 @@ export const slides = [
       "The ask: become a founding partner. Try First Ten in your classes and tell us what works and what does not. Two semesters free for founding partners, an offer supplied by the owner. Scan the verified QR or visit https://first-10-three.vercel.app/founding-partners. The ten-school target is not a count of confirmed partners.",
   },
 ];
+// Layout keys retain their authored positions; presentation order is independent.
+export const slideOrder = [0, 1, 2, 3, 8, 4, 5, 6, 7, 9, 10, 11, 12];
+export const slides = slideOrder.map((index) => authoredSlides[index]);
+
 export default async function rebuild({ presentation, input }) {
   const text = (s, content, x, y, w, h, size = 24, color = ink, bold = false) => {
     const sh = s.shapes.add({
@@ -122,14 +126,15 @@ export default async function rebuild({ presentation, input }) {
     text(s, c, 72, 657, 1136, 40, 16, dark ? "#B9D3C3" : "#4D655A");
   while (presentation.slides.items.length < 13)
     presentation.slides.add({ width: 1280, height: 720 });
-  for (let i = input.from; i <= input.to; i++) {
-    const s = presentation.slides.getItem(i);
+  for (let outputIndex = input.from; outputIndex <= input.to; outputIndex++) {
+    const i = slideOrder[outputIndex];
+    const s = presentation.slides.getItem(outputIndex);
     const snap = s.toSnapshot();
     presentation.delete(
       [...snap.shapes, ...snap.images, ...snap.charts, ...snap.tables].map((x) => x.aid),
     );
     s.background.fill = [1, 10, 12].includes(i) ? forest : cream;
-    let notes = slides[i].caption;
+    let notes = authoredSlides[i].caption;
     if (i === 0) {
       image(s, "brand/wordmark.png", 72, 48, 315, 70, "First Ten original logo");
       text(s, "Customer conversations.\nA clearer next move.", 72, 177, 1136, 168, 64, ink, true);
@@ -210,10 +215,10 @@ export default async function rebuild({ presentation, input }) {
       text(s, "Live walkthrough: first-10-three.vercel.app/demo", 76, 579, 1100, 42, 26, ink, true);
       footer(s, "StudyLoop is fictional. This experiment has no customer result.");
     } else if (i >= 4 && i <= 7) {
-      header(s, "PRODUCT DEMO", slides[i].title);
-      const f = slides[i].file;
+      header(s, "PRODUCT DEMO", authoredSlides[i].title);
+      const f = authoredSlides[i].file;
       if (i === 4) {
-        image(s, `pitch/demo/${f}.png`, 185, 178, 910, 466, slides[i].caption);
+        image(s, `pitch/demo/${f}.png`, 185, 178, 910, 466, authoredSlides[i].caption);
       } else if (i === 6) {
         image(
           s,
@@ -234,7 +239,7 @@ export default async function rebuild({ presentation, input }) {
           "Complete educator page, fictional example",
         );
       } else {
-        image(s, `pitch/demo/${f}-viewport.png`, 62, 187, 970, 450, slides[i].caption);
+        image(s, `pitch/demo/${f}-viewport.png`, 62, 187, 970, 450, authoredSlides[i].caption);
         image(
           s,
           `pitch/demo/${f}.png`,

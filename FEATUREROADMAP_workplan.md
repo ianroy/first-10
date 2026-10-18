@@ -30,7 +30,7 @@ research_gate: not_passed
 foundation_gate: not_passed
 realtime_go: pending
 last_updated: 2026-10-18
-last_documentation_update: "2026-10-18: reconciled deployed desktop demo, final pitch architecture/chasm/QR, private founding-partner intake and reviewed export."
+last_documentation_update: "2026-10-18: moved Market Opportunity to slide 5 before all four product demo slides; synchronized native deck, companions and presenter notes."
 resume_hint: >-
   Production 64bc86e includes complete MKT-006 manual planner controls and private partner
   Admin counts. Actual presenter login worked: 0 interest, 0 feedback, 0 distinct addresses

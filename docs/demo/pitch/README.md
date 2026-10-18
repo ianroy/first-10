@@ -3,7 +3,7 @@
 Editable Spaces presentation: **First Ten — Babson teaching and product pitch**.
 
 - Page: `page_984affe9853c8191a5f8caf0d446aba3`
-- Connected artifact: `artifact_external_df4a6cc0-0203-4da3-9814-41a835d83328`
+- Connected artifact: `artifact_external_9b2807b9-fea3-4aba-9682-f6d83e0f32fa`
 - Thirteen slides, 1280 × 720, original First Ten logo and Field notebook palette.
 - Native editable slide text, market and adoption diagrams, and source-bearing speaker notes. Slide 10 uses the owner-requested architecture illustration with editable exact model IDs.
 - [Presenter script](presenter-script.md) and [claim/source map](source-map.md).
@@ -14,11 +14,11 @@ Editable Spaces presentation: **First Ten — Babson teaching and product pitch*
 2. The teaching problem: approaching people and facing uncertain demand.
 3. The solution: real conversations, features and bounded tests.
 4. Value proposition: a clearer next move using fictional StudyLoop.
-5. Student workspace, actual deployed screen.
-6. Saved manual $0 Marketing Lab, actual deployed screen.
-7. Educator planner and fictional class preview, actual deployed screen.
-8. Protected aggregate admin view, actual deployed screen.
-9. Qualitative market positioning against MIT Orbit / AI JetPack, Venturekit and facilitated alternatives.
+5. Qualitative market positioning against MIT Orbit / AI JetPack, Venturekit and facilitated alternatives.
+6. Student workspace, actual deployed screen.
+7. Saved manual $0 Marketing Lab, actual deployed screen.
+8. Educator planner and fictional class preview, actual deployed screen.
+9. Protected aggregate admin view, actual deployed screen.
 10. Owner-requested architecture illustration, private data boundary, AI gateway, exact model IDs and the owner-stated pedagogy moat.
 11. Six named pedagogical concepts with student activities.
 12. Editable Crossing the Chasm adoption curve and planned timeline: October 2026 tests, November–December refinement, Spring 2027 release target of ten schools represented at the workshop.
