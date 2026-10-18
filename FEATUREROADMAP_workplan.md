@@ -45,6 +45,7 @@ last_task_done: DOC-001
 next_task: VP-007
 resume_hint: "DOC-001 updated README and ProductSpec to the candidate decision-focused value proposition and verified implementation. Continue Iteration 4 at VP-007, then VP-008; neither research task is complete. Human interviews and a small pilot remain necessary; no synthetic evidence or automatic recruiting. Local typecheck, 17 tests and Vercel build passed; lint passed with 6 existing warnings after excluding generated .vercel output. F-007 remains partial pending GitHub CI confirmation; R0/R1 gates remain open. The 11 research tasks remain the active queue. Local installs use `npx bun@1.3.5 install`."
 last_updated: 2026-10-17
+last_documentation_update: "2026-10-17: DOC-002 added README team credits with names only; removed the existing email link."
 open_questions:
   - Does the live-app founder with few or no recurring users need access to relevant people, help asking, or help making a decision most? (VP-008, R0-004a/b)
   - Is a useful next decision valuable enough to repeat the workflow, or do founders mainly want user acquisition? (VP7, VP-010)

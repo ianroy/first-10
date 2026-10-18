@@ -7,7 +7,7 @@ First Ten is a mobile-first app for student founders with a live prototype or ap
 This is the **candidate value proposition** being tested. The existing app implements a three-stage ladder; research is now focused on whether that ladder helps founders make better decisions and take useful action. There are no founder interviews or pilot outcomes recorded in the research workspace yet, so improved acquisition, retention and willingness to pay remain unproven. This document does not establish a final positioning decision or change the live app's copy.
 
 - [Open First Ten](https://first-10-three.vercel.app) · [GitHub repository](https://github.com/ianroy/first-10)
-- Built by Ian Roy ([ianroy@brandeis.edu](mailto:ianroy@brandeis.edu)) for the Babson AI Academy. First scaffolded in Lovable, then moved to GitHub, Vercel and Supabase.
+- Built for the Babson AI Academy by the [First Ten team](#team). First scaffolded in Lovable, then moved to GitHub, Vercel and Supabase.
 - [ProductSpec.md](ProductSpec.md) describes the current product and its boundaries. [FEATUREROADMAP_workplan.md](FEATUREROADMAP_workplan.md) is the source of truth for research, delivery gates and the next task.
 
 ## The decision First Ten aims to help with
@@ -147,6 +147,17 @@ vercel deploy --prod
 Set `NITRO_PRESET=vercel` in the remote build environment as well as the required Supabase and OpenRouter values. The `VITE_*` settings must be available at build time. In Supabase Authentication, configure the Site URL and allowed `/auth` redirect URLs for production, local development and any previews being used. Confirm sign-in, project access and AI generation after deployment.
 
 The project remains connected to Lovable. Preserve published Git history: use ordinary commits and pushes, and keep the connected branch working.
+
+## Team
+
+First Ten was created for the Babson AI Academy by:
+
+- Ian Roy
+- Jungsoo Ahn
+- Harini Mittal
+- José Pedro Carreón Gutiérrez
+- Anna M. Pietraszek
+- Raquel M. Richardson
 
 ## Project documents
 
