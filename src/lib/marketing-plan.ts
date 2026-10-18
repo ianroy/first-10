@@ -867,6 +867,8 @@ export type MarketingFailure = {
     | "INVALID_PLAN"
     | "CONFLICT"
     | "IDEMPOTENCY_CONFLICT"
+    | "ARCHIVED"
+    | "BUSY"
     | "UNAVAILABLE";
   currentRevision?: number;
 };

@@ -101,7 +101,7 @@ SELECT is(firstten_policy_test.attempt($case$UPDATE public.teacher_plans SET use
 SELECT is(firstten_policy_test.attempt($case$UPDATE public.teacher_plans SET project_id=firstten_policy_test.id('teacher_project_a2') WHERE project_id=firstten_policy_test.id('teacher_project_a')$case$),'error:23514','lesson cannot move between projects even with same owner');
 SELECT is(firstten_policy_test.attempt($case$UPDATE public.teacher_plans SET id=gen_random_uuid() WHERE project_id=firstten_policy_test.id('teacher_project_a')$case$),'error:23514','lesson identity immutable');
 SELECT is(firstten_policy_test.attempt($case$UPDATE public.teacher_plans SET created_at=created_at+interval '1 second' WHERE project_id=firstten_policy_test.id('teacher_project_a')$case$),'error:23514','lesson created timestamp immutable');
-SELECT is(firstten_policy_test.attempt($case$INSERT INTO public.teacher_plans(user_id,project_id,document,last_mutation_id,last_mutation_hash) VALUES(firstten_policy_test.id('owner_b'),firstten_policy_test.id('teacher_project_a2'),firstten_policy_test.empty_teacher_plan(),gen_random_uuid(),repeat('a',64))$case$),'error:23503','composite foreign key independently rejects wrong owner/project');
+SELECT is(firstten_policy_test.attempt($case$INSERT INTO public.teacher_plans(user_id,project_id,document,last_mutation_id,last_mutation_hash) VALUES(firstten_policy_test.id('owner_b'),firstten_policy_test.id('teacher_project_a2'),firstten_policy_test.empty_teacher_plan(),gen_random_uuid(),repeat('a',64))$case$),'error:42501','parent owner guard rejects wrong owner/project');
 SELECT firstten_policy_test.set_actor('owner_a');
 SET LOCAL ROLE authenticated;
 DELETE FROM public.projects WHERE id=firstten_policy_test.id('teacher_project_a');

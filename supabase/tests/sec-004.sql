@@ -81,7 +81,7 @@ SELECT is((SELECT count(*) FROM firstten_private.membership_audit WHERE project_
 SELECT is((SELECT count(*) FROM firstten_private.membership_operations WHERE project_id=firstten_policy_test.id('membership_project_a')),2::bigint,'one durable operation journal entry per saved intent');
 SELECT is(firstten_policy_test.attempt($case$UPDATE public.project_members SET project_id=firstten_policy_test.id('membership_project_a2'),revision=revision+1 WHERE user_id=firstten_policy_test.id('editor')$case$),'error:23514','identity trigger prevents moving grant even with elevated table access');
 SELECT is(firstten_policy_test.attempt($case$UPDATE public.project_members SET created_by=firstten_policy_test.id('owner_b'),revision=revision+1 WHERE user_id=firstten_policy_test.id('editor')$case$),'error:23514','grantor immutable');
-SELECT is(firstten_policy_test.attempt($case$INSERT INTO public.project_members(project_id,user_id,created_by,role) VALUES(firstten_policy_test.id('membership_project_b'),firstten_policy_test.id('student'),firstten_policy_test.id('owner_a'),'viewer')$case$),'error:23503','composite FK prevents cross-owner grantor');
+SELECT is(firstten_policy_test.attempt($case$INSERT INTO public.project_members(project_id,user_id,created_by,role) VALUES(firstten_policy_test.id('membership_project_b'),firstten_policy_test.id('student'),firstten_policy_test.id('owner_a'),'viewer')$case$),'error:42501','parent owner guard rejects cross-owner grantor');
 
 RESET ROLE;SELECT firstten_policy_test.set_actor('editor');SET LOCAL ROLE authenticated;
 SELECT is(firstten_policy_test.visible_count('projects',firstten_policy_test.id('membership_project_a')),0::bigint,'editor cannot read private projects');

@@ -91,6 +91,8 @@ export type TeacherPlanFailure = {
     | "INVALID_PLAN"
     | "CONFLICT"
     | "IDEMPOTENCY_CONFLICT"
+    | "ARCHIVED"
+    | "BUSY"
     | "UNAVAILABLE";
   currentRevision?: number;
 };

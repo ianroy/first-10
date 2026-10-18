@@ -39,6 +39,8 @@ const failure = z
       "INVALID_PLAN",
       "CONFLICT",
       "IDEMPOTENCY_CONFLICT",
+      "ARCHIVED",
+      "BUSY",
       "UNAVAILABLE",
     ]),
     currentRevision: z.number().int().min(0).max(Number.MAX_SAFE_INTEGER).optional(),
@@ -72,7 +74,7 @@ const loadPlan = createServerFn({ method: "POST" })
     const sb = context.supabase;
     const project = await sb
       .from("projects")
-      .select("id,stage")
+      .select("id,stage,archived_at")
       .eq("id", data.projectId)
       .eq("user_id", context.userId)
       .maybeSingle();
@@ -87,7 +89,13 @@ const loadPlan = createServerFn({ method: "POST" })
     if (result.error) return unavailable;
     const stage = project.data.stage;
     if (!result.data)
-      return { ok: true, plan: null, stage, canWrite: stage >= 2, sourceStatus: [] };
+      return {
+        ok: true,
+        plan: null,
+        stage,
+        canWrite: stage >= 2 && !project.data.archived_at,
+        sourceStatus: [],
+      };
     const row = result.data;
     const parsed = z
       .object({
@@ -150,7 +158,13 @@ const loadPlan = createServerFn({ method: "POST" })
                 : "not_accepted"
             : "available",
     }));
-    return { ok: true, plan: parsed.data, stage, canWrite: stage >= 2, sourceStatus };
+    return {
+      ok: true,
+      plan: parsed.data,
+      stage,
+      canWrite: stage >= 2 && !project.data.archived_at,
+      sourceStatus,
+    };
   });
 
 const savePlan = createServerFn({ method: "POST" })

@@ -86,7 +86,7 @@ UPDATE public.projects SET archived_at=now() WHERE id='d1600000-0000-4000-8000-0
 SET LOCAL ROLE authenticated;
 SELECT firstten_policy_test.set_actor('owner_a');
 SELECT is(public.load_discovery_workspace('d1600000-0000-4000-8000-000000000001')#>>'{workspace,revision}','2','archived owner can read prior saved discovery work');
-SELECT is(public.save_discovery_workspace('d1600000-0000-4000-8000-000000000001',2,'d1700000-0000-4000-8000-000000000035',jsonb_set(firstten_policy_test.discovery_doc(),'{excludedContextIds}','["d1500000-0000-4000-8000-000000000003"]'))->>'code','ARCHIVED','archived owner cannot save discovery changes');
+SELECT is(public.save_discovery_workspace('d1600000-0000-4000-8000-000000000001',2,'d1700000-0000-4000-8000-000000000035',jsonb_set(jsonb_set(firstten_policy_test.discovery_doc(),'{excludedContextIds}','["d1500000-0000-4000-8000-000000000003"]'),'{frame,problem}','"Changed while archived"'))->>'code','ARCHIVED','archived owner cannot save discovery changes');
 SELECT is(public.adopt_discovery_script('d1600000-0000-4000-8000-000000000001',2,'d1500000-0000-4000-8000-000000000005',firstten_policy_test.discovery_doc()#>'{scripts,0,questions}',NULL)->>'code','ARCHIVED','archived project cannot adopt script');
 RESET ROLE;
 UPDATE public.projects SET archived_at=NULL WHERE id='d1600000-0000-4000-8000-000000000001';

@@ -26,6 +26,8 @@ const failureSchema = z
       "INVALID_PLAN",
       "CONFLICT",
       "IDEMPOTENCY_CONFLICT",
+      "ARCHIVED",
+      "BUSY",
       "UNAVAILABLE",
     ]),
     currentRevision: z.number().int().min(0).max(Number.MAX_SAFE_INTEGER).optional(),

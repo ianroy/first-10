@@ -1,3 +1,4 @@
+import { workspaceWriteError } from "./write-errors";
 import { createServerFn } from "@tanstack/react-start";
 import { getRequest, setResponseHeader } from "@tanstack/react-start/server";
 import type { SupabaseClient } from "@supabase/supabase-js";
@@ -34,7 +35,13 @@ export const getProcessingConsent = createServerFn({ method: "POST" })
       "get_processing_consent",
       { p_project_id: data.projectId, p_target_kind: data.targetKind, p_target_id: data.targetId },
     );
-    if (result.error) throw consentError(null);
+    if (result.error)
+      throw new Error(
+        workspaceWriteError(
+          result.error,
+          "Privacy choices could not be saved or loaded. Your local choices remain here. Archived ideas allow withdrawal but not new permission grants.",
+        ),
+      );
     return parseConsentResult(result.data, consentRecordSchema);
   });
 export const setProcessingConsent = createServerFn({ method: "POST" })
@@ -56,7 +63,13 @@ export const setProcessingConsent = createServerFn({ method: "POST" })
         p_expected_revision: data.expectedRevision,
       },
     );
-    if (result.error) throw consentError(null);
+    if (result.error)
+      throw new Error(
+        workspaceWriteError(
+          result.error,
+          "Privacy choices could not be saved or loaded. Your local choices remain here. Archived ideas allow withdrawal but not new permission grants.",
+        ),
+      );
     return parseConsentResult(result.data, consentRecordSchema);
   });
 export const saveInterviewWithConsent = createServerFn({ method: "POST" })
@@ -79,6 +92,18 @@ export const saveInterviewWithConsent = createServerFn({ method: "POST" })
         p_request_id: data.requestId,
       },
     );
-    if (result.error) throw consentError(null);
+    if (
+      result.error ||
+      (result.data &&
+        typeof result.data === "object" &&
+        "code" in result.data &&
+        result.data.code === "ARCHIVED")
+    )
+      throw new Error(
+        workspaceWriteError(
+          result.error ?? result.data,
+          "The interview could not be saved. Keep or export your local notes, then retry.",
+        ),
+      );
     return parseConsentResult(result.data, captureReceiptSchema);
   });

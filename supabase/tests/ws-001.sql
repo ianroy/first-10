@@ -52,7 +52,7 @@ SELECT is(public.set_owned_project_archived(firstten_policy_test.id('lifecycle_o
 SELECT is(public.set_owned_project_archived(firstten_policy_test.id('lifecycle_other'),false,0,gen_random_uuid())->>'code','NOT_FOUND','owner cannot restore another owner project');
 SELECT is(public.set_owned_project_archived('f9100000-0000-4000-8000-000000000099',true,0,gen_random_uuid())->>'code','NOT_FOUND','missing and foreign projects have same denial');
 SELECT is(firstten_policy_test.attempt($case$UPDATE public.projects SET user_id=firstten_policy_test.id('owner_b') WHERE id=firstten_policy_test.id('lifecycle_project')$case$),'error:42501','archive does not permit owner reassignment');
-SELECT is(firstten_policy_test.attempt($case$UPDATE public.projects SET lifecycle_revision=99 WHERE id=firstten_policy_test.id('lifecycle_project')$case$),'error:23514','owner cannot forge a lifecycle revision');
+SELECT is(firstten_policy_test.attempt($case$UPDATE public.projects SET lifecycle_revision=99 WHERE id=firstten_policy_test.id('lifecycle_project')$case$),'error:42501','owner cannot forge a lifecycle revision');
 SELECT is(public.set_owned_project_archived(firstten_policy_test.id('lifecycle_project'),NULL,1,gen_random_uuid())->>'code','INVALID_INPUT','null archive intent rejected');
 SELECT is(public.set_owned_project_archived(firstten_policy_test.id('lifecycle_project'),false,-1,gen_random_uuid())->>'code','INVALID_INPUT','negative revision rejected');
 SELECT is(public.set_owned_project_archived(firstten_policy_test.id('lifecycle_project'),false,9007199254740991,gen_random_uuid())->>'code','INVALID_INPUT','unsafe revision rejected');
@@ -92,7 +92,7 @@ SELECT is(public.set_owned_project_archived(firstten_policy_test.id('lifecycle_p
 SELECT is(public.set_owned_project_archived(firstten_policy_test.id('lifecycle_project'),true,3,gen_random_uuid())->>'code','NOT_FOUND','editor cannot archive owner private project');
 SELECT ok(public.get_member_project_summary(firstten_policy_test.id('lifecycle_project'))#>>'{data,archivedAt}' IS NOT NULL,'safe member summary reports real archived state');
 SELECT is((SELECT count(*) FROM jsonb_object_keys(public.get_member_project_summary(firstten_policy_test.id('lifecycle_project'))->'data')),6::bigint,'member summary retains exactly six fields');
-SELECT is(firstten_policy_test.attempt($case$UPDATE public.projects SET archived_at=NULL WHERE id=firstten_policy_test.id('lifecycle_project')$case$),'ok:0','editor cannot bypass lifecycle RPC using direct table update');
+SELECT is(firstten_policy_test.attempt($case$UPDATE public.projects SET archived_at=NULL WHERE id=firstten_policy_test.id('lifecycle_project')$case$),'error:42501','editor cannot bypass lifecycle RPC using direct table update');
 SELECT is(firstten_policy_test.attempt($case$DELETE FROM public.projects WHERE id=firstten_policy_test.id('lifecycle_project')$case$),'ok:0','editor cannot delete archived owner project');
 SELECT is(firstten_policy_test.visible_count('contacts','f9100000-0000-4000-8000-000000000011'),0::bigint,'archive does not grant editor access to private participant data');
 RESET ROLE; SELECT firstten_policy_test.set_actor('viewer'); SET LOCAL ROLE authenticated;

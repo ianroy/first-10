@@ -131,7 +131,8 @@ export function createOwnedProject(
     actor,
   );
 }
-/** Archive/restore changes no content or selection. Refresh project caches on success;
+/** Archive/restore changes no content or selection. Archive freezes ordinary writes at the database.
+ * Privacy reduction, owner reads/exports and restore remain available. Refresh caches on success;
  * on conflict refetch the owner row and require a new explicit user action. */
 export function setOwnedProjectArchived(
   client: Client,
