@@ -1,11 +1,6 @@
 export type Json = string | number | boolean | null | { [key: string]: Json | undefined } | Json[];
 
 export type Database = {
-  // Allows to automatically instantiate createClient with right options
-  // instead of createClient<Database, { PostgrestVersion: 'XX' }>(URL, KEY)
-  __InternalSupabase: {
-    PostgrestVersion: "14.18";
-  };
   public: {
     Tables: {
       contacts: {
@@ -21,6 +16,7 @@ export type Database = {
           user_id: string;
           why: string;
         };
+        ComputedFields: never;
         Insert: {
           created_at?: string;
           first_name: string;
@@ -48,10 +44,10 @@ export type Database = {
         Relationships: [
           {
             foreignKeyName: "contacts_project_id_fkey";
-            columns: ["project_id"];
+            columns: ["project_id", "user_id"];
             isOneToOne: false;
             referencedRelation: "projects";
-            referencedColumns: ["id"];
+            referencedColumns: ["id", "user_id"];
           },
         ];
       };
@@ -66,6 +62,7 @@ export type Database = {
           stage: number;
           user_id: string;
         };
+        ComputedFields: never;
         Insert: {
           change?: string;
           created_at?: string;
@@ -89,16 +86,16 @@ export type Database = {
         Relationships: [
           {
             foreignKeyName: "experiments_project_id_fkey";
-            columns: ["project_id"];
+            columns: ["project_id", "user_id"];
             isOneToOne: false;
             referencedRelation: "projects";
-            referencedColumns: ["id"];
+            referencedColumns: ["id", "user_id"];
           },
         ];
       };
       interviews: {
         Row: {
-          answers: Json;
+          answers: NonNullable<Json>;
           completed: boolean;
           contact_id: string | null;
           created_at: string;
@@ -107,8 +104,9 @@ export type Database = {
           tags: string[];
           user_id: string;
         };
+        ComputedFields: never;
         Insert: {
-          answers?: Json;
+          answers?: NonNullable<Json>;
           completed?: boolean;
           contact_id?: string | null;
           created_at?: string;
@@ -118,7 +116,7 @@ export type Database = {
           user_id?: string;
         };
         Update: {
-          answers?: Json;
+          answers?: NonNullable<Json>;
           completed?: boolean;
           contact_id?: string | null;
           created_at?: string;
@@ -130,17 +128,17 @@ export type Database = {
         Relationships: [
           {
             foreignKeyName: "interviews_contact_id_fkey";
-            columns: ["contact_id"];
+            columns: ["contact_id", "project_id", "user_id"];
             isOneToOne: false;
             referencedRelation: "contacts";
-            referencedColumns: ["id"];
+            referencedColumns: ["id", "project_id", "user_id"];
           },
           {
             foreignKeyName: "interviews_project_id_fkey";
-            columns: ["project_id"];
+            columns: ["project_id", "user_id"];
             isOneToOne: false;
             referencedRelation: "projects";
-            referencedColumns: ["id"];
+            referencedColumns: ["id", "user_id"];
           },
         ];
       };
@@ -149,7 +147,7 @@ export type Database = {
           accepted: boolean;
           body: string;
           created_at: string;
-          data: Json;
+          data: NonNullable<Json>;
           id: string;
           kind: string;
           project_id: string;
@@ -157,11 +155,12 @@ export type Database = {
           title: string;
           user_id: string;
         };
+        ComputedFields: never;
         Insert: {
           accepted?: boolean;
           body?: string;
           created_at?: string;
-          data?: Json;
+          data?: NonNullable<Json>;
           id?: string;
           kind?: string;
           project_id: string;
@@ -173,7 +172,7 @@ export type Database = {
           accepted?: boolean;
           body?: string;
           created_at?: string;
-          data?: Json;
+          data?: NonNullable<Json>;
           id?: string;
           kind?: string;
           project_id?: string;
@@ -184,10 +183,10 @@ export type Database = {
         Relationships: [
           {
             foreignKeyName: "learnings_project_id_fkey";
-            columns: ["project_id"];
+            columns: ["project_id", "user_id"];
             isOneToOne: false;
             referencedRelation: "projects";
-            referencedColumns: ["id"];
+            referencedColumns: ["id", "user_id"];
           },
         ];
       };
@@ -202,6 +201,7 @@ export type Database = {
           title: string;
           user_id: string;
         };
+        ComputedFields: never;
         Insert: {
           body?: string;
           created_at?: string;
@@ -225,54 +225,55 @@ export type Database = {
         Relationships: [
           {
             foreignKeyName: "outreach_project_id_fkey";
-            columns: ["project_id"];
+            columns: ["project_id", "user_id"];
             isOneToOne: false;
             referencedRelation: "projects";
-            referencedColumns: ["id"];
+            referencedColumns: ["id", "user_id"];
           },
         ];
       };
       projects: {
         Row: {
           audience: string;
-          checklist: Json;
+          checklist: NonNullable<Json>;
           created_at: string;
           description: string;
           id: string;
           link: string;
           name: string;
           problem: string;
-          questions: Json;
+          questions: NonNullable<Json>;
           stage: number;
-          survey: Json;
+          survey: NonNullable<Json>;
           user_id: string;
         };
+        ComputedFields: never;
         Insert: {
           audience?: string;
-          checklist?: Json;
+          checklist?: NonNullable<Json>;
           created_at?: string;
           description?: string;
           id?: string;
           link?: string;
           name?: string;
           problem?: string;
-          questions?: Json;
+          questions?: NonNullable<Json>;
           stage?: number;
-          survey?: Json;
+          survey?: NonNullable<Json>;
           user_id?: string;
         };
         Update: {
           audience?: string;
-          checklist?: Json;
+          checklist?: NonNullable<Json>;
           created_at?: string;
           description?: string;
           id?: string;
           link?: string;
           name?: string;
           problem?: string;
-          questions?: Json;
+          questions?: NonNullable<Json>;
           stage?: number;
-          survey?: Json;
+          survey?: NonNullable<Json>;
           user_id?: string;
         };
         Relationships: [];
@@ -307,9 +308,7 @@ export type Tables<
     ? keyof (DatabaseWithoutInternals[DefaultSchemaTableNameOrOptions["schema"]]["Tables"] &
         DatabaseWithoutInternals[DefaultSchemaTableNameOrOptions["schema"]]["Views"])
     : never) = never,
-> = DefaultSchemaTableNameOrOptions extends {
-  schema: keyof DatabaseWithoutInternals;
-}
+> = DefaultSchemaTableNameOrOptions extends { schema: keyof DatabaseWithoutInternals }
   ? (DatabaseWithoutInternals[DefaultSchemaTableNameOrOptions["schema"]]["Tables"] &
       DatabaseWithoutInternals[DefaultSchemaTableNameOrOptions["schema"]]["Views"])[TableName] extends {
       Row: infer R;
@@ -332,9 +331,7 @@ export type TablesInsert<
   }
     ? keyof DatabaseWithoutInternals[DefaultSchemaTableNameOrOptions["schema"]]["Tables"]
     : never) = never,
-> = DefaultSchemaTableNameOrOptions extends {
-  schema: keyof DatabaseWithoutInternals;
-}
+> = DefaultSchemaTableNameOrOptions extends { schema: keyof DatabaseWithoutInternals }
   ? DatabaseWithoutInternals[DefaultSchemaTableNameOrOptions["schema"]]["Tables"][TableName] extends {
       Insert: infer I;
     }
@@ -356,9 +353,7 @@ export type TablesUpdate<
   }
     ? keyof DatabaseWithoutInternals[DefaultSchemaTableNameOrOptions["schema"]]["Tables"]
     : never) = never,
-> = DefaultSchemaTableNameOrOptions extends {
-  schema: keyof DatabaseWithoutInternals;
-}
+> = DefaultSchemaTableNameOrOptions extends { schema: keyof DatabaseWithoutInternals }
   ? DatabaseWithoutInternals[DefaultSchemaTableNameOrOptions["schema"]]["Tables"][TableName] extends {
       Update: infer U;
     }
@@ -380,9 +375,7 @@ export type Enums<
   }
     ? keyof DatabaseWithoutInternals[DefaultSchemaEnumNameOrOptions["schema"]]["Enums"]
     : never) = never,
-> = DefaultSchemaEnumNameOrOptions extends {
-  schema: keyof DatabaseWithoutInternals;
-}
+> = DefaultSchemaEnumNameOrOptions extends { schema: keyof DatabaseWithoutInternals }
   ? DatabaseWithoutInternals[DefaultSchemaEnumNameOrOptions["schema"]]["Enums"][EnumName]
   : DefaultSchemaEnumNameOrOptions extends keyof DefaultSchema["Enums"]
     ? DefaultSchema["Enums"][DefaultSchemaEnumNameOrOptions]
@@ -396,9 +389,7 @@ export type CompositeTypes<
   }
     ? keyof DatabaseWithoutInternals[PublicCompositeTypeNameOrOptions["schema"]]["CompositeTypes"]
     : never) = never,
-> = PublicCompositeTypeNameOrOptions extends {
-  schema: keyof DatabaseWithoutInternals;
-}
+> = PublicCompositeTypeNameOrOptions extends { schema: keyof DatabaseWithoutInternals }
   ? DatabaseWithoutInternals[PublicCompositeTypeNameOrOptions["schema"]]["CompositeTypes"][CompositeTypeName]
   : PublicCompositeTypeNameOrOptions extends keyof DefaultSchema["CompositeTypes"]
     ? DefaultSchema["CompositeTypes"][PublicCompositeTypeNameOrOptions]

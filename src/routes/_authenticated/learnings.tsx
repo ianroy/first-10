@@ -245,7 +245,7 @@ function Checklist({
   const toggle = async (k: string) => {
     await supabase
       .from("projects")
-      .update({ checklist: { ...check, [k]: !check[k] } as Json })
+      .update({ checklist: { ...check, [k]: !check[k] } as NonNullable<Json> })
       .eq("id", p.id);
     refresh("project");
   };
