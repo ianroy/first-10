@@ -18,6 +18,7 @@ import {
 } from "@/lib/guest-spaces/contracts";
 import type { z } from "zod";
 import { EntryLink } from "./EntryLink";
+import { TeacherGuestSubmissions } from "./TeacherGuestSubmissions";
 import { AccountSubmissionWorkspace } from "./AccountSubmissionWorkspace";
 import { SubmissionList } from "./SubmissionList";
 import { SubmittedSnapshotExport } from "@/components/export/SubmittedSnapshotExport";
@@ -77,9 +78,9 @@ export function ClassroomManager({ userId }: { userId: string }) {
         <div className="rounded-2xl border bg-secondary/30 p-5 text-sm">
           <strong>Know the audience.</strong> Published instructions reach enrolled accounts and
           admitted guests. Guests see their own team and alias, not a class roster. Signed-in
-          students can deliberately submit selected reviewed versions. Guest activity saving, guest
-          submissions and guest PDFs remain the next build. Class AI is disabled. Retention is
-          requested, not automatic deletion.
+          students and account-free guests can save their work and deliberately submit selected
+          reviewed versions. Teachers see reviewed submissions, never automatic private-note access.
+          Class AI is disabled. Retention is requested, not automatic deletion.
         </div>
         {message && <p role="status">{message}</p>}
         {creating && (
@@ -459,7 +460,7 @@ function ClassDetailPanel({
               ))}
               {assignments.length === 0 && (
                 <p className="text-sm text-muted-foreground">
-                  No visible assignments. Learning work is not saved in guest entry yet.
+                  No visible assignments. Publish one to receive deliberately reviewed student work.
                 </p>
               )}
             </div>
@@ -491,6 +492,7 @@ function ClassDetailPanel({
                   view={teacherExport}
                 />
               )}
+              <TeacherGuestSubmissions userId={userId} classId={classId} />
             </>
           )}
           {detail.role !== "student" && (

@@ -1,6 +1,33 @@
 /** Every new learning activity must register a named PDF adapter and explicit source boundary here. */
 export const ACTIVITY_EXPORT_COVERAGE = [
   {
+    id: "guest-discovery-cycle",
+    adapter: "guestLearningActivities",
+    source: "src/components/guest/GuestLearningWorkspace.tsx",
+    status: "mounted",
+    scope: "guest",
+    granularity:
+      "Every manual discovery activity, hypothesis/script version, five-person map, exact script, worksheet, interview, context and reflection; fresh genuine cookie scope and saved revision before generation and delivery",
+  },
+  {
+    id: "guest-reviewed-submission",
+    adapter: "guestSubmissionActivities",
+    source: "src/components/guest/GuestReviewedHandoff.tsx",
+    status: "mounted",
+    scope: "guest",
+    granularity:
+      "Author or currently authorized team reviewed copy; withdrawn copies remain author-private; no account identity facade",
+  },
+  {
+    id: "teacher-guest-submission",
+    adapter: "guestSubmissionActivities",
+    source: "src/components/classes/TeacherGuestSubmissions.tsx",
+    status: "mounted",
+    scope: "submitted-snapshot",
+    granularity:
+      "Each deliberately submitted guest teacher version; fresh exact current authorization before generation and delivery, no raw private drafts",
+  },
+  {
     id: "reviewed-class-submission",
     adapter: "submittedSnapshotDocument",
     source: "src/components/export/SubmittedSnapshotExport.tsx",
@@ -240,8 +267,7 @@ export const ACTIVITY_EXPORT_COVERAGE = [
   },
 ] as const;
 export const PENDING_EXPORT_CAPABILITIES = [
-  "Guest activities and guest-to-account continuity",
-  "Account-free guest/team activity and submission export mounts",
+  "Broader guest Marketing Lab/outreach parity and guest-to-account continuity",
   "Teacher-authorized student/team portfolio bundles",
   "Shared collaborative activities and permission-aware export selection",
   "New AI-assisted discovery/hypothesis/bias-map/script activities (DISC-002/003); the manual cycle already exports",

@@ -23,54 +23,37 @@ current_iteration: 5
 current_stage: P1_foundation_with_parallel_P2_and_R0
 status: in_progress
 last_task_done: WS-009
-next_task: CTX-001
-next_parallel_wave: [CTX-001, CLS-002, CLS-008]
-active_claims: [CTX-001, CLS-002, CLS-008]
+next_task: CLS-008
+next_parallel_wave: [CLS-008, AI-003, CTX-001]
+active_claims: [CLS-002, CLS-008, AI-003, CTX-001]
 research_gate: not_passed
 foundation_gate: not_passed
 realtime_go: pending
 last_updated: 2026-10-18
 last_documentation_update: "2026-10-18: AI-002 complete; resumed lifecycle/admin parallel work; added FERPA-first account-free class/hackathon spaces and PDF export of every activity/team."
 resume_hint: >-
-  Owner explicitly requests continuing until every feasible authorized roadmap item is built,
-  verified, committed, pushed and deployed. Preserve the $25 total OpenRouter cap and no
-  other paid services. Goal reactivated by the app/user control and verified active on
-  2026-10-18; continue across turns without marking incomplete work complete.
-  Ordinary account usage is available; no reset credits currently reported.
-  DISC-001 is deployed: the fictional StudyLoop manual cycle was saved and reloaded at
-  revision 7, including hypothesis, five-person bias map, script, context and decision.
-  Existing interview questions and counts were preserved. AI feedback/retrieval are pending.
-  AI-004 accounting and immutable eval v4 shipped; general AI remains disabled, with no
-  routes, allowances or opening review. The original fixed $1 fictional practice is preserved.
-  CLS-001 foundations and scoped invitation UI are live through migration 15000. Both
-  GitHub checks for 02aeb1f passed; 705 app tests and 1192 rollback SQL assertions passed.
-  WS-004 complete ef65da7/e539848/8363331: real save/completion races passed; hosted16 and
-  desktop save/reopen verified fictional draft revision2, completed count unchanged at5.
-  Exact-script draft PDF and selected-project portfolio coverage verified; actual3page PDF QA.
-  WS-009 archive-freeze implementation claimed with additive20000 after18/19.
-  AI-007 is integrated b276993/b30605f/ab5933f with immutable v5. Combined 751 app tests,
-  1333 rollback SQL assertions, typecheck/lint/build and 19 offline eval checks pass. Hosted
-  migrations 16 then 17 applied normally after exact dry-run; no seeds, roles or paid calls.
-  General AI remains disabled; source inspection and model-quality gates remain outstanding.
-  CLS-007 integrated41da669; exact reviewed18000 applied only dedicated local55322 after17,
-  official types/routes regenerated. Combined786 app tests/1402SQL/typecheck/build pass.
-  Root classes nav and safe educator return are ready; hosted18 normal apply succeeded after
-  exact dry-run. Live guest join/reload/logout/private recovery and old-key rejection pass;
-  teacher roster remains one learner after recovery. No raw private work or recovery keys
-  appear in teacher view. CLS-007 complete; CLS-002 reviewed submissions claimed with21000
-  after19/20. Guest activities and PDFs remain CLS-008/EXP-003.
-  CTX-001 first retrieval/review slice in progress with19000; no provider inclusion yet.
-  Migrations16/17/18 are published/applied. Next publication/apply order19,20,21.
-  Root reviews pinned source, regenerates types and verifies combined gates.
-  Context19 and archive20 are integrated/applied local and hosted in order;1534 real SQL
-  assertions,869 app tests, typecheck/lint/build pass. Source retrieval remains disabled
-  until deployed runtime/network review. Preview/review/withdrawal PDFs and portfolio QA
-  pass (1/8/2/1/12 pages). New admin capability check changes no policy. WS009 awaits live
-  archive/read/export/restore rehearsal now passed; WS009 complete. CLS00221 finaldd10bf
-  applied dedicatedlocal only;1618 rollback SQL +actual confirmation/withdraw races pass.
-  Student/teacher mounts and9page reviewed-snapshot PDFs integrated; hosted/live pending.
-  Guest22 independently reviewed; guardedclone rehearsal and desktop7stepUI underway.
-  General model quality, guest activities/submissions, sharing and retention remain unfinished.
+  Active goal: keep building every feasible authorized item, verify, commit/push/deploy.
+  Preserve $25 total OpenRouter cap; no other paid services. No reset credits currently reported.
+  Hosted and dedicated local55322 through22; never touch unrelated54322 database.
+  Main livee558604 has owner discovery, archive freeze, reviewed account submissions,
+  public-source PDF adapters and real guest access/recovery. WS009 completed after live
+  archive/stale-write rejection/read/export/restore rehearsal. Fictional StudyLoop remains selected.
+  Integrated guest22 source throughd530569: genuine principal-private/team-shared manual
+  seven-step studios, permissions, exact replay/CAS, reviewed selected handoffs and PDF exports.
+  Root1697 rollback SQL assertions and993 app tests pass; typecheck/lint0errors/Vercelbuild pass.
+  Guest actual23/2/3/2-page PDFs verified. Exactdryrun and normal hosted22 apply complete; live
+  guest rehearsal after publication next.
+  Account21 is hosted/live with teacher/student mounts and actual3x9-page snapshot PDF QA;
+  final live author submission/withdrawal remains. No teacher raw-source access.
+  CTX production activation explicitly approved by user. First controlled own-public-site
+  retrieval failed safely without saved preview; root disabled policy immediately preserving
+  runtime receipt. Approval is resolved; read-only runtime/transport diagnostic underway.
+  General and guest AI remain off. AI003 bounded evaluation software worker has real compiled
+  server-function runtime tests and eight-case isolated SQL parity; no paid calls. Final v6
+  integration pending. Historical v2-v5 immutable; no model-quality promotion or fabricated review.
+  Broader guest MarketingLab/outreach parity, guest-to-account continuity, teacher bundles,
+  source-fenced AI attachment, sharing, retention and real research gates remain unfinished.
+  Keep independent work moving around task blockers; never mark the global goal complete early.
 
 ```
 

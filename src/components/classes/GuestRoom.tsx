@@ -1,6 +1,7 @@
-import { useEffect, useRef, useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 import { Link } from "@tanstack/react-router";
 import { BrandLogo } from "@/components/BrandLogo";
+import { GuestLearningWorkspace } from "@/components/guest/GuestLearningWorkspace";
 import {
   bootstrapGuestSession,
   enterGuestSpace,
@@ -36,6 +37,15 @@ export function GuestRoom() {
     alive = useRef(true),
     initialized = useRef(false),
     pendingLink = useRef(false);
+  const workspaceDirty = useRef(false);
+  const reportDirty = useCallback((dirty: boolean) => {
+    workspaceDirty.current = dirty;
+  }, []);
+  const confirmAccessChange = () =>
+    !workspaceDirty.current ||
+    window.confirm(
+      "Leave the guest editor with unsaved or unconfirmed work? Save or export first to keep local edits. A save already sent may still finish. Continue and leave this editor?",
+    );
   useEffect(() => {
     alive.current = true;
     if (!initialized.current) {
@@ -60,6 +70,12 @@ export function GuestRoom() {
     void load();
     const replace = () => {
       const cap = takeGuestFragment(window.location, window.history);
+      if (!confirmAccessChange()) {
+        setMessage(
+          "Your current work is still here. Save or export it, then reopen the other access link.",
+        );
+        return;
+      }
       pendingLink.current = Boolean(cap);
       generation.current++;
       setView(null);
@@ -109,6 +125,7 @@ export function GuestRoom() {
     operation: "logout" | "team_invite" | "rotate_team_return" | "rotate_principal_recovery",
   ) => {
     if (busy) return;
+    if (!confirmAccessChange()) return;
     const epoch = generation.current;
     setBusy(true);
     setMessage("");
@@ -141,7 +158,9 @@ export function GuestRoom() {
     }
   };
   return (
-    <main className="mx-auto min-h-screen max-w-6xl px-6 py-10 lg:px-10">
+    <main
+      className={`mx-auto min-h-screen px-6 py-10 lg:px-10 ${view ? "max-w-[1600px]" : "max-w-6xl"}`}
+    >
       <header className="flex items-center justify-between gap-6">
         <Link to="/" aria-label="First Ten home">
           <BrandLogo className="h-10 w-auto" />
@@ -150,7 +169,9 @@ export function GuestRoom() {
           A classroom. No student signup.
         </p>
       </header>
-      <div className="my-10 grid gap-8 lg:grid-cols-[minmax(0,1fr)_330px]">
+      <div
+        className={view ? "my-10 space-y-8" : "my-10 grid gap-8 lg:grid-cols-[minmax(0,1fr)_330px]"}
+      >
         <div className="space-y-6">
           <div>
             <p className="text-xs font-bold uppercase tracking-widest text-primary">
@@ -206,13 +227,8 @@ export function GuestRoom() {
                     <p className="text-sm text-muted-foreground">No published assignments yet.</p>
                   )}
                 </div>
-                <p className="mt-5 rounded-xl bg-secondary/40 p-4 text-sm">
-                  <strong>Entry is ready; activity saving is next.</strong> This room currently
-                  provides instructions and scoped access. It does not save learning activity drafts
-                  or submit work to a teacher. Guest activities and their PDFs arrive together in
-                  the next build.
-                </p>
               </section>
+              <GuestLearningWorkspace view={view} csrf={csrf} onDirtyChange={reportDirty} />
               <section className="rounded-2xl border bg-card p-6">
                 <h2 className="text-xl font-bold">Manage your access</h2>
                 <p className="mt-2 text-sm text-muted-foreground">
@@ -248,6 +264,7 @@ export function GuestRoom() {
                     disabled={busy}
                     className="min-h-11 underline"
                     onClick={() => {
+                      if (!confirmAccessChange()) return;
                       generation.current++;
                       setView(null);
                       setKeys({});
@@ -369,7 +386,8 @@ export function GuestRoom() {
                   />
                   I understand: a class code cannot read other teams; a shared team key does not
                   recover personal private work. I must save my personal recovery key; teachers
-                  cannot retrieve it. Activity saving is not available yet.
+                  cannot retrieve it. Private drafts and deliberately shared work have separate
+                  audiences.
                 </label>
                 <button disabled={busy || !csrf || !reviewed} className={button}>
                   {busy
@@ -389,7 +407,7 @@ export function GuestRoom() {
             </p>
           )}
         </div>
-        <aside className="space-y-5">
+        <aside className={view ? "grid items-start gap-5 xl:grid-cols-3" : "space-y-5"}>
           <div className="rounded-2xl bg-primary p-6 text-primary-foreground">
             <h2 className="text-xl font-bold">Your recovery kit</h2>
             <p className="mt-3 text-sm leading-relaxed">
@@ -412,8 +430,10 @@ export function GuestRoom() {
           <div className="rounded-2xl border p-5 text-sm">
             <h3 className="font-semibold">What teachers can see</h3>
             <p className="mt-2">
-              Team aliases and whether access is active. No private notes or recovery secrets.
-              Future submissions will require a separate reviewed snapshot.
+              Team aliases, access state and only versions you deliberately review and submit to
+              them. Private drafts, raw interviews and recovery secrets stay separate. Team planning
+              is visible to current and future active teammates only when you explicitly create
+              shared work.
             </p>
             <p className="mt-3">No external AI request is made from this space.</p>
           </div>

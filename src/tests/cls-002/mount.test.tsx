@@ -16,6 +16,11 @@ vi.mock("@/components/classes/AccountSubmissionWorkspace", () => ({
     <p>Owner-scoped account workspace for {userId}</p>
   ),
 }));
+vi.mock("@/components/classes/TeacherGuestSubmissions", () => ({
+  TeacherGuestSubmissions: ({ classId }: { classId: string }) => (
+    <p>teacher guest versions {classId}</p>
+  ),
+}));
 vi.mock("@/components/classes/SubmissionList", () => ({
   SubmissionList: ({ mode, classId }: { mode: string; classId?: string }) => (
     <p>
@@ -67,6 +72,7 @@ it("teacher mounts recipient list scoped to the verified class and never mounts 
   render(<ClassroomManager userId="verified-user" />);
   fireEvent.click(await screen.findByRole("button", { name: /Reviewed class/ }));
   await screen.findByText(`teacher submission list ${summary.id}`);
+  expect(screen.getByText(`teacher guest versions ${summary.id}`)).toBeVisible();
   expect(screen.queryByText(/Owner-scoped account workspace/)).toBeNull();
   expect(screen.getByText("author submission list all-own")).toBeVisible();
 });
@@ -84,6 +90,7 @@ it("enrolled account students mount their own-source authoring, without a teache
   fireEvent.click(await screen.findByRole("button", { name: /Reviewed class/ }));
   await screen.findByText("Owner-scoped account workspace for verified-user");
   expect(screen.queryByText(/teacher submission list/)).toBeNull();
+  expect(screen.queryByText(/teacher guest versions/)).toBeNull();
 });
 it("failed or missing selected class leaves author recovery list available without project gating", async () => {
   h.detail.mockResolvedValue({ ok: false, code: "NOT_FOUND" });

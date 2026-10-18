@@ -56,6 +56,7 @@ export type Database = {
       };
       class_guest_principals: {
         Row: {
+          access_revision: number;
           alias: string;
           class_id: string;
           created_at: string;
@@ -66,6 +67,7 @@ export type Database = {
         };
         ComputedFields: never;
         Insert: {
+          access_revision?: number;
           alias: string;
           class_id: string;
           created_at?: string;
@@ -75,6 +77,7 @@ export type Database = {
           team_id: string;
         };
         Update: {
+          access_revision?: number;
           alias?: string;
           class_id?: string;
           created_at?: string;
@@ -199,6 +202,7 @@ export type Database = {
       };
       class_teams: {
         Row: {
+          access_revision: number;
           alias: string;
           archived_at: string | null;
           class_id: string;
@@ -208,6 +212,7 @@ export type Database = {
         };
         ComputedFields: never;
         Insert: {
+          access_revision?: number;
           alias: string;
           archived_at?: string | null;
           class_id: string;
@@ -216,6 +221,7 @@ export type Database = {
           issued_by: string;
         };
         Update: {
+          access_revision?: number;
           alias?: string;
           archived_at?: string | null;
           class_id?: string;
@@ -940,6 +946,15 @@ export type Database = {
         Args: { p_preview_hash: string; p_preview_id: string; p_request_id: string };
         Returns: Json;
       };
+      confirm_guest_learning_submission: {
+        Args: {
+          p_preview_hash: string;
+          p_preview_id: string;
+          p_request_id: string;
+          p_session: string;
+        };
+        Returns: Json;
+      };
       create_class: {
         Args: { p_class_id: string; p_document: Json; p_request_id: string };
         Returns: Json;
@@ -1022,6 +1037,10 @@ export type Database = {
       };
       get_class: { Args: { p_class_id: string }; Returns: Json };
       get_founding_partner_counts: { Args: Record<PropertyKey, never>; Returns: Json };
+      get_guest_learning_submission: {
+        Args: { p_mode: string; p_session: string; p_snapshot_id: string };
+        Returns: Json;
+      };
       get_guest_session: { Args: { p_session: string }; Returns: Json };
       get_member_project_summary: { Args: { p_project_id: string }; Returns: Json };
       get_own_class_submission: { Args: { p_snapshot_id: string }; Returns: Json };
@@ -1034,6 +1053,10 @@ export type Database = {
         Args: { p_class_id: string; p_snapshot_id: string };
         Returns: Json;
       };
+      get_teacher_guest_learning_submission: {
+        Args: { p_class_id: string; p_snapshot_id: string };
+        Returns: Json;
+      };
       leave_class: {
         Args: { p_class_id: string; p_expected_revision: number; p_request_id: string };
         Returns: Json;
@@ -1042,6 +1065,11 @@ export type Database = {
       list_class_invitations: { Args: { p_class_id: string; p_cursor?: string }; Returns: Json };
       list_class_members: { Args: { p_class_id: string; p_cursor?: string }; Returns: Json };
       list_guest_entries: { Args: { p_class_id: string }; Returns: Json };
+      list_guest_learning_activities: { Args: { p_session: string }; Returns: Json };
+      list_guest_learning_submissions: {
+        Args: { p_cursor?: string; p_mode: string; p_session: string };
+        Returns: Json;
+      };
       list_guest_teams: { Args: { p_class_id: string; p_cursor?: string }; Returns: Json };
       list_interview_drafts: { Args: { p_project_id: string }; Returns: Json };
       list_my_classes: { Args: { p_cursor?: string }; Returns: Json };
@@ -1059,10 +1087,22 @@ export type Database = {
         Args: { p_assignment_id?: string; p_class_id: string; p_cursor?: string };
         Returns: Json;
       };
+      list_teacher_guest_learning_submissions: {
+        Args: { p_assignment_id?: string; p_class_id: string; p_cursor?: string };
+        Returns: Json;
+      };
       load_discovery_workspace: { Args: { p_project_id: string }; Returns: Json };
+      load_guest_learning_activity: {
+        Args: { p_activity_id: string; p_session: string };
+        Returns: Json;
+      };
       load_interview_draft: { Args: { p_draft_id: string; p_project_id: string }; Returns: Json };
       manage_guest_session: { Args: { p_operation: string; p_session: string }; Returns: Json };
       preview_class_submission: { Args: { p_document: Json }; Returns: Json };
+      preview_guest_learning_submission: {
+        Args: { p_document: Json; p_session: string };
+        Returns: Json;
+      };
       project_collaboration_enabled: { Args: Record<PropertyKey, never>; Returns: boolean };
       record_ai_generation: { Args: { p_record: Json }; Returns: string };
       record_ai_generation_v2: {
@@ -1174,6 +1214,18 @@ export type Database = {
           p_survey?: Json;
         };
         Returns: undefined;
+      };
+      save_guest_learning_activity: {
+        Args: {
+          p_activity_id: string;
+          p_audience: string;
+          p_document: Json;
+          p_expected_revision: number;
+          p_mutation_id: string;
+          p_session: string;
+          p_shared_confirmed: boolean;
+        };
+        Returns: Json;
       };
       save_interview_draft: {
         Args: {
@@ -1296,6 +1348,10 @@ export type Database = {
       };
       withdraw_class_submission: {
         Args: { p_request_id: string; p_snapshot_id: string };
+        Returns: Json;
+      };
+      withdraw_guest_learning_submission: {
+        Args: { p_request_id: string; p_session: string; p_snapshot_id: string };
         Returns: Json;
       };
       withdraw_public_context: {

@@ -7,6 +7,7 @@ import * as demos from "@/lib/export/demo-adapters";
 import * as discovery from "@/lib/export/discovery-adapters";
 import * as drafts from "@/lib/export/interview-draft-adapters";
 import * as publicContext from "@/lib/export/public-context-adapters";
+import * as guest from "@/lib/export/guest-activity-adapters";
 import * as submissions from "@/lib/export/submission-adapters";
 it("binds every mounted activity inventory entry to a real pure adapter and source mount", () => {
   const adapters = {
@@ -17,6 +18,7 @@ it("binds every mounted activity inventory entry to a real pure adapter and sour
     ...drafts,
     ...publicContext,
     ...submissions,
+    ...guest,
   };
   expect(new Set(ACTIVITY_EXPORT_COVERAGE.map((r) => r.id)).size).toBe(
     ACTIVITY_EXPORT_COVERAGE.length,
@@ -27,7 +29,7 @@ it("binds every mounted activity inventory entry to a real pure adapter and sour
       const source = readFileSync(row.source, "utf8");
       expect(source, row.id).toContain(`${row.adapter}(`);
       expect(source, row.id).toMatch(
-        /<(OwnerActivityExport|ActivityExportLauncher|ActivityPdfExport)/,
+        /<(OwnerActivityExport|ActivityExportLauncher|ActivityPdfExport|GuestActivityExport)/,
       );
     }
   }

@@ -22,6 +22,17 @@ vi.mock("@tanstack/react-router", () => ({
   ),
 }));
 vi.mock("@/components/BrandLogo", () => ({ BrandLogo: () => <span>First Ten</span> }));
+vi.mock("@/components/guest/GuestLearningWorkspace", () => ({
+  GuestLearningWorkspace: ({ onDirtyChange }: { onDirtyChange?: (dirty: boolean) => void }) => (
+    <section>
+      <p>Scoped guest learning studio</p>
+      <button onClick={() => onDirtyChange?.(true)}>Make an unsaved guest edit</button>
+    </section>
+  ),
+}));
+vi.mock("@/components/classes/TeacherGuestSubmissions", () => ({
+  TeacherGuestSubmissions: () => <p>Reviewed guest versions only</p>,
+}));
 vi.mock("@/components/AppShell", () => ({
   AppShell: ({ children }: { children: ReactNode }) => <main>{children}</main>,
   Card: ({ children }: { children: ReactNode }) => <section>{children}</section>,
@@ -108,7 +119,10 @@ beforeEach(() => {
   h.entries.mockResolvedValue({ ok: true, data: [] });
   h.teams.mockResolvedValue({ ok: true, data: { items: [], nextCursor: null } });
 });
-afterEach(cleanup);
+afterEach(() => {
+  cleanup();
+  vi.restoreAllMocks();
+});
 describe("no-account guest journey", () => {
   it("strips public capability before requests and requires reviewed explicit entry without account fields", async () => {
     window.history.replaceState(null, "", `/join?ignored=1#entry=${"f".repeat(64)}`);
@@ -136,7 +150,29 @@ describe("no-account guest journey", () => {
     });
     expect(screen.getByRole("heading", { name: "Personal recovery — keep private" })).toBeVisible();
     expect(screen.getByRole("heading", { name: "Team return — shared team only" })).toBeVisible();
-    expect(screen.getByText(/does not save learning activity drafts/)).toBeVisible();
+    expect(screen.getByText("Scoped guest learning studio")).toBeVisible();
+  });
+  it("keeps unsaved work when access changes are cancelled and only leaves after confirmation", async () => {
+    h.bootstrap.mockResolvedValue({ ok: true, data: view, csrf: "a".repeat(64) });
+    const confirm = vi.spyOn(window, "confirm").mockReturnValue(false);
+    render(<GuestRoom />);
+    fireEvent.click(await screen.findByRole("button", { name: "Make an unsaved guest edit" }));
+    fireEvent.click(screen.getByRole("button", { name: "Use another code" }));
+    fireEvent.click(screen.getByRole("button", { name: "End this browser session" }));
+    expect(h.manage).not.toHaveBeenCalled();
+    expect(screen.getByText("Scoped guest learning studio")).toBeVisible();
+    act(() => {
+      window.history.replaceState(null, "", `/join#entry=${"9".repeat(64)}`);
+      window.dispatchEvent(new HashChangeEvent("hashchange"));
+    });
+    expect(window.location.hash).toBe("");
+    expect(screen.getByText("Scoped guest learning studio")).toBeVisible();
+    expect(screen.getByText(/Your current work is still here/)).toBeVisible();
+    expect(confirm).toHaveBeenCalledTimes(3);
+    confirm.mockReturnValue(true);
+    fireEvent.click(screen.getByRole("button", { name: "Use another code" }));
+    expect(screen.queryByText("Scoped guest learning studio")).not.toBeInTheDocument();
+    expect(await screen.findByLabelText("Private code")).toHaveValue("");
   });
   it("honors a new team invitation instead of silently opening the previous cookie room", async () => {
     window.history.replaceState(null, "", `/join#team_invite=${"f".repeat(64)}`);
