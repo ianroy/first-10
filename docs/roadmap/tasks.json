@@ -2169,7 +2169,7 @@
       "id": "AI-003",
       "title": "Deterministic eval harness and representative fixtures",
       "phase": "P1",
-      "status": "in_progress",
+      "status": "complete",
       "owner": "agent",
       "size": "S",
       "kind": "implementation",
@@ -2247,17 +2247,20 @@
         {
           "date": "2026-10-18",
           "text": "Fresh independent audit confirms old AI004 dependencyblocker is stale: eval_only exactactor/project/hash budgetroute andAI007 fences exist. Authorized implement softwareonly optionalwithEvaluation on existinggenerateAI, servercappedkey preflight, real finishreason/latency, boundedjournaled8case adapter, immutablev6 whilev2-v5 preserved. NoSQL23required, no providercalls/policyactivation/keyreadlogging. Paidexecution staysblocked until exactservingkey≤0.90nonresetting+openinghold+endpoint/billing/privacyreview+syntheticfixtureRPCparity+allowances pass; humanreview remainsblank/no promotion."
+        },
+        {
+          "date": "2026-10-18",
+          "text": "Worker source handoff integrated on main; reservation released. Root combined gates and evidence review underway before completion status."
+        },
+        {
+          "date": "2026-10-18",
+          "text": "Integrated60dfd17/6d7a2ab/0a940c9 (workereacfa9f/625c55b/979e5f0). Immutablev6 deterministic harness, authenticated generateAI evaluation receipt, actual serving-key metadata cap, SDK runtime framing, exact synthetic RLS fixtures, sequential bounded journaled adapter. Root1023app tests/105files pass;26Node checks pass after exact loopback runtime test rerun with local-listen permission (initial sandboxEPERM was not product failure). Worker8 actual SQL fullprojection cases rolledback/clonedropped/absenceverified. Typecheck/lint0errors6existingwarnings/Vercelbuild pass. Space-path and clone-vs-runtime config regressions pass. Historicalv2-v5 unchanged; no paidcalls/modelquality/humanreview/policyactivation/promotion claimed. Live evaluation prerequisites remain inAI005/006 and docs/ai-evaluation-operations.md."
         }
       ],
-      "claim": {
-        "owner": "bounded_eval",
-        "branch": "codex/bounded-evaluation-20261018",
-        "base_commit": "9af14c5",
-        "worktree": "/private/tmp/first-ten-ai-evaluation",
-        "started_at": "2026-10-18T23:12:00Z",
-        "lease_expires_at": "2026-10-19T04:00:00Z"
-      },
-      "completion_evidence": [],
+      "claim": null,
+      "completion_evidence": [
+        "Integrated60dfd17/6d7a2ab/0a940c9 (workereacfa9f/625c55b/979e5f0). Immutablev6 deterministic harness, authenticated generateAI evaluation receipt, actual serving-key metadata cap, SDK runtime framing, exact synthetic RLS fixtures, sequential bounded journaled adapter. Root1023app tests/105files pass;26Node checks pass after exact loopback runtime test rerun with local-listen permission (initial sandboxEPERM was not product failure). Worker8 actual SQL fullprojection cases rolledback/clonedropped/absenceverified. Typecheck/lint0errors6existingwarnings/Vercelbuild pass. Space-path and clone-vs-runtime config regressions pass. Historicalv2-v5 unchanged; no paidcalls/modelquality/humanreview/policyactivation/promotion claimed. Live evaluation prerequisites remain inAI005/006 and docs/ai-evaluation-operations.md."
+      ],
       "subtasks": [
         {
           "id": "AI-003.s1",
@@ -2273,7 +2276,7 @@
         },
         {
           "id": "AI-003.s3",
-          "status": "in_progress",
+          "status": "complete",
           "instruction": "Separate offline mocked checks from an explicitly bounded paid eval mode; print per-kind quality/cost/latency and preserve baselines.",
           "notes": []
         }
@@ -4182,7 +4185,7 @@
       "id": "WS-005",
       "title": "Autosave and resume the interview workflow",
       "phase": "P3",
-      "status": "not_started",
+      "status": "in_progress",
       "owner": "agent",
       "size": "S",
       "kind": "implementation",
@@ -4197,7 +4200,9 @@
         "src/lib/useInterviewDraft.ts",
         "src/tests/ws-005/**",
         "src/routes/_authenticated/interview.test.tsx",
-        "src/lib/useInterviewDraft.test.ts"
+        "src/lib/useInterviewDraft.test.ts",
+        "src/components/interview-drafts/InterviewDraftSession.tsx",
+        "docs/architecture/interview-autosave.md"
       ],
       "exclusive_locks": [
         "interview-flow"
@@ -4237,9 +4242,20 @@
         {
           "date": "2026-10-17",
           "text": "Scheduled by Iteration 5; no implementation or validation claimed."
+        },
+        {
+          "date": "2026-10-18",
+          "text": "Claimed remaining autosave/resume behavior over completedWS004 atomic draft APIs. Actual implementation is in components/interview-drafts; added exact file to scope. No migration/API rewrite, AI activation or private text browser storage. Root owns generated files/docs/status. Preserve manualsave/withdrawal/completion, exact uncertain operation replay and revision conflict recovery."
         }
       ],
-      "claim": null,
+      "claim": {
+        "owner": "interview_autosave",
+        "branch": "codex/interview-autosave-20261018",
+        "base_commit": "d1362df",
+        "worktree": "/private/tmp/first-ten-interview-autosave",
+        "started_at": "2026-10-18T23:20:00Z",
+        "lease_expires_at": "2026-10-19T03:00:00Z"
+      },
       "completion_evidence": [],
       "subtasks": [
         {
@@ -4437,7 +4453,7 @@
       "id": "AN-001",
       "title": "Define product events and customer funnel semantics",
       "phase": "P4",
-      "status": "not_started",
+      "status": "complete",
       "owner": "agent",
       "size": "S",
       "kind": "documentation",
@@ -4486,26 +4502,40 @@
         {
           "date": "2026-10-17",
           "text": "Scheduled by Iteration 5; no implementation or validation claimed."
+        },
+        {
+          "date": "2026-10-18",
+          "text": "Claimed independent documentation-only analytics semantics while root verifies live guest work and separate workers finish retrieval parser/evaluation software. No event capture, telemetry activation or schema change is authorized by this contract task."
+        },
+        {
+          "date": "2026-10-18",
+          "text": "Worker source handoff integrated on main; reservation released. Root combined gates and evidence review underway before completion status."
+        },
+        {
+          "date": "2026-10-18",
+          "text": "Integratedd1362df (worker2518b31) docs/analytics/event-contract.md. Sourceaudited9events/7cohort measures with exact sources, identity/time/dedup/windows/denominators, guest recovery vspeople, opt-in nofingerprinting, strict privacy allowlist, proposedretention/suppression and acceptance/deletion gates.14source links/format/whitespace verified. No telemetry or new dashboard conversion activated; current operational counts remain counts."
         }
       ],
       "claim": null,
-      "completion_evidence": [],
+      "completion_evidence": [
+        "Integratedd1362df (worker2518b31) docs/analytics/event-contract.md. Sourceaudited9events/7cohort measures with exact sources, identity/time/dedup/windows/denominators, guest recovery vspeople, opt-in nofingerprinting, strict privacy allowlist, proposedretention/suppression and acceptance/deletion gates.14source links/format/whitespace verified. No telemetry or new dashboard conversion activated; current operational counts remain counts."
+      ],
       "subtasks": [
         {
           "id": "AN-001.s1",
-          "status": "not_started",
+          "status": "complete",
           "instruction": "Define visits, signups, project creation, first completed interview, accepted learning/next action and return with windows/denominators.",
           "notes": []
         },
         {
           "id": "AN-001.s2",
-          "status": "not_started",
+          "status": "complete",
           "instruction": "Specify server-authoritative events versus optional anonymous attribution, deduplication and retention.",
           "notes": []
         },
         {
           "id": "AN-001.s3",
-          "status": "not_started",
+          "status": "complete",
           "instruction": "Prohibit interview text/contact details in events and document counts as observed behavior, not proof of learning.",
           "notes": []
         }
@@ -4992,7 +5022,7 @@
       "id": "CLS-002",
       "title": "Create student-reviewed submission snapshots",
       "phase": "P4",
-      "status": "in_progress",
+      "status": "complete",
       "owner": "agent",
       "size": "S",
       "kind": "implementation",
@@ -5071,39 +5101,42 @@
         {
           "date": "2026-10-18",
           "text": "Root combined965 app tests/98files,1618 rollback SQL assertions, typecheck/lint/Vercelbuild allpass, exportcoverage mounts bound. Normal hosted dry-run lists only21 and no seeds/roles;21 normal apply completed. Finalproductionstudent/teacher UI check remains beforecompletion. Guest contracts remainunmounted and22unapplied."
+        },
+        {
+          "date": "2026-10-18",
+          "text": "Implementation worker reservation released after source and hosted verification. Root retains final live UI rehearsal; no live writer remains in this scope. Parent inprogress until complete evidence."
+        },
+        {
+          "date": "2026-10-18",
+          "text": "Integratedaccount21 andgenuineguest22 reviewed snapshots. Root1023combinedapp tests and1697 real rollbackSQL assertions pass; account/guest CAS, concurrent submit/withdraw, role/class/deadline/sourcepermission invalidation and DTO bounds verified. Hosted21/22 appliednormally. Live guest authoredfictional activityrevision7, exactselected problem/hypothesis/script preview, deliberate teachersubmit, teacher2pagePDFappstatus; rawprivate interviewdraft absent. Withdrawal blocks next teacherdownload and removescopyonrefresh. Account mounts/UI/3x9pagePDF QA separatelyverified. Accessexpiry/withdrawal implemented; physicalautomaticdeletion is stillPRV003, disclosed. No broad rawsource teacherreads."
         }
       ],
-      "claim": {
-        "owner": "submission_finish",
-        "branch": "codex/reviewed-class-submissions-20261018",
-        "base_commit": "5caaabf",
-        "worktree": "/private/tmp/first-ten-project-lifecycle",
-        "started_at": "2026-10-18T20:10:00Z",
-        "lease_expires_at": "2026-10-19T00:30:00Z"
-      },
-      "completion_evidence": [],
+      "claim": null,
+      "completion_evidence": [
+        "Integratedaccount21 andgenuineguest22 reviewed snapshots. Root1023combinedapp tests and1697 real rollbackSQL assertions pass; account/guest CAS, concurrent submit/withdraw, role/class/deadline/sourcepermission invalidation and DTO bounds verified. Hosted21/22 appliednormally. Live guest authoredfictional activityrevision7, exactselected problem/hypothesis/script preview, deliberate teachersubmit, teacher2pagePDFappstatus; rawprivate interviewdraft absent. Withdrawal blocks next teacherdownload and removescopyonrefresh. Account mounts/UI/3x9pagePDF QA separatelyverified. Accessexpiry/withdrawal implemented; physicalautomaticdeletion is stillPRV003, disclosed. No broad rawsource teacherreads."
+      ],
       "subtasks": [
         {
           "id": "CLS-002.s1",
-          "status": "in_progress",
+          "status": "complete",
           "instruction": "Define a versioned submission snapshot containing selected/redacted evidence and reflection.",
           "notes": []
         },
         {
           "id": "CLS-002.s2",
-          "status": "in_progress",
+          "status": "complete",
           "instruction": "Show exactly what the teacher sees before affirmative submission; record scope/version/choice.",
           "notes": []
         },
         {
           "id": "CLS-002.s3",
-          "status": "in_progress",
+          "status": "complete",
           "instruction": "Implement withdrawal, class access expiry and retention rules without broad SELECT on source interviews.",
           "notes": []
         },
         {
           "id": "CLS-002.s4",
-          "status": "in_progress",
+          "status": "complete",
           "instruction": "Add a discriminated account_project versus guest_team submission source or a separate guest submission relation. Each immutable snapshot has its own class/assignment and verified actor/team; guest submission requires no personal account/project.",
           "notes": []
         }
@@ -11610,14 +11643,18 @@
         {
           "date": "2026-10-18",
           "text": "Root final combined993 app tests/102files pass (11 intentional skips),1697 SQL assertions pass, typecheck/lint0errors6existingwarnings/Vercelbuild pass. Exact migration dry-run lists only22000 with no seeds/roles; final pinned22 applied hosted normally. Official public types regenerated from dedicated local22. Guest join and teacher mounts/coverage/source-scope export guards ready for production rehearsal after push."
+        },
+        {
+          "date": "2026-10-18",
+          "text": "Live deployedc00327c: fictionalprincipalprivate cycle savedrevision7 with firsthypothesis/fivepeople/samplingrisks/preservedscript/privateincompleteinterview/decision. Reloadandexplicitreopenretainexactproblem+revision; exactscript+blankworksheet reports4pagePDF. Deliberateproblem/hypothesis/scriptteacherpreview/confirm works; teacher2pagePDF succeeds, rawprivatedraftabsent; withdrawalblocksfreshPDF and refreshremovescopy. Updatedfictionalclassinstructions reflect shippedmanualstudio and remainingAI/parity/deletionlimits. Proof/private/tmp/first-ten-pdf-qa/live-guest-discovery.png. BrowserPDF appstatus verified; filesystemdelivery not claimed."
         }
       ],
       "claim": {
-        "owner": "guest_design",
-        "branch": "codex/guest-activities-20261018",
-        "base_commit": "4c8ccb0",
-        "worktree": "/private/tmp/first-ten-guest-activities",
-        "started_at": "2026-10-18T20:45:00Z",
+        "owner": "root",
+        "branch": "main",
+        "base_commit": "c00327c",
+        "worktree": "/Users/ianroy/Library/CloudStorage/Dropbox/Apps by Ian/Babson AI Academy/First 10",
+        "started_at": "2026-10-18T23:20:00Z",
         "lease_expires_at": "2026-10-19T02:00:00Z"
       },
       "completion_evidence": [],
@@ -12568,6 +12605,10 @@
         {
           "date": "2026-10-18",
           "text": "Independent Node22 direct pinned HTTPS reproduction: own homepage200text/html46293B, vetted publicDNS; three literalNUL bytes in ignored TanStack hydration script trigger whole-body decodeText UNSAFE_SOURCE before script removal. Worker authorized isolated minimal HTML parsing fix: preserve fatal UTF8/response caps, ignore inert script/style then reject forbidden controls in visible extracted text. Plaintext/GitHub remain strict. Production policy staysdisabled pending review+fresh controlled probe; no SSRF weakening or AI calls."
+        },
+        {
+          "date": "2026-10-18",
+          "text": "ReviewedminimalHTMLfixf4f9562 integrated46926c5; staticparserconfirmed ignoredranges admit hydrationNUL only within omittedcontent, visiblecontrols/plaintext/GitHub/invalidUTF8 stillreject. Worker89focused/1002app tests, root1023combinedtests/type/lint/build pass. Deployedreceipt andcontrolledsite/GitHub nowpending afterpush; productionpolicy staysdisabled."
         }
       ],
       "claim": {

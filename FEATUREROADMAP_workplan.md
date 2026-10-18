@@ -22,10 +22,10 @@ Statuses are `not_started`, `in_progress`, `blocked`, `complete`, `deferred`, `d
 current_iteration: 5
 current_stage: P1_foundation_with_parallel_P2_and_R0
 status: in_progress
-last_task_done: WS-009
+last_task_done: AN-001
 next_task: CLS-008
 next_parallel_wave: [CLS-008, AI-003, CTX-001]
-active_claims: [CLS-002, CLS-008, AI-003, CTX-001]
+active_claims: [CLS-008, CTX-001, WS-005]
 research_gate: not_passed
 foundation_gate: not_passed
 realtime_go: pending
@@ -43,14 +43,18 @@ resume_hint: >-
   Root1697 rollback SQL assertions and993 app tests pass; typecheck/lint0errors/Vercelbuild pass.
   Guest actual23/2/3/2-page PDFs verified. Exactdryrun and normal hosted22 apply complete; live
   guest rehearsal after publication next.
-  Account21 is hosted/live with teacher/student mounts and actual3x9-page snapshot PDF QA;
-  final live author submission/withdrawal remains. No teacher raw-source access.
+  CLS002 complete: account21/guest22 selected submissions, real authorization/race tests and
+  teacher/student mounts. Live guest preview/submit/teacher2pagePDF/withdrawal denial pass;
+  raw private interview draft absent. Saved guestrevision7 reload and exact4page script PDF pass.
   CTX production activation explicitly approved by user. First controlled own-public-site
   retrieval failed safely without saved preview; root disabled policy immediately preserving
   runtime receipt. Approval is resolved; read-only runtime/transport diagnostic underway.
   General and guest AI remain off. AI003 bounded evaluation software worker has real compiled
   server-function runtime tests and eight-case isolated SQL parity; no paid calls. Final v6
-  integration pending. Historical v2-v5 immutable; no model-quality promotion or fabricated review.
+  integration passes1023app tests,26Node checks, typecheck/lint/build. AI003 softwarecomplete;
+  final8caseSQLprojectionmatches/rollback/drop verified. Historicalv2-v5 immutable; no paidcalls,
+  model-quality promotion or fabricatedreview. AN001 source-auditedeventcontract complete; no
+  telemetryactivation. WS005 isolated autosave worker underway over completedWS004 APIs.
   Broader guest MarketingLab/outreach parity, guest-to-account continuity, teacher bundles,
   source-fenced AI attachment, sharing, retention and real research gates remain unfinished.
   Keep independent work moving around task blockers; never mark the global goal complete early.
