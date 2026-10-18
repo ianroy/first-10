@@ -8450,7 +8450,7 @@
       "id": "MKT-001",
       "title": "Define the $0 marketing lab and its teaching contract",
       "phase": "P2",
-      "status": "in_progress",
+      "status": "complete",
       "owner": "agent",
       "size": "S",
       "kind": "documentation",
@@ -8496,33 +8496,30 @@
         {
           "date": "2026-10-18",
           "text": "Claimed for the authorized autonomous demo run."
+        },
+        {
+          "date": "2026-10-18",
+          "text": "Marketing Lab typed storage/AI/measurement contracts and sourced pedagogy map integrated. Strict TypeScript examples, six local links, formatting and diff checks passed; no product, research or paid-call evidence inferred."
         }
       ],
-      "claim": {
-        "owner": "marketing_worker",
-        "branch": "codex/mkt-001-autonomous",
-        "base_commit": "07f704ddfb84a8d5c65633703079e97f783d5981",
-        "worktree": "/Users/ianroy/.codex/worktrees/first-ten-value/First 10",
-        "started_at": "2026-10-18T03:42:03.735694+00:00",
-        "lease_expires_at": "2026-10-18T05:42:03.735694+00:00"
-      },
-      "completion_evidence": [],
+      "claim": null,
+      "completion_evidence": ["ed2635e8bdc0c88676b7249846acdc3a239796a6"],
       "subtasks": [
         {
           "id": "MKT-001.s1",
-          "status": "in_progress",
+          "status": "complete",
           "instruction": "Map the supplied BUS131 slides and board to audience, evidence/unknowns, specific physical/digital channels, reviewed content, resource limits and a one-week test.",
           "notes": []
         },
         {
           "id": "MKT-001.s2",
-          "status": "not_started",
+          "status": "complete",
           "instruction": "Define typed versioned plan/channel/asset/test/measurement contracts, private data boundaries and separate AI kinds; specify stage-2 entry without silently changing current stage unlocks.",
           "notes": []
         },
         {
           "id": "MKT-001.s3",
-          "status": "not_started",
+          "status": "complete",
           "instruction": "Name the pedagogy with source links and visible product practices: experiential learning, student-generated thinking before AI, scaffolding, formative feedback, reflection and responsible AI.",
           "notes": []
         }

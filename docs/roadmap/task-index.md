@@ -56,7 +56,7 @@ Build truthful public materials from current capabilities while research continu
 | EDU-004 Rehearse lesson materials with an instructor before the class pilot | not_started | 0/3 | human | S | EDU-001 | — | research/teaching-rehearsal.md, docs/teaching/**, public/teaching/**; locks: teaching-materials |
 | WEB-005 Verify public demo, teaching and brand journeys | not_started | 0/3 | agent | S | WEB-004, EDU-002, BR-003 | — | src/routes/public-pages.test.tsx, docs/marketing/release-check.md, src/tests/web-005/**; locks: — |
 | P-001b Factual five-minute sales/pitch deck after release evidence | not_started | 0/3 | agent | M | WEB-001, BR-001, MKT-001, WEB-003 | — | docs/demo/pitch/**, public/pitch/**; locks: — |
-| MKT-001 Define the $0 marketing lab and its teaching contract | in_progress | 0/3 | agent | S | SEC-001, VP-007 | — | docs/marketing/marketing-lab-contract.md, docs/teaching/pedagogy-map.md; locks: — |
+| MKT-001 Define the $0 marketing lab and its teaching contract | complete | 3/3 | agent | S | SEC-001, VP-007 | — | docs/marketing/marketing-lab-contract.md, docs/teaching/pedagogy-map.md; locks: — |
 | MKT-007 Extend the public demo with the marketing board | not_started | 0/3 | agent | S | MKT-001, WEB-002, BR-002 | — | src/components/demo/**, src/lib/demo/**, src/routes/demo.tsx (2 more; inspect --task); locks: route-integration |
 | BR-004 Create the First Ten logo and replace the favicon | not_started | 0/3 | agent | S | BR-001 | — | public/brand/**, public/favicon.svg, public/favicon.ico (4 more; inspect --task); locks: route-integration, brand-assets |
 
