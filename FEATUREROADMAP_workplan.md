@@ -41,9 +41,9 @@ Status boxes: `[ ]` todo · `[~]` in progress · `[x]` done · `[!]` blocked (sa
 current_iteration: 4
 current_stage: R0        # Value discovery only; unfinished R1 work is deferred, not passed
 status: not_started     # not_started | in_progress | paused | blocked
-last_task_done: VP-002
+last_task_done: DOC-001
 next_task: VP-007
-resume_hint: "Start Iteration 4 at VP-007, then VP-008. Validate the founder's conversation → evidence → decision → next action loop before selecting features. Human-led founder/instructor interviews and a small pilot are required; never substitute synthetic participants or contact people automatically. Only Iteration 4's 11 tasks are active. Any R1 resumption follows G-004 and a regenerated plan; F-007 remains partial at ce0f2fe: re-run `npx bun run typecheck`, `npx bun run lint`, `npx bun run test`, and verify GitHub CI before marking done. No verification was run during this planning session. Local installs use `npx bun@1.3.5 install`."
+resume_hint: "DOC-001 updated README and ProductSpec to the candidate decision-focused value proposition and verified implementation. Continue Iteration 4 at VP-007, then VP-008; neither research task is complete. Human interviews and a small pilot remain necessary; no synthetic evidence or automatic recruiting. Local typecheck, 17 tests and Vercel build passed; lint passed with 6 existing warnings after excluding generated .vercel output. F-007 remains partial pending GitHub CI confirmation; R0/R1 gates remain open. The 11 research tasks remain the active queue. Local installs use `npx bun@1.3.5 install`."
 last_updated: 2026-10-17
 open_questions:
   - Does the live-app founder with few or no recurring users need access to relevant people, help asking, or help making a decision most? (VP-008, R0-004a/b)
@@ -338,6 +338,7 @@ Stage: R0 → R1. R0 tasks that need humans (R0-004/005) can run in parallel wit
   - Notes: Existing tests: `src/test/app-routing.test.tsx` only.
   - Notes: 2026-10-17 IN PROGRESS (paused by owner). Shipped: `src/lib/stages.ts` (pure `unlockChecklist`, `itemDone`, `isReady`; learnings.tsx refactored to use them, behavior unchanged); fake Supabase client and `renderPage` helper (minimal router, avoids root head/stylesheets that jsdom can't load); render tests for all 8 pages plus the no-project redirect; unit tests for stage logic and `stageProgress`; CI workflow with bun 1.3.5 matching Vercel's lockfile. Repo-wide prettier run on `src/` (formatting-only churn). Remaining: re-run typecheck/lint/tests after the last two type fixes; confirm the GitHub Actions run is green. AI schema parity test moved to F-003 (needs prompts in their own module). Lint warnings (6, react-refresh) left as warnings.
   - Notes: 2026-10-17 ITERATION 4: CARRY partial to next R1 plan. ce0f2fe exists; final typecheck/lint/tests and GitHub CI confirmation remain unverified. Do not tick this task based on the historical 17-test report.
+  - Notes: 2026-10-17 DOC-001 verification: `npm run typecheck`, `npm run test` (17/17) and `NITRO_PRESET=vercel npm run build` passed. Plain `npm run lint` was interrupted while scanning generated build output; `npm run lint -- --ignore-pattern '.vercel/**'` passed with 6 existing react-refresh warnings. This required no source change. GitHub CI and live deployment were not verified in this documentation pass; F-007 stays partial.
 
 - [ ] **F-008 Non-destructive outreach regeneration** (S · deps: F-003 · owner: agent)
   - Goal: Regeneration archives prior rows (add `archived_at`) instead of deleting; allow restoring.
@@ -654,6 +655,15 @@ Generated 2026-10-17 by the requested regeneration prompt. **Scope: R0 research 
 
 **Iteration 4 exit**: complete the research decision and gate review, with real notes and explicit limits. Missing minimum founder/instructor interview coverage keeps R0 open; pause at that dependency and document what remains. Documented pilot refusals, withdrawal or inability to test may complete the research activity with an unresolved/hold/stop verdict, never a successful app-use result. A desk analysis alone cannot pass R0. No product feature is implemented in this iteration, so feature tests, deployment metrics and rollbacks remain prerequisites of the next selected implementation task. Research methods and data-quality checks are the acceptance criteria here.
 
+### Completed owner-requested documentation follow-up
+
+This completed task is separate from Iteration 4's 11 active research tasks.
+
+- [x] **DOC-001 Deepen README and ProductSpec** (S · deps: none · owner: agent)
+  - Goal: Explain the candidate value, implemented behavior and contributor workflow accurately.
+  - Done when: both documents distinguish evidence-informed decisions from validated demand, shipped features from research concepts, and manual data from verified behavior; implementation/configuration links checked; project checks recorded; documentation committed and pushed as requested by the owner.
+  - Notes: 2026-10-17 updated both documents from the current source and Iteration 4. Corrected stage targets/unlocks, session-only notes and consent, AI context/validation limits, one-project/RLS scope, regeneration behavior, Bun/Node setup and recorded deployment status. Preserved the accepted-learnings principle. No app or research-result changes; VP-007/VP-008 remain pending. Documentation links/structure and diff checked; local verification is recorded under F-007. Owner explicitly requested a normal commit and push to GitHub.
+
 ---
 
 ## 8. Decision log (append only)
@@ -686,3 +696,4 @@ Generated 2026-10-17 by the requested regeneration prompt. **Scope: R0 research 
 | 2026-10-17 | VP-001 and VP-002 done: value-prop canvas with sourced alternatives, new hypothesis VP6 (proof it was real), founder and instructor interview guides with tally. Next: owner interviews (R0-004, VP-003); agent R1 carry-over from F-007. |
 | 2026-10-17 | Paused by owner mid F-007 (tests, stage-logic extraction and CI committed; final local re-check of typecheck/lint/tests pending). |
 | 2026-10-17 | Regeneration run: Iteration 4, 11 R0 tasks, next VP-007. Revised promise toward evidence-informed decisions; added VP7; explicit numeric re-rank with all evidence scores at 1. Split founder interviews, message testing and positioning; deferred R1/features/deck, replaced G-003 with G-004. Empty interview log and missing synthesis remain explicit; F-007 is still partial and no code/tests/deployments were run. Only this roadmap changed. |
+| 2026-10-17 | DOC-001: deepened README/ProductSpec with candidate value and verified product/technical boundaries; updated setup and operational guidance. Local typecheck, 17 tests, Vercel build and lint excluding generated output passed (6 existing warnings). Next stays VP-007; F-007 awaits GitHub CI confirmation and no research gate was passed. Owner requested commit/push of this documentation and the preceding roadmap commit. |
