@@ -22,10 +22,10 @@ Statuses are `not_started`, `in_progress`, `blocked`, `complete`, `deferred`, `d
 current_iteration: 5
 current_stage: P1_foundation_with_parallel_P2_and_R0
 status: in_progress
-last_task_done: AI-009
-next_task: PITCH-001
+last_task_done: PITCH-001
+next_task: MKT-006
 next_parallel_wave: []
-active_claims: [PITCH-001, MKT-006]
+active_claims: [MKT-006]
 research_gate: not_passed
 foundation_gate: not_passed
 realtime_go: pending
@@ -33,12 +33,13 @@ last_updated: 2026-10-18
 last_documentation_update: "2026-10-18: reconciled owner-private ideas, educator planning/authored cohort, aggregate presenter view and three-dashboard sign-in; retained DOC-002 team-credit history."
 resume_hint: >-
   Production 840d0eb includes tested Student/Educator/Admin presenter launches, saved fictional
-  StudyLoop work, four authored educator team examples and private lesson plan revision1.
+  StudyLoop work, four authored educator team examples and private lesson plan revision2.
   AI-009 is complete: fixed-case live Gemini Flash Lite draft succeeded; UI cost $0.000106,
   4c reserved across two attempts with first outcome cost unknown; $0.96 allowance remains.
   Typecheck and 221 application tests pass; lint zero errors/six existing warnings. CI and
-  isolated real SQL policy jobs passed at f8bc878. PITCH-001 rebuild is active in an isolated
-  worker to follow the owner's new slide order, with four actual desktop screenshot assets.
+  isolated real SQL policy jobs passed at f8bc878. PITCH-001 is complete:13slide native deck and online/offlinecompanion follow the owner's
+  requested flow with four actualscreenshots. MKT-006 manualmeasurements are integrated
+  with248tests/buildpassing;deployed save/reload verification is next.
   Human studies, general class permissions, broader admin funnel and sharing remain open.
   Final-hour checkpoint approximately12:13UTC; keep public/offline fallbacks and saved work.
 

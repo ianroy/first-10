@@ -148,7 +148,7 @@ Test cross-role behavior, rehearse releases, observe use and revise the plan.
 | REL-005 Review integrated outcomes and choose the next bounded wave | not_started | 0/3 | either | S | L-001, L-002, EDU-003, G-004 | — | research/release-learning-review.md; locks: — |
 | MKT-008 Verify the integrated marketing and AI journeys | not_started | 0/3 | agent | S | MKT-003, MKT-004, MKT-005, MKT-006, MKT-007 | — | src/tests/marketing-release/**, docs/qa/marketing-gate.md; locks: — |
 | DEMO-003 Keep sign-in explicit and launch the chosen student, educator or admin view | complete | 3/3 | agent | S | DEMO-002, WS-008, EDU-005, BR-003 | — | src/routes/auth.tsx, src/routes/_authenticated/route.tsx, src/components/RequireProject.tsx (4 more; inspect --task); locks: auth-entry, route-integration, app-shell |
-| PITCH-001 Rebuild the Babson pitch in the owner-requested slide flow | in_progress | 0/3 | agent | M | DEMO-003, WEB-004, EDU-002 | — | public/pitch/**, docs/demo/pitch/**; locks: pitch-deck |
+| PITCH-001 Rebuild the Babson pitch in the owner-requested slide flow | complete | 3/3 | agent | M | DEMO-003, WEB-004, EDU-002 | — | public/pitch/**, docs/demo/pitch/**; locks: pitch-deck |
 
 ## R0 — Continuous user and educator research
 
