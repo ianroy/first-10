@@ -82,7 +82,12 @@ describe("generation receipts survive save and subsequent editing", () => {
       }),
     );
     expect(h.gen).toHaveBeenCalledWith({
-      data: { kind: "questions", projectId: "p1", withOrigin: true },
+      data: {
+        kind: "questions",
+        projectId: "p1",
+        operationId: expect.any(String),
+        withOrigin: true,
+      },
     });
     cleanup();
     client({

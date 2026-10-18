@@ -37,6 +37,7 @@ const context = (p = project()) => ({
     }),
   } as unknown as SupabaseClient<Database>,
   userId: owner,
+  operationId: "fa140000-0000-4000-8000-000000000111",
   project: p,
 });
 beforeEach(() => {
@@ -102,14 +103,26 @@ describe("fixed fictional economical AI practice", () => {
     await expect(generateFictionalMarketingPractice(context())).rejects.toThrow("unavailable");
     expect(h.rpc).toHaveBeenCalledTimes(1);
   });
+  it.each(["BUDGET_DISABLED", "ALREADY_RESERVED"])(
+    "keeps %s distinct and never starts another provider call",
+    async (code) => {
+      h.rpc.mockResolvedValue({ data: { ok: false, code }, error: null });
+      await expect(generateFictionalMarketingPractice(context())).rejects.toMatchObject({
+        code,
+        attempts: 0,
+      });
+      expect(h.request).not.toHaveBeenCalled();
+    },
+  );
   it("reserves before calling the one gateway and never sends free-text project fields", async () => {
     const result = await generateFictionalMarketingPractice(context());
     expect(h.rpc).toHaveBeenCalledWith("reserve_demo_ai", {
       p_project_id: project().id,
-      p_request_id: expect.any(String),
+      p_request_id: "fa140000-0000-4000-8000-000000000111",
     });
     expect(h.rpc.mock.invocationCallOrder[0]).toBeLessThan(h.request.mock.invocationCallOrder[0]!);
     const options = h.request.mock.calls[0]![0];
+    expect(options.key === "fixture-key").toBe(true);
     expect(options).toMatchObject({ kind: "marketing_demo", policy: "synthetic-marketing-v1" });
     expect(JSON.stringify(options)).not.toContain("DO_NOT_TRANSMIT");
     expect(result.metadata).toMatchObject({

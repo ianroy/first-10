@@ -7,6 +7,7 @@ import { useServerFn } from "@tanstack/react-start";
 import { Copy, Lock } from "lucide-react";
 import { supabase } from "@/integrations/supabase/client";
 import { generateAI } from "@/lib/ai.functions";
+import { useAIIntent } from "@/hooks/useAIIntent";
 import { recordedAIOutput, outreachRows } from "@/lib/ai/saved-output";
 import { AIOrigin } from "@/components/AIOrigin";
 import { AppShell, Card, DraftBadge, Empty } from "@/components/AppShell";
@@ -79,12 +80,16 @@ function OutreachPage({ p }: { p: Project }) {
 
 function useGenerate(p: Project, kind: "stage2" | "stage3") {
   const gen = useServerFn(generateAI);
+  const intent = useAIIntent(p.id, kind);
   const refresh = useRefresh();
   const [busy, setBusy] = useState(false);
   const run = async () => {
+    const operationId = intent.begin();
+    if (!operationId) return;
     setBusy(true);
     try {
-      const output = await gen({ data: { kind, projectId: p.id, withOrigin: true } });
+      const output = await gen({ data: { kind, projectId: p.id, operationId, withOrigin: true } });
+      if (!intent.isCurrent(operationId)) return;
       const recorded =
         kind === "stage2" ? recordedAIOutput("stage2", output) : recordedAIOutput("stage3", output);
       const r = recorded.data;
@@ -99,13 +104,24 @@ function useGenerate(p: Project, kind: "stage2" | "stage3") {
         throw new Error(
           "The new outreach plan could not be saved. Your previous saved plan is unchanged.",
         );
+      if (!intent.isCurrent(operationId)) return;
       refresh("outreach", "project");
+      intent.succeeded(operationId);
     } catch (e) {
-      toast.error((e as Error).message);
+      intent.failed(operationId);
+      if (intent.isCurrent(operationId)) toast.error((e as Error).message);
+    } finally {
+      if (intent.isCurrent(operationId)) setBusy(false);
     }
-    setBusy(false);
   };
-  return { busy, run };
+  return {
+    busy,
+    run,
+    uncertain: intent.uncertain,
+    runNew: () => {
+      if (intent.newRequest()) void run();
+    },
+  };
 }
 
 function DraftItem({ o, copy }: { o: Outreach; copy?: boolean | undefined }) {
@@ -183,7 +199,7 @@ function Stage2({ p }: { p: Project }) {
   const { data: out = [] } = useOutreach(p.id);
   const { data: contacts = [] } = useContacts(p.id);
   const refresh = useRefresh();
-  const { busy, run } = useGenerate(p, "stage2");
+  const { busy, run, uncertain, runNew } = useGenerate(p, "stage2");
   const items = out.filter((o) => o.stage === 2).reverse();
   const survey = (p.survey as string[]) ?? [];
   const [sv, setSv] = useState<string | null>(null);
@@ -191,6 +207,15 @@ function Stage2({ p }: { p: Project }) {
 
   return (
     <div className="grid items-start gap-6 lg:grid-cols-2">
+      {uncertain && (
+        <div role="status" className="rounded-xl border p-4 text-sm lg:col-span-2">
+          The previous request may have completed; repeating it cannot generate twice. A new request
+          uses additional allowance.
+          <Button variant="outline" disabled={busy} className="ml-3" onClick={runNew}>
+            Request a new AI plan
+          </Button>
+        </div>
+      )}
       {items.length === 0 ? (
         <Card className="min-w-0 text-center lg:col-span-2">
           <h2 className="text-xl font-bold">Build your plan for the next 50</h2>
@@ -341,7 +366,7 @@ function Stage2({ p }: { p: Project }) {
 function Stage3({ p }: { p: Project }) {
   const { data: out = [] } = useOutreach(p.id);
   const refresh = useRefresh();
-  const { busy, run } = useGenerate(p, "stage3");
+  const { busy, run, uncertain, runNew } = useGenerate(p, "stage3");
   const items = out.filter((o) => o.stage === 3).reverse();
   const check = (p.checklist ?? {}) as Record<string, unknown>;
   const m = (check["metrics"] ?? { signups: 0, active: 0, returning: 0 }) as {
@@ -355,6 +380,15 @@ function Stage3({ p }: { p: Project }) {
 
   return (
     <div className="grid items-start gap-6 lg:grid-cols-2">
+      {uncertain && (
+        <div role="status" className="rounded-xl border p-4 text-sm lg:col-span-2">
+          The previous request may have completed; repeating it cannot generate twice. A new request
+          uses additional allowance.
+          <Button variant="outline" disabled={busy} className="ml-3" onClick={runNew}>
+            Request a new AI plan
+          </Button>
+        </div>
+      )}
       <Card>
         <h2 className="text-lg font-bold">Your numbers</h2>
         <OwnerActivityExport

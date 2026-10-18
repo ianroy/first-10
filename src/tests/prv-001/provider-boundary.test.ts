@@ -1,5 +1,10 @@
 import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
 const h = vi.hoisted(() => ({
+  budget: vi.fn(),
+  claim: vi.fn(),
+  cancel: vi.fn(),
+  settle: vi.fn(),
+  unknown: vi.fn(),
   request: vi.fn(),
   write: vi.fn(),
   prepare: vi.fn(),
@@ -16,6 +21,11 @@ vi.mock("@/integrations/supabase/auth-middleware", () => ({ requireSupabaseAuth:
 vi.mock("@/lib/ai/gateway.server", () => ({ requestStructuredDraft: h.request }));
 vi.mock("@/lib/prompts/provenance.server", () => ({ prepareProvenanceWriter: h.prepare }));
 vi.mock("@/lib/ai/demo-marketing.server", () => ({ generateFictionalMarketingPractice: h.demo }));
+vi.mock("@/lib/ai/budget.server", async (original) => ({
+  ...(await original<typeof import("@/lib/ai/budget.server")>()),
+  prepareAIBudget: h.budget,
+}));
+import { budgetRoute, gatewayBilling } from "@/tests/ai-004/fixtures";
 import { generateAI } from "@/lib/ai.functions";
 const projectId = "fa110000-0000-4000-8000-000000000001";
 const safe = {
@@ -55,17 +65,26 @@ const sb = {
 };
 const invoke = (kind: string) =>
   (generateAI as unknown as (args: unknown) => Promise<unknown>)({
-    data: { kind, projectId },
+    data: { kind, projectId, operationId: "fa140000-0000-4000-8000-000000000111" },
     context: { supabase: sb, userId: "actor" },
   });
 afterEach(() => vi.unstubAllEnvs());
 beforeEach(() => {
   vi.stubEnv("OPENROUTER_API_KEY", "synthetic-fixture-key");
   vi.clearAllMocks();
+  h.budget.mockResolvedValue({
+    route: budgetRoute,
+    claim: h.claim,
+    cancelBeforeDispatch: h.cancel,
+    settle: h.settle,
+    markUnknown: h.unknown,
+  });
+  h.claim.mockResolvedValue({ route: budgetRoute });
+  h.settle.mockResolvedValue({ state: "settled", resultAllowed: true });
   h.tables = [];
   h.prepare.mockResolvedValue(h.write);
   h.write.mockResolvedValue("receipt");
-  h.request.mockResolvedValue({ data: { fixture: true } });
+  h.request.mockResolvedValue({ ...gatewayBilling, data: { fixture: true } });
   h.rpc.mockReturnValue({
     abortSignal: async () => ({ data: { ok: true, data: safe }, error: null }),
   });
@@ -100,7 +119,7 @@ describe("PRV001 provider boundary", () => {
         p_project_id: projectId,
         p_kind: kind,
       });
-      expect(h.tables).toEqual(["projects"]);
+      expect(h.tables).toEqual(["projects", "projects"]);
       if (kind === "questions") expect(args.user).not.toContain("ALLOWED_NOTE");
       else expect(args.user).toContain("ALLOWED_NOTE");
     },
@@ -115,7 +134,7 @@ describe("PRV001 provider boundary", () => {
     });
     await expect(invoke("synthesis")).rejects.toThrow("AI processing is not enabled");
     expect(h.request).toHaveBeenCalledTimes(1);
-    expect(h.rpc).toHaveBeenCalledTimes(2);
+    expect(h.rpc).toHaveBeenCalledTimes(3);
   });
   it.each([
     { data: null, error: { message: "WITHDRAWN_NOTE" } },

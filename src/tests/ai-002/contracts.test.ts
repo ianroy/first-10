@@ -3,6 +3,7 @@ import { describe, expect, it } from "vitest";
 import { getPrivateContract, type ExistingKind } from "@/lib/prompts/private-v1";
 import { requestStructuredDraft, DEFAULT_MODEL } from "@/lib/ai/gateway.server";
 import { validateAIOutput } from "@/lib/ai/contracts";
+import { budgetRoute } from "@/tests/ai-004/fixtures";
 const legacy = JSON.parse(readFileSync("src/tests/ai-002/legacy-contracts.json", "utf8"));
 const outputs = {
   questions: { questions: ["What happened last time?"] },
@@ -48,6 +49,7 @@ describe("AI-002 frozen legacy contracts", () => {
       const result = await requestStructuredDraft({
         key: "fixture",
         kind: "questions",
+        route: { ...budgetRoute, model: DEFAULT_MODEL },
         schema: getPrivateContract("questions").schema,
         system: "fixture",
         user: "fixture",

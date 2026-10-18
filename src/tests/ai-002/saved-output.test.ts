@@ -4,17 +4,37 @@ import { aiOriginSchema, recordedAIOutput, outreachRows } from "@/lib/ai/saved-o
 const originId = "fa028000-0000-4000-8000-000000000001";
 describe("saved generation receipts", () => {
   it("accepts optional receipt requests but never caller-supplied model/prompt/origin", () => {
-    expect(aiRequestSchema.parse({ kind: "questions", projectId: originId })).not.toHaveProperty(
-      "withOrigin",
-    );
     expect(
-      aiRequestSchema.parse({ kind: "questions", projectId: originId, withOrigin: true })
-        .withOrigin,
+      aiRequestSchema.parse({ kind: "questions", projectId: originId, operationId: originId }),
+    ).not.toHaveProperty("withOrigin");
+    expect(
+      aiRequestSchema.parse({
+        kind: "questions",
+        projectId: originId,
+        operationId: originId,
+        withOrigin: true,
+      }).withOrigin,
     ).toBe(true);
     for (const field of ["originId", "model", "prompt"])
       expect(() =>
-        aiRequestSchema.parse({ kind: "questions", projectId: originId, [field]: "fixture" }),
+        aiRequestSchema.parse({
+          kind: "questions",
+          projectId: originId,
+          operationId: originId,
+          [field]: "fixture",
+        }),
       ).toThrow();
+  });
+  it("requires a stable UUID intent for every kind", () => {
+    for (const kind of ["questions", "synthesis", "stage2", "stage3", "marketing_demo"]) {
+      expect(aiRequestSchema.safeParse({ kind, projectId: originId }).success).toBe(false);
+      expect(
+        aiRequestSchema.safeParse({ kind, projectId: originId, operationId: "random" }).success,
+      ).toBe(false);
+      expect(
+        aiRequestSchema.safeParse({ kind, projectId: originId, operationId: originId }).success,
+      ).toBe(true);
+    }
   });
   it("preserves strict output validation inside a server receipt", () => {
     expect(

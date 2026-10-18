@@ -1,53 +1,101 @@
 import { validateAIOutput, type AIKind } from "./contracts";
+import { budgetRouteSchema, providerBudgetParameters, type BudgetRoute } from "./budget-contract";
 
+// Baseline identity is evidence/compatibility only. Paid routing requires an explicit DB policy.
 export const DEFAULT_MODEL = "anthropic/claude-sonnet-4.5";
 export const AI_TOTAL_DEADLINE_MS = 60_000;
 export const AI_ATTEMPT_TIMEOUT_MS = 25_000;
-export const AI_MAX_ATTEMPTS = 2;
+export const AI_MAX_ATTEMPTS = 1;
 export const AI_MAX_OUTPUT_TOKENS = 2500;
 const ENDPOINT = "https://openrouter.ai/api/v1/chat/completions";
-
 export function resolveAIModel(value?: string) {
   return value?.trim() || DEFAULT_MODEL;
 }
-
+export type GatewayMetadata = {
+  requestedModel: string;
+  actualModel: string | null;
+  generationId: string | null;
+  model: string;
+  usage: {
+    prompt_tokens: number | null;
+    completion_tokens: number | null;
+    total_tokens: number | null;
+    cost: number | null;
+  };
+  provider: string | null;
+  attempts: number;
+};
 export class AIGatewayError extends Error {
   constructor(
     public code: string,
     message: string,
     public attempts: number,
+    public metadata: GatewayMetadata | null = null,
   ) {
     super(message);
     this.name = "AIGatewayError";
   }
 }
-
 type Options = {
   key: string;
-  model?: string | undefined;
+  model?: string | undefined; // Ignored: retained only for specialized consumer compatibility.
   referer?: string | undefined;
   kind: AIKind;
   schema: object;
   system: string;
   user: string;
+  route?: BudgetRoute;
   policy?: "synthetic-marketing-v1";
   fetcher?: typeof fetch;
   now?: () => number;
   sleep?: (ms: number) => Promise<void>;
   random?: () => number;
 };
-
-function retryDelay(header: string | null, attempt: number, now: number, random: () => number) {
-  if (header) {
-    const seconds = Number(header);
-    const milliseconds = Number.isFinite(seconds) ? seconds * 1000 : Date.parse(header) - now;
-    if (Number.isFinite(milliseconds) && milliseconds >= 0) return Math.min(milliseconds, 5000);
-  }
-  return Math.min(5000, 800 * 2 ** attempt + Math.floor(random() * 200));
+const label = (value: unknown) =>
+  typeof value === "string" &&
+  value.length > 0 &&
+  value.length <= 100 &&
+  !Array.from(value).some((c) => c.charCodeAt(0) < 32 || c.charCodeAt(0) === 127)
+    ? value
+    : null;
+const count = (value: unknown) =>
+  typeof value === "number" && Number.isInteger(value) && value >= 0 && value <= 2_147_483_647
+    ? value
+    : null;
+function metadataFromEnvelope(envelope: unknown, requestedModel: string): GatewayMetadata {
+  const e =
+    envelope !== null && typeof envelope === "object" ? (envelope as Record<string, unknown>) : {};
+  const u =
+    e["usage"] !== null && typeof e["usage"] === "object"
+      ? (e["usage"] as Record<string, unknown>)
+      : {};
+  return {
+    requestedModel,
+    actualModel: label(e["model"]),
+    model: label(e["model"]) ?? requestedModel,
+    generationId:
+      typeof e["id"] === "string" && /^gen-[0-9A-Za-z-]{1,123}$/.test(e["id"]) ? e["id"] : null,
+    provider: label(e["provider"]),
+    attempts: 1,
+    usage: {
+      prompt_tokens: count(u["prompt_tokens"]),
+      completion_tokens: count(u["completion_tokens"]),
+      total_tokens: count(u["total_tokens"]),
+      cost:
+        typeof u["cost"] === "number" &&
+        Number.isFinite(u["cost"]) &&
+        u["cost"] >= 0 &&
+        u["cost"] <= 1_000_000
+          ? u["cost"]
+          : null,
+    },
+  };
 }
 
-/** Returns draft plus non-content metadata; the public server function returns only data. */
+/** Exactly one HTTP attempt. Errors carry only bounded billing metadata, never provider/source text. */
 export async function requestStructuredDraft(options: Options) {
+  const now = options.now ?? Date.now;
+  const started = now();
   const { kind, schema, system, user } = options;
   const key = options.key.trim();
   if (!key || key === "[SENSITIVE]")
@@ -65,150 +113,114 @@ export async function requestStructuredDraft(options: Options) {
     );
   if (kind === "marketing_demo" && !synthetic)
     throw new AIGatewayError("POLICY_REQUIRED", "The fictional practice route is required.", 0);
+  const parsed = synthetic ? null : budgetRouteSchema.safeParse(options.route);
+  if (!synthetic && (!parsed?.success || parsed.data.kind !== kind))
+    throw new AIGatewayError(
+      "BUDGET_POLICY_REQUIRED",
+      "An approved AI allowance is required. Continue manually.",
+      0,
+    );
   if (system.length + user.length > (synthetic ? 12_000 : 40_000))
     throw new AIGatewayError(
       "CONTEXT_LIMIT",
-      "There is too much context for this draft. Narrow the material and try again.",
+      "There is too much context for this draft. Narrow the material or continue manually.",
       0,
     );
-  const fetcher = options.fetcher ?? fetch;
-  const now = options.now ?? Date.now;
-  const sleep =
-    options.sleep ?? ((ms: number) => new Promise<void>((resolve) => setTimeout(resolve, ms)));
-  const random = options.random ?? Math.random;
-  const deadline = now() + AI_TOTAL_DEADLINE_MS;
-  const model = synthetic ? "google/gemini-2.5-flash-lite" : resolveAIModel(options.model);
-  const maxAttempts = synthetic ? 1 : AI_MAX_ATTEMPTS;
-  for (let attempt = 0; attempt < maxAttempts; attempt++) {
-    const remaining = deadline - now();
-    if (remaining <= 0)
-      throw new AIGatewayError(
-        "DEADLINE",
-        "The AI request timed out. Your saved work is unchanged.",
-        attempt,
-      );
-    const signal = AbortSignal.timeout(Math.max(1, Math.min(AI_ATTEMPT_TIMEOUT_MS, remaining)));
-    let response: Response;
-    try {
-      response = await fetcher(ENDPOINT, {
-        method: "POST",
-        signal,
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${key}`,
-          "HTTP-Referer": options.referer || "https://first-10-three.vercel.app",
-          "X-Title": "First Ten",
+  const parameters = synthetic
+    ? {
+        model: "google/gemini-2.5-flash-lite",
+        max_tokens: 1200,
+        provider: {
+          require_parameters: true,
+          only: ["google-vertex"],
+          order: ["google-vertex"],
+          allow_fallbacks: false,
+          data_collection: "deny",
+          zdr: true,
+          max_price: { prompt: 0.1, completion: 0.4 },
         },
-        body: JSON.stringify({
-          model,
-          messages: [
-            { role: "system", content: system },
-            { role: "user", content: user },
-          ],
-          max_tokens: synthetic ? 1200 : AI_MAX_OUTPUT_TOKENS,
-          response_format: {
-            type: "json_schema",
-            json_schema: { name: kind, strict: true, schema },
-          },
-          provider: synthetic
-            ? {
-                require_parameters: true,
-                only: ["google-vertex"],
-                order: ["google-vertex"],
-                allow_fallbacks: false,
-                data_collection: "deny",
-                zdr: true,
-                max_price: { prompt: 0.1, completion: 0.4 },
-              }
-            : { require_parameters: true },
-        }),
-      });
-    } catch {
-      // A disconnected request may have been processed upstream. Do not automatically pay twice.
-      throw new AIGatewayError(
-        "OUTCOME_UNKNOWN",
-        "The AI response could not be confirmed. Your saved work is unchanged; retry only if you want a new request.",
-        attempt + 1,
-      );
-    }
-    if (!response.ok) {
-      const retryable = response.status === 429 || response.status >= 500;
-      if (retryable && attempt + 1 < maxAttempts) {
-        const delay = retryDelay(response.headers.get("retry-after"), attempt, now(), random);
-        if (now() + delay >= deadline)
-          throw new AIGatewayError(
-            "DEADLINE",
-            "The AI request timed out. Your saved work is unchanged.",
-            attempt + 1,
-          );
-        await sleep(delay);
-        continue;
       }
-      const message =
-        response.status === 401
-          ? "AI authentication failed. Your saved work is still available."
-          : response.status === 402
-            ? "The AI allowance is unavailable. Your saved work is still available."
-            : response.status === 429
-              ? "The AI is busy. Wait a moment before requesting another draft."
-              : "The AI could not respond. Your saved work is unchanged.";
-      throw new AIGatewayError(`HTTP_${response.status}`, message, attempt + 1);
-    }
-    let envelope;
-    try {
-      envelope = await response.json();
-    } catch {
-      throw new AIGatewayError(
-        "INVALID_RESPONSE",
-        "The AI returned an unreadable response. Your saved work is unchanged.",
-        attempt + 1,
-      );
-    }
-    const choice = envelope?.choices?.[0];
-    if (choice?.message?.refusal || choice?.finish_reason === "content_filter")
-      throw new AIGatewayError(
-        "REFUSAL",
-        "The provider could not make this draft. Review the material or continue manually.",
-        attempt + 1,
-      );
-    if (choice?.finish_reason === "length")
-      throw new AIGatewayError(
-        "TRUNCATED",
-        "The AI draft reached its size limit. Narrow the request and try again.",
-        attempt + 1,
-      );
-    const content = choice?.message?.content;
-    if (typeof content !== "string" || !content.trim())
-      throw new AIGatewayError(
-        "EMPTY_RESPONSE",
-        "The AI returned an empty draft. Your saved work is unchanged.",
-        attempt + 1,
-      );
-    let parsed: unknown;
-    try {
-      parsed = JSON.parse(content);
-    } catch {
-      throw new AIGatewayError(
-        "INVALID_JSON",
-        "The AI draft was unreadable. Your saved work is unchanged.",
-        attempt + 1,
-      );
-    }
-    const data = validateAIOutput(kind, parsed);
-    return {
-      data,
-      requestedModel: model,
-      actualModel: typeof envelope.model === "string" ? envelope.model : null,
-      generationId: typeof envelope.id === "string" ? envelope.id : null,
-      model: typeof envelope.model === "string" ? envelope.model : model,
-      usage: envelope.usage ?? null,
-      provider: typeof envelope.provider === "string" ? envelope.provider : null,
-      attempts: attempt + 1,
-    };
+    : providerBudgetParameters(parsed!.data!);
+  const remaining = AI_TOTAL_DEADLINE_MS - (now() - started);
+  if (!Number.isFinite(remaining) || remaining <= 0)
+    throw new AIGatewayError(
+      "DEADLINE",
+      "The AI request timed out before dispatch. Continue manually.",
+      0,
+    );
+  let response: Response;
+  try {
+    response = await (options.fetcher ?? fetch)(ENDPOINT, {
+      method: "POST",
+      signal: AbortSignal.timeout(Math.max(1, Math.min(AI_ATTEMPT_TIMEOUT_MS, remaining))),
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${key}`,
+        "HTTP-Referer": options.referer || "https://first-10-three.vercel.app",
+        "X-Title": "First Ten",
+      },
+      body: JSON.stringify({
+        ...parameters,
+        messages: [
+          { role: "system", content: system },
+          { role: "user", content: user },
+        ],
+        response_format: { type: "json_schema", json_schema: { name: kind, strict: true, schema } },
+      }),
+    });
+  } catch {
+    throw new AIGatewayError(
+      "OUTCOME_UNKNOWN",
+      "The AI response could not be confirmed. The request will not be repeated automatically; continue manually.",
+      1,
+    );
   }
-  throw new AIGatewayError(
-    "UNAVAILABLE",
-    "The AI is unavailable. Your saved work is unchanged.",
-    AI_MAX_ATTEMPTS,
-  );
+  if (!response.ok) {
+    // Even error responses can follow upstream work. Do not log bodies, refund or retry.
+    throw new AIGatewayError(
+      `HTTP_${response.status}`,
+      response.status === 402
+        ? "The AI allowance is unavailable. Continue manually."
+        : "The AI could not respond. Your saved work is unchanged; this request will not be repeated automatically.",
+      1,
+    );
+  }
+  let envelope;
+  try {
+    envelope = await response.json();
+  } catch {
+    throw new AIGatewayError(
+      "INVALID_RESPONSE",
+      "The AI returned an unreadable response. Continue manually.",
+      1,
+    );
+  }
+  const metadata = metadataFromEnvelope(envelope, parameters.model);
+  const invalid = (code: string, message: string): never => {
+    throw new AIGatewayError(code, message, 1, metadata);
+  };
+  const choice = envelope?.choices?.[0];
+  if (choice?.message?.refusal || choice?.finish_reason === "content_filter")
+    invalid("REFUSAL", "The provider could not make this draft. Continue manually.");
+  if (choice?.finish_reason === "length")
+    invalid("TRUNCATED", "The AI draft reached its size limit. Continue manually.");
+  const content = choice?.message?.content;
+  if (typeof content !== "string" || !content.trim())
+    invalid("EMPTY_RESPONSE", "The AI returned an empty draft. Continue manually.");
+  let decoded: unknown;
+  try {
+    decoded = JSON.parse(content);
+  } catch {
+    invalid("INVALID_JSON", "The AI draft was unreadable. Continue manually.");
+  }
+  let data;
+  try {
+    data = validateAIOutput(kind, decoded);
+  } catch {
+    invalid(
+      "INVALID_SCHEMA",
+      "The AI draft did not match the expected format. Your saved work is unchanged.",
+    );
+  }
+  return { ...metadata, data: data! };
 }

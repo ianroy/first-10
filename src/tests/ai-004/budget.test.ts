@@ -13,9 +13,12 @@ import {
   reservedMicro,
   trustedUsageSchema,
 } from "@/lib/ai/budget-contract";
-const boundary = vi.hoisted(() => ({ request: vi.fn(), rpc: vi.fn() }));
+const boundary = vi.hoisted(() => ({ request: vi.fn(), rpc: vi.fn(), imported: vi.fn() }));
 vi.mock("@tanstack/react-start/server", () => ({ getRequest: boundary.request }));
-vi.mock("@/integrations/supabase/client.server", () => ({ supabaseAdmin: { rpc: boundary.rpc } }));
+vi.mock("@/integrations/supabase/client.server", () => {
+  boundary.imported();
+  return { supabaseAdmin: { rpc: boundary.rpc } };
+});
 const id = "fa140000-0000-4000-8000-000000000001";
 const route = {
   purpose: "product",
@@ -304,5 +307,6 @@ describe("fresh caller authorization", () => {
       code: "UNVERIFIED_OWNER",
     });
     expect(boundary.rpc).not.toHaveBeenCalled();
+    expect(boundary.imported).not.toHaveBeenCalled();
   });
 });

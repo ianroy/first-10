@@ -5,6 +5,7 @@ import { useServerFn } from "@tanstack/react-start";
 import { z } from "zod";
 import { Sparkles, ArrowUpRight } from "lucide-react";
 import { generateAI } from "@/lib/ai.functions";
+import { useAIIntent } from "@/hooks/useAIIntent";
 import { aiOutputSchemas } from "@/lib/ai/contracts";
 import { Card } from "@/components/AppShell";
 import { Button } from "@/components/ui/button";
@@ -35,6 +36,7 @@ export function LiveMarketingPractice({
   onStateChange?: (state: { busy: boolean; hasDraft: boolean }) => void;
 }) {
   const generate = useServerFn(generateAI);
+  const intent = useAIIntent(projectId, "marketing_demo");
   const id = useId();
   const [result, setResult] = useState<z.infer<typeof responseSchema> | null>(null);
   const [body, setBody] = useState("");
@@ -64,10 +66,15 @@ export function LiveMarketingPractice({
         <Button
           disabled={busy}
           onClick={async () => {
+            const operationId = intent.begin();
+            if (!operationId) return;
             setBusy(true);
             setError("");
             try {
-              const response = await generate({ data: { kind: "marketing_demo", projectId } });
+              const response = await generate({
+                data: { kind: "marketing_demo", projectId, operationId },
+              });
+              if (!intent.isCurrent(operationId)) return;
               const parsed = responseSchema.safeParse(response);
               if (!parsed.success)
                 throw new Error(
@@ -76,12 +83,18 @@ export function LiveMarketingPractice({
               if (result) setPreviousDrafts((previous) => [...previous, body]);
               setResult(parsed.data);
               setBody(parsed.data.draft.body);
-            } catch {
+              intent.succeeded(operationId);
+            } catch (failure) {
+              intent.failed(operationId);
+              if (!intent.isCurrent(operationId)) return;
               setError(
-                "The live practice draft is unavailable. Your saved plan and previous draft are unchanged. Use the prepared example or keep writing your own invitation.",
+                failure instanceof Error &&
+                  failure.message.startsWith("Live AI practice is paused.")
+                  ? failure.message
+                  : "The live practice draft is unavailable. Your saved plan and previous draft are unchanged. Use the prepared example or keep writing your own invitation.",
               );
             } finally {
-              setBusy(false);
+              if (intent.isCurrent(operationId)) setBusy(false);
             }
           }}
         >
@@ -102,6 +115,22 @@ export function LiveMarketingPractice({
         <p role="alert" className="mt-4 rounded-xl bg-destructive-soft p-4 text-sm">
           {error}
         </p>
+      )}
+      {intent.uncertain && (
+        <div className="mt-3 text-sm">
+          The previous request may have completed. Repeating it reuses the same reservation; a new
+          request uses additional allowance.
+          <Button
+            variant="outline"
+            disabled={busy}
+            className="ml-3"
+            onClick={() => {
+              intent.newRequest();
+            }}
+          >
+            Start a new AI request
+          </Button>
+        </div>
       )}
       {result && (
         <div className="mt-6 space-y-5 border-t pt-5">

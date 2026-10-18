@@ -11,6 +11,7 @@ import { toast } from "sonner";
 import { useServerFn } from "@tanstack/react-start";
 import { supabase } from "@/integrations/supabase/client";
 import { generateAI } from "@/lib/ai.functions";
+import { useAIIntent } from "@/hooks/useAIIntent";
 import { recordedAIOutput } from "@/lib/ai/saved-output";
 import { AIOrigin } from "@/components/AIOrigin";
 import { AppShell, Card, DraftBadge, Empty } from "@/components/AppShell";
@@ -111,6 +112,7 @@ function Learnings({ p }: { p: Project }) {
 
 function Synthesis({ p, synth }: { p: Project; synth: Learning | undefined }) {
   const gen = useServerFn(generateAI);
+  const intent = useAIIntent(p.id, "synthesis");
   const refresh = useRefresh();
   const [busy, setBusy] = useState(false);
   const [d, setD] = useState<Synth | null>(null);
@@ -119,9 +121,14 @@ function Synthesis({ p, synth }: { p: Project; synth: Learning | undefined }) {
   }, [synth]);
 
   const run = async () => {
+    const operationId = intent.begin();
+    if (!operationId) return;
     setBusy(true);
     try {
-      const output = await gen({ data: { kind: "synthesis", projectId: p.id, withOrigin: true } });
+      const output = await gen({
+        data: { kind: "synthesis", projectId: p.id, operationId, withOrigin: true },
+      });
+      if (!intent.isCurrent(operationId)) return;
       const recorded = recordedAIOutput("synthesis", output);
       const fields = {
         data: recorded.data,
@@ -141,11 +148,15 @@ function Synthesis({ p, synth }: { p: Project; synth: Learning | undefined }) {
         throw new Error(
           "The new summary could not be saved. Your previous saved work is unchanged.",
         );
+      if (!intent.isCurrent(operationId)) return;
       refresh("learnings");
+      intent.succeeded(operationId);
     } catch (e) {
-      toast.error((e as Error).message);
+      intent.failed(operationId);
+      if (intent.isCurrent(operationId)) toast.error((e as Error).message);
+    } finally {
+      if (intent.isCurrent(operationId)) setBusy(false);
     }
-    setBusy(false);
   };
   const save = async (accepted: boolean) => {
     if (!synth || !d) return;
@@ -161,6 +172,22 @@ function Synthesis({ p, synth }: { p: Project; synth: Learning | undefined }) {
     toast.success(accepted ? "Accepted! These now shape your outreach." : "Saved");
   };
 
+  const recovery = intent.uncertain && (
+    <div role="status" className="mt-4 rounded-xl border p-3 text-sm">
+      The previous request may have completed; repeating it cannot generate twice. A new request
+      uses additional allowance.
+      <Button
+        variant="outline"
+        disabled={busy}
+        className="mt-2"
+        onClick={() => {
+          if (intent.newRequest()) void run();
+        }}
+      >
+        Request a new AI summary
+      </Button>
+    </div>
+  );
   if (!synth || !d)
     return (
       <Card className="text-center">
@@ -171,6 +198,7 @@ function Synthesis({ p, synth }: { p: Project; synth: Learning | undefined }) {
         <Button size="xl" className="mt-4" disabled={busy} onClick={run}>
           {busy ? "Reading your notes…" : "Summarize my interviews"}
         </Button>
+        {recovery}
       </Card>
     );
 
@@ -203,6 +231,7 @@ function Synthesis({ p, synth }: { p: Project; synth: Learning | undefined }) {
           ])
         }
       />
+      {recovery}
       <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-1 xl:grid-cols-2">
         {SECTIONS.map(([k, label]) => (
           <div key={k}>

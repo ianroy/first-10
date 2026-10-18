@@ -6,6 +6,7 @@ export const aiRequestSchema = z
   .object({
     kind: z.enum(AI_KINDS),
     projectId: z.string().uuid(),
+    operationId: z.string().uuid(),
     withOrigin: z.boolean().optional(),
   })
   .strict();

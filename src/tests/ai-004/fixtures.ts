@@ -1,0 +1,32 @@
+import { budgetRouteSchema } from "@/lib/ai/budget-contract";
+export const budgetRoute = budgetRouteSchema.parse({
+  kind: "questions",
+  version: 1,
+  enabled: true,
+  model: "google/gemini-2.5-flash-lite",
+  provider_slug: "google-vertex",
+  response_providers: ["Google Vertex"],
+  input_token_ceiling: 10_000,
+  output_token_ceiling: 2500,
+  input_byte_ceiling: 200_000,
+  prompt_micro_per_million: 100_000,
+  completion_micro_per_million: 400_000,
+  bounds_review_sha256: "a".repeat(64),
+  quality_review_sha256: "b".repeat(64),
+  checked_at: "2026-10-18T00:00:00+00:00",
+  expires_at: "2026-10-19T00:00:00+00:00",
+  operator_reference: "test-only",
+  purpose: "product",
+  eval_user_id: null,
+  eval_project_id: null,
+  eval_context_sha256: null,
+});
+export const gatewayBilling = {
+  requestedModel: budgetRoute.model,
+  actualModel: budgetRoute.model,
+  model: budgetRoute.model,
+  provider: "Google Vertex",
+  generationId: "gen-ai004-fixture",
+  attempts: 1,
+  usage: { cost: 0.0002, prompt_tokens: 100, completion_tokens: 10, total_tokens: 110 },
+};

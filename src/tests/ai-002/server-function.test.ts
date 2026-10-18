@@ -1,5 +1,15 @@
 import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
-const h = vi.hoisted(() => ({ prepare: vi.fn(), write: vi.fn(), request: vi.fn(), demo: vi.fn() }));
+const h = vi.hoisted(() => ({
+  prepare: vi.fn(),
+  write: vi.fn(),
+  request: vi.fn(),
+  demo: vi.fn(),
+  budget: vi.fn(),
+  claim: vi.fn(),
+  cancel: vi.fn(),
+  settle: vi.fn(),
+  unknown: vi.fn(),
+}));
 vi.mock("@tanstack/react-start", () => ({
   createServerFn: () => ({
     middleware: () => ({ inputValidator: () => ({ handler: (fn: unknown) => fn }) }),
@@ -9,6 +19,11 @@ vi.mock("@/integrations/supabase/auth-middleware", () => ({ requireSupabaseAuth:
 vi.mock("@/lib/prompts/provenance.server", () => ({ prepareProvenanceWriter: h.prepare }));
 vi.mock("@/lib/ai/gateway.server", () => ({ requestStructuredDraft: h.request }));
 vi.mock("@/lib/ai/demo-marketing.server", () => ({ generateFictionalMarketingPractice: h.demo }));
+vi.mock("@/lib/ai/budget.server", async (original) => ({
+  ...(await original<typeof import("@/lib/ai/budget.server")>()),
+  prepareAIBudget: h.budget,
+}));
+import { budgetRoute, gatewayBilling } from "@/tests/ai-004/fixtures";
 import { generateAI } from "@/lib/ai.functions";
 import { validateAIOutput } from "@/lib/ai/contracts";
 import type { ExistingKind } from "@/lib/prompts/private-v1";
@@ -63,13 +78,27 @@ const sb = {
 };
 const invoke = (kind: string, withOrigin?: boolean) =>
   (generateAI as unknown as (args: unknown) => Promise<unknown>)({
-    data: { kind, projectId: project.id, withOrigin },
+    data: {
+      kind,
+      projectId: project.id,
+      operationId: "fa140000-0000-4000-8000-000000000111",
+      withOrigin,
+    },
     context: { supabase: sb, userId: project.user_id },
   });
 afterEach(() => vi.unstubAllEnvs());
 beforeEach(() => {
   vi.stubEnv("OPENROUTER_API_KEY", "synthetic-fixture-key");
   vi.clearAllMocks();
+  h.budget.mockResolvedValue({
+    route: budgetRoute,
+    claim: h.claim,
+    cancelBeforeDispatch: h.cancel,
+    settle: h.settle,
+    markUnknown: h.unknown,
+  });
+  h.claim.mockResolvedValue({ route: budgetRoute });
+  h.settle.mockResolvedValue({ state: "settled", resultAllowed: true });
   h.prepare.mockResolvedValue(h.write);
   h.write.mockResolvedValue("fa028000-0000-4000-8000-000000000001");
 });
@@ -79,12 +108,7 @@ describe("generateAI legacy response compatibility", () => {
     async (kind) => {
       const result = {
         data: outputs[kind],
-        requestedModel: "fixture",
-        actualModel: null,
-        provider: null,
-        usage: null,
-        generationId: null,
-        attempts: 1,
+        ...gatewayBilling,
       };
       h.request.mockResolvedValue(result);
       expect(validateAIOutput(kind, await invoke(kind))).toEqual(outputs[kind]);
@@ -103,7 +127,7 @@ describe("generateAI legacy response compatibility", () => {
   it.each(Object.keys(outputs) as ExistingKind[])(
     "returns an opt-in receipt outside strict %s JSON",
     async (kind) => {
-      h.request.mockResolvedValue({ data: outputs[kind] });
+      h.request.mockResolvedValue({ ...gatewayBilling, data: outputs[kind] });
       expect(await invoke(kind, true)).toEqual({
         data: outputs[kind],
         originId: "fa028000-0000-4000-8000-000000000001",
@@ -112,7 +136,7 @@ describe("generateAI legacy response compatibility", () => {
     },
   );
   it("never returns a successful draft when provenance cannot commit", async () => {
-    h.request.mockResolvedValue({ data: outputs.questions });
+    h.request.mockResolvedValue({ ...gatewayBilling, data: outputs.questions });
     h.write.mockRejectedValue(new Error("Record failed"));
     await expect(invoke("questions")).rejects.toThrow("Record failed");
     expect(h.request).toHaveBeenCalledTimes(1);

@@ -7,11 +7,12 @@ import {
   resolveAIModel,
 } from "./ai/gateway.server";
 
+import { budgetRoute } from "@/tests/ai-004/fixtures";
 const valid = { questions: ["Tell me about the last time this happened."] };
 function reply(content: unknown = valid, extra: Record<string, unknown> = {}) {
   return new Response(
     JSON.stringify({
-      id: "generation-fixture",
+      id: "gen-fixture",
       model: "fixture-model",
       choices: [{ finish_reason: "stop", message: { content: JSON.stringify(content) } }],
       usage: { cost: 0.001 },
@@ -24,6 +25,7 @@ function settings(fetcher: typeof fetch) {
   return {
     key: "fixture-key",
     kind: "questions" as const,
+    route: { ...budgetRoute, model: DEFAULT_MODEL } as typeof budgetRoute,
     schema: { type: "object" },
     system: "Fixture instructions",
     user: "Fictional project only",
@@ -35,7 +37,11 @@ function settings(fetcher: typeof fetch) {
 
 describe("AI request and output contracts", () => {
   it("rejects unknown kinds, forged extra authority and malformed project ids", () => {
-    const input = { kind: "questions", projectId: "a1111111-1111-4111-8111-111111111111" };
+    const input = {
+      kind: "questions",
+      projectId: "a1111111-1111-4111-8111-111111111111",
+      operationId: "a1111111-1111-4111-8111-111111111112",
+    };
     expect(aiRequestSchema.parse(input)).toEqual(input);
     for (const bad of [
       { ...input, kind: "admin" },
@@ -82,7 +88,7 @@ describe("bounded structured gateway", () => {
     expect(body.provider.require_parameters).toBe(true);
     expect(result).toMatchObject({
       data: valid,
-      generationId: "generation-fixture",
+      generationId: "gen-fixture",
       model: "fixture-model",
       attempts: 1,
     });
@@ -99,18 +105,19 @@ describe("bounded structured gateway", () => {
     ).rejects.toMatchObject({ code: "CONTEXT_LIMIT" });
     expect(fetcher).not.toHaveBeenCalled();
   });
-  it("retries one eligible HTTP failure with a fresh bounded signal", async () => {
+  it("does not retry an eligible HTTP failure and uses one bounded signal", async () => {
     const fetcher = vi
       .fn<typeof fetch>()
       .mockResolvedValueOnce(new Response("", { status: 503 }))
       .mockResolvedValueOnce(reply());
     const options = settings(fetcher);
-    const result = await requestStructuredDraft(options);
-    expect(result.attempts).toBe(2);
-    expect(options.sleep).toHaveBeenCalledWith(800);
-    const first = fetcher.mock.calls[0]![1]!.signal;
-    expect(first).toBeInstanceOf(AbortSignal);
-    expect(fetcher.mock.calls[1]![1]!.signal).not.toBe(first);
+    await expect(requestStructuredDraft(options)).rejects.toMatchObject({
+      code: "HTTP_503",
+      attempts: 1,
+    });
+    expect(options.sleep).not.toHaveBeenCalled();
+    expect(fetcher).toHaveBeenCalledOnce();
+    expect(fetcher.mock.calls[0]![1]!.signal).toBeInstanceOf(AbortSignal);
   });
   it.each([400, 401, 402, 403, 422])(
     "never retries HTTP %i or exposes provider error content",
@@ -125,18 +132,17 @@ describe("bounded structured gateway", () => {
       expect(fetcher).toHaveBeenCalledTimes(1);
     },
   );
-  it("bounds Retry-After and stops after two starts", async () => {
+  it("never follows Retry-After into another paid start", async () => {
     const fetcher = vi.fn<typeof fetch>(
       async () => new Response("", { status: 429, headers: { "Retry-After": "99999" } }),
     );
     const options = settings(fetcher);
     await expect(requestStructuredDraft(options)).rejects.toMatchObject({
       code: "HTTP_429",
-      attempts: 2,
+      attempts: 1,
     });
-    expect(options.sleep).toHaveBeenCalledOnce();
-    expect(options.sleep).toHaveBeenCalledWith(5000);
-    expect(fetcher).toHaveBeenCalledTimes(2);
+    expect(options.sleep).not.toHaveBeenCalled();
+    expect(fetcher).toHaveBeenCalledOnce();
   });
   it("treats transport loss as an unknown outcome instead of automatically paying twice", async () => {
     const fetcher = vi.fn<typeof fetch>(async () => {

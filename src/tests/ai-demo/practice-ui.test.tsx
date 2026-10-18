@@ -3,6 +3,9 @@ import { cleanup, fireEvent, render, screen, waitFor } from "@testing-library/re
 const h = vi.hoisted(() => ({ generate: vi.fn() }));
 vi.mock("@tanstack/react-start", () => ({ useServerFn: () => h.generate }));
 vi.mock("@/lib/ai.functions", () => ({ generateAI: vi.fn() }));
+vi.mock("@/lib/project-selection", () => ({
+  useWorkspaceIdentity: () => ({ userId: "synthetic-presenter", ready: true, error: null }),
+}));
 import { LiveMarketingPractice } from "@/components/marketing/LiveMarketingPractice";
 const projectId = "f1d00000-0000-4000-8000-000000000010";
 const response = () => ({
@@ -30,6 +33,7 @@ const response = () => ({
 });
 beforeEach(() => {
   vi.clearAllMocks();
+  sessionStorage.clear();
   h.generate.mockResolvedValue(response());
 });
 afterEach(cleanup);
@@ -38,7 +42,9 @@ it("only calls the authorized gateway on explicit request and sends no editable 
   expect(h.generate).not.toHaveBeenCalled();
   fireEvent.click(screen.getByRole("button", { name: "Draft a $0 invitation with AI" }));
   await screen.findByText("AI practice proposal · fictional, untested and unsent");
-  expect(h.generate).toHaveBeenCalledWith({ data: { kind: "marketing_demo", projectId } });
+  expect(h.generate).toHaveBeenCalledWith({
+    data: { kind: "marketing_demo", projectId, operationId: expect.any(String) },
+  });
   expect(screen.getByText("$0.000200")).toBeVisible();
   expect(screen.getByRole("textbox", { name: "Edit the AI practice draft" })).toHaveValue(
     response().draft.body,
@@ -96,4 +102,30 @@ it("preserves edited prior drafts on regeneration and disables editing while the
   const disclosure = screen.getByText("Previous practice drafts (1) · temporary");
   fireEvent.click(disclosure);
   expect(screen.getByText("My first reviewed draft must remain available")).toBeVisible();
+});
+
+it("retains an ambiguous request identifier until explicitly starting a new request", async () => {
+  h.generate.mockRejectedValue(new Error("synthetic transport failure"));
+  render(<LiveMarketingPractice projectId={projectId} />);
+  const request = screen.getByRole("button", { name: "Draft a $0 invitation with AI" });
+  fireEvent.click(request);
+  await screen.findByRole("alert");
+  const first = h.generate.mock.calls[0]![0].data.operationId;
+  fireEvent.click(request);
+  await waitFor(() => expect(h.generate).toHaveBeenCalledTimes(2));
+  expect(h.generate.mock.calls[1]![0].data.operationId).toBe(first);
+  await waitFor(() => expect(request).not.toBeDisabled());
+  fireEvent.click(screen.getByRole("button", { name: "Start a new AI request" }));
+  fireEvent.click(request);
+  await waitFor(() => expect(h.generate).toHaveBeenCalledTimes(3));
+  expect(h.generate.mock.calls[2]![0].data.operationId).not.toBe(first);
+});
+it("shows the deliberate stop with a prepared/manual alternative", async () => {
+  h.generate.mockRejectedValueOnce(
+    new Error("Live AI practice is paused. Use the prepared example or write your own invitation."),
+  );
+  render(<LiveMarketingPractice projectId={projectId} />);
+  fireEvent.click(screen.getByRole("button", { name: "Draft a $0 invitation with AI" }));
+  expect(await screen.findByRole("alert")).toHaveTextContent("Live AI practice is paused");
+  expect(screen.getByRole("link", { name: /Use the prepared marketing example/ })).toBeVisible();
 });

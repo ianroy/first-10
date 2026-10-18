@@ -82,6 +82,26 @@ export function budgetInputBinding(context: BudgetInput["context"]) {
   };
 }
 
+/** Only the server gateway's allowlisted billing fields qualify; missing values remain unknown. */
+export function trustedGatewayUsage(metadata: unknown, outputValid: boolean): TrustedUsage | null {
+  const m =
+    metadata !== null && typeof metadata === "object" ? (metadata as Record<string, unknown>) : {};
+  const u =
+    m["usage"] !== null && typeof m["usage"] === "object"
+      ? (m["usage"] as Record<string, unknown>)
+      : {};
+  const parsed = trustedUsageSchema.safeParse({
+    generationId: m["generationId"],
+    model: m["actualModel"],
+    provider: m["provider"],
+    costUsd: u["cost"],
+    promptTokens: u["prompt_tokens"],
+    completionTokens: u["completion_tokens"],
+    outputValid,
+  });
+  return parsed.success ? parsed.data : null;
+}
+
 /** No network generation here. A lost claim acknowledgement must NEVER lead to dispatch/retry. */
 export async function createBudgetSession(client: BudgetRpcClient, input: BudgetInput) {
   const { contextSha256, inputBytes } = budgetInputBinding(input.context);
@@ -177,9 +197,9 @@ export async function createBudgetSession(client: BudgetRpcClient, input: Budget
       last = await call("settle_ai_usage", {
         p_operation_id: input.operationId,
         p_attempt_id: attemptId,
-        p_generation_id: u.generationId,
-        p_model: u.model,
-        p_provider: u.provider,
+        p_generation_id: u["generationId"],
+        p_model: u["model"],
+        p_provider: u["provider"],
         p_cost_usd: u.costUsd,
         p_prompt_tokens: u.promptTokens,
         p_completion_tokens: u.completionTokens,
@@ -195,13 +215,18 @@ export async function createBudgetSession(client: BudgetRpcClient, input: Budget
 /** Fresh request identity BEFORE importing service credentials; RPC rechecks current DB ownership. */
 export async function prepareAIBudget(scope: {
   supabase: SupabaseClient<Database>;
+  operationId: string;
   userId: string;
   projectId: string;
   projectOwnerId: string;
   kind: BudgetKind;
   context: BudgetInput["context"];
 }) {
-  const operationId = randomUUID();
+  const operationId = scope.operationId;
+  if (
+    !/^[0-9a-f]{8}-[0-9a-f]{4}-[1-8][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$/i.test(operationId)
+  )
+    throw new AIBudgetError(operationId, "INVALID_INTENT");
   const token = getRequest()
     .headers.get("authorization")
     ?.match(/^Bearer\s+(.+)$/i)?.[1];

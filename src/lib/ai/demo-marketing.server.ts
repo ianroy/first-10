@@ -44,10 +44,12 @@ export async function generateFictionalMarketingPractice({
   supabase,
   userId,
   project,
+  operationId,
 }: {
   supabase: SupabaseClient<Database>;
   userId: string;
   project: Project;
+  operationId: string;
 }) {
   const token = getRequest()
     .headers.get("authorization")
@@ -89,12 +91,24 @@ export async function generateFictionalMarketingPractice({
     );
   const key = process.env["OPENROUTER_API_KEY"]?.trim();
   if (!key || key === "[SENSITIVE]") throw new Error(safeFailure);
-  const requestId = crypto.randomUUID();
+  const requestId = z.string().uuid().parse(operationId);
   const reservation = await supabase.rpc("reserve_demo_ai", {
     p_project_id: project.id,
     p_request_id: requestId,
   });
   const permitted = reservationSchema.safeParse(reservation.data);
+  if (!reservation.error && permitted.success && permitted.data.code === "BUDGET_DISABLED")
+    throw new AIGatewayError(
+      "BUDGET_DISABLED",
+      "Live AI practice is paused. Use the prepared example or write your own invitation.",
+      0,
+    );
+  if (!reservation.error && permitted.success && permitted.data.code === "ALREADY_RESERVED")
+    throw new AIGatewayError(
+      "ALREADY_RESERVED",
+      "This AI practice request was already reserved and will not be repeated. Use the prepared example or explicitly start a new request.",
+      0,
+    );
   if (
     reservation.error ||
     !permitted.success ||

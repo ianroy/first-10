@@ -5,6 +5,7 @@ import { useServerFn } from "@tanstack/react-start";
 import { Plus, Trash2, X } from "lucide-react";
 import { supabase } from "@/integrations/supabase/client";
 import { generateAI } from "@/lib/ai.functions";
+import { useAIIntent } from "@/hooks/useAIIntent";
 import { recordedAIOutput } from "@/lib/ai/saved-output";
 import { AIOrigin } from "@/components/AIOrigin";
 import { OwnerActivityExport } from "@/components/export/OwnerActivityExport";
@@ -67,6 +68,7 @@ function Prep({
   onStart: (id: string | null) => void;
 }) {
   const gen = useServerFn(generateAI);
+  const intent = useAIIntent(p.id, "questions");
   const refresh = useRefresh();
   const { data: contacts = [] } = useContacts(p.id);
   const { data: interviews = [] } = useInterviews(p.id);
@@ -197,6 +199,23 @@ function Prep({
           already transmitted content and downloaded copies cannot be recalled.
         </p>
       </Card>
+      {intent.uncertain && (
+        <div role="status" className="my-4 rounded-xl border p-4 text-sm">
+          The previous AI request may have completed. Checking it reuses the same request and cannot
+          generate twice. A new request uses additional allowance; manual questions remain
+          available.
+          <Button
+            variant="outline"
+            disabled={busy}
+            className="ml-3"
+            onClick={() => {
+              intent.newRequest();
+            }}
+          >
+            Start a new AI request
+          </Button>
+        </div>
+      )}
       <div className="grid items-start gap-6 lg:grid-cols-[minmax(0,1.3fr)_minmax(0,1fr)]">
         <div className="min-w-0">
           <Card>
@@ -229,18 +248,24 @@ function Prep({
                   size="xl"
                   disabled={busy}
                   onClick={async () => {
+                    const operationId = intent.begin();
+                    if (!operationId) return;
                     setBusy(true);
                     try {
                       const r = await gen({
-                        data: { kind: "questions", projectId: p.id, withOrigin: true },
+                        data: { kind: "questions", projectId: p.id, operationId, withOrigin: true },
                       });
+                      if (!intent.isCurrent(operationId)) return;
                       const recorded = recordedAIOutput("questions", r);
                       setDraft(recorded.data.questions);
                       setDraftOrigin(recorded.originId);
+                      intent.succeeded(operationId);
                     } catch (e) {
-                      toast.error((e as Error).message);
+                      intent.failed(operationId);
+                      if (intent.isCurrent(operationId)) toast.error((e as Error).message);
+                    } finally {
+                      if (intent.isCurrent(operationId)) setBusy(false);
                     }
-                    setBusy(false);
                   }}
                 >
                   {busy ? "Writing questions…" : "Write my interview questions"}
