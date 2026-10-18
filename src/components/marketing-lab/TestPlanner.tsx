@@ -1,4 +1,4 @@
-import { useState, type ReactNode } from "react";
+import { cloneElement, isValidElement, useId, useState, type ReactNode } from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
@@ -8,11 +8,14 @@ import { measurementLabels, parseManualCount } from "@/lib/marketing-metrics";
 import { dependencyError, previewTestState, taskStatusError } from "@/lib/marketing-planning";
 const selectClass = "min-h-11 w-full rounded-lg border bg-background px-3 text-sm";
 function Field({ label, children }: { label: string; children: ReactNode }) {
+  const id = useId();
   return (
-    <label className="block space-y-2">
-      <span className="text-sm font-semibold">{label}</span>
-      {children}
-    </label>
+    <div className="block space-y-2">
+      <label htmlFor={id} className="text-sm font-semibold">
+        {label}
+      </label>
+      {isValidElement<{ id?: string }>(children) ? cloneElement(children, { id }) : children}
+    </div>
   );
 }
 const stateLabels = {

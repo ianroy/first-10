@@ -76,3 +76,13 @@ it("previews locally, adopts only explicitly, and prevents adoption after inputs
   expect(fetchSpy).not.toHaveBeenCalled();
   fetchSpy.mockRestore();
 });
+
+it("gives native selects explicit labels without including option text", () => {
+  render(<Harness />);
+  for (const name of ["Test status", "AI resources", "Action 2: Type", "Action 2: Status"]) {
+    const select = screen.getByRole("combobox", { name }) as HTMLSelectElement;
+    expect(select.labels).toHaveLength(1);
+    expect(select.labels![0]!.textContent).toBe(name);
+    expect(select.labels![0]!.control).toBe(select);
+  }
+});
