@@ -14,6 +14,12 @@ import {
   invitationListSchema,
   revokedInvitationSchema,
   acceptedInvitationSchema,
+  createdClassInvitationSchema,
+  classInvitationListSchema,
+  revokedClassInvitationSchema,
+  acceptedClassInvitationSchema,
+  classInvitationListInputSchema,
+  classInvitationRevokeInputSchema,
   type InvitationFailure,
 } from "@/components/invitations/contracts";
 type Context = { userId: string; supabase: SupabaseClient<Database> };
@@ -21,7 +27,11 @@ type Operation =
   | "create_project_invitation"
   | "list_project_invitations"
   | "revoke_project_invitation"
-  | "accept_project_invitation";
+  | "accept_project_invitation"
+  | "create_class_invitation"
+  | "list_class_invitations"
+  | "revoke_class_invitation"
+  | "accept_class_invitation";
 function privateResponse() {
   setResponseHeader("Cache-Control", "private, no-store");
   setResponseHeader("Referrer-Policy", "no-referrer");
@@ -70,8 +80,23 @@ const identity = (value: unknown) => value;
 const create = createServerFn({ method: "POST" })
   .middleware([invitationPrivacy, requireSupabaseAuth])
   .inputValidator(identity)
-  .handler(({ data, context }) =>
-    execute(
+  .handler(({ data, context }) => {
+    const parsed = createInvitationSchema.safeParse(data);
+    if (parsed.success && parsed.data.targetType === "class")
+      return execute(
+        data,
+        context,
+        createInvitationSchema,
+        createdClassInvitationSchema,
+        "create_class_invitation",
+        (d) => ({
+          p_class_id: d.targetId,
+          p_recipient_id: d.recipientId,
+          p_days: d.expiresInDays,
+          p_request_id: d.requestId,
+        }),
+      );
+    return execute(
       data,
       context,
       createInvitationSchema,
@@ -85,8 +110,8 @@ const create = createServerFn({ method: "POST" })
         p_days: d.expiresInDays,
         p_request_id: d.requestId,
       }),
-    ),
-  );
+    );
+  });
 const list = createServerFn({ method: "POST" })
   .middleware([invitationPrivacy, requireSupabaseAuth])
   .inputValidator(identity)
@@ -120,16 +145,60 @@ const revoke = createServerFn({ method: "POST" })
 const accept = createServerFn({ method: "POST" })
   .middleware([invitationPrivacy, requireSupabaseAuth])
   .inputValidator(identity)
-  .handler(({ data, context }) =>
-    execute(
+  .handler(({ data, context }) => {
+    const parsed = acceptInvitationSchema.safeParse(data);
+    if (parsed.success && parsed.data.targetType === "class")
+      return execute(
+        data,
+        context,
+        acceptInvitationSchema,
+        acceptedClassInvitationSchema,
+        "accept_class_invitation",
+        (d) => ({
+          p_token: d.token,
+          p_display_label: d.targetType === "class" ? d.displayLabel : null,
+        }),
+      );
+    return execute(
       data,
       context,
       acceptInvitationSchema,
       acceptedInvitationSchema,
       "accept_project_invitation",
       (d) => ({ p_target_type: d.targetType, p_token: d.token }),
+    );
+  });
+const listClass = createServerFn({ method: "POST" })
+  .middleware([invitationPrivacy, requireSupabaseAuth])
+  .inputValidator(identity)
+  .handler(({ data, context }) =>
+    execute(
+      data,
+      context,
+      classInvitationListInputSchema,
+      classInvitationListSchema,
+      "list_class_invitations",
+      (d) => ({ p_class_id: d.classId, p_cursor: d.cursor ?? null }),
     ),
   );
+const revokeClass = createServerFn({ method: "POST" })
+  .middleware([invitationPrivacy, requireSupabaseAuth])
+  .inputValidator(identity)
+  .handler(({ data, context }) =>
+    execute(
+      data,
+      context,
+      classInvitationRevokeInputSchema,
+      revokedClassInvitationSchema,
+      "revoke_class_invitation",
+      (d) => ({
+        p_class_id: d.classId,
+        p_invitation_id: d.invitationId,
+        p_request_id: d.requestId,
+      }),
+    ),
+  );
+
 async function safe<T>(call: () => Promise<T>): Promise<T | InvitationFailure> {
   try {
     return await call();
@@ -151,3 +220,10 @@ export const revokeInvitation = (input: { data: z.infer<typeof revokeInvitationS
   safe(() => revoke(input));
 export const acceptInvitation = (input: { data: z.infer<typeof acceptInvitationSchema> }) =>
   safe(() => accept(input));
+
+export const listClassInvitations = (input: {
+  data: z.infer<typeof classInvitationListInputSchema>;
+}) => safe(() => listClass(input));
+export const revokeClassInvitation = (input: {
+  data: z.infer<typeof classInvitationRevokeInputSchema>;
+}) => safe(() => revokeClass(input));
