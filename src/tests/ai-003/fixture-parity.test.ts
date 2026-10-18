@@ -2,7 +2,14 @@ import { readFileSync } from "node:fs";
 import { execFileSync } from "node:child_process";
 import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
 import type { ExistingKind } from "@/lib/prompts/private-v1";
-const h = vi.hoisted(() => ({ prepare: vi.fn(), write: vi.fn(), request: vi.fn() }));
+const h = vi.hoisted(() => ({
+  prepare: vi.fn(),
+  write: vi.fn(),
+  request: vi.fn(),
+  budget: vi.fn(),
+  claim: vi.fn(),
+  settle: vi.fn(),
+}));
 vi.mock("@tanstack/react-start", () => ({
   createServerFn: () => ({
     middleware: () => ({ inputValidator: () => ({ handler: (fn: unknown) => fn }) }),
@@ -12,6 +19,12 @@ vi.mock("@/integrations/supabase/auth-middleware", () => ({ requireSupabaseAuth:
 vi.mock("@/lib/prompts/provenance.server", () => ({ prepareProvenanceWriter: h.prepare }));
 vi.mock("@/lib/ai/gateway.server", () => ({ requestStructuredDraft: h.request }));
 vi.mock("@/lib/ai/demo-marketing.server", () => ({ generateFictionalMarketingPractice: vi.fn() }));
+vi.mock("@/lib/ai/budget.server", async (original) => ({
+  ...(await original<typeof import("@/lib/ai/budget.server")>()),
+  prepareAIBudget: h.budget,
+}));
+import { budgetInputBinding } from "@/lib/ai/budget.server";
+import { budgetRoute, gatewayBilling } from "@/tests/ai-004/fixtures";
 import { generateAI } from "@/lib/ai.functions";
 import { getPrivateContract } from "@/lib/prompts/private-v1";
 
@@ -22,6 +35,8 @@ type Case = {
   user: string;
   schema: object;
   permission_context: unknown;
+  budget_binding_sha256: string;
+  budget_input_bytes: number;
   input: {
     project: Record<string, string>;
     interviews: unknown[];
@@ -29,7 +44,7 @@ type Case = {
     contacts: unknown[];
   };
 };
-const fixtures = JSON.parse(readFileSync("src/tests/ai-eval/fixtures.v3.json", "utf8")) as {
+const fixtures = JSON.parse(readFileSync("src/tests/ai-eval/fixtures.v4.json", "utf8")) as {
   cases: Case[];
 };
 afterEach(() => vi.unstubAllEnvs());
@@ -38,7 +53,14 @@ beforeEach(() => {
   vi.clearAllMocks();
   h.prepare.mockResolvedValue(h.write);
   h.write.mockResolvedValue("fa030000-0000-4000-8000-000000000001");
-  h.request.mockResolvedValue({ data: { fixture: true } });
+  h.request.mockResolvedValue({ ...gatewayBilling, data: { fixture: true } });
+  h.budget.mockImplementation(async (scope) => ({
+    route: { ...budgetRoute, kind: scope.kind },
+    claim: h.claim,
+    settle: h.settle,
+    markUnknown: vi.fn(),
+    cancelBeforeDispatch: vi.fn(),
+  }));
 });
 describe("AI-003 reproducible evaluation inputs", () => {
   it.each(fixtures.cases)(
@@ -66,7 +88,11 @@ describe("AI-003 reproducible evaluation inputs", () => {
         return q;
       };
       await (generateAI as unknown as (args: unknown) => Promise<unknown>)({
-        data: { kind: c.kind, projectId: project.id },
+        data: {
+          kind: c.kind,
+          projectId: project.id,
+          operationId: "fa030000-0000-4000-8000-000000000004",
+        },
         context: {
           supabase: {
             from,
@@ -85,7 +111,15 @@ describe("AI-003 reproducible evaluation inputs", () => {
       expect(h.request).toHaveBeenCalledExactlyOnceWith(
         expect.objectContaining({ kind: c.kind, system: c.system, user: c.user, schema: c.schema }),
       );
-      if (c.id === "stage3-edge-v3") {
+      const scope = h.budget.mock.calls[0]![0];
+      expect(scope.operationId).toBe("fa030000-0000-4000-8000-000000000004");
+      expect(budgetInputBinding(scope.context)).toEqual({
+        contextSha256: c.budget_binding_sha256,
+        inputBytes: c.budget_input_bytes,
+      });
+      expect(h.claim).toHaveBeenCalledOnce();
+      expect(h.settle).toHaveBeenCalledWith(expect.objectContaining({ outputValid: true }));
+      if (c.id === "stage3-edge-v4") {
         const user = h.request.mock.calls[0]?.[0].user;
         expect(user).toContain("PRIVACY LIMITS");
         expect(user).not.toContain("WITHDRAWN_PRIVATE_NOTE");

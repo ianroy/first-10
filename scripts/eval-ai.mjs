@@ -16,7 +16,7 @@ export const OUTPUT_CAP = 2500;
 export const MAX_CALLS = 8;
 const KINDS = ["questions", "synthesis", "stage2", "stage3"];
 export const hash = (value) => createHash("sha256").update(value).digest("hex");
-export const FIXTURE_PATH = "src/tests/ai-eval/fixtures.v3.json";
+export const FIXTURE_PATH = "src/tests/ai-eval/fixtures.v4.json";
 const SOURCE_PATHS = [
   "src/lib/ai.functions.ts",
   "src/lib/ai/contracts.ts",
@@ -24,6 +24,10 @@ const SOURCE_PATHS = [
   "src/lib/prompts/private-v1.ts",
   "src/lib/consent.ts",
   "supabase/migrations/20261018011000_processing_consent.sql",
+  "src/lib/ai/budget.server.ts",
+  "src/lib/ai/budget-contract.ts",
+  "supabase/migrations/20261018014000_ai_usage_budget.sql",
+  "src/hooks/useAIIntent.ts",
 ];
 const plain = (value) => value !== null && typeof value === "object" && !Array.isArray(value);
 const isoDate = (value) =>
@@ -37,6 +41,24 @@ const label = (value) =>
   value.length <= 200 &&
   !/[\x00-\x1f\x7f]/.test(value);
 export const contractHash = (contract) => hash(JSON.stringify(contract));
+const canonicalJson = (value) =>
+  Array.isArray(value)
+    ? `[${value.map(canonicalJson).join(",")}]`
+    : value !== null && typeof value === "object"
+      ? `{${Object.keys(value)
+          .sort()
+          .map((key) => `${JSON.stringify(key)}:${canonicalJson(value[key])}`)
+          .join(",")}}`
+      : JSON.stringify(value);
+export function fixtureBudgetBinding(c) {
+  const serialized = canonicalJson({
+    system: c.system,
+    user: c.user,
+    schema: c.schema,
+    ...c.contract,
+  });
+  return { contextSha256: hash(serialized), inputBytes: Buffer.byteLength(serialized, "utf8") };
+}
 export function assembleFixtureContext(c) {
   const {
     project: p,
@@ -98,7 +120,9 @@ export async function loadFixtures(root = ROOT) {
   const fixture = JSON.parse(raw);
   if (
     !plain(fixture) ||
-    fixture.version !== "first-ten-existing-kinds-v3" ||
+    fixture.version !== "first-ten-existing-kinds-v4" ||
+    typeof fixture.source_commit !== "string" ||
+    !/^[a-f0-9]{40}$/.test(fixture.source_commit) ||
     !Array.isArray(fixture.cases) ||
     !plain(fixture.source_sha256) ||
     !isDeepStrictEqual(Object.keys(fixture.source_sha256).sort(), [...SOURCE_PATHS].sort())
@@ -183,6 +207,12 @@ export async function loadFixtures(root = ROOT) {
       throw new Error(
         "Prompt/schema/context parity failed; version the fixture rather than updating hashes alone.",
       );
+    const binding = fixtureBudgetBinding(c);
+    if (
+      c.budget_binding_sha256 !== binding.contextSha256 ||
+      c.budget_input_bytes !== binding.inputBytes
+    )
+      throw new Error("Exact canonical budget input binding mismatch.");
     const ids = c.source_catalog.map((s) => s?.id);
     const quotes = c.source_catalog.map((s) => s?.quote);
     if (
@@ -204,7 +234,8 @@ export async function loadFixtures(root = ROOT) {
 
 export function estimatedReservation(c) {
   // Deliberately conservative text-byte proxy plus 4096 framing/schema tokens; not a tokenizer proof.
-  // The dedicated non-resetting key limit is the external total-spend guard.
+  // Historical OFFLINE planning preview only: NOT an authorization, tokenizer proof or atomic spend bound.
+  // Actual paid requests require generateAI's DB-reviewed full-endpoint-ceiling reservation; --run is disabled.
   const inputProxy = Buffer.byteLength(c.system + c.user + JSON.stringify(c.schema), "utf8") + 4096;
   return (inputProxy * 0.1 + OUTPUT_CAP * 0.4) / 1_000_000;
 }
@@ -522,7 +553,7 @@ async function exportPacket(fixtures, outputDirectory) {
 
 export async function runOfflineBaseline(fixtures, root = ROOT) {
   const baseline = JSON.parse(
-    await readFile(resolve(root, "evals/offline-baseline.v3.json"), "utf8"),
+    await readFile(resolve(root, "evals/offline-baseline.v4.json"), "utf8"),
   );
   if (
     baseline.fixture_sha256 !== fixtures.fixture_sha256 ||
