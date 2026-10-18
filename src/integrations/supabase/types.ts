@@ -930,6 +930,10 @@ export type Database = {
         Args: { p_class_id: string; p_days: number; p_recipient_id: string; p_request_id: string };
         Returns: Json;
       };
+      create_guest_entry: {
+        Args: { p_class_id: string; p_days: number; p_max_uses: number; p_request_id: string };
+        Returns: Json;
+      };
       create_interview_draft: {
         Args: {
           p_contact_id: string;
@@ -966,6 +970,16 @@ export type Database = {
       };
       current_platform_admin: { Args: Record<PropertyKey, never>; Returns: boolean };
       current_project_role: { Args: { p_project_id: string }; Returns: string };
+      exchange_guest_entry: {
+        Args: {
+          p_client_hash: string;
+          p_kind: string;
+          p_principal_alias: string;
+          p_team_alias: string;
+          p_token: string;
+        };
+        Returns: Json;
+      };
       finish_ai_usage: {
         Args: {
           p_action: string;
@@ -986,6 +1000,7 @@ export type Database = {
       };
       get_class: { Args: { p_class_id: string }; Returns: Json };
       get_founding_partner_counts: { Args: Record<PropertyKey, never>; Returns: Json };
+      get_guest_session: { Args: { p_session: string }; Returns: Json };
       get_member_project_summary: { Args: { p_project_id: string }; Returns: Json };
       get_platform_admin_authorization: { Args: Record<PropertyKey, never>; Returns: Json };
       get_processing_consent: {
@@ -999,6 +1014,8 @@ export type Database = {
       list_class_assignments: { Args: { p_class_id: string; p_cursor?: string }; Returns: Json };
       list_class_invitations: { Args: { p_class_id: string; p_cursor?: string }; Returns: Json };
       list_class_members: { Args: { p_class_id: string; p_cursor?: string }; Returns: Json };
+      list_guest_entries: { Args: { p_class_id: string }; Returns: Json };
+      list_guest_teams: { Args: { p_class_id: string; p_cursor?: string }; Returns: Json };
       list_interview_drafts: { Args: { p_project_id: string }; Returns: Json };
       list_my_classes: { Args: { p_cursor?: string }; Returns: Json };
       list_project_invitations: {
@@ -1008,6 +1025,7 @@ export type Database = {
       list_project_members: { Args: { p_cursor?: string; p_project_id: string }; Returns: Json };
       load_discovery_workspace: { Args: { p_project_id: string }; Returns: Json };
       load_interview_draft: { Args: { p_draft_id: string; p_project_id: string }; Returns: Json };
+      manage_guest_session: { Args: { p_operation: string; p_session: string }; Returns: Json };
       project_collaboration_enabled: { Args: Record<PropertyKey, never>; Returns: boolean };
       record_ai_generation: { Args: { p_record: Json }; Returns: string };
       record_ai_generation_v2: {
@@ -1060,6 +1078,11 @@ export type Database = {
           p_membership_id: string;
           p_request_id: string;
         };
+        Returns: Json;
+      };
+      revoke_guest_entry: { Args: { p_class_id: string; p_entry_id: string }; Returns: Json };
+      revoke_guest_scope: {
+        Args: { p_class_id: string; p_principal_id?: string; p_team_id: string };
         Returns: Json;
       };
       revoke_project_invitation: {

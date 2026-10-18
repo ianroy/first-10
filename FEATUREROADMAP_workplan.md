@@ -22,10 +22,10 @@ Statuses are `not_started`, `in_progress`, `blocked`, `complete`, `deferred`, `d
 current_iteration: 5
 current_stage: P1_foundation_with_parallel_P2_and_R0
 status: in_progress
-last_task_done: AI-007
-next_task: WS-004
-next_parallel_wave: [CLS-007, WS-004, CTX-001]
-active_claims: [CLS-007, WS-004, CTX-001]
+last_task_done: WS-004
+next_task: CLS-007
+next_parallel_wave: [CLS-007, CTX-001, WS-009]
+active_claims: [CLS-007, CTX-001, WS-009]
 research_gate: not_passed
 foundation_gate: not_passed
 realtime_go: pending
@@ -44,16 +44,19 @@ resume_hint: >-
   routes, allowances or opening review. The original fixed $1 fictional practice is preserved.
   CLS-001 foundations and scoped invitation UI are live through migration 15000. Both
   GitHub checks for 02aeb1f passed; 705 app tests and 1192 rollback SQL assertions passed.
-  WS-004 migration 16000 is approved and applied only on dedicated local port 55322;
-  103 focused SQL assertions pass and actual completion races are under final verification.
-  Root is adding private saved drafts to the explicitly opened PDF portfolio, failing closed
-  on partial, stale or mismatched acquisition. UI handoff follows the backend handoff.
+  WS-004 complete ef65da7/e539848/8363331: real save/completion races passed; hosted16 and
+  desktop save/reopen verified fictional draft revision2, completed count unchanged at5.
+  Exact-script draft PDF and selected-project portfolio coverage verified; actual3page PDF QA.
+  WS-009 archive-freeze implementation claimed with additive20000 after18/19.
   AI-007 is integrated b276993/b30605f/ab5933f with immutable v5. Combined 751 app tests,
   1333 rollback SQL assertions, typecheck/lint/build and 19 offline eval checks pass. Hosted
   migrations 16 then 17 applied normally after exact dry-run; no seeds, roles or paid calls.
   General AI remains disabled; source inspection and model-quality gates remain outstanding.
-  CLS-007 migration 18000 is under review and not approved for apply. Entry/session source
-  and UI are being tested; review caught expiry, admission-counter and history-cap issues.
+  CLS-007 integrated41da669; exact reviewed18000 applied only dedicated local55322 after17,
+  official types/routes regenerated. Combined786 app tests/1402SQL/typecheck/build pass.
+  Root classes nav and safe educator return are ready; hosted18 normal apply succeeded after
+  exact dry-run. Two auth-return regression cases pass; live guest acceptance is next.
+  CTX-001 first retrieval/review slice in progress with19000; no provider inclusion yet.
   Publish and apply migrations in order 16, 17, 18. Regenerate types and verify combined gates.
   General model quality, guest activities/submissions, sharing and retention remain unfinished.
 

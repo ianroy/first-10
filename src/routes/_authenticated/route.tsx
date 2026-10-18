@@ -13,9 +13,10 @@ export const Route = createFileRoute("/_authenticated")({
           view:
             location.pathname === "/admin"
               ? "admin"
-              : location.pathname === "/teacher"
+              : location.pathname === "/teacher" || location.pathname === "/classes"
                 ? "educator"
                 : "student",
+          ...(location.pathname === "/classes" ? { next: "/classes" as const } : {}),
         },
       });
     return { user: data.user };

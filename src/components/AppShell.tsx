@@ -126,6 +126,13 @@ export function AppShell({ title, children }: { title: string; children: ReactNo
             Evidence → decision → one small next test
           </p>
           <Link
+            to="/classes"
+            className="flex min-h-11 items-center justify-between rounded-xl border bg-card px-4 text-sm font-semibold"
+          >
+            Classes & hackathons
+            <ArrowUpRight className="size-4" aria-hidden="true" />
+          </Link>
+          <Link
             to="/teacher"
             className="flex min-h-11 items-center justify-between px-2 text-sm font-medium"
           >

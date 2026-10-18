@@ -22,12 +22,13 @@ const OTHER_PATHS = [
   "/learnings",
   "/outreach",
   "/teacher",
+  "/classes",
   "/admin",
   "/account",
   "/settings",
 ];
 
-export function renderPage(Page: FunctionComponent, path: string) {
+export function renderPage(Page: FunctionComponent, path: string, initialEntry = path) {
   const root = createRootRoute({ component: () => <Outlet /> });
   const routes = [
     createRoute({ getParentRoute: () => root, path, component: Page }),
@@ -37,7 +38,7 @@ export function renderPage(Page: FunctionComponent, path: string) {
   ];
   const router = createRouter({
     routeTree: root.addChildren(routes),
-    history: createMemoryHistory({ initialEntries: [path] }),
+    history: createMemoryHistory({ initialEntries: [initialEntry] }),
   });
   const queryClient = new QueryClient({ defaultOptions: { queries: { retry: false } } });
   return render(

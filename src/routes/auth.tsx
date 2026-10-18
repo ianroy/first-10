@@ -12,8 +12,11 @@ const destinations = { student: "/dashboard", educator: "/teacher", admin: "/adm
 const isView = (value: unknown): value is View =>
   value === "student" || value === "educator" || value === "admin";
 export const Route = createFileRoute("/auth")({
-  validateSearch: (search: Record<string, unknown>): { view?: View; callback?: boolean } => ({
+  validateSearch: (
+    search: Record<string, unknown>,
+  ): { view?: View; callback?: boolean; next?: "/classes" } => ({
     ...(isView(search["view"]) ? { view: search["view"] } : {}),
+    ...(search["next"] === "/classes" ? { next: "/classes" } : {}),
     ...(search["callback"] === true || search["callback"] === "true" ? { callback: true } : {}),
   }),
   head: () => ({
@@ -34,7 +37,11 @@ export const Route = createFileRoute("/auth")({
 export function AuthPage() {
   const navigate = useNavigate();
   const queryClient = useQueryClient();
-  const search = useSearch({ strict: false }) as { view?: View; callback?: boolean };
+  const search = useSearch({ strict: false }) as {
+    view?: View;
+    callback?: boolean;
+    next?: "/classes";
+  };
   const [view, setView] = useState<View>(search.view ?? "student");
   const [existingUser, setExistingUser] = useState<{ id: string; demo: boolean } | null>(null);
   const openView = useCallback(
@@ -50,9 +57,11 @@ export function AuthPage() {
         }
       }
       queryClient.clear();
-      void navigate({ to: destinations[target] });
+      void navigate({
+        to: target === "educator" && search.next === "/classes" ? "/classes" : destinations[target],
+      });
     },
-    [navigate, queryClient],
+    [navigate, queryClient, search.next],
   );
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -189,7 +198,7 @@ export function AuthPage() {
                   const { error } = await supabase.auth.signInWithOtp({
                     email: address,
                     options: {
-                      emailRedirectTo: `${window.location.origin}/auth?callback=true&view=${view}`,
+                      emailRedirectTo: `${window.location.origin}/auth?callback=true&view=${view}${view === "educator" && search.next === "/classes" ? "&next=%2Fclasses" : ""}`,
                     },
                   });
                   if (error) throw error;
@@ -199,7 +208,7 @@ export function AuthPage() {
                     email: email.trim(),
                     password,
                     options: {
-                      emailRedirectTo: `${window.location.origin}/auth?callback=true&view=${view === "admin" ? "student" : view}`,
+                      emailRedirectTo: `${window.location.origin}/auth?callback=true&view=${view === "admin" ? "student" : view}${view === "educator" && search.next === "/classes" ? "&next=%2Fclasses" : ""}`,
                     },
                   });
                   if (error) throw error;

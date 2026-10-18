@@ -15,9 +15,11 @@ import { Route as AuthRouteImport } from './routes/auth'
 import { Route as DemoRouteImport } from './routes/demo'
 import { Route as FoundingPartnersRouteImport } from './routes/founding-partners'
 import { Route as InviteRouteImport } from './routes/invite'
+import { Route as JoinRouteImport } from './routes/join'
 import { Route as TeachRouteImport } from './routes/teach'
 import { Route as AuthenticatedAccountRouteImport } from './routes/_authenticated/account'
 import { Route as AuthenticatedAdminRouteImport } from './routes/_authenticated/admin'
+import { Route as AuthenticatedClassesRouteImport } from './routes/_authenticated/classes'
 import { Route as AuthenticatedContactsRouteImport } from './routes/_authenticated/contacts'
 import { Route as AuthenticatedDashboardRouteImport } from './routes/_authenticated/dashboard'
 import { Route as AuthenticatedDiscoveryRouteImport } from './routes/_authenticated/discovery'
@@ -58,6 +60,11 @@ const InviteRoute = InviteRouteImport.update({
   path: '/invite',
   getParentRoute: () => rootRouteImport,
 } as any)
+const JoinRoute = JoinRouteImport.update({
+  id: '/join',
+  path: '/join',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const TeachRoute = TeachRouteImport.update({
   id: '/teach',
   path: '/teach',
@@ -71,6 +78,11 @@ const AuthenticatedAccountRoute = AuthenticatedAccountRouteImport.update({
 const AuthenticatedAdminRoute = AuthenticatedAdminRouteImport.update({
   id: '/admin',
   path: '/admin',
+  getParentRoute: () => AuthenticatedRouteRoute,
+} as any)
+const AuthenticatedClassesRoute = AuthenticatedClassesRouteImport.update({
+  id: '/classes',
+  path: '/classes',
   getParentRoute: () => AuthenticatedRouteRoute,
 } as any)
 const AuthenticatedContactsRoute = AuthenticatedContactsRouteImport.update({
@@ -130,9 +142,11 @@ export interface FileRoutesByFullPath {
   '/demo': typeof DemoRoute
   '/founding-partners': typeof FoundingPartnersRoute
   '/invite': typeof InviteRoute
+  '/join': typeof JoinRoute
   '/teach': typeof TeachRoute
   '/account': typeof AuthenticatedAccountRoute
   '/admin': typeof AuthenticatedAdminRoute
+  '/classes': typeof AuthenticatedClassesRoute
   '/contacts': typeof AuthenticatedContactsRoute
   '/dashboard': typeof AuthenticatedDashboardRoute
   '/discovery': typeof AuthenticatedDiscoveryRoute
@@ -150,9 +164,11 @@ export interface FileRoutesByTo {
   '/demo': typeof DemoRoute
   '/founding-partners': typeof FoundingPartnersRoute
   '/invite': typeof InviteRoute
+  '/join': typeof JoinRoute
   '/teach': typeof TeachRoute
   '/account': typeof AuthenticatedAccountRoute
   '/admin': typeof AuthenticatedAdminRoute
+  '/classes': typeof AuthenticatedClassesRoute
   '/contacts': typeof AuthenticatedContactsRoute
   '/dashboard': typeof AuthenticatedDashboardRoute
   '/discovery': typeof AuthenticatedDiscoveryRoute
@@ -172,9 +188,11 @@ export interface FileRoutesById {
   '/demo': typeof DemoRoute
   '/founding-partners': typeof FoundingPartnersRoute
   '/invite': typeof InviteRoute
+  '/join': typeof JoinRoute
   '/teach': typeof TeachRoute
   '/_authenticated/account': typeof AuthenticatedAccountRoute
   '/_authenticated/admin': typeof AuthenticatedAdminRoute
+  '/_authenticated/classes': typeof AuthenticatedClassesRoute
   '/_authenticated/contacts': typeof AuthenticatedContactsRoute
   '/_authenticated/dashboard': typeof AuthenticatedDashboardRoute
   '/_authenticated/discovery': typeof AuthenticatedDiscoveryRoute
@@ -194,9 +212,11 @@ export interface FileRouteTypes {
     | '/demo'
     | '/founding-partners'
     | '/invite'
+    | '/join'
     | '/teach'
     | '/account'
     | '/admin'
+    | '/classes'
     | '/contacts'
     | '/dashboard'
     | '/discovery'
@@ -214,9 +234,11 @@ export interface FileRouteTypes {
     | '/demo'
     | '/founding-partners'
     | '/invite'
+    | '/join'
     | '/teach'
     | '/account'
     | '/admin'
+    | '/classes'
     | '/contacts'
     | '/dashboard'
     | '/discovery'
@@ -235,9 +257,11 @@ export interface FileRouteTypes {
     | '/demo'
     | '/founding-partners'
     | '/invite'
+    | '/join'
     | '/teach'
     | '/_authenticated/account'
     | '/_authenticated/admin'
+    | '/_authenticated/classes'
     | '/_authenticated/contacts'
     | '/_authenticated/dashboard'
     | '/_authenticated/discovery'
@@ -257,6 +281,7 @@ export interface RootRouteChildren {
   DemoRoute: typeof DemoRoute
   FoundingPartnersRoute: typeof FoundingPartnersRoute
   InviteRoute: typeof InviteRoute
+  JoinRoute: typeof JoinRoute
   TeachRoute: typeof TeachRoute
   ApiHealthRoute: typeof ApiHealthRoute
 }
@@ -305,6 +330,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof InviteRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/join': {
+      id: '/join'
+      path: '/join'
+      fullPath: '/join'
+      preLoaderRoute: typeof JoinRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/teach': {
       id: '/teach'
       path: '/teach'
@@ -324,6 +356,13 @@ declare module '@tanstack/react-router' {
       path: '/admin'
       fullPath: '/admin'
       preLoaderRoute: typeof AuthenticatedAdminRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
+    '/_authenticated/classes': {
+      id: '/_authenticated/classes'
+      path: '/classes'
+      fullPath: '/classes'
+      preLoaderRoute: typeof AuthenticatedClassesRouteImport
       parentRoute: typeof AuthenticatedRouteRoute
     }
     '/_authenticated/contacts': {
@@ -402,6 +441,7 @@ declare module '@tanstack/react-router' {
 interface AuthenticatedRouteRouteChildren {
   AuthenticatedAccountRoute: typeof AuthenticatedAccountRoute
   AuthenticatedAdminRoute: typeof AuthenticatedAdminRoute
+  AuthenticatedClassesRoute: typeof AuthenticatedClassesRoute
   AuthenticatedContactsRoute: typeof AuthenticatedContactsRoute
   AuthenticatedDashboardRoute: typeof AuthenticatedDashboardRoute
   AuthenticatedDiscoveryRoute: typeof AuthenticatedDiscoveryRoute
@@ -416,6 +456,7 @@ interface AuthenticatedRouteRouteChildren {
 const AuthenticatedRouteRouteChildren: AuthenticatedRouteRouteChildren = {
   AuthenticatedAccountRoute: AuthenticatedAccountRoute,
   AuthenticatedAdminRoute: AuthenticatedAdminRoute,
+  AuthenticatedClassesRoute: AuthenticatedClassesRoute,
   AuthenticatedContactsRoute: AuthenticatedContactsRoute,
   AuthenticatedDashboardRoute: AuthenticatedDashboardRoute,
   AuthenticatedDiscoveryRoute: AuthenticatedDiscoveryRoute,
@@ -437,6 +478,7 @@ const rootRouteChildren: RootRouteChildren = {
   DemoRoute: DemoRoute,
   FoundingPartnersRoute: FoundingPartnersRoute,
   InviteRoute: InviteRoute,
+  JoinRoute: JoinRoute,
   TeachRoute: TeachRoute,
   ApiHealthRoute: ApiHealthRoute,
 }

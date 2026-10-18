@@ -3785,7 +3785,7 @@
       "id": "WS-004",
       "title": "Persist versioned interview drafts",
       "phase": "P3",
-      "status": "in_progress",
+      "status": "complete",
       "owner": "agent",
       "size": "S",
       "kind": "implementation",
@@ -3846,31 +3846,26 @@
           "text": "Claimed after deployedDISCmanualcycle verified. Approved read-only design: exact questionsnapshot, private CAS saves/resume, separate processing choices, explicit atomic exactly-once completion via existing captureRPC, no completed counts/evidence beforecompletion. Forwardfix archival captureguard/pipeline-state preservation in16000. Rootfixes missedregenerateintent beforeworkerbranchsync. Rootserializes generatedtypes and15000→16000→17000 publication/apply; do not edit earlier migrations."
         }
       ],
-      "claim": {
-        "owner": "plan_audit",
-        "branch": "codex/interview-drafts-20261018",
-        "base_commit": "0263cf3",
-        "worktree": "/private/tmp/first-ten-activity-pdf",
-        "started_at": "2026-10-18T16:06:53.445Z",
-        "lease_expires_at": "2026-10-19T00:00:00Z"
-      },
-      "completion_evidence": [],
+      "claim": null,
+      "completion_evidence": [
+        "ef65da7 + e539848 + 8363331 (worker50450de/163d24b): private server-saved drafts with exact question snapshots, CAS/idempotent edits, permission-led notes, explicit reload/conflict recovery and atomic reviewed completion. Combined767 app tests and1333 rollback SQL assertions passed through17; newer combined786/1402 through18 also pass. Actual two-connection save and duplicate completion races passed with fixture cleanup and audit trigger restoration. Actual three-page Unicode/long-note PDF rendered and inspected, including final-page endpoint. Hosted16 applied normally; production desktop fictional manual draft saved/reopened at revision2 with exact script/notes and completed count unchanged at5; no real interview or AI/sharing grant invented. Screenshot /private/tmp/first-ten-pdf-qa/live-interview-resumed-desktop.png. Completion atomicity verified in local real SQL and UI tests, not by inflating the live workshop interview count."
+      ],
       "subtasks": [
         {
           "id": "WS-004.s1",
-          "status": "not_started",
+          "status": "complete",
           "instruction": "Define draft revision, owner, project, contact, answers and consent state with private access.",
           "notes": []
         },
         {
           "id": "WS-004.s2",
-          "status": "not_started",
+          "status": "complete",
           "instruction": "Implement expected-revision writes and idempotent draft creation.",
           "notes": []
         },
         {
           "id": "WS-004.s3",
-          "status": "not_started",
+          "status": "complete",
           "instruction": "Exclude drafts from completed counts, stage gates, AI evidence and shared projections until explicit completion.",
           "notes": []
         }
@@ -11230,7 +11225,7 @@
       "id": "WS-009",
       "title": "Enforce archived-workspace write and generation boundaries",
       "phase": "P3",
-      "status": "not_started",
+      "status": "in_progress",
       "owner": "agent",
       "size": "M",
       "kind": "implementation",
@@ -11238,12 +11233,26 @@
       "depends_on": ["WS-002", "SEC-005", "AI-007"],
       "requires_decisions": [],
       "write_scope": [
-        "supabase/migrations/**",
+        "supabase/migrations/20261018020000_archived_workspace_freeze.sql",
         "src/lib/project-lifecycle.ts",
-        "src/lib/ai.functions.ts",
-        "src/lib/invitations.functions.ts",
+        "src/lib/write-errors.ts",
+        "src/lib/marketing-plan.ts",
+        "src/lib/marketing.functions.ts",
+        "src/lib/teacher-plan.ts",
+        "src/lib/teacher.functions.ts",
+        "src/routes/_authenticated/contacts.tsx",
+        "src/routes/_authenticated/interview.tsx",
+        "src/routes/_authenticated/learnings.tsx",
+        "src/routes/_authenticated/outreach.tsx",
+        "src/routes/_authenticated/setup.tsx",
         "src/tests/ws-009/**",
-        "supabase/tests/ws-009.sql"
+        "supabase/tests/ws-009.sql",
+        "docs/architecture/archived-workspaces.md",
+        "src/components/marketing/SavedMarketingLab.tsx",
+        "src/components/teaching/TeacherPlanner.tsx",
+        "src/components/ConsentFields.tsx",
+        "src/lib/consent.functions.ts",
+        "src/routes/_authenticated/account.tsx"
       ],
       "exclusive_locks": ["ws-009-integration"],
       "read_first": [
@@ -11280,9 +11289,24 @@
         {
           "date": "2026-10-18",
           "text": "Owner explicitly added as core product value; preserve privacy boundaries and show status truthfully."
+        },
+        {
+          "date": "2026-10-18",
+          "text": "Claimed after AI007 and interview drafts land. Migration20 reserved after guest18/context19. Implement table/claim guards, revoke project lifecycle column client updates, narrow privacy-reducing exceptions and safe retryable lock conflict handling; preserve accounting, authorized deletion, owner read/export/restore and legacy data. No historical migration, prompt, gateway or evalv5 edit. Root serializes review/apply/publish and exact source snapshots."
+        },
+        {
+          "date": "2026-10-18",
+          "text": "Approved exact caller UI copy scopes for archive errors and obsolete account archive statement. Core consent.ts remains immutable-v5 bound and outside scope; use wrapper/local error handling without refreshing historical evaluation pins. Context19 owner read/withdraw forward guards must be coordinated with its worker."
         }
       ],
-      "claim": null,
+      "claim": {
+        "owner": "plan_audit",
+        "branch": "codex/archive-freeze-20261018",
+        "base_commit": "41da669",
+        "worktree": "/private/tmp/first-ten-activity-pdf",
+        "started_at": "2026-10-18T20:02:00Z",
+        "lease_expires_at": "2026-10-19T00:30:00Z"
+      },
       "completion_evidence": [],
       "subtasks": [
         {

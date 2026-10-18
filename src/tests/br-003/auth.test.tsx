@@ -16,6 +16,25 @@ beforeEach(() => {
   auth.onAuthStateChange.mockReturnValue({ data: { subscription: { unsubscribe: vi.fn() } } });
 });
 afterEach(cleanup);
+it.each([
+  ["%2Fclasses", "/classes"],
+  ["https%3A%2F%2Fexample.invalid", "/teacher"],
+])("limits educator return destinations to the classroom route (%s)", async (next, destination) => {
+  auth.signInWithPassword.mockResolvedValue({
+    data: { user: { id: "ordinary-teacher" } },
+    error: null,
+  });
+  renderPage(AuthPage, "/auth", `/auth?view=educator&next=${next}`);
+  await screen.findByRole("heading", { name: "Continue your learning" });
+  fireEvent.change(screen.getByLabelText("Email or demo username"), {
+    target: { value: "teacher@example.test" },
+  });
+  fireEvent.change(screen.getByLabelText("Password", { exact: true }), {
+    target: { value: "test-secret" },
+  });
+  fireEvent.submit(screen.getByLabelText("Password", { exact: true }).closest("form")!);
+  expect(await screen.findByText(`at ${destination}`)).toBeInTheDocument();
+});
 it("keeps sign-in available for an existing account instead of redirecting into setup", async () => {
   auth.getSession.mockResolvedValue({ data: { session: { user: { id: "ordinary-user" } } } });
   renderPage(AuthPage, "/auth");
