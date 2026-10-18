@@ -1,4 +1,5 @@
 import { useEffect, useRef, useState } from "react";
+import { useInterviewDraft } from "@/lib/useInterviewDraft";
 import { useBlocker } from "@tanstack/react-router";
 import { ArrowLeft, Save } from "lucide-react";
 import { Button } from "@/components/ui/button";
@@ -18,19 +19,8 @@ import { ConsentFields } from "@/components/ConsentFields";
 import { OwnerActivityExport } from "@/components/export/OwnerActivityExport";
 import { AIOrigin } from "@/components/AIOrigin";
 import { TAGS, useContacts, useRefresh, type Project } from "@/lib/data";
-import {
-  loadInterviewDraft,
-  saveInterviewDraft,
-  completeInterviewDraft,
-} from "@/lib/interview-drafts.functions";
-import {
-  draftErrorText,
-  interviewDraftDocumentSchema,
-  type InterviewDraftRecord,
-  type InterviewDraftDocument,
-  type saveDraftSchema,
-} from "@/lib/interview-drafts";
-import type { z } from "zod";
+import { completeInterviewDraft } from "@/lib/interview-drafts.functions";
+import { draftErrorText, type InterviewDraftDocument } from "@/lib/interview-drafts";
 import { interviewDraftActivities } from "@/lib/export/interview-draft-adapters";
 export function InterviewDraftSession({
   project,
@@ -41,19 +31,62 @@ export function InterviewDraftSession({
   draftId: string;
   onDone: () => void;
 }) {
-  const [record, setRecord] = useState<InterviewDraftRecord | null>(null),
-    [doc, setDoc] = useState<InterviewDraftDocument | null>(null),
-    [contactId, setContactId] = useState<string | null>(null),
-    [busy, setBusy] = useState(false),
-    [dirty, setDirty] = useState(false),
-    [conflict, setConflict] = useState(false),
-    [error, setError] = useState(""),
-    [notice, setNotice] = useState(""),
-    [attempt, setAttempt] = useState(0),
+  return (
+    <ScopedInterviewDraftSession
+      key={`${project.user_id}:${project.id}:${draftId}`}
+      project={project}
+      draftId={draftId}
+      onDone={onDone}
+    />
+  );
+}
+function ScopedInterviewDraftSession({
+  project,
+  draftId,
+  onDone,
+}: {
+  project: Project;
+  draftId: string;
+  onDone: () => void;
+}) {
+  const [busy, setBusy] = useState(false),
     [action, setAction] = useState<"exit" | "reload" | "complete" | "clear" | null>(null),
     [conducted, setConducted] = useState(false);
-  const mounted = useRef(true),
-    pending = useRef<{ fingerprint: string; data: z.infer<typeof saveDraftSchema> } | null>(null);
+  const session = useInterviewDraft({
+    ownerId: project.user_id,
+    projectId: project.id,
+    draftId,
+    suspendAutosave: busy || action !== null,
+  });
+  const {
+    record,
+    doc,
+    contactId,
+    dirty,
+    conflict,
+    error,
+    notice,
+    accept,
+    change,
+    setError,
+    setNotice,
+    setConflict,
+  } = session;
+  const mounted = useRef(true);
+  useEffect(() => {
+    mounted.current = true;
+    return () => {
+      mounted.current = false;
+    };
+  }, []);
+  useEffect(() => {
+    setConducted(false);
+  }, [record?.revision]);
+  async function save(next?: InterviewDraftDocument) {
+    setBusy(true);
+    await session.save(next);
+    if (mounted.current) setBusy(false);
+  }
   const {
     data: contacts = [],
     isLoading: contactsLoading,
@@ -61,87 +94,10 @@ export function InterviewDraftSession({
   } = useContacts(project.id);
   const refresh = useRefresh();
   const blocker = useBlocker({
-    shouldBlockFn: () => dirty || busy,
-    enableBeforeUnload: dirty || busy,
+    shouldBlockFn: () => dirty || busy || session.saving || session.loading,
+    enableBeforeUnload: dirty || busy || session.saving || session.loading,
     withResolver: true,
   });
-  function accept(r: InterviewDraftRecord) {
-    setRecord(r);
-    setDoc(r.document ? structuredClone(r.document) : null);
-    setContactId(r.contactId);
-    setDirty(false);
-    setConflict(false);
-    setConducted(false);
-    pending.current = null;
-  }
-  useEffect(() => {
-    mounted.current = true;
-    let active = true;
-    setRecord(null);
-    setDoc(null);
-    void loadInterviewDraft({ data: { projectId: project.id, draftId } })
-      .then((r) => {
-        if (!active) return;
-        if (r.ok) {
-          accept(r.draft);
-          setError("");
-        } else setError(draftErrorText[r.code]);
-      })
-      .catch(() => {
-        if (active) setError(draftErrorText.UNAVAILABLE);
-      });
-    return () => {
-      mounted.current = false;
-      active = false;
-    };
-  }, [project.id, draftId, attempt]);
-  function change(fn: (d: InterviewDraftDocument) => void) {
-    if (busy || !doc) return;
-    setDoc((before) => {
-      const d = structuredClone(before!);
-      fn(d);
-      return d;
-    });
-    setDirty(true);
-    setNotice("");
-    pending.current = null;
-    if (!conflict) setError("");
-  }
-  async function save(next = doc) {
-    if (!record || !next || busy || conflict) return;
-    const p = interviewDraftDocumentSchema.safeParse(next);
-    if (!p.success) {
-      setError(p.error.issues[0]?.message ?? "Review the draft.");
-      return;
-    }
-    const base = {
-        projectId: project.id,
-        draftId,
-        expectedRevision: record.revision,
-        contactId,
-        document: p.data,
-      },
-      fingerprint = JSON.stringify(base);
-    if (pending.current?.fingerprint !== fingerprint)
-      pending.current = { fingerprint, data: { ...base, mutationId: crypto.randomUUID() } };
-    setBusy(true);
-    setError("");
-    const r = await saveInterviewDraft({ data: pending.current.data }).catch(
-      () => ({ ok: false, code: "UNAVAILABLE" }) as const,
-    );
-    if (!mounted.current) return;
-    setBusy(false);
-    if (r.ok) {
-      accept(r.draft);
-      setNotice(
-        "Draft saved. It is still incomplete and is not included in interview counts or AI evidence.",
-      );
-    } else {
-      setError(draftErrorText[r.code]);
-      if (["CONFLICT", "IDEMPOTENCY_CONFLICT", "ALREADY_COMPLETED"].includes(r.code))
-        setConflict(true);
-    }
-  }
   async function confirm() {
     const next = action;
     setAction(null);
@@ -150,17 +106,7 @@ export function InterviewDraftSession({
       return;
     }
     if (next === "reload") {
-      setBusy(true);
-      const r = await loadInterviewDraft({ data: { projectId: project.id, draftId } }).catch(
-        () => ({ ok: false, code: "UNAVAILABLE" }) as const,
-      );
-      if (!mounted.current) return;
-      setBusy(false);
-      if (r.ok) {
-        accept(r.draft);
-        setError("");
-        setNotice("Saved draft reloaded.");
-      } else setError("Reload failed. Your current local draft remains here.");
+      await session.reload();
       return;
     }
     if (next === "clear" && doc) {
@@ -172,13 +118,19 @@ export function InterviewDraftSession({
         aiStatus: "withdrawn",
         sharingStatus: "withdrawn",
       };
-      setDoc(cleared);
-      setDirty(true);
-      pending.current = null;
+      change((value) => Object.assign(value, cleared));
       await save(cleared);
       return;
     }
-    if (next === "complete" && record && !dirty && conducted) {
+    if (
+      next === "complete" &&
+      record &&
+      !dirty &&
+      !session.saving &&
+      !session.loading &&
+      !session.paused &&
+      conducted
+    ) {
       setBusy(true);
       setError("");
       const r = await completeInterviewDraft({
@@ -187,10 +139,7 @@ export function InterviewDraftSession({
       if (!mounted.current) return;
       setBusy(false);
       if (r.ok) {
-        setDirty(false);
-        setConflict(false);
-        setDoc(null);
-        setRecord({
+        accept({
           ...record,
           status: "completed",
           document: null,
@@ -232,13 +181,14 @@ export function InterviewDraftSession({
                 : "Resume your conversation"}
           </h1>
           <p className="mt-2 max-w-3xl text-sm text-muted-foreground">
-            Save a draft to resume later. Only explicit completion records an interview. Questions
-            remain the exact snapshot captured at the start.
+            Changes save automatically after a short pause. Only confirmed saves can be resumed;
+            keep this page open until saved. Only explicit completion records an interview.
+            Questions remain the exact snapshot captured at the start.
           </p>
         </div>
         <Button
           variant="outline"
-          disabled={busy}
+          disabled={busy || session.saving || session.loading}
           onClick={() => (dirty ? setAction("exit") : onDone())}
         >
           <ArrowLeft />
@@ -259,7 +209,7 @@ export function InterviewDraftSession({
         <div>
           <p>Opening the saved private draft…</p>
           {error && (
-            <Button variant="outline" onClick={() => setAttempt((n) => n + 1)}>
+            <Button variant="outline" onClick={session.retryOpening}>
               Retry opening draft
             </Button>
           )}
@@ -281,13 +231,83 @@ export function InterviewDraftSession({
           <>
             <div className="mb-5 flex flex-wrap items-center gap-3 text-sm">
               <span className="rounded-full bg-secondary px-3 py-1">
-                {dirty ? "Unsaved changes" : `Saved revision ${record.revision}`}
+                {session.saving
+                  ? "Saving…"
+                  : session.paused
+                    ? "Autosave paused · local work retained"
+                    : dirty
+                      ? "Unsaved changes · waiting to save"
+                      : `Saved revision ${record.revision}`}
               </span>
               <span>Incomplete · excluded from AI evidence</span>
-              <Button variant="ghost" disabled={busy} onClick={() => setAction("reload")}>
+              <Button
+                variant="ghost"
+                disabled={busy || session.saving || session.loading}
+                onClick={() => setAction("reload")}
+              >
                 Review / reload saved draft
               </Button>
             </div>
+            {session.paused && !conflict && (
+              <p className="mb-4 text-sm text-muted-foreground">
+                Automatic saving is paused. If a result is unconfirmed, Save draft retries that
+                exact request first; newer local edits stay here and save only after its
+                acknowledgement. Reconnecting does not retry automatically. No private text is
+                stored in browser storage.
+              </p>
+            )}
+            {conflict && (
+              <section
+                className="mb-5 rounded-xl border p-4"
+                aria-label="Conflicting interview versions"
+              >
+                <p className="text-sm">
+                  Your local version remains editable and exportable. Compare the current saved
+                  version before choosing whether to reload. Permissions are never merged
+                  automatically.
+                </p>
+                <Button
+                  variant="outline"
+                  disabled={busy || session.loading || session.saving}
+                  onClick={() => void session.reload(true)}
+                >
+                  Compare saved version
+                </Button>
+                {session.remote && (
+                  <div className="mt-4" aria-label="Current remote interview draft">
+                    <h2 className="font-semibold">
+                      Saved revision {session.remote.revision} · {session.remote.status}
+                    </h2>
+                    {session.remote.document ? (
+                      <>
+                        <p className="text-sm">
+                          Note permission: {session.remote.document.choices.noteStatus}; AI:{" "}
+                          {session.remote.document.choices.aiStatus}; sharing:{" "}
+                          {session.remote.document.choices.sharingStatus}.
+                        </p>
+                        {session.remote.document.answers.map((answer, index) => (
+                          <article key={index} className="mt-3 border-t py-3">
+                            <h3>{answer.q}</h3>
+                            <p className="whitespace-pre-wrap">
+                              {answer.note || "No saved observation"}
+                            </p>
+                            <p className="whitespace-pre-wrap">
+                              {answer.quote || "No saved quote"}
+                            </p>
+                          </article>
+                        ))}
+                      </>
+                    ) : (
+                      <p>The saved draft is completed; only its completion receipt remains.</p>
+                    )}
+                    <p className="mt-3 text-sm">
+                      Export or copy your local work before using Review / reload saved draft to
+                      replace it deliberately.
+                    </p>
+                  </div>
+                )}
+              </section>
+            )}
             {missingContact && (
               <div role="alert" className="mb-5 rounded-xl border p-4 text-sm">
                 The saved person is no longer available. Keep the notes and explicitly unlink the
@@ -296,11 +316,7 @@ export function InterviewDraftSession({
                   className="ml-3"
                   variant="outline"
                   disabled={busy}
-                  onClick={() => {
-                    setContactId(null);
-                    setDirty(true);
-                    pending.current = null;
-                  }}
+                  onClick={session.unlinkContact}
                 >
                   Unlink unavailable person
                 </Button>
@@ -320,7 +336,7 @@ export function InterviewDraftSession({
                 style={{ width: `${(i / doc.answers.length) * 100}%` }}
               />
             </div>
-            <fieldset disabled={busy} className="space-y-6">
+            <fieldset disabled={busy || session.loading} className="space-y-6">
               <details className="rounded-xl border bg-card p-4">
                 <summary className="min-h-11 cursor-pointer font-semibold">
                   Note, AI and sharing choices
@@ -496,7 +512,16 @@ export function InterviewDraftSession({
                   Next
                 </Button>
               )}
-              <Button disabled={busy || !dirty || conflict} onClick={() => void save()}>
+              <Button
+                disabled={
+                  busy ||
+                  session.saving ||
+                  session.loading ||
+                  (!dirty && !session.paused) ||
+                  conflict
+                }
+                onClick={() => void save()}
+              >
                 <Save />
                 {busy ? "Working…" : "Save draft"}
               </Button>
@@ -504,6 +529,9 @@ export function InterviewDraftSession({
                 <Button
                   disabled={
                     busy ||
+                    session.saving ||
+                    session.loading ||
+                    session.paused ||
                     dirty ||
                     conflict ||
                     !conducted ||
@@ -517,7 +545,9 @@ export function InterviewDraftSession({
               )}
               <Button
                 variant="ghost"
-                disabled={busy || conflict}
+                disabled={
+                  busy || session.saving || session.loading || session.uncertain || conflict
+                }
                 onClick={() => setAction("clear")}
               >
                 Clear notes and save withdrawal
@@ -548,7 +578,7 @@ export function InterviewDraftSession({
             </AlertDialogTitle>
             <AlertDialogDescription>
               {blocker.status === "blocked" || action === "exit"
-                ? "Only the last confirmed save can be resumed. Keep working to save or export your local changes first."
+                ? "Only the last confirmed save can be resumed. An unconfirmed request may still finish. Keep working to save or export your local changes first."
                 : action === "complete"
                   ? "The exact saved revision and its choices will become one completed interview. This is your report of a conversation. No message or AI request is sent."
                   : action === "clear"
