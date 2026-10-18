@@ -5,7 +5,8 @@ import { useServerFn } from "@tanstack/react-start";
 import { Copy, Lock } from "lucide-react";
 import { supabase } from "@/integrations/supabase/client";
 import { generateAI } from "@/lib/ai.functions";
-import { validateAIOutput } from "@/lib/ai/contracts";
+import { recordedAIOutput, outreachRows } from "@/lib/ai/saved-output";
+import { AIOrigin } from "@/components/AIOrigin";
 import { AppShell, Card, DraftBadge, Empty } from "@/components/AppShell";
 import { RequireProject } from "@/components/RequireProject";
 import { Button } from "@/components/ui/button";
@@ -72,8 +73,6 @@ function OutreachPage({ p }: { p: Project }) {
   );
 }
 
-type Titled = { title: string; body: string };
-
 function useGenerate(p: Project, kind: "stage2" | "stage3") {
   const gen = useServerFn(generateAI);
   const refresh = useRefresh();
@@ -81,33 +80,21 @@ function useGenerate(p: Project, kind: "stage2" | "stage3") {
   const run = async () => {
     setBusy(true);
     try {
-      const output = await gen({ data: { kind, projectId: p.id } });
-      const r =
-        kind === "stage2" ? validateAIOutput("stage2", output) : validateAIOutput("stage3", output);
-      const stage = kind === "stage2" ? 2 : 3;
-      await supabase.from("outreach").delete().eq("project_id", p.id).eq("stage", stage);
-      const rows: { kind: string; title: string; body: string }[] =
-        "drafts" in r
-          ? [
-              ...r.channels.map((c: Titled) => ({ kind: "channel", ...c })),
-              ...r.drafts.map((c: Titled) => ({ kind: "draft", ...c })),
-            ]
-          : [
-              ...r.channels.map((c: Titled) => ({ kind: "channel", ...c })),
-              ...r.referral_asks.map((b: string, i: number) => ({
-                kind: "referral",
-                title: `Referral ask ${i + 1}`,
-                body: b,
-              })),
-              ...r.onboarding_questions.map((b: string) => ({
-                kind: "onboarding",
-                title: "",
-                body: b,
-              })),
-            ];
-      await supabase.from("outreach").insert(rows.map((x) => ({ ...x, project_id: p.id, stage })));
-      if ("survey" in r)
-        await supabase.from("projects").update({ survey: r.survey }).eq("id", p.id);
+      const output = await gen({ data: { kind, projectId: p.id, withOrigin: true } });
+      const recorded =
+        kind === "stage2" ? recordedAIOutput("stage2", output) : recordedAIOutput("stage3", output);
+      const r = recorded.data;
+      const saved = await supabase.rpc("save_generated_outreach", {
+        p_project_id: p.id,
+        p_stage: kind === "stage2" ? 2 : 3,
+        p_origin_id: recorded.originId,
+        p_rows: outreachRows(r),
+        ...("survey" in r ? { p_survey: r.survey } : {}),
+      });
+      if (saved.error)
+        throw new Error(
+          "The new outreach plan could not be saved. Your previous saved plan is unchanged.",
+        );
       refresh("outreach", "project");
     } catch (e) {
       toast.error((e as Error).message);
@@ -138,6 +125,7 @@ function DraftItem({ o, copy }: { o: Outreach; copy?: boolean | undefined }) {
           }
         }}
       />
+      <AIOrigin projectId={o.project_id} originId={o.generation_origin_id} />
       {copy && (
         <Button
           variant="outline"
@@ -225,6 +213,7 @@ function Stage2({ p }: { p: Project }) {
             Review for people who tried it. One question per line. Copy to your own form or message;
             responses are not collected here.
           </p>
+          <AIOrigin projectId={p.id} originId={p.survey_origin_id} />
           <Textarea
             aria-labelledby="feedback-survey-title"
             aria-describedby="feedback-survey-help"

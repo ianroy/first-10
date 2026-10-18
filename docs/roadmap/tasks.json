@@ -2021,7 +2021,17 @@
         "src/lib/ai.functions.test.ts",
         "supabase/tests/ai-002.sql",
         "src/lib/ai/gateway.server.ts",
-        "src/lib/ai/provenance.server.ts"
+        "src/lib/ai/provenance.server.ts",
+        "src/lib/ai/contracts.ts",
+        "src/lib/ai/saved-output.ts",
+        "src/components/AIOrigin.tsx",
+        "src/routes/_authenticated/interview.tsx",
+        "src/routes/_authenticated/learnings.tsx",
+        "src/routes/_authenticated/outreach.tsx",
+        "supabase/migrations/20261018008000_ai_output_origins.sql",
+        "supabase/tests/ai-002_output_origins.sql",
+        "src/integrations/supabase/types.ts",
+        "src/tests/marketing-lab/persistence-ui.test.tsx"
       ],
       "exclusive_locks": [
         "ai-provenance-schema"
@@ -2071,6 +2081,14 @@
         {
           "date": "2026-10-18",
           "text": "The worker stopped with an out-of-credits error; root completed frozen prompt/schema contracts and the metadata-only success ledger. The focused 21 tests, typecheck, lint and combined 619 SQL assertions pass. Hosted migration 06000 is applied. Strict returned payloads remain unchanged. The whole task is still incomplete: records currently link request, project and kind, but not later saved questions, synthesis, outreach or survey versions. Add durable saved-output linkage before marking AI-002 complete. No additional paid call was made."
+        },
+        {
+          "date": "2026-10-18",
+          "text": "Coordinator continues serialized AI-002: optional strict origin envelope, nullable saved-output links with owner/project/kind validation, owner-only metadata lookup and atomic outreach replacement. No prompt changes or additional paid evaluation authorized by this implementation; all private kinds retain their frozen contracts."
+        },
+        {
+          "date": "2026-10-18",
+          "text": "Saved-output implementation passes 372 app tests across 44 files, typecheck, lint (six existing Fast Refresh warnings) and production build. Dedicated local SQL passes 659 assertions (40 new origin/link/rollback checks) and confirms fixture rollback. Hosted dry run listed only08000, then normal migration push applied08000. Browser verification against the new deployed app is pending before task completion; no paid call yet in this continuation."
         }
       ],
       "claim": {

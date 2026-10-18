@@ -95,6 +95,7 @@ export async function prepareProvenanceWriter(scope: {
         })
         .abortSignal(AbortSignal.timeout(10_000));
       if (saved.error || saved.data !== requestId) throw new Error("record unavailable");
+      return requestId;
     } catch {
       // Never retry a paid generation because its audit write failed; never expose database/provider payloads.
       throw new Error(

@@ -41,8 +41,10 @@ resume_hint: >-
   Combined 357 tests, typecheck, lint and build pass; 619 real SQL assertions pass with
   rollback. The later label improvement passes 12 focused UI checks and live exact labels.
   CI 39131773694 and database policies 39131773786 passed at 92c43ee.
-  AI-002 remains active: durable generation links to later saved outputs are missing.
-  Do not claim the request metadata ledger proves the origin of edited saved rows.
+  AI-002 saved-output links, owner metadata UI and atomic outreach replacement are implemented.
+  Migration08000 is applied; 372 app tests and 659 SQL assertions pass; typecheck/lint/build pass.
+  New-deployment browser verification remains before task completion. Origin means source draft,
+  not proof that edited wording is unchanged or that its claims are true.
   SEC-004 is complete as a foundation, with collaboration disabled and no class visibility.
   The ten-hour checkpoint was 13:29:45 UTC; the report and final live checks followed.
   General class spaces/submissions, AI budgets, sharing, realtime and human studies remain.

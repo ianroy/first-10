@@ -83,7 +83,8 @@ describe("server-owned generation metadata", () => {
     const write = await prepareProvenanceWriter(scope());
     expect(h.getUser).toHaveBeenCalledWith("fixture-token");
     expect(h.rpc).not.toHaveBeenCalled();
-    await write(result());
+    const id = await write(result());
+    expect(id).toBe(h.rpc.mock.calls[0]?.[1].p_record.request_id);
     expect(h.rpc).toHaveBeenCalledTimes(1);
     expect(h.rpc.mock.calls[0]?.[0]).toBe("record_ai_generation");
     expect(h.rpc.mock.calls[0]?.[1].p_record).toMatchObject({

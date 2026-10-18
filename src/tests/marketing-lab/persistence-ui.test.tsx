@@ -30,6 +30,8 @@ const project: Project = {
   link: "",
   stage: 2,
   questions: [],
+  questions_origin_id: null,
+  survey_origin_id: null,
   survey: [],
   checklist: {},
   updated_at: "2026-10-18T00:00:00Z",

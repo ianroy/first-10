@@ -4,6 +4,8 @@ import { toast } from "sonner";
 import { useServerFn } from "@tanstack/react-start";
 import { supabase } from "@/integrations/supabase/client";
 import { generateAI } from "@/lib/ai.functions";
+import { recordedAIOutput } from "@/lib/ai/saved-output";
+import { AIOrigin } from "@/components/AIOrigin";
 import { AppShell, Card, DraftBadge, Empty } from "@/components/AppShell";
 import { RequireProject } from "@/components/RequireProject";
 import { Button } from "@/components/ui/button";
@@ -106,17 +108,26 @@ function Synthesis({ p, synth }: { p: Project; synth: Learning | undefined }) {
   const run = async () => {
     setBusy(true);
     try {
-      const r = (await gen({ data: { kind: "synthesis", projectId: p.id } })) as Synth;
-      if (synth)
-        await supabase.from("learnings").update({ data: r, accepted: false }).eq("id", synth.id);
-      else
-        await supabase.from("learnings").insert({
-          project_id: p.id,
-          stage: 1,
-          kind: "synthesis",
-          title: "What I learned from my first conversations",
-          data: r,
-        });
+      const output = await gen({ data: { kind: "synthesis", projectId: p.id, withOrigin: true } });
+      const recorded = recordedAIOutput("synthesis", output);
+      const fields = {
+        data: recorded.data,
+        generation_origin_id: recorded.originId,
+        accepted: false,
+      };
+      const saved = synth
+        ? await supabase.from("learnings").update(fields).eq("id", synth.id)
+        : await supabase.from("learnings").insert({
+            project_id: p.id,
+            stage: 1,
+            kind: "synthesis",
+            title: "What I learned from my first conversations",
+            ...fields,
+          });
+      if (saved.error)
+        throw new Error(
+          "The new summary could not be saved. Your previous saved work is unchanged.",
+        );
       refresh("learnings");
     } catch (e) {
       toast.error((e as Error).message);
@@ -166,6 +177,7 @@ function Synthesis({ p, synth }: { p: Project; synth: Learning | undefined }) {
         One item per line. Check quotes against the original notes, preserve disagreement and edit
         unsupported interpretations.
       </p>
+      <AIOrigin projectId={p.id} originId={synth.generation_origin_id} />
       <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-1 xl:grid-cols-2">
         {SECTIONS.map(([k, label]) => (
           <div key={k}>

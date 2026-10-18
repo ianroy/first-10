@@ -69,7 +69,7 @@ export const generateAI = createServerFn({ method: "POST" })
       kind: data.kind,
       schema: contract.schema,
     });
-    await recordSuccess(result);
-    // Keep all four strict legacy response objects unchanged.
-    return result.data;
+    const originId = await recordSuccess(result);
+    // Opt-in receipt stays outside all four strict provider response objects.
+    return data.withOrigin ? { data: result.data, originId } : result.data;
   });

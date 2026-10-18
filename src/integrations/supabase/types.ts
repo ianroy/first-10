@@ -148,6 +148,7 @@ export type Database = {
           body: string;
           created_at: string;
           data: NonNullable<Json>;
+          generation_origin_id: string | null;
           id: string;
           kind: string;
           project_id: string;
@@ -161,6 +162,7 @@ export type Database = {
           body?: string;
           created_at?: string;
           data?: NonNullable<Json>;
+          generation_origin_id?: string | null;
           id?: string;
           kind?: string;
           project_id: string;
@@ -173,6 +175,7 @@ export type Database = {
           body?: string;
           created_at?: string;
           data?: NonNullable<Json>;
+          generation_origin_id?: string | null;
           id?: string;
           kind?: string;
           project_id?: string;
@@ -242,6 +245,7 @@ export type Database = {
         Row: {
           body: string;
           created_at: string;
+          generation_origin_id: string | null;
           id: string;
           kind: string;
           project_id: string;
@@ -253,6 +257,7 @@ export type Database = {
         Insert: {
           body?: string;
           created_at?: string;
+          generation_origin_id?: string | null;
           id?: string;
           kind?: string;
           project_id: string;
@@ -263,6 +268,7 @@ export type Database = {
         Update: {
           body?: string;
           created_at?: string;
+          generation_origin_id?: string | null;
           id?: string;
           kind?: string;
           project_id?: string;
@@ -336,8 +342,10 @@ export type Database = {
           name: string;
           problem: string;
           questions: NonNullable<Json>;
+          questions_origin_id: string | null;
           stage: number;
           survey: NonNullable<Json>;
+          survey_origin_id: string | null;
           updated_at: string;
           user_id: string;
         };
@@ -352,8 +360,10 @@ export type Database = {
           name?: string;
           problem?: string;
           questions?: NonNullable<Json>;
+          questions_origin_id?: string | null;
           stage?: number;
           survey?: NonNullable<Json>;
+          survey_origin_id?: string | null;
           updated_at?: string;
           user_id?: string;
         };
@@ -367,8 +377,10 @@ export type Database = {
           name?: string;
           problem?: string;
           questions?: NonNullable<Json>;
+          questions_origin_id?: string | null;
           stage?: number;
           survey?: NonNullable<Json>;
+          survey_origin_id?: string | null;
           updated_at?: string;
           user_id?: string;
         };
@@ -425,6 +437,10 @@ export type Database = {
     };
     Functions: {
       current_project_role: { Args: { p_project_id: string }; Returns: string };
+      get_ai_generation_origin: {
+        Args: { p_origin_id: string; p_project_id: string };
+        Returns: Json;
+      };
       get_founding_partner_counts: { Args: Record<PropertyKey, never>; Returns: Json };
       get_member_project_summary: { Args: { p_project_id: string }; Returns: Json };
       list_project_members: { Args: { p_cursor?: string; p_project_id: string }; Returns: Json };
@@ -449,6 +465,16 @@ export type Database = {
           p_target_user_id: string;
         };
         Returns: Json;
+      };
+      save_generated_outreach: {
+        Args: {
+          p_origin_id: string;
+          p_project_id: string;
+          p_rows: Json;
+          p_stage: number;
+          p_survey?: Json;
+        };
+        Returns: undefined;
       };
       save_marketing_plan: {
         Args: {

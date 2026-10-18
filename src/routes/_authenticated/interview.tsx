@@ -5,7 +5,8 @@ import { useServerFn } from "@tanstack/react-start";
 import { Plus, Trash2, X } from "lucide-react";
 import { supabase } from "@/integrations/supabase/client";
 import { generateAI } from "@/lib/ai.functions";
-import { validateAIOutput } from "@/lib/ai/contracts";
+import { recordedAIOutput } from "@/lib/ai/saved-output";
+import { AIOrigin } from "@/components/AIOrigin";
 import { AppShell, Card, DraftBadge, Empty, PrivacyNote } from "@/components/AppShell";
 import { RequireProject } from "@/components/RequireProject";
 import { Button } from "@/components/ui/button";
@@ -60,6 +61,7 @@ function Prep({
   const { data: interviews = [] } = useInterviews(p.id);
   const [busy, setBusy] = useState(false);
   const [draft, setDraft] = useState<string[] | null>(null);
+  const [draftOrigin, setDraftOrigin] = useState<string | null | undefined>(undefined);
   const [who, setWho] = useState("");
   const [asked, setAsked] = useState(false);
   const qs = draft ?? questions;
@@ -68,13 +70,17 @@ function Prep({
   const save = async (list: string[]) => {
     const { error } = await supabase
       .from("projects")
-      .update({ questions: list.filter((q) => q.trim()) })
+      .update({
+        questions: list.filter((q) => q.trim()),
+        questions_origin_id: draftOrigin === undefined ? p.questions_origin_id : draftOrigin,
+      })
       .eq("id", p.id);
     if (error) {
       toast.error(error.message);
       return;
     }
     setDraft(null);
+    setDraftOrigin(undefined);
     refresh("project");
     toast.success("Questions saved");
   };
@@ -96,6 +102,12 @@ function Prep({
               Ask what happened last time and how they handled it. Leave room for disagreement; save
               the pitch for another conversation.
             </p>
+            {qs.length > 0 && (
+              <AIOrigin
+                projectId={p.id}
+                originId={draftOrigin === undefined ? p.questions_origin_id : draftOrigin}
+              />
+            )}
             {qs.length === 0 ? (
               <Button
                 size="xl"
@@ -103,8 +115,12 @@ function Prep({
                 onClick={async () => {
                   setBusy(true);
                   try {
-                    const r = await gen({ data: { kind: "questions", projectId: p.id } });
-                    setDraft(validateAIOutput("questions", r).questions);
+                    const r = await gen({
+                      data: { kind: "questions", projectId: p.id, withOrigin: true },
+                    });
+                    const recorded = recordedAIOutput("questions", r);
+                    setDraft(recorded.data.questions);
+                    setDraftOrigin(recorded.originId);
                   } catch (e) {
                     toast.error((e as Error).message);
                   }
@@ -158,8 +174,12 @@ function Prep({
                   onClick={async () => {
                     setBusy(true);
                     try {
-                      const r = await gen({ data: { kind: "questions", projectId: p.id } });
-                      setDraft(validateAIOutput("questions", r).questions);
+                      const r = await gen({
+                        data: { kind: "questions", projectId: p.id, withOrigin: true },
+                      });
+                      const recorded = recordedAIOutput("questions", r);
+                      setDraft(recorded.data.questions);
+                      setDraftOrigin(recorded.originId);
                     } catch (e) {
                       toast.error((e as Error).message);
                     }

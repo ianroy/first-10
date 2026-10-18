@@ -41,15 +41,15 @@ const sb = {
     return q;
   },
 };
-const invoke = (kind: string) =>
+const invoke = (kind: string, withOrigin?: boolean) =>
   (generateAI as unknown as (args: unknown) => Promise<unknown>)({
-    data: { kind, projectId: project.id },
+    data: { kind, projectId: project.id, withOrigin },
     context: { supabase: sb, userId: project.user_id },
   });
 beforeEach(() => {
   vi.clearAllMocks();
   h.prepare.mockResolvedValue(h.write);
-  h.write.mockResolvedValue(undefined);
+  h.write.mockResolvedValue("fa028000-0000-4000-8000-000000000001");
 });
 describe("generateAI legacy response compatibility", () => {
   it.each(Object.keys(outputs) as ExistingKind[])(
@@ -75,6 +75,17 @@ describe("generateAI legacy response compatibility", () => {
       );
       expect(h.write).toHaveBeenCalledWith(result);
       expect(h.request.mock.calls[0]?.[0].user).toContain("APP: Fixture\nWhat it does: PRIVATE");
+    },
+  );
+  it.each(Object.keys(outputs) as ExistingKind[])(
+    "returns an opt-in receipt outside strict %s JSON",
+    async (kind) => {
+      h.request.mockResolvedValue({ data: outputs[kind] });
+      expect(await invoke(kind, true)).toEqual({
+        data: outputs[kind],
+        originId: "fa028000-0000-4000-8000-000000000001",
+      });
+      expect(h.write).toHaveBeenCalledTimes(1);
     },
   );
   it("never returns a successful draft when provenance cannot commit", async () => {
