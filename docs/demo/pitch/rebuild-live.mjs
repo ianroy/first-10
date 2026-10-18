@@ -19,11 +19,45 @@ const sources = {
     "https://www.brandeis.edu/programs/business/course-schedule/course?acad_year=2026&class_section=1&crse_id=DEFINITION-3-13833&strm=1253",
   bus232: "https://www.brandeis.edu/global/impact/2023/asper-center.pdf",
 };
+export const teamProfiles = [
+  {
+    "name": "Ian Roy",
+    "bio": "Design & Innovation · Brandeis University\nSenior Lecturer, Engineering & Business",
+    "url": "https://scholarworks.brandeis.edu/esploro/profile/ian_roy/overview"
+  },
+  {
+    "name": "Anna M. Pietraszek",
+    "bio": "Entrepreneurship Center Director\nFlorida International University",
+    "url": "https://business.fiu.edu/about/directory/profile/pietraszeka"
+  },
+  {
+    "name": "Jungsoo Ahn",
+    "bio": "Assistant Professor, Strategy & Entrepreneurship\nStony Brook University",
+    "url": "https://www.stonybrook.edu/business/faculty-research/faculty-directory/jungsoo-ahn.html"
+  },
+  {
+    "name": "José Pedro Carreón Gutiérrez",
+    "bio": "MBA leadership · EGADE Business School\nTecnológico de Monterrey",
+    "url": "https://egade.tec.mx/en/profesor/pedro-carreon"
+  },
+  {
+    "name": "Harini Mittal",
+    "bio": "Business & Information Systems\nBronx Community College, CUNY",
+    "url": "https://www.bcc.cuny.edu/employees/mittal-harini/",
+    "linkedin": "https://www.linkedin.com/in/harini-mittal-ms-mba-phd-78a3615/"
+  },
+  {
+    "name": "Raquel Thomas",
+    "bio": "Business & Entrepreneurship\nBenedict College",
+    "url": "https://benedict.edu/faculty-and-staff/raquel-thomas/"
+  }
+];
+
 const authoredSlides = [
   {
     title: "First Ten",
     caption:
-      "Built by Ian Roy, Jungsoo Ahn, Harini Mittal, José Pedro Carreón Gutiérrez, Anna M. Pietraszek and Raquel M. Richardson for the Babson AI Academy. Workshop context does not imply institutional endorsement.",
+      "Built by Ian Roy, Jungsoo Ahn, Harini Mittal, José Pedro Carreón Gutiérrez, Anna M. Pietraszek and Raquel Thomas for the Babson AI Academy. Workshop context does not imply institutional endorsement.",
   },
   {
     title: "The first conversation is hard",
@@ -136,21 +170,19 @@ export default async function rebuild({ presentation, input }) {
     s.background.fill = [1, 10, 12].includes(i) ? forest : cream;
     let notes = authoredSlides[i].caption;
     if (i === 0) {
-      image(s, "brand/wordmark.png", 72, 48, 315, 70, "First Ten original logo");
-      text(s, "Customer conversations.\nA clearer next move.", 72, 177, 1136, 168, 64, ink, true);
-      text(s, "Babson AI for Entrepreneurship Educators", 76, 389, 1100, 44, 28, ink, true);
-      text(
-        s,
-        "Ian Roy  ·  Jungsoo Ahn  ·  Harini Mittal\nJosé Pedro Carreón Gutiérrez\nAnna M. Pietraszek  ·  Raquel M. Richardson",
-        76,
-        470,
-        1100,
-        120,
-        25,
-        ink,
-      );
-      footer(s, "Babson AI Academy team  /  October 18, 2026");
-      notes += " Event source: " + sources.event;
+      image(s, "brand/wordmark.png", 72, 40, 315, 70, "First Ten original logo");
+      text(s, "Customer conversations.\nA clearer next move.", 72, 145, 1136, 154, 60, ink, true);
+      text(s, "Babson AI for Entrepreneurship Educators", 76, 324, 1100, 44, 28, ink, true);
+      teamProfiles.forEach((person, index) => {
+        const x = index % 2 === 0 ? 76 : 670;
+        const y = 410 + Math.floor(index / 2) * 80;
+        const name = text(s, person.name, x, y, 540, 32, 24, ink, true);
+        name.text = [[{ run: person.name, style: { underline: "sng" }, link: { uri: person.url, isExternal: true } }]];
+        text(s, person.bio, x, y + 34, 540, 45, 17, "#4D655A");
+      });
+      footer(s, "Babson AI Academy team  /  October 18, 2026  /  Select a name for their professional profile");
+      notes += " Event source: " + sources.event + " Professional profiles: " + teamProfiles.map(p => p.name + ": " + p.url).join(" ; ") +
+        ". Names/links supplied by the owner; Raquel Thomas replaces the earlier title-slide credit. Ian's role supported by https://www.brandeis.edu/library/design-innovation/people/index.html ; Anna and Jungsoo by their current linked directories; Harini's department by BCC directory; José's MBA leadership by https://newsroom.itesm.mx/Paginas/Expertos-Tec.aspx?PageFirstRow=451&Paged=TRUE&View=%7BE0F885B2-E576-4C5C-BE09-8F2D9A97E303%7D&p_ID=769 ; Raquel's affiliation by Benedict's 2025–2026 catalogue. The supplied José page redirects in the research fetch, and Benedict's individual profile blocks the research fetch; links are retained as supplied, not claimed as browser-verified.";
     } else if (i === 1) {
       header(s, "THE TEACHING PROBLEM", "The first conversation is hard", true);
       text(

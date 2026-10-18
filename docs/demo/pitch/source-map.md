@@ -4,7 +4,7 @@ Checked 2026-10-18. The editable deck is the live Spaces page `page_984affe9853c
 
 | Slides | Claim or material | Basis and limit |
 | --- | --- | --- |
-| 1 | Six makers and original logo | README team list and repository brand assets. Names: Ian Roy, Jungsoo Ahn, Harini Mittal, José Pedro Carreón Gutiérrez, Anna M. Pietraszek, Raquel M. Richardson. |
+| 1 | Six makers and original logo | Owner-supplied professional profile links, verified institutional descriptions, README team list and repository brand assets. All six title-slide names link to their supplied profile; links also appear in companion captions. Names: Ian Roy, Jungsoo Ahn, Harini Mittal, José Pedro Carreón Gutiérrez, Anna M. Pietraszek, Raquel Thomas. |
 | 1 | Babson AI for Entrepreneurship Educators | [Official program](https://www.babson.edu/professional/entrepreneurship-education/faculty-and-staff-programs/ai-for-entrepreneurship-educators/), Oct 16–18, 2026, university educators at beginner/intermediate AI levels. Supports event context, not endorsement. |
 | 2–3 | Students may find outreach difficult; useful tests examine use and payment commitments | Teaching problem and candidate value supplied by the owner and current product research documents. No prevalence statistics, measured anxiety reduction, user acquisition or PMF claim. Stated willingness is not payment evidence. |
 | 4 | Maya, Nora and the attendance-confirmation decision | Authored fictional StudyLoop case in repository teaching/demo materials. No real person, customer quote or experiment result. |

@@ -202,12 +202,15 @@ The project remains connected to Lovable. Preserve published Git history: use or
 
 First Ten was created for the Babson AI Academy by:
 
-- Ian Roy
-- Jungsoo Ahn
-- Harini Mittal
-- José Pedro Carreón Gutiérrez
-- Anna M. Pietraszek
-- Raquel M. Richardson
+| Maker | Professional profile | Affiliation / focus |
+| --- | --- | --- |
+| Ian Roy | [Brandeis profile](https://scholarworks.brandeis.edu/esploro/profile/ian_roy/overview) | Brandeis University · Design & Innovation; Senior Lecturer in Engineering and Business |
+| Anna M. Pietraszek | [FIU profile](https://business.fiu.edu/about/directory/profile/pietraszeka) | Florida International University · Entrepreneurship Center Director; Associate Teaching Professor, Marketing & Logistics |
+| Jungsoo Ahn | [Stony Brook profile](https://www.stonybrook.edu/business/faculty-research/faculty-directory/jungsoo-ahn.html) | Stony Brook University College of Business · Assistant Professor of Strategy and Entrepreneurship |
+| José Pedro Carreón Gutiérrez | [EGADE profile](https://egade.tec.mx/en/profesor/pedro-carreon) | EGADE Business School, Tecnológico de Monterrey · MBA leadership |
+| Harini Mittal | [BCC profile](https://www.bcc.cuny.edu/employees/mittal-harini/) · [LinkedIn](https://www.linkedin.com/in/harini-mittal-ms-mba-phd-78a3615/) | Bronx Community College, CUNY · Business & Information Systems |
+| Raquel Thomas | [Benedict College profile](https://benedict.edu/faculty-and-staff/raquel-thomas/) | Benedict College · Business & Entrepreneurship |
+
 
 ## Project documents
 
