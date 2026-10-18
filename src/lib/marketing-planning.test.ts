@@ -30,7 +30,10 @@ it("does not mark dependent work done without completed prerequisites and an obs
   first.status = "done";
   expect(taskStatusError(second, p.test.tasks, "doing")).toBeNull();
   second.status = "doing";
-  expect(taskStatusError(first, p.test.tasks, "todo")).toMatch(/dependent/);
+  for (const reopened of ["todo", "doing", "blocked"] as const)
+    expect(taskStatusError(first, p.test.tasks, reopened)).toMatch(/dependent/);
+  second.status = "todo";
+  expect(taskStatusError(first, p.test.tasks, "doing")).toBeNull();
 });
 it("validates owner-recorded readiness/start/reflection without inventing counts or overwriting first thinking", () => {
   const p = planningFixture();

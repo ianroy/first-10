@@ -31,7 +31,7 @@ export function taskStatusError(
   status: MarketingTask["status"],
 ): string | null {
   if (
-    !["doing", "done"].includes(status) &&
+    status !== "done" &&
     task.status === "done" &&
     tasks.some(
       (other) => other.dependsOn.includes(task.id) && ["doing", "done"].includes(other.status),
