@@ -6,7 +6,9 @@ Defined for the Iteration 5 execution plan on 2026-10-17. These are operating co
 
 **Founder promise to test:** “Turn real customer conversations into a clearer next move.”
 
-**Educator promise to test:** “Help students show how customer evidence changes their next decision.”
+**Educator promise to test:** “Provision a private learning space, let students start without personal accounts, and take their evidence and decisions back out as PDFs.”
+
+**FERPA-first commitment:** minimize student identity data, keep private notes separate from intentionally submitted work, make institution-controlled processing explicit, and support portable PDF records of every activity. Guest classroom and universal export capabilities are new roadmap work; this is not a certification claim. [Design and execution requirements](privacy/ferpa-first-product-direction.md).
 
 | Value                         | What we do                                                                                                          | What we avoid                                                                                     |
 | ----------------------------- | ------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------- |

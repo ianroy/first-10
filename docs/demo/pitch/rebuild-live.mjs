@@ -21,36 +21,36 @@ const sources = {
 };
 export const teamProfiles = [
   {
-    "name": "Ian Roy",
-    "bio": "Design & Innovation · Brandeis University\nSenior Lecturer, Engineering & Business",
-    "url": "https://scholarworks.brandeis.edu/esploro/profile/ian_roy/overview"
+    name: "Ian Roy",
+    bio: "Design & Innovation · Brandeis University\nSenior Lecturer, Engineering & Business",
+    url: "https://scholarworks.brandeis.edu/esploro/profile/ian_roy/overview",
   },
   {
-    "name": "Anna M. Pietraszek",
-    "bio": "Entrepreneurship Center Director\nFlorida International University",
-    "url": "https://business.fiu.edu/about/directory/profile/pietraszeka"
+    name: "Anna M. Pietraszek",
+    bio: "Entrepreneurship Center Director\nFlorida International University",
+    url: "https://business.fiu.edu/about/directory/profile/pietraszeka",
   },
   {
-    "name": "Jungsoo Ahn",
-    "bio": "Assistant Professor, Strategy & Entrepreneurship\nStony Brook University",
-    "url": "https://www.stonybrook.edu/business/faculty-research/faculty-directory/jungsoo-ahn.html"
+    name: "Jungsoo Ahn",
+    bio: "Assistant Professor, Strategy & Entrepreneurship\nStony Brook University",
+    url: "https://www.stonybrook.edu/business/faculty-research/faculty-directory/jungsoo-ahn.html",
   },
   {
-    "name": "José Pedro Carreón Gutiérrez",
-    "bio": "MBA leadership · EGADE Business School\nTecnológico de Monterrey",
-    "url": "https://egade.tec.mx/en/profesor/pedro-carreon"
+    name: "José Pedro Carreón Gutiérrez",
+    bio: "MBA leadership · EGADE Business School\nTecnológico de Monterrey",
+    url: "https://egade.tec.mx/en/profesor/pedro-carreon",
   },
   {
-    "name": "Harini Mittal",
-    "bio": "Business & Information Systems\nBronx Community College, CUNY",
-    "url": "https://www.bcc.cuny.edu/employees/mittal-harini/",
-    "linkedin": "https://www.linkedin.com/in/harini-mittal-ms-mba-phd-78a3615/"
+    name: "Harini Mittal",
+    bio: "Business & Information Systems\nBronx Community College, CUNY",
+    url: "https://www.bcc.cuny.edu/employees/mittal-harini/",
+    linkedin: "https://www.linkedin.com/in/harini-mittal-ms-mba-phd-78a3615/",
   },
   {
-    "name": "Raquel Thomas",
-    "bio": "Business & Entrepreneurship\nBenedict College",
-    "url": "https://benedict.edu/faculty-and-staff/raquel-thomas/"
-  }
+    name: "Raquel Thomas",
+    bio: "Business & Entrepreneurship\nBenedict College",
+    url: "https://benedict.edu/faculty-and-staff/raquel-thomas/",
+  },
 ];
 
 const authoredSlides = [
@@ -177,11 +177,26 @@ export default async function rebuild({ presentation, input }) {
         const x = index % 2 === 0 ? 76 : 670;
         const y = 410 + Math.floor(index / 2) * 80;
         const name = text(s, person.name, x, y, 540, 32, 24, ink, true);
-        name.text = [[{ run: person.name, style: { underline: "sng" }, link: { uri: person.url, isExternal: true } }]];
+        name.text = [
+          [
+            {
+              run: person.name,
+              style: { underline: "sng" },
+              link: { uri: person.url, isExternal: true },
+            },
+          ],
+        ];
         text(s, person.bio, x, y + 34, 540, 45, 17, "#4D655A");
       });
-      footer(s, "Babson AI Academy team  /  October 18, 2026  /  Select a name for their professional profile");
-      notes += " Event source: " + sources.event + " Professional profiles: " + teamProfiles.map(p => p.name + ": " + p.url).join(" ; ") +
+      footer(
+        s,
+        "Babson AI Academy team  /  October 18, 2026  /  Select a name for their professional profile",
+      );
+      notes +=
+        " Event source: " +
+        sources.event +
+        " Professional profiles: " +
+        teamProfiles.map((p) => p.name + ": " + p.url).join(" ; ") +
         ". Names/links supplied by the owner; Raquel Thomas replaces the earlier title-slide credit. Ian's role supported by https://www.brandeis.edu/library/design-innovation/people/index.html ; Anna and Jungsoo by their current linked directories; Harini's department by BCC directory; José's MBA leadership by https://newsroom.itesm.mx/Paginas/Expertos-Tec.aspx?PageFirstRow=451&Paged=TRUE&View=%7BE0F885B2-E576-4C5C-BE09-8F2D9A97E303%7D&p_ID=769 ; Raquel's affiliation by Benedict's 2025–2026 catalogue. The supplied José page redirects in the research fetch, and Benedict's individual profile blocks the research fetch; links are retained as supplied, not claimed as browser-verified.";
     } else if (i === 1) {
       header(s, "THE TEACHING PROBLEM", "The first conversation is hard", true);
@@ -374,8 +389,15 @@ export default async function rebuild({ presentation, input }) {
         cream,
         true,
       );
-      image(s, "pitch/demo/student-worksheet.png", 76, 242, 540, 408,
-        "Actual printable Worksheet B: source, interpretation, counterexample, decision and next action");
+      image(
+        s,
+        "pitch/demo/student-worksheet.png",
+        76,
+        242,
+        540,
+        408,
+        "Actual printable Worksheet B: source, interpretation, counterexample, decision and next action",
+      );
       const rows = [
         ["Experiential learning", "A real conversation or small test"],
         ["Student-led thinking before AI", "Start with the student’s own explanation"],
@@ -401,8 +423,15 @@ export default async function rebuild({ presentation, input }) {
         ". EEF addresses school settings, not First Ten university efficacy. Owner-supplied BUS131 Week 6 activities inspired the marketing sequence. The main lab works manually. Presenter-only synthetic practice uses Gemini 2.5 Flash-Lite through OpenRouter on Google Vertex. The owner verified one production draft on 2026-10-18 at reported provider cost $0.000106. That single observed cost is not a forecast or a promise for other flows. General marketing AI remains planned; the existing four private AI kinds retain their separate baseline. A live AI call is not required for this presentation.";
     } else if (i === 11) {
       header(s, "GO TO MARKET", "Crossing the Chasm");
-      image(s, "pitch/founding-partners-qr.png", 1000, 24, 208, 208,
-        "Scan to join: https://first-10-three.vercel.app/founding-partners");
+      image(
+        s,
+        "pitch/founding-partners-qr.png",
+        1000,
+        24,
+        208,
+        208,
+        "Scan to join: https://first-10-three.vercel.app/founding-partners",
+      );
       text(s, "Scan to join", 1038, 238, 170, 30, 20, ink, true);
       // Editable adaptation of Moore's adoption lifecycle. No measured percentages.
       const curve = (x, w, y0, c1, c2, y1, fill) =>

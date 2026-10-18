@@ -30,6 +30,12 @@ For example, a founder building a study planner might hear that a student alread
 
 The proposed advantage is continuity from conversation to decision to follow-through. It still needs to earn its place alongside a founder's existing AI chat, documents, mentor and course tools. The app supports pieces of this loop today; general claim-level evidence links and a source-linked decision record remain research concepts.
 
+## FERPA-first classroom direction
+
+**A private learning space students can join without creating a personal account, with every activity exportable as a PDF.** Teachers will provision spaces for classes and hackathons; students use team aliases, review what they submit and keep portable copies of their work. Teacher visibility follows explicit class/team permissions and submitted versions. Private notes stay separate, and external AI remains a distinct, optional processing choice.
+
+This is a core product requirement now staged in the roadmap. Account-free class spaces and complete activity/team PDF export are not yet shipped. FERPA-first describes the design and operating commitment; institutional review and applicable agreements remain separate from engineering. See the [privacy and export direction](docs/privacy/ferpa-first-product-direction.md).
+
 ## A classroom process you can inspect
 
 The login-free **StudyLoop** example follows fictional perspectives through an interpretation, a counterexample, a choice and a proposed next test. Its resettable, deterministic flow needs no live model response and writes no product data. The example demonstrates a method; it does not claim that every source-linked interaction exists in the private app.

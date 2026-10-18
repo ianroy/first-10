@@ -21,16 +21,16 @@ Statuses are `not_started`, `in_progress`, `blocked`, `complete`, `deferred`, `d
 ```yaml
 current_iteration: 5
 current_stage: P1_foundation_with_parallel_P2_and_R0
-status: paused_by_owner_for_presentation
-last_task_done: PARTNER-002
-next_task: AI-002
-next_parallel_wave: []
-active_claims: [AI-002]
+status: in_progress
+last_task_done: AI-002
+next_task: FERPA-001
+next_parallel_wave: [WS-001, SEC-006]
+active_claims: [FERPA-001, WS-001, SEC-006, EXP-001]
 research_gate: not_passed
 foundation_gate: not_passed
 realtime_go: pending
 last_updated: 2026-10-18
-last_documentation_update: "2026-10-18: duplicated title for timed opening: first Next starts clock on identical second title, 14 slides; product work remains paused."
+last_documentation_update: "2026-10-18: AI-002 complete; resumed lifecycle/admin parallel work; added FERPA-first account-free class/hackathon spaces and PDF export of every activity/team."
 resume_hint: >-
   Production 64bc86e includes complete MKT-006 manual planner controls and private partner
   Admin counts. Actual presenter login worked: 0 interest, 0 feedback, 0 distinct addresses
@@ -44,12 +44,13 @@ resume_hint: >-
   AI-002 saved-output links, owner metadata UI and atomic outreach replacement are implemented.
   Migration08000 is applied; 372 app tests and 659 SQL assertions pass; typecheck/lint/build pass.
   Deployed d564fa8; CampusSwap questions generated, reviewed, saved and reloaded with origin.
-  Reported cost $0.004239, Claude Sonnet4.5 via Amazon Bedrock. Product work paused by owner
-  for presentation/slide refinements; concurrency rehearsal and final handoff remain. Origin means source draft,
+  Reported cost $0.004239, Claude Sonnet4.5 via Amazon Bedrock. Owner resumed product work after presentation refinements; concurrency rehearsal and final handoff remain. Origin means source draft,
   not proof that edited wording is unchanged or that its claims are true.
   SEC-004 is complete as a foundation, with collaboration disabled and no class visibility.
   The ten-hour checkpoint was 13:29:45 UTC; the report and final live checks followed.
   General class spaces/submissions, AI budgets, sharing, realtime and human studies remain.
+  Owner added FERPA-first no-account class/hackathon participation and per-activity/team PDFs;
+  FERPA-001/002, CLS-007/008 and EXP-001/002/003 are explicit new requirements.
 
 ```
 

@@ -65,6 +65,14 @@ Record denominators, withdrawals and assistance. A facilitated paper exercise ca
 
 The owner identifies **10 years of classroom-tested proprietary pedagogy** as the company’s moat. That teaching-history statement is owner supplied; it does not establish measured outcomes for this new app. The pitch makes the pedagogy foundation visible beneath the technology.
 
+### 1.5 FERPA-first classes, hackathons and portable activity work
+
+The owner adds a core classroom value proposition: **teachers provision private spaces that students join without a personal account, and every activity can leave as a PDF.** Class and hackathon modes should require no student email, password or personal profile, provide team aliases and safe return access, and disclose the audience for each activity. Guest capabilities are scoped and revocable; a class join code never permits reading another team's work. Existing private account projects keep their present ownership boundaries.
+
+Export covers every implemented activity individually and complete selected team portfolios, not merely the public teaching-kit PDF or account JSON. Student and teacher exports use their respective authorized scopes. Teachers receive intentionally submitted versions, not automatic access to raw private notes. PDF generation preserves draft/fictional/unknown labels and selected evidence, supports preview/redaction, and requires no paid render service or external AI call.
+
+These are **new requirements**, not delivered guest-class or universal-export capabilities. The [FERPA-first product direction](docs/privacy/ferpa-first-product-direction.md) defines the technical/privacy work and primary sources. FERPA-001, CLS-007/008 and EXP-001/002/003 implement the design; FERPA-002 records actual institution-dependent review and agreements. Account-free does not mean anonymous or automatically compliant.
+
 ## 2. User journey and screens
 
 ### 2.1 Route map

@@ -24,7 +24,7 @@ const figures = slides
       i,
     ) => `        <figure class="slide${i === 0 ? " active" : ""}" aria-label="Slide ${i + 1} of ${slides.length}">
           <img src="slides/${String(i + 1).padStart(2, "0")}.png" width="1280" height="720" alt="${esc(s.title + ". " + s.caption)}" />
-          <figcaption>${esc(s.caption)}${i <= 1 ? " " + teamProfiles.map(p => `<a href="${esc(p.url)}">${esc(p.name)} — professional profile</a>`).join(" · ") : ""}${s.file ? ` <a href="https://first-10-three.vercel.app/pitch/demo/${s.file}.png">Open full-page capture</a>` : ""}${i === slides.length - 1 ? ' <a href="https://first-10-three.vercel.app/founding-partners">Become a founding partner</a>' : ""}</figcaption>
+          <figcaption>${esc(s.caption)}${i <= 1 ? " " + teamProfiles.map((p) => `<a href="${esc(p.url)}">${esc(p.name)} — professional profile</a>`).join(" · ") : ""}${s.file ? ` <a href="https://first-10-three.vercel.app/pitch/demo/${s.file}.png">Open full-page capture</a>` : ""}${i === slides.length - 1 ? ' <a href="https://first-10-three.vercel.app/founding-partners">Become a founding partner</a>' : ""}</figcaption>
         </figure>`,
   )
   .join("\n");

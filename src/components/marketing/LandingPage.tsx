@@ -265,6 +265,17 @@ export function LandingPage() {
                 <p className="mt-4 text-sm">
                   Printable PDF · Editable worksheets · No account or AI required
                 </p>
+                <div className="mt-6 border-t border-primary-foreground/25 pt-5">
+                  <p className="font-bold">Building toward FERPA-first classes and hackathons</p>
+                  <p className="mt-2 leading-relaxed">
+                    Provision a private space students can join with a team alias, without a
+                    personal account. Take every activity and the team’s work back out as PDFs.
+                  </p>
+                  <p className="mt-2 text-sm">
+                    Account-free class spaces and student activity exports are in development.
+                    FERPA-first is our design commitment; institutional review remains separate.
+                  </p>
+                </div>
               </div>
             </div>
           </section>

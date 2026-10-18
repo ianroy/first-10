@@ -1541,7 +1541,7 @@
       "id": "SEC-006",
       "title": "Platform admin role and audited privileged boundary",
       "phase": "P1",
-      "status": "not_started",
+      "status": "in_progress",
       "owner": "agent",
       "size": "S",
       "kind": "implementation",
@@ -1551,17 +1551,14 @@
       ],
       "requires_decisions": [],
       "write_scope": [
-        "supabase/migrations/**",
+        "supabase/migrations/20261018010000_platform_admin.sql",
         "src/lib/admin-auth.server.ts",
         "src/lib/admin-audit.server.ts",
         "src/tests/sec-006/**",
-        "src/lib/admin-auth.server.test.ts",
-        "src/lib/admin-audit.server.test.ts",
         "supabase/tests/sec-006.sql"
       ],
       "exclusive_locks": [
-        "database-schema",
-        "generated-types"
+        "platform-admin-authoring"
       ],
       "read_first": [
         "ProductSpec.md",
@@ -1598,14 +1595,25 @@
         {
           "date": "2026-10-17",
           "text": "Scheduled by Iteration 5; no implementation or validation claimed."
+        },
+        {
+          "date": "2026-10-18",
+          "text": "Resumed run: isolated authoring only; unique migration reserved in write scope. Coordinator owns serial migration apply, public type generation, route integration and roadmap. No hosted action or broad schema lock delegated."
         }
       ],
-      "claim": null,
+      "claim": {
+        "owner": "platform_admin",
+        "branch": "codex/roadmap-admin-20261018",
+        "base_commit": "07f0426",
+        "worktree": "/private/tmp/first-ten-platform-admin",
+        "started_at": "2026-10-18T14:44:38.158676+00:00",
+        "lease_expires_at": "2026-10-18T16:44:38.158676+00:00"
+      },
       "completion_evidence": [],
       "subtasks": [
         {
           "id": "SEC-006.s1",
-          "status": "not_started",
+          "status": "in_progress",
           "instruction": "Define protected role assignment/initial bootstrap through an operator-controlled path.",
           "notes": []
         },
@@ -2003,7 +2011,7 @@
       "id": "AI-002",
       "title": "Version prompts/schemas and persist generation provenance",
       "phase": "P1",
-      "status": "in_progress",
+      "status": "complete",
       "owner": "agent",
       "size": "S",
       "kind": "implementation",
@@ -2031,7 +2039,8 @@
         "supabase/migrations/20261018008000_ai_output_origins.sql",
         "supabase/tests/ai-002_output_origins.sql",
         "src/integrations/supabase/types.ts",
-        "src/tests/marketing-lab/persistence-ui.test.tsx"
+        "src/tests/marketing-lab/persistence-ui.test.tsx",
+        "scripts/check-ai-origin-concurrency.mjs"
       ],
       "exclusive_locks": [
         "ai-provenance-schema"
@@ -2093,18 +2102,26 @@
         {
           "date": "2026-10-18",
           "text": "Owner paused product development ten minutes before presentation to focus on slide refinements. Release d564fa8 is committed/pushed/deployed Ready. Actual production CampusSwap questions generated, manually reviewed, saved and reloaded with origin: anthropic/claude-sonnet-4.5 via Amazon Bedrock, reported cost $0.004239. Source/edits survive reload. 372 app tests and659 SQL pass. No further product work started; concurrency rehearsal and final task handoff remain for resumption."
+        },
+        {
+          "date": "2026-10-18",
+          "text": "Owner explicitly resumed roadmap execution after presentation refinements. Coordinator resumes AI-002 final concurrency rehearsal and handoff; paused product work is active again. Read-only acceptance audit delegated to existing ops agent. Existing spending ceiling25USD remains, no new paid service authorization."
+        },
+        {
+          "date": "2026-10-18",
+          "text": "Complete after independent acceptance audit and passing real two-connection rehearsal: observed PostgreSQL blocking; homogeneous final outreach+survey+origin; other-stage preserved; all created fictional fixtures removed. This is atomic serialized last-writer-wins, not CAS. Prior372app/659SQL plus current35focused origin tests/typecheck and production save/reload evidence retained. Pitch script lint blockers found independently are being fixed."
         }
       ],
-      "claim": {
-        "owner": "coordinator",
-        "branch": "main",
-        "base_commit": "64bc86e5a06e6a9045f6e34d13fc39ca84b9b2e1",
-        "worktree": "/Users/ianroy/Library/CloudStorage/Dropbox/Apps by Ian/Babson AI Academy/First 10",
-        "started_at": "2026-10-18T12:52:42.445453+00:00",
-        "lease_expires_at": "2026-10-18T14:52:42.445453+00:00"
-      },
+      "claim": null,
       "completion_evidence": [
-        "Partial7e86440:src/lib/prompts;supabase06000;21focusedtests;619combinedSQL;hostedmigrationapplied;durablesaved-outputlinkagepending"
+        "src/lib/prompts/private-v1.ts",
+        "src/lib/prompts/provenance.server.ts",
+        "src/lib/ai/saved-output.ts",
+        "supabase/migrations/20261018008000_ai_output_origins.sql",
+        "src/tests/ai-002",
+        "supabase/tests/ai-002_output_origins.sql",
+        "scripts/check-ai-origin-concurrency.mjs",
+        "docs/demo/qa/saved-ai-origin-desktop-2026-10-18.png"
       ],
       "subtasks": [
         {
@@ -2115,7 +2132,7 @@
         },
         {
           "id": "AI-002.s2",
-          "status": "in_progress",
+          "status": "complete",
           "instruction": "Add prompt-id/version/schema metadata and compatible persistence fields for all current outputs.",
           "notes": []
         },
@@ -3671,7 +3688,7 @@
       "id": "WS-001",
       "title": "Add safe project lifecycle metadata",
       "phase": "P3",
-      "status": "not_started",
+      "status": "in_progress",
       "owner": "agent",
       "size": "S",
       "kind": "implementation",
@@ -3681,16 +3698,13 @@
       ],
       "requires_decisions": [],
       "write_scope": [
-        "supabase/migrations/**",
-        "src/integrations/supabase/types.ts",
+        "supabase/migrations/20261018009000_project_lifecycle.sql",
         "src/lib/project-lifecycle.ts",
         "src/tests/ws-001/**",
-        "src/lib/project-lifecycle.test.ts",
         "supabase/tests/ws-001.sql"
       ],
       "exclusive_locks": [
-        "database-schema",
-        "generated-types"
+        "project-lifecycle-authoring"
       ],
       "read_first": [
         "ProductSpec.md",
@@ -3731,14 +3745,25 @@
         {
           "date": "2026-10-18",
           "text": "WS-008 now delivers the narrow single-owner multiple-idea selection/create/recovery subset. Preserve that working behavior when executing this broader lifecycle/membership/draft task; its own remaining acceptance and prerequisites are unchanged."
+        },
+        {
+          "date": "2026-10-18",
+          "text": "Resumed run: isolated authoring only; unique migration reserved in write scope. Coordinator owns serial migration apply, public type generation, route integration and roadmap. No hosted action or broad schema lock delegated."
         }
       ],
-      "claim": null,
+      "claim": {
+        "owner": "lifecycle",
+        "branch": "codex/roadmap-lifecycle-20261018",
+        "base_commit": "07f0426",
+        "worktree": "/private/tmp/first-ten-project-lifecycle",
+        "started_at": "2026-10-18T14:44:38.158676+00:00",
+        "lease_expires_at": "2026-10-18T16:44:38.158676+00:00"
+      },
       "completion_evidence": [],
       "subtasks": [
         {
           "id": "WS-001.s1",
-          "status": "not_started",
+          "status": "in_progress",
           "instruction": "Inventory first-row assumptions, child references and archive behavior.",
           "notes": []
         },
@@ -6704,7 +6729,10 @@
         "EV-005",
         "EV-006",
         "EV-007",
-        "MKT-008"
+        "MKT-008",
+        "CLS-008",
+        "EXP-002",
+        "EXP-003"
       ],
       "requires_decisions": [],
       "write_scope": [
@@ -7036,7 +7064,11 @@
         "EV-007",
         "CLS-006",
         "ADM-003",
-        "COL-004"
+        "COL-004",
+        "CLS-008",
+        "EXP-002",
+        "EXP-003",
+        "FERPA-002"
       ],
       "requires_decisions": [],
       "write_scope": [
@@ -11115,6 +11147,608 @@
           "id": "PARTNER-002.s3",
           "status": "complete",
           "instruction": "Verify no role bypass or PII response, production migration and actual presenter dashboard.",
+          "notes": []
+        }
+      ]
+    },
+    {
+      "id": "FERPA-001",
+      "title": "Define FERPA-first guest-space and export privacy contract",
+      "phase": "P1",
+      "status": "in_progress",
+      "owner": "agent",
+      "size": "M",
+      "kind": "planning",
+      "priority": 25,
+      "depends_on": [
+        "SEC-001"
+      ],
+      "requires_decisions": [],
+      "write_scope": [
+        "docs/privacy/ferpa-first-product-direction.md",
+        "docs/privacy/guest-data-contract.md",
+        "docs/architecture/access-contract.md"
+      ],
+      "exclusive_locks": [
+        "ferpa-001-integration"
+      ],
+      "read_first": [
+        "ProductSpec.md",
+        "FEATUREROADMAP_workplan.md",
+        "docs/privacy/ferpa-first-product-direction.md",
+        "docs/architecture/access-contract.md"
+      ],
+      "goal": "Define FERPA-first guest-space and export privacy contract",
+      "steps": [
+        "Inventory direct/indirect identifiers, processors, logs, guest/team capabilities, teacher projections and each exported field; link primary Department of Education sources.",
+        "Specify teacher provision, invitation expiry/revocation, pseudonymous guest/team principals, recovery and separate private-versus-submitted activity data. A public class code never reads team work.",
+        "Specify institution-controlled AI opt-in, access/retention/deletion/export policies and actionable release evidence; keep legal/institutional approval separate from engineering."
+      ],
+      "acceptance": [
+        "Account-free does not imply anonymous, public, or FERPA-exempt; no raw student notes become teacher/public data by default.",
+        "A field-level matrix covers teacher, guest teammate, outsider, institution operator, AI provider and downloaded PDF; unresolved approval is recorded."
+      ],
+      "verification_profile": "product",
+      "verification": [
+        "Account-free does not imply anonymous, public, or FERPA-exempt; no raw student notes become teacher/public data by default.",
+        "A field-level matrix covers teacher, guest teammate, outsider, institution operator, AI provider and downloaded PDF; unresolved approval is recorded.",
+        "Run meaningful authorization and UI tests, typecheck, lint and production build; inspect actual generated PDF pages or guest browser journeys. Use real isolated SQL tests for access changes."
+      ],
+      "metric": "Unauthorized disclosures: zero; guest and PDF activity coverage tracked explicitly.",
+      "rollback": "Disable new entry points without deleting saved work; preserve previous private-account and teaching workflows.",
+      "agent_notes": {
+        "starting_point": "Explicit owner addition2026-10-18: FERPA-first class/hackathon spaces with student participation without account creation; PDF export of every activity/team data. This is a product requirement, not a claim of compliance or current availability.",
+        "stop_and_report": "If a required contract, test environment, human observation, budget or permission is missing, record the specific blocker. Continue another ready task; do not fabricate data or widen the write scope.",
+        "handoff": "Report changed files, base/result commit, exact checks and outcomes, artifact/source ids, residual risks and the next eligible task. Only the coordinator edits task status, shared generated files and the main roadmap.",
+        "integration": "Use a clean task branch/worktree from the coordinator base. Commit only this write scope. Migrations, generated types, route tree, dependency locks and shared entry points are serialized by the coordinator; never hand-edit generated output."
+      },
+      "notes": [
+        {
+          "date": "2026-10-18",
+          "text": "Owner explicitly added as core product value; preserve privacy boundaries and show status truthfully."
+        }
+      ],
+      "claim": {
+        "owner": "coordinator",
+        "branch": "main",
+        "base_commit": "07f0426",
+        "worktree": "/Users/ianroy/Library/CloudStorage/Dropbox/Apps by Ian/Babson AI Academy/First 10",
+        "started_at": "2026-10-18T14:49:38.082477+00:00",
+        "lease_expires_at": "2026-10-18T16:49:38.082477+00:00"
+      },
+      "completion_evidence": [],
+      "subtasks": [
+        {
+          "id": "FERPA-001.s1",
+          "status": "in_progress",
+          "instruction": "Inventory direct/indirect identifiers, processors, logs, guest/team capabilities, teacher projections and each exported field; link primary Department of Education sources.",
+          "notes": []
+        },
+        {
+          "id": "FERPA-001.s2",
+          "status": "not_started",
+          "instruction": "Specify teacher provision, invitation expiry/revocation, pseudonymous guest/team principals, recovery and separate private-versus-submitted activity data. A public class code never reads team work.",
+          "notes": []
+        },
+        {
+          "id": "FERPA-001.s3",
+          "status": "not_started",
+          "instruction": "Specify institution-controlled AI opt-in, access/retention/deletion/export policies and actionable release evidence; keep legal/institutional approval separate from engineering.",
+          "notes": []
+        }
+      ]
+    },
+    {
+      "id": "CLS-007",
+      "title": "Teacher provisions class or hackathon spaces for account-free student entry",
+      "phase": "P4",
+      "status": "not_started",
+      "owner": "agent",
+      "size": "M",
+      "kind": "implementation",
+      "priority": 25,
+      "depends_on": [
+        "CLS-001",
+        "SEC-005",
+        "PRV-001",
+        "FERPA-001"
+      ],
+      "requires_decisions": [],
+      "write_scope": [
+        "supabase/migrations/**",
+        "src/lib/guest-spaces/**",
+        "src/lib/guest-spaces.functions.ts",
+        "src/routes/_authenticated/teacher.tsx",
+        "src/tests/cls-007/**",
+        "supabase/tests/cls-007.sql"
+      ],
+      "exclusive_locks": [
+        "cls-007-integration"
+      ],
+      "read_first": [
+        "ProductSpec.md",
+        "FEATUREROADMAP_workplan.md",
+        "docs/privacy/ferpa-first-product-direction.md",
+        "docs/architecture/access-contract.md"
+      ],
+      "goal": "Teacher provisions class or hackathon spaces for account-free student entry",
+      "steps": [
+        "Teacher creates named class/hackathon with assignments, end/retention dates, visibility and AI policy; receives bounded revocable join link/code and QR.",
+        "Implement high-entropy scoped guest/team capability sessions with hash-only secret storage, secure transport, expiry/rate limits and explicit schema principal exceptions; student entry requires no email/password or personal account.",
+        "Exercise join, full/expired/revoked/closed space, invalid code, wrong team/class, teacher revocation and recovery without revealing roster/private work."
+      ],
+      "acceptance": [
+        "A real browser student can join a teacher-provisioned space and team using a pseudonym without creating a personal account.",
+        "Guessing or possessing only a public join code cannot read other teams or private records; classroom/hackathon lifecycle closes access as disclosed."
+      ],
+      "verification_profile": "product",
+      "verification": [
+        "A real browser student can join a teacher-provisioned space and team using a pseudonym without creating a personal account.",
+        "Guessing or possessing only a public join code cannot read other teams or private records; classroom/hackathon lifecycle closes access as disclosed.",
+        "Run meaningful authorization and UI tests, typecheck, lint and production build; inspect actual generated PDF pages or guest browser journeys. Use real isolated SQL tests for access changes."
+      ],
+      "metric": "Unauthorized disclosures: zero; guest and PDF activity coverage tracked explicitly.",
+      "rollback": "Disable new entry points without deleting saved work; preserve previous private-account and teaching workflows.",
+      "agent_notes": {
+        "starting_point": "Explicit owner addition2026-10-18: FERPA-first class/hackathon spaces with student participation without account creation; PDF export of every activity/team data. This is a product requirement, not a claim of compliance or current availability.",
+        "stop_and_report": "If a required contract, test environment, human observation, budget or permission is missing, record the specific blocker. Continue another ready task; do not fabricate data or widen the write scope.",
+        "handoff": "Report changed files, base/result commit, exact checks and outcomes, artifact/source ids, residual risks and the next eligible task. Only the coordinator edits task status, shared generated files and the main roadmap.",
+        "integration": "Use a clean task branch/worktree from the coordinator base. Commit only this write scope. Migrations, generated types, route tree, dependency locks and shared entry points are serialized by the coordinator; never hand-edit generated output."
+      },
+      "notes": [
+        {
+          "date": "2026-10-18",
+          "text": "Owner explicitly added as core product value; preserve privacy boundaries and show status truthfully."
+        }
+      ],
+      "claim": null,
+      "completion_evidence": [],
+      "subtasks": [
+        {
+          "id": "CLS-007.s1",
+          "status": "not_started",
+          "instruction": "Teacher creates named class/hackathon with assignments, end/retention dates, visibility and AI policy; receives bounded revocable join link/code and QR.",
+          "notes": []
+        },
+        {
+          "id": "CLS-007.s2",
+          "status": "not_started",
+          "instruction": "Implement high-entropy scoped guest/team capability sessions with hash-only secret storage, secure transport, expiry/rate limits and explicit schema principal exceptions; student entry requires no email/password or personal account.",
+          "notes": []
+        },
+        {
+          "id": "CLS-007.s3",
+          "status": "not_started",
+          "instruction": "Exercise join, full/expired/revoked/closed space, invalid code, wrong team/class, teacher revocation and recovery without revealing roster/private work.",
+          "notes": []
+        }
+      ]
+    },
+    {
+      "id": "CLS-008",
+      "title": "Account-free team activities, return access and reviewed classroom handoff",
+      "phase": "P4",
+      "status": "not_started",
+      "owner": "agent",
+      "size": "M",
+      "kind": "implementation",
+      "priority": 25,
+      "depends_on": [
+        "CLS-007",
+        "CLS-002",
+        "EXP-001"
+      ],
+      "requires_decisions": [],
+      "write_scope": [
+        "src/routes/join.tsx",
+        "src/routes/workshop/**",
+        "src/components/guest/**",
+        "src/lib/guest-activities/**",
+        "supabase/migrations/**",
+        "src/tests/cls-008/**",
+        "supabase/tests/cls-008.sql"
+      ],
+      "exclusive_locks": [
+        "cls-008-integration"
+      ],
+      "read_first": [
+        "ProductSpec.md",
+        "FEATUREROADMAP_workplan.md",
+        "docs/privacy/ferpa-first-product-direction.md",
+        "docs/architecture/access-contract.md"
+      ],
+      "goal": "Account-free team activities, return access and reviewed classroom handoff",
+      "steps": [
+        "Support no-account team work across all core learning activities, with clear class/team/audience context and safe save/reload.",
+        "Provide disclosed return/recovery method without collecting student emails; distinguish shared team activity from private local notes; optional later personal-account transfer is explicit.",
+        "Students preview selected submitted work and export PDFs; teacher sees only the agreed class projection/submitted versions; test teammate, outsider and expired-session boundaries."
+      ],
+      "acceptance": [
+        "Guest/team activities persist and return within disclosed lifecycle, without treating class enrollment as consent for AI or sharing.",
+        "Students can obtain individual activity PDFs and a team portfolio before expiry; teacher export never silently includes raw private notes."
+      ],
+      "verification_profile": "product",
+      "verification": [
+        "Guest/team activities persist and return within disclosed lifecycle, without treating class enrollment as consent for AI or sharing.",
+        "Students can obtain individual activity PDFs and a team portfolio before expiry; teacher export never silently includes raw private notes.",
+        "Run meaningful authorization and UI tests, typecheck, lint and production build; inspect actual generated PDF pages or guest browser journeys. Use real isolated SQL tests for access changes."
+      ],
+      "metric": "Unauthorized disclosures: zero; guest and PDF activity coverage tracked explicitly.",
+      "rollback": "Disable new entry points without deleting saved work; preserve previous private-account and teaching workflows.",
+      "agent_notes": {
+        "starting_point": "Explicit owner addition2026-10-18: FERPA-first class/hackathon spaces with student participation without account creation; PDF export of every activity/team data. This is a product requirement, not a claim of compliance or current availability.",
+        "stop_and_report": "If a required contract, test environment, human observation, budget or permission is missing, record the specific blocker. Continue another ready task; do not fabricate data or widen the write scope.",
+        "handoff": "Report changed files, base/result commit, exact checks and outcomes, artifact/source ids, residual risks and the next eligible task. Only the coordinator edits task status, shared generated files and the main roadmap.",
+        "integration": "Use a clean task branch/worktree from the coordinator base. Commit only this write scope. Migrations, generated types, route tree, dependency locks and shared entry points are serialized by the coordinator; never hand-edit generated output."
+      },
+      "notes": [
+        {
+          "date": "2026-10-18",
+          "text": "Owner explicitly added as core product value; preserve privacy boundaries and show status truthfully."
+        }
+      ],
+      "claim": null,
+      "completion_evidence": [],
+      "subtasks": [
+        {
+          "id": "CLS-008.s1",
+          "status": "not_started",
+          "instruction": "Support no-account team work across all core learning activities, with clear class/team/audience context and safe save/reload.",
+          "notes": []
+        },
+        {
+          "id": "CLS-008.s2",
+          "status": "not_started",
+          "instruction": "Provide disclosed return/recovery method without collecting student emails; distinguish shared team activity from private local notes; optional later personal-account transfer is explicit.",
+          "notes": []
+        },
+        {
+          "id": "CLS-008.s3",
+          "status": "not_started",
+          "instruction": "Students preview selected submitted work and export PDFs; teacher sees only the agreed class projection/submitted versions; test teammate, outsider and expired-session boundaries.",
+          "notes": []
+        }
+      ]
+    },
+    {
+      "id": "EXP-001",
+      "title": "Build reusable private PDF export with frozen preview and authorization",
+      "phase": "P3",
+      "status": "in_progress",
+      "owner": "agent",
+      "size": "M",
+      "kind": "implementation",
+      "priority": 25,
+      "depends_on": [
+        "SEC-003"
+      ],
+      "requires_decisions": [],
+      "write_scope": [
+        "src/lib/export/**",
+        "src/components/export/**",
+        "src/tests/exp-001/**",
+        "package.json",
+        "bun.lock",
+        "package-lock.json",
+        "public/fonts/pdf/**"
+      ],
+      "exclusive_locks": [
+        "exp-001-integration"
+      ],
+      "read_first": [
+        "ProductSpec.md",
+        "FEATUREROADMAP_workplan.md",
+        "docs/privacy/ferpa-first-product-direction.md",
+        "docs/architecture/access-contract.md"
+      ],
+      "goal": "Build reusable private PDF export with frozen preview and authorization",
+      "steps": [
+        "Define versioned activity/team PDF payload and local generation with Unicode, headings, wrapped text, tables, pagination, dates, source labels and fictional/draft/unknown markers.",
+        "Build preview/select/redact and real downloadable PDF without paid render service, AI call or transmission of private content; check authorization at source acquisition and scope on account/project change.",
+        "Render generated PDFs and verify long text, multilingual names, hostile markup/URLs, empty/unknown versus zero, page overflow and no unrelated project fields."
+      ],
+      "acceptance": [
+        "User downloads an actual readable PDF after explicit export; output is a frozen snapshot with clear activity/project/team/date/audience.",
+        "PDF generation cannot fetch arbitrary URLs, execute content or expose another project; private identifiers are excluded by default."
+      ],
+      "verification_profile": "product",
+      "verification": [
+        "User downloads an actual readable PDF after explicit export; output is a frozen snapshot with clear activity/project/team/date/audience.",
+        "PDF generation cannot fetch arbitrary URLs, execute content or expose another project; private identifiers are excluded by default.",
+        "Run meaningful authorization and UI tests, typecheck, lint and production build; inspect actual generated PDF pages or guest browser journeys. Use real isolated SQL tests for access changes."
+      ],
+      "metric": "Unauthorized disclosures: zero; guest and PDF activity coverage tracked explicitly.",
+      "rollback": "Disable new entry points without deleting saved work; preserve previous private-account and teaching workflows.",
+      "agent_notes": {
+        "starting_point": "Explicit owner addition2026-10-18: FERPA-first class/hackathon spaces with student participation without account creation; PDF export of every activity/team data. This is a product requirement, not a claim of compliance or current availability.",
+        "stop_and_report": "If a required contract, test environment, human observation, budget or permission is missing, record the specific blocker. Continue another ready task; do not fabricate data or widen the write scope.",
+        "handoff": "Report changed files, base/result commit, exact checks and outcomes, artifact/source ids, residual risks and the next eligible task. Only the coordinator edits task status, shared generated files and the main roadmap.",
+        "integration": "Use a clean task branch/worktree from the coordinator base. Commit only this write scope. Migrations, generated types, route tree, dependency locks and shared entry points are serialized by the coordinator; never hand-edit generated output."
+      },
+      "notes": [
+        {
+          "date": "2026-10-18",
+          "text": "Owner explicitly added as core product value; preserve privacy boundaries and show status truthfully."
+        }
+      ],
+      "claim": {
+        "owner": "plan_audit",
+        "branch": "codex/activity-pdf-20261018",
+        "base_commit": "07f0426",
+        "worktree": "/private/tmp/first-ten-activity-pdf",
+        "started_at": "2026-10-18T14:47:46.231280+00:00",
+        "lease_expires_at": "2026-10-18T16:47:46.231280+00:00"
+      },
+      "completion_evidence": [],
+      "subtasks": [
+        {
+          "id": "EXP-001.s1",
+          "status": "in_progress",
+          "instruction": "Define versioned activity/team PDF payload and local generation with Unicode, headings, wrapped text, tables, pagination, dates, source labels and fictional/draft/unknown markers.",
+          "notes": []
+        },
+        {
+          "id": "EXP-001.s2",
+          "status": "not_started",
+          "instruction": "Build preview/select/redact and real downloadable PDF without paid render service, AI call or transmission of private content; check authorization at source acquisition and scope on account/project change.",
+          "notes": []
+        },
+        {
+          "id": "EXP-001.s3",
+          "status": "not_started",
+          "instruction": "Render generated PDFs and verify long text, multilingual names, hostile markup/URLs, empty/unknown versus zero, page overflow and no unrelated project fields.",
+          "notes": []
+        }
+      ]
+    },
+    {
+      "id": "EXP-002",
+      "title": "PDF export for every learning activity and its saved state",
+      "phase": "P3",
+      "status": "not_started",
+      "owner": "agent",
+      "size": "M",
+      "kind": "implementation",
+      "priority": 25,
+      "depends_on": [
+        "EXP-001",
+        "FERPA-001"
+      ],
+      "requires_decisions": [],
+      "write_scope": [
+        "src/components/export/**",
+        "src/lib/export/**",
+        "src/routes/_authenticated/**",
+        "src/tests/exp-002/**",
+        "docs/export/activity-coverage.md"
+      ],
+      "exclusive_locks": [
+        "exp-002-integration"
+      ],
+      "read_first": [
+        "ProductSpec.md",
+        "FEATUREROADMAP_workplan.md",
+        "docs/privacy/ferpa-first-product-direction.md",
+        "docs/architecture/access-contract.md"
+      ],
+      "goal": "PDF export for every learning activity and its saved state",
+      "steps": [
+        "Create exhaustive current/future activity export inventory: idea, people/pipeline, questions, interview draft/completed notes, synthesis, experiments, outreach/survey/metrics, every Marketing Lab step, teacher plans/assignments/feedback and shared evidence/design/decision activities.",
+        "Wire individually named PDF export actions to every currently implemented activity, preserving reviewed selections, manual edits, AI-origin metadata and unknown/not-run labels; mark unfinished feature adapters pending.",
+        "Add coverage enforcement so every newly registered activity provides a PDF adapter and inspect actual downloads/rendered PDFs across existing activities; do not count the generic teaching-kit PDF as learner-data export."
+      ],
+      "acceptance": [
+        "Every implemented student/team activity has a working PDF export, not only a whole-account JSON or print shortcut.",
+        "Coverage matrix lists each activity, scope/audience, included/excluded fields, status and actual verification; new activity missing PDF fails release coverage."
+      ],
+      "verification_profile": "product",
+      "verification": [
+        "Every implemented student/team activity has a working PDF export, not only a whole-account JSON or print shortcut.",
+        "Coverage matrix lists each activity, scope/audience, included/excluded fields, status and actual verification; new activity missing PDF fails release coverage.",
+        "Run meaningful authorization and UI tests, typecheck, lint and production build; inspect actual generated PDF pages or guest browser journeys. Use real isolated SQL tests for access changes."
+      ],
+      "metric": "Unauthorized disclosures: zero; guest and PDF activity coverage tracked explicitly.",
+      "rollback": "Disable new entry points without deleting saved work; preserve previous private-account and teaching workflows.",
+      "agent_notes": {
+        "starting_point": "Explicit owner addition2026-10-18: FERPA-first class/hackathon spaces with student participation without account creation; PDF export of every activity/team data. This is a product requirement, not a claim of compliance or current availability.",
+        "stop_and_report": "If a required contract, test environment, human observation, budget or permission is missing, record the specific blocker. Continue another ready task; do not fabricate data or widen the write scope.",
+        "handoff": "Report changed files, base/result commit, exact checks and outcomes, artifact/source ids, residual risks and the next eligible task. Only the coordinator edits task status, shared generated files and the main roadmap.",
+        "integration": "Use a clean task branch/worktree from the coordinator base. Commit only this write scope. Migrations, generated types, route tree, dependency locks and shared entry points are serialized by the coordinator; never hand-edit generated output."
+      },
+      "notes": [
+        {
+          "date": "2026-10-18",
+          "text": "Owner explicitly added as core product value; preserve privacy boundaries and show status truthfully."
+        }
+      ],
+      "claim": null,
+      "completion_evidence": [],
+      "subtasks": [
+        {
+          "id": "EXP-002.s1",
+          "status": "not_started",
+          "instruction": "Create exhaustive current/future activity export inventory: idea, people/pipeline, questions, interview draft/completed notes, synthesis, experiments, outreach/survey/metrics, every Marketing Lab step, teacher plans/assignments/feedback and shared evidence/design/decision activities.",
+          "notes": []
+        },
+        {
+          "id": "EXP-002.s2",
+          "status": "not_started",
+          "instruction": "Wire individually named PDF export actions to every currently implemented activity, preserving reviewed selections, manual edits, AI-origin metadata and unknown/not-run labels; mark unfinished feature adapters pending.",
+          "notes": []
+        },
+        {
+          "id": "EXP-002.s3",
+          "status": "not_started",
+          "instruction": "Add coverage enforcement so every newly registered activity provides a PDF adapter and inspect actual downloads/rendered PDFs across existing activities; do not count the generic teaching-kit PDF as learner-data export.",
+          "notes": []
+        }
+      ]
+    },
+    {
+      "id": "EXP-003",
+      "title": "Export complete student-team portfolios and scoped teacher class bundles",
+      "phase": "P4",
+      "status": "not_started",
+      "owner": "agent",
+      "size": "M",
+      "kind": "implementation",
+      "priority": 25,
+      "depends_on": [
+        "EXP-002",
+        "CLS-003",
+        "CLS-008",
+        "SHR-001"
+      ],
+      "requires_decisions": [],
+      "write_scope": [
+        "src/lib/export/**",
+        "src/components/export/**",
+        "src/routes/_authenticated/teacher.tsx",
+        "src/components/guest/**",
+        "src/tests/exp-003/**",
+        "supabase/tests/exp-003.sql"
+      ],
+      "exclusive_locks": [
+        "exp-003-integration"
+      ],
+      "read_first": [
+        "ProductSpec.md",
+        "FEATUREROADMAP_workplan.md",
+        "docs/privacy/ferpa-first-product-direction.md",
+        "docs/architecture/access-contract.md"
+      ],
+      "goal": "Export complete student-team portfolios and scoped teacher class bundles",
+      "steps": [
+        "Build student-team portfolio export across chosen activity versions with a manifest/index, activity dates, evidence-to-decision links and draft/submitted status.",
+        "Teacher selects only authorized teams/assignments and intentionally submitted versions; generate PDFs or a local ZIP of per-activity PDFs with no cross-team disclosure to students.",
+        "Verify partial/missing activities, withdrawn submissions, role revocation, class closure, large cohorts, team aliases, file naming, failure recovery and retention/deletion notes for downloaded copies."
+      ],
+      "acceptance": [
+        "Teacher and student-team can export their authorized full activity set and individual PDFs without losing context or silently omitting unsupported activities.",
+        "Revoked/withdrawn/unsubmitted private work never enters teacher bundles, and guest students cannot export another team."
+      ],
+      "verification_profile": "product",
+      "verification": [
+        "Teacher and student-team can export their authorized full activity set and individual PDFs without losing context or silently omitting unsupported activities.",
+        "Revoked/withdrawn/unsubmitted private work never enters teacher bundles, and guest students cannot export another team.",
+        "Run meaningful authorization and UI tests, typecheck, lint and production build; inspect actual generated PDF pages or guest browser journeys. Use real isolated SQL tests for access changes."
+      ],
+      "metric": "Unauthorized disclosures: zero; guest and PDF activity coverage tracked explicitly.",
+      "rollback": "Disable new entry points without deleting saved work; preserve previous private-account and teaching workflows.",
+      "agent_notes": {
+        "starting_point": "Explicit owner addition2026-10-18: FERPA-first class/hackathon spaces with student participation without account creation; PDF export of every activity/team data. This is a product requirement, not a claim of compliance or current availability.",
+        "stop_and_report": "If a required contract, test environment, human observation, budget or permission is missing, record the specific blocker. Continue another ready task; do not fabricate data or widen the write scope.",
+        "handoff": "Report changed files, base/result commit, exact checks and outcomes, artifact/source ids, residual risks and the next eligible task. Only the coordinator edits task status, shared generated files and the main roadmap.",
+        "integration": "Use a clean task branch/worktree from the coordinator base. Commit only this write scope. Migrations, generated types, route tree, dependency locks and shared entry points are serialized by the coordinator; never hand-edit generated output."
+      },
+      "notes": [
+        {
+          "date": "2026-10-18",
+          "text": "Owner explicitly added as core product value; preserve privacy boundaries and show status truthfully."
+        }
+      ],
+      "claim": null,
+      "completion_evidence": [],
+      "subtasks": [
+        {
+          "id": "EXP-003.s1",
+          "status": "not_started",
+          "instruction": "Build student-team portfolio export across chosen activity versions with a manifest/index, activity dates, evidence-to-decision links and draft/submitted status.",
+          "notes": []
+        },
+        {
+          "id": "EXP-003.s2",
+          "status": "not_started",
+          "instruction": "Teacher selects only authorized teams/assignments and intentionally submitted versions; generate PDFs or a local ZIP of per-activity PDFs with no cross-team disclosure to students.",
+          "notes": []
+        },
+        {
+          "id": "EXP-003.s3",
+          "status": "not_started",
+          "instruction": "Verify partial/missing activities, withdrawn submissions, role revocation, class closure, large cohorts, team aliases, file naming, failure recovery and retention/deletion notes for downloaded copies.",
+          "notes": []
+        }
+      ]
+    },
+    {
+      "id": "FERPA-002",
+      "title": "Institutional review and evidence for FERPA-first classroom release",
+      "phase": "P7",
+      "status": "not_started",
+      "owner": "human",
+      "size": "M",
+      "kind": "research",
+      "priority": 25,
+      "depends_on": [
+        "FERPA-001",
+        "CLS-008",
+        "PRV-002",
+        "EXP-003"
+      ],
+      "requires_decisions": [],
+      "write_scope": [
+        "docs/privacy/institution-review.md",
+        "docs/privacy/agreements/**",
+        "research/classroom-privacy-review.md"
+      ],
+      "exclusive_locks": [
+        "ferpa-002-integration"
+      ],
+      "read_first": [
+        "ProductSpec.md",
+        "FEATUREROADMAP_workplan.md",
+        "docs/privacy/ferpa-first-product-direction.md",
+        "docs/architecture/access-contract.md"
+      ],
+      "goal": "Institutional review and evidence for FERPA-first classroom release",
+      "steps": [
+        "Prepare institution-facing field/processor map, access and retention controls, incident contact, deletion/export process, school-official/direct-control contract checklist and AI-processing options.",
+        "An authorized institutional reviewer evaluates the actual implementation, agreements, settings and processor obligations; record date, scope, concerns and disposition without inventing approval.",
+        "Resolve material technical findings, configure the institution scope and record approved uses and remaining limits before marketing verified compliance."
+      ],
+      "acceptance": [
+        "FERPA-first is supported by implemented controls and documented institutional process; there is no claim of blanket certification.",
+        "Actual reviewer evidence/approval is present for institution-dependent gates; absent review remains outstanding rather than inferred."
+      ],
+      "verification_profile": "research",
+      "verification": [
+        "FERPA-first is supported by implemented controls and documented institutional process; there is no claim of blanket certification.",
+        "Actual reviewer evidence/approval is present for institution-dependent gates; absent review remains outstanding rather than inferred.",
+        "Record actual institutional review; no fabricated approval."
+      ],
+      "metric": "Unauthorized disclosures: zero; guest and PDF activity coverage tracked explicitly.",
+      "rollback": "Disable new entry points without deleting saved work; preserve previous private-account and teaching workflows.",
+      "agent_notes": {
+        "starting_point": "Explicit owner addition2026-10-18: FERPA-first class/hackathon spaces with student participation without account creation; PDF export of every activity/team data. This is a product requirement, not a claim of compliance or current availability.",
+        "stop_and_report": "If a required contract, test environment, human observation, budget or permission is missing, record the specific blocker. Continue another ready task; do not fabricate data or widen the write scope.",
+        "handoff": "Report changed files, base/result commit, exact checks and outcomes, artifact/source ids, residual risks and the next eligible task. Only the coordinator edits task status, shared generated files and the main roadmap.",
+        "integration": "Use a clean task branch/worktree from the coordinator base. Commit only this write scope. Migrations, generated types, route tree, dependency locks and shared entry points are serialized by the coordinator; never hand-edit generated output."
+      },
+      "notes": [
+        {
+          "date": "2026-10-18",
+          "text": "Owner explicitly added as core product value; preserve privacy boundaries and show status truthfully."
+        }
+      ],
+      "claim": null,
+      "completion_evidence": [],
+      "subtasks": [
+        {
+          "id": "FERPA-002.s1",
+          "status": "not_started",
+          "instruction": "Prepare institution-facing field/processor map, access and retention controls, incident contact, deletion/export process, school-official/direct-control contract checklist and AI-processing options.",
+          "notes": []
+        },
+        {
+          "id": "FERPA-002.s2",
+          "status": "not_started",
+          "instruction": "An authorized institutional reviewer evaluates the actual implementation, agreements, settings and processor obligations; record date, scope, concerns and disposition without inventing approval.",
+          "notes": []
+        },
+        {
+          "id": "FERPA-002.s3",
+          "status": "not_started",
+          "instruction": "Resolve material technical findings, configure the institution scope and record approved uses and remaining limits before marketing verified compliance.",
           "notes": []
         }
       ]
