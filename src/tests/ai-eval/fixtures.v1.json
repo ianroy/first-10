@@ -1,10 +1,10 @@
 {
   "version": "first-ten-existing-kinds-v1",
-  "source_commit": "ec5ef05",
+  "source_commit": "c16b3a3a11259c7635a660e3d6bce86466ff7f08",
   "source_sha256": {
-    "src/lib/ai.functions.ts": "e21387271c0896cc9017394c84b5d0fb9d787fea1930a83324d6336538d24c4f",
-    "src/lib/ai/contracts.ts": "9ddd8c8a494c1d609aaf635ca40d48f8c6fa131c8e243178f2ac9e0f27a5a233",
-    "src/lib/ai/gateway.server.ts": "32cad847a97d9c14ddf5390da43741364f982fa6851f054296195e283d7a0e7f"
+    "src/lib/ai.functions.ts": "9afa911782d92b17fc2265c668d842907a54e38baa849d5f2a2769895caed982",
+    "src/lib/ai/contracts.ts": "ff2c3f06a1e27e4ec720f98a1d498e989059bcd6c64cc1dee42c1d331d15333d",
+    "src/lib/ai/gateway.server.ts": "57411e6ca49e6ca02c36ea4b032bc2149044ea65a7c94645be77ebce16b2e120"
   },
   "model": "google/gemini-2.5-flash-lite",
   "provider": "google-vertex",
@@ -25,7 +25,9 @@
             }
           }
         },
-        "required": ["questions"],
+        "required": [
+          "questions"
+        ],
         "additionalProperties": false
       },
       "source_quotes": [],
@@ -49,7 +51,9 @@
             }
           }
         },
-        "required": ["questions"],
+        "required": [
+          "questions"
+        ],
         "additionalProperties": false
       },
       "source_quotes": [],
@@ -103,12 +107,21 @@
                   "type": "string"
                 }
               },
-              "required": ["title", "body"],
+              "required": [
+                "title",
+                "body"
+              ],
               "additionalProperties": false
             }
           }
         },
-        "required": ["problems", "objections", "best_fit", "quotes", "changes"],
+        "required": [
+          "problems",
+          "objections",
+          "best_fit",
+          "quotes",
+          "changes"
+        ],
         "additionalProperties": false
       },
       "source_quotes": [
@@ -119,7 +132,7 @@
         "We wrote down who would come, but I do not know if that changed anything."
       ],
       "review_focus": [
-        "Preserve Nora\u2019s contradictory routine; avoid treating five fictional excerpts as validation.",
+        "Preserve Nora’s contradictory routine; avoid treating five fictional excerpts as validation.",
         "Copy quotes only from exact quote fields, not paraphrased notes."
       ],
       "synthetic": true
@@ -168,19 +181,30 @@
                   "type": "string"
                 }
               },
-              "required": ["title", "body"],
+              "required": [
+                "title",
+                "body"
+              ],
               "additionalProperties": false
             }
           }
         },
-        "required": ["problems", "objections", "best_fit", "quotes", "changes"],
+        "required": [
+          "problems",
+          "objections",
+          "best_fit",
+          "quotes",
+          "changes"
+        ],
         "additionalProperties": false
       },
-      "source_quotes": ["I do not want another app; our group already has a routine."],
+      "source_quotes": [
+        "I do not want another app; our group already has a routine."
+      ],
       "review_focus": [
-        "Preserve Nora\u2019s contradictory routine; avoid treating five fictional excerpts as validation.",
+        "Preserve Nora’s contradictory routine; avoid treating five fictional excerpts as validation.",
         "Copy quotes only from exact quote fields, not paraphrased notes.",
-        "Source sufficiency outranks requested 3\u20136 quote count; return at most the one supplied exact quote and state the evidence limit."
+        "Source sufficiency outranks requested 3–6 quote count; return at most the one supplied exact quote and state the evidence limit."
       ],
       "synthetic": true
     },
@@ -204,7 +228,10 @@
                   "type": "string"
                 }
               },
-              "required": ["title", "body"],
+              "required": [
+                "title",
+                "body"
+              ],
               "additionalProperties": false
             }
           },
@@ -220,7 +247,10 @@
                   "type": "string"
                 }
               },
-              "required": ["title", "body"],
+              "required": [
+                "title",
+                "body"
+              ],
               "additionalProperties": false
             }
           },
@@ -231,7 +261,11 @@
             }
           }
         },
-        "required": ["channels", "drafts", "survey"],
+        "required": [
+          "channels",
+          "drafts",
+          "survey"
+        ],
         "additionalProperties": false
       },
       "source_quotes": [
@@ -267,7 +301,10 @@
                   "type": "string"
                 }
               },
-              "required": ["title", "body"],
+              "required": [
+                "title",
+                "body"
+              ],
               "additionalProperties": false
             }
           },
@@ -283,7 +320,10 @@
                   "type": "string"
                 }
               },
-              "required": ["title", "body"],
+              "required": [
+                "title",
+                "body"
+              ],
               "additionalProperties": false
             }
           },
@@ -294,7 +334,11 @@
             }
           }
         },
-        "required": ["channels", "drafts", "survey"],
+        "required": [
+          "channels",
+          "drafts",
+          "survey"
+        ],
         "additionalProperties": false
       },
       "source_quotes": [
@@ -331,7 +375,10 @@
                   "type": "string"
                 }
               },
-              "required": ["title", "body"],
+              "required": [
+                "title",
+                "body"
+              ],
               "additionalProperties": false
             }
           },
@@ -348,7 +395,11 @@
             }
           }
         },
-        "required": ["channels", "referral_asks", "onboarding_questions"],
+        "required": [
+          "channels",
+          "referral_asks",
+          "onboarding_questions"
+        ],
         "additionalProperties": false
       },
       "source_quotes": [
@@ -382,7 +433,10 @@
                   "type": "string"
                 }
               },
-              "required": ["title", "body"],
+              "required": [
+                "title",
+                "body"
+              ],
               "additionalProperties": false
             }
           },
@@ -399,7 +453,11 @@
             }
           }
         },
-        "required": ["channels", "referral_asks", "onboarding_questions"],
+        "required": [
+          "channels",
+          "referral_asks",
+          "onboarding_questions"
+        ],
         "additionalProperties": false
       },
       "source_quotes": [],
