@@ -1,3 +1,4 @@
+import { workspaceWriteError } from "@/lib/write-errors";
 import { OwnerActivityExport } from "@/components/export/OwnerActivityExport";
 import { marketingActivities } from "@/lib/export/plan-adapters";
 import { useEffect, useRef, useState, type ReactNode } from "react";
@@ -201,13 +202,15 @@ export function SavedMarketingLab({ project }: { project: Project }) {
     const result = await saveMarketingPlan({ data: input });
     setBusy(false);
     if (!result.ok) {
-      if (result.code === "STAGE_LOCKED") setServerCanWrite(false);
+      if (result.code === "STAGE_LOCKED" || result.code === "ARCHIVED") setServerCanWrite(false);
       setError(
-        result.code === "CONFLICT"
-          ? "A newer version was saved elsewhere. Your edits are still here. Review or load the saved version before continuing."
-          : result.code === "STAGE_LOCKED"
-            ? "Saving opens at Stage 2. Your draft has not been submitted."
-            : "This save was not confirmed. Your edits are still here; try again. Do not leave until you have a confirmed save.",
+        result.code === "ARCHIVED" || result.code === "BUSY"
+          ? workspaceWriteError(result)
+          : result.code === "CONFLICT"
+            ? "A newer version was saved elsewhere. Your edits are still here. Review or load the saved version before continuing."
+            : result.code === "STAGE_LOCKED"
+              ? "Saving opens at Stage 2. Your draft has not been submitted."
+              : "This save was not confirmed. Your edits are still here; try again. Do not leave until you have a confirmed save.",
       );
       return;
     }
@@ -308,10 +311,11 @@ export function SavedMarketingLab({ project }: { project: Project }) {
       </div>
       {!canWrite && (
         <Card>
-          <h3 className="font-bold">Build from your first conversations</h3>
+          <h3 className="font-bold">Saving is unavailable</h3>
           <p className="mt-2 text-sm text-muted-foreground">
-            Saving a Marketing Lab plan opens at Stage 2. You can explore the public example or use
-            the printable classroom kit now.
+            Saving a Marketing Lab plan requires an active idea at Stage 2. If this idea was
+            archived, restore it in Account & saved work. Your current draft remains available to
+            review and export.
           </p>
           <Link
             to="/demo"

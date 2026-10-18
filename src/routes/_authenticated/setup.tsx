@@ -1,3 +1,4 @@
+import { workspaceWriteError } from "@/lib/write-errors";
 import { createFileRoute, Link, useNavigate, useSearch } from "@tanstack/react-router";
 import { useEffect, useRef, useState } from "react";
 import { toast } from "sonner";
@@ -180,7 +181,10 @@ function SetupForm({
                   if (!stillHere()) return;
                   if (result.error || !result.data?.id)
                     throw new Error(
-                      "The save could not be confirmed. Your text is still here; check Account & saved work if this idea was archived.",
+                      workspaceWriteError(
+                        result.error,
+                        "The save could not be confirmed. Your text is still here; check Account & saved work if this idea was archived.",
+                      ),
                     );
                   savedId = result.data.id;
                 } else {

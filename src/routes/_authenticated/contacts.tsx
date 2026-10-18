@@ -1,3 +1,4 @@
+import { workspaceWriteError } from "@/lib/write-errors";
 import { OwnerActivityExport } from "@/components/export/OwnerActivityExport";
 import { contactActivities, contactDraftActivity } from "@/lib/export/adapters";
 import { createFileRoute } from "@tanstack/react-router";
@@ -47,7 +48,7 @@ function Contacts({ p }: { p: Project }) {
       status: stage === 1 ? "to_contact" : "contacted",
     });
     if (error) {
-      toast.error(error.message);
+      toast.error(workspaceWriteError(error));
       return;
     }
     setF({ first_name: "", relation: "", why: "" });
@@ -175,10 +176,14 @@ function Contacts({ p }: { p: Project }) {
                         aria-label={`Status for ${c.first_name}`}
                         value={c.status}
                         onChange={async (e) => {
-                          await supabase
+                          const { error } = await supabase
                             .from("contacts")
                             .update({ status: e.target.value })
                             .eq("id", c.id);
+                          if (error) {
+                            toast.error(workspaceWriteError(error));
+                            return;
+                          }
                           refresh("contacts");
                         }}
                         className="mt-2 min-h-11 max-w-full rounded-lg border bg-background px-3 py-2 text-sm"
@@ -199,7 +204,16 @@ function Contacts({ p }: { p: Project }) {
                     aria-label={`Remove ${c.first_name}`}
                     className="flex size-11 shrink-0 items-center justify-center rounded-lg text-muted-foreground hover:bg-muted"
                     onClick={async () => {
-                      await supabase.from("contacts").delete().eq("id", c.id);
+                      const { error } = await supabase.from("contacts").delete().eq("id", c.id);
+                      if (error) {
+                        toast.error(
+                          workspaceWriteError(
+                            error,
+                            "The person could not be removed. No deletion was confirmed.",
+                          ),
+                        );
+                        return;
+                      }
                       refresh("contacts");
                     }}
                   >

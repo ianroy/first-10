@@ -1,3 +1,4 @@
+import { workspaceWriteError } from "@/lib/write-errors";
 import { OwnerActivityExport } from "@/components/export/OwnerActivityExport";
 import { teacherActivities } from "@/lib/export/plan-adapters";
 import { teachingReferenceActivities } from "@/lib/export/demo-adapters";
@@ -290,7 +291,9 @@ export function TeacherPlanner({
           setError(
             "A newer or different save needs your review. Your draft is still here. Review the saved version before saving again.",
           );
-        } else if (result.code === "UNAUTHENTICATED")
+        } else if (result.code === "ARCHIVED" || result.code === "BUSY")
+          setError(workspaceWriteError(result));
+        else if (result.code === "UNAUTHENTICATED")
           setError(
             "Your session needs attention. Copy any unsaved work before signing in again. This draft has not been discarded.",
           );

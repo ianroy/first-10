@@ -1,3 +1,4 @@
+import { workspaceWriteError } from "@/lib/write-errors";
 import { InterviewDraftList } from "@/components/interview-drafts/InterviewDraftList";
 import { InterviewDraftSession } from "@/components/interview-drafts/InterviewDraftSession";
 import { createFileRoute, Link } from "@tanstack/react-router";
@@ -133,7 +134,7 @@ function Prep({
       })
       .eq("id", p.id);
     if (error) {
-      toast.error(error.message);
+      toast.error(workspaceWriteError(error));
       return;
     }
     setDraft(null);

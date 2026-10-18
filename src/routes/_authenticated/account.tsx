@@ -143,7 +143,7 @@ function Account() {
             <p className="mt-2 text-sm">
               {confirmation.idea.archived_at
                 ? "Return this idea to your active list. Its people, conversations and saved work are retained."
-                : "Keep all saved work and move this idea to the archived list. You can restore it here. Archive organizes your list; it does not prevent changes from an already open session."}
+                : "Keep all saved work and stop new edits, generations and access grants, including from already open sessions. Owner review, export, withdrawal and restore remain available. A request authorized before archive may still finish; it cannot save new content into the archived idea."}
             </p>
             <div className="mt-4 flex flex-wrap gap-3">
               <button

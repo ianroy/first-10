@@ -1,3 +1,4 @@
+import { workspaceWriteError } from "@/lib/write-errors";
 import { OwnerActivityExport } from "@/components/export/OwnerActivityExport";
 import {
   projectActivities,
@@ -165,7 +166,7 @@ function Synthesis({ p, synth }: { p: Project; synth: Learning | undefined }) {
       .update({ data: d, accepted, body: d.problems.slice(0, 2).join(" · ") })
       .eq("id", synth.id);
     if (error) {
-      toast.error(error.message);
+      toast.error(workspaceWriteError(error));
       return;
     }
     refresh("learnings");
@@ -330,10 +331,14 @@ function Checklist({
   const val = (it: ChecklistItem) => itemDone(it, check);
   const ready = isReady(items, check);
   const toggle = async (k: string) => {
-    await supabase
+    const { error } = await supabase
       .from("projects")
       .update({ checklist: { ...check, [k]: !check[k] } as NonNullable<Json> })
       .eq("id", p.id);
+    if (error) {
+      toast.error(workspaceWriteError(error));
+      return;
+    }
     refresh("project");
   };
   return (
@@ -363,7 +368,14 @@ function Checklist({
         className="mt-3"
         disabled={!ready}
         onClick={async () => {
-          await supabase.from("projects").update({ stage: nextStage }).eq("id", p.id);
+          const { error } = await supabase
+            .from("projects")
+            .update({ stage: nextStage })
+            .eq("id", p.id);
+          if (error) {
+            toast.error(workspaceWriteError(error));
+            return;
+          }
           refresh("project");
           toast.success(`Stage ${nextStage} unlocked! `);
         }}
@@ -394,7 +406,7 @@ function Experiments({ p }: { p: Project }) {
             .from("experiments")
             .insert({ ...f, project_id: p.id, stage: p.stage });
           if (error) {
-            toast.error(error.message);
+            toast.error(workspaceWriteError(error));
             return;
           }
           setF({ hypothesis: "", change: "", result: "" });
@@ -465,10 +477,14 @@ function Experiments({ p }: { p: Project }) {
               className="mt-2 rounded-lg bg-background"
               onBlur={async (e) => {
                 if (e.target.value !== x.result) {
-                  await supabase
+                  const { error } = await supabase
                     .from("experiments")
                     .update({ result: e.target.value })
                     .eq("id", x.id);
+                  if (error) {
+                    toast.error(workspaceWriteError(error));
+                    return;
+                  }
                   refresh("experiments");
                 }
               }}

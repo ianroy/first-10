@@ -110,6 +110,11 @@ export function SavedConsentFields({ scope, label }: { scope: ConsentScope; labe
     <div className="space-y-3">
       <h3 className="font-semibold">{label}</h3>
       <ConsentFields value={draft} onChange={setDraft} disabled={busy} />
+      <p className="text-xs text-muted-foreground">
+        Archived ideas allow withdrawing choices but cannot add permission grants. Removing a linked
+        person resets that interview’s AI choice to unknown; review it again before any deliberate
+        new grant. Private notes are retained until you choose to remove them.
+      </p>
       {record.evidenceInvalidated && (
         <p className="rounded-lg bg-secondary p-3 text-sm">
           This learning may contain withdrawn evidence. Its AI permission cannot be restored by this

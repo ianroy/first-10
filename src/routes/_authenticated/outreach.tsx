@@ -1,3 +1,4 @@
+import { workspaceWriteError } from "@/lib/write-errors";
 import { OwnerActivityExport } from "@/components/export/OwnerActivityExport";
 import { outreachActivities, projectActivities, contactActivities } from "@/lib/export/adapters";
 import { createFileRoute, Link } from "@tanstack/react-router";
@@ -140,7 +141,11 @@ function DraftItem({ o, copy }: { o: Outreach; copy?: boolean | undefined }) {
         className="rounded-lg bg-background text-sm"
         onBlur={async () => {
           if (body !== o.body) {
-            await supabase.from("outreach").update({ body }).eq("id", o.id);
+            const { error } = await supabase.from("outreach").update({ body }).eq("id", o.id);
+            if (error) {
+              toast.error(workspaceWriteError(error));
+              return;
+            }
             refresh("outreach");
           }
         }}
@@ -271,10 +276,14 @@ function Stage2({ p }: { p: Project }) {
               <Button
                 className="flex-1 rounded-xl"
                 onClick={async () => {
-                  await supabase
+                  const { error } = await supabase
                     .from("projects")
                     .update({ survey: sv.split("\n").filter(Boolean) })
                     .eq("id", p.id);
+                  if (error) {
+                    toast.error(workspaceWriteError(error));
+                    return;
+                  }
                   setSv(null);
                   refresh("project");
                   toast.success("Saved");
@@ -328,10 +337,14 @@ function Stage2({ p }: { p: Project }) {
                         }
                         disabled={si === PIPELINE.length - 1}
                         onClick={async () => {
-                          await supabase
+                          const { error } = await supabase
                             .from("contacts")
                             .update({ status: PIPELINE[si + 1]!.key })
                             .eq("id", c.id);
+                          if (error) {
+                            toast.error(workspaceWriteError(error));
+                            return;
+                          }
                           refresh("contacts");
                         }}
                         className="min-h-11 rounded-full border bg-background px-3 py-2 text-sm"
@@ -452,10 +465,14 @@ function Stage3({ p }: { p: Project }) {
           variant="outline"
           className="mt-3 w-full rounded-xl"
           onClick={async () => {
-            await supabase
+            const { error } = await supabase
               .from("projects")
               .update({ checklist: { ...check, metrics: mm } })
               .eq("id", p.id);
+            if (error) {
+              toast.error(workspaceWriteError(error));
+              return;
+            }
             refresh("project");
             toast.success("Numbers saved");
           }}
