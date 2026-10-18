@@ -55,7 +55,7 @@ Build truthful public materials from current capabilities while research continu
 | EDU-001 Author reusable lesson plans and assessment guidance | complete | 3/3 | agent | S | VAL-001, VP-008 | — | docs/teaching/**, public/teaching/**; locks: — |
 | EDU-002 Build a teaching subpage with usable resources | complete | 3/3 | agent | S | EDU-001, BR-002, WEB-001 | — | src/routes/teach.tsx, src/components/teaching/**, public/teaching/** (3 more; inspect --task); locks: route-integration |
 | EDU-004 Rehearse lesson materials with an instructor before the class pilot | not_started | 0/3 | human | S | EDU-001 | — | research/teaching-rehearsal.md, docs/teaching/**, public/teaching/**; locks: teaching-materials |
-| WEB-005 Verify public demo, teaching and brand journeys | not_started | 0/3 | agent | S | WEB-004, EDU-002, BR-003 | — | src/routes/public-pages.test.tsx, docs/marketing/release-check.md, src/tests/web-005/**; locks: — |
+| WEB-005 Verify public demo, teaching and brand journeys | blocked | 2/3 | agent | S | WEB-004, EDU-002, BR-003 | — | src/routes/public-pages.test.tsx, docs/marketing/release-check.md, src/tests/web-005/**; locks: — |
 | P-001b Factual five-minute sales/pitch deck after release evidence | blocked | 2/3 | agent | M | WEB-001, BR-001, MKT-001, WEB-003 | — | docs/demo/pitch/**, public/pitch/**; locks: — |
 | MKT-001 Define the $0 marketing lab and its teaching contract | complete | 3/3 | agent | S | SEC-001, VP-007 | — | docs/marketing/marketing-lab-contract.md, docs/teaching/pedagogy-map.md; locks: — |
 | MKT-007 Extend the public demo with the marketing board | complete | 3/3 | agent | S | MKT-001, WEB-002, BR-002 | — | src/components/demo/**, src/lib/demo/**, src/routes/demo.tsx (2 more; inspect --task); locks: — |
@@ -114,7 +114,7 @@ Offer bounded, reviewed help with interviews, decisions and follow-through.
 | EV-005 Add evidence-linked challenge and next-test drafts | not_started | 0/3 | agent | S | EV-003, AI-008 | — | src/lib/ai.functions.ts, src/lib/prompts/challenge.ts, src/components/decisions/ChallengeDraft.tsx (10 more; inspect --task); locks: ai-entrypoint |
 | EV-006 Add interview question coaching with cheap optional rewrites | not_started | 0/3 | agent | S | WS-007, AI-008 | — | src/lib/question-coach.ts, src/components/interviews/QuestionCoach.tsx, src/lib/ai.functions.ts (14 more; inspect --task); locks: ai-entrypoint, interview-flow |
 | EV-007 Offer a first-conversation and outreach rewrite assistant | not_started | 0/3 | agent | S | EV-001, AI-008, WEB-005 | — | src/components/outreach/FirstAsk.tsx, src/lib/ai.functions.ts, src/lib/prompts/first-ask.ts (14 more; inspect --task); locks: ai-entrypoint, route-integration |
-| MKT-006 Plan a one-week test and measure useful action | not_started | 0/3 | agent | S | MKT-003 | — | src/components/marketing-lab/TestPlanner.tsx, src/components/marketing-lab/ResultsReview.tsx, src/lib/marketing-metrics.ts (2 more; inspect --task); locks: marketing-editor |
+| MKT-006 Plan a one-week test and measure useful action | in_progress | 0/3 | agent | S | MKT-003 | — | src/components/marketing-lab/TestPlanner.tsx, src/components/marketing-lab/ResultsReview.tsx, src/lib/marketing-metrics.ts (5 more; inspect --task); locks: marketing-editor |
 
 ## P6 — Sharing and collaborative design
 

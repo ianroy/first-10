@@ -3516,7 +3516,7 @@
       "id": "WEB-005",
       "title": "Verify public demo, teaching and brand journeys",
       "phase": "P2",
-      "status": "not_started",
+      "status": "blocked",
       "owner": "agent",
       "size": "S",
       "kind": "gate",
@@ -3567,26 +3567,32 @@
         {
           "date": "2026-10-17",
           "text": "Scheduled by Iteration 5; no implementation or validation claimed."
+        },
+        {
+          "date": "2026-10-18",
+          "text": "Desktop public QA and current/planned claim fixes are shipped. Full task awaits mobile-layout/keyboard/accessibility completion after the owner-prioritized desktop demo; unblock by running the remaining checks and recording actual evidence. This is not a human comprehension study."
         }
       ],
       "claim": null,
-      "completion_evidence": [],
+      "completion_evidence": [
+        "Partial desktop-only verification: docs/marketing/release-check.md; integrated 61ab5cd; 16 worker focused tests plus 19 combined public checks. Desktop journeys and public resources verified; mobile review explicitly unrun at owner request."
+      ],
       "subtasks": [
         {
           "id": "WEB-005.s1",
-          "status": "not_started",
+          "status": "complete",
           "instruction": "Check anonymous-to-demo-to-auth and landing-to-teaching-to-download journeys.",
           "notes": []
         },
         {
           "id": "WEB-005.s2",
-          "status": "not_started",
+          "status": "blocked",
           "instruction": "Review claims, privacy/AI explanations, keyboard flow, mobile layouts and image/text alternatives.",
           "notes": []
         },
         {
           "id": "WEB-005.s3",
-          "status": "not_started",
+          "status": "complete",
           "instruction": "Record actual failures and fixes; feed comprehension findings into VP-004a when participants are available.",
           "notes": []
         }
@@ -9738,7 +9744,7 @@
       "id": "MKT-006",
       "title": "Plan a one-week test and measure useful action",
       "phase": "P5",
-      "status": "not_started",
+      "status": "in_progress",
       "owner": "agent",
       "size": "S",
       "kind": "implementation",
@@ -9752,7 +9758,10 @@
         "src/components/marketing-lab/ResultsReview.tsx",
         "src/lib/marketing-metrics.ts",
         "src/lib/marketing-metrics.test.ts",
-        "src/lib/marketing.functions.ts"
+        "src/lib/marketing.functions.ts",
+        "src/components/marketing/ManualMeasurements.tsx",
+        "src/components/marketing/SavedMarketingLab.tsx",
+        "src/tests/marketing-metrics/**"
       ],
       "exclusive_locks": [
         "marketing-editor"
@@ -9790,14 +9799,25 @@
         {
           "date": "2026-10-18",
           "text": "Explicitly requested by owner: Next 50 $0 marketing activity inspired by BUS131 slides and whiteboard; pedagogy must appear in landing/pitch; original logo and fixed favicon requested."
+        },
+        {
+          "date": "2026-10-18",
+          "text": "Final-sprint isolated implementation of existing-schema manual measurements and defensible derived rates; no new database or analytics claims. Coordinator will review strict unknown/cohort/window/source validation before integration; whole-task completion depends on all acceptance criteria."
         }
       ],
-      "claim": null,
+      "claim": {
+        "owner": "value_critique",
+        "branch": "codex/marketing-measurements",
+        "base_commit": "22a701f943207473e568db0d39344c7b492c1939",
+        "worktree": "/Users/ianroy/.codex/worktrees/first-ten-access/First 10",
+        "started_at": "2026-10-18T11:53:37.859808+00:00",
+        "lease_expires_at": "2026-10-18T12:53:37.859808+00:00"
+      },
       "completion_evidence": [],
       "subtasks": [
         {
           "id": "MKT-006.s1",
-          "status": "not_started",
+          "status": "in_progress",
           "instruction": "Define owner/deadline/dependencies/definition-of-done, time/resource limits, primary useful action, baseline/target and fallback without paid ads or assumed free resources.",
           "notes": []
         },

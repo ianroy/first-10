@@ -25,7 +25,7 @@ status: in_progress
 last_task_done: AI-009
 next_task: PITCH-001
 next_parallel_wave: []
-active_claims: [PITCH-001]
+active_claims: [PITCH-001, MKT-006]
 research_gate: not_passed
 foundation_gate: not_passed
 realtime_go: pending
