@@ -1,0 +1,74 @@
+name: Database policies
+
+on:
+  pull_request:
+  push:
+    branches: [main]
+
+permissions:
+  contents: read
+
+concurrency:
+  group: policies-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  isolated-rls:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    env:
+      POLICY_TEST_WORKDIR: ${{ runner.temp }}/firstten-policy-ci
+      # Disposable local DB credentials only. No hosted project or repository secret is used.
+      POLICY_TEST_DATABASE_URL: postgresql://postgres:postgres@127.0.0.1:54322/postgres
+    steps:
+      - uses: actions/checkout@v5
+      - uses: actions/setup-node@v5
+        with:
+          node-version: "22"
+          package-manager-cache: false
+      - uses: supabase/setup-cli@v1
+        with:
+          version: 2.121.0
+      - name: Check policy runner target safeguards
+        run: node --test src/tests/sec-002/*.test.mjs
+      - name: Prepare a separate disposable Supabase project
+        shell: bash
+        run: |
+          mkdir -p "$POLICY_TEST_WORKDIR"
+          cd "$POLICY_TEST_WORKDIR"
+          supabase init --workdir "$POLICY_TEST_WORKDIR" >/dev/null 2>&1
+          python3 - <<'PY'
+          import os,re
+          from pathlib import Path
+          root=Path(os.environ['POLICY_TEST_WORKDIR'])/'supabase'
+          config=root/'config.toml'
+          text=config.read_text()
+          text=re.sub(r'^project_id\s*=.*$', 'project_id = "firstten-policy-ci"', text, flags=re.M)
+          config.write_text(text)
+          (root/'migrations').mkdir(exist_ok=True)
+          for source in (Path(os.environ['GITHUB_WORKSPACE'])/'supabase/migrations').glob('*.sql'):
+              (root/'migrations'/source.name).write_bytes(source.read_bytes())
+          (root/'seed.sql').write_text('-- Disposable policy-test database; test fixtures roll back.\n')
+          PY
+      - name: Start only local Postgres and apply migrations
+        working-directory: ${{ env.POLICY_TEST_WORKDIR }}
+        shell: bash
+        run: |
+          if ! supabase db start --workdir "$POLICY_TEST_WORKDIR" >/dev/null 2>&1; then
+            echo "Could not start the disposable policy-test database; no hosted target was used."
+            exit 1
+          fi
+          if ! supabase db reset --local --workdir "$POLICY_TEST_WORKDIR" >/dev/null 2>&1; then
+            echo "Could not apply migrations to the disposable policy-test database."
+            exit 1
+          fi
+      - name: Run real owner and anonymous policies
+        run: node scripts/test-policies.mjs
+      - name: Stop only this disposable stack
+        if: always()
+        shell: bash
+        run: |
+          if [ -f "$POLICY_TEST_WORKDIR/supabase/config.toml" ]; then
+            cd "$POLICY_TEST_WORKDIR"
+            supabase stop --no-backup --workdir "$POLICY_TEST_WORKDIR" >/dev/null 2>&1 || true
+          fi
