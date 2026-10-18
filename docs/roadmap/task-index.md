@@ -29,7 +29,7 @@ Protect data and money before expanding access or AI behavior.
 | PRV-001 Persist consent choices and explain AI/sharing data flow | not_started | 0/3 | agent | S | SEC-003 | — | supabase/migrations/**, src/components/ConsentFields.tsx, src/components/AppShell.tsx (11 more; inspect --task); locks: database-schema, generated-types, app-shell, ai-entrypoint, interview-flow |
 | PRV-002 Account data export and deliberate deletion | not_started | 0/3 | agent | S | PRV-001, SEC-004 | — | src/routes/_authenticated/settings.tsx, src/lib/account.functions.ts, supabase/migrations/** (5 more; inspect --task); locks: database-schema, generated-types, route-integration |
 | OPS-003 Migration, release and restore runbook | not_started | 0/3 | agent | S | SEC-003, OPS-002 | — | docs/operations/release-runbook.md, scripts/check-migrations.mjs; locks: migration-coordination |
-| AI-001 Harden the existing OpenRouter gateway and input/output validation | not_started | 0/3 | agent | S | OPS-001 | — | src/lib/ai.functions.ts, src/lib/ai/**, src/lib/ai.test.ts (2 more; inspect --task); locks: ai-entrypoint |
+| AI-001 Harden the existing OpenRouter gateway and input/output validation | complete | 3/3 | agent | S | OPS-001 | — | src/lib/ai.functions.ts, src/lib/ai/**, src/lib/ai.test.ts (4 more; inspect --task); locks: ai-entrypoint, interview-flow, route-integration |
 | AI-002 Version prompts/schemas and persist generation provenance | not_started | 0/3 | agent | S | AI-001, SEC-003 | — | src/lib/prompts/**, src/lib/ai.functions.ts, supabase/migrations/** (4 more; inspect --task); locks: ai-entrypoint, database-schema, generated-types |
 | AI-003 Deterministic eval harness and representative fixtures | not_started | 0/3 | agent | S | AI-002 | — | evals/**, scripts/eval-ai.mjs, package.json (1 more; inspect --task); locks: package-manifest |
 | AI-004 Authoritative usage ledger and atomic spend reservation | not_started | 0/3 | agent | S | AI-001, SEC-003 | — | supabase/migrations/**, src/integrations/supabase/types.ts, src/lib/ai.functions.ts (5 more; inspect --task); locks: database-schema, generated-types, ai-entrypoint |
@@ -45,7 +45,7 @@ Build truthful public materials from current capabilities while research continu
 | Task | Status | Subtasks complete | Owner | Size | Dependencies | Decisions | Write scope / locks |
 | --- | --- | --- | --- | --- | --- | --- | --- |
 | BR-001 Translate company values into two accessible brand directions | complete | 3/3 | agent | S | VAL-001 | — | docs/brand/directions.md, docs/brand/previews/**; locks: — |
-| BR-002 Implement semantic brand tokens and component foundations | not_started | 0/3 | agent | S | BR-001, OPS-001 | — | src/styles.css, src/components/ui/**, docs/brand/tokens.md (1 more; inspect --task); locks: design-system |
+| BR-002 Implement semantic brand tokens and component foundations | in_progress | 0/3 | agent | S | BR-001, OPS-001 | — | src/styles.css, src/components/ui/**, docs/brand/tokens.md (1 more; inspect --task); locks: design-system |
 | BR-003 Apply product voice and brand across authenticated journeys | not_started | 0/3 | agent | S | BR-002 | — | src/components/AppShell.tsx, src/components/RequireProject.tsx, src/routes/auth.tsx (7 more; inspect --task); locks: app-shell, route-integration |
 | WEB-001 Write the founder sales narrative and demo storyboard | complete | 3/3 | agent | S | VP-007, VAL-001 | — | docs/marketing/landing-brief.md, docs/marketing/claims.md; locks: — |
 | WEB-002 Build a deterministic interactive product demo | not_started | 0/3 | agent | S | WEB-001, BR-002, F-007 | — | src/components/demo/**, src/lib/demo/**, public/demo/** (3 more; inspect --task); locks: route-integration |
@@ -56,7 +56,7 @@ Build truthful public materials from current capabilities while research continu
 | EDU-004 Rehearse lesson materials with an instructor before the class pilot | not_started | 0/3 | human | S | EDU-001 | — | research/teaching-rehearsal.md, docs/teaching/**, public/teaching/**; locks: teaching-materials |
 | WEB-005 Verify public demo, teaching and brand journeys | not_started | 0/3 | agent | S | WEB-004, EDU-002, BR-003 | — | src/routes/public-pages.test.tsx, docs/marketing/release-check.md, src/tests/web-005/**; locks: — |
 | P-001b Factual five-minute sales/pitch deck after release evidence | not_started | 0/3 | agent | M | WEB-001, BR-001, MKT-001, WEB-003 | — | docs/demo/pitch/**, public/pitch/**; locks: — |
-| MKT-001 Define the $0 marketing lab and its teaching contract | not_started | 0/3 | agent | S | SEC-001, VP-007 | — | docs/marketing/marketing-lab-contract.md, docs/teaching/pedagogy-map.md; locks: — |
+| MKT-001 Define the $0 marketing lab and its teaching contract | in_progress | 0/3 | agent | S | SEC-001, VP-007 | — | docs/marketing/marketing-lab-contract.md, docs/teaching/pedagogy-map.md; locks: — |
 | MKT-007 Extend the public demo with the marketing board | not_started | 0/3 | agent | S | MKT-001, WEB-002, BR-002 | — | src/components/demo/**, src/lib/demo/**, src/routes/demo.tsx (2 more; inspect --task); locks: route-integration |
 | BR-004 Create the First Ten logo and replace the favicon | not_started | 0/3 | agent | S | BR-001 | — | public/brand/**, public/favicon.svg, public/favicon.ico (4 more; inspect --task); locks: route-integration, brand-assets |
 

@@ -5,6 +5,7 @@ import { useServerFn } from "@tanstack/react-start";
 import { Plus, Trash2, X } from "lucide-react";
 import { supabase } from "@/integrations/supabase/client";
 import { generateAI } from "@/lib/ai.functions";
+import { validateAIOutput } from "@/lib/ai/contracts";
 import { AppShell, Card, DraftBadge, Empty, PrivacyNote } from "@/components/AppShell";
 import { RequireProject } from "@/components/RequireProject";
 import { Button } from "@/components/ui/button";
@@ -96,7 +97,7 @@ function Prep({
               setBusy(true);
               try {
                 const r = await gen({ data: { kind: "questions", projectId: p.id } });
-                setDraft(r.questions);
+                setDraft(validateAIOutput("questions", r).questions);
               } catch (e) {
                 toast.error((e as Error).message);
               }
@@ -150,7 +151,7 @@ function Prep({
                 setBusy(true);
                 try {
                   const r = await gen({ data: { kind: "questions", projectId: p.id } });
-                  setDraft(r.questions);
+                  setDraft(validateAIOutput("questions", r).questions);
                 } catch (e) {
                   toast.error((e as Error).message);
                 }

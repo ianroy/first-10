@@ -1700,7 +1700,7 @@
       "id": "AI-001",
       "title": "Harden the existing OpenRouter gateway and input/output validation",
       "phase": "P1",
-      "status": "not_started",
+      "status": "complete",
       "owner": "agent",
       "size": "S",
       "kind": "implementation",
@@ -1712,9 +1712,11 @@
         "src/lib/ai/**",
         "src/lib/ai.test.ts",
         "src/tests/ai-001/**",
-        "src/lib/ai.functions.test.ts"
+        "src/lib/ai.functions.test.ts",
+        "src/routes/_authenticated/interview.tsx",
+        "src/routes/_authenticated/outreach.tsx"
       ],
-      "exclusive_locks": ["ai-entrypoint"],
+      "exclusive_locks": ["ai-entrypoint", "interview-flow", "route-integration"],
       "read_first": [
         "ProductSpec.md",
         "FEATUREROADMAP_workplan.md",
@@ -1749,26 +1751,38 @@
         {
           "date": "2026-10-17",
           "text": "Partly seeded by F-002 timeout/retry at c2bea2b; runtime schemas, full tests and robust deadline semantics remain."
+        },
+        {
+          "date": "2026-10-18",
+          "text": "Claimed for the authorized autonomous demo run."
+        },
+        {
+          "date": "2026-10-18",
+          "text": "Coordinator expands scope to two existing AI callers for type-safe narrowing of validated kind-specific output; no stage or regeneration behavior changes. Empty evidence arrays remain valid rather than requiring invented observations."
+        },
+        {
+          "date": "2026-10-18",
+          "text": "Runtime request/output schemas and safe bounded gateway implemented. 40 Vitest tests, typecheck, scoped lint and Vercel build passed. No paid provider calls. Two existing callers narrow validated kind-specific output; source/quote grounding, prompts and spend ledger remain downstream tasks."
         }
       ],
       "claim": null,
-      "completion_evidence": [],
+      "completion_evidence": ["src/lib/ai.test.ts"],
       "subtasks": [
         {
           "id": "AI-001.s1",
-          "status": "not_started",
+          "status": "complete",
           "instruction": "Preserve the four current kinds and use runtime schemas for inputs and outputs.",
           "notes": []
         },
         {
           "id": "AI-001.s2",
-          "status": "not_started",
+          "status": "complete",
           "instruction": "Handle blank model env, absolute deadline, bounded retry/backoff, cancellation and safe error mapping.",
           "notes": []
         },
         {
           "id": "AI-001.s3",
-          "status": "not_started",
+          "status": "complete",
           "instruction": "Test 200/401/402/429/5xx/timeouts/malformed JSON and prompt-injection-shaped data; avoid retries that double-charge after uncertain completion.",
           "notes": []
         }
@@ -2391,7 +2405,7 @@
       "id": "BR-002",
       "title": "Implement semantic brand tokens and component foundations",
       "phase": "P2",
-      "status": "not_started",
+      "status": "in_progress",
       "owner": "agent",
       "size": "S",
       "kind": "implementation",
@@ -2440,14 +2454,25 @@
         {
           "date": "2026-10-17",
           "text": "Scheduled by Iteration 5; no implementation or validation claimed."
+        },
+        {
+          "date": "2026-10-18",
+          "text": "Claimed for the authorized autonomous demo run."
         }
       ],
-      "claim": null,
+      "claim": {
+        "owner": "brand_worker",
+        "branch": "codex/br-002-autonomous",
+        "base_commit": "07f704ddfb84a8d5c65633703079e97f783d5981",
+        "worktree": "/Users/ianroy/.codex/worktrees/first-ten-ops/First 10",
+        "started_at": "2026-10-18T03:42:03.658092+00:00",
+        "lease_expires_at": "2026-10-18T05:42:03.658092+00:00"
+      },
       "completion_evidence": [],
       "subtasks": [
         {
           "id": "BR-002.s1",
-          "status": "not_started",
+          "status": "in_progress",
           "instruction": "Map semantic palette, type and spacing to existing Tailwind/shadcn tokens.",
           "notes": []
         },
@@ -8425,7 +8450,7 @@
       "id": "MKT-001",
       "title": "Define the $0 marketing lab and its teaching contract",
       "phase": "P2",
-      "status": "not_started",
+      "status": "in_progress",
       "owner": "agent",
       "size": "S",
       "kind": "documentation",
@@ -8467,14 +8492,25 @@
         {
           "date": "2026-10-18",
           "text": "Explicitly requested by owner: Next 50 $0 marketing activity inspired by BUS131 slides and whiteboard; pedagogy must appear in landing/pitch; original logo and fixed favicon requested."
+        },
+        {
+          "date": "2026-10-18",
+          "text": "Claimed for the authorized autonomous demo run."
         }
       ],
-      "claim": null,
+      "claim": {
+        "owner": "marketing_worker",
+        "branch": "codex/mkt-001-autonomous",
+        "base_commit": "07f704ddfb84a8d5c65633703079e97f783d5981",
+        "worktree": "/Users/ianroy/.codex/worktrees/first-ten-value/First 10",
+        "started_at": "2026-10-18T03:42:03.735694+00:00",
+        "lease_expires_at": "2026-10-18T05:42:03.735694+00:00"
+      },
       "completion_evidence": [],
       "subtasks": [
         {
           "id": "MKT-001.s1",
-          "status": "not_started",
+          "status": "in_progress",
           "instruction": "Map the supplied BUS131 slides and board to audience, evidence/unknowns, specific physical/digital channels, reviewed content, resource limits and a one-week test.",
           "notes": []
         },

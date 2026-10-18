@@ -47,3 +47,7 @@ The canonical registry owns current task/subtask/claim state. Recheck readiness 
 - 03:34 UTC: three isolated branches/worktrees created; initial tasks claimed and dispatched.
 
 - OPS-001 integrated: reproducible source lint, explicit Node22 CI and roadmap graph/tests in the pipeline; local lint/typecheck/19 app tests/20 scheduler tests/Vercel build passed.
+
+- User steering: make the Next50 $0 Marketing Lab core, using supplied BUS131 slides/board; name pedagogical concepts in landing and pitch; create an original logo and matching favicon. MKT-001–008, BR-004 and DEMO-001 added; event pitch deck promoted.
+- AI-001 implemented and verified locally: strict input/output shapes, bounded HTTP attempts/deadline, blank-model fallback, failure handling and token ceiling; 40 app/gateway tests, typecheck, lint and Vercel build pass. No paid calls were made.
+- Pitch deck draft created in Spaces: page_984affe9853c8191a5f8caf0d446aba3, artifact_external_f6f8a2ee-e468-4ec9-a57f-99e5f0f9fb49. Cover only; full slide authoring/review remains pending.

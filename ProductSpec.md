@@ -189,20 +189,22 @@ Context is sliced by characters without a deterministic query order or a separat
 
 ### 5.2 Provider contract and limits
 
-Requests use OpenRouter chat completions, `response_format.type=json_schema`, `strict:true` and `provider.require_parameters:true`. `SCHEMAS` defines required properties and disallows additional object properties. Array counts and interview-quality rules are expressed in prompts, not array-length constraints.
+Requests use OpenRouter chat completions, `response_format.type=json_schema`, `strict:true` and `provider.require_parameters:true`. Provider schemas define required properties and disallow additional object fields. The server independently validates `kind` and a UUID `projectId`, rejects extra input fields, and validates the returned task shape with bounded arrays/text in [contracts.ts](src/lib/ai/contracts.ts). Evidence sections may be empty when the source does not support a finding; question lists require at least one nonempty question.
 
-The application parses the returned content as JSON, with a fallback that extracts an object-shaped substring. It does not independently validate the returned object against the schema, verify copied quotes, or check semantic grounding. The input validator is also a typed pass-through rather than runtime validation of `kind` and `projectId`. Provider structured-output settings do not establish the truth of a claim.
+Only strict JSON is accepted. Empty, malformed, refused, truncated and wrong-shaped responses fail before callers save them. These checks establish format, not quote authenticity or semantic grounding; source-id and quote checks remain AI-007 work. Requested array counts and question quality still require prompt/evaluation checks.
 
-`OPENROUTER_MODEL` selects the model, otherwise the code defaults to `anthropic/claude-sonnet-4.5`. Omit this variable or set a nonempty value: the code uses `??`, so a present empty string does not select the default. The `OPENROUTER_API_KEY` never belongs in a browser-exposed variable. `APP_URL`, when set, supplies the request's `HTTP-Referer` header.
+`OPENROUTER_MODEL` selects the model; missing, empty or whitespace configuration uses the existing `anthropic/claude-sonnet-4.5` baseline. Cheaper routing is not promoted until its evaluation tasks pass. The `OPENROUTER_API_KEY` stays server-side. `APP_URL` supplies the request referer when configured.
 
 ### 5.3 Reliability and errors
 
-- At most three fetch attempts. HTTP 429/5xx responses retry with 800 ms and 1,600 ms waits; thrown network errors retry immediately.
-- One `AbortSignal.timeout(60_000)` is shared across those attempts. This is not a fresh 60-second allowance for each retry.
-- Missing configuration, empty/malformed content and HTTP 401/402/429 have explanatory errors. Other HTTP failures use a generic retry message; repeated fetch exceptions are reported as a timeout even if their cause differs.
-- No streaming, fallback-model list, per-user rate/spend cap, usage/cost persistence, prompt registry or eval harness is implemented.
+- At most two application-level HTTP starts within a 60-second absolute deadline, each using a fresh abort signal bounded to 25 seconds or the remaining deadline.
+- Only HTTP 429/5xx responses are eligible for the second attempt. Backoff includes jitter and a bounded Retry-After delay of at most five seconds.
+- Transport loss is an unknown outcome and is not automatically retried: upstream processing may already have happened. Authentication, funds, schema, refusal, truncation and malformed-output failures are not retried as outages.
+- Provider requests include a 2,500-output-token ceiling and a 40,000-character assembled-input ceiling. Token-aware whole-record context selection remains planned.
+- The internal gateway returns non-content generation/model/usage metadata for future accounting. Usage is not yet persisted or a substitute for atomic spend reservation.
+- Safe errors explain that previous saved work remains available. There is no streaming, automatic model fallback list, per-user rate/spend cap, persisted usage, prompt registry or comparative model-evaluation harness yet.
 
-A returned draft is not yet a saved draft: the caller must persist it and handle the write result. Some existing paths need better error checks; do not copy their omissions into new work.
+The gateway fault tests use mocked provider responses and make no paid calls. A returned draft is not yet a saved draft: callers still persist it and must handle the write result. Some existing multi-write paths remain non-atomic; EV-001 addresses their history and recovery.
 
 ### 5.4 Data handling and future AI changes
 
@@ -249,7 +251,7 @@ npx bun@1.3.5 run test
 NITRO_PRESET=vercel npx bun@1.3.5 run build
 ```
 
-If `.vercel/output` already exists, use `npx bun@1.3.5 run lint --ignore-pattern '.vercel/**'` for the local lint check. The current ESLint ignore list does not exclude generated Vercel output; CI avoids this by linting before building.
+OPS-001 excludes generated Vercel output from source linting. Run the same lint command before or after a build; CI also verifies the roadmap graph and scheduler tests.
 
 The same scripts can be invoked with `npm run <script>` after dependencies are installed; preserve the committed package-manager lockfile. For schema work, link a deliberate development Supabase project, inspect pending migrations, and use `supabase db push`. A linked database is a real remote target; `db reset --linked` is destructive and is not part of this quickstart.
 
@@ -284,7 +286,7 @@ A push to the recorded connected branch can trigger Vercel and Lovable synchroni
 2. **Counts are limited evidence.** Interview totals, self-ticked checklist items and manual contact statuses drive progress. Distinct qualified people, commitments and independently measured behavior are not established by these counters.
 3. **Interview quality is unchecked.** Prompts request past behavior, but edited questions and notes are not coached or linted. The existing hypothetical tags need care when interpreting evidence.
 4. **Regeneration can discard work.** Outreach replacement is destructive; synthesis overwrites the current version. Archive/restore remains unimplemented.
-5. **AI controls are incomplete.** No usage ledger/cap, versioned prompt registry, eval harness or runtime schema/quote validation. Timeout/retry behavior exists but does not complete all of F-002.
+5. **AI controls are incomplete.** Runtime input/output validation and bounded failure handling are implemented in AI-001. Usage caps/ledger, prompt versions, comparative evals and quote/source validation remain planned; F-002 is split across those tasks.
 6. **Interview capture is fragile.** Notes save only at wrap-up; no offline/PWA, autosave or session recovery.
 7. **Channel suggestions are not verified research.** AI suggestions have no browsing, community-rule lookup or live source checking. The old direct Reddit audit is cancelled; the supplied title-level brief is inspiration only.
 8. **Scaffold and delivery work remains.** The Lovable wrapper/runtime support files remain; F-007 is verified, while preview setup (F-009b) and deployment smoke coverage (OPS-002, successor to X-001) remain planned.

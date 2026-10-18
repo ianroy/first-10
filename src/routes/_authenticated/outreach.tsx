@@ -5,6 +5,7 @@ import { useServerFn } from "@tanstack/react-start";
 import { Copy, Lock } from "lucide-react";
 import { supabase } from "@/integrations/supabase/client";
 import { generateAI } from "@/lib/ai.functions";
+import { validateAIOutput } from "@/lib/ai/contracts";
 import { AppShell, Card, DraftBadge, Empty } from "@/components/AppShell";
 import { RequireProject } from "@/components/RequireProject";
 import { Button } from "@/components/ui/button";
@@ -75,11 +76,13 @@ function useGenerate(p: Project, kind: "stage2" | "stage3") {
   const run = async () => {
     setBusy(true);
     try {
-      const r = await gen({ data: { kind, projectId: p.id } });
+      const output = await gen({ data: { kind, projectId: p.id } });
+      const r =
+        kind === "stage2" ? validateAIOutput("stage2", output) : validateAIOutput("stage3", output);
       const stage = kind === "stage2" ? 2 : 3;
       await supabase.from("outreach").delete().eq("project_id", p.id).eq("stage", stage);
       const rows: { kind: string; title: string; body: string }[] =
-        kind === "stage2"
+        "drafts" in r
           ? [
               ...r.channels.map((c: Titled) => ({ kind: "channel", ...c })),
               ...r.drafts.map((c: Titled) => ({ kind: "draft", ...c })),
@@ -98,7 +101,7 @@ function useGenerate(p: Project, kind: "stage2" | "stage3") {
               })),
             ];
       await supabase.from("outreach").insert(rows.map((x) => ({ ...x, project_id: p.id, stage })));
-      if (kind === "stage2")
+      if ("survey" in r)
         await supabase.from("projects").update({ survey: r.survey }).eq("id", p.id);
       refresh("outreach", "project");
     } catch (e) {

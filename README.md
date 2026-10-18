@@ -90,18 +90,18 @@ Use the local URL printed by Vite; the wrapper can choose the port. Configure th
 
 ### Environment variables
 
-| Variable                                             | Scope                                    | Purpose                                                                                                                |
-| ---------------------------------------------------- | ---------------------------------------- | ---------------------------------------------------------------------------------------------------------------------- |
-| `VITE_SUPABASE_URL`, `VITE_SUPABASE_PUBLISHABLE_KEY` | Browser/build                            | Public Supabase URL and publishable/anon key                                                                           |
-| `SUPABASE_URL`, `SUPABASE_PUBLISHABLE_KEY`           | Server                                   | Same project URL and publishable/anon key for authenticated AI requests                                                |
-| `OPENROUTER_API_KEY`                                 | Server only                              | Required for AI generation                                                                                             |
-| `OPENROUTER_MODEL`                                   | Server only, optional                    | Omit to use the code default `anthropic/claude-sonnet-4.5`, or set a supported model identifier; do not leave it empty |
-| `APP_URL`                                            | Server only, optional                    | OpenRouter request referer; code defaults to the recorded production URL                                               |
-| `NITRO_PRESET`                                       | Build                                    | Set to `vercel` when building for Vercel                                                                               |
-| `SUPABASE_SERVICE_ROLE_KEY`                          | Server only, unused by current app flows | Optional admin-client scaffold; bypasses RLS                                                                           |
-| `SUPABASE_PROJECT_ID`, `VITE_SUPABASE_PROJECT_ID`    | Template metadata                        | Present in `.env.example`; not read by current application code                                                        |
+| Variable                                             | Scope                                    | Purpose                                                                                                              |
+| ---------------------------------------------------- | ---------------------------------------- | -------------------------------------------------------------------------------------------------------------------- |
+| `VITE_SUPABASE_URL`, `VITE_SUPABASE_PUBLISHABLE_KEY` | Browser/build                            | Public Supabase URL and publishable/anon key                                                                         |
+| `SUPABASE_URL`, `SUPABASE_PUBLISHABLE_KEY`           | Server                                   | Same project URL and publishable/anon key for authenticated AI requests                                              |
+| `OPENROUTER_API_KEY`                                 | Server only                              | Required for AI generation                                                                                           |
+| `OPENROUTER_MODEL`                                   | Server only, optional                    | Missing or blank uses the current `anthropic/claude-sonnet-4.5` baseline; set a supported explicit model to override |
+| `APP_URL`                                            | Server only, optional                    | OpenRouter request referer; code defaults to the recorded production URL                                             |
+| `NITRO_PRESET`                                       | Build                                    | Set to `vercel` when building for Vercel                                                                             |
+| `SUPABASE_SERVICE_ROLE_KEY`                          | Server only, unused by current app flows | Optional admin-client scaffold; bypasses RLS                                                                         |
+| `SUPABASE_PROJECT_ID`, `VITE_SUPABASE_PROJECT_ID`    | Template metadata                        | Present in `.env.example`; not read by current application code                                                      |
 
-The template includes a blank `OPENROUTER_MODEL=` line: remove it or fill it, because an empty value prevents the default from applying. `APP_URL` and `NITRO_PRESET` are additional supported settings not listed in that template. Keep real `.env` values out of Git. Never put the OpenRouter key or service-role key in a `VITE_` variable.
+The template includes a blank `OPENROUTER_MODEL=` line; blank and missing values now select the baseline. Lower-cost routes require their model-evaluation tasks before promotion. `APP_URL` and `NITRO_PRESET` are additional supported settings not listed in that template. Keep real `.env` values out of Git. Never put the OpenRouter key or service-role key in a `VITE_` variable.
 
 ### Database
 
