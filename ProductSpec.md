@@ -4,7 +4,7 @@ First Ten helps a student founder turn early customer conversations into a clear
 
 Read this first, then [the roadmap's state and current iteration](FEATUREROADMAP_workplan.md). The [README](README.md) is the shorter introduction and setup guide. The roadmap decides what to investigate or build next; this spec does not authorize its candidate features.
 
-**Documentation basis, 2026-10-17:** implementation checked against the source following `ce0f2fe`; product direction follows Iteration 4, introduced in `0848ab2`. Descriptions of deployment configuration are recorded operational history, not a new live-environment audit. The revised value proposition is a hypothesis; no completed participant interviews or product-outcome study is recorded in `research/` yet.
+**Documentation basis, 2026-10-17:** implementation checked against the source following `ce0f2fe`; candidate value follows the Iteration 4 research thesis; the owner-requested delivery plan is now Iteration 5. No proposed capability in that plan is implemented by this documentation change. Descriptions of deployment configuration are recorded operational history, not a new live-environment audit. The revised value proposition is a hypothesis; no completed participant interviews or product-outcome study is recorded in `research/` yet.
 
 ## 1. Product in one paragraph
 
@@ -51,7 +51,7 @@ Changes to these principles require a decision in the roadmap.
 
 ### 1.4 How value will be assessed
 
-Iteration 4 tests the workflow with interviews, manual concepts and a three-founder pilot before selecting a new feature. These are proposed research measures, not metrics already instrumented in the app:
+The R0 track tests the workflow with interviews, manual concepts and a three-founder pilot while the owner-requested Iteration 5 engineering plan proceeds through its own gates. These are proposed research measures, not metrics already instrumented in the app:
 
 | Measure        | Proposed definition                                                                                                        |
 | -------------- | -------------------------------------------------------------------------------------------------------------------------- |
@@ -224,7 +224,7 @@ Before adding or changing AI behavior, follow the roadmap's prompt-versioning, e
 
 [Vitest configuration](vitest.config.ts) discovers tests throughout `src/`. Existing coverage includes [stage counters](src/lib/data.test.ts), [unlock logic](src/lib/stages.test.ts), [routing](src/test/app-routing.test.tsx), and [page rendering](src/test/pages.test.tsx), using [fake Supabase](src/test/fake-supabase.ts) and [render helpers](src/test/render-page.tsx). These mocks do not prove production RLS, real auth, provider correctness or deploy readiness.
 
-The [CI workflow](.github/workflows/ci.yml) uses Bun 1.3.5 and runs lint, typecheck, tests and a Vercel-preset build on pushes to `main` and pull requests. Consult the roadmap's F-007 Notes for recorded verification; the existence of a workflow is not a green result. New routes need meaningful routing/render coverage; changed pure helpers need appropriate unit coverage. AI behavior changes require evals once the prerequisite harness exists. Research/documentation tasks use source and artifact checks rather than silently implementing deferred features.
+The [CI workflow](.github/workflows/ci.yml) uses Bun 1.3.5 and runs lint, typecheck, tests and a Vercel-preset build on pushes to `main` and pull requests. F-007 has [verified green CI for 7006f87](https://github.com/ianroy/first-10/actions/runs/39092157827); future changes still need their own checks. Consult the canonical task registry for current status. New routes need meaningful routing/render coverage; changed pure helpers need appropriate unit coverage. AI behavior changes require evals once the prerequisite harness exists. Research/documentation tasks use source and artifact checks rather than silently implementing deferred features.
 
 ## 7. Local dev quickstart
 
@@ -287,10 +287,12 @@ A push to the recorded connected branch can trigger Vercel and Lovable synchroni
 5. **AI controls are incomplete.** No usage ledger/cap, versioned prompt registry, eval harness or runtime schema/quote validation. Timeout/retry behavior exists but does not complete all of F-002.
 6. **Interview capture is fragile.** Notes save only at wrap-up; no offline/PWA, autosave or session recovery.
 7. **Channel suggestions are not verified research.** AI suggestions have no browsing, community-rule lookup or live source checking. The old direct Reddit audit is cancelled; the supplied title-level brief is inspiration only.
-8. **Scaffold and delivery work remains.** The Lovable wrapper/runtime support files remain; F-007's recorded checks, preview setup and X-001 smoke coverage must be verified on their own terms.
+8. **Scaffold and delivery work remains.** The Lovable wrapper/runtime support files remain; F-007 is verified, while preview setup (F-009b) and deployment smoke coverage (OPS-002, successor to X-001) remain planned.
 9. **The next-decision promise is not validated.** No completed research interviews, pilot outcome dataset or synthesis is recorded yet. A manual decision record is a planned experiment, not a shipped feature.
 10. **Privacy and ownership need further work.** Consent is not persisted; export/delete, provider-processing choices and sharing controls are absent. Cross-row ownership consistency is not enforced by the current foreign keys/policies.
 11. **Measurement is manual.** No product event log or automatic activation/retention tracking exists. Stage 3 counts are entered by the founder and have no historical period series.
 12. **Writes and validation need hardening.** Some multi-step writes can partially succeed; UI stage thresholds and TypeScript shapes are not runtime or database invariants.
 
-Iteration 4 investigates the user, alternatives, action blockers, useful decisions and reviewer needs. Evidence-linked synthesis, coaching, commitments, challenge responses, Evidence Packs and first-ask help remain candidates. Neither the R0 research gate nor the R1 foundation gate is recorded as passed. Select the smallest next investment after the evidence review; do not execute older feature schedules simply because their definitions remain in the roadmap.
+Iteration 5 schedules the owner-requested broader product: accessible brand and public demos, teaching materials, economical per-kind AI, durable multi-project workspaces, separate teacher/admin panels, evidence-to-decision tools and controlled collaboration. [The registry](docs/roadmap/tasks.json) and [task index](docs/roadmap/task-index.md) own the execution order and detailed acceptance criteria. The [company values](docs/company-values.md) define operating commitments. These capabilities are planned; the current routes, tables and limitations above remain authoritative until implementation lands.
+
+Neither the R0 research gate nor the full foundation gate is recorded as passed. Research runs alongside requested engineering; it governs claims of founder value and buyer fit, while security, data integrity, cost and release gates govern feature enablement. Archived schedules are historical. Teacher/class/admin/design roles require explicit new contracts and tested migrations; they are not exceptions that a worker may infer from the current owner-only schema.

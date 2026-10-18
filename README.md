@@ -59,11 +59,11 @@ The goals and unlock thresholds differ. They are workflow guides, not evidence t
 
 ## What we are testing next
 
-[Iteration 4](FEATUREROADMAP_workplan.md#iteration-4-test-the-value-of-a-useful-next-decision) is a research plan: audit the claims and alternatives, refine interview guides, run founder and instructor interviews, test concepts manually, then run a small existing-product pilot. No new feature in that plan should be treated as already shipped or validated.
+[Iteration 5](FEATUREROADMAP_workplan.md) stages the requested product expansion alongside research: economical AI, a new brand and demo landing page, teaching resources, durable personal workspaces, teacher and admin panels, and controlled sharing/collaboration. The [task registry and index](docs/roadmap/task-index.md) specify status, dependencies, subtasks and agent handoffs. These are planned capabilities, not shipped features.
 
 The primary pilot outcome to test is a **useful loop within 14 days**: a founder takes an external action and records a specific decision supported by observations, including counterevidence or unknowns, plus a next step. Voluntary return matters; course requirements and facilitator help will be recorded separately. Draft generation, interview totals and positive feedback alone are insufficient.
 
-Research may change the audience, workflow or positioning. New feature selection follows the research and reliability gates in the roadmap. F-007 still needs GitHub CI confirmation; local check results are recorded in the roadmap. A CI workflow alone does not establish pilot readiness.
+Research may change the audience, workflow or positioning. The owner-requested engineering plan can proceed while interviews run; research findings and reliability gates remain separate. F-007 now has [verified green CI](https://github.com/ianroy/first-10/actions/runs/39092157827), while privacy, model evaluations and preview setup remain open. The [company values](docs/company-values.md) and [OpenRouter plan](docs/roadmap/openrouter-plan.md) guide future implementation.
 
 ## Privacy and AI data flow
 

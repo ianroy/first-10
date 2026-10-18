@@ -1,0 +1,23 @@
+# Iteration 5 planning validation
+
+Checked on 2026-10-17 against the proposed planning changes following `a2d69a3` (including the concurrent DOC-002 team-credits change). This records validation of the roadmap and its execution tooling, not delivery of the planned product features.
+
+| Check                                                                                      | Result                                                                                                                                                                    |
+| ------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `node scripts/roadmap.mjs --check`                                                         | Passed: 110 tasks, 306 subtasks, no graph/decision/claim warnings                                                                                                         |
+| `node --test scripts/roadmap.test.mjs`                                                     | Passed: 20 tests covering malformed graphs, cycles, gates, subtasks, historical coverage, scope conflicts, claims, isolated worktrees/branches, renderer and CLI behavior |
+| Scoped ESLint on both roadmap scripts                                                      | Passed                                                                                                                                                                    |
+| Generated index/audit compared with renderer output                                        | Passed; canonical state remains `tasks.json`                                                                                                                              |
+| In-memory dispatch simulation                                                              | Every scheduled task is reachable when its actual prerequisites are supplied; simulation does not modify real statuses or establish completion                            |
+| Local links in active roadmap, README, ProductSpec, values, model plan and generated views | Passed                                                                                                                                                                    |
+| Historical preservation                                                                    | Archive body matches the previous committed roadmap byte for byte; all dated Notes preserved                                                                              |
+| Legacy inventory                                                                           | All 47 historical task IDs and 19 seed backlog items have explicit dispositions/successors; the old `X-001a` format example is not counted as an actual task              |
+| Git whitespace check                                                                       | Passed                                                                                                                                                                    |
+
+The proposed first wave is `OPS-001`, `SEC-001`, `VP-007`, with distinct write scopes. `BR-001` and `WEB-003` are also independently ready for later slots. No task claims or autonomous schedules were created.
+
+Final review corrected premature class invitation handling, future AI context-adapter assumptions, missing consumer/test/evaluation write scopes, and the need to run the release security gate after all included AI paths land. An early instructor lesson rehearsal now runs independently of the later full class pilot.
+
+Current statuses: **12 complete** (historical foundation or planning artifacts), **85 not started**, **12 deferred**, **1 dropped**. Research, preview, privacy, new model evaluations and the product additions remain outstanding. Required human observations, endpoint eligibility, configured evaluation budgets and realtime feasibility cannot be supplied by a successful scheduler test.
+
+The existing application CI was separately verified green for `7006f87`: [run 39092157827](https://github.com/ianroy/first-10/actions/runs/39092157827). This planning pass changes documentation and two standalone Node scripts; it does not change app code, dependencies, migrations or deployed role behavior. App tests/build were not rerun locally for this pass. OPS-001 schedules wiring the new registry checks into CI and normalizing the generated-output lint exclusion; that integration is not claimed complete here.
