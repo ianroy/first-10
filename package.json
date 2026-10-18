@@ -16,7 +16,9 @@
     "roadmap:check": "node scripts/roadmap.mjs --check",
     "roadmap:test": "node --test scripts/roadmap.test.mjs",
     "smoke": "node scripts/smoke.mjs",
-    "smoke:test": "node --test src/tests/ops-002/smoke.test.mjs"
+    "smoke:test": "node --test src/tests/ops-002/smoke.test.mjs",
+    "migrations:check": "node scripts/check-migrations.mjs",
+    "migrations:test": "node --test scripts/check-migrations.test.mjs"
   },
   "overrides": {
     "rolldown": "1.2.1"

@@ -1,0 +1,14 @@
+{
+  "source": "disposable local-only fixture database",
+  "restored_project_count": 1,
+  "restored_contact_count": 1,
+  "fixture_content_match": true,
+  "original_stage": 2,
+  "pending_migration_replayed": "20261018004000",
+  "recorded_versions": 6,
+  "second_plan_pending": 0,
+  "anonymous_intake_read": false,
+  "dump_sha256": "15dfbd3f4ea6ff641bca249e4c97e55a0fcc7c237712f011b17a4656b906bc6a",
+  "production_read_or_write": false,
+  "full_supabase_auth_restore": false
+}

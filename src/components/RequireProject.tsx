@@ -33,14 +33,6 @@ export function RequireProject({ children }: { children: (p: Project) => ReactNo
             Account &amp; saved work
           </Link>
         </p>
-        <p>
-          <Link
-            to="/account"
-            className="mt-4 inline-flex min-h-11 items-center font-semibold underline underline-offset-4"
-          >
-            Account & saved work
-          </Link>
-        </p>
       </div>
     );
   if (!data) return <Navigate to="/setup" />;
