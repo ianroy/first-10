@@ -158,6 +158,27 @@ function Prep({
     toast.success("Questions saved");
   };
 
+  const requestQuestions = async () => {
+    const operationId = intent.begin();
+    if (!operationId) return;
+    setBusy(true);
+    try {
+      const r = await gen({
+        data: { kind: "questions", projectId: p.id, operationId, withOrigin: true },
+      });
+      if (!intent.isCurrent(operationId)) return;
+      const recorded = recordedAIOutput("questions", r);
+      setDraft(recorded.data.questions);
+      setDraftOrigin(recorded.originId);
+      intent.succeeded(operationId);
+    } catch (e) {
+      intent.failed(operationId);
+      if (intent.isCurrent(operationId)) toast.error((e as Error).message);
+    } finally {
+      if (intent.isCurrent(operationId)) setBusy(false);
+    }
+  };
+
   return (
     <AppShell title="Interview">
       <p className="max-w-2xl text-muted-foreground">
@@ -244,30 +265,7 @@ function Prep({
                 >
                   Write questions myself
                 </Button>
-                <Button
-                  size="xl"
-                  disabled={busy}
-                  onClick={async () => {
-                    const operationId = intent.begin();
-                    if (!operationId) return;
-                    setBusy(true);
-                    try {
-                      const r = await gen({
-                        data: { kind: "questions", projectId: p.id, operationId, withOrigin: true },
-                      });
-                      if (!intent.isCurrent(operationId)) return;
-                      const recorded = recordedAIOutput("questions", r);
-                      setDraft(recorded.data.questions);
-                      setDraftOrigin(recorded.originId);
-                      intent.succeeded(operationId);
-                    } catch (e) {
-                      intent.failed(operationId);
-                      if (intent.isCurrent(operationId)) toast.error((e as Error).message);
-                    } finally {
-                      if (intent.isCurrent(operationId)) setBusy(false);
-                    }
-                  }}
-                >
+                <Button size="xl" disabled={busy} onClick={requestQuestions}>
                   {busy ? "Writing questions…" : "Write my interview questions"}
                 </Button>
               </div>
@@ -313,20 +311,7 @@ function Prep({
                 <button
                   className="min-h-11 w-full rounded-lg pt-1 text-sm text-muted-foreground underline"
                   disabled={busy}
-                  onClick={async () => {
-                    setBusy(true);
-                    try {
-                      const r = await gen({
-                        data: { kind: "questions", projectId: p.id, withOrigin: true },
-                      });
-                      const recorded = recordedAIOutput("questions", r);
-                      setDraft(recorded.data.questions);
-                      setDraftOrigin(recorded.originId);
-                    } catch (e) {
-                      toast.error((e as Error).message);
-                    }
-                    setBusy(false);
-                  }}
+                  onClick={requestQuestions}
                 >
                   {busy ? "Rewriting…" : "Regenerate with AI"}
                 </button>

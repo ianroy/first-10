@@ -66,6 +66,27 @@ beforeEach(() => {
 });
 afterEach(cleanup);
 describe("generation receipts survive save and subsequent editing", () => {
+  it("reuses the same intent when regenerating saved questions after an uncertain response", async () => {
+    sessionStorage.clear();
+    client({ projects: [{ ...project, questions: ["Keep the current question"] }] });
+    h.gen.mockRejectedValue(new Error("Response uncertain"));
+    renderPage(page(Interview), "/interview");
+    fireEvent.click(await screen.findByRole("button", { name: "Regenerate with AI" }));
+    await waitFor(() => expect(h.error).toHaveBeenCalledWith("Response uncertain"));
+    const first = h.gen.mock.calls[0]![0].data;
+    expect(first).toMatchObject({
+      kind: "questions",
+      projectId: "p1",
+      operationId: expect.any(String),
+      withOrigin: true,
+    });
+    expect(first.operationId).toMatch(/^[0-9a-f-]{36}$/i);
+    expect(screen.getByLabelText("Question 1")).toHaveValue("Keep the current question");
+    fireEvent.click(screen.getByRole("button", { name: "Regenerate with AI" }));
+    await waitFor(() => expect(h.gen).toHaveBeenCalledTimes(2));
+    expect(h.gen.mock.calls[1]![0].data.operationId).toBe(first.operationId);
+    expect(h.client.calls).toHaveLength(0);
+  });
   it("stores the generated question receipt with human-edited questions and reads it after remount", async () => {
     client({ projects: [project] });
     h.gen.mockResolvedValue({ originId: id, data: { questions: ["Recent example?"] } });
