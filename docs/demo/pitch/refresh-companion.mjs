@@ -24,7 +24,7 @@ const figures = slides
       i,
     ) => `        <figure class="slide${i === 0 ? " active" : ""}" aria-label="Slide ${i + 1} of ${slides.length}">
           <img src="slides/${String(i + 1).padStart(2, "0")}.png" width="1280" height="720" alt="${esc(s.title + ". " + s.caption)}" />
-          <figcaption>${esc(s.caption)}${s.file ? ` <a href="https://first-10-three.vercel.app/pitch/demo/${s.file}.png">Open full-page capture</a>` : ""}</figcaption>
+          <figcaption>${esc(s.caption)}${s.file ? ` <a href="https://first-10-three.vercel.app/pitch/demo/${s.file}.png">Open full-page capture</a>` : ""}${i === 12 ? ' <a href="https://first-10-three.vercel.app/founding-partners">Become a founding partner</a>' : ""}</figcaption>
         </figure>`,
   )
   .join("\n");
@@ -41,7 +41,7 @@ html = html
         <p>First Ten helps students take the next step after building a prototype. Choosing whom to approach, knowing what to ask and facing uncertain demand can be difficult. That is the teaching problem we want to investigate.</p>
         <p>The workflow connects a real conversation to a reviewed interpretation and a small test. Students look for counterexamples, test meaningful use and investigate willingness to pay through real commitments. StudyLoop is a fictional worked example, with no customer outcome implied.</p>
         <p>The deployed app includes private saved ideas, an interview and learning workflow, a manual five-step Marketing Lab and private teacher planning. The educator class examples are fictional. Admin shows protected aggregate counts. Presenter-only AI practice uses a fixed fictional case; general marketing AI remains planned.</p>
-        <p>Students think before AI, check each other’s plans and reflect after a bounded test. Our planned tests begin in October 2026 in BUS 131A and BUS 232F at Brandeis. After November–December refinement, we target a Spring 2027 release to ten schools represented at the workshop. This is a target, not ten confirmed commitments; no learning gain is established. Which student decision would you want to see more clearly?</p>
+        <p>Students think before AI, check each other’s plans and reflect after a bounded test. Our planned tests begin in October 2026 in BUS 131A and BUS 232F at Brandeis. After November–December refinement, we target a Spring 2027 release to ten schools represented at the workshop. This is a target, not ten confirmed commitments; no learning gain is established. Become a founding partner: try First Ten in your classes and give feedback. The owner offers founding partners two semesters free. Visit https://first-10-three.vercel.app/founding-partners.</p>
       </details>`,
   );
 html = html.replace(

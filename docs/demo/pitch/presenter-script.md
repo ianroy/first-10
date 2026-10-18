@@ -16,7 +16,7 @@ Use the thirteen-slide deck in order. The screenshots are a complete fallback; t
 | 10. Architecture | 10 sec | “The app sends AI requests through one server gateway and returns drafts for human review. The technology is the engine. Our stated moat is ten years of classroom-tested proprietary pedagogy; learning outcomes for this new app still need to be tested.” |
 | 11. Pedagogy | 15 sec | “The technology supports six teaching practices: experiential learning, student thinking before AI, scaffolding, peer feedback, reflection and responsible judgment. The app keeps saved work private. The student still decides what evidence means and what to do next.” |
 | 12. Go to market | 20 sec | “Moore’s chasm separates early adopters from the early majority. Our proposed entry is classroom pilots, and the bridge is a repeatable teaching package. We plan tests this October in BUS 131A and BUS 232F at Brandeis, refine with feedback in November and December, then target a Spring 2027 release to ten schools represented here. That is our target, not ten commitments.” |
-| 13. Questions | 10 sec | “Which student decision would you want to see more clearly? You can explore the fictional demo and adapt the teaching kit today.” |
+| 13. Questions and invitation | 15 sec | “Our ask is for the educators in this room to become founding partners. Try First Ten in your classes and tell us what works and what does not. Founding partners get two semesters free. Scan the code to join and leave feedback.” |
 
 Total target: about three minutes. Adjust pacing in rehearsal; no actual rehearsal timing is claimed here.
 
@@ -33,3 +33,7 @@ Presenter-only AI practice has one verified production response on 2026-10-18. I
 ## If asked about class management
 
 “The planner is private to its owner. The four class examples are fictional. Enrollment, student submissions, grades, shared review and broader role administration are not implemented.”
+
+## Founding-partner invitation
+
+The final slide contains a real QR encoding [the founding-partner page](https://first-10-three.vercel.app/founding-partners). The owner explicitly offers two semesters free for founding partners who try the app in their classes and give feedback. Do not describe the ten-school target as ten signed partners.

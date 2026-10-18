@@ -3,7 +3,7 @@
 Editable Spaces presentation: **First Ten — Babson teaching and product pitch**.
 
 - Page: `page_984affe9853c8191a5f8caf0d446aba3`
-- Connected artifact: `artifact_external_78c2eda9-303d-468b-9ff0-3fc40aeb3083`
+- Connected artifact: `artifact_external_df4a6cc0-0203-4da3-9814-41a835d83328`
 - Thirteen slides, 1280 × 720, original First Ten logo and Field notebook palette.
 - Native editable slide text, market and adoption diagrams, and source-bearing speaker notes. Slide 10 uses the owner-requested architecture illustration with editable exact model IDs.
 - [Presenter script](presenter-script.md) and [claim/source map](source-map.md).
@@ -22,7 +22,7 @@ Editable Spaces presentation: **First Ten — Babson teaching and product pitch*
 10. Owner-requested architecture illustration, private data boundary, AI gateway, exact model IDs and the owner-stated pedagogy moat.
 11. Six named pedagogical concepts with student activities.
 12. Editable Crossing the Chasm adoption curve and planned timeline: October 2026 tests, November–December refinement, Spring 2027 release target of ten schools represented at the workshop.
-13. Questions and public demo / teaching links.
+13. Questions and founding-partner ask, verified QR and two semesters free offer.
 
 ## Delivery and fallback
 
@@ -46,3 +46,7 @@ node docs/demo/pitch/build-offline.mjs
 The first command copies `slide-1.png` through `slide-13.png` to `public/pitch/slides/01.png` through `13.png`. Then inspect the browser companion and offline file, including Home/End, arrow navigation and presentation mode. A previous render is not evidence of the current native deck.
 
 The sources and limits remain in native speaker notes and the [source map](source-map.md). This presentation reports a working prototype and proposed classroom use, not verified demand, product-market fit, learning gains or institutional endorsement.
+
+## Founding-partner QR
+
+The final-slide QR encodes `https://first-10-three.vercel.app/founding-partners`. It has a white four-module quiet zone and is placed at 320 × 320 slide pixels. `build-qr.swift` uses macOS Core Image to generate it and Vision to decode and verify the exact URL. Rebuild on macOS with `swift docs/demo/pitch/build-qr.swift public/pitch/founding-partners-qr.png`. The offer of two semesters free is supplied by the owner; the ten-school target remains separate from confirmed partners.
