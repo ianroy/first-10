@@ -1,6 +1,7 @@
 import { useCallback, useEffect, useRef, useState } from "react";
 import { Link } from "@tanstack/react-router";
 import { BrandLogo } from "@/components/BrandLogo";
+import { GuestMarketingWorkspace } from "@/components/guest-marketing/GuestMarketingWorkspace";
 import { GuestLearningWorkspace } from "@/components/guest/GuestLearningWorkspace";
 import {
   bootstrapGuestSession,
@@ -32,17 +33,21 @@ export function GuestRoom() {
   const [keys, setKeys] = useState<Keys>({}),
     [busy, setBusy] = useState(false),
     [message, setMessage] = useState(""),
-    [reviewed, setReviewed] = useState(false);
+    [reviewed, setReviewed] = useState(false),
+    [studio, setStudio] = useState<"discovery" | "marketing">("discovery");
   const generation = useRef(0),
     alive = useRef(true),
     initialized = useRef(false),
     pendingLink = useRef(false);
-  const workspaceDirty = useRef(false);
+  const workspaceDirty = useRef({ discovery: false, marketing: false });
   const reportDirty = useCallback((dirty: boolean) => {
-    workspaceDirty.current = dirty;
+    workspaceDirty.current.discovery = dirty;
+  }, []);
+  const reportMarketingDirty = useCallback((dirty: boolean) => {
+    workspaceDirty.current.marketing = dirty;
   }, []);
   const confirmAccessChange = () =>
-    !workspaceDirty.current ||
+    !Object.values(workspaceDirty.current).some(Boolean) ||
     window.confirm(
       "Leave the guest editor with unsaved or unconfirmed work? Save or export first to keep local edits. A save already sent may still finish. Continue and leave this editor?",
     );
@@ -228,7 +233,40 @@ export function GuestRoom() {
                   )}
                 </div>
               </section>
-              <GuestLearningWorkspace view={view} csrf={csrf} onDirtyChange={reportDirty} />
+              <section className="rounded-2xl border bg-card p-5">
+                <nav aria-label="Learning studios" className="flex flex-wrap gap-3">
+                  {(
+                    [
+                      ["discovery", "First conversations"],
+                      ["marketing", "Next 50: $0 Marketing Lab"],
+                    ] as const
+                  ).map(([key, label]) => (
+                    <button
+                      key={key}
+                      aria-pressed={studio === key}
+                      aria-controls={`guest-${key}-studio`}
+                      className={`min-h-12 rounded-xl border px-5 font-semibold ${studio === key ? "bg-primary text-primary-foreground" : "bg-background"}`}
+                      onClick={() => setStudio(key)}
+                    >
+                      {label}
+                    </button>
+                  ))}
+                </nav>
+                <p className="mt-3 text-sm text-muted-foreground">
+                  Switch studios without losing local edits. Save before closing this browser. Each
+                  studio keeps its own private or deliberately shared work.
+                </p>
+              </section>
+              <div id="guest-discovery-studio" hidden={studio !== "discovery"}>
+                <GuestLearningWorkspace view={view} csrf={csrf} onDirtyChange={reportDirty} />
+              </div>
+              <div id="guest-marketing-studio" hidden={studio !== "marketing"}>
+                <GuestMarketingWorkspace
+                  view={view}
+                  csrf={csrf}
+                  onDirtyChange={reportMarketingDirty}
+                />
+              </div>
               <section className="rounded-2xl border bg-card p-6">
                 <h2 className="text-xl font-bold">Manage your access</h2>
                 <p className="mt-2 text-sm text-muted-foreground">

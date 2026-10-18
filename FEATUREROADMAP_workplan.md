@@ -22,10 +22,10 @@ Statuses are `not_started`, `in_progress`, `blocked`, `complete`, `deferred`, `d
 current_iteration: 5
 current_stage: P1_foundation_with_parallel_P2_and_R0
 status: in_progress
-last_task_done: AN-001
+last_task_done: WS-005
 next_task: CLS-008
 next_parallel_wave: [CLS-008, AI-003, CTX-001]
-active_claims: [CLS-008, WS-005]
+active_claims: [CLS-008, WS-003]
 research_gate: not_passed
 foundation_gate: not_passed
 realtime_go: pending
@@ -34,7 +34,7 @@ last_documentation_update: "2026-10-18: AI-002 complete; resumed lifecycle/admin
 resume_hint: >-
   Active goal: keep building every feasible authorized item, verify, commit/push/deploy.
   Preserve $25 total OpenRouter cap; no other paid services. No reset credits currently reported.
-  Hosted and dedicated local55322 through22; never touch unrelated54322 database.
+  Hosted and dedicated local55322 through23; never touch unrelated54322 database.
   Main livee558604 has owner discovery, archive freeze, reviewed account submissions,
   public-source PDF adapters and real guest access/recovery. WS009 completed after live
   archive/stale-write rejection/read/export/restore rehearsal. Fictional StudyLoop remains selected.
@@ -50,16 +50,20 @@ resume_hint: >-
   stopped, parser-fixed and redeployed8768392. Bothhomepage+commitpinnedGitHub retrievaland
   exactexcerptreview nowpasslive onNode24.21. Policyenabled withreceipt83724f78 (savedinrepo);
   sourceAI/sharingexcluded. Reviewed-sourceprocessing/AIadapter remainsunfinished.
-  General and guest AI remain off. AI003 bounded evaluation software worker has real compiled
+  AllnewAI dispatch nowpausedbyexistingglobal_stop afterretirement/billableboundreview;
+  permanent$1democarveoutandallaccountingpreserved. Publicretrievalremainsenabled. AI003 bounded evaluation software worker has real compiled
   server-function runtime tests and eight-case isolated SQL parity; no paid calls. Final v6
   integration passes1023app tests,26Node checks, typecheck/lint/build. AI003 softwarecomplete;
   final8caseSQLprojectionmatches/rollback/drop verified. Historicalv2-v5 immutable; no paidcalls,
   model-quality promotion or fabricatedreview. AI005 officialreviewfinds2.5FlashLiteCloud
   retirementOct20 andunprovenaccount/privacy/allinbillingbound; noqualitypromotion.
   AN001 source-auditedeventcontract complete; no
-  telemetryactivation. WS005 integrated85cac14 after independentreview; fullroot gates/publication/live ACK/reload
-  rehearsal underway. Guest Marketing Lab separate23 candidate reviewed; isolatedclone awaits
-  CREATE-ack cleanup guard fix before approval. No23 applied originallocal orhosted.
+  telemetryactivation. WS005 complete85cac14/9dd4691:1036app tests, type/lint/build pass; liveautosaverevision3
+  survivesreload+Resume; completedcountunchanged5. WS003 personalresume panel isolatedworker.
+  Guest Marketing Lab23 candidate dfa6de reviewed; correctedcloneharness3eccad ran1738SQL
+  assertions+6actualDTOs+5races, rollback/drop/absencepass. Final1746SQLcap assertions/6DTOs/5races pass andclonescleaned. Root1062app tests,
+  typecheck/lint/build pass;23appliednormallydedicatedlocalandhosted, published UI next.
+  Gueststudiosswitchwithoutunmount andaggregate dirtystateindependently.
   Broader guest MarketingLab/outreach parity, guest-to-account continuity, teacher bundles,
   source-fenced AI attachment, sharing, retention and real research gates remain unfinished.
   Keep independent work moving around task blockers; never mark the global goal complete early.

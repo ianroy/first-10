@@ -1,6 +1,15 @@
 /** Every new learning activity must register a named PDF adapter and explicit source boundary here. */
 export const ACTIVITY_EXPORT_COVERAGE = [
   {
+    id: "guest-marketing-lab",
+    adapter: "guestMarketingActivities",
+    source: "src/components/guest-marketing/GuestMarketingWorkspace.tsx",
+    status: "mounted",
+    scope: "guest",
+    granularity:
+      "All five manual steps and every channel, content asset, outreach draft, task and measurement; genuine private/team scope and fresh cookie/revision authorization before generation and delivery",
+  },
+  {
     id: "guest-discovery-cycle",
     adapter: "guestLearningActivities",
     source: "src/components/guest/GuestLearningWorkspace.tsx",
@@ -267,7 +276,7 @@ export const ACTIVITY_EXPORT_COVERAGE = [
   },
 ] as const;
 export const PENDING_EXPORT_CAPABILITIES = [
-  "Broader guest Marketing Lab/outreach parity and guest-to-account continuity",
+  "Guest-to-account continuity and reviewed teacher handoff for guest Marketing Lab",
   "Teacher-authorized student/team portfolio bundles",
   "Shared collaborative activities and permission-aware export selection",
   "New AI-assisted discovery/hypothesis/bias-map/script activities (DISC-002/003); the manual cycle already exports",

@@ -1,6 +1,6 @@
 # AI model and endpoint review (AI-005)
 
-**Review date:** 2026-10-18, 23:22 UTC. **Source baseline:** `8768392`. This document completes an official-source investigation and proposes routing rules. It does not enable a route, establish model quality, approve paid execution or complete AI-005. General and guest AI stay disabled. All inference must continue through `generateAI`; no serving code, fixtures, ledgers, credentials or account settings changed in this review.
+**Review date:** 2026-10-18, 23:22 UTC. **Source baseline:** `8768392`. This document completes an official-source investigation and proposes routing rules. It does not enable a route, establish model quality, approve paid execution or complete AI-005. General and guest AI stay disabled. After this review, the coordinator enabled the existing production global stop on 2026-10-18, pausing new requests including the fixed fictional practice. The $1 carve-out and all reservation/charge records are preserved. All inference must continue through `generateAI`; no serving code, fixtures, ledgers, credentials or account settings changed in this review.
 
 ## Immediate lifecycle finding
 
@@ -8,7 +8,7 @@ Google's official page names the **GA `gemini-2.5-flash-lite`**, released July 2
 
 **Recommendation, not an implemented guard:** do not promote this model as a durable product default. Conservatively stop new calls on this model before October 20 in the earliest applicable timezone unless exact continued endpoint availability and policy are re-reviewed. Record an explicit operator cutoff; do not invent a UTC retirement instant. Prefer a controlled stop over automatic migration. A new candidate requires new quality, endpoint, privacy and billing evidence.
 
-The same issue affects the existing fixed fictional workshop practice: `gateway.server.ts` pins `synthetic-marketing-v1` to `google/gemini-2.5-flash-lite`, `google-vertex`, 1,200 output tokens and no fallback. The v6 evaluator pins that model too. Preserve historical fixtures and accounting. A retirement guard or replacement is separate implementation work; this document changes neither.
+The same issue affects the existing fixed fictional workshop practice: `gateway.server.ts` pins `synthetic-marketing-v1` to `google/gemini-2.5-flash-lite`, `google-vertex`, 1,200 output tokens and no fallback. The v6 evaluator pins that model too. Preserve historical fixtures and accounting. A route-specific retirement guard or replacement is separate implementation work; the operational global stop now prevents new calls while its eligibility is unresolved.
 
 ## Public endpoint facts
 

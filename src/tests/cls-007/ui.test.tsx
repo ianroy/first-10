@@ -30,6 +30,14 @@ vi.mock("@/components/guest/GuestLearningWorkspace", () => ({
     </section>
   ),
 }));
+vi.mock("@/components/guest-marketing/GuestMarketingWorkspace", () => ({
+  GuestMarketingWorkspace: ({ onDirtyChange }: { onDirtyChange?: (dirty: boolean) => void }) => (
+    <section>
+      <button onClick={() => onDirtyChange?.(true)}>Make an unsaved marketing edit</button>
+      <button onClick={() => onDirtyChange?.(false)}>Mark marketing clean</button>
+    </section>
+  ),
+}));
 vi.mock("@/components/classes/TeacherGuestSubmissions", () => ({
   TeacherGuestSubmissions: () => <p>Reviewed guest versions only</p>,
 }));
@@ -157,6 +165,9 @@ describe("no-account guest journey", () => {
     const confirm = vi.spyOn(window, "confirm").mockReturnValue(false);
     render(<GuestRoom />);
     fireEvent.click(await screen.findByRole("button", { name: "Make an unsaved guest edit" }));
+    fireEvent.click(screen.getByRole("button", { name: "Next 50: $0 Marketing Lab" }));
+    fireEvent.click(screen.getByRole("button", { name: "Mark marketing clean" }));
+    fireEvent.click(screen.getByRole("button", { name: "First conversations" }));
     fireEvent.click(screen.getByRole("button", { name: "Use another code" }));
     fireEvent.click(screen.getByRole("button", { name: "End this browser session" }));
     expect(h.manage).not.toHaveBeenCalled();

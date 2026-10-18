@@ -2255,6 +2255,10 @@
         {
           "date": "2026-10-18",
           "text": "Integrated60dfd17/6d7a2ab/0a940c9 (workereacfa9f/625c55b/979e5f0). Immutablev6 deterministic harness, authenticated generateAI evaluation receipt, actual serving-key metadata cap, SDK runtime framing, exact synthetic RLS fixtures, sequential bounded journaled adapter. Root1023app tests/105files pass;26Node checks pass after exact loopback runtime test rerun with local-listen permission (initial sandboxEPERM was not product failure). Worker8 actual SQL fullprojection cases rolledback/clonedropped/absenceverified. Typecheck/lint0errors6existingwarnings/Vercelbuild pass. Space-path and clone-vs-runtime config regressions pass. Historicalv2-v5 unchanged; no paidcalls/modelquality/humanreview/policyactivation/promotion claimed. Live evaluation prerequisites remain inAI005/006 and docs/ai-evaluation-operations.md."
+        },
+        {
+          "date": "2026-10-18",
+          "text": "Futureclonecleanuphardeningd523099 integrated82682c1; createdattempttrackedbeforedispatch, exactpreviouslyabsentnamechecked/dropped andabsenceverifiedevenlostCREATEack. Newfutureharnesspin25fcf3f1c9c72344b1708bbd72101e23ae85abe0894c93f18096f34b476557ae. Syntax/lint/formatpass; historicalactuallysuccessful6f84412receiptunchanged, no repeatDB/providercalls."
         }
       ],
       "claim": null,
@@ -2471,6 +2475,10 @@
         {
           "date": "2026-10-18",
           "text": "Officialreviewcf75cfc: exactGA2.5FlashLite GoogleCloudretirementOct20, noUTCtimegiven; fixedfictionalpractice sharesmodel/endpoint risk. google-vertex base slugadmitsregions; responseproviderGooglecannotproveexactregion. Defaultthinking/softbudget meansallinbillingbound notproven; catalogprices≠accounteligibility. Currenteightcaseconservativearithmetic$.846864 onlyifboundvalid;3.1comparatorwouldrequire$2.127152cannotreuse$.90plan. Doconlyno keyreads/provider/policymutations. s1publicfactsreviewcomplete; exactaccount/privacy/billablebound+quality/promotiongatesunmet; paidexecution remainsdisabled. Rootowns lifecyclecutoff followup; oldmodelmustnotbepromotedasdurabledefault."
+        },
+        {
+          "date": "2026-10-18",
+          "text": "ProductionAIglobal_stop readfalse then narrowlysettrue after verifiedretirement and unresolvedbillablebounds. Freshreadconfirmstrue. This stopsnewdispatchincludingfixedfictionalpractice; preservespermanent$1carveout, allpriorreservations/charges/provenance andsettlement. No keyread/providercall, noreplacementmodel/fallbackpromotion. Publicretrievalseparatepolicyremainsenabled. Reenableonlyafterfreshendpoint/privacy/budget/qualityreview."
         }
       ],
       "claim": null,
@@ -4007,7 +4015,7 @@
       "id": "WS-003",
       "title": "Build the personal workspace panel",
       "phase": "P3",
-      "status": "not_started",
+      "status": "in_progress",
       "owner": "agent",
       "size": "S",
       "kind": "implementation",
@@ -4068,9 +4076,20 @@
         {
           "date": "2026-10-18",
           "text": "WS-008 now delivers the narrow single-owner multiple-idea selection/create/recovery subset. Preserve that working behavior when executing this broader lifecycle/membership/draft task; its own remaining acceptance and prerequisites are unchanged."
+        },
+        {
+          "date": "2026-10-18",
+          "text": "Claimed personalresume panel over actualWS008ownerselection+WS009archive APIs. Current accessmodel has no shared-projectmembership API; list only freshlyverified ownedideas, labelthatboundary, never fake sharedgrants or overload classroommembership. Futureexplicitsharedrows integrate only afterWS007/COL contracts. Root serializesgeneratedroutetree. No schema/AI/key change; useful empty/missing/archive/recovery paths and accurate savedmetadata required."
         }
       ],
-      "claim": null,
+      "claim": {
+        "owner": "personal_workspace",
+        "branch": "codex/personal-workspace-20261018",
+        "base_commit": "82682c1",
+        "worktree": "/private/tmp/first-ten-personal-workspace",
+        "started_at": "2026-10-18T23:35:00Z",
+        "lease_expires_at": "2026-10-19T03:00:00Z"
+      },
       "completion_evidence": [],
       "subtasks": [
         {
@@ -4193,7 +4212,7 @@
       "id": "WS-005",
       "title": "Autosave and resume the interview workflow",
       "phase": "P3",
-      "status": "in_progress",
+      "status": "complete",
       "owner": "agent",
       "size": "S",
       "kind": "implementation",
@@ -4258,33 +4277,32 @@
         {
           "date": "2026-10-18",
           "text": "Worker e154646 integrated85cac14; independent review finds no actionable blocker and22 focused unchangedWS004/newWS005 tests pass. Worker51 focused/full1036pass/type/lint/build. Root source/landing claims updated; oldcopy assertion updated to actual shipped review/private-note boundary, focusedlanding3pass; finalroot combined run underway. No API/migration/AI changes. Live acknowledgement/reload rehearsal afterpush remains."
+        },
+        {
+          "date": "2026-10-18",
+          "text": "85cac14/9dd4691: acknowledged1.2s private draft autosave, immutable exact uncertain retries, newer local edit retention, owner/project/draft keying, explicit conflict comparison and permission separation. Rootfull1036tests/106files pass (11 existing skips), typecheck/lint0errors6existingwarnings/Vercelbuild pass; independent22focused reviewed againstactualWS004SQL. Live9dd4691 fictionalprivate draft automaticallysavedrevision3; reload+Resume retainedexactnote, completedcountstayed5. Proof/private/tmp/first-ten-pdf-qa/live-interview-autosave.png. Noofflinecache, unloadguarantee, realinterview or AIcall claimed."
         }
       ],
-      "claim": {
-        "owner": "root",
-        "branch": "main",
-        "base_commit": "85cac14",
-        "worktree": "/Users/ianroy/Library/CloudStorage/Dropbox/Apps by Ian/Babson AI Academy/First 10",
-        "started_at": "2026-10-18T23:31:00Z",
-        "lease_expires_at": "2026-10-19T02:00:00Z"
-      },
-      "completion_evidence": [],
+      "claim": null,
+      "completion_evidence": [
+        "85cac14/9dd4691: acknowledged1.2s private draft autosave, immutable exact uncertain retries, newer local edit retention, owner/project/draft keying, explicit conflict comparison and permission separation. Rootfull1036tests/106files pass (11 existing skips), typecheck/lint0errors6existingwarnings/Vercelbuild pass; independent22focused reviewed againstactualWS004SQL. Live9dd4691 fictionalprivate draft automaticallysavedrevision3; reload+Resume retainedexactnote, completedcountstayed5. Proof/private/tmp/first-ten-pdf-qa/live-interview-autosave.png. Noofflinecache, unloadguarantee, realinterview or AIcall claimed."
+      ],
       "subtasks": [
         {
           "id": "WS-005.s1",
-          "status": "not_started",
+          "status": "complete",
           "instruction": "Load a selected draft and debounce saves scoped to immutable account/project/draft identity.",
           "notes": []
         },
         {
           "id": "WS-005.s2",
-          "status": "not_started",
+          "status": "complete",
           "instruction": "Add visible status, retry, navigation protection and conflict resolution preserving both versions.",
           "notes": []
         },
         {
           "id": "WS-005.s3",
-          "status": "not_started",
+          "status": "complete",
           "instruction": "Test reload, disconnect/reconnect, tab switching and a delayed response after project/account change.",
           "notes": []
         }
@@ -11675,6 +11693,14 @@
         {
           "date": "2026-10-18",
           "text": "Guest Marketing Lab continuation uses separate genuine guest private/team tables and closed manual five-step schema, resources/demo walkthrough/channel/content/outreach/test/measurement/reflection, individual PDFs and selected portfolio. Migration23 finalcandidate dfa6deade799c5711183b701432e582fcd045dec2a9643528bd1e3f12693ecb4 includes two scoped lookup indexes; originallocal/hosted23 NOT applied. Independent authority/guard review passes in principle; cloneharness CREATE-ack cleanup fix required before rehearsal approval. Teacher review for new marketing kind explicitly unavailable; no inherited raw access or AI. Worker branch/worktree /private/tmp/first-ten-guest-marketing codex/guest-marketing-20261018."
+        },
+        {
+          "date": "2026-10-18",
+          "text": "Pinned23 isolatedclone rehearsal passed1738 actual rollbackSQL assertions/0failures/0gaps,6actualDTOchecks and5separateconnection races incl late-expiry UPDATE rollback. Clone dropped/absenceverified; original55322/hostedunchanged. Worker adding8SQLplan-capassertions only, sameharness/migration approvedrerun; finalcap-proof count/sourcehandoff pending. Separate guestteacher copy freshlyresubmitted afterclassinstructionupdate fordemo, priorwithdrawal remains irreversible."
+        },
+        {
+          "date": "2026-10-18",
+          "text": "Guest Marketing Lab84dd7b6/47168d5 integrated67383da/74526f0. Finalclone1746SQLassertions/0failures/0gaps/rollback+6actualDTOs+5blockedconnectionraces; bothclonesremovedabsenceverified. Root1062app tests/110files pass (11existing skips), officialtypes23/typecheck/lint0errors6existingwarnings/Vercelbuild pass. Rootrealstudio mount, PDFcoverage and independently aggregated dirtycallbacks verified; studio switching keepsbothmounted. Exacthosteddryrun lists only23 withnoseeds/roles; normalhostedapplycomplete. Actual12/3/1page PDFs verified; livebrowserrehearsal afterpush next. RemainingreviewedteacherMarketingLabhand-off/ownerderivedparity/accounttransfer/fullbundles notclaimed."
         }
       ],
       "claim": {
