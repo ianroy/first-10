@@ -83,3 +83,8 @@ SELECT throws_ok($$SELECT firstten_private.set_platform_admin(firstten_policy_te
 SELECT is((SELECT enabled FROM firstten_private.platform_admins WHERE user_id=firstten_policy_test.id('unrelated')),false,'exhausted grant remains disabled');
 SELECT throws_ok($$SELECT firstten_private.set_platform_admin(firstten_policy_test.id('unrelated'),true,9007199254740992,'SEC-006-unsafe')$$,'22023','Invalid operator request','unsafe expected revision is rejected');
 SELECT throws_ok($$INSERT INTO firstten_private.platform_admins(user_id,enabled,revision) VALUES(firstten_policy_test.id('teacher'),false,9007199254740992)$$,'23514',NULL,'table constraint also rejects unsafe grant revisions');
+SELECT throws_ok($$INSERT INTO firstten_private.platform_admins(user_id,enabled,revision) VALUES(firstten_policy_test.id('teacher'),true,9007199254740991)$$,'23514',NULL,'final safe revision cannot hold an active grant');
+INSERT INTO firstten_private.platform_admins(user_id,enabled,revision) VALUES(firstten_policy_test.id('teacher'),true,9007199254740990);
+SELECT throws_ok($$SELECT firstten_private.set_platform_admin(firstten_policy_test.id('teacher'),true,9007199254740990,'SEC-006-reserved')$$,'22003','Admin grant revision exhausted','last revision is reserved for revocation rather than another active grant');
+SELECT is(firstten_private.set_platform_admin(firstten_policy_test.id('teacher'),false,9007199254740990,'SEC-006-final-revoke')->>'revision','9007199254740991','operator can revoke at the final safe revision');
+SELECT is((SELECT enabled FROM firstten_private.platform_admins WHERE user_id=firstten_policy_test.id('teacher')),false,'revision exhaustion never traps an active grant');

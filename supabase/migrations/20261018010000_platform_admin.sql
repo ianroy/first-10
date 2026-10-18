@@ -8,7 +8,8 @@ SET LOCAL lock_timeout = '5s';
 CREATE TABLE firstten_private.platform_admins (
  user_id uuid PRIMARY KEY REFERENCES auth.users(id) ON DELETE CASCADE,
  enabled boolean NOT NULL,
- revision bigint NOT NULL CHECK (revision BETWEEN 1 AND 9007199254740991),
+ -- Reserve the final safe revision for revocation; exhaustion must never trap an active grant.
+ revision bigint NOT NULL CHECK (revision BETWEEN 1 AND 9007199254740991 AND (NOT enabled OR revision<9007199254740991)),
  created_at timestamptz NOT NULL DEFAULT now(),
  updated_at timestamptz NOT NULL DEFAULT now()
 );
@@ -52,7 +53,7 @@ BEGIN
  IF coalesce(current_grant.revision,0)<>p_expected_revision THEN
   RAISE EXCEPTION 'Admin grant revision conflict' USING ERRCODE='40001';
  END IF;
- IF p_expected_revision=9007199254740991 THEN
+ IF p_expected_revision=9007199254740991 OR (p_enabled AND p_expected_revision=9007199254740990) THEN
   RAISE EXCEPTION 'Admin grant revision exhausted' USING ERRCODE='22003';
  END IF;
  next_revision:=p_expected_revision+1;
