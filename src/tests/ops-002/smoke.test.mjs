@@ -78,3 +78,17 @@ test("credential/query/remote-http target URLs are rejected before fetching", ()
     assert.throws(() => deploymentOrigin(url));
   assert.equal(deploymentOrigin("http://127.0.0.1:8080"), "http://127.0.0.1:8080");
 });
+
+test("username/password entry is a supported sign-in surface", async () => {
+  const report = await smokeDeployment("https://fixture.example", {
+    fetchImpl: fixture((path, response) =>
+      path === "/auth"
+        ? new Response(
+            '<title>Sign in — First Ten</title><label for="signin-email">Email or demo username</label><input id="signin-email" type="text"/><input type="password"/>',
+            { headers: { "content-type": "text/html" } },
+          )
+        : response,
+    ),
+  });
+  assert.equal(report.public.find((item) => item.path === "/auth").status, "passed");
+});

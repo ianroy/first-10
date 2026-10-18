@@ -1,0 +1,81 @@
+import { afterEach, beforeEach, expect, it, vi } from "vitest";
+import { cleanup, fireEvent, screen, waitFor } from "@testing-library/react";
+import { renderPage } from "@/test/render-page";
+const auth = vi.hoisted(() => ({
+  getSession: vi.fn(),
+  onAuthStateChange: vi.fn(),
+  signInWithPassword: vi.fn(),
+  signInWithOtp: vi.fn(),
+  signUp: vi.fn(),
+}));
+vi.mock("@/integrations/supabase/client", () => ({ supabase: { auth } }));
+import { AuthPage } from "@/routes/auth";
+beforeEach(() => {
+  vi.clearAllMocks();
+  auth.getSession.mockResolvedValue({ data: { session: null } });
+  auth.onAuthStateChange.mockReturnValue({ data: { subscription: { unsubscribe: vi.fn() } } });
+});
+afterEach(cleanup);
+it("uses the dedicated demo identity for username sign-in and retains errors without exposing a password", async () => {
+  auth.signInWithPassword.mockResolvedValue({ error: new Error("Invalid login credentials") });
+  renderPage(AuthPage, "/auth");
+  await screen.findByRole("heading", { name: "Continue your learning" });
+  fireEvent.change(screen.getByLabelText("Email or demo username"), {
+    target: { value: "ianroy" },
+  });
+  fireEvent.change(screen.getByLabelText("Password", { exact: true }), {
+    target: { value: "test-secret" },
+  });
+  fireEvent.submit(screen.getByLabelText("Password", { exact: true }).closest("form")!);
+  await waitFor(() =>
+    expect(auth.signInWithPassword).toHaveBeenCalledWith({
+      email: "workshop-presenter@firstten-demo.invalid",
+      password: "test-secret",
+    }),
+  );
+  expect(await screen.findByRole("alert")).toHaveTextContent("Invalid login credentials");
+  expect(screen.queryByText("test-secret")).not.toBeInTheDocument();
+  expect(auth.signUp).not.toHaveBeenCalled();
+});
+it("creates ordinary accounts with email and no client-provided admin role", async () => {
+  auth.signUp.mockResolvedValue({ data: { session: null }, error: null });
+  renderPage(AuthPage, "/auth");
+  await screen.findByRole("heading", { name: "Continue your learning" });
+  fireEvent.click(screen.getByRole("button", { name: "Create account" }));
+  fireEvent.change(screen.getByLabelText("Your email"), {
+    target: { value: "student@example.test" },
+  });
+  fireEvent.change(screen.getByLabelText("Password", { exact: true }), {
+    target: { value: "test-secret" },
+  });
+  fireEvent.click(screen.getByRole("button", { name: "Create my account" }));
+  await waitFor(() =>
+    expect(auth.signUp).toHaveBeenCalledWith({
+      email: "student@example.test",
+      password: "test-secret",
+      options: { emailRedirectTo: `${window.location.origin}/auth` },
+    }),
+  );
+  expect(await screen.findByRole("status")).toHaveTextContent("Check your inbox");
+});
+it("keeps the password-free email link and public example available", async () => {
+  auth.signInWithOtp.mockResolvedValue({ error: null });
+  renderPage(AuthPage, "/auth");
+  await screen.findByRole("heading", { name: "Continue your learning" });
+  expect(screen.getByRole("link", { name: /Explore the example first/ })).toHaveAttribute(
+    "href",
+    "/demo",
+  );
+  fireEvent.click(screen.getByRole("button", { name: "Email link" }));
+  expect(screen.queryByLabelText("Password", { exact: true })).not.toBeInTheDocument();
+  fireEvent.change(screen.getByLabelText("Your email"), {
+    target: { value: "student@example.test" },
+  });
+  fireEvent.click(screen.getByRole("button", { name: "Email me a magic link" }));
+  await waitFor(() =>
+    expect(auth.signInWithOtp).toHaveBeenCalledWith({
+      email: "student@example.test",
+      options: { emailRedirectTo: `${window.location.origin}/auth` },
+    }),
+  );
+});

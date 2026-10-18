@@ -2525,7 +2525,7 @@
       "id": "BR-003",
       "title": "Apply product voice and brand across authenticated journeys",
       "phase": "P2",
-      "status": "not_started",
+      "status": "complete",
       "owner": "agent",
       "size": "S",
       "kind": "implementation",
@@ -2542,7 +2542,11 @@
         "src/components/AppShell.test.tsx",
         "src/components/RequireProject.test.tsx",
         "src/routes/auth.test.tsx",
-        "src/routes/_authenticated/setup.test.tsx"
+        "src/routes/_authenticated/setup.test.tsx",
+        "src/routes/_authenticated/dashboard.tsx",
+        "src/routes/_authenticated/account.tsx",
+        "src/tests/desktop-routes/**",
+        "src/test/pages.test.tsx"
       ],
       "exclusive_locks": ["app-shell", "route-integration"],
       "read_first": [
@@ -2584,26 +2588,40 @@
         {
           "date": "2026-10-18",
           "text": "Browser finding for the later copy pass: dashboard empty pipeline says Unlocks at Stage 2 even for an already Stage 2 project with zero later contacts. Make the empty message reflect the actual stage. Sign-in/contact fields also need explicit accessible labels; keep literal fictional labels visible."
+        },
+        {
+          "date": "2026-10-18",
+          "text": "Claimed for the authorized autonomous demo run."
+        },
+        {
+          "date": "2026-10-18",
+          "text": "Owner explicitly prioritizes desktop workshop projection and requests username/password demo sign-in, ordinary account creation and admin/user tools. Coordinator broadens presentation scope; trusted admin aggregate service is tracked separately, never granted from user_metadata or signup."
+        },
+        {
+          "date": "2026-10-18",
+          "text": "Desktop-first sidebar and route grids, accessible auth/setup/contact inputs, precise progress language, retry/loading states and account navigation. User requested ordinary password signup plus email links; signup carries no role metadata."
         }
       ],
       "claim": null,
-      "completion_evidence": [],
+      "completion_evidence": [
+        "Desktop Chrome requested-login walkthrough: wider shell, persistent labelled navigation, actualStage2empty-pipeline state, original logo;3auth/5desktopworkflow tests plusfull153-test suite;typecheck,lint(noerrors/6existingwarnings),Nitrobuild passed."
+      ],
       "subtasks": [
         {
           "id": "BR-003.s1",
-          "status": "not_started",
+          "status": "complete",
           "instruction": "Inventory setup, empty, error, loading and stage-lock copy.",
           "notes": []
         },
         {
           "id": "BR-003.s2",
-          "status": "not_started",
+          "status": "complete",
           "instruction": "Replace claims of validation or automatic proof with precise observations and next actions.",
           "notes": []
         },
         {
           "id": "BR-003.s3",
-          "status": "not_started",
+          "status": "complete",
           "instruction": "Apply brand/navigation treatment and test recovery, keyboard navigation and mobile layout.",
           "notes": []
         }
@@ -8652,7 +8670,7 @@
       "id": "MKT-002",
       "title": "Persist versioned private marketing plans",
       "phase": "P3",
-      "status": "blocked",
+      "status": "complete",
       "owner": "agent",
       "size": "S",
       "kind": "implementation",
@@ -8709,26 +8727,36 @@
         {
           "date": "2026-10-18",
           "text": "Worker terminal error: workspace out of credits. Partial files remain preserved in its named worktree. Coordinator verified the worker stopped and released this reservation; implementation and verification are incomplete, not discarded."
+        },
+        {
+          "date": "2026-10-18",
+          "text": "Claimed for the authorized autonomous demo run."
+        },
+        {
+          "date": "2026-10-18",
+          "text": "Owner-private CAS/idempotent manual-plan storage, immutable completed first-thinking board, source ownership validation, three prior snapshots. No new AI provenance accepted until trusted ledger exists; existing application rows not rewritten."
         }
       ],
       "claim": null,
-      "completion_evidence": [],
+      "completion_evidence": [
+        "ec5ef05 +00c06f4: 308 real isolated database assertions;43 new validator tests;four concurrent transaction cases;official local types regenerated. Hosted additive migration20261018001000 applied; actual browser created and saved revisions1–3 in the dedicated fictional project."
+      ],
       "subtasks": [
         {
           "id": "MKT-002.s1",
-          "status": "blocked",
+          "status": "complete",
           "instruction": "Create one private plan per project with owner/project consistency, JSON shape/size bounds and revision timestamps.",
           "notes": []
         },
         {
           "id": "MKT-002.s2",
-          "status": "not_started",
+          "status": "complete",
           "instruction": "Implement authenticated load/save with expected revision and safe defaults; preserve unknown measurements rather than inventing zeros or results.",
           "notes": []
         },
         {
           "id": "MKT-002.s3",
-          "status": "not_started",
+          "status": "complete",
           "instruction": "Test two unrelated identities, forged project references, stale concurrent writes and migration compatibility.",
           "notes": []
         }
@@ -8738,7 +8766,7 @@
       "id": "MKT-003",
       "title": "Build the guided Next 50 marketing workspace",
       "phase": "P4",
-      "status": "not_started",
+      "status": "complete",
       "owner": "agent",
       "size": "S",
       "kind": "implementation",
@@ -8750,7 +8778,8 @@
         "src/components/marketing-lab/**",
         "src/components/AppShell.tsx",
         "src/routes/_authenticated/outreach.tsx",
-        "src/tests/marketing-lab/**"
+        "src/tests/marketing-lab/**",
+        "src/components/marketing/SavedMarketingLab.tsx"
       ],
       "exclusive_locks": ["route-integration", "app-shell"],
       "read_first": [
@@ -8786,26 +8815,36 @@
         {
           "date": "2026-10-18",
           "text": "Explicitly requested by owner: Next 50 $0 marketing activity inspired by BUS131 slides and whiteboard; pedagogy must appear in landing/pitch; original logo and fixed favicon requested."
+        },
+        {
+          "date": "2026-10-18",
+          "text": "Claimed for the authorized autonomous demo run."
+        },
+        {
+          "date": "2026-10-18",
+          "text": "Five-step desktop manual lab: immutable student-first work, audience and physical/digital channels, exact access/effort/resource questions, editable content, seven-day draft and reflection. Saves are explicit, owner-private, CAS-protected and retry-idempotent. New AI proposals, measured funnel and full ready/running/reviewed controls remain their own tasks."
         }
       ],
       "claim": null,
-      "completion_evidence": [],
+      "completion_evidence": [
+        "Actual Chrome with dedicated hosted presenter: first thinking preserved server-side; two distinct channels and content saved through revisions1–4; one-week plan saved; route leave protected unsaved edits; reload retained original thinking. Seven recovery/CAS UI tests;153combinedtests,typecheck,lintandNitrobuildpass."
+      ],
       "subtasks": [
         {
           "id": "MKT-003.s1",
-          "status": "not_started",
+          "status": "complete",
           "instruction": "Start with students’ own audience/known evidence/unknowns and initial channel ideas before offering AI assistance.",
           "notes": []
         },
         {
           "id": "MKT-003.s2",
-          "status": "not_started",
+          "status": "complete",
           "instruction": "Build a physical/digital channel board with exact place/link, observation, access/permission state, effort/time and primary/alternative selection; cap current commitments at two chosen channels.",
           "notes": []
         },
         {
           "id": "MKT-003.s3",
-          "status": "not_started",
+          "status": "complete",
           "instruction": "Add saved/unsaved/conflict/retry states and stage-aware navigation using the explicitly supplied project id; retain current private project flow until WS-002 integration.",
           "notes": []
         }
@@ -9050,7 +9089,7 @@
       "id": "MKT-007",
       "title": "Extend the public demo with the marketing board",
       "phase": "P2",
-      "status": "blocked",
+      "status": "complete",
       "owner": "agent",
       "size": "S",
       "kind": "implementation",
@@ -9110,26 +9149,36 @@
         {
           "date": "2026-10-18",
           "text": "Worker terminal error: workspace out of credits. Partial files remain preserved in its named worktree. Coordinator verified the worker stopped and released this reservation; implementation and verification are incomplete, not discarded."
+        },
+        {
+          "date": "2026-10-18",
+          "text": "Claimed for the authorized autonomous demo run."
+        },
+        {
+          "date": "2026-10-18",
+          "text": "Login-free deterministic marketing continuation: student thinking, physical/digital channel comparison, authored content, bounded week and unknown measures. No provider calls or production writes."
         }
       ],
       "claim": null,
-      "completion_evidence": [],
+      "completion_evidence": [
+        "b148ec8:10 meaningful tests;desktop1440 keyboard+reset walkthrough;all3 discovery branches,staticfallback;combined153-test suite and Nitro build pass."
+      ],
       "subtasks": [
         {
           "id": "MKT-007.s1",
-          "status": "blocked",
+          "status": "complete",
           "instruction": "Continue StudyLoop from its chosen audience into a sample channel board with one campus-club route and one digital alternative.",
           "notes": []
         },
         {
           "id": "MKT-007.s2",
-          "status": "not_started",
+          "status": "complete",
           "instruction": "Let visitors choose a channel, inspect a labeled sample content draft and define/inspect a proposed measurement; show peer-check and reflection prompts.",
           "notes": []
         },
         {
           "id": "MKT-007.s3",
-          "status": "not_started",
+          "status": "complete",
           "instruction": "Keep reset/deep-link/keyboard/mobile behavior deterministic without login, provider calls or production writes; distinguish sample numbers and proposed results.",
           "notes": []
         }
@@ -9396,6 +9445,99 @@
           "id": "DEMO-001.s3",
           "status": "complete",
           "instruction": "Apply to isolated local fixtures first, then authorized Supabase target; verify counts, project access and repeat execution preserving unrelated data.",
+          "notes": []
+        }
+      ]
+    },
+    {
+      "id": "DEMO-002",
+      "title": "Deliver the authorized presenter login and aggregate admin view",
+      "phase": "P4",
+      "status": "in_progress",
+      "owner": "agent",
+      "size": "S",
+      "kind": "implementation",
+      "priority": 10,
+      "depends_on": ["DEMO-001", "SEC-003"],
+      "requires_decisions": [],
+      "write_scope": [
+        "src/routes/auth.tsx",
+        "src/routes/_authenticated/admin.tsx",
+        "src/routes/_authenticated/account.tsx",
+        "src/lib/admin.functions.ts",
+        "src/tests/br-003/**",
+        "src/tests/desktop-routes/**",
+        "docs/demo/presenter-data.md"
+      ],
+      "exclusive_locks": ["presenter-access"],
+      "read_first": [
+        "ProductSpec.md",
+        "FEATUREROADMAP_workplan.md",
+        "docs/demo/babson-pitch-brief.md",
+        "docs/architecture/access-contract.md"
+      ],
+      "goal": "Let the owner present ordinary account tools and a protected count-only admin dashboard without exposing private content or claiming an event funnel.",
+      "steps": [
+        "Support email/password, ordinary signup and existing magic links while preserving the no-login public example.",
+        "Assign the requested login only to the existing dedicated synthetic presenter and require a fresh trusted admin marker on every server request.",
+        "Show live count-only totals with presenter contribution, missing-data states and explicit uninstrumented-funnel labels; verify denied/revoked access and actual desktop login."
+      ],
+      "acceptance": [
+        "The requested presenter login reaches its private fictional workspace and server-verified aggregate dashboard.",
+        "Ordinary signup cannot assign admin privileges; no raw notes, emails or user exports are returned."
+      ],
+      "verification_profile": "product",
+      "verification": [
+        "Run actual requested-login and desktop admin/browser checks; test missing/invalid/revoked/forged roles and failed count reads.",
+        "Run combined typecheck, lint, application tests, build, CI and deployed smoke."
+      ],
+      "metric": "Zero unauthorized aggregate reads or exposed raw content; actual presenter login works.",
+      "rollback": "Remove demo admin flag from trusted app_metadata and hide admin entry; retain ordinary private workspace and public demo.",
+      "agent_notes": {
+        "starting_point": "Owner-requested addition during the autonomous run for tomorrow’s Babson demo. Use the approved marketing-lab contract and existing contracts; no fictional evidence may become a claim of real research.",
+        "stop_and_report": "Record the exact missing environment, permission, budget or human evidence, preserve partial work, and continue another eligible task. Do not bypass gates or widen access.",
+        "handoff": "Report scoped files, commit, checks/results, migration/type contracts, measured spend, remaining blockers and rollback. Coordinator owns registry/status/integration."
+      },
+      "notes": [
+        {
+          "date": "2026-10-18",
+          "text": "Owner explicitly requests a named username/password demo login plus both admin and user tools. This is a narrow presenter aggregate view, not completion of SEC-006/ADM-001 event and cost analytics."
+        },
+        {
+          "date": "2026-10-18",
+          "text": "Implementation and local browser/live backend counts verified. Release verification waits for the coordinator-owned marketing route integration and final combined build/deployment; claim resumes after MKT-003."
+        },
+        {
+          "date": "2026-10-18",
+          "text": "Claimed for the authorized autonomous demo run."
+        }
+      ],
+      "claim": {
+        "owner": "coordinator",
+        "branch": "main",
+        "base_commit": "00c06f404f868486ab0f9f3971078cb53c9f9c0e",
+        "worktree": "/Users/ianroy/Library/CloudStorage/Dropbox/Apps by Ian/Babson AI Academy/First 10",
+        "started_at": "2026-10-18T11:25:54.821808+00:00",
+        "lease_expires_at": "2026-10-18T13:25:54.821808+00:00"
+      },
+      "completion_evidence": [],
+      "subtasks": [
+        {
+          "id": "DEMO-002.s1",
+          "status": "in_progress",
+          "instruction": "Support email/password, ordinary signup and existing magic links while preserving the no-login public example.",
+          "notes": []
+        },
+        {
+          "id": "DEMO-002.s2",
+          "status": "complete",
+          "instruction": "Assign the requested login only to the existing dedicated synthetic presenter and require a fresh trusted admin marker on every server request.",
+          "notes": []
+        },
+        {
+          "id": "DEMO-002.s3",
+          "status": "blocked",
+          "instruction": "Show live count-only totals with presenter contribution, missing-data states and explicit uninstrumented-funnel labels; verify denied/revoked access and actual desktop login.",
           "notes": []
         }
       ]

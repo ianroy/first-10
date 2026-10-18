@@ -17,7 +17,10 @@ export const Route = createFileRoute("/_authenticated/dashboard")({
   head: () => ({
     meta: [
       { title: "Your ladder — First Ten" },
-      { name: "description", content: "Track your climb from 10 to 50 to 100 customers." },
+      {
+        name: "description",
+        content: "Review conversations, decisions and manually recorded outreach progress.",
+      },
     ],
   }),
   component: () => <RequireProject>{(p) => <Dashboard p={p} />}</RequireProject>,
@@ -30,14 +33,26 @@ function Dashboard({ p }: { p: Project }) {
   const { data: experiments = [] } = useExperiments(p.id);
   const prog = stageProgress(contacts, interviews);
   const rungs = [
-    { stage: 3, goal: 100, val: prog.s3, label: "Next 100", sub: "Scalable channels" },
-    { stage: 2, goal: 50, val: prog.s2, label: "Next 50", sub: "Referrals & communities" },
-    { stage: 1, goal: 10, val: prog.s1, label: "First 10", sub: "In-person interviews" },
+    { stage: 1, goal: 10, val: prog.s1, label: "First 10", sub: "Completed conversations" },
+    {
+      stage: 2,
+      goal: 50,
+      val: prog.s2,
+      label: "Next 50",
+      sub: "Reported trials, active or paying",
+    },
+    {
+      stage: 3,
+      goal: 100,
+      val: prog.s3,
+      label: "Next 100",
+      sub: "Reported trials, active or paying",
+    },
   ];
   const next =
     p.stage === 1
       ? contacts.length < 3
-        ? { t: "Add 10 people you know", to: "/contacts" as const }
+        ? { t: "Choose a few relevant people", to: "/contacts" as const }
         : prog.s1 < 5
           ? { t: `Do interview #${prog.s1 + 1}`, to: "/interview" as const }
           : { t: "Review what you learned", to: "/learnings" as const }
@@ -74,7 +89,7 @@ function Dashboard({ p }: { p: Project }) {
         </Button>
       </Card>
 
-      <div className="space-y-3">
+      <div className="grid gap-3 xl:grid-cols-3">
         {rungs.map((r) => {
           const locked = p.stage < r.stage;
           const pct = Math.min(100, (r.val / r.goal) * 100);
@@ -108,48 +123,56 @@ function Dashboard({ p }: { p: Project }) {
         })}
       </div>
 
-      <Card>
-        <h2 className="text-lg font-bold">Pipeline</h2>
-        {pipeContacts.length === 0 ? (
-          <p className="mt-1 text-sm text-muted-foreground">
-            Unlocks at Stage 2. People you reach out to will show up here.
-          </p>
-        ) : (
-          <div className="mt-3 grid grid-cols-5 gap-2 text-center">
-            {PIPELINE.map((s) => (
-              <div key={s.key} className="rounded-xl bg-muted p-2">
-                <p className="font-display text-xl font-bold">
-                  {pipeContacts.filter((c) => c.status === s.key).length}
-                </p>
-                <p className="text-[10px] leading-tight text-muted-foreground">{s.label}</p>
-              </div>
-            ))}
-          </div>
-        )}
-      </Card>
+      <div className="grid items-start gap-6 xl:grid-cols-2">
+        <Card>
+          <h2 className="text-lg font-bold">Outreach pipeline</h2>
+          {pipeContacts.length === 0 ? (
+            <p className="mt-1 text-sm text-muted-foreground">
+              {p.stage < 2
+                ? "Available at Stage 2. Keep learning from your first conversations."
+                : "No Stage 2 or 3 people recorded yet. Add someone in People and track what actually happens."}
+            </p>
+          ) : (
+            <div className="mt-3 grid grid-cols-5 gap-2 text-center">
+              {PIPELINE.map((s) => (
+                <div key={s.key} className="rounded-xl bg-muted p-2">
+                  <p className="font-display text-xl font-bold">
+                    {pipeContacts.filter((c) => c.status === s.key).length}
+                  </p>
+                  <p className="text-[10px] leading-tight text-muted-foreground">{s.label}</p>
+                </div>
+              ))}
+            </div>
+          )}
+        </Card>
 
-      <div>
-        <h2 className="mb-2 text-lg font-bold">Learnings timeline</h2>
-        {timeline.length === 0 ? (
-          <Empty
-            title="Nothing yet — that’s normal!"
-            body="After a few interviews, your learnings and experiments will appear here."
-          />
-        ) : (
-          <ol className="space-y-3 border-l-2 border-primary/30 pl-4">
-            {timeline.map((t) => (
-              <li key={t.id}>
-                <p className="text-[11px] font-semibold uppercase text-primary">
-                  {t.k} · Stage {t.stage}
-                </p>
-                <p className="font-semibold">{t.t}</p>
-                {t.b && <p className="line-clamp-2 text-sm text-muted-foreground">{t.b}</p>}
-              </li>
-            ))}
-          </ol>
-        )}
+        <div>
+          <h2 className="mb-2 text-lg font-bold">Learnings timeline</h2>
+          {timeline.length === 0 ? (
+            <Empty
+              title="Nothing yet — that’s normal!"
+              body="After a few interviews, your learnings and experiments will appear here."
+            />
+          ) : (
+            <ol className="space-y-3 border-l-2 border-primary/30 pl-4">
+              {timeline.map((t) => (
+                <li key={t.id}>
+                  <p className="text-[11px] font-semibold uppercase text-primary">
+                    {t.k} · Stage {t.stage}
+                  </p>
+                  <p className="font-semibold">{t.t}</p>
+                  {t.b && <p className="line-clamp-2 text-sm text-muted-foreground">{t.b}</p>}
+                </li>
+              ))}
+            </ol>
+          )}
+        </div>
       </div>
 
+      <p className="text-xs text-muted-foreground">
+        The ladder is a learning scaffold. Counts do not establish demand; outreach statuses are
+        manually recorded.
+      </p>
       <Link
         to="/setup"
         className="flex items-center justify-center gap-2 py-2 text-sm text-muted-foreground"

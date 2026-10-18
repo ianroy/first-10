@@ -22,10 +22,10 @@ Statuses are `not_started`, `in_progress`, `blocked`, `complete`, `deferred`, `d
 current_iteration: 5
 current_stage: P1_foundation_with_parallel_P2_and_R0
 status: in_progress
-last_task_done: WEB-004
-next_task: WEB-004
-next_parallel_wave: [WEB-004, MKT-002, MKT-007]
-active_claims: []
+last_task_done: MKT-003
+next_task: DEMO-002
+next_parallel_wave: [DEMO-002]
+active_claims: [DEMO-002]
 research_gate: not_passed
 foundation_gate: not_passed
 realtime_go: pending

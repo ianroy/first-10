@@ -1,4 +1,4 @@
-import { createFileRoute, useNavigate } from "@tanstack/react-router";
+import { createFileRoute, Link, useNavigate } from "@tanstack/react-router";
 import { useEffect, useState } from "react";
 import { toast } from "sonner";
 import { supabase } from "@/integrations/supabase/client";
@@ -6,6 +6,7 @@ import { useProject, useRefresh } from "@/lib/data";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
+import { BrandLogo } from "@/components/BrandLogo";
 import { Label } from "@/components/ui/label";
 
 export const Route = createFileRoute("/_authenticated/setup")({
@@ -60,55 +61,71 @@ function Setup() {
   }, [project]);
 
   return (
-    <div className="mx-auto max-w-xl px-5 py-8">
-      <p className="text-xs font-semibold uppercase tracking-widest text-primary">Step 1 of 1</p>
-      <h1 className="mt-1 text-3xl font-bold">Tell us about your app</h1>
-      <p className="mt-2 text-muted-foreground">
-        Plain words are perfect. You can change this anytime.
-      </p>
-      <form
-        className="mt-6 space-y-4"
-        onSubmit={async (e) => {
-          e.preventDefault();
-          setBusy(true);
-          const { error } = project
-            ? await supabase.from("projects").update(form).eq("id", project.id)
-            : await supabase.from("projects").insert(form);
-          setBusy(false);
-          if (error) {
-            toast.error(error.message);
-            return;
-          }
-          refresh("project");
-          navigate({ to: "/dashboard" });
-        }}
-      >
-        {fields.map((f) => (
-          <div key={f.k} className="space-y-1.5">
-            <Label>{f.l}</Label>
-            {"area" in f ? (
-              <Textarea
-                required
-                value={form[f.k]}
-                placeholder={f.p}
-                onChange={(e) => setForm({ ...form, [f.k]: e.target.value })}
-                className="rounded-xl text-base"
-              />
-            ) : (
-              <Input
-                required={f.k !== "link"}
-                value={form[f.k]}
-                placeholder={f.p}
-                onChange={(e) => setForm({ ...form, [f.k]: e.target.value })}
-                className="h-12 rounded-xl text-base"
-              />
-            )}
-          </div>
-        ))}
-        <Button size="xl" disabled={busy}>
-          {project ? "Save changes" : "Start my ladder"}
-        </Button>
-      </form>
+    <div className="mx-auto max-w-5xl px-6 py-8 lg:py-14">
+      <Link to="/" aria-label="First Ten home">
+        <BrandLogo className="mb-10 h-9 w-auto" />
+      </Link>
+      <div className="grid items-start gap-10 lg:grid-cols-[.8fr_1.2fr]">
+        <div>
+          <p className="text-xs font-semibold uppercase tracking-widest text-primary">
+            {project ? "Your project" : "Start with your current idea"}
+          </p>
+          <h1 className="mt-1 text-3xl font-bold">Tell us about your app</h1>
+          <p className="mt-2 text-muted-foreground">
+            Plain words are perfect. Treat the audience and problem as starting assumptions you can
+            revise.
+          </p>
+          <p className="mt-6 text-sm leading-relaxed text-muted-foreground">
+            What have you built? Who has experienced the problem? A focused starting point helps you
+            choose a useful first conversation.
+          </p>
+        </div>
+        <form
+          className="space-y-5 rounded-3xl border bg-card p-6 shadow-soft lg:p-8"
+          onSubmit={async (e) => {
+            e.preventDefault();
+            setBusy(true);
+            const { error } = project
+              ? await supabase.from("projects").update(form).eq("id", project.id)
+              : await supabase.from("projects").insert(form);
+            setBusy(false);
+            if (error) {
+              toast.error(error.message);
+              return;
+            }
+            refresh("project");
+            navigate({ to: "/dashboard" });
+          }}
+        >
+          {fields.map((f) => (
+            <div key={f.k} className="space-y-1.5">
+              <Label htmlFor={`project-${f.k}`}>{f.l}</Label>
+              {"area" in f ? (
+                <Textarea
+                  id={`project-${f.k}`}
+                  required
+                  value={form[f.k]}
+                  placeholder={f.p}
+                  onChange={(e) => setForm({ ...form, [f.k]: e.target.value })}
+                  className="rounded-xl text-base"
+                />
+              ) : (
+                <Input
+                  id={`project-${f.k}`}
+                  required={f.k !== "link"}
+                  value={form[f.k]}
+                  placeholder={f.p}
+                  onChange={(e) => setForm({ ...form, [f.k]: e.target.value })}
+                  className="h-12 rounded-xl text-base"
+                />
+              )}
+            </div>
+          ))}
+          <Button size="xl" disabled={busy}>
+            {project ? "Save changes" : "Start my ladder"}
+          </Button>
+        </form>
+      </div>
     </div>
   );
 }

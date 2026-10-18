@@ -99,7 +99,7 @@ export async function smokeDeployment(input, { fetchImpl = fetch } = {}) {
       ) {
         throw new Error(`${path}: expected product page or found an application error.`);
       }
-      if (path === "/auth" && !/type="email"/.test(body))
+      if (path === "/auth" && !/<input\b[^>]*(?:type="email"|id="signin-email")/i.test(body))
         throw new Error("/auth: sign-in form is absent.");
     }
     results.push({ path, status: "passed" });

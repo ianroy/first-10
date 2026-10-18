@@ -45,13 +45,23 @@ beforeEach(() => {
 describe("pages render", () => {
   it("landing", async () => {
     renderPage(page(Landing), "/");
-    expect(await screen.findByText(/meet the people/i)).toBeInTheDocument();
+    expect(
+      await screen.findByRole("heading", {
+        level: 1,
+        name: /Real conversations.*A clearer next move/,
+      }),
+    ).toBeInTheDocument();
   });
 
   it("auth", async () => {
     h.supabase = createFakeSupabase({}, null);
     renderPage(page(Auth), "/auth");
-    expect(await screen.findByText(/find your first customers/i)).toBeInTheDocument();
+    expect(
+      await screen.findByRole("heading", {
+        level: 1,
+        name: "Your next move starts with a real conversation.",
+      }),
+    ).toBeInTheDocument();
   });
 
   it("setup", async () => {
@@ -61,7 +71,9 @@ describe("pages render", () => {
 
   it("dashboard shows the project and next step", async () => {
     renderPage(page(Dashboard), "/dashboard");
-    expect(await screen.findByText("StudyBuddy")).toBeInTheDocument();
+    expect(
+      await screen.findByRole("heading", { level: 1, name: "StudyBuddy" }),
+    ).toBeInTheDocument();
     expect(screen.getByText(/your next step/i)).toBeInTheDocument();
   });
 

@@ -32,6 +32,10 @@ vi.mock("@/components/AppShell", () => ({
   AppShell: ({ children }: { children: ReactNode }) => <main>{children}</main>,
   Card: ({ children }: { children: ReactNode }) => <section>{children}</section>,
 }));
+vi.mock("@/components/RequireProject", () => ({
+  RequireProject: ({ children }: { children: (project: unknown) => ReactNode }) =>
+    children({ id: "fixture" }),
+}));
 import { Route } from "@/routes/_authenticated/admin";
 const Page = Route.options.component!;
 

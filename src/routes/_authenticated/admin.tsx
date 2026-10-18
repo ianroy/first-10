@@ -3,6 +3,7 @@ import { useQuery } from "@tanstack/react-query";
 import { useServerFn } from "@tanstack/react-start";
 import { ArrowUpRight, Database, RefreshCw, ShieldCheck } from "lucide-react";
 import { AppShell, Card } from "@/components/AppShell";
+import { RequireProject } from "@/components/RequireProject";
 import { Button } from "@/components/ui/button";
 import { getAdminSnapshot } from "@/lib/admin.functions";
 
@@ -10,7 +11,7 @@ export const Route = createFileRoute("/_authenticated/admin")({
   head: () => ({
     meta: [{ title: "Operations — First Ten" }, { name: "robots", content: "noindex, nofollow" }],
   }),
-  component: AdminPage,
+  component: () => <RequireProject>{() => <AdminPage />}</RequireProject>,
 });
 
 function AdminPage() {

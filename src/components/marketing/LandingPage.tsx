@@ -53,11 +53,11 @@ const faqs = [
   ],
   [
     "Can I use the $0 Marketing Lab now?",
-    "The one-week assignment and editable worksheets are available now. The full saved in-app channel/content/test board is being built. Zero cash does not mean unlimited time or free AI usage. There are no automated posting tools.",
+    "The one-week assignment and editable worksheets are available now. Stage 2 accounts can save a manual audience/channel/content/test plan and return to it. New AI channel/content proposals remain in development. Zero cash does not mean unlimited time or free AI usage. There are no automated posting tools.",
   ],
   [
     "Can teachers review a class?",
-    "Use the teaching kit and your existing private submission method today. Separate teacher panels, class submissions, shared project work and admin analytics are planned. No measured learning improvement or institutional endorsement is claimed.",
+    "Use the teaching kit and your existing private submission method today. Separate teacher panels, class submissions, shared project work and event-funnel analytics are planned. The current admin view is a protected count-only operational dashboard. No measured learning improvement or institutional endorsement is claimed.",
   ],
 ] as const;
 
@@ -318,9 +318,9 @@ export function LandingPage() {
                 ))}
               </ol>
               <p className="mt-6 border-t border-border pt-4 text-sm text-muted-foreground">
-                Assignment available now. The full saved in-app lab is being built. AI is optional
-                after initial thinking. No automatic posting; $0 cash does not mean zero effort or
-                free AI.
+                Assignment and saved manual Stage 2 lab available now. New AI proposals are in
+                development. AI is optional after initial thinking. No automatic posting; $0 cash
+                does not mean zero effort or free AI.
               </p>
             </div>
           </section>

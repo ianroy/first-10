@@ -48,7 +48,7 @@ it("exposes the six teaching concepts and keeps current versus proposed claims i
   expect(screen.getByText(/learning gains have not been measured/)).toBeVisible();
   fireEvent.click(screen.getByText("Can teachers review a class?"));
   expect(screen.getByText(/Separate teacher panels, class submissions/)).toBeVisible();
-  expect(screen.getByText(/The full saved in-app lab is being built/)).toBeVisible();
+  expect(screen.getByText(/saved manual Stage 2 lab available now/)).toBeVisible();
 });
 
 it("allows a visitor to inspect and reset the embedded example without fetching or saving", async () => {
