@@ -2,7 +2,7 @@
 /** Explicit local-only operator evaluation. All generation uses the ACTUAL authenticated generateAI server function. */
 import { open, readFile, lstat, mkdir } from "node:fs/promises";
 import { resolve } from "node:path";
-import { pathToFileURL } from "node:url";
+import { fileURLToPath, pathToFileURL } from "node:url";
 import { randomUUID } from "node:crypto";
 import { isDeepStrictEqual } from "node:util";
 import { loadFixtures, hash, MODEL, PROVIDER, checkEndpoint, evaluateOutput } from "./eval-ai.mjs";
@@ -14,7 +14,10 @@ import {
   EVALUATOR_PROJECT_ID,
   assertLocalDatabaseUrl,
 } from "../evals/fixture-staging.v6.mjs";
-const ROOT = resolve(new URL("..", import.meta.url).pathname);
+export function evaluationRepositoryRoot(moduleUrl = import.meta.url) {
+  return resolve(fileURLToPath(new URL("..", moduleUrl)));
+}
+const ROOT = evaluationRepositoryRoot();
 export function reviewedPlanBinding(plan) {
   return hash(
     JSON.stringify({
@@ -69,6 +72,13 @@ export function assertLocalOrigin(value) {
   )
     throw deny();
   return u.origin;
+}
+/** Paid API55321 and its SQL staging must address the SAME original local database.
+ * Clone URLs remain valid only for the separate rollback rehearsal, never a paid run. */
+export function assertPaidDatabaseUrl(value) {
+  const url = assertLocalDatabaseUrl(value);
+  if (url.pathname !== "/postgres") throw deny();
+  return url;
 }
 /** Real SDK serializer/framed response parser. No handwritten server-function wire format. */
 export async function invokeGenerateAI({
@@ -232,7 +242,7 @@ export async function runPaid(planPath) {
     throw deny();
   // Explicit private runtime inputs only. Never use an ambient production provider/service credential.
   const secrets = await readPrivateJson(resolve(plan.runtime_file));
-  const databaseUrl = assertLocalDatabaseUrl(secrets.database_url);
+  const databaseUrl = assertPaidDatabaseUrl(secrets.database_url);
   if (
     secrets.SUPABASE_URL !== "http://127.0.0.1:55321" ||
     !secrets.SUPABASE_PUBLISHABLE_KEY ||

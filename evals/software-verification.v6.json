@@ -71,5 +71,23 @@
   "model_quality_evaluated": false,
   "human_review": "not_performed",
   "production_policies_changed": false,
-  "production_promotion": false
+  "production_promotion": false,
+  "supplemental_verification": {
+    "recorded_at": "2026-10-18T23:17:44.518Z",
+    "scope": "Runner repository-root URL decoding and exact original local database binding only; serving code and immutable fixtures unchanged.",
+    "runner_regressions": {
+      "passed": 3,
+      "real_filesystem_fixture_lookup": true,
+      "literal_percent_and_unicode": true,
+      "old_pathname_lookup_rejected": true,
+      "clone_paid_database_rejected": true,
+      "actual_run_entry_rejected_before_network_staging_runtime": true,
+      "log_sha256": "a210c632cd49495adfa1a33541f47193745b8b688173cc2c5d26408c56b5da28"
+    },
+    "scoped_lint": "passed",
+    "offline_baseline": "passed",
+    "fixture_sha256": "a71c3f6b9cd195205b9899a6f2e52f2c641cd3a5a895067716a898d916a7d34d",
+    "runner_sha256": "97991bb3220cf9aeef65157b6f140d00b848420f0358c6835dc6219131758dbb",
+    "note": "Previous application/build/SQL receipts remain evidence for unchanged serving code. No DB, provider or policy action occurred for this follow-up."
+  }
 }

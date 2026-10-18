@@ -55,6 +55,8 @@ These are placeholders, not credentials. Never commit the filled file, plan, pri
 node scripts/eval-ai-paid.mjs --run /private/tmp/first-ten-eval-plan.json
 ```
 
+The paid run accepts only the exact `/postgres` database on dedicated local port 55322, matching API55321; disposable clone database URLs are rejected before connector creation, staging or credential use. Clone names are reserved for the separate rollback rehearsal. Filesystem roots use `fileURLToPath` so spaces, Unicode and literal percent characters in the checkout are decoded correctly.
+
 The runner starts its own isolated loopback Vite runtime, with explicit runtime credentials substituted before server imports. It never sends a bearer token to arbitrary origins; HTTP is limited to `127.0.0.1` on a reviewed 558xx/559xx port and the exact generated server-function path. The SDK fetch hook prohibits redirects, retries and a second attempt. The exact `createServerFn(createClientRpc(...))` compiled client wrapper handles TanStack serialization and response framing; no invented server protocol or direct provider path exists.
 
 For each case, it durably journals one stable operation UUID **before** staging/dispatch. It updates only the fixed fictional project and reserved child IDs, uses actual authenticated CRUD/consent RPCs, preserves consent history and every accounting/audit record, and compares the actual server permission projection and assembled prompt with the immutable case. No fixture text is accepted by `generateAI`. Each case uses distinct fixed child IDs, preventing source identity reuse across cases. Existing unrelated content or a preexisting evaluation project blocks staging.
