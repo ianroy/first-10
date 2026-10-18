@@ -55,7 +55,7 @@ function Workspace({ view, csrf, onDirtyChange }: Props) {
     [conflict, setConflict] = useState(false),
     [message, setMessage] = useState(""),
     [step, setStep] = useState(0),
-    [tick, setTick] = useState(0);
+    [expired, setExpired] = useState(() => Date.now() >= Date.parse(view.accessExpiresAt));
   const alive = useRef(true),
     epoch = useRef(0),
     current = useRef(doc),
@@ -66,8 +66,7 @@ function Workspace({ view, csrf, onDirtyChange }: Props) {
   saved.current = record;
   reporter.current = onDirtyChange;
   const dirty = fp(doc) !== fp(record?.document ?? createGuestMarketing()),
-    guard = dirty || busy || uncertain,
-    expired = Date.now() >= Date.parse(view.accessExpiresAt);
+    guard = dirty || busy || uncertain;
   const blocker = useBlocker({
     shouldBlockFn: () => guard,
     enableBeforeUnload: guard,
@@ -83,9 +82,12 @@ function Workspace({ view, csrf, onDirtyChange }: Props) {
     [],
   );
   useEffect(() => {
-    const timer = setInterval(() => setTick((t) => t + 1), 1000);
+    const timer = setInterval(
+      () => setExpired(Date.now() >= Date.parse(view.accessExpiresAt)),
+      1000,
+    );
     return () => clearInterval(timer);
-  }, []);
+  }, [view.accessExpiresAt]);
   useEffect(() => {
     alive.current = true;
     const token = ++epoch.current;
@@ -270,7 +272,6 @@ function Workspace({ view, csrf, onDirtyChange }: Props) {
   } catch {
     /* Invalid unfinished fields must be fixed before a reliable export. */
   }
-  void tick;
   return (
     <section
       className="mt-8 space-y-6 rounded-3xl border bg-card p-6 lg:p-8"
