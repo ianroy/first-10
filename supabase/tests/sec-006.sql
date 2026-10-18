@@ -1,0 +1,80 @@
+-- Fixture grants and audit rows are discarded by the enclosing policy transaction.
+RESET ROLE;
+SELECT ok(NOT EXISTS(SELECT 1 FROM firstten_private.platform_admins WHERE user_id IN (SELECT id FROM firstten_policy_test.ids)),'migration never auto-bootstraps a fixture identity as admin');
+SELECT ok((SELECT bool_and(relrowsecurity) FROM pg_class WHERE oid IN ('firstten_private.platform_admins'::regclass,'firstten_private.admin_audit'::regclass)),'role and audit relations have RLS');
+SELECT ok(NOT has_table_privilege('authenticated','firstten_private.platform_admins','SELECT,INSERT,UPDATE,DELETE'),'browser cannot list or alter platform grants');
+SELECT ok(NOT has_table_privilege('service_role','firstten_private.platform_admins','SELECT,INSERT,UPDATE,DELETE'),'service key is not an operator role');
+SELECT ok(NOT has_table_privilege('authenticated','firstten_private.admin_audit','SELECT,INSERT,UPDATE,DELETE'),'browser cannot read or forge audit rows');
+SELECT ok(NOT has_table_privilege('service_role','firstten_private.admin_audit','SELECT,INSERT,UPDATE,DELETE'),'service key cannot bypass append-only audit API');
+SELECT ok(NOT has_function_privilege('authenticated','firstten_private.set_platform_admin(uuid,boolean,bigint,text)','EXECUTE'),'normal users cannot self-assign platform authority');
+SELECT ok(NOT has_function_privilege('service_role','firstten_private.set_platform_admin(uuid,boolean,bigint,text)','EXECUTE'),'service-role API cannot bootstrap a platform role');
+SELECT ok(NOT has_function_privilege('anon','public.current_platform_admin()','EXECUTE'),'anonymous role lookup denied');
+SELECT ok(NOT has_function_privilege('anon','public.get_platform_admin_authorization()','EXECUTE'),'anonymous authorization receipt denied');
+SELECT ok(NOT has_function_privilege('anon','public.record_platform_admin_action(text,text,uuid)','EXECUTE'),'anonymous audit RPC denied');
+SELECT ok(NOT has_function_privilege('service_role','public.record_platform_admin_action(text,text,uuid)','EXECUTE'),'service role cannot impersonate admin audit caller');
+SELECT ok((SELECT bool_and(prosecdef AND proconfig=ARRAY['search_path=pg_catalog']) FROM pg_proc WHERE oid IN (
+ 'firstten_private.set_platform_admin(uuid,boolean,bigint,text)'::regprocedure,
+ 'public.current_platform_admin()'::regprocedure,
+ 'public.get_platform_admin_authorization()'::regprocedure,
+ 'public.record_platform_admin_action(text,text,uuid)'::regprocedure)),'privileged helpers pin the search path');
+
+SELECT firstten_policy_test.set_actor('admin');SET LOCAL ROLE authenticated;
+SELECT is(public.current_platform_admin(),false,'metadata admin marker does not create a grant');
+SELECT is(public.get_platform_admin_authorization(),NULL::jsonb,'missing grant returns no authorization identity');
+SELECT throws_ok($$SELECT firstten_private.set_platform_admin(firstten_policy_test.id('admin'),true,0,'SEC-006')$$,'42501',NULL,'direct RPC/SQL cannot self-assign even with admin JWT marker');
+SELECT throws_ok($$SELECT public.record_platform_admin_action('operational_snapshot','ready',gen_random_uuid())$$,'42501','Admin access denied','metadata marker cannot authorize aggregate audit');
+RESET ROLE;SELECT firstten_policy_test.set_actor('teacher');SET LOCAL ROLE authenticated;
+SELECT is(public.current_platform_admin(),false,'teacher is not a platform admin');
+SELECT throws_ok($$SELECT firstten_private.set_platform_admin(firstten_policy_test.id('teacher'),true,0,'SEC-006')$$,'42501',NULL,'teacher cannot bootstrap platform role');
+RESET ROLE;SELECT firstten_policy_test.set_actor('student');SET LOCAL ROLE authenticated;
+SELECT is(public.current_platform_admin(),false,'student is not a platform admin');
+SELECT throws_ok($$SELECT public.record_platform_admin_action('operational_snapshot','ready',gen_random_uuid())$$,'42501','Admin access denied','student cannot invoke aggregate audit');
+RESET ROLE;
+SELECT throws_ok($$SELECT firstten_private.set_platform_admin('f6060000-0000-4000-8000-000000000099',true,0,'SEC-006')$$,'22023','Verified subject not found','operator must identify an existing verified user UUID');
+SELECT throws_ok($$SELECT firstten_private.set_platform_admin(firstten_policy_test.id('admin'),true,0,NULL)$$,'22023','Invalid operator request','operator audit reference is required');
+SELECT throws_ok($$SELECT firstten_private.set_platform_admin(firstten_policy_test.id('admin'),true,0,'unreviewed free-form private text')$$,'22023','Invalid operator request','operator reference cannot carry arbitrary prose');
+SELECT is(firstten_private.set_platform_admin(firstten_policy_test.id('admin'),true,0,'SEC-006-fixture')->>'revision','1','operator grants explicit subject at initial revision');
+SELECT throws_ok($$SELECT firstten_private.set_platform_admin(firstten_policy_test.id('admin'),false,0,'SEC-006-stale')$$,'40001','Admin grant revision conflict','stale operator update cannot overwrite grant');
+SELECT is((SELECT count(*) FROM firstten_private.admin_audit WHERE subject_id=firstten_policy_test.id('admin') AND operation='role_granted'),1::bigint,'grant writes one content-free operator audit');
+
+INSERT INTO public.projects(id,user_id,name) VALUES('f6060000-0000-4000-8000-000000000001',firstten_policy_test.id('owner_a'),'SEC006 private fixture');
+INSERT INTO public.contacts(id,user_id,project_id,first_name) VALUES('f6060000-0000-4000-8000-000000000002',firstten_policy_test.id('owner_a'),'f6060000-0000-4000-8000-000000000001','Private');
+INSERT INTO public.interviews(id,user_id,project_id,contact_id,completed) VALUES('f6060000-0000-4000-8000-000000000003',firstten_policy_test.id('owner_a'),'f6060000-0000-4000-8000-000000000001','f6060000-0000-4000-8000-000000000002',true);
+INSERT INTO public.learnings(id,user_id,project_id,title,body) VALUES('f6060000-0000-4000-8000-000000000004',firstten_policy_test.id('owner_a'),'f6060000-0000-4000-8000-000000000001','Private','Private notes');
+INSERT INTO public.experiments(id,user_id,project_id,hypothesis,change) VALUES('f6060000-0000-4000-8000-000000000005',firstten_policy_test.id('owner_a'),'f6060000-0000-4000-8000-000000000001','Private','Private');
+INSERT INTO public.outreach(id,user_id,project_id,title,body) VALUES('f6060000-0000-4000-8000-000000000006',firstten_policy_test.id('owner_a'),'f6060000-0000-4000-8000-000000000001','Private','Private');
+SELECT firstten_policy_test.set_actor('admin');SET LOCAL ROLE authenticated;
+SELECT is(public.current_platform_admin(),true,'operator grant authorizes the current actor');
+SELECT is(public.get_platform_admin_authorization(),jsonb_build_object('userId',firstten_policy_test.id('admin')),'authorization receipt exposes only the verified current subject');
+SELECT is(firstten_policy_test.visible_count('projects','f6060000-0000-4000-8000-000000000001'),0::bigint,'real platform admin cannot read another owner project');
+SELECT is(firstten_policy_test.visible_count('contacts','f6060000-0000-4000-8000-000000000002'),0::bigint,'real platform admin cannot read student contact identity');
+SELECT is(firstten_policy_test.visible_count('interviews','f6060000-0000-4000-8000-000000000003'),0::bigint,'real platform admin cannot read private interview notes');
+SELECT is(firstten_policy_test.visible_count('learnings','f6060000-0000-4000-8000-000000000004'),0::bigint,'real platform admin cannot read private learning content');
+SELECT is(firstten_policy_test.visible_count('experiments','f6060000-0000-4000-8000-000000000005'),0::bigint,'real platform admin cannot read private experiment content');
+SELECT is(firstten_policy_test.visible_count('outreach','f6060000-0000-4000-8000-000000000006'),0::bigint,'real platform admin cannot read private outreach content');
+SELECT throws_ok($$INSERT INTO firstten_private.platform_admins(user_id,enabled,revision) VALUES(firstten_policy_test.id('teacher'),true,1)$$,'42501',NULL,'platform admin cannot grant another role via direct table insert');
+SELECT throws_ok($$SELECT firstten_private.set_platform_admin(firstten_policy_test.id('teacher'),true,0,'SEC-006')$$,'42501',NULL,'platform admin has no role-administration RPC');
+SELECT throws_ok($$SELECT public.record_platform_admin_action('export_interviews','ready',gen_random_uuid())$$,'22023','Invalid admin audit request','arbitrary privileged operation cannot be logged as authorized');
+SELECT throws_ok($$SELECT public.record_platform_admin_action('role_granted','ready',gen_random_uuid())$$,'22023','Invalid admin audit request','browser cannot forge operator audit');
+SELECT throws_ok($$SELECT public.record_platform_admin_action('operational_snapshot','private text',gen_random_uuid())$$,'22023','Invalid admin audit request','audit outcome has no free-form content');
+SELECT throws_ok($$SELECT public.record_platform_admin_action(NULL,'ready',gen_random_uuid())$$,'22023','Invalid admin audit request','NULL operation is rejected');
+SELECT throws_ok($$SELECT public.record_platform_admin_action('operational_snapshot','ready',NULL)$$,'22023','Invalid admin audit request','audit request id is required');
+SELECT lives_ok($$SELECT public.record_platform_admin_action('operational_snapshot','ready','f6060000-0000-4000-8000-000000000010')$$,'active admin records bounded aggregate operation');
+SELECT is(public.record_platform_admin_action('operational_snapshot','ready','f6060000-0000-4000-8000-000000000010'),public.record_platform_admin_action('operational_snapshot','ready','f6060000-0000-4000-8000-000000000010'),'same request returns original receipt');
+SELECT throws_ok($$SELECT public.record_platform_admin_action('operational_snapshot','partial','f6060000-0000-4000-8000-000000000010')$$,'22023','Admin audit request conflict','request replay cannot rewrite outcome');
+SELECT throws_ok($$DELETE FROM firstten_private.admin_audit$$,'42501',NULL,'admin cannot erase own audit');
+RESET ROLE;
+SELECT is((SELECT count(*) FROM firstten_private.admin_audit WHERE actor_id=firstten_policy_test.id('admin')),1::bigint,'repeated valid request writes one audit receipt');
+SELECT throws_ok($$UPDATE firstten_private.admin_audit SET outcome='partial'$$,'42501','Admin audit is append-only','audit UPDATE rejected even by table owner');
+SELECT throws_ok($$DELETE FROM firstten_private.admin_audit$$,'42501','Admin audit is append-only','audit DELETE rejected even by table owner');
+SELECT throws_ok($$TRUNCATE firstten_private.admin_audit$$,'42501','Admin audit is append-only','audit TRUNCATE rejected even by table owner');
+SELECT is(firstten_private.set_platform_admin(firstten_policy_test.id('admin'),false,1,'SEC-006-revoke')->>'revision','2','operator revokes with current revision');
+SELECT firstten_policy_test.set_actor('admin');SET LOCAL ROLE authenticated;
+SELECT is(public.current_platform_admin(),false,'same stale JWT loses role immediately after database revocation');
+SELECT is(public.get_platform_admin_authorization(),NULL::jsonb,'revoked actor loses authorization receipt');
+SELECT throws_ok($$SELECT public.record_platform_admin_action('operational_snapshot','ready','f6060000-0000-4000-8000-000000000010')$$,'42501','Admin access denied','revoked actor cannot replay former receipt');
+SELECT throws_ok($$SELECT public.record_platform_admin_action('ai_usage_snapshot','ready',gen_random_uuid())$$,'42501','Admin access denied','revoked actor cannot initiate fresh privileged action');
+SELECT throws_ok($$SELECT firstten_private.set_platform_admin(firstten_policy_test.id('admin'),true,2,'SEC-006')$$,'42501',NULL,'revoked actor cannot regrant their own role');
+RESET ROLE;
+SELECT is((SELECT count(*) FROM firstten_private.admin_audit WHERE subject_id=firstten_policy_test.id('admin') AND operation='role_revoked'),1::bigint,'revocation preserves append-only operator audit');
+SELECT is((SELECT count(*) FROM firstten_private.admin_audit WHERE actor_id=firstten_policy_test.id('admin')),1::bigint,'revoked replay does not add or mutate audit history');
