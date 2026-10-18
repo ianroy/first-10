@@ -162,13 +162,13 @@ BEGIN
    END LOOP;
   END LOOP;
   IF EXISTS(SELECT 1 FROM jsonb_array_elements(a.document#>'{discovery,excludedContextIds}')x WHERE NOT d#>'{discovery,excludedContextIds}'@>jsonb_build_array(x.value))THEN RETURN jsonb_build_object('ok',false,'code','PRESERVED_VERSION');END IF;
-  changed:=(a.document->'permissions'-'revision')IS DISTINCT FROM(d->'permissions'-'revision');
-  IF(d#>>'{permissions,revision}')::bigint<>(a.document#>>'{permissions,revision}')::bigint+CASE WHEN changed THEN 1 ELSE 0 END THEN RETURN jsonb_build_object('ok',false,'code','INVALID_INPUT');END IF;
+  changed:=((a.document->'permissions')-'revision')IS DISTINCT FROM((d->'permissions')-'revision');
+  IF(d#>>'{permissions,revision}')::bigint<>(a.document#>>'{permissions,revision}')::bigint+(CASE WHEN changed THEN 1 ELSE 0 END) THEN RETURN jsonb_build_object('ok',false,'code','INVALID_INPUT');END IF;
   FOR old_item IN SELECT value FROM jsonb_array_elements(a.document->'interviews')LOOP
    item:=firstten_private.marketing_find(d->'interviews',old_item->>'id');
    IF item IS NULL OR item->'scriptId'IS DISTINCT FROM old_item->'scriptId'OR item->'capturedAt'IS DISTINCT FROM old_item->'capturedAt'OR(SELECT jsonb_agg(x->'q'ORDER BY n)FROM jsonb_array_elements(item->'answers')WITH ORDINALITY t(x,n))IS DISTINCT FROM(SELECT jsonb_agg(x->'q'ORDER BY n)FROM jsonb_array_elements(old_item->'answers')WITH ORDINALITY t(x,n))THEN RETURN jsonb_build_object('ok',false,'code','PRESERVED_VERSION');END IF;
-   changed:=(item->'choices'-'revision')IS DISTINCT FROM(old_item->'choices'-'revision');
-   IF(item#>>'{choices,revision}')::bigint<>(old_item#>>'{choices,revision}')::bigint+CASE WHEN changed THEN 1 ELSE 0 END THEN RETURN jsonb_build_object('ok',false,'code','INVALID_INPUT');END IF;
+   changed:=((item->'choices')-'revision')IS DISTINCT FROM((old_item->'choices')-'revision');
+   IF(item#>>'{choices,revision}')::bigint<>(old_item#>>'{choices,revision}')::bigint+(CASE WHEN changed THEN 1 ELSE 0 END) THEN RETURN jsonb_build_object('ok',false,'code','INVALID_INPUT');END IF;
    IF old_item->>'completed'='true'AND(item-'choices')IS DISTINCT FROM(old_item-'choices')AND NOT(item#>>'{choices,note}'='withdrawn'AND item->>'completed'='false'AND NOT EXISTS(SELECT 1 FROM jsonb_array_elements(item->'answers')x WHERE x->>'note'<>''OR x->>'quote'<>''))THEN RETURN jsonb_build_object('ok',false,'code','PRESERVED_VERSION');END IF;
   END LOOP;
   IF EXISTS(SELECT 1 FROM jsonb_array_elements(d->'interviews')i WHERE firstten_private.marketing_find(a.document->'interviews',i->>'id')IS NULL AND i#>>'{choices,revision}'<>'1')THEN RETURN jsonb_build_object('ok',false,'code','INVALID_INPUT');END IF;
@@ -208,9 +208,9 @@ BEGIN
  payload:=jsonb_build_object('schemaVersion',1);
  FOREACH f IN ARRAY ARRAY['title','interpretation','uncertainty','decision','nextAction']LOOP
   body:=spec->'reflection'->>f;
-  IF jsonb_typeof(spec->'reflection'->f)IS DISTINCT FROM'string'OR char_length(body)>CASE WHEN f='title'THEN 120 WHEN f='interpretation'THEN 3000 ELSE 2000 END OR(f='title'AND btrim(body)='')THEN RETURN jsonb_build_object('ok',false,'code','INVALID_INPUT');END IF;
+  IF jsonb_typeof(spec->'reflection'->f)IS DISTINCT FROM'string'OR char_length(body)>(CASE WHEN f='title'THEN 120 WHEN f='interpretation'THEN 3000 ELSE 2000 END) OR(f='title'AND btrim(body)='')THEN RETURN jsonb_build_object('ok',false,'code','INVALID_INPUT');END IF;
   FOR phrase IN SELECT value FROM jsonb_array_elements(spec->'redactions')LOOP body:=replace(body,phrase#>>'{}','[Redacted]');END LOOP;
-  body:=firstten_private.submission_scrub(body);IF char_length(body)>CASE WHEN f='title'THEN 120 WHEN f='interpretation'THEN 3000 ELSE 2000 END OR(f='title'AND btrim(body)='')THEN RETURN jsonb_build_object('ok',false,'code','INVALID_INPUT');END IF;
+  body:=firstten_private.submission_scrub(body);IF char_length(body)>(CASE WHEN f='title'THEN 120 WHEN f='interpretation'THEN 3000 ELSE 2000 END) OR(f='title'AND btrim(body)='')THEN RETURN jsonb_build_object('ok',false,'code','INVALID_INPUT');END IF;
   payload:=payload||jsonb_build_object(f,body);
  END LOOP;
  FOR item IN SELECT value FROM jsonb_array_elements(spec->'selections')LOOP

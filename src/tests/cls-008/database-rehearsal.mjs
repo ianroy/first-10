@@ -100,11 +100,39 @@ try {
   assert(tap.validPlan && tap.cleanupOk);
   assert.equal(tap.failures.length, 0);
   assert.equal(tap.knownGaps.length, 0);
+  phase = "actual SQL-produced DTOs through production runtime schemas";
+  const dtoLines = output.split(/\r?\n/).filter((line) => line.startsWith("GUEST_ACTUAL_DTO:"));
+  assert.equal(dtoLines.length, 1, "One fresh actual SQL DTO receipt must be captured");
+  const dtoPath = "/private/tmp/firstten-guest-learning-actual-dtos.json";
+  writeFileSync(dtoPath, dtoLines[0].slice("GUEST_ACTUAL_DTO:".length));
+  const dtoResult = execFileSync(
+    process.execPath,
+    [
+      root + "/node_modules/vitest/vitest.mjs",
+      "run",
+      "src/tests/cls-008/sql-produced-dtos.test.ts",
+    ],
+    {
+      cwd: root,
+      encoding: "utf8",
+      stdio: ["pipe", "pipe", "pipe"],
+      timeout: 60000,
+      env: {
+        ...process.env,
+        FIRSTTEN_ACTUAL_GUEST_DTOS: dtoPath,
+        OPENROUTER_API_KEY: "fictional-no-provider-calls",
+      },
+    },
+  );
+  writeFileSync("/private/tmp/firstten-guest-learning-actual-dtos-test.log", dtoResult);
+  console.log("11 fresh actual SQL DTO/schema and privacy-boundary checks passed.");
   phase = "actual guest activity separate-connection races";
   const password = info.Config.Env.find((v) => v.startsWith("POSTGRES_PASSWORD="))?.slice(18);
   assert(password);
   await learningRaces({ database, password });
 } catch (error) {
+  if (error.stdout)
+    writeFileSync("/private/tmp/firstten-guest-learning-policy-partial.txt", String(error.stdout));
   writeFileSync(
     "/private/tmp/firstten-guest-learning-policy-error.txt",
     String(error.stderr ?? error.stack ?? ""),

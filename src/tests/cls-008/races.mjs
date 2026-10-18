@@ -256,7 +256,7 @@ export async function learningRaces({ database, password }) {
     );
     await admin`UPDATE public.classes SET access_expires_at=clock_timestamp()+interval '600 milliseconds',revision=revision+1 WHERE id=${cid}`;
     await a`BEGIN`;
-    await a`SELECT id FROM public.classes WHERE id=${cid}FOR UPDATE`;
+    await a`SELECT id FROM public.classes WHERE id=${cid} FOR UPDATE`;
     await start(b);
     pending = save(b, recovered.sessionToken, activity, 3, randomUUID(), doc).execute();
     pending.catch(() => {});
@@ -277,6 +277,32 @@ export async function learningRaces({ database, password }) {
     await b`COMMIT`;
     console.log(
       "Actual deadline elapsed during lock wait: guest save rechecked time and failed without writing.",
+    );
+    // Force expiry after initial authorization and the UPDATE trigger, not merely during lock admission.
+    await admin`UPDATE public.classes SET access_expires_at=clock_timestamp()+interval '1 day',revision=revision+1 WHERE id=${cid}`;
+    await admin.unsafe(
+      "CREATE FUNCTION firstten_private.guest_learning_fixture_delay() RETURNS trigger LANGUAGE plpgsql SET search_path=pg_catalog AS $$BEGIN PERFORM pg_sleep(1.2); RETURN NEW; END $$; REVOKE ALL ON FUNCTION firstten_private.guest_learning_fixture_delay() FROM PUBLIC,anon,authenticated,service_role; CREATE TRIGGER guest_learning_fixture_delay BEFORE UPDATE ON firstten_private.guest_learning_activities FOR EACH ROW EXECUTE FUNCTION firstten_private.guest_learning_fixture_delay();",
+    );
+    const expiryMutation = randomUUID();
+    const afterExpiryDoc = structuredClone(doc);
+    afterExpiryDoc.discovery.frame.solution = "This fictional edit must roll back after expiry";
+    await admin`UPDATE public.classes SET access_expires_at=clock_timestamp()+interval '1 second',revision=revision+1 WHERE id=${cid}`;
+    await start(a);
+    const expiredDuringWrite = result(
+      await save(a, recovered.sessionToken, activity, 3, expiryMutation, afterExpiryDoc),
+    );
+    assert.equal(expiredDuringWrite.code, "NOT_FOUND");
+    await a`COMMIT`;
+    const [afterRollback] =
+      await admin`SELECT revision,document->'discovery'->'frame'->>'solution'AS solution,(SELECT count(*)FROM firstten_private.guest_learning_operations WHERE principal_id=${principal} AND request_id=${expiryMutation})AS operations FROM firstten_private.guest_learning_activities WHERE id=${activity}`;
+    assert.equal(Number(afterRollback.revision), 3);
+    assert.equal(afterRollback.solution, doc.discovery.frame.solution);
+    assert.equal(Number(afterRollback.operations), 0);
+    await admin.unsafe(
+      "DROP TRIGGER guest_learning_fixture_delay ON firstten_private.guest_learning_activities; DROP FUNCTION firstten_private.guest_learning_fixture_delay();",
+    );
+    console.log(
+      "Actual expiry after initial authorization and delayed UPDATE: document, revision and operation receipt all rolled back.",
     );
   } finally {
     for (const c of [a, b])
