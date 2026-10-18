@@ -76,7 +76,7 @@ describe("public teaching resources", () => {
     }
     expect(screen.getByText(/No account, AI subscription or outside contact/)).toBeVisible();
     expect(
-      screen.getByText(/Assignment available now. The full in-app Marketing Lab is planned/),
+      screen.getByText(/Assignment and manual saved Marketing Lab available now/),
     ).toBeVisible();
     expect(
       screen.getByText(/This is a planning example, not a tested class-size limit/),

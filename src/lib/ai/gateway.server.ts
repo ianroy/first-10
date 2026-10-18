@@ -30,6 +30,7 @@ type Options = {
   schema: object;
   system: string;
   user: string;
+  policy?: "synthetic-marketing-v1";
   fetcher?: typeof fetch;
   now?: () => number;
   sleep?: (ms: number) => Promise<void>;
@@ -55,7 +56,16 @@ export async function requestStructuredDraft(options: Options) {
       "AI is not configured. Your saved work is still available.",
       0,
     );
-  if (system.length + user.length > 40_000)
+  const synthetic = options.policy === "synthetic-marketing-v1";
+  if (synthetic && kind !== "marketing_demo")
+    throw new AIGatewayError(
+      "POLICY_MISMATCH",
+      "This route is reserved for the fictional practice task.",
+      0,
+    );
+  if (kind === "marketing_demo" && !synthetic)
+    throw new AIGatewayError("POLICY_REQUIRED", "The fictional practice route is required.", 0);
+  if (system.length + user.length > (synthetic ? 12_000 : 40_000))
     throw new AIGatewayError(
       "CONTEXT_LIMIT",
       "There is too much context for this draft. Narrow the material and try again.",
@@ -67,8 +77,9 @@ export async function requestStructuredDraft(options: Options) {
     options.sleep ?? ((ms: number) => new Promise<void>((resolve) => setTimeout(resolve, ms)));
   const random = options.random ?? Math.random;
   const deadline = now() + AI_TOTAL_DEADLINE_MS;
-  const model = resolveAIModel(options.model);
-  for (let attempt = 0; attempt < AI_MAX_ATTEMPTS; attempt++) {
+  const model = synthetic ? "google/gemini-2.5-flash-lite" : resolveAIModel(options.model);
+  const maxAttempts = synthetic ? 1 : AI_MAX_ATTEMPTS;
+  for (let attempt = 0; attempt < maxAttempts; attempt++) {
     const remaining = deadline - now();
     if (remaining <= 0)
       throw new AIGatewayError(
@@ -94,12 +105,22 @@ export async function requestStructuredDraft(options: Options) {
             { role: "system", content: system },
             { role: "user", content: user },
           ],
-          max_tokens: AI_MAX_OUTPUT_TOKENS,
+          max_tokens: synthetic ? 1200 : AI_MAX_OUTPUT_TOKENS,
           response_format: {
             type: "json_schema",
             json_schema: { name: kind, strict: true, schema },
           },
-          provider: { require_parameters: true },
+          provider: synthetic
+            ? {
+                require_parameters: true,
+                only: ["google-vertex"],
+                order: ["google-vertex"],
+                allow_fallbacks: false,
+                data_collection: "deny",
+                zdr: true,
+                max_price: { prompt: 0.1, completion: 0.4 },
+              }
+            : { require_parameters: true },
         }),
       });
     } catch {
@@ -112,7 +133,7 @@ export async function requestStructuredDraft(options: Options) {
     }
     if (!response.ok) {
       const retryable = response.status === 429 || response.status >= 500;
-      if (retryable && attempt + 1 < AI_MAX_ATTEMPTS) {
+      if (retryable && attempt + 1 < maxAttempts) {
         const delay = retryDelay(response.headers.get("retry-after"), attempt, now(), random);
         if (now() + delay >= deadline)
           throw new AIGatewayError(
@@ -179,6 +200,7 @@ export async function requestStructuredDraft(options: Options) {
       generationId: typeof envelope.id === "string" ? envelope.id : null,
       model: typeof envelope.model === "string" ? envelope.model : model,
       usage: envelope.usage ?? null,
+      provider: typeof envelope.provider === "string" ? envelope.provider : null,
       attempts: attempt + 1,
     };
   }

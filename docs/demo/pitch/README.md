@@ -3,7 +3,7 @@
 Editable Spaces presentation: **First Ten — Babson teaching and product pitch**.
 
 - Page: `page_984affe9853c8191a5f8caf0d446aba3`
-- Artifact: `artifact_external_f6f8a2ee-e468-4ec9-a57f-99e5f0f9fb49`
+- Artifact: `artifact_external_43c311e5-4001-4eb5-8456-4536a8049edf`
 - Nine slides, 1280 × 720; Field notebook colors, editable text and speaker notes.
 - [Presenter script](presenter-script.md) and [claim/source map](source-map.md).
 
@@ -23,7 +23,7 @@ Editable Spaces presentation: **First Ten — Babson teaching and product pitch*
 
 - [x] Author all slides and inspect the rendered pages for fit and readability.
 - [x] Add the original First Ten logo after BR-004 lands.
-- [ ] Reconcile current/proposed feature labels with the tested release.
+- [x] Reconcile current/proposed feature labels with the tested release. Slides4/5/7 refreshed after manual Marketing Lab and aggregate admin release; reviewed all changed renders.
 - [ ] Rehearse the `/demo` handoff after WEB-002 is deployed.
 - [ ] Rehearse the teaching-page link after EDU-002 is deployed.
 - [ ] Record actual presentation and fallback timing.

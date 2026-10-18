@@ -2,6 +2,7 @@ import { createServerFn } from "@tanstack/react-start";
 import { requireSupabaseAuth } from "@/integrations/supabase/auth-middleware";
 
 import { aiRequestSchema, type AIKind as Kind } from "./ai/contracts";
+import { generateFictionalMarketingPractice } from "./ai/demo-marketing.server";
 import { requestStructuredDraft } from "./ai/gateway.server";
 
 const str = { type: "string" };
@@ -24,7 +25,8 @@ function obj(props: Record<string, unknown>) {
   };
 }
 
-const SCHEMAS: Record<Kind, object> = {
+type ExistingKind = Exclude<Kind, "marketing_demo">;
+const SCHEMAS: Record<ExistingKind, object> = {
   questions: obj({ questions: strArr }),
   synthesis: obj({
     problems: strArr,
@@ -37,7 +39,7 @@ const SCHEMAS: Record<Kind, object> = {
   stage3: obj({ channels: titled, referral_asks: strArr, onboarding_questions: strArr }),
 };
 
-const TASKS: Record<Kind, string> = {
+const TASKS: Record<ExistingKind, string> = {
   questions:
     "Write 9 in-person customer interview questions in the style of The Mom Test. Ask about past behavior, real recent situations, current workarounds, and what it cost them. NEVER pitch the app, never ask hypotheticals like 'would you use'. Keep each question short and casual for a student to say out loud. The LAST question must be: 'Who else should I talk to about this?'",
   synthesis:
@@ -48,7 +50,7 @@ const TASKS: Record<Kind, string> = {
     "Plan growth to the next 100 users. channels: 4-5 scalable channels a student can run (with how-to). referral_asks: 3 short scripts asking happy users to refer friends. onboarding_questions: 4-5 short questions to ask new users right after signup to find onboarding friction.",
 };
 
-async function callAI(system: string, user: string, kind: Kind) {
+async function callAI(system: string, user: string, kind: ExistingKind) {
   const result = await requestStructuredDraft({
     key: process.env["OPENROUTER_API_KEY"] ?? "",
     model: process.env["OPENROUTER_MODEL"],
@@ -72,6 +74,12 @@ export const generateAI = createServerFn({ method: "POST" })
       .eq("id", data.projectId)
       .single();
     if (projectError || !p) throw new Error("Project not found or access unavailable.");
+    if (data.kind === "marketing_demo")
+      return generateFictionalMarketingPractice({
+        supabase: sb,
+        userId: context.userId,
+        project: p,
+      });
     const [interviewResult, learningResult, contactResult] = await Promise.all([
       sb.from("interviews").select("answers,tags").eq("project_id", p.id).eq("completed", true),
       sb

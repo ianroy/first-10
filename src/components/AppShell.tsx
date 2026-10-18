@@ -45,7 +45,11 @@ export function AppShell({ title, children }: { title: string; children: ReactNo
       ? checklist["demo"]
       : null;
   const fictional =
-    marker && typeof marker === "object" && !Array.isArray(marker) && marker["fictional"] === true;
+    project?.user_id === "f1d00000-0000-4000-8000-000000000001" ||
+    (marker &&
+      typeof marker === "object" &&
+      !Array.isArray(marker) &&
+      marker["fictional"] === true);
   return (
     <div className="mx-auto min-h-screen max-w-[1600px] lg:grid lg:grid-cols-[244px_minmax(0,1fr)]">
       <a
@@ -106,10 +110,10 @@ export function AppShell({ title, children }: { title: string; children: ReactNo
             Evidence → decision → one small next test
           </p>
           <Link
-            to="/teach"
+            to="/teacher"
             className="flex min-h-11 items-center justify-between px-2 text-sm font-medium"
           >
-            Teaching resources
+            Educator dashboard
             <ArrowUpRight className="size-4" aria-hidden="true" />
           </Link>
           <a

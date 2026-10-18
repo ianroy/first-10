@@ -13,6 +13,7 @@ import {
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
+import { LiveMarketingPractice } from "./LiveMarketingPractice";
 import { loadMarketingPlan, saveMarketingPlan } from "@/lib/marketing.functions";
 import {
   createEmptyMarketingPlan,
@@ -114,6 +115,7 @@ export function SavedMarketingLab({ project }: { project: Project }) {
   const [savedAt, setSavedAt] = useState<string | null>(null);
   const [step, setStep] = useState(0);
   const [busy, setBusy] = useState(false);
+  const [practiceState, setPracticeState] = useState({ busy: false, hasDraft: false });
   const [dirty, setDirty] = useState(false);
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(true);
@@ -123,8 +125,8 @@ export function SavedMarketingLab({ project }: { project: Project }) {
   const canWrite = serverCanWrite && project.stage >= 2;
   const pendingSave = useRef<{ fingerprint: string; input: SaveMarketingPlanInput } | null>(null);
   const blocker = useBlocker({
-    shouldBlockFn: () => dirty || busy,
-    enableBeforeUnload: dirty || busy,
+    shouldBlockFn: () => dirty || busy || practiceState.busy || practiceState.hasDraft,
+    enableBeforeUnload: dirty || busy || practiceState.busy || practiceState.hasDraft,
     withResolver: true,
   });
   async function load() {
@@ -265,7 +267,7 @@ export function SavedMarketingLab({ project }: { project: Project }) {
               Keep editing
             </AlertDialogCancel>
             <AlertDialogAction
-              disabled={busy}
+              disabled={busy || practiceState.busy}
               onClick={() => {
                 if (blocker.status === "blocked") blocker.proceed();
               }}
@@ -383,6 +385,11 @@ export function SavedMarketingLab({ project }: { project: Project }) {
         ))}
       </nav>
       <fieldset disabled={busy || !canWrite} className="min-w-0 space-y-5">
+        {project.id === "f1d00000-0000-4000-8000-000000000010" && complete && (
+          <div hidden={step !== 2}>
+            <LiveMarketingPractice projectId={project.id} onStateChange={setPracticeState} />
+          </div>
+        )}
         {step === 0 && (
           <div className="grid items-start gap-6 xl:grid-cols-[1.4fr_1fr]">
             <Card>

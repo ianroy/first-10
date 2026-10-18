@@ -12,8 +12,8 @@
 # AGENTS.md
 
 - All AI calls go through `generateAI` in `src/lib/ai.functions.ts` (one server function, `kind` switch, strict JSON schema, OpenRouter chat completions via OPENROUTER_API_KEY) — keeps prompts and the key server-side in one place.
-- Each user has one project (first row); every app table carries `user_id` + `project_id` with an owner-only RLS policy — simple per-user isolation.
-- Signed-in pages live under `src/routes/_authenticated/` and wrap content in `RequireProject` + `AppShell` — consistent gating and mobile bottom nav.
+- Users may keep several owner-private projects. The authenticated ProjectSelectionProvider supplies the verified user id; selection is remembered per user, validated as a UUID and checked with owner-scoped queries/RLS. With no selected id, use the earliest project. Never silently fall back from a missing/foreign selected project. Scope query caches by user and project. Every private child app table carries `user_id` + `project_id` and owner-only access; this does not grant sharing or class access.
+- Signed-in pages live under `src/routes/_authenticated/` and normally wrap content in `RequireProject` + `AppShell`, with a desktop sidebar and mobile bottom nav. Setup and Account are authenticated recovery exceptions: Setup may create an idea, and Account must remain reachable when a selected project is unavailable. Account lists only the verified owner’s projects.
 - Stage unlocks are stored in `projects.stage`; manual checklist ticks and Stage 3 metrics live in `projects.checklist` JSON — avoids extra tables for small state.
 
 - Read `ProductSpec.md` first, then `FEATUREROADMAP_workplan.md` §0-§1 before doing any work; update the roadmap's state block before you stop.

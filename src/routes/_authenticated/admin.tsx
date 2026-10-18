@@ -9,7 +9,10 @@ import { getAdminSnapshot } from "@/lib/admin.functions";
 
 export const Route = createFileRoute("/_authenticated/admin")({
   head: () => ({
-    meta: [{ title: "Operations — First Ten" }, { name: "robots", content: "noindex, nofollow" }],
+    meta: [
+      { title: "Admin dashboard — First Ten" },
+      { name: "robots", content: "noindex, nofollow" },
+    ],
   }),
   component: () => <RequireProject>{() => <AdminPage />}</RequireProject>,
 });
@@ -27,7 +30,7 @@ function AdminPage() {
   });
   const snapshot = report.isError ? undefined : report.data;
   return (
-    <AppShell title="Operations">
+    <AppShell title="Admin dashboard">
       <div className="flex flex-wrap items-start justify-between gap-4">
         <div className="max-w-2xl">
           <p className="text-xs font-bold uppercase tracking-widest text-primary">

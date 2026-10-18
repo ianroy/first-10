@@ -1,4 +1,4 @@
-import { Navigate } from "@tanstack/react-router";
+import { Link, Navigate } from "@tanstack/react-router";
 import type { ReactNode } from "react";
 import { useProject, type Project } from "@/lib/data";
 import { CurrentProjectContext } from "@/lib/current-project";
@@ -25,6 +25,22 @@ export function RequireProject({ children }: { children: (p: Project) => ReactNo
         >
           Try again
         </button>
+        <p>
+          <Link
+            to="/account"
+            className="mt-4 inline-flex min-h-11 items-center font-semibold underline underline-offset-4"
+          >
+            Account &amp; saved work
+          </Link>
+        </p>
+        <p>
+          <Link
+            to="/account"
+            className="mt-4 inline-flex min-h-11 items-center font-semibold underline underline-offset-4"
+          >
+            Account & saved work
+          </Link>
+        </p>
       </div>
     );
   if (!data) return <Navigate to="/setup" />;

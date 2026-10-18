@@ -21,6 +21,9 @@ const OTHER_PATHS = [
   "/interview",
   "/learnings",
   "/outreach",
+  "/teacher",
+  "/admin",
+  "/account",
   "/settings",
 ];
 

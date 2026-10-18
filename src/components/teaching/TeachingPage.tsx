@@ -42,6 +42,9 @@ export function TeachingPage() {
           <Link to="/demo" className="inline-flex min-h-11 items-center rounded-md">
             Explore the example
           </Link>
+          <Link to="/teacher" className="inline-flex min-h-11 items-center rounded-md">
+            Plan my class
+          </Link>
           <a href="/pitch/index.html" className="inline-flex min-h-11 items-center rounded-md">
             The short pitch
           </a>
@@ -234,7 +237,8 @@ export function TeachingPage() {
             </a>
           </div>
           <p className="mt-4 text-xs">
-            Assignment available now. The full in-app Marketing Lab is planned.
+            Assignment and manual saved Marketing Lab available now. Dedicated channel/content AI
+            for private student work remains planned.
           </p>
         </section>
 

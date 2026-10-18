@@ -326,14 +326,69 @@ export type Database = {
         };
         Relationships: [];
       };
+      teacher_plans: {
+        Row: {
+          created_at: string;
+          document: NonNullable<Json>;
+          id: string;
+          last_mutation_hash: string;
+          last_mutation_id: string;
+          project_id: string;
+          revision: number;
+          updated_at: string;
+          user_id: string;
+        };
+        ComputedFields: never;
+        Insert: {
+          created_at?: string;
+          document: NonNullable<Json>;
+          id?: string;
+          last_mutation_hash: string;
+          last_mutation_id: string;
+          project_id: string;
+          revision?: number;
+          updated_at?: string;
+          user_id?: string;
+        };
+        Update: {
+          created_at?: string;
+          document?: NonNullable<Json>;
+          id?: string;
+          last_mutation_hash?: string;
+          last_mutation_id?: string;
+          project_id?: string;
+          revision?: number;
+          updated_at?: string;
+          user_id?: string;
+        };
+        Relationships: [
+          {
+            foreignKeyName: "teacher_plans_project_id_fkey";
+            columns: ["project_id", "user_id"];
+            isOneToOne: false;
+            referencedRelation: "projects";
+            referencedColumns: ["id", "user_id"];
+          },
+        ];
+      };
     };
     Views: {
       [_ in never]: never;
     };
     Functions: {
+      reserve_demo_ai: { Args: { p_project_id: string; p_request_id: string }; Returns: Json };
       save_marketing_plan: {
         Args: {
           p_complete_student_first: boolean;
+          p_document: Json;
+          p_expected_revision: number;
+          p_mutation_id: string;
+          p_project_id: string;
+        };
+        Returns: Json;
+      };
+      save_teacher_plan: {
+        Args: {
           p_document: Json;
           p_expected_revision: number;
           p_mutation_id: string;

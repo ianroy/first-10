@@ -16,6 +16,38 @@ beforeEach(() => {
   auth.onAuthStateChange.mockReturnValue({ data: { subscription: { unsubscribe: vi.fn() } } });
 });
 afterEach(cleanup);
+it("keeps sign-in available for an existing account instead of redirecting into setup", async () => {
+  auth.getSession.mockResolvedValue({ data: { session: { user: { id: "ordinary-user" } } } });
+  renderPage(AuthPage, "/auth");
+  expect(await screen.findByText(/An account is already signed in/)).toBeInTheDocument();
+  expect(screen.getByLabelText("Email or demo username")).toBeInTheDocument();
+  expect(screen.queryByText("at /dashboard")).not.toBeInTheDocument();
+});
+it.each([
+  ["Admin", "/admin"],
+  ["Educator", "/teacher"],
+  ["Student", "/dashboard"],
+])(
+  "opens the selected %s dashboard after signing into the seeded presenter account",
+  async (role, destination) => {
+    const userId = "f1d00000-0000-4000-8000-000000000001";
+    auth.signInWithPassword.mockResolvedValue({ data: { user: { id: userId } }, error: null });
+    renderPage(AuthPage, "/auth");
+    await screen.findByRole("heading", { name: "Continue your learning" });
+    fireEvent.click(screen.getByRole("button", { name: role }));
+    fireEvent.change(screen.getByLabelText("Email or demo username"), {
+      target: { value: "ianroy" },
+    });
+    fireEvent.change(screen.getByLabelText("Password", { exact: true }), {
+      target: { value: "test-secret" },
+    });
+    fireEvent.submit(screen.getByLabelText("Password", { exact: true }).closest("form")!);
+    expect(await screen.findByText(`at ${destination}`)).toBeInTheDocument();
+    expect(localStorage.getItem(`firstten:selected-project:${userId}`)).toBe(
+      "f1d00000-0000-4000-8000-000000000010",
+    );
+  },
+);
 it("uses the dedicated demo identity for username sign-in and retains errors without exposing a password", async () => {
   auth.signInWithPassword.mockResolvedValue({ error: new Error("Invalid login credentials") });
   renderPage(AuthPage, "/auth");
@@ -53,7 +85,7 @@ it("creates ordinary accounts with email and no client-provided admin role", asy
     expect(auth.signUp).toHaveBeenCalledWith({
       email: "student@example.test",
       password: "test-secret",
-      options: { emailRedirectTo: `${window.location.origin}/auth` },
+      options: { emailRedirectTo: `${window.location.origin}/auth?callback=true&view=student` },
     }),
   );
   expect(await screen.findByRole("status")).toHaveTextContent("Check your inbox");
@@ -75,7 +107,7 @@ it("keeps the password-free email link and public example available", async () =
   await waitFor(() =>
     expect(auth.signInWithOtp).toHaveBeenCalledWith({
       email: "student@example.test",
-      options: { emailRedirectTo: `${window.location.origin}/auth` },
+      options: { emailRedirectTo: `${window.location.origin}/auth?callback=true&view=student` },
     }),
   );
 });

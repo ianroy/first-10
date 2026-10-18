@@ -1,11 +1,21 @@
-import { createFileRoute, Link, useNavigate } from "@tanstack/react-router";
-import { useEffect, useState } from "react";
+import { createFileRoute, Link, useNavigate, useSearch } from "@tanstack/react-router";
+import { useCallback, useEffect, useState } from "react";
+import { useQueryClient } from "@tanstack/react-query";
+import { selectionStorageKey } from "@/lib/project-selection";
 import { supabase } from "@/integrations/supabase/client";
 import { Button } from "@/components/ui/button";
 import { BrandLogo } from "@/components/BrandLogo";
 import { Input } from "@/components/ui/input";
 
+type View = "student" | "educator" | "admin";
+const destinations = { student: "/dashboard", educator: "/teacher", admin: "/admin" } as const;
+const isView = (value: unknown): value is View =>
+  value === "student" || value === "educator" || value === "admin";
 export const Route = createFileRoute("/auth")({
+  validateSearch: (search: Record<string, unknown>): { view?: View; callback?: boolean } => ({
+    ...(isView(search["view"]) ? { view: search["view"] } : {}),
+    ...(search["callback"] === true || search["callback"] === "true" ? { callback: true } : {}),
+  }),
   head: () => ({
     meta: [
       { title: "Sign in — First Ten" },
@@ -23,6 +33,27 @@ export const Route = createFileRoute("/auth")({
 
 export function AuthPage() {
   const navigate = useNavigate();
+  const queryClient = useQueryClient();
+  const search = useSearch({ strict: false }) as { view?: View; callback?: boolean };
+  const [view, setView] = useState<View>(search.view ?? "student");
+  const [existingUser, setExistingUser] = useState<{ id: string; demo: boolean } | null>(null);
+  const openView = useCallback(
+    (target: View, userId?: string) => {
+      if (userId === "f1d00000-0000-4000-8000-000000000001") {
+        try {
+          window.localStorage.setItem(
+            selectionStorageKey(userId),
+            "f1d00000-0000-4000-8000-000000000010",
+          );
+        } catch {
+          /* Selection remains available through Account. */
+        }
+      }
+      queryClient.clear();
+      void navigate({ to: destinations[target] });
+    },
+    [navigate, queryClient],
+  );
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [mode, setMode] = useState<"password" | "signup" | "link">("password");
@@ -30,12 +61,39 @@ export function AuthPage() {
   const [busy, setBusy] = useState(false);
   const [err, setErr] = useState("");
   useEffect(() => {
-    supabase.auth.getSession().then(({ data }) => data.session && navigate({ to: "/dashboard" }));
-    const { data } = supabase.auth.onAuthStateChange(
-      (_e, session) => session && navigate({ to: "/dashboard" }),
-    );
-    return () => data.subscription.unsubscribe();
-  }, [navigate]);
+    let active = true;
+    const emailCallback =
+      search.callback === true ||
+      /(?:access_token|code|token_hash)=/.test(window.location.hash + window.location.search);
+    const showSession = (
+      session: { user: { id: string; app_metadata?: Record<string, unknown> } } | null,
+    ) => {
+      if (!active) return;
+      setExistingUser(
+        session
+          ? {
+              id: session.user.id,
+              demo:
+                session.user.id === "f1d00000-0000-4000-8000-000000000001" &&
+                session.user.app_metadata?.["synthetic"] === true,
+            }
+          : null,
+      );
+      if (emailCallback && session) {
+        openView(search.view ?? "student", session.user.id);
+      }
+    };
+    void supabase.auth.getSession().then(({ data }) => showSession(data.session));
+    const { data } = supabase.auth.onAuthStateChange((event, session) => {
+      showSession(session);
+      if (event === "SIGNED_OUT") setExistingUser(null);
+    });
+    return () => {
+      active = false;
+      data.subscription.unsubscribe();
+    };
+  }, [openView, search.callback, search.view]);
+
   return (
     <div className="mx-auto grid min-h-screen max-w-6xl items-center gap-12 px-6 py-12 lg:grid-cols-2 lg:gap-20">
       <div>
@@ -64,6 +122,43 @@ export function AuthPage() {
         <p className="mt-2 text-sm text-muted-foreground">
           Sign in, create an account, or use an email link.
         </p>
+        {existingUser && (
+          <div className="mt-5 rounded-xl border bg-secondary/40 p-4">
+            <p className="text-sm font-semibold">
+              {existingUser.demo
+                ? "Workshop demo account is signed in."
+                : "An account is already signed in. You can still use a different login below."}
+            </p>
+            {existingUser.demo ? (
+              <div className="mt-3 grid gap-2 sm:grid-cols-3">
+                {(
+                  [
+                    ["student", "Open student demo"],
+                    ["educator", "Open educator demo"],
+                    ["admin", "Open admin demo"],
+                  ] as const
+                ).map(([target, label]) => (
+                  <button
+                    key={target}
+                    type="button"
+                    className="min-h-11 rounded-lg border bg-card px-2 text-xs font-semibold"
+                    onClick={() => openView(target, existingUser.id)}
+                  >
+                    {label}
+                  </button>
+                ))}
+              </div>
+            ) : (
+              <button
+                type="button"
+                className="mt-2 min-h-11 text-sm font-semibold underline"
+                onClick={() => openView(view, existingUser.id)}
+              >
+                Continue my workspace
+              </button>
+            )}
+          </div>
+        )}
         {sent ? (
           <div
             role="status"
@@ -93,7 +188,9 @@ export function AuthPage() {
                 if (mode === "link") {
                   const { error } = await supabase.auth.signInWithOtp({
                     email: address,
-                    options: { emailRedirectTo: `${window.location.origin}/auth` },
+                    options: {
+                      emailRedirectTo: `${window.location.origin}/auth?callback=true&view=${view}`,
+                    },
                   });
                   if (error) throw error;
                   setSent(true);
@@ -101,18 +198,20 @@ export function AuthPage() {
                   const { data, error } = await supabase.auth.signUp({
                     email: email.trim(),
                     password,
-                    options: { emailRedirectTo: `${window.location.origin}/auth` },
+                    options: {
+                      emailRedirectTo: `${window.location.origin}/auth?callback=true&view=${view === "admin" ? "student" : view}`,
+                    },
                   });
                   if (error) throw error;
-                  if (data.session) navigate({ to: "/dashboard" });
+                  if (data.session) openView(view === "admin" ? "student" : view, data.user?.id);
                   else setSent(true);
                 } else {
-                  const { error } = await supabase.auth.signInWithPassword({
+                  const { data, error } = await supabase.auth.signInWithPassword({
                     email: address,
                     password,
                   });
                   if (error) throw error;
-                  navigate({ to: "/dashboard" });
+                  openView(view, data.user?.id);
                 }
               } catch (error) {
                 setErr(
@@ -150,6 +249,46 @@ export function AuthPage() {
                 </button>
               ))}
             </div>
+            {mode === "password" && (
+              <fieldset className="rounded-xl border p-3">
+                <legend className="px-1 text-xs font-semibold">Choose the dashboard to open</legend>
+                <div className="grid grid-cols-3 gap-2">
+                  {(
+                    [
+                      ["student", "Student"],
+                      ["educator", "Educator"],
+                      ["admin", "Admin"],
+                    ] as const
+                  ).map(([target, label]) => (
+                    <button
+                      key={target}
+                      type="button"
+                      disabled={busy}
+                      aria-pressed={view === target}
+                      onClick={() => setView(target)}
+                      className={`min-h-11 rounded-lg px-2 text-sm font-semibold ${view === target ? "bg-primary text-primary-foreground" : "bg-muted"}`}
+                    >
+                      {label}
+                    </button>
+                  ))}
+                </div>
+                <button
+                  type="button"
+                  className="mt-3 min-h-11 text-sm font-semibold underline underline-offset-4"
+                  onClick={() => {
+                    setEmail("ianroy");
+                    setPassword("");
+                    setMode("password");
+                  }}
+                >
+                  Use workshop demo login
+                </button>
+                <p className="text-xs leading-relaxed text-muted-foreground">
+                  The presenter account opens all three demo views. New accounts have private
+                  student and lesson-planning tools; admin access requires a server-assigned grant.
+                </p>
+              </fieldset>
+            )}
             <label htmlFor="signin-email" className="block text-sm font-semibold">
               {mode === "password" ? "Email or demo username" : "Your email"}
             </label>
