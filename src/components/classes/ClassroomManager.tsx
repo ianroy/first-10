@@ -19,6 +19,7 @@ import {
 import type { z } from "zod";
 import { EntryLink } from "./EntryLink";
 import { TeacherGuestSubmissions } from "./TeacherGuestSubmissions";
+import { TeacherMarketingSubmissions } from "./TeacherMarketingSubmissions";
 import { AccountSubmissionWorkspace } from "./AccountSubmissionWorkspace";
 import { SubmissionList } from "./SubmissionList";
 import { SubmittedSnapshotExport } from "@/components/export/SubmittedSnapshotExport";
@@ -493,6 +494,7 @@ function ClassDetailPanel({
                 />
               )}
               <TeacherGuestSubmissions userId={userId} classId={classId} />
+              <TeacherMarketingSubmissions userId={userId} classId={classId} />
             </>
           )}
           {detail.role !== "student" && (

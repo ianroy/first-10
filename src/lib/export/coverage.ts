@@ -1,6 +1,33 @@
 /** Every new learning activity must register a named PDF adapter and explicit source boundary here. */
 export const ACTIVITY_EXPORT_COVERAGE = [
   {
+    id: "guest-marketing-submission-preview",
+    adapter: "marketingPreviewActivities",
+    source: "src/components/guest-marketing/ReviewedMarketingHandoff.tsx",
+    status: "mounted",
+    scope: "guest",
+    granularity:
+      "Each selected/redacted private Marketing Lab preview; fresh exact preview authorization before generation and delivery, no teacher grant",
+  },
+  {
+    id: "guest-marketing-reviewed-submission",
+    adapter: "marketingSubmissionActivities",
+    source: "src/components/guest-marketing/ReviewedMarketingHandoff.tsx",
+    status: "mounted",
+    scope: "guest",
+    granularity:
+      "Each publishing guest's immutable authored copy, including withdrawn copies while current guest access permits; no raw plan or teammate access",
+  },
+  {
+    id: "teacher-guest-marketing-submission",
+    adapter: "marketingSubmissionActivities",
+    source: "src/components/classes/TeacherMarketingSubmissions.tsx",
+    status: "mounted",
+    scope: "submitted-snapshot",
+    granularity:
+      "Each deliberately submitted selected Marketing Lab teacher copy; fresh exact recipient eligibility before generation and delivery",
+  },
+  {
     id: "guest-marketing-lab",
     adapter: "guestMarketingActivities",
     source: "src/components/guest-marketing/GuestMarketingWorkspace.tsx",
@@ -276,7 +303,7 @@ export const ACTIVITY_EXPORT_COVERAGE = [
   },
 ] as const;
 export const PENDING_EXPORT_CAPABILITIES = [
-  "Guest-to-account continuity and reviewed teacher handoff for guest Marketing Lab",
+  "Guest-to-account continuity",
   "Teacher-authorized student/team portfolio bundles",
   "Shared collaborative activities and permission-aware export selection",
   "New AI-assisted discovery/hypothesis/bias-map/script activities (DISC-002/003); the manual cycle already exports",

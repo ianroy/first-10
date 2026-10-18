@@ -1,0 +1,36 @@
+{
+  "date": "2026-10-18",
+  "phase": "integrated_and_schema_applied_live_browser_pending",
+  "sources": {
+    "supabase/migrations/20261018024000_guest_marketing_handoffs.sql": "9bd05330ef36dc72109419b2b9dcc297242cace0468d7a816b16d8e0a48e3634",
+    "src/tests/guest-marketing-handoff/database-rehearsal.mjs": "b78558506ed0a2b3c9ee0e233add2847e084403ee861c1ad218eb0e0aa213981",
+    "src/tests/guest-marketing-handoff/races.mjs": "fc39343d99ad6794d23062b16c2616e90ecd8d8e7be02177433a3bcd49e15a63",
+    "supabase/tests/guest-marketing-handoff.sql": "0f9cc9c24b0aa17e786636a435f3d824074561ddf00b11c4f796f06e31945738"
+  },
+  "actualSql": {
+    "assertions": 1810,
+    "failures": 0,
+    "knownGaps": 0,
+    "validPlan": true,
+    "rollbackVerified": true,
+    "actualDtoChecks": 8,
+    "observedRaces": 6,
+    "cloneDroppedAndAbsenceVerified": true
+  },
+  "sourceDatabase": "Dedicated First Ten55322; schema-only clone no source content writes during rehearsal. Exact local24 application afterward.",
+  "hostedApply": "Normal dryrun only24/no seeds/roles, normal24 application complete.",
+  "rootApp": {
+    "passed": 1107,
+    "existingSkips": 11,
+    "typecheck": "pass",
+    "lintErrors": 0,
+    "existingLintWarnings": 6,
+    "vercelBuild": "pass"
+  },
+  "limitations": [
+    "First clone stopped on withdrawal local/query alias collision; cleaned and fixed before passing second rehearsal.",
+    "Class byte and thread caps implemented; no independent exhaustive class-cap stress test claimed.",
+    "No paid AI calls, source teacher access, automatic outreach or actual customer research.",
+    "Live teacher/author/withdrawal rehearsal still pending publication."
+  ]
+}

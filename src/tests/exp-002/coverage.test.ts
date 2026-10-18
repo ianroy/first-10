@@ -8,6 +8,7 @@ import * as discovery from "@/lib/export/discovery-adapters";
 import * as drafts from "@/lib/export/interview-draft-adapters";
 import * as publicContext from "@/lib/export/public-context-adapters";
 import * as guestMarketing from "@/lib/guest-marketing/pdf-adapters";
+import * as marketingHandoff from "@/lib/guest-marketing/handoff/pdf-adapters";
 import * as guest from "@/lib/export/guest-activity-adapters";
 import * as submissions from "@/lib/export/submission-adapters";
 it("binds every mounted activity inventory entry to a real pure adapter and source mount", () => {
@@ -21,6 +22,7 @@ it("binds every mounted activity inventory entry to a real pure adapter and sour
     ...submissions,
     ...guest,
     ...guestMarketing,
+    ...marketingHandoff,
   };
   expect(new Set(ACTIVITY_EXPORT_COVERAGE.map((r) => r.id)).size).toBe(
     ACTIVITY_EXPORT_COVERAGE.length,

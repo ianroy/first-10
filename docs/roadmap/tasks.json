@@ -3739,7 +3739,7 @@
       "id": "WS-003",
       "title": "Build the personal workspace panel",
       "phase": "P3",
-      "status": "in_progress",
+      "status": "complete",
       "owner": "agent",
       "size": "S",
       "kind": "implementation",
@@ -3806,33 +3806,35 @@
         {
           "date": "2026-10-18",
           "text": "Source 0c8c0f4 integrated and routeTree regenerated. Root combined 1083 app tests pass (11 existing skips), typecheck and build pass; full lint has zero errors and six pre-existing warnings. Publishing and actual owner workspace resume/switch rehearsal next. Genuine shared Design discovery remains COL002.s4, not an inferred project grant."
+        },
+        {
+          "date": "2026-10-18",
+          "text": "Complete after deployed resume/switch, exact draft recovery, reversible archive/restore and reload checks. No invented sharing or validated progress. Account remains reachable for unavailable explicit selections. Both fictional ideas restored active; StudyLoop selected."
         }
       ],
-      "claim": {
-        "owner": "root",
-        "branch": "main",
-        "base_commit": "eb5bdb4",
-        "worktree": "/Users/ianroy/Library/CloudStorage/Dropbox/Apps by Ian/Babson AI Academy/First 10",
-        "started_at": "2026-10-18T23:47:00Z",
-        "lease_expires_at": "2026-10-19T03:00:00Z"
-      },
-      "completion_evidence": [],
+      "claim": null,
+      "completion_evidence": [
+        "Source0c8c0f4 and route integration8c39dba; official Vercel build and regenerated routeTree, typecheck and zero lint errors (six existing warnings). Root1083 app tests pass/11 existing skips; 21 dedicated workspace tests.",
+        "Production8c39dba: Vercel success, GitHub check and isolated-rls jobs both success. Presenter workspace lists exactly two owner-private fictional ideas; CampusSwap resume shows separate questions/no incomplete draft, StudyLoop resume restores exact questions and revision3 note with completed count5 unchanged.",
+        "Live workspace archive/restore of fictional CampusSwap acknowledged retained work, active/archived counts updated correctly, StudyLoop remained selected. Reload restored both active ideas and selected StudyLoop. Proof /private/tmp/first-ten-pdf-qa/live-personal-workspace.png.",
+        "Verified-owner/missing/foreign/archive recovery and delayed-scope cases covered by existing focused tests. No live cross-account or separate-device claim; WS007 owns combined journey gate. Genuine shared Design discovery remains unfinished COL002.s4."
+      ],
       "subtasks": [
         {
           "id": "WS-003.s1",
-          "status": "in_progress",
+          "status": "complete",
           "instruction": "List verified owned projects with private-owner/status labels and truthful saved-activity metadata; explicitly distinguish unavailable shared-design discovery, delegated to COL-002.",
           "notes": []
         },
         {
           "id": "WS-003.s2",
-          "status": "in_progress",
+          "status": "complete",
           "instruction": "Add create/open/rename/archive/restore flows with clear confirmations and error recovery.",
           "notes": []
         },
         {
           "id": "WS-003.s3",
-          "status": "in_progress",
+          "status": "complete",
           "instruction": "Show resume destination and progress from authoritative data; explain private versus shared areas.",
           "notes": []
         }
@@ -4122,7 +4124,7 @@
       "id": "WS-007",
       "title": "Verify multi-project save and return journeys",
       "phase": "P3",
-      "status": "not_started",
+      "status": "in_progress",
       "owner": "agent",
       "size": "S",
       "kind": "gate",
@@ -4174,9 +4176,20 @@
         {
           "date": "2026-10-18",
           "text": "WS-008 now delivers the narrow single-owner multiple-idea selection/create/recovery subset. Preserve that working behavior when executing this broader lifecycle/membership/draft task; its own remaining acceptance and prerequisites are unchanged."
+        },
+        {
+          "date": "2026-10-18",
+          "text": "Claim combined journey verification after WS003 live completion and WS006 audited completion. Reuse released isolated worktree on fresh branch from8c39dba only after clean-state check. Scope only tests/workspace-journeys, tests/ws-007 and docs/qa/workspace-gate.md. First implement four-scope overlapping-name UI tests and design exact clone harness; no DB action until coordinator reviews pins/cleanup and24 integration. Existing mocks are not claimed as cross-device or live two-account testing."
         }
       ],
-      "claim": null,
+      "claim": {
+        "owner": "personal_workspace",
+        "branch": "codex/workspace-journeys-20261018",
+        "base_commit": "8c39dba",
+        "worktree": "/private/tmp/first-ten-personal-workspace",
+        "started_at": "2026-10-18T23:49:00Z",
+        "lease_expires_at": "2026-10-19T03:00:00Z"
+      },
       "completion_evidence": [],
       "subtasks": [
         {
@@ -10977,14 +10990,18 @@
         {
           "date": "2026-10-18",
           "text": "Guest Marketing Lab23 is live at eb5bdb4. Fictional private StudyLoop plan saved through revision5: two permission-needed physical/digital channels, unposted content, unsent outreach, zero-dollar/120-minute proposed test, unknown manual count and reflection. Reload/Open restored exact saved title; unsaved title survived studio switching and was reverted without saving. Outreach PDF reported two pages. No real customer result/contact/publication invented. Separate teacher selected-copy migration24 now in exact-pinned disposable-clone rehearsal after independent read-only guard/privacy review; no24 applied to source or hosted DB."
+        },
+        {
+          "date": "2026-10-18",
+          "text": "Teacher Marketing Lab handoff integrated b4d5b13/b3f75b1 plus root teacher mount/three PDF coverage adapters/official types24. Exact24 SHA9bd05330 passed disposable1810 SQL assertions/zero failures/gaps/validplan/rollback,8 actualDTO checks and6 observed races; failed prior clone alias collision fixed and both clones dropped/absence verified. Root1107 app tests pass/11 existing skips; typecheck, lint zeroerrors/sixexistingwarnings, Vercelbuild pass. Dedicated local24 applied after exact pin/port guard; normal hosted dryrun listed only24/no seeds/roles and normal24 application completed. Live author/teacher/withdrawal rehearsal after deployment remains next; broader parent scope remains under audit, not falsely completed."
         }
       ],
       "claim": {
-        "owner": "guest_marketing_handoff",
-        "branch": "codex/guest-marketing-handoff-20261018",
-        "base_commit": "eb5bdb4",
-        "worktree": "/private/tmp/first-ten-guest-marketing-handoff",
-        "started_at": "2026-10-18T23:40:00Z",
+        "owner": "root",
+        "branch": "main",
+        "base_commit": "8c39dba",
+        "worktree": "/Users/ianroy/Library/CloudStorage/Dropbox/Apps by Ian/Babson AI Academy/First 10",
+        "started_at": "2026-10-18T23:52:00Z",
         "lease_expires_at": "2026-10-19T03:00:00Z"
       },
       "completion_evidence": [],

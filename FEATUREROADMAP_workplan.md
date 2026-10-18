@@ -22,10 +22,10 @@ Statuses are `not_started`, `in_progress`, `blocked`, `complete`, `deferred`, `d
 current_iteration: 5
 current_stage: P1_foundation_with_parallel_P2_and_R0
 status: in_progress
-last_task_done: WS-006
+last_task_done: WS-003
 next_task: CLS-008
 next_parallel_wave: [CLS-008, WS-007, AN-002]
-active_claims: [CLS-008, WS-003]
+active_claims: [CLS-008, WS-007]
 research_gate: not_passed
 foundation_gate: not_passed
 realtime_go: pending
@@ -34,7 +34,7 @@ last_documentation_update: "2026-10-18: AI-002 complete; resumed lifecycle/admin
 resume_hint: >-
   Active goal: continue every feasible authorized item, verify, commit/push/deploy.
   Preserve the $25 total OpenRouter cap; no other paid services. No reset credits reported.
-  Hosted and dedicated local database55322 are through migration23. Never touch54322.
+  Hosted and dedicated local database55322 are through migration24. Never touch54322.
   Last live eb5bdb4 includes account recovery, owner discovery, archive enforcement,
   reviewed account and guest submissions, bounded public context, interview autosave,
   and both genuine guest studios. Guest Discovery revision7 and private Marketing Lab
@@ -53,15 +53,19 @@ resume_hint: >-
   unchanged. WS006 completion is complete by independent source/test audit of existing
   transactional WS004/005; actual nested consent-failure and overlapping race evidence
   is recorded precisely. No duplicate completion implementation or migration added.
-  WS003 owner workspace source0c8c0f4 is integrated with generated routeTree. Root1083
-  app tests pass, 11 existing skips; typecheck/build pass, lint zero errors/six existing
-  warnings. Publish and verify live workspace next; genuine shared Design discovery is
-  explicitly unfinished under COL002.s4.
+  WS003 owner workspace is complete and live at8c39dba. Both CIjobs and Vercel pass.
+  Live two-idea switch/resume/exactrevision3, CampusSwap archive/restore and reload pass;
+  both ideas remain active and StudyLoop selected. Shared Design discovery remains COL002.s4.
+  WS007 is claimed on an isolated branch for combined four-scope request/recovery checks;
+  no new DB action without exact clone-harness review.
   Guest Marketing Lab23 passed1746 SQL assertions, six actual DTOs, five real races and
   clone rollback/drop/absence checks before normal local/hosted application. Live plan
   revision5 reload, unsaved studio-switch preservation and two-page outreach PDF pass.
-  CLS008 teacher selected-copy migration24 is in exact-pinned disposable-clone rehearsal
-  after independent guard/privacy review; no24 original or hosted application yet.
+  CLS008 teacher Marketing Lab selected-copy24 passed1810 SQL assertions, eight actual
+  DTO checks, six real races and clone cleanup. Root1107 app tests pass/11 existing skips;
+  typecheck/lint/build pass. Exact pinned24 applied to guarded local55322 and normally to
+  hosted after dryrun only24/no seeds/roles. Teacher mount, three PDF adapters and official
+  generated types integrated; publish and live teacher/withdrawal rehearsal next.
   AN001 event contract is complete; telemetry capture is not enabled. Guest-to-account
   transfer, complete teacher bundles, retention, collaboration, source-fenced AI and
   real research remain unfinished. Keep independent work moving around those gates.

@@ -955,6 +955,16 @@ export type Database = {
         };
         Returns: Json;
       };
+      confirm_guest_marketing_submission: {
+        Args: {
+          p_confirmed: boolean;
+          p_preview_hash: string;
+          p_preview_id: string;
+          p_request_id: string;
+          p_session: string;
+        };
+        Returns: Json;
+      };
       create_class: {
         Args: { p_class_id: string; p_document: Json; p_request_id: string };
         Returns: Json;
@@ -1041,6 +1051,14 @@ export type Database = {
         Args: { p_mode: string; p_session: string; p_snapshot_id: string };
         Returns: Json;
       };
+      get_guest_marketing_sharing_choice: {
+        Args: { p_plan_id: string; p_session: string };
+        Returns: Json;
+      };
+      get_guest_marketing_submission: {
+        Args: { p_session: string; p_snapshot_id: string };
+        Returns: Json;
+      };
       get_guest_session: { Args: { p_session: string }; Returns: Json };
       get_member_project_summary: { Args: { p_project_id: string }; Returns: Json };
       get_own_class_submission: { Args: { p_snapshot_id: string }; Returns: Json };
@@ -1054,6 +1072,10 @@ export type Database = {
         Returns: Json;
       };
       get_teacher_guest_learning_submission: {
+        Args: { p_class_id: string; p_snapshot_id: string };
+        Returns: Json;
+      };
+      get_teacher_guest_marketing_submission: {
         Args: { p_class_id: string; p_snapshot_id: string };
         Returns: Json;
       };
@@ -1071,6 +1093,10 @@ export type Database = {
         Returns: Json;
       };
       list_guest_marketing_plans: { Args: { p_session: string }; Returns: Json };
+      list_guest_marketing_submissions: {
+        Args: { p_cursor?: string; p_session: string };
+        Returns: Json;
+      };
       list_guest_teams: { Args: { p_class_id: string; p_cursor?: string }; Returns: Json };
       list_interview_drafts: { Args: { p_project_id: string }; Returns: Json };
       list_my_classes: { Args: { p_cursor?: string }; Returns: Json };
@@ -1092,6 +1118,10 @@ export type Database = {
         Args: { p_assignment_id?: string; p_class_id: string; p_cursor?: string };
         Returns: Json;
       };
+      list_teacher_guest_marketing_submissions: {
+        Args: { p_assignment_id?: string; p_class_id: string; p_cursor?: string };
+        Returns: Json;
+      };
       load_discovery_workspace: { Args: { p_project_id: string }; Returns: Json };
       load_guest_learning_activity: {
         Args: { p_activity_id: string; p_session: string };
@@ -1102,6 +1132,10 @@ export type Database = {
       manage_guest_session: { Args: { p_operation: string; p_session: string }; Returns: Json };
       preview_class_submission: { Args: { p_document: Json }; Returns: Json };
       preview_guest_learning_submission: {
+        Args: { p_document: Json; p_session: string };
+        Returns: Json;
+      };
+      preview_guest_marketing_submission: {
         Args: { p_document: Json; p_session: string };
         Returns: Json;
       };
@@ -1241,6 +1275,16 @@ export type Database = {
         };
         Returns: Json;
       };
+      save_guest_marketing_sharing_choice: {
+        Args: {
+          p_choice: string;
+          p_expected_revision: number;
+          p_plan_id: string;
+          p_request_id: string;
+          p_session: string;
+        };
+        Returns: Json;
+      };
       save_interview_draft: {
         Args: {
           p_contact_id: string;
@@ -1365,6 +1409,10 @@ export type Database = {
         Returns: Json;
       };
       withdraw_guest_learning_submission: {
+        Args: { p_request_id: string; p_session: string; p_snapshot_id: string };
+        Returns: Json;
+      };
+      withdraw_guest_marketing_submission: {
         Args: { p_request_id: string; p_session: string; p_snapshot_id: string };
         Returns: Json;
       };
