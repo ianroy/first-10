@@ -22,47 +22,36 @@ Statuses are `not_started`, `in_progress`, `blocked`, `complete`, `deferred`, `d
 current_iteration: 5
 current_stage: P1_foundation_with_parallel_P2_and_R0
 status: in_progress
-last_task_done: AI-004
-next_task: DISC-001
-next_parallel_wave: [CLS-001, AI-007, DISC-001]
-active_claims: [AI-007, CLS-001, DISC-001]
+last_task_done: CLS-001
+next_task: WS-004
+next_parallel_wave: [CLS-007, AI-007, WS-004]
+active_claims: [AI-007, CLS-007, WS-004]
 research_gate: not_passed
 foundation_gate: not_passed
 realtime_go: pending
 last_updated: 2026-10-18
 last_documentation_update: "2026-10-18: AI-002 complete; resumed lifecycle/admin parallel work; added FERPA-first account-free class/hackathon spaces and PDF export of every activity/team."
 resume_hint: >-
-  Owner resumed all roadmap work and added FERPA-first no-account class/hackathon spaces
-  plus PDF of every activity/team. New main student framework: idea, falsifiable hypothesis,
-  adjacent hypotheses, fivepeople/bias map, editable printed script, interviews/results/nextsteps.
-  DISC001/002/003 and CTX001 also connect reviewed website/GitHub/pasted context. Registry141tasks; guest source/capability/export/retention
-  contract reviewed with no remaining design contradiction, not institutional approval.
-  AI002 complete: persisted origins and owner metadata; actual synthetic question save/reload
-  and two-connection atomic outreach rehearsal passed. Extra call reported0.004239USD.
-  WS001 and SEC006 foundations integrated with official types;794real SQL assertions and
-  real lifecycle CAS race pass;437app tests/typecheck/lint/build pass. Pitch script lint fixed.
-  Exact09000/10000 hosted dryrun reviewed and normal apply succeeded. No automatic admin grant.
-  Archive marker is recoverable metadata; WS009 owns eventual ordinary-write freeze.
-  EXP001 integrated91e5a4d: actual local PDF engine with frozen preview/select/redact;
-  two/sevenpage generatedPDFs visually inspected.463combined app tests/typecheck/lint/build pass.
-  AI003 offline improvements integrated43c8b2e; paid adapter still blocked on bounded budget.
-  WS002 integrated0e33ea9 with455worker tests/typecheck/lint/build; deployed journey pending.
-  PRV001 integrated75ab467 plus synthetic-key tests and immutableevalv3;935combinedrealSQL
-  passwithrollback through12000. Hosted11000/12000 reviewed dryrun and normalapply both succeeded.
-  EXP002 integrated currentactivityexports plus rootdesktopmounts;564combinedapptests,
-  typecheck/lint/build pass.35adapterPDFpages inspected. Actualproduction2pageinterviewscript PDF downloaded/renderedandinspected; all9questions+origin.
-  SEC005 completecef1ad9: realcompetingacceptance/replay passed;fixturesabsent/flagrestored.
-  CLS001 building real class/enrollment/guest resources, independent review fixes pending beforeapply.
-  AI004 complete: f489e82/06fc95d/143d94d, immutableevalv4 preserves historicalartifacts.
-  Generalpaid routes disabled; originalfixedcasecarveout preserved via reviewednarrowpolicy.
-  DISC001 integrated47a82bc plus rootNav/dashboard/savedportfolio/PDFcoverage; realoverlapping
-  save/replay/staleadoption races pass with fixtureabsenceverified.76newSQL/1073combinedrollback
-  assertions pass;661apptests/69files,typecheck/build pass. Hosted13000/14000 reviewednormalapply
-  succeeded, no seeds/roles/datadeletes/providercalls. ProductionUIjourney pending.
-  AI007 worker implements boundedwhole-record authorizedsource context; noJSONslicing/newpaidkinds.
-  WS004 interviewdraft persistence design underway read-only untilDISCclaimcloses.
-  Existing Stage2 fictional marketing plan revision7 and private teaching planner persist.
-  Guest classrooms, all activity PDFs, general AI budgets, sharing/realtime remain unfinished.
+  Owner resumed full roadmap; current priorities FERPA-first no-account class spaces,
+  PDFs for every activity/team and the seven-step hypothesis-to-interview learning cycle.
+  DISC001 complete47a82bc/22ff272: live manualcycle saved/reloadedfictionalStudyLooprev7,
+  firsthypothesis/fivepeople/biasmap/script/context/observations/decision; exactscriptworksheet
+  previewgenerated4pages. Existing interviewquestions/count preserved. AIfeedback/retrieval pending.
+  AI004 completef489e82/06fc95d/143d94d with immutableevalv4. Hosted13/14 normalapplydone;
+  generalAI disabled with no routes/allowances/openingreview. Originalfixedcase1USDcarveout
+  preserved via narrowlyreviewed policy; no paidcalls inthisphase.
+  CLS001 integrateda3c6cbd with rootdualinvite route/typeintegration.705apptests/71files,
+  1192SQLrollbackassertions,typecheck/lint/build pass; actualblocked-expiry anddiscoveryCAS
+  races pass, newfixtureabsenceverified.15000hosted reviewed normalapply succeeded.
+  Three workers: CLS007 guestprovision/entry18000; WS004 interviewdrafts16000;
+  AI007 bounded/fencedsourcecontext17000. Root serializes publication/apply16→17→18;
+  never publishhigherreservedmigrationbeforelowerfiles.22ff272 CIapp checkfailed only
+  late13-beforepublished14 orderingguard; RLSjobpassed andcurrentguardbase22passes.
+  No historicalfileedit/rename/gitrewriting. NewcommitCI mustbeverified.
+  Worker17 candidateapproved onlyschema-onlydisposablelocalclone, no mainapplyuntil16ready.
+  GeneralAI/modelquality, classguestactivities/submissions/review/sharing/retention remainunfinished.
+  PresenterfictionalStudyLoop andCampusSwap active; demo/lesson/pitch preserved.
+
 ```
 
 **Audit basis:** product source and documentation at `7006f87`, plus the concurrent team-credits commit `a2d69a3`, with repository research files rechecked. F-007 is now complete: [GitHub CI run 39092157827](https://github.com/ianroy/first-10/actions/runs/39092157827) succeeded for that commit. The earlier local typecheck, 17 tests, Vercel build and scoped lint results remain in history. Six existing lint warnings and generated `.vercel` scanning motivate OPS-001. A green code pipeline does not verify live auth, RLS, model quality, research outcomes or preview configuration.

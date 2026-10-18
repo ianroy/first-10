@@ -808,8 +808,9 @@ export function DiscoveryWorkspace({ project }: { project: Project }) {
                       Preserve this script version
                     </Button>
                     <p className="text-xs text-muted-foreground">
-                      Select a hypothesis first. Save workspace after preserving. Existing versions
-                      and completed interview answers stay unchanged.
+                      A script needs a selected hypothesis and at least one completed question. Save
+                      workspace after preserving. Existing versions and completed interview answers
+                      stay unchanged.
                     </p>
                   </>
                 )}
@@ -894,10 +895,10 @@ export function DiscoveryWorkspace({ project }: { project: Project }) {
                       </Button>
                     </div>
                     <p className="text-sm text-muted-foreground">
-                      Save the selected script first. Adoption explicitly replaces preparation
-                      questions only, after a confirmation. Add a saved contact in People if you
-                      want the existing Interview flow; paper interviews and manually reported
-                      observations in step 7 are also valid paths.
+                      After saving a script, adoption explicitly replaces preparation questions
+                      only, after a confirmation. Add a saved contact in People if you want the
+                      existing Interview flow; paper interviews and manually reported observations
+                      in step 7 are also valid paths.
                     </p>
                   </>
                 )}

@@ -2,7 +2,11 @@ import { createFileRoute, Link } from "@tanstack/react-router";
 import { useEffect, useRef, useState } from "react";
 import { supabase } from "@/integrations/supabase/client";
 import { acceptInvitation } from "@/lib/invitations.functions";
-import { invitationMessage, takeInvitationFragment } from "@/components/invitations/contracts";
+import {
+  invitationMessage,
+  takeScopedInvitationFragment,
+} from "@/components/invitations/contracts";
+import { ClassInvitationAcceptance } from "@/components/invitations/ClassInvitationAcceptance";
 import { BrandLogo } from "@/components/BrandLogo";
 
 export const Route = createFileRoute("/invite")({
@@ -13,7 +17,7 @@ export const Route = createFileRoute("/invite")({
   }),
   head: () => ({
     meta: [
-      { title: "Project invitation — First Ten" },
+      { title: "Private invitation — First Ten" },
       { name: "robots", content: "noindex,nofollow" },
       { name: "referrer", content: "no-referrer" },
     ],
@@ -21,7 +25,9 @@ export const Route = createFileRoute("/invite")({
   component: InvitationPage,
 });
 export function InvitationPage() {
-  const [token, setToken] = useState<string | null>(null);
+  const [capability, setCapability] =
+    useState<ReturnType<typeof takeScopedInvitationFragment>>(null);
+  const token = capability?.token ?? null;
   const [user, setUser] = useState<string | null>(null);
   const [ready, setReady] = useState(false);
   const [busy, setBusy] = useState(false);
@@ -34,11 +40,11 @@ export function InvitationPage() {
     mounted.current = true;
     if (!initialized.current) {
       initialized.current = true;
-      setToken(takeInvitationFragment(window.location, window.history));
+      setCapability(takeScopedInvitationFragment(window.location, window.history));
     }
     const replaceCapability = () => {
       generation.current++;
-      setToken(takeInvitationFragment(window.location, window.history));
+      setCapability(takeScopedInvitationFragment(window.location, window.history));
       setBusy(false);
       setMessage("");
     };
@@ -68,7 +74,7 @@ export function InvitationPage() {
         generation.current++;
         setUser(null);
         setMessage("Your account changed. Reopen the original invitation after signing in.");
-        setToken(null);
+        setCapability(null);
       }
     });
     return () => {
@@ -83,11 +89,13 @@ export function InvitationPage() {
       <Link to="/" aria-label="First Ten home">
         <BrandLogo className="h-10 w-auto" />
       </Link>
-      <h1 className="text-3xl font-bold">A project invitation</h1>
+      <h1 className="text-3xl font-bold">
+        {capability?.targetType === "class" ? "A class invitation" : "A project invitation"}
+      </h1>
       <p>
-        Invitations apply only to a named account and the shared project space. They never open
-        private interviews, contacts or other owner notes. Project collaboration is currently
-        disabled until its shared tools are ready.
+        Invitations apply only to the intended account and the named space. They never open private
+        interviews, contacts or other owner notes. Project collaboration remains disabled until its
+        shared tools are ready; class membership shares published instructions only.
       </p>
       {!ready ? (
         <p role="status">Checking your account…</p>
@@ -103,6 +111,8 @@ export function InvitationPage() {
         </div>
       ) : !token ? (
         <p>This invitation is unavailable. Reopen the complete link the project owner gave you.</p>
+      ) : capability?.targetType === "class" ? (
+        <ClassInvitationAcceptance key={`${user}:${token}`} token={token} />
       ) : (
         <button
           disabled={busy}
@@ -119,7 +129,7 @@ export function InvitationPage() {
                 ? `Invitation accepted as ${result.data.role}. Private owner notes remain private.`
                 : invitationMessage(result.code),
             );
-            if (result.ok) setToken(null);
+            if (result.ok) setCapability(null);
             setBusy(false);
           }}
         >

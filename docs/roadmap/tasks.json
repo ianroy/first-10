@@ -2388,7 +2388,12 @@
         "src/tests/ai-eval/fixtures.v5.json",
         "src/tests/ai-eval/README.md",
         "scripts/eval-ai.mjs",
-        "src/tests/ai-003/fixture-parity.test.ts"
+        "src/tests/ai-003/fixture-parity.test.ts",
+        "src/lib/ai/gateway.server.ts",
+        "src/lib/ai/budget.server.ts",
+        "src/tests/ai-004/**",
+        "src/tests/ai-002/**",
+        "src/tests/prv-001/**"
       ],
       "exclusive_locks": ["ai-entrypoint", "ai-context-schema"],
       "read_first": [
@@ -3781,7 +3786,7 @@
       "id": "WS-004",
       "title": "Persist versioned interview drafts",
       "phase": "P3",
-      "status": "not_started",
+      "status": "in_progress",
       "owner": "agent",
       "size": "S",
       "kind": "implementation",
@@ -3789,14 +3794,18 @@
       "depends_on": ["WS-002", "PRV-001"],
       "requires_decisions": [],
       "write_scope": [
-        "supabase/migrations/**",
-        "src/integrations/supabase/types.ts",
+        "supabase/migrations/20261018016000_interview_drafts.sql",
+        "src/lib/interview-drafts.ts",
         "src/lib/interview-drafts.functions.ts",
+        "src/components/interview-drafts/**",
+        "src/routes/_authenticated/interview.tsx",
+        "src/lib/export/interview-draft-adapters.ts",
         "src/tests/ws-004/**",
-        "src/lib/interview-drafts.functions.test.ts",
-        "supabase/tests/ws-004.sql"
+        "supabase/tests/ws-004.sql",
+        "docs/pedagogy/interview-drafts.md",
+        "src/tests/desktop-routes/workflows.test.tsx"
       ],
-      "exclusive_locks": ["database-schema", "generated-types"],
+      "exclusive_locks": ["interview-draft-schema", "interview-session-ui"],
       "read_first": [
         "ProductSpec.md",
         "FEATUREROADMAP_workplan.md",
@@ -3832,9 +3841,20 @@
         {
           "date": "2026-10-17",
           "text": "Scheduled by Iteration 5; no implementation or validation claimed."
+        },
+        {
+          "date": "2026-10-18",
+          "text": "Claimed after deployedDISCmanualcycle verified. Approved read-only design: exact questionsnapshot, private CAS saves/resume, separate processing choices, explicit atomic exactly-once completion via existing captureRPC, no completed counts/evidence beforecompletion. Forwardfix archival captureguard/pipeline-state preservation in16000. Rootfixes missedregenerateintent beforeworkerbranchsync. Rootserializes generatedtypes and15000→16000→17000 publication/apply; do not edit earlier migrations."
         }
       ],
-      "claim": null,
+      "claim": {
+        "owner": "plan_audit",
+        "branch": "codex/interview-drafts-20261018",
+        "base_commit": "0263cf3",
+        "worktree": "/private/tmp/first-ten-activity-pdf",
+        "started_at": "2026-10-18T16:06:53.445Z",
+        "lease_expires_at": "2026-10-18T19:06:53.446Z"
+      },
       "completion_evidence": [],
       "subtasks": [
         {
@@ -4513,7 +4533,7 @@
       "id": "CLS-001",
       "title": "Model classes, enrollment and explicit project association",
       "phase": "P4",
-      "status": "in_progress",
+      "status": "complete",
       "owner": "agent",
       "size": "S",
       "kind": "implementation",
@@ -4578,39 +4598,38 @@
         {
           "date": "2026-10-18",
           "text": "Claimed afterSEC005 verifiedrace. Teacher-owned classes/enrollment/assignments/projectassociation plus real guestresource schema; no fake auth/projectFK. Reserved15000; rootserializes local/hostedapply and officialtypes, workerrequiresdesignreview first. Root wires final UIlaterCLS007/CLS003; no automaticstudent/privateproject grants."
+        },
+        {
+          "date": "2026-10-18",
+          "text": "Core schema/API complete; class provision/guest UX continuesCLS007, submissions/review laterCLS002/003/008. Real guest principal/team resources are closed exceptions, not fake auth accounts/project IDs. Source timestamps now publish in order after prior13/14 ordering deviation; no historical edits/renames/rewrites."
         }
       ],
-      "claim": {
-        "owner": "lifecycle",
-        "branch": "codex/class-foundation-20261018",
-        "base_commit": "cef1ad9",
-        "worktree": "/private/tmp/first-ten-project-lifecycle",
-        "started_at": "2026-10-18T15:47:57.209Z",
-        "lease_expires_at": "2026-10-18T18:47:57.211Z"
-      },
-      "completion_evidence": [],
+      "claim": null,
+      "completion_evidence": [
+        "a3c6cbd (worker47a34fb): closed-RLS class/member/assignment/project-association and real guest-resource schema, strict authenticated DTO/RPCs, actual typed class invitations, terminal-safe revocation and post-lock wallclock expiry. Root integrated dual /invite parsing with before-auth fragment removal and explicit student alias acceptance. Worker621tests,1116SQL/rollback; root705tests/71files,1192combinedSQL/rollback,typecheck/lint/build pass. Actual blocked-expiry race grants/consumes/audits nothing and verifies newfixtureabsence. Reviewed15000 hash2ac0f152 localapply; hosted dryrun listed only15000 and normalapply succeeded. No guest entry, submitted content, privateprojectgrant, classAI or automaticretention claim."
+      ],
       "subtasks": [
         {
           "id": "CLS-001.s1",
-          "status": "not_started",
+          "status": "complete",
           "instruction": "Create teacher-owned classes, student enrollment and assignments with scoped role operations.",
           "notes": []
         },
         {
           "id": "CLS-001.s2",
-          "status": "not_started",
+          "status": "complete",
           "instruction": "Use explicit student-confirmed project association and separate class membership from project membership.",
           "notes": []
         },
         {
           "id": "CLS-001.s3",
-          "status": "not_started",
+          "status": "complete",
           "instruction": "Activate the SEC-005 class-invitation contract after class tables exist; test recipient binding, one-use/races, duplicate enrollment, teacher changes and leave/removal. Class join grants student enrollment only.",
           "notes": []
         },
         {
           "id": "CLS-001.s4",
-          "status": "not_started",
+          "status": "complete",
           "instruction": "Model guest principals/teams as real class-scoped resources with separate principal-private versus team capabilities; no invented auth user or project foreign key.",
           "notes": []
         }
@@ -10625,7 +10644,7 @@
       "id": "CLS-007",
       "title": "Teacher provisions class or hackathon spaces for account-free student entry",
       "phase": "P4",
-      "status": "not_started",
+      "status": "in_progress",
       "owner": "agent",
       "size": "M",
       "kind": "implementation",
@@ -10633,12 +10652,15 @@
       "depends_on": ["CLS-001", "SEC-005", "PRV-001", "FERPA-001"],
       "requires_decisions": [],
       "write_scope": [
-        "supabase/migrations/**",
+        "supabase/migrations/20261018018000_guest_class_entry.sql",
         "src/lib/guest-spaces/**",
         "src/lib/guest-spaces.functions.ts",
-        "src/routes/_authenticated/teacher.tsx",
+        "src/components/classes/**",
+        "src/routes/_authenticated/classes.tsx",
+        "src/routes/join.tsx",
         "src/tests/cls-007/**",
-        "supabase/tests/cls-007.sql"
+        "supabase/tests/cls-007.sql",
+        "docs/architecture/guest-class-entry.md"
       ],
       "exclusive_locks": ["cls-007-integration"],
       "read_first": [
@@ -10675,9 +10697,20 @@
         {
           "date": "2026-10-18",
           "text": "Owner explicitly added as core product value; preserve privacy boundaries and show status truthfully."
+        },
+        {
+          "date": "2026-10-18",
+          "text": "Claimed afterCLS001 foundation. Build real teacher class/hackathon provision UI outside RequireProject and no-account public entry, separate class-entry/team/principal-private capabilities, HttpOnly sessions and recoverable return, QR. No student emails or fake accounts; no private class/team content untilCLS008. Guest/class AI startsdisabled; retention schedule requested not enforced untilPRV003. Reserved18000; root publishes/applies15000→16000→17000→18000 in order and owns package locks/generatedtypes/routeTree/AppShell links."
         }
       ],
-      "claim": null,
+      "claim": {
+        "owner": "lifecycle",
+        "branch": "codex/guest-class-entry-20261018",
+        "base_commit": "0263cf3",
+        "worktree": "/private/tmp/first-ten-project-lifecycle",
+        "started_at": "2026-10-18T16:10:31.613Z",
+        "lease_expires_at": "2026-10-18T20:10:31.615Z"
+      },
       "completion_evidence": [],
       "subtasks": [
         {
@@ -11277,7 +11310,7 @@
       "id": "DISC-001",
       "title": "Build the student hypothesis-to-interview learning cycle",
       "phase": "P3",
-      "status": "in_progress",
+      "status": "complete",
       "owner": "agent",
       "size": "M",
       "kind": "implementation",
@@ -11337,31 +11370,26 @@
           "text": "Worker d797de0 integrated47a82bc; root mounted discovery navigation/dashboard and complete saved portfolio/coverage, officialtypes/routes. Actual overlapping save CAS and stale adoption races passed with same-intent replay no extra revision and exact fictionalfixturecleanup.76newSQL/1073combinedrollback checks;661apptests/typecheck/build pass. Hosted13000 applied by reviewed normalmigration; final production UI journey pending."
         }
       ],
-      "claim": {
-        "owner": "root-integration",
-        "branch": "main",
-        "base_commit": "47a82bc",
-        "worktree": "/Users/ianroy/Library/CloudStorage/Dropbox/Apps by Ian/Babson AI Academy/First 10",
-        "started_at": "2026-10-18T15:37:32.788710+00:00",
-        "lease_expires_at": "2026-10-18T17:37:32.788710+00:00"
-      },
-      "completion_evidence": [],
+      "claim": null,
+      "completion_evidence": [
+        "47a82bc +22ff272 (workerd797de0): private manual seven-step workspace, preserved hypotheses/scripts/context captures, irreversible context exclusion, CAS/idempotent saves and deliberate script adoption. Root661tests/typecheck/lint/build and1073SQL/rollback pass; actual overlapping save/replay/stale-adoption races pass with fixturecleanup. Hosted13000 normalapply; live desktop saved/reloaded fictionalStudyLoop revision7 with5mappedcontacts/biases, script1, reviewedcontext, linkedfictionalobservation and narrow/nexttest reflection. Existing interviewquestions/count unchanged. Live exactscript/blankworksheet frozenpreview generated4pages; actual worker2pagePDF rendered/inspected. AIfeedback/retrieval remain separate tasks."
+      ],
       "subtasks": [
         {
           "id": "DISC-001.s1",
-          "status": "in_progress",
+          "status": "complete",
           "instruction": "Persist versioned owner-scoped problem/solution framing, student-authored first falsifiable hypothesis, five reachable people and sampling-risk/mitigation map; preserve the original attempt before optional AI.",
           "notes": []
         },
         {
           "id": "DISC-001.s2",
-          "status": "not_started",
+          "status": "complete",
           "instruction": "Build the seven-step desktop journey with hypothesis pivots, editable manual scripts, saved/printed script and results-to-next-step links; preserve existing people/interview workflows without fabricated completion.",
           "notes": []
         },
         {
           "id": "DISC-001.s3",
-          "status": "not_started",
+          "status": "complete",
           "instruction": "Attach reviewed links and pasted context at any step with source type/retrieval state/permission labels; export every framework activity and include it in authorized saved portfolios.",
           "notes": []
         }

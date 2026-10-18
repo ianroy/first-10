@@ -57,6 +57,34 @@ beforeEach(() => {
 });
 afterEach(cleanup);
 describe("invitation review and one-time links", () => {
+  it("routes a stripped class fragment to explicit student enrollment without a project grant", async () => {
+    window.history.replaceState(null, "", `/invite?ignored=true#class-invite=${"d".repeat(64)}`);
+    h.getUser.mockImplementation(async () => {
+      expect(window.location.hash).toBe("");
+      expect(window.location.search).toBe("");
+      return { data: { user: { id: recipient } }, error: null };
+    });
+    h.accept.mockResolvedValue({
+      ok: true,
+      data: { classId: project, role: "student", membershipRevision: 1 },
+    });
+    render(<InvitationPage />);
+    const alias = await screen.findByLabelText("Your classroom alias");
+    expect(h.accept).not.toHaveBeenCalled();
+    expect(
+      screen.queryByRole("button", { name: "Accept project invitation" }),
+    ).not.toBeInTheDocument();
+    fireEvent.change(alias, { target: { value: "Team Cedar" } });
+    fireEvent.click(screen.getByRole("button", { name: "Accept class invitation" }));
+    await waitFor(() =>
+      expect(h.accept).toHaveBeenCalledWith({
+        data: { targetType: "class", token: "d".repeat(64), displayLabel: "Team Cedar" },
+      }),
+    );
+    expect(
+      await screen.findByText("Class joined. Your private projects remain private."),
+    ).toBeInTheDocument();
+  });
   it("strips fragment before authentication and never accepts automatically", async () => {
     window.history.replaceState(null, "", `/invite?tracking=ignored#invite=${"a".repeat(64)}`);
     h.getUser.mockImplementation(async () => {

@@ -3,6 +3,282 @@ export type Json = string | number | boolean | null | { [key: string]: Json | un
 export type Database = {
   public: {
     Tables: {
+      assignments: {
+        Row: {
+          class_id: string;
+          created_at: string;
+          due_at: string | null;
+          id: string;
+          instructions: string;
+          last_editor_id: string;
+          revision: number;
+          state: string;
+          title: string;
+          updated_at: string;
+          user_id: string;
+        };
+        ComputedFields: never;
+        Insert: {
+          class_id: string;
+          created_at?: string;
+          due_at?: string | null;
+          id?: string;
+          instructions?: string;
+          last_editor_id: string;
+          revision?: number;
+          state: string;
+          title: string;
+          updated_at?: string;
+          user_id: string;
+        };
+        Update: {
+          class_id?: string;
+          created_at?: string;
+          due_at?: string | null;
+          id?: string;
+          instructions?: string;
+          last_editor_id?: string;
+          revision?: number;
+          state?: string;
+          title?: string;
+          updated_at?: string;
+          user_id?: string;
+        };
+        Relationships: [
+          {
+            foreignKeyName: "assignments_class_id_fkey";
+            columns: ["class_id"];
+            isOneToOne: false;
+            referencedRelation: "classes";
+            referencedColumns: ["id"];
+          },
+        ];
+      };
+      class_guest_principals: {
+        Row: {
+          alias: string;
+          class_id: string;
+          created_at: string;
+          id: string;
+          issued_by: string;
+          revoked_at: string | null;
+          team_id: string;
+        };
+        ComputedFields: never;
+        Insert: {
+          alias: string;
+          class_id: string;
+          created_at?: string;
+          id?: string;
+          issued_by: string;
+          revoked_at?: string | null;
+          team_id: string;
+        };
+        Update: {
+          alias?: string;
+          class_id?: string;
+          created_at?: string;
+          id?: string;
+          issued_by?: string;
+          revoked_at?: string | null;
+          team_id?: string;
+        };
+        Relationships: [
+          {
+            foreignKeyName: "class_guest_principals_class_id_issued_by_fkey";
+            columns: ["class_id", "issued_by"];
+            isOneToOne: false;
+            referencedRelation: "classes";
+            referencedColumns: ["id", "user_id"];
+          },
+          {
+            foreignKeyName: "class_guest_principals_team_id_class_id_fkey";
+            columns: ["team_id", "class_id"];
+            isOneToOne: false;
+            referencedRelation: "class_teams";
+            referencedColumns: ["id", "class_id"];
+          },
+        ];
+      };
+      class_members: {
+        Row: {
+          class_id: string;
+          created_at: string;
+          created_by: string;
+          display_label: string;
+          id: string;
+          revision: number;
+          role: string;
+          state: string;
+          updated_at: string;
+          user_id: string;
+        };
+        ComputedFields: never;
+        Insert: {
+          class_id: string;
+          created_at?: string;
+          created_by: string;
+          display_label: string;
+          id?: string;
+          revision?: number;
+          role: string;
+          state?: string;
+          updated_at?: string;
+          user_id: string;
+        };
+        Update: {
+          class_id?: string;
+          created_at?: string;
+          created_by?: string;
+          display_label?: string;
+          id?: string;
+          revision?: number;
+          role?: string;
+          state?: string;
+          updated_at?: string;
+          user_id?: string;
+        };
+        Relationships: [
+          {
+            foreignKeyName: "class_members_class_id_created_by_fkey";
+            columns: ["class_id", "created_by"];
+            isOneToOne: false;
+            referencedRelation: "classes";
+            referencedColumns: ["id", "user_id"];
+          },
+        ];
+      };
+      class_project_links: {
+        Row: {
+          active: boolean;
+          class_id: string;
+          created_at: string;
+          id: string;
+          project_id: string;
+          revision: number;
+          updated_at: string;
+          user_id: string;
+        };
+        ComputedFields: never;
+        Insert: {
+          active?: boolean;
+          class_id: string;
+          created_at?: string;
+          id?: string;
+          project_id: string;
+          revision?: number;
+          updated_at?: string;
+          user_id: string;
+        };
+        Update: {
+          active?: boolean;
+          class_id?: string;
+          created_at?: string;
+          id?: string;
+          project_id?: string;
+          revision?: number;
+          updated_at?: string;
+          user_id?: string;
+        };
+        Relationships: [
+          {
+            foreignKeyName: "class_project_links_class_id_user_id_fkey";
+            columns: ["class_id", "user_id"];
+            isOneToOne: true;
+            referencedRelation: "class_members";
+            referencedColumns: ["class_id", "user_id"];
+          },
+          {
+            foreignKeyName: "class_project_links_project_id_user_id_fkey";
+            columns: ["project_id", "user_id"];
+            isOneToOne: false;
+            referencedRelation: "projects";
+            referencedColumns: ["id", "user_id"];
+          },
+        ];
+      };
+      class_teams: {
+        Row: {
+          alias: string;
+          archived_at: string | null;
+          class_id: string;
+          created_at: string;
+          id: string;
+          issued_by: string;
+        };
+        ComputedFields: never;
+        Insert: {
+          alias: string;
+          archived_at?: string | null;
+          class_id: string;
+          created_at?: string;
+          id?: string;
+          issued_by: string;
+        };
+        Update: {
+          alias?: string;
+          archived_at?: string | null;
+          class_id?: string;
+          created_at?: string;
+          id?: string;
+          issued_by?: string;
+        };
+        Relationships: [
+          {
+            foreignKeyName: "class_teams_class_id_issued_by_fkey";
+            columns: ["class_id", "issued_by"];
+            isOneToOne: false;
+            referencedRelation: "classes";
+            referencedColumns: ["id", "user_id"];
+          },
+        ];
+      };
+      classes: {
+        Row: {
+          access_expires_at: string;
+          ai_enabled: boolean;
+          archived_at: string | null;
+          created_at: string;
+          id: string;
+          instructions: string;
+          mode: string;
+          name: string;
+          retention_days: number;
+          revision: number;
+          updated_at: string;
+          user_id: string;
+        };
+        ComputedFields: never;
+        Insert: {
+          access_expires_at: string;
+          ai_enabled?: boolean;
+          archived_at?: string | null;
+          created_at?: string;
+          id?: string;
+          instructions?: string;
+          mode: string;
+          name: string;
+          retention_days?: number;
+          revision?: number;
+          updated_at?: string;
+          user_id: string;
+        };
+        Update: {
+          access_expires_at?: string;
+          ai_enabled?: boolean;
+          archived_at?: string | null;
+          created_at?: string;
+          id?: string;
+          instructions?: string;
+          mode?: string;
+          name?: string;
+          retention_days?: number;
+          revision?: number;
+          updated_at?: string;
+          user_id?: string;
+        };
+        Relationships: [];
+      };
       contacts: {
         Row: {
           created_at: string;
@@ -541,6 +817,10 @@ export type Database = {
       [_ in never]: never;
     };
     Functions: {
+      accept_class_invitation: {
+        Args: { p_display_label: string; p_token: string };
+        Returns: Json;
+      };
       accept_project_invitation: {
         Args: { p_target_type: string; p_token: string };
         Returns: Json;
@@ -555,7 +835,24 @@ export type Database = {
         };
         Returns: Json;
       };
+      associate_class_project: {
+        Args: {
+          p_class_id: string;
+          p_expected_revision: number;
+          p_project_id: string;
+          p_request_id: string;
+        };
+        Returns: Json;
+      };
       claim_ai_usage: { Args: { p_attempt_id: string; p_operation_id: string }; Returns: Json };
+      create_class: {
+        Args: { p_class_id: string; p_document: Json; p_request_id: string };
+        Returns: Json;
+      };
+      create_class_invitation: {
+        Args: { p_class_id: string; p_days: number; p_recipient_id: string; p_request_id: string };
+        Returns: Json;
+      };
       create_owned_project: {
         Args: {
           p_audience: string;
@@ -595,6 +892,7 @@ export type Database = {
         Returns: Json;
       };
       get_ai_processing_context: { Args: { p_kind: string; p_project_id: string }; Returns: Json };
+      get_class: { Args: { p_class_id: string }; Returns: Json };
       get_founding_partner_counts: { Args: Record<PropertyKey, never>; Returns: Json };
       get_member_project_summary: { Args: { p_project_id: string }; Returns: Json };
       get_platform_admin_authorization: { Args: Record<PropertyKey, never>; Returns: Json };
@@ -602,6 +900,14 @@ export type Database = {
         Args: { p_project_id: string; p_target_id: string; p_target_kind: string };
         Returns: Json;
       };
+      leave_class: {
+        Args: { p_class_id: string; p_expected_revision: number; p_request_id: string };
+        Returns: Json;
+      };
+      list_class_assignments: { Args: { p_class_id: string; p_cursor?: string }; Returns: Json };
+      list_class_invitations: { Args: { p_class_id: string; p_cursor?: string }; Returns: Json };
+      list_class_members: { Args: { p_class_id: string; p_cursor?: string }; Returns: Json };
+      list_my_classes: { Args: { p_cursor?: string }; Returns: Json };
       list_project_invitations: {
         Args: { p_cursor?: string; p_project_id: string };
         Returns: Json;
@@ -624,6 +930,15 @@ export type Database = {
         Args: { p_operation: string; p_outcome: string; p_request_id: string };
         Returns: string;
       };
+      remove_class_student: {
+        Args: {
+          p_class_id: string;
+          p_expected_revision: number;
+          p_membership_id: string;
+          p_request_id: string;
+        };
+        Returns: Json;
+      };
       reserve_ai_usage: {
         Args: {
           p_context_sha256: string;
@@ -636,6 +951,19 @@ export type Database = {
         Returns: Json;
       };
       reserve_demo_ai: { Args: { p_project_id: string; p_request_id: string }; Returns: Json };
+      revoke_class_invitation: {
+        Args: { p_class_id: string; p_invitation_id: string; p_request_id: string };
+        Returns: Json;
+      };
+      revoke_class_teacher: {
+        Args: {
+          p_class_id: string;
+          p_expected_revision: number;
+          p_membership_id: string;
+          p_request_id: string;
+        };
+        Returns: Json;
+      };
       revoke_project_invitation: {
         Args: { p_invitation_id: string; p_project_id: string; p_request_id: string };
         Returns: Json;
@@ -646,6 +974,16 @@ export type Database = {
           p_project_id: string;
           p_request_id: string;
           p_target_user_id: string;
+        };
+        Returns: Json;
+      };
+      save_class_assignment: {
+        Args: {
+          p_assignment_id: string;
+          p_class_id: string;
+          p_document: Json;
+          p_expected_revision: number;
+          p_request_id: string;
         };
         Returns: Json;
       };
@@ -701,6 +1039,26 @@ export type Database = {
         };
         Returns: Json;
       };
+      set_class_archived: {
+        Args: {
+          p_archived: boolean;
+          p_class_id: string;
+          p_expected_revision: number;
+          p_request_id: string;
+        };
+        Returns: Json;
+      };
+      set_class_teacher: {
+        Args: {
+          p_active: boolean;
+          p_class_id: string;
+          p_display_label: string;
+          p_expected_revision: number;
+          p_request_id: string;
+          p_target_user_id: string;
+        };
+        Returns: Json;
+      };
       set_owned_project_archived: {
         Args: {
           p_archived: boolean;
@@ -744,6 +1102,15 @@ export type Database = {
           p_output_valid: boolean;
           p_prompt_tokens: number;
           p_provider: string;
+        };
+        Returns: Json;
+      };
+      update_class: {
+        Args: {
+          p_class_id: string;
+          p_document: Json;
+          p_expected_revision: number;
+          p_request_id: string;
         };
         Returns: Json;
       };
