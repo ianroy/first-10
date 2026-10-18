@@ -1,6 +1,6 @@
 {
   "version": "first-ten-software-verification-v6",
-  "recorded_at": "2026-10-18T23:15:42.577Z",
+  "recorded_at": "2026-10-18T23:16:15.677Z",
   "fixture_sha256": "a71c3f6b9cd195205b9899a6f2e52f2c641cd3a5a895067716a898d916a7d34d",
   "source_sha256": {
     "src/lib/ai.functions.ts": "fb2a78d05d57d69d4bbd0ea2a6a21981ec62fbd07220fd99dc7bf281bdd29836",
@@ -53,10 +53,11 @@
     "source_database_changed": false,
     "hosted_changed": false,
     "provider_calls": 0,
-    "fixture_sha256_at_completed_run": "c10a625221460513983d8b2b7c04de901b78275d94ea152f09fdf0151c1b3cd3",
+    "fixture_sha256_at_completed_run": "a71c3f6b9cd195205b9899a6f2e52f2c641cd3a5a895067716a898d916a7d34d",
     "final_case_payload_sha256": "a8e67c475ef5f7427a9b1e8f5c422b655b686573a30d6db9d9bb02fd51458da3",
-    "final_metadata_repeat": "pending_function_cell_51",
-    "note": "The final fixture metadata changes only serving-source pins; all eight SQL case projections are unchanged. A matching final-metadata repeat is pending; not claimed complete."
+    "final_metadata_repeat": "passed",
+    "note": "Final exact-metadata guarded schema-only clone rehearsal passed all eight full actual permission-RPC JSON comparisons. Transaction rolled back; clone dropped and absence verified. The first repeat attempt did not execute because automatic approval review timed out; its single permitted retry completed successfully.",
+    "harness_sha256": "6f84412a043364ba256c3d5031021ea3474dd5b1c81f3a455da3ceeb25220f23"
   },
   "checks": {
     "typecheck": "passed",
