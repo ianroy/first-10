@@ -10894,6 +10894,10 @@
         {
           "date": "2026-10-18",
           "text": "Owner revised order: four product demos5–8, architecture9, Teaching Design10, Market Opportunity11, Chasm12, Questions13. Replaced yellow teaching text block with actual Worksheet B rendered from teaching-kit PDF page4, blank lower paper removed; retained six pedagogy concepts beside worksheet. Native state27 and all13 renders regenerated; companions and speaker/source docs synchronized. Product development remains paused."
+        },
+        {
+          "date": "2026-10-18",
+          "text": "Owner requested three-speaker timer: first-title Next or Right starts90/60/30seconds sequentially and total3minutes. Added monotonic-time overlay, automatic handoffs, Pause/Resume and explicit Reset to title; navigation does not restart it. Browser-independent boundary/pause/navigation tests added; online/offline share inline timer. Product development remains paused."
         }
       ],
       "claim": null,

@@ -154,6 +154,21 @@
         object-fit: contain;
         background: #102820;
       }
+      .pitch-clock {
+        position: fixed; bottom: 10px; left: 16px; z-index: 10;
+        display: flex; align-items: center; gap: 16px;
+        padding: 8px 12px; border: 1px solid #74977f; border-radius: 10px;
+        background: #102820f5; color: #f7f5ec; box-shadow: 0 3px 16px #0003;
+        font-variant-numeric: tabular-nums; line-height: 1.15;
+      }
+      .pitch-clock small { display: block; font-size: 11px; color: #b9d3c3; margin-bottom: 3px; }
+      .pitch-clock strong { display: block; font-size: 25px; letter-spacing: .02em; }
+      .pitch-clock button { padding: 4px 8px; min-height: 40px; font-size: 12px; }
+      .pitch-clock[data-urgent="true"] strong { color: #f2cb6b; }
+      .pitch-clock[data-finished="true"] strong { color: #ffb3a0; }
+      @media (max-width: 1000px) {
+        .presenting .pitch-clock { bottom: 74px; left: 8px; gap: 10px; }
+      }
       @media (max-width: 600px) {
         main {
           padding: 8px;
@@ -174,6 +189,7 @@
         main {
           padding: 0;
         }
+        .pitch-clock,
         .toolbar,
         .controls,
         .hint,
@@ -292,12 +308,67 @@
           >EEF metacognition guidance</a
         >. EEF addresses school settings, not measured outcomes for First Ten.
       </p>
+      <aside class="pitch-clock" id="pitch-clock" aria-label="Three-minute pitch timer">
+        <div><small id="speaker-label">Speaker 1 · starts on Next</small><strong id="speaker-time">1:30</strong></div>
+        <div><small>Total remaining</small><strong id="total-time">3:00</strong></div>
+        <button id="clock-pause" type="button" disabled>Pause</button>
+        <button id="clock-reset" type="button">Reset</button>
+        <span id="clock-announcement" class="clock-announcement" role="status" style="position:absolute;width:1px;height:1px;overflow:hidden;clip-path:inset(50%)"></span>
+      </aside>
     </main>
     <script>
       const slides = [...document.querySelectorAll(".slide")];
       const previous = document.querySelector("#previous");
       const next = document.querySelector("#next");
       const position = document.querySelector("#position");
+      // Use elapsed monotonic time, not interval ticks: background tabs keep accurate time.
+      const clock = document.querySelector("#pitch-clock");
+      const speakerLabel = document.querySelector("#speaker-label");
+      const speakerTime = document.querySelector("#speaker-time");
+      const totalTime = document.querySelector("#total-time");
+      const pauseClock = document.querySelector("#clock-pause");
+      const announcement = document.querySelector("#clock-announcement");
+      let startedAt = null;
+      let elapsedBeforePause = 0;
+      let running = false;
+      let announcedSpeaker = 0;
+      const formatTime = (seconds) => `${Math.floor(seconds / 60)}:${String(seconds % 60).padStart(2, "0")}`;
+      function renderClock() {
+        const elapsed = Math.min(180000, elapsedBeforePause + (running ? Math.max(0, performance.now() - startedAt) : 0));
+        const finished = elapsed >= 180000;
+        const speaker = elapsed < 90000 ? 1 : elapsed < 150000 ? 2 : 3;
+        const boundary = speaker === 1 ? 90000 : speaker === 2 ? 150000 : 180000;
+        const remaining = Math.max(0, Math.ceil((boundary - elapsed) / 1000));
+        speakerLabel.textContent = finished ? "Pitch complete" : `Speaker ${speaker}${startedAt === null ? " · starts on Next" : !running ? " · paused" : ""}`;
+        speakerTime.textContent = formatTime(remaining);
+        totalTime.textContent = formatTime(Math.max(0, Math.ceil((180000 - elapsed) / 1000)));
+        clock.dataset.urgent = String(remaining <= 10);
+        clock.dataset.finished = String(finished);
+        pauseClock.disabled = startedAt === null || finished;
+        pauseClock.textContent = running || startedAt === null ? "Pause" : "Resume";
+        if (startedAt !== null && announcedSpeaker !== (finished ? 4 : speaker)) {
+          announcedSpeaker = finished ? 4 : speaker;
+          announcement.textContent = finished ? "Three minutes complete." : `Speaker ${speaker}: ${speaker === 1 ? 90 : speaker === 2 ? 60 : 30} seconds.`;
+        }
+        if (finished) { running = false; elapsedBeforePause = 180000; }
+      }
+      function startClock() {
+        if (startedAt !== null) return;
+        startedAt = performance.now(); running = true; renderClock();
+      }
+      pauseClock.addEventListener("click", () => {
+        if (pauseClock.disabled) return;
+        if (running) { elapsedBeforePause += Math.max(0, performance.now() - startedAt); running = false; }
+        else { startedAt = performance.now(); running = true; }
+        renderClock();
+      });
+      document.querySelector("#clock-reset").addEventListener("click", () => {
+        startedAt = null; elapsedBeforePause = 0; running = false; announcedSpeaker = 0;
+        announcement.textContent = "Timer reset. Click Next on the title slide to begin.";
+        show(0); renderClock();
+      });
+      setInterval(renderClock, 200);
+      document.addEventListener("visibilitychange", renderClock);
       let current = 0;
       function show(index) {
         current = Math.min(slides.length - 1, Math.max(0, index));
@@ -310,7 +381,11 @@
         position.textContent = `${current + 1} / ${slides.length}`;
       }
       previous.addEventListener("click", () => show(current - 1));
-      next.addEventListener("click", () => show(current + 1));
+      function advance() {
+        if (current === 0) startClock();
+        show(current + 1);
+      }
+      next.addEventListener("click", advance);
       document.addEventListener("keydown", (event) => {
         if (
           event.altKey ||
@@ -321,7 +396,7 @@
           return;
         if (event.key === "ArrowRight") {
           event.preventDefault();
-          show(current + 1);
+          advance();
         }
         if (event.key === "ArrowLeft") {
           event.preventDefault();
@@ -350,6 +425,7 @@
         if (event.key === "Escape") presentationMode(false);
       });
       show(0);
+      renderClock();
     </script>
   </body>
 </html>

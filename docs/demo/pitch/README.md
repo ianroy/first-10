@@ -50,3 +50,7 @@ The sources and limits remain in native speaker notes and the [source map](sourc
 ## Founding-partner QR
 
 The final-slide QR encodes `https://first-10-three.vercel.app/founding-partners`. It has a white four-module quiet zone and is placed at 320 × 320 slide pixels. `build-qr.swift` uses macOS Core Image to generate it and Vision to decode and verify the exact URL. Rebuild on macOS with `swift docs/demo/pitch/build-qr.swift public/pitch/founding-partners-qr.png`. The offer of two semesters free is supplied by the owner; the ten-school target remains separate from confirmed partners.
+
+## Three-speaker pitch clock
+
+Click **Next** on the title slide (or Right arrow) to start a continuous three-minute timer. Speaker 1 has 90 seconds, Speaker 2 has 60, Speaker 3 has 30; handoffs happen automatically at 1:30 and 2:30 elapsed. The overlay shows the current speaker countdown and total remaining. Changing slides does not reset it. Pause/Resume freezes both clocks; Reset returns to the title with 3:00 ready. Entering Present mode alone does not start timing. The clock works in the offline HTML too; a page reload resets it.

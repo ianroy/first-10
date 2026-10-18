@@ -30,7 +30,7 @@ research_gate: not_passed
 foundation_gate: not_passed
 realtime_go: pending
 last_updated: 2026-10-18
-last_documentation_update: "2026-10-18: slide-only refinement: actual worksheet on Teaching Design10, Market Opportunity moved directly after it to11; product development remains paused."
+last_documentation_update: "2026-10-18: pitch-only refinement: 90/60/30-second speaker overlay and total3-minute clock start on title-slide Next; product development remains paused."
 resume_hint: >-
   Production 64bc86e includes complete MKT-006 manual planner controls and private partner
   Admin counts. Actual presenter login worked: 0 interest, 0 feedback, 0 distinct addresses
