@@ -825,7 +825,7 @@
       "id": "SEC-001",
       "title": "Define role, ownership and API contracts",
       "phase": "P0",
-      "status": "in_progress",
+      "status": "complete",
       "owner": "agent",
       "size": "S",
       "kind": "documentation",
@@ -873,33 +873,30 @@
         {
           "date": "2026-10-18",
           "text": "Claimed for the authorized autonomous Babson demo run. Worker delivers an isolated commit; coordinator owns status and integration."
+        },
+        {
+          "date": "2026-10-18",
+          "text": "Permission/API contracts integrated: eight roles, six private legacy tables, field projections, invitation/role boundaries, expected revisions and idempotency. Local links/module paths/strict TypeScript examples and whitespace checks passed."
         }
       ],
-      "claim": {
-        "owner": "access_worker",
-        "branch": "codex/sec-001-autonomous",
-        "base_commit": "f3c45253d837d486f8a8cec4e3b353eabf7acb5a",
-        "worktree": "/Users/ianroy/.codex/worktrees/first-ten-access/First 10",
-        "started_at": "2026-10-18T03:30:28.647550+00:00",
-        "lease_expires_at": "2026-10-18T05:30:28.647550+00:00"
-      },
-      "completion_evidence": [],
+      "claim": null,
+      "completion_evidence": ["474a912678bf37be144e6bd28b12c31969ec0a60"],
       "subtasks": [
         {
           "id": "SEC-001.s1",
-          "status": "in_progress",
+          "status": "complete",
           "instruction": "Inventory all six tables and current user_id/project_id semantics.",
           "notes": []
         },
         {
           "id": "SEC-001.s2",
-          "status": "not_started",
+          "status": "complete",
           "instruction": "Specify immutable owner/author fields, private interview scope, owner/editor/viewer project membership, teacher/student class roles and platform admin assignment.",
           "notes": []
         },
         {
           "id": "SEC-001.s3",
-          "status": "not_started",
+          "status": "complete",
           "instruction": "Specify typed service contracts, projected fields, feature flags and audit events; record planned exceptions to single-project/owner-only assumptions.",
           "notes": []
         }

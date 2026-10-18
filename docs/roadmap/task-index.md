@@ -11,7 +11,7 @@ Define contracts and keep independent research moving; no product feature is rep
 | Task | Status | Subtasks complete | Owner | Size | Dependencies | Decisions | Write scope / locks |
 | --- | --- | --- | --- | --- | --- | --- | --- |
 | OPS-001 Make local and CI verification repeatable | complete | 3/3 | agent | S | F-007 | — | eslint.config.js, .github/workflows/ci.yml, package.json (2 more; inspect --task); locks: — |
-| SEC-001 Define role, ownership and API contracts | in_progress | 0/3 | agent | S | F-007 | — | docs/architecture/access-contract.md, docs/architecture/api-contracts.md; locks: — |
+| SEC-001 Define role, ownership and API contracts | complete | 3/3 | agent | S | F-007 | — | docs/architecture/access-contract.md, docs/architecture/api-contracts.md; locks: — |
 
 ## P1 — Reliability, privacy and economical AI
 
