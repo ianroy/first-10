@@ -195,11 +195,11 @@ RESET ROLE;
 SELECT is((SELECT count(*)FROM firstten_private.class_submission_operations o JOIN firstten_private.class_submission_versions v ON v.id=o.result_snapshot_id WHERE o.operation='submit'AND v.thread_id=firstten_policy_test.id('submission_thread')),80::bigint,'submit receipts remain bounded at80');
 SELECT is((SELECT count(*)FROM firstten_private.class_submission_operations WHERE operation='withdraw'AND result_snapshot_id=(SELECT(result#>>'{data,id}')::uuid FROM firstten_policy_test.submission_results WHERE label='submitted')),8::bigint,'withdrawal receipts remain bounded at8');
 -- Redaction and identifier replacement can expand short input: final DTO bounds apply.
-UPDATE public.class_members SET display_label=repeat('a@b.co ',10)WHERE class_id=firstten_policy_test.id('submission_class')AND user_id=firstten_policy_test.id('student');
+UPDATE public.class_members SET display_label=repeat('a@b.co ',10),revision=revision+1 WHERE class_id=firstten_policy_test.id('submission_class')AND user_id=firstten_policy_test.id('student');
 SELECT firstten_policy_test.set_actor('student');SET LOCAL ROLE authenticated;
 SELECT is(public.preview_class_submission(firstten_policy_test.submission_spec(gen_random_uuid(),'c2120000-0000-4000-8000-000000000092'))->>'code','INVALID_INPUT','email-scrub expansion beyond80-character alias returns bounded actionable failure');
 RESET ROLE;
-UPDATE public.class_members SET display_label='foo@example.org'WHERE class_id=firstten_policy_test.id('submission_class')AND user_id=firstten_policy_test.id('student');
+UPDATE public.class_members SET display_label='foo@example.org',revision=revision+1 WHERE class_id=firstten_policy_test.id('submission_class')AND user_id=firstten_policy_test.id('student');
 SELECT firstten_policy_test.set_actor('student');SET LOCAL ROLE authenticated;
 INSERT INTO firstten_policy_test.submission_results SELECT 'email_alias_preview',public.preview_class_submission(firstten_policy_test.submission_spec(gen_random_uuid(),'c2120000-0000-4000-8000-000000000092'));
 SELECT is((SELECT result->>'ok'FROM firstten_policy_test.submission_results WHERE label='email_alias_preview'),'true','bounded scrubbed email alias can be previewed');
@@ -218,4 +218,12 @@ DO $fn$ DECLARE f text;r jsonb;n integer;BEGIN
  END LOOP;
 END $fn$;
 SELECT pass('all five reflection DTO fields enforce their final post-redaction bounds');
+RESET ROLE;
+
+SELECT is(firstten_private.submission_dto_length('A😀É'),4,'final string bounds count UTF-16 DTO units rather than only Unicode code points');
+SELECT firstten_policy_test.set_actor('student');SET LOCAL ROLE authenticated;
+UPDATE public.projects SET problem=repeat('😀',3001)WHERE id=firstten_policy_test.id('submission_project');
+SELECT is(public.preview_class_submission(firstten_policy_test.submission_spec(gen_random_uuid(),'c2120000-0000-4000-8000-000000000095'))->>'code','INVALID_INPUT','supplementary-character excerpt beyond6000 DTO units fails before returning a malformed DTO');
+UPDATE public.projects SET problem=repeat('😀',3000)WHERE id=firstten_policy_test.id('submission_project');
+SELECT is(public.preview_class_submission(firstten_policy_test.submission_spec(gen_random_uuid(),'c2120000-0000-4000-8000-000000000095'))->>'ok','true','exact6000 UTF-16-unit excerpt is preserved without truncation');
 RESET ROLE;

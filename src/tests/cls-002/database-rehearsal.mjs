@@ -62,21 +62,14 @@ try {
   );
   assert.equal(
     createHash("sha256").update(migration).digest("hex"),
-    "2234095628e9e6ef186ec36cfc5ab37f7f333e4748c9baea27ea4cc915410af2",
+    "dd10bf6999e73358be001244b5cc1b39b76a0738c90866cc8e3efc9befcd4190",
   );
   phase = "reviewed migration apply to empty clone";
-  // Before integration, apply the reviewed21 file to the empty schema clone.
-  // After root integrates21, the schema dump already contains these objects.
-  const installed =
-    sql(
-      database,
-      "SELECT to_regclass('firstten_private.class_submission_threads') IS NOT NULL",
-    ).trim() === "t";
-  if (!installed) sql(database, migration);
+  sql(database, migration);
   // Bootstrap only migration-default policy singleton fixtures; source data never copied.
   sql(
     database,
-    "INSERT INTO firstten_private.demo_ai_budget(singleton,cap_cents,reserved_cents) VALUES(true,100,0) ON CONFLICT DO NOTHING;INSERT INTO firstten_private.project_collaboration_capability VALUES(true,false) ON CONFLICT DO NOTHING;INSERT INTO firstten_private.ai_usage_global_policy(singleton) VALUES(true) ON CONFLICT DO NOTHING;",
+    "INSERT INTO firstten_private.demo_ai_budget(singleton,cap_cents,reserved_cents) VALUES(true,100,0) ON CONFLICT DO NOTHING;INSERT INTO firstten_private.project_collaboration_capability VALUES(true,false) ON CONFLICT DO NOTHING;INSERT INTO firstten_private.ai_usage_global_policy(singleton) VALUES(true) ON CONFLICT DO NOTHING;INSERT INTO firstten_private.public_context_policy(singleton) VALUES(true) ON CONFLICT DO NOTHING;",
   );
   phase = "rolled-back policy suite";
   const policyRoot = process.env.FIRSTTEN_POLICY_BASE_ROOT ?? root;
@@ -106,7 +99,10 @@ try {
   assert(password);
   await submissionRaces({ database, password });
 } catch (error) {
-  writeFileSync("/private/tmp/firstten-submission-policy-error.txt", String(error.stderr ?? ""));
+  writeFileSync(
+    "/private/tmp/firstten-submission-policy-error.txt",
+    String(error.stderr ?? error.stack ?? ""),
+  );
   console.error(
     "Clone verification failed at " + phase + "; raw diagnostic retained locally, not printed.",
   );

@@ -66,6 +66,10 @@ REVOKE ALL ON FUNCTION firstten_private.submission_identity() FROM PUBLIC,anon,a
 CREATE FUNCTION firstten_private.submission_scrub(v text) RETURNS text LANGUAGE sql IMMUTABLE SET search_path=pg_catalog AS $$
  SELECT regexp_replace(regexp_replace(v,'[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}','[Identifier removed]','gi'),'[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}','[Email removed]','gi')
 $$;
+-- JavaScript DTO string bounds count UTF-16 code units, including surrogate pairs.
+CREATE FUNCTION firstten_private.submission_dto_length(v text)RETURNS integer LANGUAGE sql IMMUTABLE SET search_path=pg_catalog AS $$
+ SELECT char_length(v)+regexp_count(v,U&'[\+010000-\+10FFFF]')
+$$;
 CREATE FUNCTION firstten_private.submission_permission(p_project uuid,p_owner uuid,p_kind text,p_id uuid) RETURNS jsonb
 LANGUAGE plpgsql STABLE SECURITY DEFINER SET search_path=pg_catalog AS $$
 DECLARE c public.processing_consents;exists_source boolean:=false;
@@ -149,7 +153,7 @@ BEGIN
   body:=spec->'reflection'->>f;
   FOR phrase IN SELECT value FROM jsonb_array_elements(spec->'redactions')LOOP body:=replace(body,phrase#>>'{}','[Redacted]');END LOOP;
   body:=firstten_private.submission_scrub(body);
-  IF char_length(body)>(CASE WHEN f='title'THEN 120 WHEN f='interpretation'THEN 3000 ELSE 2000 END)OR(f='title'AND char_length(btrim(body))=0)THEN RETURN jsonb_build_object('ok',false,'code','INVALID_INPUT');END IF;
+  IF firstten_private.submission_dto_length(body)>(CASE WHEN f='title'THEN 120 WHEN f='interpretation'THEN 3000 ELSE 2000 END)OR(f='title'AND char_length(btrim(body))=0)THEN RETURN jsonb_build_object('ok',false,'code','INVALID_INPUT');END IF;
   payload:=payload||jsonb_build_object(f,body);
  END LOOP;
  FOR item IN SELECT value FROM jsonb_array_elements(spec->'selections')LOOP
@@ -158,7 +162,7 @@ BEGIN
   IF source?'denied'THEN RETURN jsonb_build_object('ok',false,'code','SHARING_REQUIRED');END IF;
   body:=source->>'text';FOR phrase IN SELECT value FROM jsonb_array_elements(spec->'redactions')LOOP body:=replace(body,phrase#>>'{}','[Redacted]');END LOOP;n:=n+1;
   body:=firstten_private.submission_scrub(body);
-  IF char_length(body)NOT BETWEEN 1 AND 6000 OR char_length(source->>'label')NOT BETWEEN 1 AND 120 THEN RETURN jsonb_build_object('ok',false,'code','INVALID_INPUT');END IF;
+  IF firstten_private.submission_dto_length(body)NOT BETWEEN 1 AND 6000 OR firstten_private.submission_dto_length(source->>'label')NOT BETWEEN 1 AND 120 THEN RETURN jsonb_build_object('ok',false,'code','INVALID_INPUT');END IF;
   excerpts:=excerpts||jsonb_build_array(jsonb_build_object('key','excerpt.'||n,'label',source->>'label','text',body,'sourceKind',source->>'kind','evidenceLabel','Owner-reported; selected and reviewed'));
   manifest:=manifest||jsonb_build_array(source-'text'-'label');
  END LOOP;
@@ -197,7 +201,7 @@ BEGIN
  cid:=(p_document->>'classId')::uuid;aid:=(p_document->>'assignmentId')::uuid;pid:=(p_document#>>'{source,projectId}')::uuid;tid:=(p_document->>'threadId')::uuid;rid:=(p_document->>'requestId')::uuid;
  IF cid IS NULL OR aid IS NULL OR pid IS NULL OR tid IS NULL OR rid IS NULL THEN RETURN jsonb_build_object('ok',false,'code','INVALID_INPUT');END IF;
  authority:=firstten_private.submission_authoring(cid,aid,pid,actor);IF authority IS NULL THEN RETURN jsonb_build_object('ok',false,'code','NOT_FOUND');END IF;
- IF char_length(authority->>'label')NOT BETWEEN 1 AND 80 THEN RETURN jsonb_build_object('ok',false,'code','INVALID_INPUT');END IF;
+ IF firstten_private.submission_dto_length(authority->>'label')NOT BETWEEN 1 AND 80 THEN RETURN jsonb_build_object('ok',false,'code','INVALID_INPUT');END IF;
  SELECT * INTO t FROM firstten_private.class_submission_threads WHERE id=tid FOR UPDATE;
  IF FOUND AND(t.author_user_id IS DISTINCT FROM actor OR t.project_id IS DISTINCT FROM pid OR t.class_id<>cid OR t.assignment_id<>aid OR t.source_type<>'account_project')THEN RETURN jsonb_build_object('ok',false,'code','NOT_FOUND');END IF;
  IF t.id IS NULL THEN
@@ -230,7 +234,7 @@ BEGIN
  SELECT * INTO t FROM firstten_private.class_submission_threads WHERE id=target AND author_user_id=actor AND source_type='account_project';
  IF NOT FOUND THEN RETURN jsonb_build_object('ok',false,'code','NOT_FOUND');END IF;
  authority:=firstten_private.submission_authoring(t.class_id,t.assignment_id,t.project_id,actor);IF authority IS NULL THEN RETURN jsonb_build_object('ok',false,'code','NOT_FOUND');END IF;
- IF char_length(authority->>'label')NOT BETWEEN 1 AND 80 THEN RETURN jsonb_build_object('ok',false,'code','INVALID_INPUT');END IF;
+ IF firstten_private.submission_dto_length(authority->>'label')NOT BETWEEN 1 AND 80 THEN RETURN jsonb_build_object('ok',false,'code','INVALID_INPUT');END IF;
  SELECT * INTO t FROM firstten_private.class_submission_threads WHERE id=target FOR UPDATE;
  SELECT * INTO preview FROM firstten_private.class_submission_previews WHERE id=p_preview_id AND thread_id=t.id FOR UPDATE;
  IF preview.binding_hash IS DISTINCT FROM p_preview_hash THEN RETURN jsonb_build_object('ok',false,'code','CHANGED');END IF;
@@ -344,7 +348,7 @@ BEGIN
  IF op.request_id IS NULL THEN INSERT INTO firstten_private.class_submission_operations(actor_id,operation,request_id,target_id,payload_hash,result_snapshot_id)VALUES(actor,'withdraw',p_request_id,v.id,hash,v.id);END IF;
  RETURN jsonb_build_object('ok',true,'data',firstten_private.submission_view(v,false));
 END $$;
-REVOKE ALL ON FUNCTION firstten_private.submission_scrub(text),firstten_private.submission_permission(uuid,uuid,text,uuid),firstten_private.submission_source(uuid,uuid,jsonb),firstten_private.build_submission(uuid,uuid,jsonb),firstten_private.submission_authoring(uuid,uuid,uuid,uuid),firstten_private.submission_view(firstten_private.class_submission_versions,boolean),firstten_private.teacher_submission_allowed(uuid)FROM PUBLIC,anon,authenticated,service_role;
+REVOKE ALL ON FUNCTION firstten_private.submission_dto_length(text),firstten_private.submission_scrub(text),firstten_private.submission_permission(uuid,uuid,text,uuid),firstten_private.submission_source(uuid,uuid,jsonb),firstten_private.build_submission(uuid,uuid,jsonb),firstten_private.submission_authoring(uuid,uuid,uuid,uuid),firstten_private.submission_view(firstten_private.class_submission_versions,boolean),firstten_private.teacher_submission_allowed(uuid)FROM PUBLIC,anon,authenticated,service_role;
 REVOKE ALL ON FUNCTION public.preview_class_submission(jsonb),public.confirm_class_submission(uuid,text,uuid),public.get_own_class_submission(uuid),public.get_teacher_class_submission(uuid,uuid),public.list_own_class_submissions(uuid,uuid),public.list_teacher_class_submissions(uuid,uuid,uuid),public.withdraw_class_submission(uuid,uuid)FROM PUBLIC,anon,authenticated,service_role;
 GRANT EXECUTE ON FUNCTION public.preview_class_submission(jsonb),public.confirm_class_submission(uuid,text,uuid),public.get_own_class_submission(uuid),public.get_teacher_class_submission(uuid,uuid),public.list_own_class_submissions(uuid,uuid),public.list_teacher_class_submissions(uuid,uuid,uuid),public.withdraw_class_submission(uuid,uuid)TO authenticated;
 COMMENT ON TABLE firstten_private.class_submission_threads IS 'Discriminated real account_project/guest_team source. Guest adapter is disabled until CLS008 actual activities; no fake auth or project identity.';

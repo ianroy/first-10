@@ -168,7 +168,7 @@ export async function submissionRaces({ database, password }) {
       assert.equal(result.data.grantState, "withdrawn");
     });
     const [unchanged] =
-      await admin`SELECT count(*)AS count FROM firstten_private.class_submission_grants g JOIN firstten_private.class_submission_versions v ON v.id=g.snapshot_id WHERE v.id=${first.data.id}AND g.state='active'`;
+      await admin`SELECT count(*)AS count FROM firstten_private.class_submission_grants g JOIN firstten_private.class_submission_versions v ON v.id=g.snapshot_id WHERE v.id=${first.data.id} AND g.state='active'`;
     assert.equal(Number(unchanged.count), 0);
     console.log(
       "Two real connections: competing same-preview confirmation blocked, both received one immutable receipt, exactly one grant per receipt; competing different previews produced one new version/one CHANGED; committed withdrawal denied subsequent teacher read and replay did not regrant.",
