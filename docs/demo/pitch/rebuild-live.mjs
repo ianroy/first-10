@@ -70,9 +70,9 @@ export const slides = [
       "Illustrative positioning based on public product descriptions. Axes describe scope and delivery, not quality or efficacy. MIT Orbit / AI JetPack includes testing within broader Disciplined Entrepreneurship guidance. First Ten is an unvalidated working prototype.",
   },
   {
-    title: "A small stack with clear boundaries",
+    title: "The technology is the engine. Pedagogy is the moat.",
     caption:
-      "Native editable architecture: React/TanStack app calls one server AI gateway, which calls OpenRouter. Supabase Auth and owner-scoped Postgres keep saved work private. Drafts return for human review. Vercel hosts the app. Presenter-only fictional practice uses Gemini 2.5 Flash-Lite on the Google Vertex route; other private AI kinds retain their separate baseline.",
+      "Architecture illustration requested by the owner. React/TanStack/Tailwind, Supabase private data, Vercel and one server OpenRouter gateway. Live fictional practice: google/gemini-2.5-flash-lite. Private-workflow code default: anthropic/claude-sonnet-4.5. The owner describes ten years of classroom-tested proprietary pedagogy; this is teaching history and positioning, not a measured learning result for First Ten.",
   },
   {
     title: "Teaching built into the workflow",
@@ -80,9 +80,9 @@ export const slides = [
       "React/TanStack, Supabase owner-scoped storage, Vercel and one server-side OpenRouter gateway support the workflow. Six teaching concepts map to student activities. These design choices have not established learning gains.",
   },
   {
-    title: "A proposed beachhead in our own classrooms",
+    title: "Crossing the Chasm",
     caption:
-      "Proposed first pilots: BUS 131A and BUS 232F teaching contexts at Brandeis, followed by interested fall-course collaborators. No confirmed adoption, institutional endorsement, buyer or purchase is claimed.",
+      "Editable adaptation of Geoffrey Moore’s adoption curve. Our proposed entry is classroom pilots with early adopters; the intended bridge is a repeatable teaching package. Timeline: October 2026 tests in BUS 131A / BUS 232F at Brandeis; November–December refinement; Spring 2027 release target of ten schools represented at the Babson workshop. Dates and ten-school target are plans, not confirmed commitments.",
   },
   {
     title: "Questions",
@@ -291,65 +291,39 @@ export default async function rebuild({ presentation, input }) {
         sources.canvas +
         ". Offline facilitated uses are illustrative teaching formats, not separate software offerings. No exclusive feature or superior outcome is claimed.";
     } else if (i === 9) {
-      header(s, "UNDERLYING MAGIC", "A small stack with clear boundaries");
-      const node = (label, detail, x, y, w, h) => {
-        const sh = s.shapes.add({
-          geometry: "rect",
-          position: { left: x, top: y, width: w, height: h },
-          fill: "#E8ECE1",
-          line: { fill: "#8AA696", width: 1 },
-        });
-        text(s, label, x + 20, y + 20, w - 40, 45, 28, ink, true);
-        text(s, detail, x + 20, y + 73, w - 40, h - 76, 23, ink);
-        return sh;
-      };
-      const app = node("Student app", "React + TanStack\nReview, edit and save", 72, 223, 300, 155);
-      const gateway = node(
-        "AI gateway",
-        "Validate requests\nCheck JSON drafts",
-        490,
-        223,
-        300,
-        155,
+      image(
+        s,
+        "pitch/architecture-magic.png",
+        0,
+        0,
+        1280,
+        720,
+        "Technology architecture and owner-stated moat: ten years of classroom-tested proprietary pedagogy. React, TanStack and Tailwind; Supabase private data; server AI gateway; OpenRouter; Gemini Flash-Lite fictional practice and Claude Sonnet private-flow default.",
       );
-      const provider = node(
-        "OpenRouter",
-        "Selected model\nServer-held API key",
-        908,
-        223,
-        300,
-        155,
-      );
-      const db = node("Private data", "Supabase Auth\nPostgres + owner RLS", 72, 490, 300, 145);
-      const connect = (a, b, fromSide = "right", toSide = "left") =>
-        s.shapes.connect(a, b, {
-          kind: "straight",
-          fromSide,
-          toSide,
-          line: { fill: ink, width: 3 },
-          tail: { type: "arrow", width: "med", length: "med" },
-        });
-      connect(app, gateway);
-      connect(gateway, provider);
-      connect(app, db, "bottom", "top");
-      text(s, "Owner-only\nrow access", 270, 412, 210, 65, 21, ink, true);
-      text(s, "Drafts return for human review", 500, 421, 700, 44, 27, ink, true);
       text(
         s,
-        "Fictional presenter practice:\nGemini 2.5 Flash-Lite, Google Vertex route\nFixed case only. No private project input.",
-        500,
-        493,
-        700,
-        121,
+        "Live fictional practice: google/gemini-2.5-flash-lite",
+        76,
+        665,
+        1135,
         25,
+        17,
         ink,
+        true,
       );
-      footer(
+      text(
         s,
-        "Hosted on Vercel. General marketing AI remains planned. No automatic external posting.",
+        "Private-workflow code default: anthropic/claude-sonnet-4.5",
+        76,
+        689,
+        1135,
+        25,
+        17,
+        ink,
+        true,
       );
       notes +=
-        " Source: current repository architecture and root production verification at 840d0eb on 2026-10-18. The diagram shows a simplified request/data route, not network internals. Existing four private AI kinds retain their distinct baseline and are not covered by the narrow synthetic-practice budget.";
+        " Visual generated with the built-in ImageGen tool at the owner’s explicit request, 2026-10-18. The ten years of classroom-tested proprietary pedagogy is an owner-stated teaching-history and competitive-positioning claim, not a measured learning outcome for the new app or an independently verified IP/exclusivity finding. Logos identify depicted technologies and do not imply endorsement. The diagram is conceptual; human review happens after the server returns a draft. Current code default for four private workflows is anthropic/claude-sonnet-4.5; environment configuration may select another model. Restricted live fictional practice uses google/gemini-2.5-flash-lite with the Google Vertex route. Exact IDs are editable native text. No private project text enters the synthetic practice request.";
     } else if (i === 10) {
       header(s, "TEACHING DESIGN", "Teaching built into the workflow", true);
       text(
@@ -390,29 +364,104 @@ export default async function rebuild({ presentation, input }) {
         sources.eef +
         ". EEF addresses school settings, not First Ten university efficacy. Owner-supplied BUS131 Week 6 activities inspired the marketing sequence. The main lab works manually. Presenter-only synthetic practice uses Gemini 2.5 Flash-Lite through OpenRouter on Google Vertex. The owner verified one production draft on 2026-10-18 at reported provider cost $0.000106. That single observed cost is not a forecast or a promise for other flows. General marketing AI remains planned; the existing four private AI kinds retain their separate baseline. A live AI call is not required for this presentation.";
     } else if (i === 11) {
-      header(s, "GO TO MARKET / CROSSING THE CHASM", "A proposed beachhead in our own classrooms");
-      const ys = [238, 365, 492];
-      [
-        ["01  Proposed pilots", "BUS 131A / BUS 232F teaching contexts at Brandeis"],
-        [
-          "02  Repeatable teaching value",
-          "Can students complete a useful loop and explain a revision?",
-        ],
-        ["03  Adjacent fall classes", "Interested educators with a similar assignment"],
-      ].forEach((r, j) => {
-        text(s, r[0], 76, ys[j], 320, 55, 29, ink, true);
-        text(s, r[1], 420, ys[j], 770, 80, 30, ink);
+      header(s, "GO TO MARKET", "Crossing the Chasm");
+      // Editable adaptation of Moore's adoption lifecycle. No measured percentages.
+      const curve = (x, w, y0, c1, c2, y1, fill) =>
+        s.shapes.add({
+          geometry: "custom",
+          position: { left: x, top: 200, width: w, height: 225 },
+          fill,
+          line: { fill: cream, width: 2 },
+          customPaths: [
+            {
+              width: w,
+              height: 225,
+              commands: [
+                { moveTo: { x: 0, y: 225 } },
+                { lineTo: { x: 0, y: y0 } },
+                { cubicBezTo: { x1: w * 0.35, y1: c1, x2: w * 0.7, y2: c2, x: w, y: y1 } },
+                { lineTo: { x: w, y: 225 } },
+                { close: {} },
+              ],
+            },
+          ],
+        });
+      curve(92, 130, 225, 224, 213, 204, "#B9D3C3");
+      curve(222, 168, 204, 186, 140, 105, "#2B7058");
+      curve(488, 238, 105, 51, 1, 1, "#A4C4AE");
+      curve(726, 238, 1, 0, 115, 183, "#C7D8C6");
+      curve(964, 226, 183, 210, 224, 225, "#DFE6D8");
+      const rule = (x, y, w, h, color = ink, width = 2) =>
+        s.shapes.add({
+          geometry: "line",
+          position: { left: x, top: y, width: w, height: h },
+          fill: "none",
+          line: { fill: color, width },
+        });
+      rule(92, 425, 298, 0);
+      rule(488, 425, 702, 0);
+      text(s, "Innovators", 80, 439, 160, 45, 21, ink, true);
+      text(s, "Early adopters", 244, 439, 165, 55, 21, ink, true);
+      text(s, "Early majority", 540, 439, 190, 45, 21, ink, true);
+      text(s, "Late majority", 784, 439, 190, 45, 21, ink, true);
+      text(s, "Laggards", 1058, 439, 145, 45, 21, ink, true);
+      text(s, "CHASM", 397, 353, 94, 40, 18, "#A24328", true);
+      text(s, "Our proposed entry:\nclassroom pilots", 76, 197, 310, 72, 23, ink, true);
+      s.shapes.add({
+        geometry: "ellipse",
+        position: { left: 322, top: 314, width: 16, height: 16 },
+        fill: gold,
+        line: { fill: ink, width: 2 },
       });
-      footer(
+      rule(278, 273, 50, 42, ink, 2);
+      text(s, "Bridge: repeatable teaching package", 386, 177, 700, 44, 25, ink, true);
+      const a = s.shapes.add({
+        geometry: "rect",
+        position: { left: 364, top: 263, width: 1, height: 1 },
+        fill: "none",
+        line: { fill: "none", width: 0 },
+      });
+      const b = s.shapes.add({
+        geometry: "rect",
+        position: { left: 554, top: 263, width: 1, height: 1 },
+        fill: "none",
+        line: { fill: "none", width: 0 },
+      });
+      s.shapes.connect(a, b, {
+        kind: "straight",
+        fromSide: "right",
+        toSide: "left",
+        line: { fill: "#B98A29", width: 5 },
+        tail: { type: "arrow", width: "med", length: "med" },
+      });
+      rule(76, 525, 1126, 0, "#8AA696", 2);
+      const timeline = [
+        ["OCTOBER 2026", "Tests begin", "BUS 131A / BUS 232F, Brandeis"],
+        ["NOV–DEC 2026", "Refine the teaching package", "Use pilot feedback"],
+        ["SPRING 2027", "Release target: 10 schools", "Schools represented in this room"],
+      ];
+      timeline.forEach((r, j) => {
+        const x = 76 + j * 388;
+        text(s, r[0], x, 541, 370, 35, 21, ink, true);
+        text(s, r[1], x, 583, 370, 45, 25, ink, true);
+        text(s, r[2], x, 625, 370, 34, 18, ink);
+      });
+      text(
         s,
-        "Crossing the Chasm framing: a focused proposed beachhead. No adoption or buyer is confirmed.",
+        "Adapted from Geoffrey Moore. Planned dates and target, not confirmed school commitments.",
+        76,
+        680,
+        1135,
+        28,
+        16,
+        "#4D655A",
       );
       notes +=
-        " Proposed route supplied by the owner, not confirmed pilots. BUS 131A: Fail Faster, Fail Smarter, " +
+        " Primary sources checked 2026-10-18: https://geoffreyamoore.com/book/crossing-the-chasm/ and https://crossingthechasmbymoore.com/book/ (official book site with adoption-curve illustration). The gap separates visionary early adopters from pragmatist early-majority customers. Editable qualitative adaptation, not measured adoption data; no exact percentages or claim that First Ten has crossed it. Our proposed classroom-pilot entry and repeatable teaching-package bridge are strategic hypotheses. Owner-requested timeline: tests start October 2026 in BUS 131A and BUS 232F Brandeis teaching contexts, refine November–December using pilot feedback, Spring 2027 release target of ten schools represented at the Babson workshop. Ten is an ambition, not ten confirmed commitments or institutional endorsement. Course sources: " +
         sources.bus131 +
-        ". BUS 232F: Digital Fabrication with Robotics, " +
+        " ; " +
         sources.bus232 +
-        " and https://slate.brandeis.edu/portal/course_offerings . Crossing the Chasm is a strategy framing, not evidence of having crossed any adoption threshold. Buyer path and willingness to pay remain unknown. Babson and Brandeis have not endorsed or adopted this app in the evidence available.";
+        ".";
     } else if (i === 12) {
       image(s, "brand/wordmark-on-dark.png", 72, 48, 315, 70, "First Ten original logo on dark");
       text(s, "Questions", 76, 195, 1100, 100, 72, cream, true);

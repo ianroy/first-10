@@ -5,7 +5,7 @@ Editable Spaces presentation: **First Ten — Babson teaching and product pitch*
 - Page: `page_984affe9853c8191a5f8caf0d446aba3`
 - Connected artifact: `artifact_external_78c2eda9-303d-468b-9ff0-3fc40aeb3083`
 - Thirteen slides, 1280 × 720, original First Ten logo and Field notebook palette.
-- Native editable slide text, market diagram and source-bearing speaker notes.
+- Native editable slide text, market and adoption diagrams, and source-bearing speaker notes. Slide 10 uses the owner-requested architecture illustration with editable exact model IDs.
 - [Presenter script](presenter-script.md) and [claim/source map](source-map.md).
 
 ## Presentation order
@@ -19,9 +19,9 @@ Editable Spaces presentation: **First Ten — Babson teaching and product pitch*
 7. Educator planner and fictional class preview, actual deployed screen.
 8. Protected aggregate admin view, actual deployed screen.
 9. Qualitative market positioning against MIT Orbit / AI JetPack, Venturekit and facilitated alternatives.
-10. Native architecture schematic, including the private data boundary and AI gateway.
+10. Owner-requested architecture illustration, private data boundary, AI gateway, exact model IDs and the owner-stated pedagogy moat.
 11. Six named pedagogical concepts with student activities.
-12. Proposed Crossing the Chasm roadmap: BUS 131A / BUS 232F beachhead, repeatable teaching value, adjacent fall classes.
+12. Editable Crossing the Chasm adoption curve and planned timeline: October 2026 tests, November–December refinement, Spring 2027 release target of ten schools represented at the workshop.
 13. Questions and public demo / teaching links.
 
 ## Delivery and fallback
