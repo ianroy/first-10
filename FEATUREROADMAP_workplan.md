@@ -22,27 +22,28 @@ Statuses are `not_started`, `in_progress`, `blocked`, `complete`, `deferred`, `d
 current_iteration: 5
 current_stage: P1_foundation_with_parallel_P2_and_R0
 status: in_progress
-last_task_done: PITCH-001
-next_task: MKT-006
+last_task_done: PARTNER-001
+next_task: AI-002
 next_parallel_wave: []
-active_claims: [MKT-006]
+active_claims: []
 research_gate: not_passed
 foundation_gate: not_passed
 realtime_go: pending
 last_updated: 2026-10-18
-last_documentation_update: "2026-10-18: reconciled owner-private ideas, educator planning/authored cohort, aggregate presenter view and three-dashboard sign-in; retained DOC-002 team-credit history."
+last_documentation_update: "2026-10-18: reconciled deployed desktop demo, final pitch architecture/chasm/QR, private founding-partner intake and reviewed export."
 resume_hint: >-
-  Production 840d0eb includes tested Student/Educator/Admin presenter launches, saved fictional
-  StudyLoop work, four authored educator team examples and private lesson plan revision2.
-  AI-009 is complete: fixed-case live Gemini Flash Lite draft succeeded; UI cost $0.000106,
-  4c reserved across two attempts with first outcome cost unknown; $0.96 allowance remains.
-  Typecheck and 221 application tests pass; lint zero errors/six existing warnings. CI and
-  isolated real SQL policy jobs passed at f8bc878. PITCH-001 is complete:13slide native deck and online/offlinecompanion follow the owner's
-  requested flow with four actualscreenshots. MKT-006 manualmeasurements are integrated
-  with248tests/buildpassing;deployed save/reload verification is next.
+  Production d281f0c includes Student/Educator/Admin presenter launches, saved fictional
+  StudyLoop work, private educator plan, manual Marketing Lab measurements and reviewed export.
+  PITCH-001 and PARTNER-001 are complete. Thirteen-slide native/online/offline pitch includes
+  generated architecture, exact model IDs, owner-stated ten-year pedagogy moat, Crossing
+  the Chasm timeline and a decoded QR to /founding-partners. Actual public browser intake
+  returned Request received using explicitly fictional QA data. Hosted04000 migration applied.
+  All276applicationtests, typecheck/build pass; lint0errors/6existingwarnings. New23SQL
+  assertions passed locally. AI reservations remain4c; no new paid calls. The export
+  download verification tool stalled for25minutes; download completion remains unverified.
+  The owner's12:13UTC checkpoint was missed; new pitch/partner requests were then completed.
   Human studies, general class permissions, broader admin funnel and sharing remain open.
-  Final-hour checkpoint approximately12:13UTC; keep public/offline fallbacks and saved work.
-
+  Recheck scheduler readiness and owner priority before dispatching any new wave.
 ```
 
 **Audit basis:** product source and documentation at `7006f87`, plus the concurrent team-credits commit `a2d69a3`, with repository research files rechecked. F-007 is now complete: [GitHub CI run 39092157827](https://github.com/ianroy/first-10/actions/runs/39092157827) succeeded for that commit. The earlier local typecheck, 17 tests, Vercel build and scoped lint results remain in history. Six existing lint warnings and generated `.vercel` scanning motivate OPS-001. A green code pipeline does not verify live auth, RLS, model quality, research outcomes or preview configuration.

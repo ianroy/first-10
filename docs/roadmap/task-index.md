@@ -114,7 +114,7 @@ Offer bounded, reviewed help with interviews, decisions and follow-through.
 | EV-005 Add evidence-linked challenge and next-test drafts | not_started | 0/3 | agent | S | EV-003, AI-008 | — | src/lib/ai.functions.ts, src/lib/prompts/challenge.ts, src/components/decisions/ChallengeDraft.tsx (10 more; inspect --task); locks: ai-entrypoint |
 | EV-006 Add interview question coaching with cheap optional rewrites | not_started | 0/3 | agent | S | WS-007, AI-008 | — | src/lib/question-coach.ts, src/components/interviews/QuestionCoach.tsx, src/lib/ai.functions.ts (14 more; inspect --task); locks: ai-entrypoint, interview-flow |
 | EV-007 Offer a first-conversation and outreach rewrite assistant | not_started | 0/3 | agent | S | EV-001, AI-008, WEB-005 | — | src/components/outreach/FirstAsk.tsx, src/lib/ai.functions.ts, src/lib/prompts/first-ask.ts (14 more; inspect --task); locks: ai-entrypoint, route-integration |
-| MKT-006 Plan a one-week test and measure useful action | in_progress | 0/3 | agent | S | MKT-003 | — | src/components/marketing-lab/TestPlanner.tsx, src/components/marketing-lab/ResultsReview.tsx, src/lib/marketing-metrics.ts (5 more; inspect --task); locks: marketing-editor |
+| MKT-006 Plan a one-week test and measure useful action | blocked | 1/3 | agent | S | MKT-003 | — | src/components/marketing-lab/TestPlanner.tsx, src/components/marketing-lab/ResultsReview.tsx, src/lib/marketing-metrics.ts (9 more; inspect --task); locks: marketing-editor |
 
 ## P6 — Sharing and collaborative design
 
@@ -149,6 +149,7 @@ Test cross-role behavior, rehearse releases, observe use and revise the plan.
 | MKT-008 Verify the integrated marketing and AI journeys | not_started | 0/3 | agent | S | MKT-003, MKT-004, MKT-005, MKT-006, MKT-007 | — | src/tests/marketing-release/**, docs/qa/marketing-gate.md; locks: — |
 | DEMO-003 Keep sign-in explicit and launch the chosen student, educator or admin view | complete | 3/3 | agent | S | DEMO-002, WS-008, EDU-005, BR-003 | — | src/routes/auth.tsx, src/routes/_authenticated/route.tsx, src/components/RequireProject.tsx (4 more; inspect --task); locks: auth-entry, route-integration, app-shell |
 | PITCH-001 Rebuild the Babson pitch in the owner-requested slide flow | complete | 3/3 | agent | M | DEMO-003, WEB-004, EDU-002 | — | public/pitch/**, docs/demo/pitch/**; locks: pitch-deck |
+| PARTNER-001 Launch the founding-partner classroom invitation and private feedback intake | complete | 3/3 | agent | M | WEB-004, SEC-003 | — | src/routes/founding-partners.tsx, src/components/partners/**, src/lib/founding-partners.functions.ts (2 more; inspect --task); locks: founding-partner-intake |
 
 ## R0 — Continuous user and educator research
 
