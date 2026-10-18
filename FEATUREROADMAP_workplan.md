@@ -38,17 +38,19 @@ Status boxes: `[ ]` todo · `[~]` in progress · `[x]` done · `[!]` blocked (sa
 ## 1. State (update every session)
 
 ```yaml
-current_iteration: 2
-current_stage: R1        # R0 Research, R1 Foundations, R2 Core, R3 Growth (see §3). R0 human tasks run in parallel.
+current_iteration: 3
+current_stage: R0+R1     # R0 Research (value-prop track), R1 Foundations, R2 Core, R3 Growth (see §3)
 status: not_started      # not_started | in_progress | paused | blocked
 last_task_done: F-010
-next_task: F-007
-resume_hint: "Iteration 2 generated 2026-10-17. Work the 'Carry-over' block of Iteration 2 in the listed order (F-007 first), then X-001. Iteration 1 tasks keep their ids and live in the Iteration 1 section; do not duplicate them. R0-004 interviews are human-owned and can start any time."
+next_task: VP-001
+resume_hint: "Iteration 3 generated 2026-10-17 with a value-proposition focus. It supersedes Iteration 2's ordering (nothing there had started). Follow the 'Order of operations' list in Iteration 3: VP-001 and VP-002 first (they unblock the human interviews), then the R1 carry-over starting with F-007. Task definitions for F-*, R0-*, I2-* stay in their original sections; do not duplicate them."
 last_updated: 2026-10-17
 open_questions:
-  - Who is the primary user: Babson/college student founders only, or any first-time founder?  (decide in R0-005)
-  - Is the product free for students, cohort-licensed to schools, or paid per founder?        (decide in R0-005)
-  - Do commitments (deposits, pre-orders, LOIs) make sense for student founders with free apps, or should "commitment" include time, intros and repeat use? (answer in R0-004, shapes I2-001)
+  - Who is the primary user: Babson/college student founders only, or any first-time founder?  (decide in VP-006)
+  - Is the product free for students, cohort-licensed to schools, or paid per founder?        (decide in VP-006)
+  - Is the instructor/program the real buyer, with students as users? (VP3; answer in VP-003)
+  - Is fear of reaching out a bigger blocker than not knowing the method? (VP2; answer in R0-004)
+  - Do commitments (deposits, pre-orders, LOIs) make sense for student founders with free apps, or should "commitment" include time, intros and repeat use? (VP5; answer in R0-004, shapes I2-001)
 ```
 
 ---
@@ -68,6 +70,63 @@ open_questions:
 | A5 | An AI that grounds suggestions in real communities and real quotes is more useful than generic advice | Founders complain about generic AI advice | Founders prefer fully generic tools |
 | A6 | Students/early founders need a progress ladder with gates | Threads about overwhelm, no clear next step, "how do I know I'm ready" | Founders want freeform tools |
 
+### 2.1 Value proposition (working draft, deepened 2026-10-17; hypotheses until VP-006 decides)
+
+**What the app says today** (landing page): "You built it. Now meet the people it's for." It sells a *process*: a ladder from 10 conversations to 100 users, with AI drafts, on your phone.
+
+**What founders seem to want** (signal brief, titles only, so treat as hypothesis): building got cheap and buyers didn't; "everything is saturated"; confusion about what counts as validation; AI that just agrees with you. The ladder is a means. The outcome they want is **confidence grounded in proof**: knowing whether anyone really wants this, who those people are, and what to do next, without feeling like a spammer.
+
+**Deepened promise (candidate)**: *First Ten turns "cool idea!" into proof: real conversations, real commitments, and an honest next step.*
+
+Why this goes deeper than the ladder:
+1. It names the enemy (polite praise, flattering AI) instead of the method.
+2. It defines success as evidence (commitments, quotes, changed plans) that the app can measure and the founder can show.
+3. It opens a second customer: whoever needs to *see* that proof (instructors, programs, co-founders, early investors).
+
+**Two segments (hypothesis)**
+
+| | Student founder (user) | Instructor / program lead (champion, likely buyer) |
+|---|---|---|
+| Functional job | Find out if anyone really wants what I built; get my first users | Get students doing real customer discovery; assess it fairly |
+| Emotional job | Stop feeling stuck and embarrassed; feel progress | Stop chasing students; trust that the work is real |
+| Social job | Show teammates, instructors or investors real proof | Show the program produces founders who talk to customers |
+| Pains | Crickets after launch; friends say "cool"; don't know who to ask; fear of reaching out; generic AI advice; little time | Skipped or invented interviews; slide-deck "validation"; can't see who is stuck until too late; subjective grading |
+| Gains | A first conversation this week; quotes in customers' own words; commitments; a clear next step; something to show | Live visibility; evidence-based grading; one method across sections |
+| Pain relievers we have | One next step; Mom Test questions; consent-first interview mode; synthesis; outreach drafts | None yet |
+| Pain relievers missing | Proof Not Praise, Devil's Advocate, Interview Coach, first-ask kickstart, Evidence Pack | Cohort view, rubric-aligned Evidence Pack, assignment template |
+
+**Alternatives** (claims to verify with sources in VP-001)
+
+| Alternative | Good at | Falls short for a student founder | First Ten's edge |
+|---|---|---|---|
+| ChatGPT/Claude ad hoc | Free, flexible | Generic, agreeable, forgets your evidence, no process | Grounded in your own interviews, argues back, keeps the record |
+| The Mom Test book, Startup School | The method | No help in the moment or with follow-through | Method built into a phone-first flow with gates |
+| Notion/Docs templates | Free, familiar | No synthesis, progress or accountability | Ladder, synthesis, scorecard |
+| Research repositories (e.g. Dovetail) | Deep analysis | Priced and built for research teams | Student-sized, and it helps you find people |
+| Outreach/lead tools (e.g. Apollo) | Volume | Wrong stage, spammy, paid | Warm-first, community-respectful |
+| Instructors and mentors | Judgment | Scarce, after the fact | Always on; makes mentor time count |
+
+**Value hypotheses** (kill criteria detailed in `research/value-prop.md`, VP-001)
+
+- **VP1 Proof to show**: founders value evidence they can show others more than the ladder itself. Kill if founders never mention an audience for their evidence.
+- **VP2 Nerve, not knowledge**: the first outreach is blocked more by fear than by not knowing the method. Kill if most founders who stall cite time or method, not nerve.
+- **VP3 Instructor pull**: instructors would assign First Ten for visibility and gradable evidence; the program is the buyer. Kill if at most 1 of 3-5 instructors describes this pain in their current process.
+- **VP4 Accountability**: outside a course, founders stall after Stage 1 without external deadlines. Kill if self-directed founders reach Stage 2 at similar rates to course founders.
+- **VP5 Commitments fit students**: free-app founders can collect meaningful commitments (time, intros, repeat use, pre-signups), not only money. Kill if founders can't name one plausible commitment for their app.
+
+**Candidate one-liners** (VP-004 message test)
+
+- A (current, process): "You built it. Now meet the people it's for."
+- B (proof): "Turn 'cool idea!' into proof: real conversations, real commitments, a clear next step."
+- C (action): "Talk to 10 real people this week. We write the questions; you have the conversations."
+- Instructor: "See which teams are really talking to customers, and grade discovery on evidence, not slides."
+
+**Metrics that express the value**
+
+- North star (candidate): founders with ≥3 completed interviews and ≥1 logged commitment within 14 days of signup.
+- Activation: first completed interview within 7 days of signup.
+- Honesty signal: share of syntheses where the founder opens the Devil's Advocate and then changes a learning or plan.
+
 ---
 
 ## 3. Staging order of operations (dependency spine)
@@ -76,7 +135,7 @@ Each regeneration iteration must respect this order. A later stage's tasks may n
 
 | Stage | Purpose | Gate to leave the stage |
 |---|---|---|
-| **R0 Research** | Replace guesses with evidence (signal brief, interviews, personas) | `research/synthesis.md` exists, ≥5 founder interviews logged, backlog re-ranked with evidence links |
+| **R0 Research** | Replace guesses with evidence (signal brief, interviews, personas) | `research/synthesis.md` exists with VP1-VP5 verdicts, ≥5 founder and ≥3 instructor interviews logged, backlog re-ranked with evidence links |
 | **R1 Foundations** | Remove blockers for everything after: LLM layer, evals, cost control, cleanup, tests, schema changes | Prompts versioned, eval harness runs, usage metered, `npm run test` green, Vercel deploy green |
 | **R2 Core features** | The features the research says matter most | Each feature has acceptance tests and a metric defined |
 | **R3 Growth and cohort** | Instructor/cohort views, sharing, retention, monetization | Pilot with a real cohort completed and debriefed |
@@ -84,7 +143,8 @@ Each regeneration iteration must respect this order. A later stage's tasks may n
 Dependency rules of thumb:
 - Schema migrations before the UI that uses them. Prompt versioning before new AI kinds. Evals before changing a prompt that is already shipped.
 - Anything that stores user-generated text from third parties (e.g. Reddit snippets) needs the privacy task (F-006) first.
-- Research tasks (R0) never touch app code; they write to `research/` only.
+- Research tasks (R0) never touch app code; they write to `research/` only. Exception: value-prop experiments (VP-004, VP-005) are small app changes and are sequenced after F-006 and I2-005.
+- Value before features: an R2 feature that does not deepen a confirmed value hypothesis (§2.1) waits.
 
 ---
 
@@ -118,16 +178,16 @@ Not commitments. R0 re-ranks these and adds new ones. Each links to the assumpti
 | FB-06 | **Outreach tracker with follow-up reminders** | A4 | R2 |
 | FB-07 | **Offline-first PWA** interview mode | A3 | R2 |
 | FB-08 | **Multiple projects** and archive | product | R1 |
-| FB-09 | **Cohort/instructor dashboard** (anonymized progress, stuck alerts) | Babson context | R3 |
+| FB-09 | **Cohort/instructor dashboard** (fake door first: VP-005; build in Iteration 4 only if VP3 holds) (anonymized progress, stuck alerts) | Babson context; VP3 | R3 |
 | FB-10 | **Experiment tracker upgrade** (hypothesis, metric, result, decision) | A6 | R2 |
 | FB-11 | **Survey builder and public link** | A3 | R3 |
 | FB-12 | **Model picker and cost meter** (covered by F-005) (Token Budget idea): per-user spend caps, routing to cheaper models | AI cost dependence | R1 |
-| FB-13 | **Share/export** discovery report (PDF/markdown) | Babson context | R3 |
-| FB-14 | **Anti-fear coaching** micro-challenges | A1 | R2 |
+| FB-13 | **Evidence Pack** (scheduled: I3-001, conditional on VP1 or VP3): shareable, revocable summary of conversations, quotes, commitments and changes, plus PDF/markdown export | Babson context; VP1, VP3 | R2 |
+| FB-14 | **First-ask kickstart / anti-fear coaching** (scheduled: I3-002, conditional on VP2) micro-challenges | A1; VP2 | R2 |
 | FB-15 | **Devil's Advocate** (scheduled: I2-003): AI argues against your synthesis/plan to counter sycophancy; shows what evidence would change its mind | "AI just agrees with you" | R2 |
 | FB-16 | **Pain Miner (user-supplied)**: founder pastes public complaints/reviews; AI clusters them into ranked problem briefs with quotes, to seed Stage 1 contacts and questions | "boring database of complaints made $3,200" | R2 |
 | FB-17 | **Test Swap / Test Panels**: cohort peer-testing with structured reports (credit-based) | peer testing demand | R3 |
-| FB-18 | **Digest, not dashboard** (deferred to Iteration 3: needs I2-005 events first): weekly email/Slack summary of next step and progress | "dashboard nobody opened" | R2 |
+| FB-18 | **Digest, not dashboard** (hold: needs I2-005 events data showing drop-off): weekly email/Slack summary of next step and progress | "dashboard nobody opened" | R2 |
 
 ---
 
@@ -200,16 +260,18 @@ Stage: R0 → R1. R0 tasks that need humans (R0-004/005) can run in parallel wit
   - Goal: Store the user-supplied summary as inspiration.
   - Done when: `research/inspiration/reddit-signals-2026-10.md` exists and §5 maps signals to features.
   - Notes: 2026-10-17 done. §5 backlog expanded with FB-15..FB-18 and re-sourced FB-01/05/12.
-- [ ] **R0-003 Re-rank backlog from the brief** (S · deps: R0-002 · owner: agent)
+- [-] **R0-003 Re-rank backlog from the brief** (S · deps: R0-002 · owner: agent)
   - Goal: Score §5 by Signal strength × Pain × Fit ÷ Effort; mark top 5 as hypotheses to validate.
   - Done when: ranked table in `research/synthesis.md` (draft section "Ranked hypotheses") with one-line reasoning each.
   - Notes: Titles-only evidence: cap signal strength at "medium" for anything not corroborated by interviews.
-- [ ] **R0-004 Student-founder interviews (5-8)** (L · deps: R0-003 · owner: human + agent)
+  - Notes: 2026-10-17 DROPPED as a separate task: the re-rank tables in Iteration 2 and Iteration 3 cover it; R0-005 cites them in `research/synthesis.md`.
+- [ ] **R0-004 Student-founder interviews (5-8)** (L · deps: VP-002 · owner: human + agent)
   - Goal: Mom Test interviews on the top 5 hypotheses; notes in `research/interviews/` (first names, no sensitive data).
   - Done when: ≥5 interviews logged with tags and quotes.
   - Notes: Dogfood: run them in First Ten's interview mode.
-- [ ] **R0-005 R0 synthesis (GATE)** (M · deps: R0-004 · owner: human + agent)
-  - Goal: `research/synthesis.md` (≤2 pages): A1-A6 verdicts, 2-3 personas, ranked backlog, answers to §1 open questions.
+  - Notes: 2026-10-17 REGEN: use `research/interviews/guide-founders.md` (VP-002), which adds probes for VP1, VP2, VP4, VP5.
+- [ ] **R0-005 R0 synthesis (GATE)** (M · deps: R0-004, VP-003 · owner: human + agent)
+  - Goal: `research/synthesis.md` (≤2 pages): A1-A6 and VP1-VP5 verdicts, 2-3 personas (at least one per segment), ranked backlog, answers to §1 open questions.
   - Done when: decisions logged in §8; R0 gate in §3 satisfied.
   - Notes:
 
@@ -267,6 +329,8 @@ Stage: R0 → R1. R0 tasks that need humans (R0-004/005) can run in parallel wit
 
 ## Iteration 2: Close R1, pass the R0 gate, ship the first R2 slice
 
+> **Superseded on 2026-10-17 by Iteration 3** before any Iteration 2 task started. Its *ordering* is replaced by Iteration 3's order of operations. Its *task definitions* (X-001, I2-001..I2-005, L-002) remain valid and live here; Iteration 3 schedules them. G-002 is replaced by G-003.
+
 Generated 2026-10-17 by the regeneration prompt. Stage: R1 → R2.
 
 **Reconciliation (Step A)**: Iteration 1 carries over. Done: R0-001, R0-002, F-009, F-010. Partly done: F-002 (timeouts and retries shipped; fallback models, usage logging and tests remain). Everything else carries unchanged. The Reddit audit was dropped (decision in §8), so R0 now rests on the signal brief plus interviews.
@@ -287,17 +351,9 @@ Generated 2026-10-17 by the regeneration prompt. Stage: R1 → R2.
 
 **Staging**: R1 foundations first (carry-over block), then the R0 gate, then the R2 slice. R2 tasks must not start before the R0 and R1 gates in §3 are checked. I2-005 (events) precedes anything that needs usage data.
 
-### Carry-over from Iteration 1 (do in this order; tasks keep their ids and live in the Iteration 1 section)
+### Carry-over from Iteration 1
 
-1. F-007 Test baseline (no deps, unblocks CI for everything else)
-2. F-001 Remove Lovable leftovers (deploy risk; run after F-007 so tests catch regressions)
-3. F-002 remainder: fallback models, usage logging, mocked-fetch tests
-4. F-003 Prompt registry and versioning
-5. F-004 Eval harness (needed before I2-003 and I2-004)
-6. F-005 Usage metering and spend caps
-7. F-006 Privacy and data-handling pass (needed before any third-party text is stored)
-8. F-008 Non-destructive outreach regeneration
-9. R0-003 Re-rank backlog (agent), R0-004 founder interviews (human, start now, parallel), R0-005 R0 synthesis GATE
+Moved to Iteration 3's order of operations.
 
 ### New tasks
 
@@ -329,14 +385,104 @@ Generated 2026-10-17 by the regeneration prompt. Stage: R1 → R2.
   - Goal: Watch 3 real student founders use commitments, challenge and coach.
   - Done when: `research/interviews/` has 3 session notes with friction points and quotes; top 3 problems recorded in Notes here.
   - Notes: Ask Mom Test questions; do not pitch the features.
-- [ ] **G-002 Gate review and Iteration 3 trigger** (S · deps: all above · owner: either)
+- [-] **G-002 Gate review and Iteration 3 trigger** (S · deps: all above · owner: either)
   - Goal: Tick the §3 gates for R0, R1 and R2-slice; decide go/no-go for Iteration 3; run §6.
   - Done when: gates checked in §3 with evidence links; §8 has the decision; §1 updated.
-  - Notes: Candidate Iteration 3 themes (do not start): Community Finder / Helpful Replies (needs F-006 and interview confirmation), Digest (needs I2-005 data), cohort dashboard and peer testing (needs a pilot cohort), multiple projects (FB-08).
+  - Notes: 2026-10-17 DROPPED: replaced by G-003 in Iteration 3.
+  - Notes (earlier): Candidate Iteration 3 themes (do not start): Community Finder / Helpful Replies (needs F-006 and interview confirmation), Digest (needs I2-005 data), cohort dashboard and peer testing (needs a pilot cohort), multiple projects (FB-08).
 
 **Per-feature checklist (Step D)**: tests: covered in each task's Done when. Metrics: noted per task. Rollback: migrations ship with a down file; UI features sit behind a simple flag in `projects.checklist` or a constant until the learning task passes.
 
 **Iteration 2 gate**: F-001..F-008 done; R0-005 synthesis written; X-001 green on production; I2-001..I2-005 shipped; L-002 notes recorded.
+
+---
+
+## Iteration 3: Understand and deepen the value proposition, then build what proves it
+
+Generated 2026-10-17 by the regeneration prompt, with the owner's focus: understand the value proposition and deepen it. Ends with a 5-minute pitch deck and product architecture diagrams. Stage: R0 (value track) and R1 in parallel, then R2.
+
+**Reconciliation (Step A)**
+- Nothing in Iteration 2 had started. Iteration 3 replaces its ordering. All Iteration 2 task definitions carry except G-002, which is dropped for G-003.
+- Iteration 1: R0-003 dropped (covered by the Iteration 2 and 3 re-rank tables). R0-004 now depends on the new interview guide (VP-002). R0-005 now also needs instructor interviews (VP-003) and VP1-VP5 verdicts. F-002 stays partial. Everything else carries unchanged.
+
+**Value-prop diagnosis (Step B input)**: see §2.1. In short, the app sells a *process* (the ladder), but the signals point to an *outcome*: confidence grounded in proof, versus polite praise and flattering AI. Proof also has an audience, which suggests a second segment: instructors and programs who need to *see* real discovery. These are hypotheses (VP1-VP5) until interviews test them.
+
+**Re-rank through the value lens (Step B)**: each idea is scored by how much it deepens the promise "proof, not praise", times signal strength, divided by effort.
+
+| Rank | Idea | Which part of the value it deepens | Verdict |
+|---|---|---|---|
+| 1 | FB-05 Proof, Not Praise (I2-001/002) | Defines what "proof" means; core of the promise | Schedule after R0 gate |
+| 2 | FB-15 Devil's Advocate (I2-003) | Honesty; counters flattering AI | Schedule after R0 gate |
+| 3 | FB-02 Interview Coach (I2-004) | Quality of the proof collected | Schedule after R0 gate |
+| 4 | FB-13 Evidence Pack (I3-001) | Social job: proof you can show; bridge to instructors | Promoted from R3. Conditional on VP1 or VP3 |
+| 5 | FB-14 First-ask kickstart (I3-002) | Emotional job: nerve for the first conversation; activation | Promoted. Conditional on VP2 |
+| 6 | FB-09 Instructor view | Second segment | Fake door only (VP-005); build in Iteration 4 if VP3 holds |
+| - | FB-01 Community Finder | Reach (10 to 50) | Hold until R0-005 and F-006 |
+| - | FB-18 Digest | Retention, accountability (VP4) | Hold until events show where founders drop off |
+| - | FB-16, FB-17, FB-03, FB-07 | Not yet tied to a value hypothesis | Hold |
+
+**Order of operations (Step C; dependency order, work top to bottom)**
+
+1. **Value track, agent, now**: VP-001, then VP-002. These unblock the human interviews, which take the longest.
+2. **Human, in parallel from now on**: R0-004 founder interviews and VP-003 instructor interviews.
+3. **R1 carry-over, agent**: F-007 → X-001 → F-001 → F-002 (remaining) → F-003 → F-004 → F-005 → F-006 → F-008. Definitions are in Iteration 1 and Iteration 2.
+4. **Instrumentation, then experiments**: I2-005 events → VP-004 message test and VP-005 instructor fake door.
+5. **R0 gate**: R0-005 synthesis → VP-006 positioning decision and rollout.
+6. **R2 slice** (only after the R0 and R1 gates): I2-001 → I2-002; I2-003; I2-004; then the conditional I3-001 and I3-002.
+7. **Learning**: L-002 dogfood with 3 founders (include I3-001/I3-002 if they shipped).
+8. **G-003** gate review.
+9. **P-001** (final task): 5-minute pitch deck and product architecture diagrams.
+
+### New tasks
+
+- [ ] **VP-001 Value proposition canvas and alternatives scan** (S · deps: none · owner: agent)
+  - Goal: Turn §2.1 into `research/value-prop.md`: a canvas for each segment, an alternatives table with real sources, and VP1-VP5, each with confirm and kill signals and the interview question that tests it.
+  - Done when: the file exists; every claim about an alternative links a source checked that day (pricing page, docs or official site); no hypothesis is stated as fact; §2.1 links to the file.
+  - Notes: Research only; no app code.
+- [ ] **VP-002 Interview guides for both segments** (S · deps: VP-001 · owner: agent)
+  - Goal: Mom Test guides for student founders (used by R0-004) and for instructors and program leads (used by VP-003).
+  - Done when: `research/interviews/guide-founders.md` and `guide-instructors.md` exist, each with at most 12 past-behavior questions, each mapped to a hypothesis (A1-A6, VP1-VP5); a note template with tags; a recruiting checklist (first names or roles only).
+  - Notes: The instructor guide asks how last semester's discovery assignments actually ran and were graded. It does not pitch First Ten.
+- [ ] **VP-003 Instructor and program-lead interviews (3-5)** (M · deps: VP-002 · owner: human)
+  - Goal: Learn how instructors run and assess customer discovery today, what breaks, and who decides on tools and budget.
+  - Done when: at least 3 notes in `research/interviews/` (roles, not names unless agreed), tagged with hypotheses; one-paragraph takeaway in Notes here.
+  - Notes: Candidates: entrepreneurship and AI Academy faculty, accelerator or program leads. This is the learning task for the value track.
+- [ ] **VP-004 Landing-page message test** (S · deps: I2-005, F-006 · owner: agent)
+  - Goal: Test one-liners A, B and C from §2.1 on real visitors.
+  - Done when: each visitor gets a variant at random, sticky per browser; the variant is stored on the signup event; a SQL view reports visits (Vercel Web Analytics, no cookies) → signups → first interview within 7 days, per variant; a constant pins one variant; tests cover assignment.
+  - Notes: Traffic will be low, so read results as directional and pair them with interview reactions. Metric: signup rate and 7-day activation per variant. Rollback: pin variant A. No third-party trackers.
+- [ ] **VP-005 Instructor fake door** (S · deps: F-006 · owner: agent)
+  - Goal: Measure instructor pull before building a cohort view.
+  - Done when: an `/instructors` page states the instructor value prop and labels the cohort view honestly as "in development, tell us if you want it"; the form saves name, school, email and course size to `instructor_interest` (anonymous insert only, no public read, owner-only RLS for reading); privacy note shown; nothing is emailed automatically; tests cover the policy.
+  - Notes: Metric: interest sign-ups from instructors reached in VP-003 or by class links. Rollback: remove the route and keep the table.
+- [ ] **VP-006 Positioning decision and rollout** (M · deps: R0-005, VP-004 · owner: human + agent)
+  - Goal: Choose the primary segment, the one-liner and the pricing hypothesis, and apply them everywhere.
+  - Done when: §8 records the decision with evidence links; landing page, auth page, setup copy, README intro and ProductSpec §1 updated; §2.1 marked "decided" with what was confirmed or killed; §1 open questions closed or re-asked.
+  - Notes: If VP3 holds, Iteration 4 promotes the instructor view (FB-09). If VP3 fails, drop the instructor fake door and keep Evidence Pack founder-only.
+- [ ] **I3-001 Evidence Pack** (M · deps: I2-002, I2-003, VP-006 · conditional: build only if VP1 or VP3 holds · owner: agent)
+  - Goal: One tap to share proof: who you talked to (first names or roles), what you heard (quotes), commitments, what you changed, what the Devil's Advocate challenged, and your next step.
+  - Done when: a read-only share link with an unguessable, revocable token; PDF and markdown export that work on a phone; the founder reviews quotes before sharing and names are stripped; tests cover token access, revocation and RLS; if VP3 holds, section headings follow instructor feedback from VP-003.
+  - Notes: Metric: share of founders past Stage 1 who share a pack. Rollback: feature flag. Privacy: needs F-006.
+- [ ] **I3-002 First-ask kickstart** (S · deps: I2-005, VP-006 · conditional: build only if VP2 holds · owner: agent)
+  - Goal: Shorten the time from signup to first conversation.
+  - Done when: with 0 interviews, the dashboard offers "ask one person today", an AI-drafted, low-pressure ask for a specific contact (using their relation), and a 15-minute interview shortcut; a self-reported `first_ask_sent` event; tests.
+  - Notes: Metric: median days from signup to first completed interview (target under 3). The app never sends messages for the user.
+- [ ] **G-003 Gate review and Iteration 4 trigger** (S · deps: everything above except P-001 · owner: either)
+  - Goal: Check the §3 gates for R0, R1 and the R2 slice; decide go/no-go and the Iteration 4 theme.
+  - Done when: gates ticked with evidence links; §8 decision; §1 updated; then run §6 after P-001.
+  - Notes: Likely Iteration 4 candidates (do not start): instructor view if VP3 holds, Community Finder, Digest.
+- [ ] **P-001 FINAL: 5-minute pitch deck and product architecture diagrams** (M · deps: G-003 · owner: agent; owner rehearses)
+  - Goal: Tell the deepened value story in 5 minutes, using only real evidence, with architecture diagrams that match the shipped code.
+  - Done when:
+    - **Deck**: 9-10 slides with speaker notes timed to 5:00 or less (about 30 seconds each): (1) title and chosen one-liner; (2) problem: built it, crickets, polite praise, with real interview quotes; (3) insight: proof, not praise; (4) who it's for, and the buyer if VP3 holds; (5) product walkthrough with production screenshots at phone width; (6) how it differs from the alternatives (from VP-001); (7) evidence and traction: interviews, activation, commitments, each number cited to `research/` or the events table in the notes; (8) business model (from VP-006); (9) architecture at a glance (diagram 1); (10) roadmap and ask.
+    - **Format**: a Slides artifact that exports to .pptx or PDF, using the owner's design system if one exists.
+    - **Diagrams**: `docs/architecture.md` with Mermaid diagrams that render on GitHub: (1) system context: browser, TanStack Start on Vercel, Supabase Auth and Postgres with RLS, OpenRouter; (2) ER diagram of every table, including those added this iteration (commitments, events, ai_usage, instructor_interest); (3) sequence diagram of one AI call: auth middleware, context assembly, prompt registry, spend cap, OpenRouter, schema validation, persistence, event; (4) delivery pipeline: GitHub, Actions (lint, test, build, eval), Vercel deploy, smoke test, Supabase migrations.
+    - **Checks**: every table, route and service named in a diagram exists in the code at that commit; README and ProductSpec link to `docs/architecture.md`; the owner times one run-through and the notes are adjusted.
+  - Notes: No invented traction. If a number doesn't exist yet, the slide says what will be measured next. If a pitch date comes before G-003, an early draft can be made from the current state and labeled as a draft.
+
+**Per-feature checklist (Step D)**: every feature task lists tests, a metric and a rollback. Conditional tasks are marked `[-]` with the reason if their hypothesis fails.
+
+**Iteration 3 gate**: VP1-VP5 verdicts in `research/synthesis.md`; positioning decided (VP-006); R1 gate met; I2-001..I2-005 shipped; conditional tasks resolved (built or dropped with a reason); L-002 notes recorded; P-001 deck and diagrams delivered.
 
 ---
 
@@ -349,6 +495,10 @@ Generated 2026-10-17 by the regeneration prompt. Stage: R1 → R2.
 | 2026-10-17 | LLM via OpenRouter, default `anthropic/claude-sonnet-4.5`, strict JSON schema, non-streaming | Model flexibility and one key; JSON outputs are small | Lovable AI gateway (only works inside Lovable) |
 | 2026-10-17 | Research before features, but Reddit audit cancelled; use supplied signal brief as inspiration plus founder interviews | Reddit unreachable to tools; owner chose the brief | Reddit API app, pasted URLs, Claude in Chrome (blocked) |
 | 2026-10-17 | First R2 slice = Proof Not Praise, Devil's Advocate, Interview Coach; Community Finder held | Highest signal-to-effort, least dependent on unresolved privacy work and interviews | Community Finder first; Pain Miner |
+| 2026-10-17 | Iteration 3 supersedes Iteration 2's ordering; value-prop track front-loaded | Owner asked to understand and deepen the value prop before building more; nothing in Iteration 2 had started | Running Iteration 2 as planned |
+| 2026-10-17 | Working value prop: "proof, not praise", with two segments (student founder user, instructor/program buyer) as hypotheses VP1-VP5; final positioning deferred to VP-006 | The signal brief points to validation confusion and flattering AI; proof has an audience | Keep the process-led "ladder" message only |
+| 2026-10-17 | Evidence Pack and first-ask kickstart promoted, conditional on VP1/VP3 and VP2; instructor view tested as a fake door first | Deepen the value before widening features; don't build a cohort view before instructor pull is shown | Build the cohort dashboard now |
+| 2026-10-17 | Final task of the iteration: 5-minute pitch deck and architecture diagrams (P-001), evidence-only numbers | Owner request; the deck should tell the deepened story with real data | A deck now from assumptions |
 
 ## 9. Iteration log (append only)
 
@@ -357,3 +507,4 @@ Generated 2026-10-17 by the regeneration prompt. Stage: R1 → R2.
 | 2026-10-17 | Reddit audit cancelled; signal brief adopted (R0-001/002 done, backlog FB-15..18 added) |
 | 2026-10-17 | Initial roadmap written: Iteration 1 (R0 research plus R1 foundations). Nothing executed yet. |
 | 2026-10-17 | Regeneration run: Iteration 2 planned (carry-over R1, R0 gate, I2-001..005, X-001, L-002, G-002). Reconciled F-002 (partial), F-009, F-010 done. Collapsed nothing: Iteration 1 is not finished. |
+| 2026-10-17 | Regeneration run (value-prop focus): Iteration 3 planned. Added §2.1 value proposition (two segments, VP1-VP5, one-liners, metrics), VP-001..VP-006, I3-001/I3-002 (conditional), G-003, P-001 final (pitch deck and architecture diagrams). Dropped R0-003 and G-002. Iteration 2 marked superseded; its task definitions kept. |
