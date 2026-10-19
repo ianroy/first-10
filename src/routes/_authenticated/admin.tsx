@@ -107,7 +107,7 @@ function AdminPage({ projectId }: { projectId: string }) {
             </p>
           )}
           <PublicContextReadiness key={`${user.id}:${projectId}`} projectId={projectId} />
-          <AIReadinessPanel key={`ai:${user.id}`} />
+          <AIReadinessPanel key={`ai:${user.id}:${projectId}`} projectId={projectId} />
           <Card>
             <div className="flex flex-wrap items-start justify-between gap-4">
               <div>

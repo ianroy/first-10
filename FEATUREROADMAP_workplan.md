@@ -54,7 +54,11 @@ resume_hint: >-
   paste secrets. No account settings changed. Narrow Vercel metadata confirms
   production OPENROUTER_API_KEY is Sensitive/runtime-only; no secret extracted.
   Actual production platform-admin count is0. New operator-only readiness probe
-  requires a genuine DB grant and is not usable yet; never auto-upgrade presenter.
+  originally required a genuine DB grant; dcc1116 presenter denial was verified.
+  New reviewed source adds a separate exact fictional-presenter metadata permission,
+  requiring fresh trusted fixture markers and current owned active reserved project
+  before/after the free check. No platform role is granted.77focused/type/scopedlint/
+  build pass. Deploy this narrow probe next, then verify actual serving-key metadata.
   Source adds bounded/audited runtime key check and exact standard Vertex3.1
   candidate selector.1401app tests/11existing skips(all5actualDTOs),type/scopedlint/
   productionbuild PASS. No live key probe, model quality or generation enablement

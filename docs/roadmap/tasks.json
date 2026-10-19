@@ -2270,7 +2270,8 @@
         "src/components/admin/AIReadinessPanel.tsx",
         "src/routes/_authenticated/admin.tsx",
         "src/tests/desktop-routes/admin-page.test.tsx",
-        "docs/verification/live-ai-readiness-20261018.json"
+        "docs/verification/live-ai-readiness-20261018.json",
+        "src/lib/ai/readiness-access.server.ts"
       ],
       "exclusive_locks": ["ai-entrypoint"],
       "read_first": [
@@ -2335,6 +2336,14 @@
         {
           "date": "2026-10-18",
           "text": "dcc1116 Vercel production READY verified. Genuine desktop presenter opened new admin readiness control and actual server request denied as intended (no trueplatformadmin grants); no key metadata/provider draft exposed. Screenshot first-ten-ai-readiness-role-denial.png saved/embedded. No global policy changed or role auto-granted. Next implementation must make actual successor evaluation possible with the key remaining in serving runtime; preserve immutable v6 evaluator evidence/0.90 plan rather than pretending it supports the3.1 replacement or broadening origins secretly. Continue feasible source work while user identifies correct OpenRouter key label/workspace."
+        },
+        {
+          "date": "2026-10-18",
+          "text": "Root extends runtime-only metadata check with a separate, narrowly fixed fictional-presenter permission: exact reserved actor/project, fresh trusted synthetic/demo/fixture markers and current owned active fixture. This permits only the free bounded serving-key readiness response, not platform-admin status, policy mutation, paid generation or private note reads. Ordinary owners/other synthetic users remain denied. No production credential extraction. Build this scoped probe to verify actual serving-key readiness while preserving the0 true-platform-admin state."
+        },
+        {
+          "date": "2026-10-18",
+          "text": "Narrow fixed-presenter readiness source implemented: exact reserved actor/project, fresh trusted fixture markers, owner/RLS-scoped active fixture projection only, repeated identity/scope check after metadata. No role grant/private content read/policy mutation/paid call. Actual platform-admin path retains before/after audit.77 focused tests pass including spoofed/foreign/archived fixture denials and role-change checks; typecheck/scopedlint/productionbuild pass. Deploy then actual serving-key metadata probe next. Previous genuine presenter denial remains historical evidence for dcc1116; new explicit narrow metadata permission does not turn presenter into platform admin."
         }
       ],
       "claim": {

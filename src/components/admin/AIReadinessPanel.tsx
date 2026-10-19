@@ -5,7 +5,7 @@ import { Button } from "@/components/ui/button";
 import { getAIKeyReadiness } from "@/lib/ai/readiness.functions";
 import type { AIKeyReadiness } from "@/lib/ai/readiness.server";
 
-export function AIReadinessPanel() {
+export function AIReadinessPanel({ projectId }: { projectId: string }) {
   const inspect = useServerFn(getAIKeyReadiness);
   const [result, setResult] = useState<AIKeyReadiness | null>(null);
   const [busy, setBusy] = useState(false);
@@ -23,7 +23,7 @@ export function AIReadinessPanel() {
     setDenied(false);
     setResult(null);
     try {
-      const value = await inspect({ data: {} });
+      const value = await inspect({ data: { projectId } });
       if (requests.current.epoch === epoch) setResult(value);
     } catch {
       if (requests.current.epoch === epoch) setDenied(true);
@@ -36,16 +36,17 @@ export function AIReadinessPanel() {
       <h2 className="text-xl font-bold">Live AI readiness</h2>
       <p className="mt-3 max-w-3xl text-sm text-muted-foreground">
         Verify the deployed OpenRouter credential and its spending limit. This free check sends no
-        student work, generates no draft and changes no settings. Platform administrator access is
-        required.
+        student work, generates no draft and changes no settings. Access requires a platform
+        administrator or the exact authorized fictional presenter workspace. This grants no admin
+        role.
       </p>
       <Button className="mt-4" variant="outline" onClick={() => void check()} disabled={busy}>
         {busy ? "Checking OpenRouter…" : "Check deployed AI credential"}
       </Button>
       {denied && (
         <p role="alert" className="mt-4 text-sm">
-          This check could not be authorized or audited. A presenter account alone does not grant
-          platform administrator access.
+          This check could not be authorized or verified. It is limited to platform administrators
+          and the exact authorized fictional presenter workspace.
         </p>
       )}
       {result && (
