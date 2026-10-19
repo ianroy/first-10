@@ -49,10 +49,10 @@ type Case = {
     contacts: unknown[];
   };
 };
-const fixtures = JSON.parse(readFileSync("src/tests/ai-eval/fixtures.v6.json", "utf8")) as {
+const fixtures = JSON.parse(readFileSync("src/tests/ai-eval/fixtures.v7.json", "utf8")) as {
   cases: Case[];
 };
-const baseline = JSON.parse(readFileSync("evals/offline-baseline.v6.json", "utf8")) as {
+const baseline = JSON.parse(readFileSync("evals/offline-baseline.v7.json", "utf8")) as {
   cases: { id: string; output: unknown }[];
 };
 afterEach(() => vi.unstubAllEnvs());
@@ -134,7 +134,7 @@ describe("AI-003 reproducible evaluation inputs", () => {
       expect(scope.contextFence.contextHash).toBe(c.budget_binding_sha256);
       expect(h.claim).toHaveBeenCalledOnce();
       expect(h.settle).toHaveBeenCalledWith(expect.objectContaining({ outputValid: true }));
-      if (c.id === "stage3-edge-v6") {
+      if (c.id === "stage3-edge-v7") {
         const user = h.request.mock.calls[0]?.[0].user;
         expect(user).toContain('"permission":');
         expect(user).not.toContain("WITHDRAWN_PRIVATE_NOTE");
@@ -147,12 +147,16 @@ describe("AI-003 reproducible evaluation inputs", () => {
       );
     },
   );
-  it("runs all offline scoring, binding, budget, failure and no-network checks under the normal Vitest command", () => {
-    const output = execFileSync(process.execPath, ["--test", "src/tests/ai-eval/runner.test.mjs"], {
-      encoding: "utf8",
-      timeout: 20000,
-    });
-    expect(output).toContain("# tests 19");
+  it("runs current offline runtime-source, grounding and tamper checks under the normal Vitest command", () => {
+    const output = execFileSync(
+      process.execPath,
+      ["--test", "src/tests/ai-eval/runtime-parity-v7.test.mjs"],
+      {
+        encoding: "utf8",
+        timeout: 20000,
+      },
+    );
+    expect(output).toContain("# tests 6");
     expect(output).toContain("# fail 0");
   }, 25000);
 });

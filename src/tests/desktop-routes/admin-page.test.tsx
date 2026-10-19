@@ -29,6 +29,7 @@ vi.mock("@tanstack/react-query", () => ({
 vi.mock("@tanstack/react-start", () => ({ useServerFn: () => vi.fn() }));
 vi.mock("@/lib/admin.functions", () => ({ getAdminSnapshot: vi.fn() }));
 vi.mock("@/lib/ai/readiness.functions", () => ({ getAIKeyReadiness: vi.fn() }));
+vi.mock("@/lib/ai.functions", () => ({ generateAI: vi.fn() }));
 vi.mock("@/components/admin/PublicContextReadiness", () => ({
   PublicContextReadiness: () => <section>Public-source import readiness</section>,
 }));

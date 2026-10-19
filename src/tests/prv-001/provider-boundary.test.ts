@@ -146,8 +146,8 @@ describe("PRV001 provider boundary", () => {
   });
   it("leaves the fixed fictional marketing practice boundary separate", async () => {
     h.demo.mockResolvedValue({ fixture: true });
-    await invoke("marketing_demo");
-    expect(h.demo).toHaveBeenCalledOnce();
+    await expect(invoke("marketing_demo")).rejects.toThrow("older fictional practice is paused");
+    expect(h.demo).not.toHaveBeenCalled();
     expect(h.rpc).not.toHaveBeenCalled();
     expect(h.prepare).not.toHaveBeenCalled();
   });

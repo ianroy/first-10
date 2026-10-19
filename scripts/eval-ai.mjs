@@ -75,16 +75,24 @@ export function assembleFixtureContext(c) {
 }
 export const derivePermissionFixture = derivePermissionFixtureV6;
 export async function loadFixtures(root = ROOT) {
-  const raw = await readFile(resolve(root, FIXTURE_PATH), "utf8");
+  return loadVersionedFixtures(root, {
+    path: FIXTURE_PATH,
+    version: "first-ten-existing-kinds-v6",
+    sourcePaths: SOURCE_PATHS,
+  });
+}
+// Offline parity reuse only. Historical v6 dispatch/key/origin guards stay unchanged.
+export async function loadVersionedFixtures(root, manifest) {
+  const raw = await readFile(resolve(root, manifest.path), "utf8");
   const fixture = JSON.parse(raw);
   if (
     !plain(fixture) ||
-    fixture.version !== "first-ten-existing-kinds-v6" ||
+    fixture.version !== manifest.version ||
     typeof fixture.source_commit !== "string" ||
     !/^[a-f0-9]{40}$/.test(fixture.source_commit) ||
     !Array.isArray(fixture.cases) ||
     !plain(fixture.source_sha256) ||
-    !isDeepStrictEqual(Object.keys(fixture.source_sha256).sort(), [...SOURCE_PATHS].sort())
+    !isDeepStrictEqual(Object.keys(fixture.source_sha256).sort(), [...manifest.sourcePaths].sort())
   )
     throw new Error("A complete versioned fixture and exact source manifest are required.");
   for (const [path, expected] of Object.entries(fixture.source_sha256))

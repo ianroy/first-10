@@ -2271,7 +2271,28 @@
         "src/routes/_authenticated/admin.tsx",
         "src/tests/desktop-routes/admin-page.test.tsx",
         "docs/verification/live-ai-readiness-20261018.json",
-        "src/lib/ai/readiness-access.server.ts"
+        "src/lib/ai/readiness-access.server.ts",
+        "src/lib/ai/runtime-evaluation*",
+        "src/lib/ai/budget-binding.ts",
+        "src/lib/ai/budget.server.ts",
+        "src/lib/ai/budget-contract.ts",
+        "src/lib/ai/contracts.ts",
+        "src/lib/ai/gateway.server.ts",
+        "src/components/admin/RuntimeAIEvaluation.tsx",
+        "scripts/prepare-runtime-ai-evaluation.mjs",
+        "docs/ai-runtime-evaluation-plan.md",
+        "scripts/eval-ai.mjs",
+        "scripts/eval-ai-v6.mjs",
+        "scripts/eval-ai-paid.mjs",
+        "src/tests/ai-eval/fixtures.v7.json",
+        "src/tests/ai-eval/**",
+        "src/tests/ai-003/**",
+        "evals/**",
+        "scripts/runtime-ai-fixtures.mjs",
+        "src/tests/ai-002/server-function.test.ts",
+        "src/tests/prv-001/provider-boundary.test.ts",
+        "README.md",
+        "ProductSpec.md"
       ],
       "exclusive_locks": ["ai-entrypoint"],
       "read_first": [
@@ -2344,12 +2365,28 @@
         {
           "date": "2026-10-18",
           "text": "Narrow fixed-presenter readiness source implemented: exact reserved actor/project, fresh trusted fixture markers, owner/RLS-scoped active fixture projection only, repeated identity/scope check after metadata. No role grant/private content read/policy mutation/paid call. Actual platform-admin path retains before/after audit.77 focused tests pass including spoofed/foreign/archived fixture denials and role-change checks; typecheck/scopedlint/productionbuild pass. Deploy then actual serving-key metadata probe next. Previous genuine presenter denial remains historical evidence for dcc1116; new explicit narrow metadata permission does not turn presenter into platform admin."
+        },
+        {
+          "date": "2026-10-18",
+          "text": "f071a8f production READY; actual fixed-presenter runtime key probe now succeeds. Serving key accepted, limit50USD/remaining49.9955416; external nonreset25USD control not verified. No key extracted, role granted, paid generation or global policy change. User25USD total remains governing cap, with24USD application ledger plus permanent1USD carveout; external key50USD is not new permission. Next source-only runtime evaluation bootstrap must use generateAI with fixed8fictional cases, exact operator eval-only route/user/project/context bindings, authoritative reservations/settlements and stable intent. No editable student work/provider-key export. Preserve v6 local-only0.90 evaluator as historical; new workflow is separately versioned. Do not open global stop until legacy2.5 path is closed and synthetic policy/rollback reviewed."
+        },
+        {
+          "date": "2026-10-18",
+          "text": "Larger v7 implementation isolated on codex/live-generation-v7 from passing f071a8f. First four owner kinds will use a separately versioned fixed-runtime evaluation bootstrap (not editable/private source data) through generateAI, existing atomic eval-only scope/hash/allowance ledger, eight stable case operation IDs and conservative model bounds. Preserve historical v6 fixtures/reports/local0.90 guard; current source-binding corpus must move to v7 before integration. Runtime expected-workspace pin remains unknown/null and dispatch closed pending actual account matching/BYOK/logging review. No paid activation yet."
+        },
+        {
+          "date": "2026-10-19",
+          "text": "Root closed-runtime v7 bootstrap passes1439app tests/11existing skips withall5actualDTO suites, fulltypecheck, scopedlint andproductionbuild. Eightauthoredfictional cases enter generateAI beforeeditableprivateprojectreads, fresh exactfixture authorization, stablecaseoperationIDs, existingeval-onlyledger/settlement, strictgrounding andreadonly receipts. Lostclaim/settlement acknowledgements neverpermitretry/refund; legacy2.5practice entrypoint nowexplicitlyclosed whilepreservingdrafts/1USDcarveout. Immutablev7current-sourcefixture/baseline added; historicalv1-v6artifacts andv6local0.90paidguards preserved. Sourcepin expectedworkspace remainsNULL: paidcallscannotdispatch. Unapproved4USDmaxplan preparedinside25USDtotal, noDBmutation. Actualab72productionREADY keyprobeacceptskey/workspace047cf11a-2bfd-5ce5-888a-2a4ddcd4bc14,limit50/resetting/BYOKexcluded/usage0.0044584; signed-inDefault8fb3fcfb-98fe-5695-a3a3-94f1067dac4e differs. Askeduserswitchaccount; visibleprivacysettingsdonotattestservingaccount. LatestexactstandardVertex3.1catalogstatus-2correctlyfailseligibility; donotsilentlysubstituteendpoint. Freshproductionreadonlycheckstillstoptrue/generalenabledfalse/openingholdNULL/0operations/0enabledroutes/4cdemoreserved. No paidcallsorrolegrant. Fullactivationsequence/limits/rollback:docs/ai-runtime-evaluation-plan.md. Original10hcheckpointreportedaccurately; goalremainsactiveunderlatestbuild-live-generationrequest. Otherworkersremainidle, slowserial."
+        },
+        {
+          "date": "2026-10-19",
+          "text": "Git staging requestedthroughrequire_escalated twice; automatic approval reviewerfailedatselected-modelcapacity beforeexecution, notunsafe-actiondetermination. No staging/commit/push/deploymentofv7occurred, nobypassattempted. Verifiedsource remainsuncommitted oncodex/live-generation-v7; productionstillab72f2e. Useraskedrestore revieweravailabilityorhandlecommit. This isseparatefromproductionOpenRouteraccount/workspacemismatch. Keepgoalactive; do notclaimv7live. Updatecursorbeforestop; preserveuserPDFuntracked."
         }
       ],
       "claim": {
         "owner": "root",
-        "branch": "main",
-        "base_commit": "57cf8f6e0f7af665e7f490c74082afde6ba38a39",
+        "branch": "codex/live-generation-v7",
+        "base_commit": "f071a8ffd43e76619bf1af79fc9dd7efa7461c99",
         "worktree": "/Users/ianroy/Library/CloudStorage/Dropbox/Apps by Ian/Babson AI Academy/First 10",
         "started_at": "2026-10-19T02:43:22.705846+00:00",
         "lease_expires_at": "2026-10-19T06:43:22.705846+00:00"
@@ -12084,7 +12121,8 @@
         "src/tests/guest-growth/handoff/**",
         "docs/architecture/guest-growth-handoff.md",
         "supabase/migrations/20261018028000_guest_growth_handoffs.sql",
-        "supabase/tests/cls-009-handoff.sql"
+        "supabase/tests/cls-009-handoff.sql",
+        "docs/verification/guest-growth-handoff-20261019.json"
       ],
       "exclusive_locks": ["guest-growth-integration", "database-schema"],
       "read_first": [
@@ -12261,15 +12299,27 @@
         {
           "date": "2026-10-18",
           "text": "User reprioritized LIVE generation. Sole worker stopped clean at source-only fa73603d19c359c8e1ebe69ab784425256ee5b70 in existing worktree.171 focused pass/29actualSQL skips; type/lint/format/syntax pass. Candidate28 UNAPPLIED/UNMOUNTED and never rehearsed. Actual20/50/50/2MiB/16MiB volume fixtures missing, privacy supersession/reconciliation UI review, independent pins review, SQL/DTO/races/expiry/COMMIT/cleanup and all shared/live gates remain. Preserve dormant claim; no worker active. Old exact pins are NOT trial approval. If AI work changes schema boundary, reserve a new forward version before resuming this candidate."
+        },
+        {
+          "date": "2026-10-19",
+          "text": "Root verified allotheragentscompleted/idle and existingcandidateworktreecleanfa73603d. WhileAI005account/workspacehandoff andGitapprovalreviewer blockpublication, rootreclaimsCLS009serialsource-onlycapacityfixturework inexisting /private/tmp/first-ten-guest-marketing-handoff. No subagentdispatch/parallelworker. Complete20versions/50previews/50threads/2MiBpublisher/16MiBclass volumegates andprivacy-reduction assertions; noDB/container/rehearsal/apply/mount/provideraction authorizedbythissourcecheckpoint. Actual27/published22–27unchanged. RootAIv7localchangespreserved; no sourcepinchange."
+        },
+        {
+          "date": "2026-10-19",
+          "text": "Root serialsourceworkaddsseparatefictionalclass/genuine9guest capacity fixtures:20actualversion/50preview/50thread admissions+nextrefusals, exactUTF8materialized2MiBpublisher/16MiBclass occupancy, actualRPCend-boundary admissions/refusals andprivacyreductions. Storagefillusestrustedtestrows, notclaimedasRPC-producedDTOs. Source reviewfoundorphanemptythreadcreatedbeforerefusedbyte/auditcap; candidate28nowdefersinsertuntilallcaps. Roster/choiceviews nowconstructresultbeforefinalfreshscope/clockfence.171focusedPASS/29actualSQLskips;bothNodeharness/racesyntax/diffchecksPASS. Rootindependentlyreviewed4currentfilesandauthorizesONEguardeddisposableclone-onlytrial: migration062db356cf59443083ef6c71acb1c053ae125ceb9c2f20228f355a691e4bd340, harness6644144d20ce5d5ebb94ae710c05f922127cbe939837173e5e7164fc6205d1be, races131827f6d6e46e2ffbfe53c04d6ca8abf12267298120969ed31fae21514203a8, SQLaef2c4b8e3e8d9354f2ea246c7407c9d7995fc5092fc5578c5c4a7965015ba97. No actualsource/hosted28apply; preserveactual27/localCLI03. Trialnotyetexecuted; no SQL/DTO/race proof claimed. Gitapprovalreviewstillunavailable (newattempttimedoutbeforestaging); no bypass."
+        },
+        {
+          "date": "2026-10-19",
+          "text": "Rootcontinuationcheckpoint: separatecapacityfixturesnowauthored; noorphanthreadonrefusedadmissionsourcefix; result-before-final-fencefixesforroster/choice. PrivacyUIreviewfounduncertaingrantblockedwithdrawal; fixedfreshrevisionreductions, exactwithdrawalretries, unrelatedpendingpreservation, removed-dependencyintentresolution, nondestructivechoicesrefresh/privatepreviewdiscard andtruthfulold-copyrecoverymessage.7newUIregressions;178focusedPASS/29actualSQLskips,typecheck/scopedlint/Nodeharness+race syntax/diffPASS. All5existingrenderedPDFpagesvisualreviewPASS/nofooterclipping; noPDFsourcechange. Exactreviewedclone-onlytrialrejectedBEFOREexecutionbyautomaticreviewermodelcapacity; noDB/containercreation/SQL/DTO/race/cleanup evidence. Gitstagingnewattempttimedoutbeforeexecution; OpenRouterbrowseroriginreviewalsocapacityfailedbeforeobservation; nobypass. Alllocalchangessaved/uncommittedinexistingcandidateworktree; no apply/integration/mount/deploy. Durableledger docs/verification/guest-growth-handoff-20261019.json includes6sourcehashes/logs/unmetgates. AIv7root1439testsource unchanged/unpublished; servingaccountmappingstillhumanpending. Rootsoleworker, otheragentsidle."
         }
       ],
       "claim": {
-        "owner": "guest_marketing_handoff",
+        "owner": "root",
         "branch": "codex/guest-growth-handoffs-20261018",
         "base_commit": "bf420c6b7d88c61a8c9f659ca04bd24c70ffafb7",
         "worktree": "/private/tmp/first-ten-guest-marketing-handoff",
-        "started_at": "2026-10-19T02:19:32.002672Z",
-        "lease_expires_at": "2026-10-19T06:19:32.002672Z"
+        "started_at": "2026-10-19T04:07:00Z",
+        "lease_expires_at": "2026-10-19T08:07:00Z"
       },
       "completion_evidence": [],
       "subtasks": [

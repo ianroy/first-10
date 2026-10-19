@@ -4,6 +4,7 @@ import { Card } from "@/components/AppShell";
 import { Button } from "@/components/ui/button";
 import { getAIKeyReadiness } from "@/lib/ai/readiness.functions";
 import type { AIKeyReadiness } from "@/lib/ai/readiness.server";
+import { RuntimeAIEvaluation } from "./RuntimeAIEvaluation";
 
 export function AIReadinessPanel({ projectId }: { projectId: string }) {
   const inspect = useServerFn(getAIKeyReadiness);
@@ -81,6 +82,7 @@ export function AIReadinessPanel({ projectId }: { projectId: string }) {
           )}
         </div>
       )}
+      <RuntimeAIEvaluation key={projectId} projectId={projectId} />
     </Card>
   );
 }

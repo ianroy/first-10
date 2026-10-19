@@ -23,73 +23,78 @@ current_iteration: 5
 current_stage: P1_foundation_with_parallel_P2_and_R0
 status: in_progress
 last_task_done: CLS-005
-next_task: AI-005
+next_task: CLS-009
 next_parallel_wave: []
 execution_pace: slow_serial
 active_claims: [AI-005, CLS-009, EV-001]
 research_gate: not_passed
 foundation_gate: not_passed
 realtime_go: pending
-last_updated: 2026-10-18
-last_documentation_update: "2026-10-18: User prioritizes live generation and confirms key replacement; root claims AI-005, teacher-copy worker saved clean source-only checkpoint and is idle."
+last_updated: 2026-10-19
+last_documentation_update: "2026-10-19: Root advanced classroom capacity/privacy source while AI account and approval-review capacity block publication, database rehearsal and browser checks."
 resume_hint: >-
-  ACTIVE goal; user now explicitly prioritizes building everything needed to ENABLE
-  LIVE GENERATION. User confirms the production OpenRouter key has been replaced.
-  SLOW SERIAL: root is sole implementation worker on main, AI-005 claim recorded.
-  Teacher-copy worker stopped clean/idle at fa73603d in existing worktree. Its28
-  source is NOT integrated, applied, rehearsed or mounted. Preserve exact checkpoint;
-  missing volume fixtures/SQL/DTO/races/late-expiry/COMMIT/cleanup/privacy-UI/shared
-  integration/live gates remain. Pins alone are not trial approval. Keep dormant
-  CLS-009 and EV-001 claims; neither has an active worker.
-  First AI step is narrow in-runtime key-readiness and operator privacy/budget/model
-  review, followed by actual bounded synthetic per-kind generation and source/UI
-  integration. All calls remain under generateAI. Production global_stop=true was
-  freshly verified through read-only SQL after the user's availability question.
-  A broad vercel env pull was auto-review rejected for copying unrelated secrets;
-  do not retry or bypass. Prefer a narrow server metadata check using its existing
-  key in memory; no secret logging/exposure. OpenRouter privacy page is waiting for
-  user sign-in; user signed in and current Chrome tab is344873417, now keys page.
-  Paid training/1percent data discount are off. Default workspace has no FirstTen
-  key label; asked user to identify key label or switch workspace/account, never
-  paste secrets. No account settings changed. Narrow Vercel metadata confirms
-  production OPENROUTER_API_KEY is Sensitive/runtime-only; no secret extracted.
-  Actual production platform-admin count is0. New operator-only readiness probe
-  originally required a genuine DB grant; dcc1116 presenter denial was verified.
-  New reviewed source adds a separate exact fictional-presenter metadata permission,
-  requiring fresh trusted fixture markers and current owned active reserved project
-  before/after the free check. No platform role is granted.77focused/type/scopedlint/
-  build pass. Deploy this narrow probe next, then verify actual serving-key metadata.
-  Source adds bounded/audited runtime key check and exact standard Vertex3.1
-  candidate selector.1401app tests/11existing skips(all5actualDTOs),type/scopedlint/
-  productionbuild PASS. No live key probe, model quality or generation enablement
-  claim. Production has0general operations/0enabled routes,opening hold unset and
-  4c fixed-demo reservations. Ledger:docs/verification/live-ai-readiness-20261018.json.
-  dcc1116 production READY and actual presenter denial verified in Chrome; role
-  boundary holds, no serving-key metadata attestation yet. Next build a new explicitly
-  reviewed successor evaluation flow with the Sensitive key staying in serving runtime.
-  Preserve historical v6 local-only/0.90 plan; never silently relax its origin/key
-  limits or treat catalog eligibility as quality. Existing four owner kinds are the
-  first activation target, then explicit guest/discovery/marketing AI scopes. No
-  paid calls have been made in this transition.
-  Preserve25USD total OpenRouter cap, permanent1USD practice carveout and existing
-  holds/accounting. Key rotation is user-reported, not yet runtime-attested. Do not
-  reopen retiring2.5 route without review;3.1 Flash Lite is a candidate, not yet an
-  approved quality/privacy/billing result. Public catalog is not account attestation.
-  Actual schema remains27 local55322/hostedhdwnnuvqqkkpontcdbwa; localCLI03 deliberately
-  preserved. Never repair that history or touch unrelated54322. Published22–27 stay
-  immutable. Candidate teacher28 cannot be included in a production rollout until
-  its independent gates pass; if AI needs schema work, choose an explicit forward
-  ordering and supersede the unpublished candidate rather than applying it incidentally.
-  Six manual guest kinds and PDFs are live;1368app tests/11existing skips passed on
-  that source. Genuine7fictional growth artifacts, six individual PDFs/15pageportfolio
-  and explicit2page team PDF verified. Discovery7/Marketing5 preserved. See the
-  guest-growth-persistence-20261018 ledger. New teacher copies remain unfinished.
-  Optional measurement disabled/no retention job. AN-003 managed-owner index blocker
-  persists; old unpublished retention27 is superseded, never apply. Public retrieval
-  is live but its AI adapter is unfinished. Broader guest AI/discovery/marketing kinds,
-  institutional review, real research, teacher bundles and collaboration remain part
-  of the full objective. Never claim those completed from one passing AI demo.
-
+  ACTIVE goal. Latest priority: build everything needed to enable live generation.
+  The original 10-hour checkpoint was reported; further work remains authorized.
+  SLOW SERIAL: root is the only active implementation worker. All other agents are
+  completed/idle. Keep the reserved claims; do not launch a parallel wave.
+  AI work is saved but uncommitted on codex/live-generation-v7, currently ab72f2e.
+  It passes 1439 app tests with 11 existing skips, all 5 actual DTO suites,
+  typecheck, scoped lint and production build. Eight authored fictional cases use
+  generateAI, stable operation IDs, the existing ledger and strict grounded output.
+  expectedWorkspaceId remains null, so this new flow cannot dispatch. The retiring
+  marketing_demo entry point is closed; preserve its drafts, charges and $1 carveout.
+  Historical v1-v6 artifacts and v6 local-only/$0.90 paid guards are preserved.
+  Immutable current v7 fixtures must be superseded when bound source changes.
+  Prepared packet: /private/tmp/firstten-runtime-ai-v7-unapproved-plan.json.
+  It is unapproved and allows at most $4 within the existing $25 total.
+  The serving key was accepted on production ab72f2e: workspace
+  047cf11a-2bfd-5ce5-888a-2a4ddcd4bc14, $50 resetting limit, $49.9955416 remaining,
+  $0.0044584 reported usage, BYOK excluded. Chrome's signed-in Default Workspace
+  8fb3fcfb-98fe-5695-a3a3-94f1067dac4e differs. User was asked to switch accounts.
+  Never request, copy or export credentials. The visible privacy settings do not
+  attest the serving account. Matching privacy/logging/BYOK review is still needed.
+  The exact standard google-vertex/global Gemini 3.1 Flash Lite endpoint last had
+  catalog status -2. Recheck availability, prices and total billing bounds before
+  activation; do not silently substitute a provider, tier or region.
+  Last hosted read: global stop true, general disabled, $24 cap, opening hold null,
+  0 general operations, 0 enabled routes and 4 cents of old demo reservations.
+  Preserve the permanent $1 carveout, all holds and the $25 total; no other paid
+  services. Reconcile prior spending before setting an honest opening hold.
+  Read docs/ai-runtime-evaluation-plan.md for review, rehearsal, activation and
+  rollback. Existing owner kinds come first; guest/discovery/marketing AI still
+  needs separate kinds, source choices and scopes. Class AI stays off by default.
+  Root used the account wait to advance CLS-009 in the existing worktree
+  /private/tmp/first-ten-guest-marketing-handoff, based on fa73603d. Its uncommitted
+  source adds full row/UTF8 capacity fixtures, fixes orphan threads on refused
+  previews, moves roster/choice results before final fences, and fixes uncertain
+  grant/withdrawal UI handling. It passes 178 focused tests, with 29 actual-SQL
+  skips, typecheck, scoped lint, Node harness/race syntax and diff checks. All five
+  existing rendered PDF pages were visually clear; no PDF source change was needed.
+  Exact pins, logs and remaining gates are in
+  docs/verification/guest-growth-handoff-20261019.json. Root reviewed and attempted
+  one guarded clone-only trial, but approval failed before execution. No candidate
+  28 SQL, DTO, overlap, COMMIT, expiry or cleanup proof exists. It is unapplied,
+  unintegrated and unmounted. Do not include it incidentally in an AI rollout.
+  Git staging subsequently succeeded through the same approval path. Commit/push
+  and the isolated teacher trial are next. Earlier Git approval failed at capacity
+  and timed out;
+  the clone trial and OpenRouter origin observation also failed at reviewer
+  capacity before execution. No bypass was attempted. User was asked to restore
+  reviewer availability or handle Git. The passing root AI changes are now staged;
+  no new commit, push or deployment has occurred yet.
+  Production was last verified at ab72f2e. Once review works, publish the passing
+  closed AI changes, verify deployment, then run the reviewed isolated teacher
+  trial. Keep these scopes separate and preserve the untracked user PDF.
+  Actual local/hosted schema is 27. Dedicated local database port is 55322; never
+  touch unrelated 54322. Local CLI history intentionally remains 03; never repair
+  it. Published migrations 22-27 remain immutable. A later AI schema change needs
+  explicit forward ordering rather than incidental application of teacher 28.
+  EV-001 remains a dormant saved claim; storage/UI integration is unfinished.
+  AN-003's managed-owner index blocker and the inherited audit DELETE/cascade
+  retention trap remain unresolved. Measurement is off with no job. Public
+  retrieval is approved and live, but its AI adapter remains unfinished. Real
+  studies, institutional review, teacher bundles and collaboration remain open.
+  Do not infer completed research or the full goal from software tests.
 ```
 
 **Audit basis:** product source and documentation at `7006f87`, plus the concurrent team-credits commit `a2d69a3`, with repository research files rechecked. F-007 is now complete: [GitHub CI run 39092157827](https://github.com/ianroy/first-10/actions/runs/39092157827) succeeded for that commit. The earlier local typecheck, 17 tests, Vercel build and scoped lint results remain in history. Six existing lint warnings and generated `.vercel` scanning motivate OPS-001. A green code pipeline does not verify live auth, RLS, model quality, research outcomes or preview configuration.

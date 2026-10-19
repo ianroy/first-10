@@ -1,6 +1,6 @@
 {
   "date": "2026-10-18",
-  "status": "foundation_verified_generation_disabled",
+  "status": "closed_runtime_evaluation_verified_generation_disabled",
   "userAuthorization": {
     "productionKeyReplaced": "user confirmed",
     "liveGeneration": "explicitly requested",
@@ -17,16 +17,17 @@
     "enabledRouteCount": 0,
     "demoReservedCents": 4,
     "activePlatformAdminCount": 0,
-    "productionKeySensitiveRuntimeOnly": true
+    "productionKeySensitiveRuntimeOnly": true,
+    "recheckedAt": "2026-10-19T04:01:58Z"
   },
   "controls": {
     "credentialExtraction": false,
     "metadataEndpoint": "https://openrouter.ai/api/v1/key",
     "metadataRequestOnly": "fixed GET; no redirects; no prompts or generation; bounded16KiB streamed response",
-    "operatorAuthority": "fresh DB-backed platform-admin check and successful audit before and after metadata request",
+    "operatorAuthority": "fresh DB-backed admin and audit, or separate exact trusted fictional-presenter permission with fresh active owned fixture checks before/after metadata",
     "presenterElevatedToAdmin": false,
-    "probeLiveUsable": false,
-    "probeLimitation": "No genuine platform-admin grant exists; source check is not a runtime attestation."
+    "probeLiveUsable": true,
+    "probeLimitation": "Serving key accepted. Its workspace differs from the signed-in account; no account privacy/BYOK/logging attestation or paid allowance follows from metadata."
   },
   "candidate": {
     "model": "google/gemini-3.1-flash-lite",
@@ -34,40 +35,74 @@
     "kind": "review candidate, not enabled route",
     "inputTokenCeiling": 1048576,
     "billableOutputTokenCeiling": 65536,
-    "requestOutputTokenCeiling": 2500,
+    "requestOutputTokenCeiling": 4000,
     "promptMicroPerMillion": 250000,
     "completionMicroPerMillion": 1500000,
-    "endpointSource": "https://openrouter.ai/api/v1/models/google/gemini-3.1-flash-lite/endpoints"
+    "endpointSource": "https://openrouter.ai/api/v1/models/google/gemini-3.1-flash-lite/endpoints",
+    "latestObservedEndpointStatus": -2,
+    "latestEndpointEligibility": "refused; recheck exact standard endpoint before activation",
+    "conservativeReservationMicro": 360448,
+    "eightMaximumReservationsMicro": 2883584
   },
   "accountReview": {
     "signedInByUser": true,
     "paidTrainingAllowed": false,
     "onePercentDataDiscountAllowed": false,
-    "productionKeyWorkspaceMapping": "unverified; user asked to identify label/workspace without sharing credential",
-    "settingsChanged": false
+    "productionKeyWorkspaceMapping": "mismatch confirmed by runtime workspace UUID; user asked to switch to owning account",
+    "settingsChanged": false,
+    "visibleDefaultWorkspaceId": "8fb3fcfb-98fe-5695-a3a3-94f1067dac4e",
+    "servingWorkspaceId": "047cf11a-2bfd-5ce5-888a-2a4ddcd4bc14",
+    "visibleSettingsScope": "different account/workspace; not serving-account attestation"
   },
   "verification": {
-    "appTestsPassed": 1401,
+    "appTestsPassed": 1439,
     "existingSkips": 11,
     "actualDtoSuitesEnabled": 5,
     "typecheck": "pass",
     "scopedLint": "pass",
     "productionBuild": "pass",
-    "paidCalls": 0
+    "paidCalls": 0,
+    "sourceFixture": "src/tests/ai-eval/fixtures.v7.json",
+    "offlineBaseline": "evals/offline-baseline.v7.json",
+    "fixtureSha256": "3b1d16ec0a29bd6f392df613ae78809934545e8b3316b1a364e4071c60cb5f1d",
+    "fullTestLog": "/private/tmp/firstten-v7-full-tests-final.log",
+    "typeLog": "/private/tmp/firstten-v7-type-final.log",
+    "lintLog": "/private/tmp/firstten-v7-lint.log",
+    "additionalUiLintLog": "/private/tmp/firstten-v7-ui-lint.log",
+    "buildLog": "/private/tmp/firstten-v7-build.log"
   },
   "unmet": [
-    "production-key account/workspace association",
-    "actual runtime key preflight and budget policy",
-    "endpoint-specific total-billing and privacy review",
-    "successor model integration and per-kind actual generation evaluation",
-    "reviewed opening hold, scoped allowances and controlled route activation",
-    "new guest/discovery/marketing generation kinds and end-to-end UI verification"
+    "production-key account/workspace privacy, logging and BYOK review",
+    "complete endpoint billing-bound review and fresh exact-endpoint availability",
+    "reviewed opening hold, scoped evaluation allowances and operator rehearsal",
+    "actual per-kind synthetic generation, charge reconciliation and quality review",
+    "ordinary owner product-route promotion and actual UI verification",
+    "new guest/discovery/marketing generation scopes, choices, kinds and end-to-end UI verification"
   ],
   "approvalReview": {
     "broadProductionEnvironmentPull": "rejected before execution; do not retry or bypass",
     "saferAlternative": "Narrow Vercel environment metadata only confirmed credential is Sensitive; no decrypted value retrieved or stored"
   },
   "deployment": {
+    "commit": "ab72f2e56f5fb43c07e691a948b6d6fde57bbb74",
+    "vercelState": "READY",
+    "target": "production",
+    "browser": "Chrome desktop",
+    "presenterCheck": "Free bounded serving-key metadata accepted under exact fictional-presenter permission; no admin role grant",
+    "liveServingKeyMetadataVerified": true
+  },
+  "updatedAt": "2026-10-19T04:01:58Z",
+  "runtimeMetadata": {
+    "credentialAccepted": true,
+    "limitUsd": 50,
+    "remainingUsd": 49.9955416,
+    "usageUsd": 0.0044584,
+    "resetting": true,
+    "includesByok": false,
+    "externalNonresetting25UsdCeilingVerified": false,
+    "screenshot": "/private/tmp/first-ten-serving-key-workspace-check.png"
+  },
+  "historicalDeployment": {
     "commit": "dcc111601dd6d442855d215ea5d7daca51826d87",
     "vercelState": "READY",
     "target": "production",
@@ -75,5 +110,29 @@
     "presenterCheck": "Actual deployed readiness request denied before key metadata access; separate narrow presenter permission did not grant platform-admin role",
     "screenshot": "/private/tmp/first-ten-ai-readiness-role-denial.png",
     "liveServingKeyMetadataVerified": false
+  },
+  "runtimeEvaluation": {
+    "version": "first-ten-runtime-evaluation-v7",
+    "status": "source_verified_closed",
+    "expectedWorkspaceId": null,
+    "fixedCases": 8,
+    "maximumAllowanceUsd": 4,
+    "ordinaryPrivateTextRead": false,
+    "stableOperationIds": true,
+    "legacyPracticeEntryPoint": "closed; saved drafts/charges/carveout preserved",
+    "plan": "/private/tmp/firstten-runtime-ai-v7-unapproved-plan.json",
+    "planApproved": false,
+    "actualPaidResults": 0,
+    "guide": "docs/ai-runtime-evaluation-plan.md"
+  },
+  "publication": {
+    "status": "staged_pending_commit",
+    "stagingExecuted": true,
+    "commitCreated": false,
+    "pushed": false,
+    "deployedV7": false,
+    "blocker": null,
+    "currentlyVerifiedProductionCommit": "ab72f2e56f5fb43c07e691a948b6d6fde57bbb74",
+    "approvalHistory": "Earlier staging attempts failed reviewer capacity/timeout before execution. A fresh same-path staging request succeeded on 2026-10-19; no bypass. Commit/push still pending."
   }
 }

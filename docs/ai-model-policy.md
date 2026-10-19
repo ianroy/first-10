@@ -1,5 +1,14 @@
 # AI model and endpoint review (AI-005)
 
+**Successor update, 2026-10-19:** the [runtime evaluation plan](ai-runtime-evaluation-plan.md)
+now defines a separate closed fixed-case workflow using the production Sensitive
+key in memory and an application allowance of at most $4 within the existing $25
+total. The older $0.90 dedicated-key/local-origin rules below remain requirements
+of the historical v6 runner; they are not silently relaxed. No paid successor
+call, product promotion or fallback is claimed. The serving key's workspace does
+not match the currently signed-in account, and the latest exact standard endpoint
+catalog status was `-2`, which fails current candidate eligibility.
+
 **Review date:** 2026-10-18, 23:22 UTC. **Source baseline:** `8768392`. This document completes an official-source investigation and proposes routing rules. It does not enable a route, establish model quality, approve paid execution or complete AI-005. General and guest AI stay disabled. After this review, the coordinator enabled the existing production global stop on 2026-10-18, pausing new requests including the fixed fictional practice. The $1 carve-out and all reservation/charge records are preserved. All inference must continue through `generateAI`; no serving code, fixtures, ledgers, credentials or account settings changed in this review.
 
 ## Immediate lifecycle finding

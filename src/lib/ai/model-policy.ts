@@ -7,7 +7,7 @@ export const LIVE_AI_CANDIDATE = {
   responseProvider: "Google",
   inputTokenCeiling: 1_048_576,
   billableOutputTokenCeiling: 65_536,
-  requestOutputTokenCeiling: 2500,
+  requestOutputTokenCeiling: 4000,
   promptMicroPerMillion: 250_000,
   completionMicroPerMillion: 1_500_000,
 } as const;

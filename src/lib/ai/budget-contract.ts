@@ -98,7 +98,14 @@ export function reservedMicro(route: BudgetRoute) {
 export function providerBudgetParameters(route: BudgetRoute) {
   return {
     model: route.model,
-    max_tokens: route.output_token_ceiling,
+    // Reserve the conservative billable ceiling; request a smaller useful draft.
+    max_tokens:
+      route.model === "google/gemini-3.1-flash-lite"
+        ? Math.min(4000, route.output_token_ceiling)
+        : route.output_token_ceiling,
+    ...(route.model === "google/gemini-3.1-flash-lite"
+      ? { reasoning: { effort: "minimal", exclude: true } }
+      : {}),
     provider: {
       only: [route.provider_slug],
       order: [route.provider_slug],

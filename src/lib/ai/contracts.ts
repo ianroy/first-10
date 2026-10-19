@@ -1,20 +1,29 @@
 import { z } from "zod";
+import { runtimeCaseIdSchema } from "./runtime-evaluation-contract.ts";
 
 export const AI_KINDS = ["questions", "synthesis", "stage2", "stage3", "marketing_demo"] as const;
 export type AIKind = (typeof AI_KINDS)[number];
 export const aiRequestSchema = z
   .object({
-    kind: z.enum(AI_KINDS),
+    kind: z.enum([...AI_KINDS, "runtime_evaluation"]),
     projectId: z.string().uuid(),
     operationId: z.string().uuid(),
     withOrigin: z.boolean().optional(),
     withEvaluation: z.literal(true).optional(),
+    evaluationCaseId: runtimeCaseIdSchema.optional(),
   })
   .strict()
   .refine(
     (request) =>
       !request.withEvaluation || (request.kind !== "marketing_demo" && !request.withOrigin),
     "Evaluation receipts are separate from product/demo responses.",
+  )
+  .refine(
+    (request) =>
+      request.kind === "runtime_evaluation"
+        ? Boolean(request.evaluationCaseId) && !request.withOrigin && !request.withEvaluation
+        : request.evaluationCaseId === undefined,
+    "Fixed runtime checks require their own case identity and response shape.",
   );
 
 const text = z.string().trim().min(1).max(2400);

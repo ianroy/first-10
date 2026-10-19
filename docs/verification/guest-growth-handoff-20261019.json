@@ -1,0 +1,83 @@
+{
+  "updatedAt": "2026-10-19T04:45:51Z",
+  "status": "source_only_verified_database_trial_not_executed",
+  "worktree": "/private/tmp/first-ten-guest-marketing-handoff",
+  "branch": "codex/guest-growth-handoffs-20261018",
+  "baseCommit": "fa73603d19c359c8e1ebe69ab784425256ee5b70",
+  "worker": "root; sole serial implementation worker",
+  "sourceFilesSha256": {
+    "src/components/guest-growth/ReviewedGrowthHandoff.tsx": "9570ba64b109e1180258c6cacc7fedfd9baff4b0ef19f87c45cb00c4d1a3f0be",
+    "src/tests/guest-growth/handoff/ui-handoff.test.tsx": "b6317324958f5011566042c81b722367906a9c4c1f3025eb36ce55cc417ab4fb",
+    "supabase/migrations/20261018028000_guest_growth_handoffs.sql": "062db356cf59443083ef6c71acb1c053ae125ceb9c2f20228f355a691e4bd340",
+    "supabase/tests/cls-009-handoff.sql": "aef2c4b8e3e8d9354f2ea246c7407c9d7995fc5092fc5578c5c4a7965015ba97",
+    "src/tests/guest-growth/handoff/database-rehearsal.mjs": "6644144d20ce5d5ebb94ae710c05f922127cbe939837173e5e7164fc6205d1be",
+    "src/tests/guest-growth/handoff/races.mjs": "131827f6d6e46e2ffbfe53c04d6ca8abf12267298120969ed31fae21514203a8"
+  },
+  "changes": [
+    "Full-size row/UTF8 volume fixtures authored in a separate fictional class",
+    "Thread insertion deferred until all preview admission caps pass",
+    "Roster/choice results constructed before final fresh scope and deadline fence",
+    "Permission reduction remains available after uncertain grants; exact withdrawal retries and unrelated pending intents preserved",
+    "Source refresh retains form edits; old dependency intents remain resolvable; private preview discard explicit",
+    "Recovered old copy never claims restored teacher access"
+  ],
+  "verification": {
+    "focusedPass": 178,
+    "actualSqlSkips": 29,
+    "typecheck": "pass",
+    "scopedLint": "pass",
+    "harnessAndRaceNodeSyntax": "pass",
+    "diffCheck": "pass",
+    "focusedLog": "/private/tmp/firstten-growth28-source-final-tests.log",
+    "typeLog": "/private/tmp/firstten-growth28-privacy-final-type.log",
+    "lintLog": "/private/tmp/firstten-growth28-privacy-final-lint.log",
+    "pdfVisualReview": {
+      "existingRenderedPages": 5,
+      "sourceChanged": false,
+      "clippingOrFooterOverlapObserved": false,
+      "folder": "/private/tmp/firstten-growth28-pdf-qa"
+    }
+  },
+  "capacityEvidence": {
+    "actualDatabaseProof": false,
+    "fixturesAuthored": [
+      "20 real versions + 21st refusal",
+      "50 real previews + exact retry + 51st refusal",
+      "50 real threads + existing-thread admission + 51st refusal",
+      "2MiB exact publisher stored bytes + final positive admission/refusals",
+      "16MiB exact class stored bytes with independent publisher headroom",
+      "Permission reductions at each cap and no orphan thread after class-cap refusal"
+    ],
+    "fillerLimit": "Trusted test-owned storage rows are not claimed as RPC-produced DTOs"
+  },
+  "approvedTrialScope": "One exact-pinned random schema-only disposable clone on dedicated local55322; source27/localCLI03 unchanged; no source/hosted28 application",
+  "trial": {
+    "attemptedThroughApproval": true,
+    "executed": false,
+    "creationAttempted": false,
+    "actualSqlAssertions": null,
+    "actualDtoPass": null,
+    "races": null,
+    "cleanupVerification": null,
+    "rejection": "Automatic approval review failed at selected-model capacity before execution; not an unsafe-action determination; no bypass"
+  },
+  "publication": {
+    "committed": false,
+    "pushed": false,
+    "integrated": false,
+    "applied": false,
+    "mounted": false,
+    "gitApproval": "A fresh same-path root staging request succeeded after earlier failures. This candidate worktree remains separate and uncommitted; database trial has not run."
+  },
+  "browser": {
+    "observationExecuted": false,
+    "approvalFailure": "OpenRouter origin review failed model capacity; no alternate surface or indirect access attempted"
+  },
+  "remaining": [
+    "Actual SQL compilation, row/byte capacities and DTO parity",
+    "True overlap, real COMMIT, late expiry/rollback and clone cleanup/source-unchanged proof",
+    "Final independent integration review, official generated types and parent/coverage mounts",
+    "Combined gates and genuine live desktop/submission/withdrawal/PDF verification",
+    "Serving OpenRouter account/privacy/BYOK review and paid generation evaluation remain separate"
+  ]
+}

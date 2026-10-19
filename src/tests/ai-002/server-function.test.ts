@@ -9,6 +9,7 @@ const h = vi.hoisted(() => ({
   cancel: vi.fn(),
   settle: vi.fn(),
   unknown: vi.fn(),
+  runtime: vi.fn(),
 }));
 vi.mock("@tanstack/react-start", () => ({
   createServerFn: () => ({
@@ -19,6 +20,7 @@ vi.mock("@/integrations/supabase/auth-middleware", () => ({ requireSupabaseAuth:
 vi.mock("@/lib/prompts/provenance.server", () => ({ prepareProvenanceWriter: h.prepare }));
 vi.mock("@/lib/ai/gateway.server", () => ({ requestStructuredDraft: h.request }));
 vi.mock("@/lib/ai/demo-marketing.server", () => ({ generateFictionalMarketingPractice: h.demo }));
+vi.mock("@/lib/ai/runtime-evaluation.server", () => ({ runRuntimeEvaluation: h.runtime }));
 vi.mock("@/lib/ai/budget.server", async (original) => ({
   ...(await original<typeof import("@/lib/ai/budget.server")>()),
   prepareAIBudget: h.budget,
@@ -87,6 +89,33 @@ beforeEach(() => {
   h.write.mockResolvedValue("fa028000-0000-4000-8000-000000000001");
 });
 describe("generateAI legacy response compatibility", () => {
+  it("dispatches fixed runtime cases before reading editable private project content", async () => {
+    const from = vi.fn(() => {
+      throw new Error("Raw content read forbidden");
+    });
+    h.runtime.mockResolvedValue({ fictional: true });
+    const args = {
+      data: {
+        kind: "runtime_evaluation",
+        projectId: project.id,
+        operationId: "f1e70000-0000-4000-8000-000000000001",
+        evaluationCaseId: "questions-typical-v7",
+      },
+      context: { supabase: { from }, userId: project.user_id },
+    };
+    await expect(
+      (generateAI as unknown as (args: unknown) => Promise<unknown>)(args),
+    ).resolves.toEqual({ fictional: true });
+    expect(h.runtime).toHaveBeenCalledWith({
+      supabase: args.context.supabase,
+      userId: project.user_id,
+      projectId: project.id,
+      operationId: args.data.operationId,
+      caseId: args.data.evaluationCaseId,
+    });
+    expect(from).not.toHaveBeenCalled();
+    expect(h.prepare).not.toHaveBeenCalled();
+  });
   it.each(Object.keys(outputs) as ExistingKind[])(
     "records successful %s metadata before returning unchanged strict output",
     async (kind) => {
@@ -139,9 +168,9 @@ describe("generateAI legacy response compatibility", () => {
     await expect(invoke("questions")).rejects.toThrow("Provider failed");
     expect(h.write).not.toHaveBeenCalled();
   });
-  it("keeps the specialized fictional marketing route separate", async () => {
-    h.demo.mockResolvedValue({ body: "Fixture" });
-    expect(await invoke("marketing_demo")).toEqual({ body: "Fixture" });
+  it("keeps the retired fictional route closed when general generation is activated", async () => {
+    await expect(invoke("marketing_demo")).rejects.toThrow("older fictional practice is paused");
+    expect(h.demo).not.toHaveBeenCalled();
     expect(h.prepare).not.toHaveBeenCalled();
     expect(h.request).not.toHaveBeenCalled();
   });

@@ -2,7 +2,6 @@ import { createServerFn } from "@tanstack/react-start";
 import { requireSupabaseAuth } from "@/integrations/supabase/auth-middleware";
 
 import { aiRequestSchema } from "./ai/contracts";
-import { generateFictionalMarketingPractice } from "./ai/demo-marketing.server";
 import { requestStructuredDraft } from "./ai/gateway.server";
 import { loadBoundedAIContext } from "./ai/context.server";
 import { validateGroundedOutput } from "./prompts/grounding-v2";
@@ -14,6 +13,7 @@ import {
   verifyEvaluationRoute,
 } from "./ai/evaluation.server";
 import { evaluationReceiptSchema } from "./ai/evaluation-contract";
+import { runRuntimeEvaluation } from "./ai/runtime-evaluation.server";
 import type { SupabaseClient } from "@supabase/supabase-js";
 
 export const generateAI = createServerFn({ method: "POST" })
@@ -21,6 +21,16 @@ export const generateAI = createServerFn({ method: "POST" })
   .inputValidator((d: unknown) => aiRequestSchema.parse(d))
   .handler(async ({ data, context }) => {
     const sb = context.supabase;
+    if (data.kind === "runtime_evaluation") {
+      if (!data.evaluationCaseId) throw new Error("A fixed evaluation case is required.");
+      return runRuntimeEvaluation({
+        supabase: sb,
+        userId: context.userId,
+        projectId: data.projectId,
+        operationId: data.operationId,
+        caseId: data.evaluationCaseId,
+      });
+    }
     if (data.withEvaluation) await verifyEvaluationIdentity(sb, context.userId);
     const { data: p, error: projectError } = await sb
       .from("projects")
@@ -29,13 +39,12 @@ export const generateAI = createServerFn({ method: "POST" })
       .single();
     if (projectError || !p || p.user_id !== context.userId || p.archived_at)
       throw new Error("Project not found or access unavailable.");
+    // Preserve historical receipts and the permanent carveout without reopening
+    // the retiring model when the general ledger's stop is later released.
     if (data.kind === "marketing_demo")
-      return generateFictionalMarketingPractice({
-        supabase: sb,
-        userId: context.userId,
-        project: p,
-        operationId: data.operationId,
-      });
+      throw new Error(
+        "This older fictional practice is paused. Your saved draft remains available.",
+      );
     const initial = await loadBoundedAIContext(
       sb as unknown as Pick<SupabaseClient, "rpc">,
       { type: "owner_project", projectId: p.id },
