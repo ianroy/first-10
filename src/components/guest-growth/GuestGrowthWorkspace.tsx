@@ -855,6 +855,7 @@ function Workspace({ view, csrf, ports, fictional = false, onDirtyChange }: Prop
             </p>
             {currentPdf ? (
               <ActivityPdfExport
+                key={signature}
                 document={currentPdf}
                 permittedAudiences={guestGrowthExportAudiences(pdfSources)}
                 authorizeDownload={() => authorize(pdfSources, signature)}
@@ -966,6 +967,7 @@ function Workspace({ view, csrf, ports, fictional = false, onDirtyChange }: Prop
             )}
             {portfolioPdf && (
               <ActivityPdfExport
+                key={portfolioSignature}
                 document={portfolioPdf}
                 permittedAudiences={guestGrowthExportAudiences(portfolioSources)}
                 authorizeDownload={() =>

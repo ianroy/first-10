@@ -46,8 +46,10 @@ resume_hint: >-
   Lazyfirstopen/retaineddrafts across studios, aggregateaccess guard and route/unload
   guards are tested. Root160focused/1365combinedapp tests pass/11existing skips, all5
   actualDTOsuites enabled; type/lint0errors6existingwarnings/build/migrationcheck pass.
-  NEXT: push this passingmount then livefictional desktop save/reload/retainedversion/PDF
-  and studio-switch smoke. Separate teacherprojection and fullparity remainunfinished;
+  Live3669c9f savedfictionallearningrev1/2 andopenedretained1read-only. ActualPDF
+  review foundstale draft/revision selectionkeys; corrected exactfingerprintpicker
+  remount plusrealpicker draft/save1/save2/history1 test.1366app tests pass/11skips,
+  type/lint/buildpass. NEXT: deployfix and livePDF/reload/allkind/portfolio/studiosmoke. Separate teacherprojection and fullparity remainunfinished;
   schema28 is UNRESERVED. ParentCLS009/CLS008 remainunfinished, not redefined.
   Workerguest_marketing_handoff idle; root owns sharedintegration. EV001 workeridle,
   contracts287dddd/8253d06 verified63tests; storage/UI/PDF/trustedcapture unfinished.

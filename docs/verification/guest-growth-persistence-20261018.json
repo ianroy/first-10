@@ -247,5 +247,30 @@
     "routeUnloadAndAggregateAccessGuards": true,
     "liveBrowserGate": "pending",
     "teacherProjectionImplemented": false
+  },
+  "liveDesktop": {
+    "deploymentCommit": "3669c9f4a04a1198ba04c576fd3f9cc585bad33d",
+    "vercelStatus": "success",
+    "browser": "Chrome desktop genuine existing fictionalguest cookie",
+    "className": "Babson educator demo \u2014 fictional class",
+    "teamAlias": "Fictional Team Compass",
+    "principalAlias": "Fictional learner",
+    "newLearningTitle": "FICTIONAL StudyLoop \u2014 reminder hypothesis",
+    "savedRevisions": [1, 2],
+    "retainedRevision1ReadOnlyVerified": true,
+    "currentLibraryStillRevision2": true,
+    "evidenceLabels": "Explicitly authored fictional scenario; no interviews, measured outcomes or demand invented",
+    "exportFailureFound": "Actual picker retained obsolete draft/revision keys, rejecting frozen review after save/history identity changes. Source fix remounts only each PDF picker by exact current/portfolio source fingerprint; real picker integration test covers draft->save1->save2->history1.",
+    "exportFixedLive": "pending",
+    "otherKindsAndPortfolioLive": "pending",
+    "teacherProjection": "not implemented",
+    "exportFixValidation": {
+      "targetedTestsPassed": 21,
+      "combinedAppTestsPassed": 1366,
+      "existingTestsSkipped": 11,
+      "typecheck": "passed",
+      "lint": "0 errors,6 existing warnings",
+      "build": "passed"
+    }
   }
 }
