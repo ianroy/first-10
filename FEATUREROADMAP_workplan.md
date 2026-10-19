@@ -95,7 +95,10 @@ resume_hint: >-
   redesign is required; no privilege widening. Fresh proof: no cron/extension/job,
   collectionfalse/AIstoptrue. Unpublished isolated AN003 candidate27 is superseded;
   never integrate it. CLS009 now exclusively reserves NEW guest27 from8828fb3 / real26.
-  Draft/review SQL only before exact-pin approval; no DB actions authorized yet. No complete
+  Draft/review SQL only before exact-pin approval; no DB actions authorized yet. Root
+  early review found concrete UUID/date/Unicode boundary parity cases; regressions
+  are being added before pins. README/ProductSpec now clearly distinguish existing
+  reviewed Marketing copies from unfinished dedicated six-kind growth workflows. No complete
   funnel or physical deletion guarantee is claimed.
   Bounded public retrieval is approved and live, receipt83724f78 committed; source AI
   and sharing excluded. CTX reviewed-source AI adapter remains unfinished. All new AI
