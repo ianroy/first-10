@@ -114,7 +114,11 @@ resume_hint: >-
   record realdelete integrationlimit. Fourthtrial after fixturefix passes3490strictSQL/0fail/0gaps/validplan/outerrollback
   and17actualDTOtests. FirstrealoverlapCOMMIT finds deferredtrigger losesprivate
   schemaauthority afterprivilegedRPC returns; narrowfixedsearchpath triggerfixpending.
-  All4clones removed/source unchanged verified; fullraces unfinished. No live27/mount.
+  Sixthtrialceaed after narrowtrigger+taggedquery fixes PASS:3494strictSQL,17actualDTO,
+  6trueblockedoverlaps,validreferenceCOMMIT/incomplete23514rollback controls and
+  witnessedlateexpiryrollback. All6clones removed/sourceunchanged verified. Root
+  integrates6sourcecommits thencombinedappgate; workeridle. No live27/mount/teacher
+  projection/coverageclaim; sourceandhosted remainactual26.
   README/ProductSpec now clearly distinguish existing
   reviewed Marketing copies from unfinished dedicated six-kind growth workflows. No complete
   funnel or physical deletion guarantee is claimed.

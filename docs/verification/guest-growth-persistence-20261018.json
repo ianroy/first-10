@@ -90,7 +90,79 @@
       "approvalReview": "First execution request timed out before start; permitted identical retry executed successfully to test failure",
       "sourceOrHostedWrites": false,
       "providerCalls": 0
+    },
+    {
+      "pins": {
+        "MIGRATION": "07e5107d78904b4a6d76b80b129a9909180b2064b5a39ff2bf24cec859be7625",
+        "HARNESS": "72700b604f55c11be0da927d0d7f91ed6e42d4b261cb380f1bf5fcb1b1ed7fb2",
+        "RACES": "1a168b59c93eb63652b90293104d113942c7342070eb61398f8dff1dedd9ac7a",
+        "SQL": "1bfaf67038b60a7afa5c85b55bdce61e5d866c9133e25cf501d485782f26920a"
+      },
+      "database": "firstten_growth_test_7c500fc53abd",
+      "phase": "true overlapping separate-connection races",
+      "creationAttempted": true,
+      "cleanupVerified": true,
+      "passed": false,
+      "assertions": 3494,
+      "failures": [],
+      "sourceUnchanged": true,
+      "sourceCommit": "65b2e4e5fa3ca75b7235e480ce4cc924335910df",
+      "date": "2026-10-18",
+      "result": "Strict3494SQL/0fail/0gaps/validplan/outerrollback and17actualDTO tests passed. Real service-role learning and reference-bearing experiment COMMIT returned successfully. Test-only verification query then failed PostgreSQL lexical error $1AND: tagged parameters require whitespace before keywords. Audit all race SQL token boundaries. Incomplete-edge negativecommit and fullraces not reached.",
+      "actualDtoTestsPassed": 17,
+      "strictSqlValidPlan": true,
+      "strictSqlKnownGaps": 0,
+      "strictSqlOuterRollback": true,
+      "failure": "trailing junk after parameter $1AND in race control verification",
+      "sourceOrHostedWrites": false,
+      "providerCalls": 0
+    },
+    {
+      "pins": {
+        "MIGRATION": "07e5107d78904b4a6d76b80b129a9909180b2064b5a39ff2bf24cec859be7625",
+        "HARNESS": "72700b604f55c11be0da927d0d7f91ed6e42d4b261cb380f1bf5fcb1b1ed7fb2",
+        "RACES": "be20e2ecd2f43403e33ff87b4aae3571e24d70c5e210208fc349bf22141e9042",
+        "SQL": "1bfaf67038b60a7afa5c85b55bdce61e5d866c9133e25cf501d485782f26920a"
+      },
+      "database": "firstten_growth_test_1e09599a07b7",
+      "phase": "true overlapping separate-connection races",
+      "creationAttempted": true,
+      "cleanupVerified": true,
+      "passed": true,
+      "assertions": 3494,
+      "failures": [],
+      "races": {
+        "actualBlockedOverlaps": 6,
+        "deferredCommitControls": {
+          "validReferenceCommit": true,
+          "incompleteReferenceRollback": true
+        },
+        "cases": [
+          "stable retry",
+          "stale CAS",
+          "recovery fence",
+          "artifact cap",
+          "source deletion versus bulk export",
+          "late expiry rollback",
+          "class closure"
+        ]
+      },
+      "sourceUnchanged": true,
+      "sourceCommit": "ceaed6014f0d05c9c59336b8021e248e855148de",
+      "date": "2026-10-18",
+      "result": "All gates passed in guarded disposable schema-only clone:3494strictSQL/0failures/0known-gaps/validplan/outerrollback,17actualSQLDTO/hashschema tests,6actualblockedoverlaps,validreferenceCOMMIT/incomplete23514rollback controls andwitnessedlateexpiryrollback. Clone removed/source26state/helper/history unchanged. No source/hosted27 apply,teacherprojection/UI/exportcoverage/live proof yet.",
+      "actualDtoTestsPassed": 17,
+      "strictSqlValidPlan": true,
+      "strictSqlKnownGaps": 0,
+      "strictSqlOuterRollback": true,
+      "sourceOrHostedWrites": false,
+      "providerCalls": 0,
+      "artifacts": {
+        "policy.txt": "7f22bbbaee368bb594d0840b1f252759f9b8bebaf41b6a3faca5170ca65acde8",
+        "actual-dtos.json": "354e6bd01d5b67f4d04d81b490d69046549e733ef81412002834cc0fb5953bc7",
+        "dto-tests.txt": "996fd97f6a503a27491b675aa48e475d5de0aa639f8b792f9d95c053c32932cc"
+      }
     }
   ],
-  "status": "source_candidate_actual_sql_failed_cleanup_verified"
+  "status": "isolated_sql_dto_commit_race_gates_passed_unapplied"
 }

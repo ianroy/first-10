@@ -12150,6 +12150,22 @@
         {
           "date": "2026-10-18",
           "text": "Fourth6a0d clone trial after one permitted approvaltimeout retry: complete strict3490SQL/0fail/0gaps/validplan/outerrollback and17actualSQLDTOhash tests PASS. First actual blocked-overlap race reached COMMIT then private-schema permission failure: deferred edges_complete trigger runs as caller after privilegedRPC returns. Narrow trusted-owner SECURITY DEFINER trigger with fixedsearchpath needed; retain directservice privatehelper/table denial. Fullraces unfinished. Cloneabsence/source26unchanged verified. Sole worker source-only correction, awaitpins."
+        },
+        {
+          "date": "2026-10-18",
+          "text": "Root reviewed65b2e4 narrow deferredtrigger SECURITYDEFINER/pg_catalog/postgresowner with directEXECUTE denied and realcommit positive+23514rollback controls. Authorizes fifth guardedclone-only trial exactpins migration07e5107d78904b4a6d76b80b129a9909180b2064b5a39ff2bf24cec859be7625; harness72700b604f55c11be0da927d0d7f91ed6e42d4b261cb380f1bf5fcb1b1ed7fb2; races1a168b59c93eb63652b90293104d113942c7342070eb61398f8dff1dedd9ac7a; SQL1bfaf67038b60a7afa5c85b55bdce61e5d866c9133e25cf501d485782f26920a. Worker idle. No actual source/hosted27 apply."
+        },
+        {
+          "date": "2026-10-18",
+          "text": "Fifth65b2 clone trial:3494strictSQL/0fail/0gaps/validplan/rollback and17actualDTO PASS; realservice-role learning+reference-bearing experiment COMMIT succeeds. Test-only edge verification then hits parameter-token lexical error $1AND. Source-only audit/fix all taggedquery keyword boundaries before newpins; incomplete-edge negativecommit/fulloverlaps notyetreached. Cleanupabsence/source26unchanged verified. No live27."
+        },
+        {
+          "date": "2026-10-18",
+          "text": "Root reviewedceaed601 fullraceparameter whitespace correction and ASTnegative controls. Authorizes sixth guardedclone-only trial exact migration07e5107d/harness72700b60/SQL1bfaf670 unchanged, newracebe20e2ecd2f43403e33ff87b4aae3571e24d70c5e210208fc349bf22141e9042.125focusedpass/17actualSQLskips. Worker idle. No source/hosted27 apply."
+        },
+        {
+          "date": "2026-10-18",
+          "text": "Sixth exact-pinceaed clone trial PASS:3494strictSQL/0fail/0gaps/validplan/outerrollback,17actualSQLDTO+hash tests,6trueblockedoverlaps,validreferenceCOMMIT/incomplete23514rollback controls andwitnessedlateexpiryrollback. Clone removed/source26flags+helper+history unchanged. Durable guest-growth-persistence-20261018.json preserves6trials/pins/artifacthashes. Root integrating6ordinarysourcecommits thencombinedappgate. Worker idle/no nextphase. Source/hosted27unapplied; teacherprojection/mount/coverage/live remainunfinished."
         }
       ],
       "claim": {
@@ -12203,7 +12219,7 @@
         },
         {
           "id": "CLS-009.s6",
-          "status": "not_started",
+          "status": "in_progress",
           "instruction": "Run actual DTO/SQL and separate-connection private/team/outsider/withdrawal/expiry/cap tests in an exact-pinned disposable clone, then root combined desktop/reload/PDF/browser checks. Preserve prior data and report all parity gaps rather than substituting generic text fields.",
           "notes": []
         }
