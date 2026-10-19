@@ -5,6 +5,7 @@ import { setOwnedProjectArchived } from "@/lib/project-lifecycle";
 import { AppShell, Card } from "@/components/AppShell";
 import { OwnerSavedWorkExport } from "@/components/OwnerSavedWorkExport";
 import { InvitationPanel } from "@/components/invitations/InvitationPanel";
+import { MeasurementPreference } from "@/components/account/MeasurementPreference";
 import {
   useContacts,
   useInterviews,
@@ -284,6 +285,7 @@ function Account() {
             />
           </details>
         )}
+        {selection?.userId && <MeasurementPreference userId={selection.userId} />}
       </AppShell>
     </CurrentProjectContext.Provider>
   );

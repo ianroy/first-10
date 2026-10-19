@@ -319,6 +319,7 @@ function ClassDetailPanel({
     [grantRevision, setGrantRevision] = useState(0);
   const alive = useRef(true);
   const refresh = async () => {
+    setTeacherExport(null);
     const result = await api.getClass({ data: { classId } });
     if (!alive.current) return;
     if (!result.ok) {
@@ -481,6 +482,7 @@ function ClassDetailPanel({
           {detail.role !== "student" && (
             <>
               <SubmissionList
+                key={`account-submissions:${detail.revision}`}
                 scopeKey={userId + ":" + classId}
                 mode="teacher"
                 classId={classId}
@@ -493,8 +495,16 @@ function ClassDetailPanel({
                   view={teacherExport}
                 />
               )}
-              <TeacherGuestSubmissions userId={userId} classId={classId} />
-              <TeacherMarketingSubmissions userId={userId} classId={classId} />
+              <TeacherGuestSubmissions
+                key={`guest-submissions:${detail.revision}`}
+                userId={userId}
+                classId={classId}
+              />
+              <TeacherMarketingSubmissions
+                key={`marketing-submissions:${detail.revision}`}
+                userId={userId}
+                classId={classId}
+              />
             </>
           )}
           {detail.role !== "student" && (

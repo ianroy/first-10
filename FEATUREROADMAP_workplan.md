@@ -22,53 +22,55 @@ Statuses are `not_started`, `in_progress`, `blocked`, `complete`, `deferred`, `d
 current_iteration: 5
 current_stage: P1_foundation_with_parallel_P2_and_R0
 status: in_progress
-last_task_done: WS-003
-next_task: CLS-008
-next_parallel_wave: [CLS-008, WS-007, AN-002]
-active_claims: [CLS-008, WS-007]
+last_task_done: WS-007
+next_task: AN-003
+next_parallel_wave: [AN-003, CLS-009]
+active_claims: [AN-003, CLS-009]
 research_gate: not_passed
 foundation_gate: not_passed
 realtime_go: pending
 last_updated: 2026-10-18
-last_documentation_update: "2026-10-18: AI-002 complete; resumed lifecycle/admin parallel work; added FERPA-first account-free class/hackathon spaces and PDF export of every activity/team."
+last_documentation_update: "2026-10-18: Guest studios and teacher handoff through24 live; personal workspace and combined return gate verified; explicit growth parity and opt-in analytics continue."
 resume_hint: >-
-  Active goal: continue every feasible authorized item, verify, commit/push/deploy.
-  Preserve the $25 total OpenRouter cap; no other paid services. No reset credits reported.
-  Hosted and dedicated local database55322 are through migration24. Never touch54322.
-  Last live eb5bdb4 includes account recovery, owner discovery, archive enforcement,
-  reviewed account and guest submissions, bounded public context, interview autosave,
-  and both genuine guest studios. Guest Discovery revision7 and private Marketing Lab
-  revision5 are clearly fictional demo records; no actual interviews or marketing results.
-  Public retrieval was explicitly approved and now passes deployed homepage and
-  commit-pinned GitHub retrieval plus reviewed-excerpt saving. Current receipt83724f78
-  is committed in docs/verification/public-context-20261018.json. Source AI and sharing
-  remain excluded; CTX001 still lacks reviewed-source processing/AI integration.
-  All new AI dispatch is paused via existing global_stop after official retirement and
-  billable-bound review. The permanent $1 demo carveout and accounting are preserved.
-  AI003 evaluation software is complete with actual eight-case SQL projection parity,
-  compiled runtime checks and 26 Node tests; no paid evaluation or quality promotion.
-  AI005 public model review is complete; actual account/privacy/billing and successor
-  quality gates remain blocked. No provider keys were read for that review.
-  WS005 autosave is verified live: revision3 survived reload/Resume, completed count5
-  unchanged. WS006 completion is complete by independent source/test audit of existing
-  transactional WS004/005; actual nested consent-failure and overlapping race evidence
-  is recorded precisely. No duplicate completion implementation or migration added.
-  WS003 owner workspace is complete and live at8c39dba. Both CIjobs and Vercel pass.
-  Live two-idea switch/resume/exactrevision3, CampusSwap archive/restore and reload pass;
-  both ideas remain active and StudyLoop selected. Shared Design discovery remains COL002.s4.
-  WS007 is claimed on an isolated branch for combined four-scope request/recovery checks;
-  no new DB action without exact clone-harness review.
-  Guest Marketing Lab23 passed1746 SQL assertions, six actual DTOs, five real races and
-  clone rollback/drop/absence checks before normal local/hosted application. Live plan
-  revision5 reload, unsaved studio-switch preservation and two-page outreach PDF pass.
-  CLS008 teacher Marketing Lab selected-copy24 passed1810 SQL assertions, eight actual
-  DTO checks, six real races and clone cleanup. Root1107 app tests pass/11 existing skips;
-  typecheck/lint/build pass. Exact pinned24 applied to guarded local55322 and normally to
-  hosted after dryrun only24/no seeds/roles. Teacher mount, three PDF adapters and official
-  generated types integrated; publish and live teacher/withdrawal rehearsal next.
-  AN001 event contract is complete; telemetry capture is not enabled. Guest-to-account
-  transfer, complete teacher bundles, retention, collaboration, source-fenced AI and
-  real research remain unfinished. Keep independent work moving around those gates.
+  Active goal: keep building every feasible authorized item, verify and commit/push/deploy.
+  Preserve $25 total OpenRouter cap and no other paid services. Latest usage check: 57%
+  weekly allowance remains, zero reset credits available, ordinary usage permitted.
+  Hosted and dedicated local55322 actual schema25; optional measurement remains disabled.
+  Local CLI history remains03 because04–25 were exact pinned SQL applies; actual schema
+  sentinels are recorded separately. Never rewrite that history or touch unrelated54322.
+  Livee590ff9 includes both guest studios and deliberate Marketing Lab teacher copies.
+  Fictional guest Discovery source revision7 and Marketing source revision5 are preserved.
+  Updated class instructions and published fictional $0 assignment reflect current features.
+  Live private marketing preview PDF3pages granted no access; explicit teacher version1
+  exported3pages, withdrawal denied stale teacher download and removed the row, private
+  withdrawn author PDF3pages remained. Fresh deliberate marketing version2 is active.
+  A fresh Discovery teacher example was submitted after class instructions changed.
+  WS003 live owner switch/resume/archive/restore/reload passes. WS006 audited atomic
+  completion and WS007 combined owner/project gate complete:9 component journeys,
+  5 guard tests,2actual DB owners/4same-name projects and4real archive races. Physical
+  second device/fresh two-owner hosted Auth/offline checks remain final release gates.
+  Root1130app tests pass/11existing skips, typecheck/lint/build pass after UI polish:
+  class revision refresh remounts teacher lists and clears old exports; download success
+  is tied to its exact source fingerprint. All three actual-SQL DTO suites were enabled.
+  CLS008 s2/s3 complete; s1 explicitly blocked on newCLS009 missing manual growth
+  artifacts, not redefined as two studios. CLS009 phase1 contracts94723d1 ready for review; worker now builds isolated controlled
+  desktop editors/PDF builders. No persistence/mounted capability claimed.
+  AN002 software7bcfb75 is integrated: opt-in owner-only measurement, defaultdisabled,
+  exact-pinned25fc798efd passed1863SQL/2actualDTOs/3races/rollback/cloneabsence. Root
+  Account mount and official types ready; normal hosted25 application succeeded. Live
+  choice check awaits UI publication. AN002 parent blocked on newAN003 retention and
+  AN004 remaining event producers. AN003 exclusively reserves26, source/harness only
+  until exact pin approval. No scheduled cleanup or complete funnel is claimed.
+  Bounded public retrieval is approved and live, receipt83724f78 committed; source AI
+  and sharing excluded. CTX reviewed-source AI adapter remains unfinished. All new AI
+  dispatch remains paused via global_stop after retirement/billing review; permanent
+  $1 carveout/accounting preserved. AI003 evaluation software verified; no paid evaluation
+  or quality promotion. AI005 account/privacy/billing/successor-quality gates blocked.
+  F009b isolated hosted preview blocked on verified Free eligibility or a supplied
+  isolated Free project; never create paid branches or repurpose unrelated projects.
+  Sharing, full team/class bundles, physical deletion, later guest/account continuity,
+  remaining growth artifacts and real research remain unfinished. Keep independent work
+  moving and preserve all exact evidence; do not mark the global goal complete early.
 ```
 
 **Audit basis:** product source and documentation at `7006f87`, plus the concurrent team-credits commit `a2d69a3`, with repository research files rechecked. F-007 is now complete: [GitHub CI run 39092157827](https://github.com/ianroy/first-10/actions/runs/39092157827) succeeded for that commit. The earlier local typecheck, 17 tests, Vercel build and scoped lint results remain in history. Six existing lint warnings and generated `.vercel` scanning motivate OPS-001. A green code pipeline does not verify live auth, RLS, model quality, research outcomes or preview configuration.

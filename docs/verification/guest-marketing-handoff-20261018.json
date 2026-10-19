@@ -1,6 +1,6 @@
 {
   "date": "2026-10-18",
-  "phase": "integrated_and_schema_applied_live_browser_pending",
+  "phase": "live_browser_verified",
   "sources": {
     "supabase/migrations/20261018024000_guest_marketing_handoffs.sql": "9bd05330ef36dc72109419b2b9dcc297242cace0468d7a816b16d8e0a48e3634",
     "src/tests/guest-marketing-handoff/database-rehearsal.mjs": "b78558506ed0a2b3c9ee0e233add2847e084403ee861c1ad218eb0e0aa213981",
@@ -30,7 +30,19 @@
   "limitations": [
     "First clone stopped on withdrawal local/query alias collision; cleaned and fixed before passing second rehearsal.",
     "Class byte and thread caps implemented; no independent exhaustive class-cap stress test claimed.",
-    "No paid AI calls, source teacher access, automatic outreach or actual customer research.",
-    "Live teacher/author/withdrawal rehearsal still pending publication."
-  ]
+    "No paid AI calls, source teacher access, automatic outreach or actual customer research."
+  ],
+  "liveCommit": "e590ff9",
+  "liveBrowser": {
+    "fictionalSourceRevision": 5,
+    "previewPdfPages": 3,
+    "previewGrantedTeacherAccess": false,
+    "explicitTeacherVersion1PdfPages": 3,
+    "withdrawalDeniedAlreadyOpenTeacherDownload": true,
+    "withdrawalRemovedFreshTeacherListRow": true,
+    "privateWithdrawnAuthorPdfPages": 3,
+    "freshDeliberateVersion2Active": true,
+    "sourcePlanUnchanged": true,
+    "realInterviewsOrCampaignResults": false
+  }
 }

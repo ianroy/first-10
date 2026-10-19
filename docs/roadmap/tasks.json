@@ -1000,7 +1000,7 @@
       "id": "F-009b",
       "title": "Configure isolated preview environment and auth redirects",
       "phase": "P1",
-      "status": "not_started",
+      "status": "blocked",
       "owner": "either",
       "size": "S",
       "kind": "research",
@@ -1037,6 +1037,10 @@
         {
           "date": "2026-10-17",
           "text": "Not started: only production Git connection was historically confirmed; access/config may require the operator."
+        },
+        {
+          "date": "2026-10-18",
+          "text": "Read-only actualCLI2.121 audit: one visible organization, two ACTIVE_HEALTHY projects and one INACTIVE project; project/org outputs do not expose subscription, quota or caller role. Counts do not prove Free eligibility. Installed create command has no --free/--plan/dry-run guarantee, and paid Supabase Branching cannot substitute under no-other-paid-services. No projects/branches created, repurposed, paused or deleted, no credentials read. Unblock with operator-provided already-isolated verified Free project or verified actual subscription/free quota before exact free-only provisioning. Then use separate Preview-only matched server/browser Supabase variables, NITRO_PRESET=vercel, preview Auth callback rules and real sign-in/save/reload checks. OpenRouter capped-key/privacy/model gates remain separate. Primary references: https://supabase.com/docs/guides/platform/billing-on-supabase ; https://supabase.com/docs/guides/platform/billing-faq ; https://supabase.com/docs/guides/platform/manage-your-usage/branching ; https://supabase.com/docs/guides/deployment/managing-environments ."
         }
       ],
       "claim": null,
@@ -1044,7 +1048,7 @@
       "subtasks": [
         {
           "id": "F-009b.s1",
-          "status": "not_started",
+          "status": "blocked",
           "instruction": "Use the intended preview Vercel/Supabase environment, never silently point test mutations at production.",
           "notes": []
         },
@@ -1655,13 +1659,13 @@
         "Resolve shared ownership before deleting an owner; test auth/account and application record cleanup together."
       ],
       "acceptance": [
-        "Export excludes others\u2019 private notes and secrets.",
-        "Deletion cannot remove another owner\u2019s project; failure/retry does not orphan unauthorized shares."
+        "Export excludes others’ private notes and secrets.",
+        "Deletion cannot remove another owner’s project; failure/retry does not orphan unauthorized shares."
       ],
       "verification_profile": "product",
       "verification": [
-        "Export excludes others\u2019 private notes and secrets.",
-        "Deletion cannot remove another owner\u2019s project; failure/retry does not orphan unauthorized shares.",
+        "Export excludes others’ private notes and secrets.",
+        "Deletion cannot remove another owner’s project; failure/retry does not orphan unauthorized shares.",
         "Run lint (exclude generated .vercel until OPS-001), typecheck, focused tests and NITRO_PRESET=vercel build; record actual outcomes. For data/roles run real isolated RLS tests; for new AI run versioned fixtures and the budgeted per-kind evaluation."
       ],
       "metric": "Export/deletion completion and failures.",
@@ -2081,7 +2085,7 @@
         },
         {
           "date": "2026-10-18",
-          "text": "Fresh independent audit confirms old AI004 dependencyblocker is stale: eval_only exactactor/project/hash budgetroute andAI007 fences exist. Authorized implement softwareonly optionalwithEvaluation on existinggenerateAI, servercappedkey preflight, real finishreason/latency, boundedjournaled8case adapter, immutablev6 whilev2-v5 preserved. NoSQL23required, no providercalls/policyactivation/keyreadlogging. Paidexecution staysblocked until exactservingkey\u22640.90nonresetting+openinghold+endpoint/billing/privacyreview+syntheticfixtureRPCparity+allowances pass; humanreview remainsblank/no promotion."
+          "text": "Fresh independent audit confirms old AI004 dependencyblocker is stale: eval_only exactactor/project/hash budgetroute andAI007 fences exist. Authorized implement softwareonly optionalwithEvaluation on existinggenerateAI, servercappedkey preflight, real finishreason/latency, boundedjournaled8case adapter, immutablev6 whilev2-v5 preserved. NoSQL23required, no providercalls/policyactivation/keyreadlogging. Paidexecution staysblocked until exactservingkey≤0.90nonresetting+openinghold+endpoint/billing/privacyreview+syntheticfixtureRPCparity+allowances pass; humanreview remainsblank/no promotion."
         },
         {
           "date": "2026-10-18",
@@ -2265,7 +2269,7 @@
         "docs/roadmap/openrouter-plan.md",
         "src/lib/ai.functions.ts"
       ],
-      "goal": "Use the lowest-cost eligible model that passes each kind\u2019s evaluations.",
+      "goal": "Use the lowest-cost eligible model that passes each kind’s evaluations.",
       "steps": [
         "Recheck official model ids, endpoint schema support, price and data-policy eligibility.",
         "Set per-kind input/output limits and an explicit ordered fallback allowlist with maximum unit price.",
@@ -2300,7 +2304,7 @@
         },
         {
           "date": "2026-10-18",
-          "text": "Officialreviewcf75cfc: exactGA2.5FlashLite GoogleCloudretirementOct20, noUTCtimegiven; fixedfictionalpractice sharesmodel/endpoint risk. google-vertex base slugadmitsregions; responseproviderGooglecannotproveexactregion. Defaultthinking/softbudget meansallinbillingbound notproven; catalogprices\u2260accounteligibility. Currenteightcaseconservativearithmetic$.846864 onlyifboundvalid;3.1comparatorwouldrequire$2.127152cannotreuse$.90plan. Doconlyno keyreads/provider/policymutations. s1publicfactsreviewcomplete; exactaccount/privacy/billablebound+quality/promotiongatesunmet; paidexecution remainsdisabled. Rootowns lifecyclecutoff followup; oldmodelmustnotbepromotedasdurabledefault."
+          "text": "Officialreviewcf75cfc: exactGA2.5FlashLite GoogleCloudretirementOct20, noUTCtimegiven; fixedfictionalpractice sharesmodel/endpoint risk. google-vertex base slugadmitsregions; responseproviderGooglecannotproveexactregion. Defaultthinking/softbudget meansallinbillingbound notproven; catalogprices≠accounteligibility. Currenteightcaseconservativearithmetic$.846864 onlyifboundvalid;3.1comparatorwouldrequire$2.127152cannotreuse$.90plan. Doconlyno keyreads/provider/policymutations. s1publicfactsreviewcomplete; exactaccount/privacy/billablebound+quality/promotiongatesunmet; paidexecution remainsdisabled. Rootowns lifecyclecutoff followup; oldmodelmustnotbepromotedasdurabledefault."
         },
         {
           "date": "2026-10-18",
@@ -2471,7 +2475,7 @@
         },
         {
           "date": "2026-10-18",
-          "text": "Claimed after budget boundary complete. Replace JSON slicing with deterministic whole-record authorized context, stable source IDs and exact-quote checks; new17000 RPC if needed, preserve published11000/v1\u2013v4 bytes. General paid kinds stay disabled; no new discovery AI kinds/retrieval until their own adapter tasks. Worker sends source/schema design beforeapply."
+          "text": "Claimed after budget boundary complete. Replace JSON slicing with deterministic whole-record authorized context, stable source IDs and exact-quote checks; new17000 RPC if needed, preserve published11000/v1–v4 bytes. General paid kinds stay disabled; no new discovery AI kinds/retrieval until their own adapter tasks. Worker sends source/schema design beforeapply."
         },
         {
           "date": "2026-10-18",
@@ -2480,7 +2484,7 @@
       ],
       "claim": null,
       "completion_evidence": [
-        "b276993 + b30605f + ab5933f (worker baa63d8/dd991c8/dcff96f): deterministic whole-record owner context, stable content/source/consent identities, atomic dispatch permission/version fence, exact quote/reference validation and content-free provenance; immutable evaluation v5 with original v1\u2013v4 bytes preserved. Combined 751 app tests, 1333 rollback SQL assertions, typecheck, production build and lint (0 errors, 6 existing warnings) pass; 19 offline eval checks and actual-handler parity pass. Worker actual source-edit, withdrawal, linked-contact permission and duplicate-claim races passed in schema-only clone, dropped and verified absent. Hosted migrations 16 then 17 applied via reviewed normal CLI, no seeds/roles. No paid calls or route activation. UTF-8 payload caps are not tokenizer proof; visible source inspection remains AI-008 and model quality remains unmeasured."
+        "b276993 + b30605f + ab5933f (worker baa63d8/dd991c8/dcff96f): deterministic whole-record owner context, stable content/source/consent identities, atomic dispatch permission/version fence, exact quote/reference validation and content-free provenance; immutable evaluation v5 with original v1–v4 bytes preserved. Combined 751 app tests, 1333 rollback SQL assertions, typecheck, production build and lint (0 errors, 6 existing warnings) pass; 19 offline eval checks and actual-handler parity pass. Worker actual source-edit, withdrawal, linked-contact permission and duplicate-claim races passed in schema-only clone, dropped and verified absent. Hosted migrations 16 then 17 applied via reviewed normal CLI, no seeds/roles. No paid calls or route activation. UTF-8 payload caps are not tokenizer proof; visible source inspection remains AI-008 and model quality remains unmeasured."
       ],
       "subtasks": [
         {
@@ -3902,7 +3906,7 @@
         },
         {
           "date": "2026-10-18",
-          "text": "Claimed after deployedDISCmanualcycle verified. Approved read-only design: exact questionsnapshot, private CAS saves/resume, separate processing choices, explicit atomic exactly-once completion via existing captureRPC, no completed counts/evidence beforecompletion. Forwardfix archival captureguard/pipeline-state preservation in16000. Rootfixes missedregenerateintent beforeworkerbranchsync. Rootserializes generatedtypes and15000\u219216000\u219217000 publication/apply; do not edit earlier migrations."
+          "text": "Claimed after deployedDISCmanualcycle verified. Approved read-only design: exact questionsnapshot, private CAS saves/resume, separate processing choices, explicit atomic exactly-once completion via existing captureRPC, no completed counts/evidence beforecompletion. Forwardfix archival captureguard/pipeline-state preservation in16000. Rootfixes missedregenerateintent beforeworkerbranchsync. Rootserializes generatedtypes and15000→16000→17000 publication/apply; do not edit earlier migrations."
         }
       ],
       "claim": null,
@@ -4124,7 +4128,7 @@
       "id": "WS-007",
       "title": "Verify multi-project save and return journeys",
       "phase": "P3",
-      "status": "in_progress",
+      "status": "complete",
       "owner": "agent",
       "size": "S",
       "kind": "gate",
@@ -4180,33 +4184,35 @@
         {
           "date": "2026-10-18",
           "text": "Claim combined journey verification after WS003 live completion and WS006 audited completion. Reuse released isolated worktree on fresh branch from8c39dba only after clean-state check. Scope only tests/workspace-journeys, tests/ws-007 and docs/qa/workspace-gate.md. First implement four-scope overlapping-name UI tests and design exact clone harness; no DB action until coordinator reviews pins/cleanup and24 integration. Existing mocks are not claimed as cross-device or live two-account testing."
+        },
+        {
+          "date": "2026-10-18",
+          "text": "Completed bounded engineering journey gate with combined scoped UI and real ordinary-role SQL/race evidence; record mocks and actual sessions separately. Do not describe a physical second-device test or production two-owner login. Final integrated release matrix remains open."
         }
       ],
-      "claim": {
-        "owner": "personal_workspace",
-        "branch": "codex/workspace-journeys-20261018",
-        "base_commit": "8c39dba",
-        "worktree": "/private/tmp/first-ten-personal-workspace",
-        "started_at": "2026-10-18T23:49:00Z",
-        "lease_expires_at": "2026-10-19T03:00:00Z"
-      },
-      "completion_evidence": [],
+      "claim": null,
+      "completion_evidence": [
+        "Integrated0ea9b74 (worker41d3301): nine composite component journeys with real selection/provider/hooks/interview components over deterministic transport; two owners/four identically named ideas, delayed generation/save/completion and exact ACK return. These are not live Auth/device tests.",
+        "src/tests/ws-007/rehearsal-20261018.json: exact-pinned schema-only dedicated55322 clone, history03 distinct from actual24 sentinel; two actual database users/four same-name projects, ownership/legacy-row preservation, four observed blocking save/finalize/archive races, exact retries/counts/terminal recovery. Zero source/hosted writes/provider calls. Both failed test-driver normalization attempt and passing clone removed/absence verified.",
+        "Root combined1116 app tests passed/11 existing skips, five Node guard tests passed, typecheck and scoped lint passed. Source changes after24 include cache/status polish with focused135 and repeated combined1116 passes.",
+        "Production workspace8c39dba browser rehearsal verifies actual presenter two-idea switch/resume, exact revision3 note, reversible archive/restore and reload. Fresh production login of both owners, physical second device, browser offline/storage restrictions and final integrated cross-role matrix remain explicitly REL001/REL002/REL003 checks; no completed participant study or liveAI test claimed."
+      ],
       "subtasks": [
         {
           "id": "WS-007.s1",
-          "status": "not_started",
+          "status": "complete",
           "instruction": "Run two accounts with two projects and overlapping record names.",
           "notes": []
         },
         {
           "id": "WS-007.s2",
-          "status": "not_started",
+          "status": "complete",
           "instruction": "Exercise switching during generation/save, archive/restore and draft/finalize recovery.",
           "notes": []
         },
         {
           "id": "WS-007.s3",
-          "status": "not_started",
+          "status": "complete",
           "instruction": "Document actual expected/observed results with fixture ids and fix critical failures before enabling the workspace.",
           "notes": []
         }
@@ -4231,7 +4237,7 @@
         "src/lib/stages.ts",
         "src/lib/data.ts"
       ],
-      "goal": "Measure First Ten adoption separately from each founder\u2019s customer pipeline.",
+      "goal": "Measure First Ten adoption separately from each founder’s customer pipeline.",
       "steps": [
         "Define visits, signups, project creation, first completed interview, accepted learning/next action and return with windows/denominators.",
         "Specify server-authoritative events versus optional anonymous attribution, deduplication and retention.",
@@ -4302,15 +4308,15 @@
       "id": "AN-002",
       "title": "Capture minimal trustworthy product events",
       "phase": "P4",
-      "status": "not_started",
+      "status": "blocked",
       "owner": "agent",
       "size": "S",
       "kind": "implementation",
       "priority": 50,
-      "depends_on": ["AN-001", "AI-004", "WS-006"],
+      "depends_on": ["AN-001", "AI-004", "WS-006", "AN-003", "AN-004"],
       "requires_decisions": [],
       "write_scope": [
-        "supabase/migrations/**",
+        "supabase/migrations/20261018025000_product_event_capture.sql",
         "src/lib/events.server.ts",
         "src/lib/analytics.ts",
         "src/routes/auth.tsx",
@@ -4320,9 +4326,13 @@
         "src/lib/analytics.test.ts",
         "src/routes/auth.test.tsx",
         "src/lib/interview-drafts.functions.test.ts",
-        "supabase/tests/an-002.sql"
+        "supabase/tests/an-002.sql",
+        "src/lib/events.functions.ts",
+        "src/lib/analytics-contracts.ts",
+        "src/components/account/MeasurementPreference.tsx",
+        "docs/architecture/analytics-capture.md"
       ],
-      "exclusive_locks": ["database-schema", "generated-types", "analytics-integration"],
+      "exclusive_locks": [],
       "read_first": [
         "ProductSpec.md",
         "FEATUREROADMAP_workplan.md",
@@ -4357,6 +4367,18 @@
         {
           "date": "2026-10-17",
           "text": "Scheduled by Iteration 5; no implementation or validation claimed."
+        },
+        {
+          "date": "2026-10-18",
+          "text": "Claim first prospective opt-in owner event slice after AN001/AI004/WS006. CLS008 explicitly released schema/type lease; exact new25 reserved. No authoritative browser event API or raw telemetry payload. Separate unknown/granted/withdrawn account measurement preference; transactional project-created/interview-completed facts, first-completion source marker, fixed-age mappings and purge are required. Collection disabled until retention execution/eligibility/choice UI verified. Public visit/session/attribution, signup without prior eligible basis, mutable learning acceptance and admin funnel remain separate unfinished slices; parent not complete by this partial delivery. Worker may build isolated source/schema candidate and clone harness but must await exact pin/cleanup approval before DB actions; root serializes hosted/local/types and Account mount."
+        },
+        {
+          "date": "2026-10-18",
+          "text": "Workeredca13e integrated7bcfb75: prospective owner project/interview milestone source triggers, separate measurement preference, durable product idempotency markers, <=30day analytics eligibility, withdrawal/purge and audited retention health. Policy stays disabled; no actualdailyjob/remainingeventstages/funnel claimed. Exact25 fc798efd passed1863 SQL assertions/zero failures/gaps/validplan/rollback,2actualDTOchecks,3observedraces; everyclone dropped/absenceverified. Three test/harness failures preserved (artificialagingclock,sharedadminfixture cleanup,taggedSQLwhitespace); product sourceunchanged. Root owns Account mount/types/main apply/deploy/live choice checks. Existing incomplete records deliberately baseline-excluded becausehistoryunknown; no retrospectiveevents. Rootretentioncopy distinguishes eligibilityexpiry from unverifiedphysicaldeletion."
+        },
+        {
+          "date": "2026-10-18",
+          "text": "Exact25 fc798efd applied normally to hosted production, dedicated55322 actual schema also25/history03 preserved. Root1130app tests pass/11existing skips, type/lint/build pass; Account mount and official types ready to publish. Parent remains blocked on newAN003 operational scheduled/drained health and AN004 remaining event producers; not complete. Explicitly release schema25/generatedtypes/analytics integration locks; AN003 reserves26. No measurement collection enabled."
         }
       ],
       "claim": null,
@@ -4364,21 +4386,36 @@
       "subtasks": [
         {
           "id": "AN-002.s1",
-          "status": "not_started",
+          "status": "blocked",
           "instruction": "Implement scoped append events and database/server-origin facts for material milestones.",
-          "notes": []
+          "notes": [
+            {
+              "date": "2026-10-18",
+              "text": "Prospective owner two-event slice implemented and rehearsed; remaining producer/operational/session gates preserved by AN003/AN004, not silently completed."
+            }
+          ]
         },
         {
           "id": "AN-002.s2",
-          "status": "not_started",
+          "status": "blocked",
           "instruction": "Add idempotency, optional anonymous session attribution and retention/withdrawal behavior.",
-          "notes": []
+          "notes": [
+            {
+              "date": "2026-10-18",
+              "text": "Prospective owner two-event slice implemented and rehearsed; remaining producer/operational/session gates preserved by AN003/AN004, not silently completed."
+            }
+          ]
         },
         {
           "id": "AN-002.s3",
-          "status": "not_started",
+          "status": "blocked",
           "instruction": "Test forged client milestones, duplicated requests, session conversion and multiple projects.",
-          "notes": []
+          "notes": [
+            {
+              "date": "2026-10-18",
+              "text": "Prospective owner two-event slice implemented and rehearsed; remaining producer/operational/session gates preserved by AN003/AN004, not silently completed."
+            }
+          ]
         }
       ]
     },
@@ -4605,7 +4642,7 @@
         "stop_and_report": "If a required contract, test environment, human observation, budget or permission is missing, record the specific blocker. Continue another ready task; do not fabricate data or widen the write scope.",
         "handoff": "Report changed files, base/result commit, exact checks and outcomes, artifact/source ids, residual risks and the next eligible task. Only the coordinator edits task status, shared generated files and the main roadmap.",
         "integration": "Use a clean task branch/worktree from the coordinator base. Commit only this write scope. Migrations, generated types, route tree, dependency locks and shared entry points are serialized by the coordinator; never hand-edit generated output.",
-        "kind_approval": "Implement and test this kind\u2019s authorized context adapter after its data services exist. Register schema/prompt/route and capture a capped held-out evaluation against the approved baseline, with dates, endpoint, actual cost and review. Foundation AI-008 does not automatically approve a new kind. Keep the kind disabled until its own scope, quality and budget criteria pass."
+        "kind_approval": "Implement and test this kind’s authorized context adapter after its data services exist. Register schema/prompt/route and capture a capped held-out evaluation against the approved baseline, with dates, endpoint, actual cost and review. Foundation AI-008 does not automatically approve a new kind. Keep the kind disabled until its own scope, quality and budget criteria pass."
       },
       "notes": [
         {
@@ -4673,12 +4710,12 @@
       ],
       "acceptance": [
         "Class enrollment alone does not grant project/private-note read access.",
-        "Students cannot self-promote or attach another user\u2019s project; teachers see only enrolled metadata allowed by contract."
+        "Students cannot self-promote or attach another user’s project; teachers see only enrolled metadata allowed by contract."
       ],
       "verification_profile": "product",
       "verification": [
         "Class enrollment alone does not grant project/private-note read access.",
-        "Students cannot self-promote or attach another user\u2019s project; teachers see only enrolled metadata allowed by contract.",
+        "Students cannot self-promote or attach another user’s project; teachers see only enrolled metadata allowed by contract.",
         "Run lint (exclude generated .vercel until OPS-001), typecheck, focused tests and NITRO_PRESET=vercel build; record actual outcomes. For data/roles run real isolated RLS tests; for new AI run versioned fixtures and the budgeted per-kind evaluation."
       ],
       "metric": "Unauthorized class/project access: zero.",
@@ -4895,12 +4932,12 @@
       ],
       "acceptance": [
         "Teacher progress does not reveal unrelated projects, private contacts or hidden draft content.",
-        "Feedback writes are scoped to the teacher\u2019s class/submission and remain attributable."
+        "Feedback writes are scoped to the teacher’s class/submission and remain attributable."
       ],
       "verification_profile": "product",
       "verification": [
         "Teacher progress does not reveal unrelated projects, private contacts or hidden draft content.",
-        "Feedback writes are scoped to the teacher\u2019s class/submission and remain attributable.",
+        "Feedback writes are scoped to the teacher’s class/submission and remain attributable.",
         "Run lint (exclude generated .vercel until OPS-001), typecheck, focused tests and NITRO_PRESET=vercel build; record actual outcomes. For data/roles run real isolated RLS tests; for new AI run versioned fixtures and the budgeted per-kind evaluation."
       ],
       "metric": "Cross-class leakage and unauthorized feedback: zero.",
@@ -5168,7 +5205,7 @@
         "stop_and_report": "If a required contract, test environment, human observation, budget or permission is missing, record the specific blocker. Continue another ready task; do not fabricate data or widen the write scope.",
         "handoff": "Report changed files, base/result commit, exact checks and outcomes, artifact/source ids, residual risks and the next eligible task. Only the coordinator edits task status, shared generated files and the main roadmap.",
         "integration": "Use a clean task branch/worktree from the coordinator base. Commit only this write scope. Migrations, generated types, route tree, dependency locks and shared entry points are serialized by the coordinator; never hand-edit generated output.",
-        "kind_approval": "Implement and test this kind\u2019s authorized context adapter after its data services exist. Register schema/prompt/route and capture a capped held-out evaluation against the approved baseline, with dates, endpoint, actual cost and review. Foundation AI-008 does not automatically approve a new kind. Keep the kind disabled until its own scope, quality and budget criteria pass."
+        "kind_approval": "Implement and test this kind’s authorized context adapter after its data services exist. Register schema/prompt/route and capture a capped held-out evaluation against the approved baseline, with dates, endpoint, actual cost and review. Foundation AI-008 does not automatically approve a new kind. Keep the kind disabled until its own scope, quality and budget criteria pass."
       },
       "notes": [
         {
@@ -5584,7 +5621,7 @@
         "stop_and_report": "If a required contract, test environment, human observation, budget or permission is missing, record the specific blocker. Continue another ready task; do not fabricate data or widen the write scope.",
         "handoff": "Report changed files, base/result commit, exact checks and outcomes, artifact/source ids, residual risks and the next eligible task. Only the coordinator edits task status, shared generated files and the main roadmap.",
         "integration": "Use a clean task branch/worktree from the coordinator base. Commit only this write scope. Migrations, generated types, route tree, dependency locks and shared entry points are serialized by the coordinator; never hand-edit generated output.",
-        "kind_approval": "Implement and test this kind\u2019s authorized context adapter after its data services exist. Register schema/prompt/route and capture a capped held-out evaluation against the approved baseline, with dates, endpoint, actual cost and review. Foundation AI-008 does not automatically approve a new kind. Keep the kind disabled until its own scope, quality and budget criteria pass."
+        "kind_approval": "Implement and test this kind’s authorized context adapter after its data services exist. Register schema/prompt/route and capture a capped held-out evaluation against the approved baseline, with dates, endpoint, actual cost and review. Foundation AI-008 does not automatically approve a new kind. Keep the kind disabled until its own scope, quality and budget criteria pass."
       },
       "notes": [
         {
@@ -5676,7 +5713,7 @@
         "stop_and_report": "If a required contract, test environment, human observation, budget or permission is missing, record the specific blocker. Continue another ready task; do not fabricate data or widen the write scope.",
         "handoff": "Report changed files, base/result commit, exact checks and outcomes, artifact/source ids, residual risks and the next eligible task. Only the coordinator edits task status, shared generated files and the main roadmap.",
         "integration": "Use a clean task branch/worktree from the coordinator base. Commit only this write scope. Migrations, generated types, route tree, dependency locks and shared entry points are serialized by the coordinator; never hand-edit generated output.",
-        "kind_approval": "Implement and test this kind\u2019s authorized context adapter after its data services exist. Register schema/prompt/route and capture a capped held-out evaluation against the approved baseline, with dates, endpoint, actual cost and review. Foundation AI-008 does not automatically approve a new kind. Keep the kind disabled until its own scope, quality and budget criteria pass."
+        "kind_approval": "Implement and test this kind’s authorized context adapter after its data services exist. Register schema/prompt/route and capture a capped held-out evaluation against the approved baseline, with dates, endpoint, actual cost and review. Foundation AI-008 does not automatically approve a new kind. Keep the kind disabled until its own scope, quality and budget criteria pass."
       },
       "notes": [
         {
@@ -5768,7 +5805,7 @@
         "stop_and_report": "If a required contract, test environment, human observation, budget or permission is missing, record the specific blocker. Continue another ready task; do not fabricate data or widen the write scope.",
         "handoff": "Report changed files, base/result commit, exact checks and outcomes, artifact/source ids, residual risks and the next eligible task. Only the coordinator edits task status, shared generated files and the main roadmap.",
         "integration": "Use a clean task branch/worktree from the coordinator base. Commit only this write scope. Migrations, generated types, route tree, dependency locks and shared entry points are serialized by the coordinator; never hand-edit generated output.",
-        "kind_approval": "Implement and test this kind\u2019s authorized context adapter after its data services exist. Register schema/prompt/route and capture a capped held-out evaluation against the approved baseline, with dates, endpoint, actual cost and review. Foundation AI-008 does not automatically approve a new kind. Keep the kind disabled until its own scope, quality and budget criteria pass."
+        "kind_approval": "Implement and test this kind’s authorized context adapter after its data services exist. Register schema/prompt/route and capture a capped held-out evaluation against the approved baseline, with dates, endpoint, actual cost and review. Foundation AI-008 does not automatically approve a new kind. Keep the kind disabled until its own scope, quality and budget criteria pass."
       },
       "notes": [
         {
@@ -6099,7 +6136,7 @@
         },
         {
           "date": "2026-10-18",
-          "text": "CarriesoriginalWS003sharedlistingrequirement afteractualCOL001membership exists, breakingsemanticcycle WS003\u2192WS007\u2192COL001. PersonalAccount/ownerlists stayowneronly; separateauthorizedsharedDESIGNmetadata androles only, no wholeprojectchildsharing."
+          "text": "CarriesoriginalWS003sharedlistingrequirement afteractualCOL001membership exists, breakingsemanticcycle WS003→WS007→COL001. PersonalAccount/ownerlists stayowneronly; separateauthorizedsharedDESIGNmetadata androles only, no wholeprojectchildsharing."
         }
       ],
       "claim": null,
@@ -6257,12 +6294,12 @@
         "Apply only a user-selected suggestion against its expected revision; detect intervening edits."
       ],
       "acceptance": [
-        "AI cannot pull a member\u2019s private interviews into the shared space.",
+        "AI cannot pull a member’s private interviews into the shared space.",
         "Late AI responses never overwrite newer collaborative edits; all calls obey budget and schema policies."
       ],
       "verification_profile": "product",
       "verification": [
-        "AI cannot pull a member\u2019s private interviews into the shared space.",
+        "AI cannot pull a member’s private interviews into the shared space.",
         "Late AI responses never overwrite newer collaborative edits; all calls obey budget and schema policies.",
         "Run lint (exclude generated .vercel until OPS-001), typecheck, focused tests and NITRO_PRESET=vercel build; record actual outcomes. For data/roles run real isolated RLS tests; for new AI run versioned fixtures and the budgeted per-kind evaluation."
       ],
@@ -6273,7 +6310,7 @@
         "stop_and_report": "If a required contract, test environment, human observation, budget or permission is missing, record the specific blocker. Continue another ready task; do not fabricate data or widen the write scope.",
         "handoff": "Report changed files, base/result commit, exact checks and outcomes, artifact/source ids, residual risks and the next eligible task. Only the coordinator edits task status, shared generated files and the main roadmap.",
         "integration": "Use a clean task branch/worktree from the coordinator base. Commit only this write scope. Migrations, generated types, route tree, dependency locks and shared entry points are serialized by the coordinator; never hand-edit generated output.",
-        "kind_approval": "Implement and test this kind\u2019s authorized context adapter after its data services exist. Register schema/prompt/route and capture a capped held-out evaluation against the approved baseline, with dates, endpoint, actual cost and review. Foundation AI-008 does not automatically approve a new kind. Keep the kind disabled until its own scope, quality and budget criteria pass."
+        "kind_approval": "Implement and test this kind’s authorized context adapter after its data services exist. Register schema/prompt/route and capture a capped held-out evaluation against the approved baseline, with dates, endpoint, actual cost and review. Foundation AI-008 does not automatically approve a new kind. Keep the kind disabled until its own scope, quality and budget criteria pass."
       },
       "notes": [
         {
@@ -6590,6 +6627,10 @@
         {
           "date": "2026-10-17",
           "text": "Scheduled by Iteration 5; no implementation or validation claimed."
+        },
+        {
+          "date": "2026-10-18",
+          "text": "WS007 completed deterministic four-scope component journeys and real two-owner/four-project dedicated clone/races. Final cross-role gate must still verify fresh hosted Auth logins for both test owners, final revision permission revocation and all future adapters. Physical second-device/browser-offline/storage checks remain REL002/003; do not inherit software-only results as live Auth/device evidence."
         }
       ],
       "claim": null,
@@ -7086,7 +7127,7 @@
       "steps": [
         "Compare research, teaching and usage findings against the candidate promise and values.",
         "Record unresolved risks and keep/change/remove choices; classify research completion separately from capability release.",
-        "Run the regeneration protocol for a focused 6\u201312-task follow-up without deleting outstanding obligations or history."
+        "Run the regeneration protocol for a focused 6–12-task follow-up without deleting outstanding obligations or history."
       ],
       "acceptance": [
         "Every conclusion links evidence or is labeled unknown; no automated completion based on elapsed time.",
@@ -7129,7 +7170,7 @@
         {
           "id": "REL-005.s3",
           "status": "not_started",
-          "instruction": "Run the regeneration protocol for a focused 6\u201312-task follow-up without deleting outstanding obligations or history.",
+          "instruction": "Run the regeneration protocol for a focused 6–12-task follow-up without deleting outstanding obligations or history.",
           "notes": []
         }
       ]
@@ -7157,7 +7198,7 @@
       "goal": "Distinguish shipped capability, candidate value and unsupported competitive claims before reusing them publicly.",
       "steps": [
         "Read the current spec, landing copy, values and existing canvas; map every consequential claim to a source and current/planned/unknown status.",
-        "Inspect participants\u2019 known alternatives without assuming First Ten wins; verify retained competitor capability or pricing claims against dated primary sources, or remove/mark them unverified.",
+        "Inspect participants’ known alternatives without assuming First Ten wins; verify retained competitor capability or pricing claims against dated primary sources, or remove/mark them unverified.",
         "Revise the canvas and claim ledger around founder decision value, reviewer needs and an unresolved buying path; hand open questions to VP-008 and public-copy owners."
       ],
       "acceptance": [
@@ -7203,7 +7244,7 @@
         {
           "id": "VP-007.s2",
           "status": "complete",
-          "instruction": "Inspect participants\u2019 known alternatives without assuming First Ten wins; verify retained competitor capability or pricing claims against dated primary sources, or remove/mark them unverified.",
+          "instruction": "Inspect participants’ known alternatives without assuming First Ten wins; verify retained competitor capability or pricing claims against dated primary sources, or remove/mark them unverified.",
           "notes": []
         },
         {
@@ -7543,12 +7584,12 @@
         "Record an actual next step accepted/completed/declined and reused-participant context; test any reviewer message separately when instructor participants are available."
       ],
       "acceptance": [
-        "Founder comparisons preserve participants\u2019 own meaning and expectations, with order, source ids, sample overlap and missing follow-through disclosed.",
+        "Founder comparisons preserve participants’ own meaning and expectations, with order, source ids, sample overlap and missing follow-through disclosed.",
         "No preference vote or small-sample behavior is described as causal conversion uplift; unavailable instructor responses do not prevent the founder result being recorded."
       ],
       "verification_profile": "research",
       "verification": [
-        "Founder comparisons preserve participants\u2019 own meaning and expectations, with order, source ids, sample overlap and missing follow-through disclosed.",
+        "Founder comparisons preserve participants’ own meaning and expectations, with order, source ids, sample overlap and missing follow-through disclosed.",
         "No preference vote or small-sample behavior is described as causal conversion uplift; unavailable instructor responses do not prevent the founder result being recorded."
       ],
       "metric": "Correctly understood audience/outcome/limits and completed next steps, reported as n/N with context rather than statistical winners.",
@@ -7843,12 +7884,12 @@
       ],
       "acceptance": [
         "Every substantive positioning/adoption claim has evidence or is marked a hypothesis; no automatic declaration that pricing or company-market fit is decided.",
-        "Decision distinguishes research confidence from the user\u2019s authorization to implement and identifies which public statements may change in VP-006b."
+        "Decision distinguishes research confidence from the user’s authorization to implement and identifies which public statements may change in VP-006b."
       ],
       "verification_profile": "research",
       "verification": [
         "Every substantive positioning/adoption claim has evidence or is marked a hypothesis; no automatic declaration that pricing or company-market fit is decided.",
-        "Decision distinguishes research confidence from the user\u2019s authorization to implement and identifies which public statements may change in VP-006b."
+        "Decision distinguishes research confidence from the user’s authorization to implement and identifies which public statements may change in VP-006b."
       ],
       "metric": "Unsupported decision claims and explicitly unresolved assumptions; next test or investment has a concrete reason.",
       "rollback": "Reopen or narrow the decision on contradictory evidence; retain prior decisions and avoid silently rewriting the public promise.",
@@ -8239,7 +8280,7 @@
         "Run lint (exclude generated .vercel until OPS-001), typecheck, focused tests and NITRO_PRESET=vercel build; record actual outcomes. For data/roles run real isolated RLS tests; for new AI run versioned fixtures and the budgeted per-kind evaluation."
       ],
       "metric": "Agreed follow-ups completed on time, unwanted reminders and duplicate deliveries.",
-      "rollback": "Disable scheduling/delivery while preserving the founder\u2019s list and completion history.",
+      "rollback": "Disable scheduling/delivery while preserving the founder’s list and completion history.",
       "agent_notes": {
         "starting_point": "Activation: actual missed agreed follow-ups recur in observed use, participants identify reminders as useful, and notification/channel consent and scheduling infrastructure are defined. Deferred and unimplemented. The coordinator must record activation and split/schema/API dependencies before implementation; evidence gates do not automatically enable this task.",
         "stop_and_report": "If a required contract, test environment, human observation, budget or permission is missing, record the specific blocker. Continue another ready task; do not fabricate data or widen the write scope.",
@@ -8299,7 +8340,7 @@
         "research/positioning-decision.md",
         "docs/architecture/access-contract.md"
       ],
-      "goal": "Preserve interview work through disconnection without leaking another account\u2019s data or duplicating saves.",
+      "goal": "Preserve interview work through disconnection without leaking another account’s data or duplicating saves.",
       "steps": [
         "Map device/account boundaries, offline draft lifecycle, conflicts and existing saved-draft behavior before adding caching.",
         "Implement minimal app-shell/offline draft support with queued idempotent saves, explicit sync/error state and account-switch/sign-out cleanup.",
@@ -8685,17 +8726,17 @@
       ],
       "goal": "Deliver a useful personal next-step summary without exporting private evidence to an unintended channel.",
       "steps": [
-        "Define the recipient\u2019s intended outcome, safe summary fields, schedule/timezone, consent and unsubscribe behavior.",
+        "Define the recipient’s intended outcome, safe summary fields, schedule/timezone, consent and unsubscribe behavior.",
         "Generate bounded summaries through generateAI only when permitted, or deterministic summaries otherwise; exclude raw interview text and instructor/private cross-scope data.",
         "Test opt-out, duplicate schedules, revoked permissions, empty progress and delivery failures; measure meaningful resumed actions rather than opens alone."
       ],
       "acceptance": [
-        "Digests are opt-in and scoped to the recipient\u2019s current permissions; removal/opt-out prevents queued delivery.",
+        "Digests are opt-in and scoped to the recipient’s current permissions; removal/opt-out prevents queued delivery.",
         "Private quotes and contact details are not included by default; unchanged/non-actionable state does not cause noisy delivery."
       ],
       "verification_profile": "product",
       "verification": [
-        "Digests are opt-in and scoped to the recipient\u2019s current permissions; removal/opt-out prevents queued delivery.",
+        "Digests are opt-in and scoped to the recipient’s current permissions; removal/opt-out prevents queued delivery.",
         "Private quotes and contact details are not included by default; unchanged/non-actionable state does not cause noisy delivery.",
         "Run lint (exclude generated .vercel until OPS-001), typecheck, focused tests and NITRO_PRESET=vercel build; record actual outcomes. For data/roles run real isolated RLS tests; for new AI run versioned fixtures and the budgeted per-kind evaluation."
       ],
@@ -8718,7 +8759,7 @@
         {
           "id": "HOLD-009.s1",
           "status": "deferred",
-          "instruction": "Define the recipient\u2019s intended outcome, safe summary fields, schedule/timezone, consent and unsubscribe behavior.",
+          "instruction": "Define the recipient’s intended outcome, safe summary fields, schedule/timezone, consent and unsubscribe behavior.",
           "notes": []
         },
         {
@@ -8774,7 +8815,7 @@
         "The experiment plan specifies a primary outcome, denominator, exposure policy and stopping rule before enrollment; privacy controls and AN-002 are usable.",
         "No low-sample preference/conversion difference is declared causal proof of the value proposition; assignment can be pinned without losing existing data."
       ],
-      "metric": "Eligible exposure \u2192 signup \u2192 relevant first interview within seven days by variant, with missingness and uncertainty.",
+      "metric": "Eligible exposure → signup → relevant first interview within seven days by variant, with missingness and uncertainty.",
       "rollback": "Pin the factual baseline, stop new assignments and retain only the agreed minimal experiment data under retention policy.",
       "agent_notes": {
         "starting_point": "Activation requires a coordinator-recorded traffic/power or explicitly exploratory plan, validated attribution and privacy settings after AN-002/WEB-004. Manual VP-004a is sufficient for early comprehension learning; live A/B work is not currently started.",
@@ -8978,8 +9019,8 @@
       ],
       "goal": "Create a polished workshop pitch deck linking pedagogy, live demo, $0 marketing and current technical architecture.",
       "steps": [
-        "Write a 3\u20135 minute pitch with a 90-second fallback: classroom problem, founder evidence loop, StudyLoop demo, $0 marketing lab, named pedagogical concepts, stack and invitation.",
-        "Author the editable deck using the Presentations skill and selected brand; cite the owner\u2019s slides/board and primary pedagogy sources, and label demo/planned material.",
+        "Write a 3–5 minute pitch with a 90-second fallback: classroom problem, founder evidence loop, StudyLoop demo, $0 marketing lab, named pedagogical concepts, stack and invitation.",
+        "Author the editable deck using the Presentations skill and selected brand; cite the owner’s slides/board and primary pedagogy sources, and label demo/planned material.",
         "Render and inspect every slide; rehearse the live-demo handoff, preserve readable offline story and provide a presentable deck link/artifact."
       ],
       "acceptance": [
@@ -9006,7 +9047,7 @@
         },
         {
           "date": "2026-10-18",
-          "text": "Promoted by explicit owner request for tomorrow\u2019s Babson pitch. Build an evidence-honest current-capability/proposed-roadmap deck with named pedagogy; no invented traction or research outcomes. Original outcome-based deck dependency is superseded by this event need."
+          "text": "Promoted by explicit owner request for tomorrow’s Babson pitch. Build an evidence-honest current-capability/proposed-roadmap deck with named pedagogy; no invented traction or research outcomes. Original outcome-based deck dependency is superseded by this event need."
         },
         {
           "date": "2026-10-18",
@@ -9033,13 +9074,13 @@
         {
           "id": "P-001b.s1",
           "status": "complete",
-          "instruction": "Write a 3\u20135 minute pitch with a 90-second fallback: classroom problem, founder evidence loop, StudyLoop demo, $0 marketing lab, named pedagogical concepts, stack and invitation.",
+          "instruction": "Write a 3–5 minute pitch with a 90-second fallback: classroom problem, founder evidence loop, StudyLoop demo, $0 marketing lab, named pedagogical concepts, stack and invitation.",
           "notes": []
         },
         {
           "id": "P-001b.s2",
           "status": "complete",
-          "instruction": "Author the editable deck using the Presentations skill and selected brand; cite the owner\u2019s slides/board and primary pedagogy sources, and label demo/planned material.",
+          "instruction": "Author the editable deck using the Presentations skill and selected brand; cite the owner’s slides/board and primary pedagogy sources, and label demo/planned material.",
           "notes": []
         },
         {
@@ -9069,7 +9110,7 @@
         "docs/demo/babson-pitch-brief.md",
         "docs/architecture/access-contract.md"
       ],
-      "goal": "Turn the owner\u2019s audience/channel/content/funnel board into a coherent student-led experiment workflow.",
+      "goal": "Turn the owner’s audience/channel/content/funnel board into a coherent student-led experiment workflow.",
       "steps": [
         "Map the supplied BUS131 slides and board to audience, evidence/unknowns, specific physical/digital channels, reviewed content, resource limits and a one-week test.",
         "Define typed versioned plan/channel/asset/test/measurement contracts, private data boundaries and separate AI kinds; specify stage-2 entry without silently changing current stage unlocks.",
@@ -9088,7 +9129,7 @@
       "metric": "Completed useful workflow, source/permission integrity, recovery failures and measured AI cost where applicable.",
       "rollback": "Disable the affected entry point/AI kind; preserve existing private records, prior plan revisions and the tested demonstration fallback.",
       "agent_notes": {
-        "starting_point": "Owner-requested addition during the autonomous run for tomorrow\u2019s Babson demo. Use the approved marketing-lab contract and existing contracts; no fictional evidence may become a claim of real research.",
+        "starting_point": "Owner-requested addition during the autonomous run for tomorrow’s Babson demo. Use the approved marketing-lab contract and existing contracts; no fictional evidence may become a claim of real research.",
         "stop_and_report": "Record the exact missing environment, permission, budget or human evidence, preserve partial work, and continue another eligible task. Do not bypass gates or widen access.",
         "handoff": "Report scoped files, commit, checks/results, migration/type contracts, measured spend, remaining blockers and rollback. Coordinator owns registry/status/integration."
       },
@@ -9155,7 +9196,7 @@
         "docs/demo/babson-pitch-brief.md",
         "docs/architecture/access-contract.md"
       ],
-      "goal": "Save a project\u2019s marketing board with strict validation and conflict-safe revisions.",
+      "goal": "Save a project’s marketing board with strict validation and conflict-safe revisions.",
       "steps": [
         "Create one private plan per project with owner/project consistency, JSON shape/size bounds and revision timestamps.",
         "Implement authenticated load/save with expected revision and safe defaults; preserve unknown measurements rather than inventing zeros or results.",
@@ -9174,7 +9215,7 @@
       "metric": "Completed useful workflow, source/permission integrity, recovery failures and measured AI cost where applicable.",
       "rollback": "Disable the affected entry point/AI kind; preserve existing private records, prior plan revisions and the tested demonstration fallback.",
       "agent_notes": {
-        "starting_point": "Owner-requested addition during the autonomous run for tomorrow\u2019s Babson demo. Use the approved marketing-lab contract and existing contracts; no fictional evidence may become a claim of real research.",
+        "starting_point": "Owner-requested addition during the autonomous run for tomorrow’s Babson demo. Use the approved marketing-lab contract and existing contracts; no fictional evidence may become a claim of real research.",
         "stop_and_report": "Record the exact missing environment, permission, budget or human evidence, preserve partial work, and continue another eligible task. Do not bypass gates or widen access.",
         "handoff": "Report scoped files, commit, checks/results, migration/type contracts, measured spend, remaining blockers and rollback. Coordinator owns registry/status/integration."
       },
@@ -9202,7 +9243,7 @@
       ],
       "claim": null,
       "completion_evidence": [
-        "ec5ef05 +00c06f4: 308 real isolated database assertions;43 new validator tests;four concurrent transaction cases;official local types regenerated. Hosted additive migration20261018001000 applied; actual browser created and saved revisions1\u20133 in the dedicated fictional project."
+        "ec5ef05 +00c06f4: 308 real isolated database assertions;43 new validator tests;four concurrent transaction cases;official local types regenerated. Hosted additive migration20261018001000 applied; actual browser created and saved revisions1–3 in the dedicated fictional project."
       ],
       "subtasks": [
         {
@@ -9253,7 +9294,7 @@
       ],
       "goal": "Guide students from a focused audience to two reachable channels and an executable $0 plan.",
       "steps": [
-        "Start with students\u2019 own audience/known evidence/unknowns and initial channel ideas before offering AI assistance.",
+        "Start with students’ own audience/known evidence/unknowns and initial channel ideas before offering AI assistance.",
         "Build a physical/digital channel board with exact place/link, observation, access/permission state, effort/time and primary/alternative selection; cap current commitments at two chosen channels.",
         "Add saved/unsaved/conflict/retry states and stage-aware navigation using the explicitly supplied project id; retain current private project flow until WS-002 integration."
       ],
@@ -9270,7 +9311,7 @@
       "metric": "Completed useful workflow, source/permission integrity, recovery failures and measured AI cost where applicable.",
       "rollback": "Disable the affected entry point/AI kind; preserve existing private records, prior plan revisions and the tested demonstration fallback.",
       "agent_notes": {
-        "starting_point": "Owner-requested addition during the autonomous run for tomorrow\u2019s Babson demo. Use the approved marketing-lab contract and existing contracts; no fictional evidence may become a claim of real research.",
+        "starting_point": "Owner-requested addition during the autonomous run for tomorrow’s Babson demo. Use the approved marketing-lab contract and existing contracts; no fictional evidence may become a claim of real research.",
         "stop_and_report": "Record the exact missing environment, permission, budget or human evidence, preserve partial work, and continue another eligible task. Do not bypass gates or widen access.",
         "handoff": "Report scoped files, commit, checks/results, migration/type contracts, measured spend, remaining blockers and rollback. Coordinator owns registry/status/integration."
       },
@@ -9290,13 +9331,13 @@
       ],
       "claim": null,
       "completion_evidence": [
-        "Actual Chrome with dedicated hosted presenter: first thinking preserved server-side; two distinct channels and content saved through revisions1\u20134; one-week plan saved; route leave protected unsaved edits; reload retained original thinking. Seven recovery/CAS UI tests;153combinedtests,typecheck,lintandNitrobuildpass."
+        "Actual Chrome with dedicated hosted presenter: first thinking preserved server-side; two distinct channels and content saved through revisions1–4; one-week plan saved; route leave protected unsaved edits; reload retained original thinking. Seven recovery/CAS UI tests;153combinedtests,typecheck,lintandNitrobuildpass."
       ],
       "subtasks": [
         {
           "id": "MKT-003.s1",
           "status": "complete",
-          "instruction": "Start with students\u2019 own audience/known evidence/unknowns and initial channel ideas before offering AI assistance.",
+          "instruction": "Start with students’ own audience/known evidence/unknowns and initial channel ideas before offering AI assistance.",
           "notes": []
         },
         {
@@ -9359,7 +9400,7 @@
       "metric": "Completed useful workflow, source/permission integrity, recovery failures and measured AI cost where applicable.",
       "rollback": "Disable the affected entry point/AI kind; preserve existing private records, prior plan revisions and the tested demonstration fallback.",
       "agent_notes": {
-        "starting_point": "Owner-requested addition during the autonomous run for tomorrow\u2019s Babson demo. Use the approved marketing-lab contract and existing contracts; no fictional evidence may become a claim of real research.",
+        "starting_point": "Owner-requested addition during the autonomous run for tomorrow’s Babson demo. Use the approved marketing-lab contract and existing contracts; no fictional evidence may become a claim of real research.",
         "stop_and_report": "Record the exact missing environment, permission, budget or human evidence, preserve partial work, and continue another eligible task. Do not bypass gates or widen access.",
         "handoff": "Report scoped files, commit, checks/results, migration/type contracts, measured spend, remaining blockers and rollback. Coordinator owns registry/status/integration."
       },
@@ -9438,7 +9479,7 @@
       "metric": "Completed useful workflow, source/permission integrity, recovery failures and measured AI cost where applicable.",
       "rollback": "Disable the affected entry point/AI kind; preserve existing private records, prior plan revisions and the tested demonstration fallback.",
       "agent_notes": {
-        "starting_point": "Owner-requested addition during the autonomous run for tomorrow\u2019s Babson demo. Use the approved marketing-lab contract and existing contracts; no fictional evidence may become a claim of real research.",
+        "starting_point": "Owner-requested addition during the autonomous run for tomorrow’s Babson demo. Use the approved marketing-lab contract and existing contracts; no fictional evidence may become a claim of real research.",
         "stop_and_report": "Record the exact missing environment, permission, budget or human evidence, preserve partial work, and continue another eligible task. Do not bypass gates or widen access.",
         "handoff": "Report scoped files, commit, checks/results, migration/type contracts, measured spend, remaining blockers and rollback. Coordinator owns registry/status/integration."
       },
@@ -9531,7 +9572,7 @@
       "metric": "Completed useful workflow, source/permission integrity, recovery failures and measured AI cost where applicable.",
       "rollback": "Disable the affected entry point/AI kind; preserve existing private records, prior plan revisions and the tested demonstration fallback.",
       "agent_notes": {
-        "starting_point": "Owner-requested addition during the autonomous run for tomorrow\u2019s Babson demo. Use the approved marketing-lab contract and existing contracts; no fictional evidence may become a claim of real research.",
+        "starting_point": "Owner-requested addition during the autonomous run for tomorrow’s Babson demo. Use the approved marketing-lab contract and existing contracts; no fictional evidence may become a claim of real research.",
         "stop_and_report": "Record the exact missing environment, permission, budget or human evidence, preserve partial work, and continue another eligible task. Do not bypass gates or widen access.",
         "handoff": "Report scoped files, commit, checks/results, migration/type contracts, measured spend, remaining blockers and rollback. Coordinator owns registry/status/integration."
       },
@@ -9566,7 +9607,7 @@
         },
         {
           "date": "2026-10-18",
-          "text": "All remaining manual planner controls are delivered: reviewed tag adoption, owners, deadlines, prerequisites, completion rules, resources, test states, baseline/target and fallback. The actual production UI blocked starting a dependent action before its prerequisite was done. The explicitly fictional October 19\u201325 plan, October 26 review, two not-run actions and 50 estimated minutes within a 180-minute ceiling saved as revision 7 and survived reload. Original thinking is preserved; baseline remains unknown, target 3 is a planning threshold, and status is Draft. No campaign ran or outreach was sent. Precise native-select labels were verified after 64bc86e."
+          "text": "All remaining manual planner controls are delivered: reviewed tag adoption, owners, deadlines, prerequisites, completion rules, resources, test states, baseline/target and fallback. The actual production UI blocked starting a dependent action before its prerequisite was done. The explicitly fictional October 19–25 plan, October 26 review, two not-run actions and 50 estimated minutes within a 180-minute ceiling saved as revision 7 and survived reload. Original thinking is preserved; baseline remains unknown, target 3 is a planning threshold, and status is Draft. No campaign ran or outreach was sent. Precise native-select labels were verified after 64bc86e."
         }
       ],
       "claim": null,
@@ -9639,7 +9680,7 @@
       "metric": "Completed useful workflow, source/permission integrity, recovery failures and measured AI cost where applicable.",
       "rollback": "Disable the affected entry point/AI kind; preserve existing private records, prior plan revisions and the tested demonstration fallback.",
       "agent_notes": {
-        "starting_point": "Owner-requested addition during the autonomous run for tomorrow\u2019s Babson demo. Use the approved marketing-lab contract and existing contracts; no fictional evidence may become a claim of real research.",
+        "starting_point": "Owner-requested addition during the autonomous run for tomorrow’s Babson demo. Use the approved marketing-lab contract and existing contracts; no fictional evidence may become a claim of real research.",
         "stop_and_report": "Record the exact missing environment, permission, budget or human evidence, preserve partial work, and continue another eligible task. Do not bypass gates or widen access.",
         "handoff": "Report scoped files, commit, checks/results, migration/type contracts, measured spend, remaining blockers and rollback. Coordinator owns registry/status/integration."
       },
@@ -9716,7 +9757,7 @@
       "goal": "Confirm the $0 marketing feature works end to end before enabling it for real testers.",
       "steps": [
         "Exercise founder/teacher-review projection where implemented, two-account plan access, stage navigation, revisions and provider failures.",
-        "Run the actual browser path audience\u2192channel\u2192asset\u2192test\u2192measurement\u2192reflection on desktop/mobile/keyboard.",
+        "Run the actual browser path audience→channel→asset→test→measurement→reflection on desktop/mobile/keyboard.",
         "Check actual spend, permission disclosures and factual claims; fix critical failures and document enabled/manual/demo-only capabilities."
       ],
       "acceptance": [
@@ -9732,7 +9773,7 @@
       "metric": "Completed useful workflow, source/permission integrity, recovery failures and measured AI cost where applicable.",
       "rollback": "Disable the affected entry point/AI kind; preserve existing private records, prior plan revisions and the tested demonstration fallback.",
       "agent_notes": {
-        "starting_point": "Owner-requested addition during the autonomous run for tomorrow\u2019s Babson demo. Use the approved marketing-lab contract and existing contracts; no fictional evidence may become a claim of real research.",
+        "starting_point": "Owner-requested addition during the autonomous run for tomorrow’s Babson demo. Use the approved marketing-lab contract and existing contracts; no fictional evidence may become a claim of real research.",
         "stop_and_report": "Record the exact missing environment, permission, budget or human evidence, preserve partial work, and continue another eligible task. Do not bypass gates or widen access.",
         "handoff": "Report scoped files, commit, checks/results, migration/type contracts, measured spend, remaining blockers and rollback. Coordinator owns registry/status/integration."
       },
@@ -9754,7 +9795,7 @@
         {
           "id": "MKT-008.s2",
           "status": "not_started",
-          "instruction": "Run the actual browser path audience\u2192channel\u2192asset\u2192test\u2192measurement\u2192reflection on desktop/mobile/keyboard.",
+          "instruction": "Run the actual browser path audience→channel→asset→test→measurement→reflection on desktop/mobile/keyboard.",
           "notes": []
         },
         {
@@ -9811,7 +9852,7 @@
       "metric": "Completed useful workflow, source/permission integrity, recovery failures and measured AI cost where applicable.",
       "rollback": "Disable the affected entry point/AI kind; preserve existing private records, prior plan revisions and the tested demonstration fallback.",
       "agent_notes": {
-        "starting_point": "Owner-requested addition during the autonomous run for tomorrow\u2019s Babson demo. Use the approved marketing-lab contract and existing contracts; no fictional evidence may become a claim of real research.",
+        "starting_point": "Owner-requested addition during the autonomous run for tomorrow’s Babson demo. Use the approved marketing-lab contract and existing contracts; no fictional evidence may become a claim of real research.",
         "stop_and_report": "Record the exact missing environment, permission, budget or human evidence, preserve partial work, and continue another eligible task. Do not bypass gates or widen access.",
         "handoff": "Report scoped files, commit, checks/results, migration/type contracts, measured spend, remaining blockers and rollback. Coordinator owns registry/status/integration."
       },
@@ -9904,7 +9945,7 @@
       "metric": "Completed useful workflow, source/permission integrity, recovery failures and measured AI cost where applicable.",
       "rollback": "Disable the affected entry point/AI kind; preserve existing private records, prior plan revisions and the tested demonstration fallback.",
       "agent_notes": {
-        "starting_point": "Owner-requested addition during the autonomous run for tomorrow\u2019s Babson demo. Use the approved marketing-lab contract and existing contracts; no fictional evidence may become a claim of real research.",
+        "starting_point": "Owner-requested addition during the autonomous run for tomorrow’s Babson demo. Use the approved marketing-lab contract and existing contracts; no fictional evidence may become a claim of real research.",
         "stop_and_report": "Record the exact missing environment, permission, budget or human evidence, preserve partial work, and continue another eligible task. Do not bypass gates or widen access.",
         "handoff": "Report scoped files, commit, checks/results, migration/type contracts, measured spend, remaining blockers and rollback. Coordinator owns registry/status/integration."
       },
@@ -10004,7 +10045,7 @@
       "metric": "Zero unauthorized aggregate reads or exposed raw content; actual presenter login works.",
       "rollback": "Remove demo admin flag from trusted app_metadata and hide admin entry; retain ordinary private workspace and public demo.",
       "agent_notes": {
-        "starting_point": "Owner-requested addition during the autonomous run for tomorrow\u2019s Babson demo. Use the approved marketing-lab contract and existing contracts; no fictional evidence may become a claim of real research.",
+        "starting_point": "Owner-requested addition during the autonomous run for tomorrow’s Babson demo. Use the approved marketing-lab contract and existing contracts; no fictional evidence may become a claim of real research.",
         "stop_and_report": "Record the exact missing environment, permission, budget or human evidence, preserve partial work, and continue another eligible task. Do not bypass gates or widen access.",
         "handoff": "Report scoped files, commit, checks/results, migration/type contracts, measured spend, remaining blockers and rollback. Coordinator owns registry/status/integration."
       },
@@ -10105,7 +10146,7 @@
       "notes": [
         {
           "date": "2026-10-18",
-          "text": "Owner explicitly requested multiple ideas during the final sprint. This is the shipped single-owner subset; WS-001\u2013007 retain their broader lifecycle, membership-aware routing, interview autosave/finalization and end-to-end acceptance gates."
+          "text": "Owner explicitly requested multiple ideas during the final sprint. This is the shipped single-owner subset; WS-001–007 retain their broader lifecycle, membership-aware routing, interview autosave/finalization and end-to-end acceptance gates."
         }
       ],
       "claim": null,
@@ -10172,7 +10213,7 @@
         "Verify schema and real database isolation/concurrency, focused UI behavior and hosted presenter lesson seeding through the ordinary owner RPC."
       ],
       "acceptance": [
-        "A real private lesson plan saves with revision checks and does not expose another owner\u2019s work. Student preview omits facilitator notes.",
+        "A real private lesson plan saves with revision checks and does not expose another owner’s work. Student preview omits facilitator notes.",
         "Fictional StudyLoop, CampusSwap, QuietSpace and TutorLink cards are visibly authored examples; planned capacity 45 is an estimate, not enrollment. No live class feed, submissions, teacher grants or student progress is fabricated."
       ],
       "verification_profile": "product",
@@ -10191,7 +10232,7 @@
       "notes": [
         {
           "date": "2026-10-18",
-          "text": "Owner requested an explicit seeded educator dashboard. This delivered private planning and an authored cohort rehearsal; CLS-001\u2013006 shared classes, memberships, reviewed submissions, student visibility and teacher AI remain not started. EDU-003 real-class pilot and EDU-004 instructor rehearsal remain open."
+          "text": "Owner requested an explicit seeded educator dashboard. This delivered private planning and an authored cohort rehearsal; CLS-001–006 shared classes, memberships, reviewed submissions, student visibility and teacher AI remain not started. EDU-003 real-class pilot and EDU-004 instructor rehearsal remain open."
         }
       ],
       "claim": null,
@@ -10283,7 +10324,7 @@
       ],
       "claim": null,
       "completion_evidence": [
-        "Implementation c16b3a3, integrated in f8bc878. src/tests/br-003/auth.test.tsx explicitly verifies Student \u2192 /dashboard, Educator \u2192 /teacher and Admin \u2192 /admin, with remembered reserved project selection and no privilege assignment.",
+        "Implementation c16b3a3, integrated in f8bc878. src/tests/br-003/auth.test.tsx explicitly verifies Student → /dashboard, Educator → /teacher and Admin → /admin, with remembered reserved project selection and no privilege assignment.",
         "Coordinator reports 19 focused auth/project checks and 219 combined application tests, typecheck, lint and build passing. Vercel deployment f8bc878 reached READY; production /auth was observed retaining the form. Credentials are never recorded in the registry."
       ],
       "subtasks": [
@@ -10366,7 +10407,7 @@
       "notes": [
         {
           "date": "2026-10-18",
-          "text": "Requested label AI-DEMO-001 is represented by canonical AI-009 to preserve the registry ID grammar. Implementation is integrated (68b1b41, c16b3a3, f8bc878) and automated verification passes, but no live-provider success or measured model quality is claimed. Parent remains in_progress until the coordinator records the deployed provider trial. This does not complete AI-002\u2013008, general marketing AI or admin cost analytics."
+          "text": "Requested label AI-DEMO-001 is represented by canonical AI-009 to preserve the registry ID grammar. Implementation is integrated (68b1b41, c16b3a3, f8bc878) and automated verification passes, but no live-provider success or measured model quality is claimed. Parent remains in_progress until the coordinator records the deployed provider trial. This does not complete AI-002–008, general marketing AI or admin cost analytics."
         },
         {
           "date": "2026-10-18",
@@ -10469,7 +10510,7 @@
         },
         {
           "date": "2026-10-18",
-          "text": "Owner-requested order update: native Market Opportunity moved to slide 5 before all four product demos (now slides 6\u20139). Slide IDs/content retained; all 13 current renders reviewed and online/offline companions, source map, presenter script and rebuild ordering synchronized."
+          "text": "Owner-requested order update: native Market Opportunity moved to slide 5 before all four product demos (now slides 6–9). Slide IDs/content retained; all 13 current renders reviewed and online/offline companions, source map, presenter script and rebuild ordering synchronized."
         },
         {
           "date": "2026-10-18",
@@ -10481,7 +10522,7 @@
         },
         {
           "date": "2026-10-18",
-          "text": "Owner revised order: four product demos5\u20138, architecture9, Teaching Design10, Market Opportunity11, Chasm12, Questions13. Replaced yellow teaching text block with actual Worksheet B rendered from teaching-kit PDF page4, blank lower paper removed; retained six pedagogy concepts beside worksheet. Native state27 and all13 renders regenerated; companions and speaker/source docs synchronized. Product development remains paused."
+          "text": "Owner revised order: four product demos5–8, architecture9, Teaching Design10, Market Opportunity11, Chasm12, Questions13. Replaced yellow teaching text block with actual Worksheet B rendered from teaching-kit PDF page4, blank lower paper removed; retained six pedagogy concepts beside worksheet. Native state27 and all13 renders regenerated; companions and speaker/source docs synchronized. Product development remains paused."
         },
         {
           "date": "2026-10-18",
@@ -10846,7 +10887,7 @@
         },
         {
           "date": "2026-10-18",
-          "text": "Claimed afterCLS001 foundation. Build real teacher class/hackathon provision UI outside RequireProject and no-account public entry, separate class-entry/team/principal-private capabilities, HttpOnly sessions and recoverable return, QR. No student emails or fake accounts; no private class/team content untilCLS008. Guest/class AI startsdisabled; retention schedule requested not enforced untilPRV003. Reserved18000; root publishes/applies15000\u219216000\u219217000\u219218000 in order and owns package locks/generatedtypes/routeTree/AppShell links."
+          "text": "Claimed afterCLS001 foundation. Build real teacher class/hackathon provision UI outside RequireProject and no-account public entry, separate class-entry/team/principal-private capabilities, HttpOnly sessions and recoverable return, QR. No student emails or fake accounts; no private class/team content untilCLS008. Guest/class AI startsdisabled; retention schedule requested not enforced untilPRV003. Reserved18000; root publishes/applies15000→16000→17000→18000 in order and owns package locks/generatedtypes/routeTree/AppShell links."
         }
       ],
       "claim": null,
@@ -10878,12 +10919,12 @@
       "id": "CLS-008",
       "title": "Account-free team activities, return access and reviewed classroom handoff",
       "phase": "P4",
-      "status": "in_progress",
+      "status": "blocked",
       "owner": "agent",
       "size": "M",
       "kind": "implementation",
       "priority": 25,
-      "depends_on": ["CLS-007", "CLS-002", "EXP-001"],
+      "depends_on": ["CLS-007", "CLS-002", "EXP-001", "CLS-009"],
       "requires_decisions": [],
       "write_scope": [
         "supabase/migrations/20261018022000_guest_learning_activities.sql",
@@ -10907,7 +10948,7 @@
         "supabase/tests/guest-marketing-handoff.sql",
         "docs/architecture/guest-marketing-handoff.md"
       ],
-      "exclusive_locks": ["cls-008-integration", "database-schema", "generated-types"],
+      "exclusive_locks": ["cls-008-integration"],
       "read_first": [
         "ProductSpec.md",
         "FEATUREROADMAP_workplan.md",
@@ -10994,33 +11035,34 @@
         {
           "date": "2026-10-18",
           "text": "Teacher Marketing Lab handoff integrated b4d5b13/b3f75b1 plus root teacher mount/three PDF coverage adapters/official types24. Exact24 SHA9bd05330 passed disposable1810 SQL assertions/zero failures/gaps/validplan/rollback,8 actualDTO checks and6 observed races; failed prior clone alias collision fixed and both clones dropped/absence verified. Root1107 app tests pass/11 existing skips; typecheck, lint zeroerrors/sixexistingwarnings, Vercelbuild pass. Dedicated local24 applied after exact pin/port guard; normal hosted dryrun listed only24/no seeds/roles and normal24 application completed. Live author/teacher/withdrawal rehearsal after deployment remains next; broader parent scope remains under audit, not falsely completed."
+        },
+        {
+          "date": "2026-10-18",
+          "text": "Explicit serialized-schema lease release after exact24 local/hosted apply and official type regeneration. Root retains only live UI/teacher rehearsal ownership; no further schema/type writes are authorized under this claim. Original scope/acceptance and unfinished full core-activity parity remain preserved. AN002 may reserve exact25, not any published22–24 file. Parent completion is separate from releasing an integration lease."
+        },
+        {
+          "date": "2026-10-18",
+          "text": "Live24 handoff passed at e590ff9: unknown choice by default; private preview PDF3pages created no teacher row; explicit selected copy version1 visible and teacher PDF3pages; withdrawal denied stale teacher Download and refresh removed row; private withdrawn author PDF3pages remained; explicit fresh version2 active. Updated fictional class instructions and published $0 assignment. s2/s3 complete, s1 blocked specifically on new CLS009 literal manual parity. Full core parity was not silently redefined as two studios. Unblock by implementing CLS009; parent/schema lease released, all original notes/acceptance retained. Optional account transfer, derived measures, AI, complete class bundles and physical deletion keep distinct tasks."
         }
       ],
-      "claim": {
-        "owner": "root",
-        "branch": "main",
-        "base_commit": "8c39dba",
-        "worktree": "/Users/ianroy/Library/CloudStorage/Dropbox/Apps by Ian/Babson AI Academy/First 10",
-        "started_at": "2026-10-18T23:52:00Z",
-        "lease_expires_at": "2026-10-19T03:00:00Z"
-      },
+      "claim": null,
       "completion_evidence": [],
       "subtasks": [
         {
           "id": "CLS-008.s1",
-          "status": "in_progress",
+          "status": "blocked",
           "instruction": "Support no-account team work across all core learning activities, with clear class/team/audience context and safe save/reload.",
           "notes": []
         },
         {
           "id": "CLS-008.s2",
-          "status": "in_progress",
+          "status": "complete",
           "instruction": "Provide disclosed return/recovery method without collecting student emails; distinguish shared team activity from private local notes; optional later personal-account transfer is explicit.",
           "notes": []
         },
         {
           "id": "CLS-008.s3",
-          "status": "in_progress",
+          "status": "complete",
           "instruction": "Students preview selected submitted work and export PDFs; teacher sees only the agreed class projection/submitted versions; test teammate, outsider and expired-session boundaries.",
           "notes": []
         }
@@ -11922,6 +11964,467 @@
           "notes": []
         }
       ]
+    },
+    {
+      "id": "CLS-009",
+      "title": "Complete manual guest growth activity parity",
+      "phase": "P4",
+      "status": "in_progress",
+      "owner": "agent",
+      "size": "M",
+      "kind": "implementation",
+      "priority": 49,
+      "depends_on": ["CLS-007", "CLS-002", "EXP-001", "MKT-003"],
+      "requires_decisions": [],
+      "write_scope": [
+        "src/lib/guest-growth/contracts.ts",
+        "src/lib/guest-growth/pdf.ts",
+        "src/components/guest-growth/**",
+        "src/tests/guest-growth/**",
+        "docs/architecture/guest-growth.md"
+      ],
+      "exclusive_locks": ["guest-growth-integration"],
+      "read_first": [
+        "ProductSpec.md",
+        "FEATUREROADMAP_workplan.md",
+        "src/lib/guest-marketing/contracts.ts",
+        "src/lib/guest-activities/contracts.ts",
+        "docs/architecture/guest-marketing-handoff.md",
+        "src/lib/export/coverage.ts"
+      ],
+      "goal": "Preserve CLS008’s original all-core-activity promise by adding the concrete manual growth artifacts missing from the two guest studios.",
+      "steps": [
+        "Define closed genuine-guest contracts for standalone authored synthesis/learnings, multiple experiments, a stage-specific alias contact pipeline, feedback-survey drafts, referral asks and onboarding questions. Preserve private versus explicitly created team scope; never create fake users/projects or treat class membership as access.",
+        "Implement bounded saved/reopen/CAS/idempotent services with exact request retry, cookie+CSRF authority, class→fresh principal→source lock order, post-write expiry rollback and documented count/byte/receipt caps. Use additive reviewed migrations; never edit published22–24 or reuse an unrelated activity identity.",
+        "Build desktop editors that distinguish authored hypotheses/plans, self-reported outcomes and completed interviews. Surveys are draft questions, not a hosted collection service. Referral/onboarding/outreach text stays unsent. No AI or automatic publication.",
+        "Register an individual PDF for every new artifact/version and selected saved portfolios with genuine source scope, fresh authorization before generation/delivery and truthful unknown/draft labels. Raw private interviews cannot enter shared artifacts through an implicit adapter.",
+        "Support separately selected/redacted immutable teacher copies under a genuine source resolver and explicit audience confirmation; current choices/generations/expiry/withdrawal gate every read/PDF. Do not widen old closed DTOs or give teachers raw growth records.",
+        "Run actual DTO/SQL and separate-connection private/team/outsider/withdrawal/expiry/cap tests in an exact-pinned disposable clone, then root combined desktop/reload/PDF/browser checks. Preserve prior data and report all parity gaps rather than substituting generic text fields."
+      ],
+      "acceptance": [
+        "Every specifically missing owner artifact has a structured genuine-guest equivalent and individually selectable PDF; generic outreach is not claimed as a dedicated survey/referral/onboarding workflow.",
+        "Private/team ownership, exact replay/CAS, source choice, deliberate teacher publication, withdrawal and expiry pass actual SQL/UI/export boundary tests without exposing raw private notes."
+      ],
+      "verification_profile": "product",
+      "verification": [
+        "Closed contract/schema and negative-field tests; actual SQL DTOs, four-role boundaries and true lock/expiry races; no mocked RLS claims.",
+        "Desktop save/reload and every individual/selected portfolio/teacher PDF; combined typecheck/lint/build and live fictional smoke."
+      ],
+      "metric": "Acknowledged saved-artifact return and authorized PDF coverage; no fabricated acquisition/learning outcomes.",
+      "rollback": "Hide new guest growth entry, retain existing22/23 studios and all saved records; no destructive downgrade.",
+      "agent_notes": {
+        "starting_point": "Genuine guest22/23/24 are shipped. Define the specific missing standalone learning/experiment, pipeline, survey/referral/onboarding artifacts; never equate generic text with structured parity. Start by reading current source and source-scoped export/submission boundaries. Contract-only phase cannot mutate schema or enable UI.",
+        "stop_and_report": "If a required contract, test environment, human observation, budget or permission is missing, record the specific blocker. Continue another ready task; do not fabricate data or widen the write scope.",
+        "handoff": "Report changed files, base/result commit, exact checks and outcomes, artifact/source ids, residual risks and the next eligible task. Only the coordinator edits task status, shared generated files and the main roadmap.",
+        "integration": "Use a clean task branch/worktree from the coordinator base. Commit only this write scope. Migrations, generated types, route tree, dependency locks and shared entry points are serialized by the coordinator; never hand-edit generated output."
+      },
+      "notes": [
+        {
+          "date": "2026-10-18",
+          "text": "Extracted the still-unfinished literal CLS008.s1 all-core requirement after independent audit. Discovery22, Marketing23 and reviewed handoff24 are shipped; standalone learning/experiments, later pipeline, survey, referral and onboarding artifacts are absent. This new task preserves the obligation and does not retroactively certify parent completion. Schema25 remains exclusively AN002; claim/review next additive version only after that lease is released."
+        },
+        {
+          "date": "2026-10-18",
+          "text": "Phase1 contract/design-only reservation, intentionally disjoint from AN002 schema25. Allowed only strict guest-growth contracts, meaningful validation tests and architecture document. No migration, server function, parent UI, generatedtypes or DB action until root reviews design and expands serialized scope for next version. Future implementation scope remains guest-growth services/components/tests, additive reviewed migration(s), SQL fixtures and root PDF/join/teacher mounts. This is partial work, not a shipped parity capability."
+        },
+        {
+          "date": "2026-10-18",
+          "text": "Phase2 authorized scope is isolated desktop controlled editors, PDF builders and tests only over phase1 typed contracts. No network/persistence claims, migration/server/DB/container/shared join or coverage mounts. Schema26 reserved AN003. Root will supply async scope/save/load/history/export authority integration later; do not fake storage. Future backend version remains unreserved until26 boundary."
+        }
+      ],
+      "claim": {
+        "owner": "guest_marketing_handoff",
+        "branch": "codex/guest-growth-contracts-20261018",
+        "base_commit": "0ea9b74",
+        "worktree": "/private/tmp/first-ten-guest-marketing-handoff",
+        "started_at": "2026-10-19T00:04:00Z",
+        "lease_expires_at": "2026-10-19T04:00:00Z"
+      },
+      "completion_evidence": [],
+      "subtasks": [
+        {
+          "id": "CLS-009.s1",
+          "status": "complete",
+          "instruction": "Define closed genuine-guest contracts for standalone authored synthesis/learnings, multiple experiments, a stage-specific alias contact pipeline, feedback-survey drafts, referral asks and onboarding questions. Preserve private versus explicitly created team scope; never create fake users/projects or treat class membership as access.",
+          "notes": [
+            {
+              "date": "2026-10-18",
+              "text": "Phase1 worker94723d1 defines six strict structured kinds, refs and copy contracts;26focused tests pass. Root review/integration pending; pure contracts not database authority."
+            }
+          ]
+        },
+        {
+          "id": "CLS-009.s2",
+          "status": "not_started",
+          "instruction": "Implement bounded saved/reopen/CAS/idempotent services with exact request retry, cookie+CSRF authority, class→fresh principal→source lock order, post-write expiry rollback and documented count/byte/receipt caps. Use additive reviewed migrations; never edit published22–24 or reuse an unrelated activity identity.",
+          "notes": []
+        },
+        {
+          "id": "CLS-009.s3",
+          "status": "in_progress",
+          "instruction": "Build desktop editors that distinguish authored hypotheses/plans, self-reported outcomes and completed interviews. Surveys are draft questions, not a hosted collection service. Referral/onboarding/outreach text stays unsent. No AI or automatic publication.",
+          "notes": []
+        },
+        {
+          "id": "CLS-009.s4",
+          "status": "in_progress",
+          "instruction": "Register an individual PDF for every new artifact/version and selected saved portfolios with genuine source scope, fresh authorization before generation/delivery and truthful unknown/draft labels. Raw private interviews cannot enter shared artifacts through an implicit adapter.",
+          "notes": []
+        },
+        {
+          "id": "CLS-009.s5",
+          "status": "not_started",
+          "instruction": "Support separately selected/redacted immutable teacher copies under a genuine source resolver and explicit audience confirmation; current choices/generations/expiry/withdrawal gate every read/PDF. Do not widen old closed DTOs or give teachers raw growth records.",
+          "notes": []
+        },
+        {
+          "id": "CLS-009.s6",
+          "status": "not_started",
+          "instruction": "Run actual DTO/SQL and separate-connection private/team/outsider/withdrawal/expiry/cap tests in an exact-pinned disposable clone, then root combined desktop/reload/PDF/browser checks. Preserve prior data and report all parity gaps rather than substituting generic text fields.",
+          "notes": []
+        }
+      ]
+    },
+    {
+      "id": "CLS-010",
+      "title": "Deliberate guest-to-account continuity",
+      "phase": "P4",
+      "status": "not_started",
+      "owner": "agent",
+      "size": "M",
+      "kind": "implementation",
+      "priority": 55,
+      "depends_on": ["CLS-008", "WS-007", "PRV-003"],
+      "requires_decisions": [],
+      "write_scope": [
+        "supabase/migrations/**",
+        "src/lib/guest-transfer/**",
+        "src/components/guest-transfer/**",
+        "src/tests/guest-transfer/**",
+        "docs/architecture/guest-transfer.md"
+      ],
+      "exclusive_locks": ["database-schema", "generated-types", "guest-transfer"],
+      "read_first": [
+        "ProductSpec.md",
+        "FEATUREROADMAP_workplan.md",
+        "src/lib/guest-marketing/contracts.ts",
+        "src/lib/guest-activities/contracts.ts",
+        "docs/architecture/guest-marketing-handoff.md",
+        "src/lib/export/coverage.ts"
+      ],
+      "goal": "Let the current guest deliberately copy eligible own work into a verified personal account without transferring teammate data or reactivating permissions.",
+      "steps": [
+        "Define and review source ownership, note/AI/sharing choice and withdrawal/copy lifecycle; distinguish an owner copy from a moved original or teacher grant.",
+        "Require current guest cookie+CSRF plus independently fresh verified owner; preview exact eligible selection and require explicit new destination. No implicit import on sign-in or teacher access.",
+        "Atomically create fresh owner-private copies with stable retry IDs and source/version manifest; preserve declined/withdrawn/unknown choices conservatively and never duplicate interviews or grant AI/sharing automatically.",
+        "Verify two guests/two accounts/team exclusion, uncertain retry, source withdrawal/recovery/expiry races and individual PDF/receipt boundaries."
+      ],
+      "acceptance": [
+        "Explicit ownership/permission boundaries and truthful current capability labels; all source data preserved.",
+        "Actual scoped save/return/export/retry checks pass before enabling the feature."
+      ],
+      "verification_profile": "product",
+      "verification": [
+        "Run meaningful contract, authority, uncertainty and PDF tests; actual schema changes require pinned disposable SQL/race rehearsal.",
+        "Root reviews/mounts/types serially, then combined typecheck/lint/build and live fictional desktop smoke."
+      ],
+      "metric": "Successful reviewed own-work continuity without privacy or count inflation.",
+      "rollback": "Hide the new interface and retain all existing source work and permissions.",
+      "agent_notes": {
+        "starting_point": "Explicit owner addition2026-10-18: FERPA-first class/hackathon spaces with student participation without account creation; PDF export of every activity/team data. This is a product requirement, not a claim of compliance or current availability.",
+        "stop_and_report": "If a required contract, test environment, human observation, budget or permission is missing, record the specific blocker. Continue another ready task; do not fabricate data or widen the write scope.",
+        "handoff": "Report changed files, base/result commit, exact checks and outcomes, artifact/source ids, residual risks and the next eligible task. Only the coordinator edits task status, shared generated files and the main roadmap.",
+        "integration": "Use a clean task branch/worktree from the coordinator base. Commit only this write scope. Migrations, generated types, route tree, dependency locks and shared entry points are serialized by the coordinator; never hand-edit generated output."
+      },
+      "notes": [
+        {
+          "date": "2026-10-18",
+          "text": "New explicit follow-up after guest22/23/24 audit; optional extension remains unbuilt, no current capability claim."
+        }
+      ],
+      "claim": null,
+      "completion_evidence": [],
+      "subtasks": [
+        {
+          "id": "CLS-010.s1",
+          "status": "not_started",
+          "instruction": "Define and review source ownership, note/AI/sharing choice and withdrawal/copy lifecycle; distinguish an owner copy from a moved original or teacher grant.",
+          "notes": []
+        },
+        {
+          "id": "CLS-010.s2",
+          "status": "not_started",
+          "instruction": "Require current guest cookie+CSRF plus independently fresh verified owner; preview exact eligible selection and require explicit new destination. No implicit import on sign-in or teacher access.",
+          "notes": []
+        },
+        {
+          "id": "CLS-010.s3",
+          "status": "not_started",
+          "instruction": "Atomically create fresh owner-private copies with stable retry IDs and source/version manifest; preserve declined/withdrawn/unknown choices conservatively and never duplicate interviews or grant AI/sharing automatically.",
+          "notes": []
+        },
+        {
+          "id": "CLS-010.s4",
+          "status": "not_started",
+          "instruction": "Verify two guests/two accounts/team exclusion, uncertain retry, source withdrawal/recovery/expiry races and individual PDF/receipt boundaries.",
+          "notes": []
+        }
+      ]
+    },
+    {
+      "id": "MKT-009",
+      "title": "Guest Marketing Lab derived measures and attribution helpers",
+      "phase": "P4",
+      "status": "not_started",
+      "owner": "agent",
+      "size": "S",
+      "kind": "implementation",
+      "priority": 55,
+      "depends_on": ["CLS-008", "MKT-007"],
+      "requires_decisions": [],
+      "write_scope": [
+        "src/lib/guest-marketing/**",
+        "src/components/guest-marketing/**",
+        "src/tests/guest-marketing-measures/**",
+        "docs/architecture/guest-marketing-measures.md"
+      ],
+      "exclusive_locks": ["guest-marketing-integration"],
+      "read_first": [
+        "ProductSpec.md",
+        "FEATUREROADMAP_workplan.md",
+        "src/lib/guest-marketing/contracts.ts",
+        "src/lib/guest-activities/contracts.ts",
+        "docs/architecture/guest-marketing-handoff.md",
+        "src/lib/export/coverage.ts"
+      ],
+      "goal": "Offer manual measurement comparisons without inventing automatic traffic, promotion permission or a conversion funnel.",
+      "steps": [
+        "Audit comparable source/cohort/window/unit requirements against existing owner pure helpers; unknown remains null and zero denominator stays unavailable.",
+        "Add explicit reviewed subset/comparability controls and safe channel attribution helpers over genuine guest data; no automatic tracking, outside retrieval, messaging or publication.",
+        "Invalidate review when source measures change; preserve original self-reported counts and explain excluded/incomparable rows.",
+        "Export calculations with source values/limits and verify private/team/teacher scopes plus unknown/zero/mixed-cohort cases."
+      ],
+      "acceptance": [
+        "Explicit ownership/permission boundaries and truthful current capability labels; all source data preserved.",
+        "Actual scoped save/return/export/retry checks pass before enabling the feature."
+      ],
+      "verification_profile": "product",
+      "verification": [
+        "Run meaningful contract, authority, uncertainty and PDF tests; actual schema changes require pinned disposable SQL/race rehearsal.",
+        "Root reviews/mounts/types serially, then combined typecheck/lint/build and live fictional desktop smoke."
+      ],
+      "metric": "Correct comparable measures with visible unknowns and limitations.",
+      "rollback": "Hide the new interface and retain all existing source work and permissions.",
+      "agent_notes": {
+        "starting_point": "Explicit owner addition2026-10-18: FERPA-first class/hackathon spaces with student participation without account creation; PDF export of every activity/team data. This is a product requirement, not a claim of compliance or current availability.",
+        "stop_and_report": "If a required contract, test environment, human observation, budget or permission is missing, record the specific blocker. Continue another ready task; do not fabricate data or widen the write scope.",
+        "handoff": "Report changed files, base/result commit, exact checks and outcomes, artifact/source ids, residual risks and the next eligible task. Only the coordinator edits task status, shared generated files and the main roadmap.",
+        "integration": "Use a clean task branch/worktree from the coordinator base. Commit only this write scope. Migrations, generated types, route tree, dependency locks and shared entry points are serialized by the coordinator; never hand-edit generated output."
+      },
+      "notes": [
+        {
+          "date": "2026-10-18",
+          "text": "New explicit follow-up after guest22/23/24 audit; optional extension remains unbuilt, no current capability claim."
+        }
+      ],
+      "claim": null,
+      "completion_evidence": [],
+      "subtasks": [
+        {
+          "id": "MKT-009.s1",
+          "status": "not_started",
+          "instruction": "Audit comparable source/cohort/window/unit requirements against existing owner pure helpers; unknown remains null and zero denominator stays unavailable.",
+          "notes": []
+        },
+        {
+          "id": "MKT-009.s2",
+          "status": "not_started",
+          "instruction": "Add explicit reviewed subset/comparability controls and safe channel attribution helpers over genuine guest data; no automatic tracking, outside retrieval, messaging or publication.",
+          "notes": []
+        },
+        {
+          "id": "MKT-009.s3",
+          "status": "not_started",
+          "instruction": "Invalidate review when source measures change; preserve original self-reported counts and explain excluded/incomparable rows.",
+          "notes": []
+        },
+        {
+          "id": "MKT-009.s4",
+          "status": "not_started",
+          "instruction": "Export calculations with source values/limits and verify private/team/teacher scopes plus unknown/zero/mixed-cohort cases.",
+          "notes": []
+        }
+      ]
+    },
+    {
+      "id": "AN-003",
+      "title": "Verify bounded scheduled measurement retention",
+      "phase": "P4",
+      "status": "in_progress",
+      "owner": "agent",
+      "size": "M",
+      "kind": "implementation",
+      "priority": 50,
+      "depends_on": ["AN-001", "AI-004", "WS-006"],
+      "requires_decisions": [],
+      "write_scope": [
+        "supabase/migrations/20261018026000_product_event_retention.sql",
+        "supabase/tests/an-003.sql",
+        "src/lib/measurement-retention/**",
+        "src/tests/an-003/**",
+        "docs/architecture/measurement-retention.md"
+      ],
+      "exclusive_locks": ["database-schema", "measurement-retention"],
+      "read_first": [
+        "ProductSpec.md",
+        "FEATUREROADMAP_workplan.md",
+        "src/lib/guest-marketing/contracts.ts",
+        "src/lib/guest-activities/contracts.ts",
+        "docs/architecture/guest-marketing-handoff.md",
+        "src/lib/export/coverage.ts"
+      ],
+      "goal": "Separate actual scheduled cleanup, drained state and bounded backlog health before any optional measurement activation.",
+      "steps": [
+        "Add forward-only cleanup health with separate attempt/drained/scheduled timestamps, expiry indexes, bounded overlap-safe processing and closed aggregate status; never edit published25.",
+        "Install an exact uniquely named inactive database-local job with bounded job-specific run history; prove scheduled execution in a separately owned network-none cluster, never the live55322 cluster.",
+        "Prove real expired/unexpired/backlog/failure/stale states and actual scheduled receipts with verified container cleanup. Collection must stay disabled.",
+        "Root reviews exact pins, applies local/hosted serially, activates cleanup only after exact job inspection, verifies real scheduler execution and truthful health. Measurement activation remains a separate gate."
+      ],
+      "acceptance": [
+        "Collection remains disabled; no private content, provider access or fabricated usage is introduced.",
+        "Meaningful actual scope/race/expiry tests and exact cleanup receipts precede root integration and any production enablement."
+      ],
+      "verification_profile": "product",
+      "verification": [
+        "Strict contracts and negative authorization tests; exact pinned disposable database rehearsal where schema changes.",
+        "Combined typecheck/lint/build; actual operational checks distinguish software implementation from verified scheduling."
+      ],
+      "metric": "Correct comparable measures with visible unknowns and limitations.",
+      "rollback": "Hide the new interface and retain all existing source work and permissions.",
+      "agent_notes": {
+        "starting_point": "Explicit owner addition2026-10-18: FERPA-first class/hackathon spaces with student participation without account creation; PDF export of every activity/team data. This is a product requirement, not a claim of compliance or current availability.",
+        "stop_and_report": "If a required contract, test environment, human observation, budget or permission is missing, record the specific blocker. Continue another ready task; do not fabricate data or widen the write scope.",
+        "handoff": "Report changed files, base/result commit, exact checks and outcomes, artifact/source ids, residual risks and the next eligible task. Only the coordinator edits task status, shared generated files and the main roadmap.",
+        "integration": "Use a clean task branch/worktree from the coordinator base. Commit only this write scope. Migrations, generated types, route tree, dependency locks and shared entry points are serialized by the coordinator; never hand-edit generated output."
+      },
+      "notes": [
+        {
+          "date": "2026-10-18",
+          "text": "Extracted the real unfinished operational retention gate from AN002; no fictional completion. Existing25 only records bounded purge attempts and no scheduled job. Reserve exact26; no27 schema writer until this lease released. Draft/test harness only before independent pin review; no DB/container/job actions yet."
+        }
+      ],
+      "claim": {
+        "owner": "finalization_audit",
+        "branch": "codex/measurement-retention-20261018",
+        "base_commit": "7bcfb75",
+        "worktree": "/private/tmp/first-ten-analytics-capture",
+        "started_at": "2026-10-19T00:15:00Z",
+        "lease_expires_at": "2026-10-19T04:00:00Z"
+      },
+      "completion_evidence": [],
+      "subtasks": [
+        {
+          "id": "AN-003.s1",
+          "status": "in_progress",
+          "instruction": "Add forward-only cleanup health with separate attempt/drained/scheduled timestamps, expiry indexes, bounded overlap-safe processing and closed aggregate status; never edit published25.",
+          "notes": []
+        },
+        {
+          "id": "AN-003.s2",
+          "status": "not_started",
+          "instruction": "Install an exact uniquely named inactive database-local job with bounded job-specific run history; prove scheduled execution in a separately owned network-none cluster, never the live55322 cluster.",
+          "notes": []
+        },
+        {
+          "id": "AN-003.s3",
+          "status": "not_started",
+          "instruction": "Prove real expired/unexpired/backlog/failure/stale states and actual scheduled receipts with verified container cleanup. Collection must stay disabled.",
+          "notes": []
+        },
+        {
+          "id": "AN-003.s4",
+          "status": "not_started",
+          "instruction": "Root reviews exact pins, applies local/hosted serially, activates cleanup only after exact job inspection, verifies real scheduler execution and truthful health. Measurement activation remains a separate gate.",
+          "notes": []
+        }
+      ]
+    },
+    {
+      "id": "AN-004",
+      "title": "Complete remaining trustworthy product event producers",
+      "phase": "P4",
+      "status": "not_started",
+      "owner": "agent",
+      "size": "M",
+      "kind": "implementation",
+      "priority": 50,
+      "depends_on": ["AN-001", "AN-003"],
+      "requires_decisions": [],
+      "write_scope": [
+        "src/lib/product-event-producers/**",
+        "src/tests/product-event-producers/**",
+        "docs/architecture/product-event-producers.md"
+      ],
+      "exclusive_locks": ["analytics-integration"],
+      "read_first": [
+        "ProductSpec.md",
+        "FEATUREROADMAP_workplan.md",
+        "src/lib/guest-marketing/contracts.ts",
+        "src/lib/guest-activities/contracts.ts",
+        "docs/architecture/guest-marketing-handoff.md",
+        "src/lib/export/coverage.ts"
+      ],
+      "goal": "Complete missing milestone semantics without inferring a funnel from independent database counts.",
+      "steps": [
+        "Define prospective signup/session/visit/learning-acceptance/next-action event eligibility, cohort and attribution unknowns; do not backfill from existing rows.",
+        "Add eligible trusted producer paths through reviewed forward migrations and independent measurement permission; no forged browser milestone API or provider accounting crossover.",
+        "Verify replay, multiple projects, guest/owner separation, withdrawal and explicit coverage gaps before any aggregate funnel claim."
+      ],
+      "acceptance": [
+        "Collection remains disabled; no private content, provider access or fabricated usage is introduced.",
+        "Meaningful actual scope/race/expiry tests and exact cleanup receipts precede root integration and any production enablement."
+      ],
+      "verification_profile": "product",
+      "verification": [
+        "Strict contracts and negative authorization tests; exact pinned disposable database rehearsal where schema changes.",
+        "Combined typecheck/lint/build; actual operational checks distinguish software implementation from verified scheduling."
+      ],
+      "metric": "Correct comparable measures with visible unknowns and limitations.",
+      "rollback": "Hide the new interface and retain all existing source work and permissions.",
+      "agent_notes": {
+        "starting_point": "Explicit owner addition2026-10-18: FERPA-first class/hackathon spaces with student participation without account creation; PDF export of every activity/team data. This is a product requirement, not a claim of compliance or current availability.",
+        "stop_and_report": "If a required contract, test environment, human observation, budget or permission is missing, record the specific blocker. Continue another ready task; do not fabricate data or widen the write scope.",
+        "handoff": "Report changed files, base/result commit, exact checks and outcomes, artifact/source ids, residual risks and the next eligible task. Only the coordinator edits task status, shared generated files and the main roadmap.",
+        "integration": "Use a clean task branch/worktree from the coordinator base. Commit only this write scope. Migrations, generated types, route tree, dependency locks and shared entry points are serialized by the coordinator; never hand-edit generated output."
+      },
+      "notes": [
+        {
+          "date": "2026-10-18",
+          "text": "Preserves AN002 unfinished public visit/session/attribution/signup/learning/next-action scope. No current producer or funnel completion claimed. Exact schema version reserved only after readiness/review."
+        }
+      ],
+      "claim": null,
+      "completion_evidence": [],
+      "subtasks": [
+        {
+          "id": "AN-004.s1",
+          "status": "not_started",
+          "instruction": "Define prospective signup/session/visit/learning-acceptance/next-action event eligibility, cohort and attribution unknowns; do not backfill from existing rows.",
+          "notes": []
+        },
+        {
+          "id": "AN-004.s2",
+          "status": "not_started",
+          "instruction": "Add eligible trusted producer paths through reviewed forward migrations and independent measurement permission; no forged browser milestone API or provider accounting crossover.",
+          "notes": []
+        },
+        {
+          "id": "AN-004.s3",
+          "status": "not_started",
+          "instruction": "Verify replay, multiple projects, guest/owner separation, withdrawal and explicit coverage gaps before any aggregate funnel claim.",
+          "notes": []
+        }
+      ]
     }
   ],
   "legacy_audit": [
@@ -12330,11 +12833,11 @@
     "openrouter_limit_usd": 25,
     "openrouter_spend_usd": 0,
     "deployment": "Production deployment and safe tested migrations authorized; commit/push often. No other paid services.",
-    "demo_priority": "Tomorrow\u2019s Babson mini hackathon presentation for 45 academics; strong educator story, reliable fictional sample data and polished walkthrough.",
+    "demo_priority": "Tomorrow’s Babson mini hackathon presentation for 45 academics; strong educator story, reliable fictional sample data and polished walkthrough.",
     "real_testers": "Supabase authorized for testers; no specific people/contact channels named. No unsolicited external messaging.",
     "checkpoint_note": "Owner-directed final one-hour sprint superseded the original 13:29 UTC checkpoint; approximately 12:13 UTC per docs/roadmap/autonomous-run.md.",
     "synthetic_ai_budget_usd": 1,
-    "spend_note": "At this reconciliation cutoff no deployed provider trial is confirmed; AI-009 must record measured cost after the authorized request. The workshop reservation cap is separate from and within the owner\u2019s total $25 limit.",
+    "spend_note": "At this reconciliation cutoff no deployed provider trial is confirmed; AI-009 must record measured cost after the authorized request. The workshop reservation cap is separate from and within the owner’s total $25 limit.",
     "continuation_objective": "Owner explicitly requests continued building until every feasible authorized roadmap item is complete, verified and deployed; continue independent work around external blockers. No new time or token budget specified. Prior OpenRouter $25 total cap and no other paid services persist.",
     "goal_control_note": "2026-10-18: fresh get_goal confirms active following user/app resumption. Continue full feasible roadmap across turns, retain actual completion/verification boundaries and $25 OpenRouter cap. Ordinary account usage available; no reset credits reported."
   }

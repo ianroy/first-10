@@ -46,7 +46,7 @@ export function ActivityPdfExport({ document, permittedAudiences, authorizeDownl
   } | null>(null);
   const [error, setError] = useState("");
   const [busy, setBusy] = useState(false);
-  const [success, setSuccess] = useState("");
+  const [success, setSuccess] = useState<{ fingerprint: string; message: string } | null>(null);
   const generation = useRef(0);
   // A changed source or permission invalidates review even before an effect runs.
   const fingerprint = JSON.stringify([document, permittedAudiences]);
@@ -63,7 +63,7 @@ export function ActivityPdfExport({ document, permittedAudiences, authorizeDownl
     generation.current += 1;
     setReview(null);
     setError("");
-    setSuccess("");
+    setSuccess(null);
     setBusy(false);
   };
   const toggle = (values: string[], key: string) =>
@@ -98,7 +98,7 @@ export function ActivityPdfExport({ document, permittedAudiences, authorizeDownl
     const token = ++generation.current;
     setBusy(true);
     setError("");
-    setSuccess("");
+    setSuccess(null);
     try {
       await authorizeDownload?.();
       if (token !== generation.current || captured.fingerprint !== currentFingerprint.current)
@@ -109,9 +109,10 @@ export function ActivityPdfExport({ document, permittedAudiences, authorizeDownl
       if (token !== generation.current || captured.fingerprint !== currentFingerprint.current)
         return;
       downloadActivityPdf(result.bytes, result.filename);
-      setSuccess(
-        `PDF download started (${result.pageCount} ${result.pageCount === 1 ? "page" : "pages"}). Nothing was submitted or shared automatically.`,
-      );
+      setSuccess({
+        fingerprint: captured.fingerprint,
+        message: `PDF download started (${result.pageCount} ${result.pageCount === 1 ? "page" : "pages"}). Nothing was submitted or shared automatically.`,
+      });
     } catch (e) {
       if (token === generation.current && captured.fingerprint === currentFingerprint.current)
         setError(
@@ -315,9 +316,9 @@ export function ActivityPdfExport({ document, permittedAudiences, authorizeDownl
               {error}
             </p>
           )}
-          {success && (
+          {success?.fingerprint === fingerprint && (
             <p role="status" className="text-sm text-success">
-              {success}
+              {success.message}
             </p>
           )}
         </div>

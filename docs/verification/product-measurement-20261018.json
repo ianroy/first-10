@@ -1,0 +1,52 @@
+{
+  "date": "2026-10-18",
+  "phase": "schema_applied_ui_ready_collection_disabled",
+  "sourceCommit": "7bcfb75",
+  "sources": {
+    "supabase/migrations/20261018025000_product_event_capture.sql": "fc798efda3a426411c279a7cfef19c2a22dcc3b99b0b91010f354792428848cf",
+    "src/tests/an-002/database-rehearsal.mjs": "0d770557e3e0cae86fde3366155a7a3f5aab695a16cfb64fc00b3778b8ba19ba",
+    "src/tests/an-002/races.mjs": "25f7e264da7e82798095e4bb3ddbe525a88a4d1741c9cce1dcf0d299c58b82b2",
+    "supabase/tests/an-002.sql": "51e7f46ed48032fe6b35a16399cbbc755386757e934a5f6d715ee83e4e6be2b1"
+  },
+  "actualSql": {
+    "assertions": 1863,
+    "failures": 0,
+    "knownGaps": 0,
+    "validPlan": true,
+    "rollbackVerified": true,
+    "actualDtoChecks": 2,
+    "observedRaces": 3,
+    "allClonesDroppedAndAbsenceVerified": true
+  },
+  "failedTestAttempts": [
+    "Artificial aging used multiple clocks and violated the expiry interval in test setup; fixed to one statement timestamp.",
+    "A fictional temporary admin fixture contaminated a later test baseline; added normal exact fictional account/project cleanup.",
+    "A diagnostic tagged SQL query lacked parameter whitespace; repaired three query boundaries."
+  ],
+  "localApply": "Exact25 SHA guarded dedicated55322 schema24->25. Existing CLI history03 deliberately preserved; actual schema sentinel and disabled policy/zero event rows verified. Unrelated54322 untouched.",
+  "hostedApply": {
+    "migration": "20261018025000_product_event_capture.sql",
+    "dryRunOnlyThisMigration": true,
+    "seeds": [],
+    "roles": [],
+    "normalApplySucceeded": true
+  },
+  "rootApp": {
+    "passed": 1130,
+    "existingSkips": 11,
+    "passingFiles": 123,
+    "skippedFiles": 1,
+    "allThreeActualDtoSuitesEnabled": true,
+    "typecheck": "pass",
+    "lintErrors": 0,
+    "existingLintWarnings": 6,
+    "vercelBuild": "pass"
+  },
+  "liveUi": "Pending publication of root Account mount and live preference/reload check.",
+  "collection": "Disabled; no activation authorized by this receipt.",
+  "remaining": [
+    "AN003 actual scheduled cleanup and separately verified drained/backlog health. A bounded purge timestamp alone is not proof of fully drained or scheduled processing.",
+    "AN004 remaining milestone producers; no public visits, sessions, signup, attribution, guest events, learning acceptance or funnel conversion implemented.",
+    "Paid AI/account eligibility/model quality remain separate gates; no new provider calls."
+  ]
+}

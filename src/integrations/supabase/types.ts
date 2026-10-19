@@ -1067,6 +1067,8 @@ export type Database = {
         Args: { p_project_id: string; p_target_id: string; p_target_kind: string };
         Returns: Json;
       };
+      get_product_measurement_preference: { Args: Record<PropertyKey, never>; Returns: Json };
+      get_product_measurement_retention_health: { Args: { p_request_id: string }; Returns: Json };
       get_teacher_class_submission: {
         Args: { p_class_id: string; p_snapshot_id: string };
         Returns: Json;
@@ -1140,6 +1142,7 @@ export type Database = {
         Returns: Json;
       };
       project_collaboration_enabled: { Args: Record<PropertyKey, never>; Returns: boolean };
+      purge_expired_product_measurement: { Args: { p_limit?: number }; Returns: Json };
       record_ai_generation: { Args: { p_record: Json }; Returns: string };
       record_ai_generation_v2: {
         Args: { p_grounding: Json; p_operation_id: string; p_record: Json };
@@ -1318,6 +1321,10 @@ export type Database = {
           p_mutation_id: string;
           p_project_id: string;
         };
+        Returns: Json;
+      };
+      save_product_measurement_preference: {
+        Args: { p_choice: string; p_expected_revision: number; p_request_id: string };
         Returns: Json;
       };
       save_teacher_plan: {
