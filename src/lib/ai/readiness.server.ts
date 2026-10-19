@@ -9,6 +9,7 @@ const keyMetadata = z.object({
   is_management_key: z.boolean(),
   is_provisioning_key: z.boolean(),
   usage: z.number().finite().nonnegative().max(1_000_000),
+  workspace_id: z.string().uuid().nullable().optional(),
 });
 export type AIKeyReadiness =
   | { status: "unconfigured" | "unavailable" }
@@ -21,6 +22,7 @@ export type AIKeyReadiness =
       includesByok: boolean;
       managementKey: boolean;
       withinRunKeyCeiling: boolean;
+      workspaceId: string | null;
     };
 
 /** Free metadata request only. Never returns credentials, labels or upstream bodies. */
@@ -75,6 +77,7 @@ export async function inspectRuntimeAIKey(
       resetting: data.limit_reset !== null,
       includesByok: data.include_byok_in_limit,
       managementKey: data.is_management_key || data.is_provisioning_key,
+      workspaceId: data.workspace_id ?? null,
       withinRunKeyCeiling:
         data.limit !== null &&
         data.limit > 0 &&

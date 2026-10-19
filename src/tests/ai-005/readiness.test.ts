@@ -44,6 +44,7 @@ describe("deployed key metadata boundary", () => {
       resetting: false,
       includesByok: true,
       managementKey: false,
+      workspaceId: null,
       withinRunKeyCeiling: true,
     });
     expect(JSON.stringify(result)).not.toMatch(/PRIVATE|NEVER|fictional-readiness-key/);

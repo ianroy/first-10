@@ -62,6 +62,11 @@ export function AIReadinessPanel({ projectId }: { projectId: string }) {
                 Non-resetting $25 key ceiling with BYOK included:{" "}
                 {result.withinRunKeyCeiling ? "verified" : "not verified"}.
               </p>
+              <p>
+                Reported key usage: ${result.usageUsd} · Resets: {result.resetting ? "yes" : "no"} ·
+                BYOK spend included: {result.includesByok ? "yes" : "no"}.
+              </p>
+              <p>OpenRouter workspace: {result.workspaceId ?? "unavailable"}.</p>
               <p className="text-muted-foreground">
                 A working key does not enable generation. Application allowances, provider privacy,
                 model evaluation and the generation stop remain separate checks.
