@@ -12039,13 +12039,14 @@
       "depends_on": ["CLS-007", "CLS-002", "EXP-001", "MKT-003"],
       "requires_decisions": [],
       "write_scope": [
-        "src/lib/guest-growth/**",
-        "src/lib/guest-growth.functions.ts",
-        "src/components/guest-growth/**",
-        "src/tests/guest-growth/**",
-        "docs/architecture/guest-growth.md",
-        "supabase/migrations/20261018027000_guest_growth.sql",
-        "supabase/tests/cls-009.sql"
+        "src/lib/guest-growth/handoff/**",
+        "src/lib/guest-growth/contracts.ts",
+        "src/components/guest-growth/ReviewedGrowthHandoff.tsx",
+        "src/components/classes/TeacherGrowthSubmissions.tsx",
+        "src/tests/guest-growth/handoff/**",
+        "docs/architecture/guest-growth-handoff.md",
+        "supabase/migrations/20261018028000_guest_growth_handoffs.sql",
+        "supabase/tests/cls-009-handoff.sql"
       ],
       "exclusive_locks": ["guest-growth-integration", "database-schema"],
       "read_first": [
@@ -12206,15 +12207,19 @@
         {
           "date": "2026-10-18",
           "text": "Finald5bcbf4/Vercelsuccess desktopvisualgatePASS:1321pxwideportfolio regionoutside stickygrid, explicitreviewbuttonfocusesregionattop24px, nooverlay. Repeatedauthorized15pageportfolio includesall6titles andbefore/during/after; screenshot /private/tmp/first-ten-pdf-qa/live-growth-portfolio-full-width.png saved/viewed/embedded. ExistingDiscovery7/Marketing5freshmetadata preserved,AIstoptrue/measurementdisabled. Sourceandhosted27 boundedmanualsubtasks s2/s3/s4complete; teacherselectedcopy s5next,fullrole/release s6unfinished. No goalcompletionclaim."
+        },
+        {
+          "date": "2026-10-18",
+          "text": "NEXT serialphase5 claim recorded BEFOREdispatch. Existingguest_marketing_handoff is soleworker onnewcleanbranch frombf420c6. Exclusivelyreserve NEW28guest_growth_handoffs; actualsource+hosted27/localCLI03, source22–27 immutable. SOURCEONLY selectedteacherprojection SQL/services/controlledguest+teacherUI/PDFadapters and exactpinnedclone/racefixtures. Existingstrictcopycontracts/architecture govern separatepublisherreportedsharingchoices, true retained-version/metadatalineage, deliberatelyreviewedredactedimmutableteachergrant, freshrecipient generation/choice/expiry/withdrawal andauthorprivatecopies. NoDB/container/rehearsal/apply,parentmount,coverage,generatedtypes,provider/network actions until rootreviewsexactpins; no othertask starts. Avoidreintroducing inheritedappend-onlyaudit parentdelete incompatibility; recordconstraintgaps honestly."
         }
       ],
       "claim": {
         "owner": "guest_marketing_handoff",
-        "branch": "codex/guest-growth-persistence-20261018",
-        "base_commit": "8828fb3",
+        "branch": "codex/guest-growth-handoffs-20261018",
+        "base_commit": "bf420c6b7d88c61a8c9f659ca04bd24c70ffafb7",
         "worktree": "/private/tmp/first-ten-guest-marketing-handoff",
-        "started_at": "2026-10-19T00:04:00Z",
-        "lease_expires_at": "2026-10-19T04:00:00Z"
+        "started_at": "2026-10-19T02:19:32.002672Z",
+        "lease_expires_at": "2026-10-19T06:19:32.002672Z"
       },
       "completion_evidence": [],
       "subtasks": [
@@ -12268,7 +12273,7 @@
         },
         {
           "id": "CLS-009.s5",
-          "status": "not_started",
+          "status": "in_progress",
           "instruction": "Support separately selected/redacted immutable teacher copies under a genuine source resolver and explicit audience confirmation; current choices/generations/expiry/withdrawal gate every read/PDF. Do not widen old closed DTOs or give teachers raw growth records.",
           "notes": []
         },

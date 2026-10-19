@@ -60,10 +60,12 @@ resume_hint: >-
   moveportfolioregionoutsidestickygrid,type/buildpass. Finald5bcbf4/Vercelsuccess
   visualproofpasses:1321pxwide,focusedtop24px,nooverlay,repeated15pageportfolio
   withall6titles/timings. NEXT: serialselectedteacherprojection undernewreviewed28.
-  CLS009s2/s3/s4completeboundedsoftware; s5teacherprojectionnotstarted/s6inprogress.
+  CLS009s2/s3/s4completeboundedsoftware; s5sourcephaseinprogress/s6inprogress.
   OriginalDiscovery7/Marketing5metadata freshlyunchanged,AIstoptrue/collectionfalse. Separate teacherprojection and fullparity remainunfinished;
-  schema28 is UNRESERVED untilthe nextclaimupdate. ParentCLS009/CLS008 remainunfinished, not redefined.
-  Workerguest_marketing_handoff idle; root owns sharedintegration. EV001 remainsidle afterauthoritativecompleted+cleanworktree audit; its dormantclaim
+  schema28 exclusivelyreserved CLS009guest_growth_handoffs frombf420c6, sourceonly
+  beforeexactpinreview. No DB/container/rehearsal/apply/mount/coverage/types action yet. ParentCLS009/CLS008 remainunfinished, not redefined.
+  Workerguest_marketing_handoff nowsoleactiveworker forselectedteacherprojection28
+  SOURCEONLY on codex/guest-growth-handoffs-20261018; root owns sharedintegration. EV001 remainsidle afterauthoritativecompleted+cleanworktree audit; its dormantclaim
   is retained because registryrequiresinprogressparent/s1claims, notbecause workisactive;
   contracts287dddd/8253d06 verified63tests; storage/UI/PDF/trustedcapture unfinished.
   Preserve $25totalOpenRouter/nootherpaidservices. AllnewAI dispatch globallystopped;
