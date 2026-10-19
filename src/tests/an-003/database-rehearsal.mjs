@@ -242,7 +242,7 @@ try {
     ),
   );
   sql(
-    `INSERT INTO cron.job_run_details(jobid,runid,database,username,command,status,start_time,end_time)VALUES(${other},900000001,'postgres','postgres','SELECT 1','succeeded',clock_timestamp()-interval'9 days',clock_timestamp()-interval'9 days');INSERT INTO cron.job_run_details(jobid,runid,database,username,command,status,start_time,end_time)SELECT${job},900001000+g,'postgres','postgres',firstten_private.retention_job_command(),'succeeded',statement_timestamp()-interval'9 days',statement_timestamp()-interval'9 days'FROM generate_series(1,501)g;`,
+    `INSERT INTO cron.job_run_details(jobid,runid,database,username,command,status,start_time,end_time)VALUES(${other},900000001,'postgres','postgres','SELECT 1','succeeded',clock_timestamp()-interval'9 days',clock_timestamp()-interval'9 days');INSERT INTO cron.job_run_details(jobid,runid,database,username,command,status,start_time,end_time)SELECT ${job},900001000+g,'postgres','postgres',firstten_private.retention_job_command(),'succeeded',statement_timestamp()-interval'9 days',statement_timestamp()-interval'9 days'FROM generate_series(1,501)g;`,
   );
   phase = "observed scheduled bounded batches and actual physical cleanup";
   sql(`SELECT cron.alter_job(${job},active:=true);`);
@@ -276,19 +276,19 @@ try {
   );
   assert.equal(
     scalar(
-      `SELECT count(*)FROM cron.job_run_details WHERE jobid=${job}AND end_time<clock_timestamp()-interval'7 days'`,
+      `SELECT count(*)FROM cron.job_run_details WHERE jobid=${job} AND end_time<clock_timestamp()-interval'7 days'`,
     ),
     "0",
   );
   assert.equal(
-    scalar(`SELECT count(*)FROM cron.job_run_details WHERE jobid=${other}AND runid=900000001`),
+    scalar(`SELECT count(*)FROM cron.job_run_details WHERE jobid=${other} AND runid=900000001`),
     "1",
     "Other job history untouched",
   );
   assert(
     Number(
       scalar(
-        `SELECT count(*)FROM cron.job_run_details WHERE jobid=${job}AND status='succeeded'AND runid<900000000`,
+        `SELECT count(*)FROM cron.job_run_details WHERE jobid=${job} AND status='succeeded'AND runid<900000000`,
       ),
     ) >= 3,
     "Actual scheduler success records required",
