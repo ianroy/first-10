@@ -66,5 +66,14 @@
   "approvalReview": {
     "broadProductionEnvironmentPull": "rejected before execution; do not retry or bypass",
     "saferAlternative": "Narrow Vercel environment metadata only confirmed credential is Sensitive; no decrypted value retrieved or stored"
+  },
+  "deployment": {
+    "commit": "dcc111601dd6d442855d215ea5d7daca51826d87",
+    "vercelState": "READY",
+    "target": "production",
+    "browser": "Chrome desktop",
+    "presenterCheck": "Actual deployed readiness request denied before key metadata access; separate narrow presenter permission did not grant platform-admin role",
+    "screenshot": "/private/tmp/first-ten-ai-readiness-role-denial.png",
+    "liveServingKeyMetadataVerified": false
   }
 }

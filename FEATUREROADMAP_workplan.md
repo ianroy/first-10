@@ -60,7 +60,13 @@ resume_hint: >-
   productionbuild PASS. No live key probe, model quality or generation enablement
   claim. Production has0general operations/0enabled routes,opening hold unset and
   4c fixed-demo reservations. Ledger:docs/verification/live-ai-readiness-20261018.json.
-  No paid calls have been made in this transition.
+  dcc1116 production READY and actual presenter denial verified in Chrome; role
+  boundary holds, no serving-key metadata attestation yet. Next build a new explicitly
+  reviewed successor evaluation flow with the Sensitive key staying in serving runtime.
+  Preserve historical v6 local-only/0.90 plan; never silently relax its origin/key
+  limits or treat catalog eligibility as quality. Existing four owner kinds are the
+  first activation target, then explicit guest/discovery/marketing AI scopes. No
+  paid calls have been made in this transition.
   Preserve25USD total OpenRouter cap, permanent1USD practice carveout and existing
   holds/accounting. Key rotation is user-reported, not yet runtime-attested. Do not
   reopen retiring2.5 route without review;3.1 Flash Lite is a candidate, not yet an
