@@ -31,7 +31,7 @@ research_gate: not_passed
 foundation_gate: not_passed
 realtime_go: pending
 last_updated: 2026-10-18
-last_documentation_update: "2026-10-18: Slow serial source review identified question-ID, thread-identity and final-authorization corrections before teacher-copy testing. Condensed the resume cursor; actual schema remains27."
+last_documentation_update: "2026-10-18: Serial review strengthened final-expiry and nonvacuous deletion/immutable-copy SQL controls; worker is implementing them. Candidate28 remains source-only; actual schema27."
 resume_hint: >-
   The goal remains active. The user's latest pace is SLOW: one worker, serial
   implementation, review and release; no new parallel wave.
@@ -56,7 +56,10 @@ resume_hint: >-
   types changes before independent exact-pin review. Root owns shared integration.
   Early review requires excluding private question IDs from teacher excerpts,
   preserving exact thread identity and final-clock/fresh-role checks after result
-  construction. New source roster exposes metadata only, with publisher-only thread
+  construction AND metadata traversal. Actual SQL deletion/ordinary-edit controls
+  must independently prove fresh eligibility and immutable selected payloads. Guard
+  optional excerpt drafts; keep structured presentations readable without changing
+  exact canonical source/hash rules. New roster exposes metadata only, with publisher-only thread
   IDs. Teacher copies require separate publisher choices, selected/redacted preview,
   explicit grant, exact retained lineage, fresh recipient eligibility and withdrawal.
   Parent CLS-009 and CLS-008 remain unfinished. EV-001 worker is idle after clean

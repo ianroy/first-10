@@ -12215,6 +12215,10 @@
         {
           "date": "2026-10-18",
           "text": "Slow serial phase5 early source review found private question IDs included in serialized teacher excerpts, possible silent replacement of a supplied stable thread ID, and missing final checks after constructing teacher/confirm results. Sole worker is correcting these before source freeze, with genuine SQL/DTO regressions. Metadata-only source roster may expose exact retained descriptors and publisher-only assignment/thread IDs; no bodies or teammate author copies. Candidate28 remains unexecuted; no disposable clone, actual schema, mount or release action yet."
+        },
+        {
+          "date": "2026-10-18",
+          "text": "Continued serial review of the live sole-worker draft found final eligibility must recheck expiry after metadata traversal, and private author get/withdraw must build results before final authority. SQL source-deletion regression must start from a freshly eligible copy rather than an already choice-invalidated one; ordinary-edit regression must change the selected observations and compare the original immutable teacher payload. Worker is correcting these and preserving unsaved optional excerpts. Human-readable structured preview/PDF presentation requested without changing canonical exact source/hash/substring rules. All candidate28 files remain source-only; no DB actions or final test claims."
         }
       ],
       "claim": {
@@ -12290,7 +12294,12 @@
           "id": "CLS-009.s6",
           "status": "in_progress",
           "instruction": "Run actual DTO/SQL and separate-connection private/team/outsider/withdrawal/expiry/cap tests in an exact-pinned disposable clone, then root combined desktop/reload/PDF/browser checks. Preserve prior data and report all parity gaps rather than substituting generic text fields.",
-          "notes": []
+          "notes": [
+            {
+              "date": "2026-10-18",
+              "text": "Continued serial review of the live sole-worker draft found final eligibility must recheck expiry after metadata traversal, and private author get/withdraw must build results before final authority. SQL source-deletion regression must start from a freshly eligible copy rather than an already choice-invalidated one; ordinary-edit regression must change the selected observations and compare the original immutable teacher payload. Worker is correcting these and preserving unsaved optional excerpts. Human-readable structured preview/PDF presentation requested without changing canonical exact source/hash/substring rules. All candidate28 files remain source-only; no DB actions or final test claims."
+            }
+          ]
         }
       ]
     },
