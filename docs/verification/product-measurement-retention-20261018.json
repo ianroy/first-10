@@ -1,6 +1,6 @@
 {
   "date": "2026-10-18",
-  "phase": "schema26_applied_prepare_rolled_back_owner_patch_pending",
+  "phase": "schema26_live_managed_role_candidate27_unverified_slow_serial_checkpoint",
   "sources": {
     "supabase/migrations/20261018026000_product_event_retention.sql": "ee76f1851cfe00d21d350f64200ad5c26848c9436e5298dc5619079565e8a4c1",
     "supabase/tests/an-002.sql": "479d52275b706cc2fbcd2de676ae15a284f750c8f0d0052e498bbec78dcd6dd2",
@@ -97,5 +97,46 @@
     "collectionEnabled": false,
     "aiStopped": true,
     "next": "Additive27 selects implicit current operator with NULL username; independently test non-superuser before retry. No role privilege grant or global configuration change."
+  },
+  "managedRoleCandidate": {
+    "branch": "codex/measurement-retention-job-owner-20261018",
+    "commit": "4ebac3d88056d22eea97cf41c30914b7b46fb53f",
+    "migration27Sha256": "a2c279d51a9f2bda1265acf0c13e81283075540be761550719b0f0f3d00e7f58",
+    "harnessSha256": "15f1b407d8fdf2271512619e89647cf84af19548319cb9ac76f2d762dd0bf14e",
+    "outcome": "unverified_candidate_not_applied",
+    "attempts": [
+      {
+        "attempt": 1,
+        "failure": "PG17 bootstrap role cannot be demoted",
+        "ownedContainerAbsent": true
+      },
+      {
+        "attempt": 2,
+        "failure": "Fresh nonsuperuser fixture lacks read-only cron settings visibility",
+        "ownedContainerAbsent": true
+      },
+      {
+        "attempt": 3,
+        "failure": "pg_cron schedule INSERT denied on cron.job under restricted role",
+        "ownedContainerAbsent": true
+      }
+    ],
+    "newProductionPrivilegeGrants": false,
+    "sharedOrHostedMutation": false,
+    "actualNonsuperScheduledSuccess": false,
+    "existingProductionOperatorReadAllSettingsVerified": true,
+    "next": "Diagnose actual metadata privilege fidelity; independently review new pinned owned rehearsal before further execution. Do not infer success from implicit username alone."
+  },
+  "executionPace": "slow_serial_user_requested",
+  "rootCombinedAfterTransportAndContracts": {
+    "passed": 1296,
+    "existingSkips": 11,
+    "passingFiles": 136,
+    "allFourActualDtoSuitesEnabled": true,
+    "typecheck": "pass",
+    "lintErrors": 0,
+    "existingLintWarnings": 6,
+    "productionBuild": "pass",
+    "newProviderCalls": 0
   }
 }

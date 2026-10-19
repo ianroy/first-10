@@ -24,15 +24,19 @@ current_stage: P1_foundation_with_parallel_P2_and_R0
 status: in_progress
 last_task_done: CLS-005
 next_task: AN-003
-next_parallel_wave: [AN-003, CLS-009, EV-001]
+next_parallel_wave: []
+execution_pace: slow_serial
 active_claims: [AN-003, CLS-009, EV-001]
 research_gate: not_passed
 foundation_gate: not_passed
 realtime_go: pending
 last_updated: 2026-10-18
-last_documentation_update: "2026-10-18: Student revision and leave recovery verified; unmounted guest growth UI/PDF candidate integrated; actual isolated retention passed and full policy compatibility continues."
+last_documentation_update: "2026-10-18: User requested slow pace; workers safely idle, serial continuation. Growth transport and generation-history contracts integrated; managed-role27 candidate remains unverified."
 resume_hint: >-
   Active goal: keep building every feasible authorized item, verify and commit/push/deploy.
+  User requested SLOW pace: maximum1 worker, one task at a time, no new parallel wave.
+  All three existing workers finished safely and are idle; retained claims protect their
+  scopes until coordinator review/release. This is slower continuation, not a goal pause.
   Preserve $25 total OpenRouter cap and no other paid services. Latest usage check: 57%
   weekly allowance remains, zero reset credits available, ordinary usage permitted.
   Hosted and dedicated local55322 actual schema26; optional measurement remains disabled.
@@ -51,8 +55,9 @@ resume_hint: >-
   completion and WS007 combined owner/project gate complete:9 component journeys,
   5 guard tests,2actual DB owners/4same-name projects and4real archive races. Physical
   second device/fresh two-owner hosted Auth/offline checks remain final release gates.
-  Root1202app tests pass/11existing skips after unmounted growth UI/PDF, CLS005 and26;
-  typecheck/lint/build pass.6e7c581 CI and isolated RLS both successful.
+  Root1296app tests pass/11existing skips after reviewed growth transport and EV001
+  contracts, with all4actualDTOsuites enabled; typecheck/lint/build pass. Latest03d0cca
+  Vercel success verified. Prior6e7c581 CI and isolated RLS both successful.
   UI polish:
   class revision refresh remounts teacher lists and clears old exports; download success
   is tied to its exact source fingerprint. All three actual-SQL DTO suites were enabled.
@@ -60,7 +65,9 @@ resume_hint: >-
   artifacts, not redefined as two studios. CLS009 phase1 reviewed contracts integrated; pure six-kind desktop editors/PDF
   candidates integrated1138dab/2acad91/abc6d40. Root viewed17portfolio pages; worker
   inspected all34individual/portfolio pages and51focusedtests pass. Still unmounted:
-  server adapters in progress, persistence/teacher projection/coverage gates unfinished.
+  server transport candidate integratedbc1a421/36c3688 with82focusedpasses. Future strict
+  4KiB authority projection, no full-session fallback; persistence/teacher projection/
+  coverage/live gates unfinished. No growth mount or schema28 reservation.
   AN002 software7bcfb75 is integrated: opt-in owner-only measurement, defaultdisabled,
   exact-pinned25fc798efd passed1863SQL/2actualDTOs/3races/rollback/cloneabsence. Root
   Account mount and official types published; hosted25 and live choice/reload checks
@@ -68,7 +75,9 @@ resume_hint: >-
   AN004 remaining event producers. CLS005 bounded software complete: fresh author
   revisions, visibility, leave/retry/draft preservation and class refresh checks. Live
   ordinary-student and physicaldevice remain REL001/002, not faked with presenterowner.
-  EV001 worker now contracts/design only for reversible learning/outreach versions.
+  EV001 contracts/design integrated287dddd/8253d06 with63puretests; exact receipt
+  intent/pointer checks retain valid newer-state replay. Storage/services/UI/PDF and
+  trusted generation capture remain unfinished. Worker idle at user slow request.
   AN003 now exclusively reserves additive27 after applied26. Actual isolated cron batches/failure/recovery and11
   malformed-proof checks passed with collectionoff and ownedcontainerabsence. Root found standalone fixturetransaction/global-suite incompatibility and fixed with
   test-only savepoints/readiness. Repeated actualcron and full1863SQL/3DTO/3race
@@ -76,7 +85,11 @@ resume_hint: >-
   officialtypesgenerated. Productioninactiveprep failed safely becausepgcron explicitusername requires
   superuser evenforcurrentrole. Reserve additive27 implicitcurrent-owner fix;26
   immutable. No jobcreated, collectionfalse/AIstoptrue. Managednon-superrole isolated
-  rehearsal and then actualproductionlibpq verification pending. Guestnextschema
+  rehearsal remains UNVERIFIED after3 safe isolated fixture failures: bootstrap demotion,
+  settings visibility and then cron.job INSERT permissions. Every owned container was
+  removed/absence verified. Candidate27/harness remain isolated at4ebac3d; never apply
+  until actual nonsuper/libpq success. No local/hosted27 or production privilege changes.
+  Guestnextschema
   remainsunreserved (willbe28). No complete
   funnel or physical deletion guarantee is claimed.
   Bounded public retrieval is approved and live, receipt83724f78 committed; source AI

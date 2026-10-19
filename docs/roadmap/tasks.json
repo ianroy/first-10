@@ -2,7 +2,7 @@
   "schema_version": 1,
   "updated_at": "2026-10-18",
   "iteration": 5,
-  "max_parallel_agents": 3,
+  "max_parallel_agents": 1,
   "phases": [
     {
       "id": "P0",
@@ -5331,6 +5331,10 @@
         {
           "date": "2026-10-18",
           "text": "Phase1 contract/design-only reservation after CLS005 bounded software completion. Exact3files only; no schema/data layer/server/UI/types/DB actions until serialized scope expansion. Audit current atomic outreach save and immutable AI origin ledger instead of duplicating them; preserve accepted/manual/current data, permission/provenance and every-activity PDF obligations. AN003 exclusively holds26. No new generation/AI call or persistence feature is claimed from pure contracts."
+        },
+        {
+          "date": "2026-10-18",
+          "text": "Phase1 contractsa068be9 and reviewfixc7ce11d integrated root287dddd/8253d06.63 pure tests worker pass; exact-commit pointer contradictions and mismatched request operation/version/revision/append intent rejected; newer-state replay allowed; baseline kind/stage/pointers remain immutable. No persistence/services/UI/AI/PDF change. Generation ledger has metadata, not recoverable old exact output; future trusted capture/legacy accepted projection/aggregate caps/real RLS and races remain gates. User requested slow pace; worker idle with scope reserved, no new phase."
         }
       ],
       "claim": {
@@ -12084,6 +12088,10 @@
         {
           "date": "2026-10-18",
           "text": "Purephase2 integrated1138dab/2acad91/abc6d40; root visually reviewed all17portfolio pages/contact sheets. Combined1196app tests/11existing skips, type/full lint(0errors/6existingwarnings)/Vercelbuild pass. Every-activity builders are unmounted, no persistence/teacherprojection/registeredcoverageclaim. Serveradapterphase3 underway withoutSQL until26lease release."
+        },
+        {
+          "date": "2026-10-18",
+          "text": "Phase3 reviewed transport6f8112d + narrow authority correctiona118df9 integrated rootbc1a421/36c3688. Root82 focused tests pass. Cookie/CSRF/same-origin/no-store and fixed RPC adapters use only future strict4KiB get_guest_growth_authority projection; no full-session fallback. Class/team/principal generation fences invalidate stale delivery. Large supported assignment text never fetched; draft-only export also fails closed without real authority. Still UNMOUNTED; no SQL persistence/teacher adapter/coverage/live proof. Schema28 remains UNRESERVED pending AN003. User requested slow pace; worker idle/no new phase until serial coordinator review."
         }
       ],
       "claim": {
@@ -12390,6 +12398,10 @@
         {
           "date": "2026-10-18",
           "text": "Production exactinactiveprep12db failed transactionally: hostedpostgres is notsuperuser; pg_cron rejects explicitusername argument even when equalcurrentuser. Freshproof confirmsjobnotconfigured, collectionfalse/AIstoptrue; checkingextensionrollback. Primarypgcron job_metadata.c and Supabasepg-toolbelt docs confirm NULLusername uses currentcallerwithoutforeign-roleprivilege. Published/applied26 remainsbyteidentical. Reserve exactNEW27 AN003 helper-only additive fix, and source26guarded ownednetworknone managedrole rehearsal; no privilege grants/configchange. Worker preparespins BEFORE anyDBaction. Guestnextschema stillUNRESERVED, will be28 afterthisboundary. Rootopsfile remainsunexecuted successfully; actualprodcleanupnotclaimed."
+        },
+        {
+          "date": "2026-10-18",
+          "text": "User requested slow pace: all workers stopped after safe checkpoints; no new parallel wave. Managed-role candidate27 a2c279d5 remains UNVERIFIED in isolated branch4ebac3d only and is not applied locally/hosted. Three actual owned-container attempts failed safely (bootstrap demotion, settings visibility, then pg_cron job-table INSERT permission); all containers removed/absence verified. Root confirmed existing production operator NOSUPER and pg_read_all_settings visibility; no production grants/settings changed. Local/hosted remain26, no job/extension/collection activated. Root must diagnose metadata privilege fidelity, review a new exact harness pin, and verify actual successful nonsuper libpq scheduling before27/apply. Keep lease reserved; worker idle."
         }
       ],
       "claim": {
