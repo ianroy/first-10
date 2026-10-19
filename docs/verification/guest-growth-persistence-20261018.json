@@ -261,7 +261,17 @@
     "currentLibraryStillRevision2": true,
     "evidenceLabels": "Explicitly authored fictional scenario; no interviews, measured outcomes or demand invented",
     "exportFailureFound": "Actual picker retained obsolete draft/revision keys, rejecting frozen review after save/history identity changes. Source fix remounts only each PDF picker by exact current/portfolio source fingerprint; real picker integration test covers draft->save1->save2->history1.",
-    "exportFixedLive": "pending",
+    "exportFixedLive": {
+      "commit": "e983e7c25903411ca58399b55bc5543092deac95",
+      "vercel": "success",
+      "reloadReopenRevision2": true,
+      "learningPdfPages": 3,
+      "experimentPdfPages": 3,
+      "pipelinePdfPages": 3,
+      "exactLearning2ReferenceInExperiment": true,
+      "bothFreshAuthorizationChecks": true,
+      "screenshot": "/private/tmp/first-ten-pdf-qa/live-growth-learning-pdf.png"
+    },
     "otherKindsAndPortfolioLive": "pending",
     "teacherProjection": "not implemented",
     "exportFixValidation": {
@@ -271,6 +281,30 @@
       "typecheck": "passed",
       "lint": "0 errors,6 existing warnings",
       "build": "passed"
+    },
+    "individualExports": {
+      "learning": {
+        "revision": 2,
+        "pages": 3
+      },
+      "experiment": {
+        "revision": 1,
+        "pages": 3
+      },
+      "pipeline_contact": {
+        "revision": 1,
+        "pages": 3
+      }
+    },
+    "surveySaveFinding": "Typed two-question survey with exactexperiment1 reference savedrevision1. UI incorrectly reported newerlocaledits despite identical values because editor question object property order differed from parsed request. Source switches semantic fingerprints to existing canonicalGrowthJson; property/array/value equality preserved. Real survey+onboarding question/save/PDF regressions pass.",
+    "contentEqualityFixValidation": {
+      "targetedTestsPassed": 23,
+      "combinedAppTestsPassed": 1368,
+      "existingTestsSkipped": 11,
+      "typecheck": "passed",
+      "lint": "0 errors,6 existing warnings",
+      "build": "passed",
+      "live": "pending"
     }
   }
 }

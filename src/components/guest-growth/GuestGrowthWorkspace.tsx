@@ -45,6 +45,7 @@ import type { z } from "zod";
 import { GrowthEditor } from "./Editors";
 import { ReferencePicker } from "./ReferencePicker";
 import type { GuestGrowthPorts } from "./ports";
+import { canonicalGrowthJson } from "@/lib/guest-growth/transport";
 type Header = z.infer<typeof guestGrowthHeaderSchema>;
 type Saved = z.infer<typeof RecordSchema>;
 type Save = z.infer<typeof saveGuestGrowthSchema>;
@@ -81,7 +82,7 @@ function pdfDocument(signature: string, title: string) {
     return null;
   }
 }
-const fp = (v: unknown) => JSON.stringify(v),
+const fp = canonicalGrowthJson,
   icons = {
     learning: BookOpen,
     experiment: FlaskConical,

@@ -7,7 +7,7 @@ import { GuestGrowthWorkspace } from "@/components/guest-growth/GuestGrowthWorks
 import { view, csrf, time, type Saved } from "./fixture";
 afterEach(cleanup);
 
-it("reviews real PDF selections across draft/save/revision/history identity changes without stale keys", async () => {
+function createPorts(): GuestGrowthPorts {
   const saved: Saved[] = [];
   const ports: GuestGrowthPorts = {
     list: vi.fn(async () => ({ ok: true, data: { items: [], nextCursor: null } })),
@@ -44,6 +44,11 @@ it("reviews real PDF selections across draft/save/revision/history identity chan
     })),
     authorizeExport: vi.fn(async () => {}),
   };
+  return ports;
+}
+
+it("reviews real PDF selections across draft/save/revision/history identity changes without stale keys", async () => {
+  const ports = createPorts();
   render(<GuestGrowthWorkspace view={view} csrf={csrf} ports={ports} fictional />);
   await waitFor(() =>
     expect(screen.getByRole("button", { name: "Refresh saved growth work" })).toBeEnabled(),
@@ -82,3 +87,54 @@ it("reviews real PDF selections across draft/save/revision/history identity chan
   expect(screen.getByRole("button", { name: "Save growth revision" })).toBeDisabled();
   expect(ports.authorizeExport).not.toHaveBeenCalled(); // Review alone never sends a document or grants access.
 });
+
+it.each(["survey", "onboarding"] as const)(
+  "acknowledges %s question content independent of JSON property order",
+  async (kind) => {
+    const ports = createPorts();
+    render(<GuestGrowthWorkspace view={view} csrf={csrf} ports={ports} fictional />);
+    await waitFor(() =>
+      expect(screen.getByRole("button", { name: "Refresh saved growth work" })).toBeEnabled(),
+    );
+    fireEvent.click(
+      screen.getByRole("button", {
+        name: kind === "survey" ? "Feedback survey draft" : "Onboarding research draft",
+      }),
+    );
+    fireEvent.change(screen.getByLabelText("Growth activity title"), {
+      target: { value: "Fictional typed question" },
+    });
+    fireEvent.click(
+      screen.getByRole("button", {
+        name: kind === "survey" ? "Add survey question" : "Add onboarding question",
+      }),
+    );
+    const prefix = kind === "survey" ? "Survey question 1" : "Onboarding question 1";
+    fireEvent.change(screen.getByLabelText(`${prefix} prompt`), {
+      target: { value: "What happened the last time you tried this?" },
+    });
+    fireEvent.change(screen.getByLabelText(`${prefix} purpose`), {
+      target: { value: "Understand concrete behavior" },
+    });
+    if (kind === "survey") {
+      fireEvent.change(screen.getByLabelText(`${prefix} format`), {
+        target: { value: "single_choice" },
+      });
+      fireEvent.change(screen.getByLabelText(`${prefix} options — one per line`), {
+        target: { value: "Completed\nDid not complete" },
+      });
+    }
+    fireEvent.click(screen.getByRole("button", { name: "Save growth revision" }));
+    await screen.findByText("Saved revision 1 confirmed.");
+    expect(screen.queryByText(/newer local edits are still unsaved/)).not.toBeInTheDocument();
+    expect(screen.getByRole("button", { name: "Save growth revision" })).toBeDisabled();
+    fireEvent.click(screen.getByRole("button", { name: "Review frozen copy" }));
+    expect(screen.getByLabelText("Frozen export preview")).toHaveTextContent(
+      "Exact retained saved revision 1",
+    );
+    expect(screen.getByLabelText("Frozen export preview")).toHaveTextContent(
+      "What happened the last time you tried this?",
+    );
+    expect(screen.getByRole("button", { name: "Download PDF" })).toBeEnabled();
+  },
+);

@@ -49,7 +49,11 @@ resume_hint: >-
   Live3669c9f savedfictionallearningrev1/2 andopenedretained1read-only. ActualPDF
   review foundstale draft/revision selectionkeys; corrected exactfingerprintpicker
   remount plusrealpicker draft/save1/save2/history1 test.1366app tests pass/11skips,
-  type/lint/buildpass. NEXT: deployfix and livePDF/reload/allkind/portfolio/studiosmoke. Separate teacherprojection and fullparity remainunfinished;
+  type/lint/buildpass. Livee983e7c reload/learning3pagePDF/linkedexperiment3pagePDF/
+  pipeline3pagePDF pass. Typed survey savedrev1 butJSONpropertyorder causedfalse
+  unsavedwarning; canonicalcontentcomparison fix withrealtypedUI regressions passes
+  1368app tests/11skips,type/lint/build. NEXT: deploycontentfix thenremainingkinds/portfolio
+  and studioswitch/team browserproof. Separate teacherprojection and fullparity remainunfinished;
   schema28 is UNRESERVED. ParentCLS009/CLS008 remainunfinished, not redefined.
   Workerguest_marketing_handoff idle; root owns sharedintegration. EV001 workeridle,
   contracts287dddd/8253d06 verified63tests; storage/UI/PDF/trustedcapture unfinished.

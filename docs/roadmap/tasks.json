@@ -12182,6 +12182,10 @@
         {
           "date": "2026-10-18",
           "text": "Live3669c9f/Vercelsuccess: genuinefictionalguest resumed, savedlearningrev1thenreportedreviewrev2, openedretainedrev1read-only whilelibraryretainedrev2. ActualPDFpicker exposed stale draft/revision selectionkeys after sourceidentity changes; sourcefix keys picker byexactcurrent/portfolio fingerprint. Added realpicker integration (notmock) over draft/save1/save2/history1;21targetedtestsPASS. Fullgate/livefixretry pending. No teachergrant,AI,realresearch or outcomeclaim."
+        },
+        {
+          "date": "2026-10-18",
+          "text": "Livee983e7c correctedpicker: reload/reopenlearningrev2 and3pagePDFpass; linkedexperimentrev1 andaliaspipeline rev1eachsave+3pagePDFpass. Survey2typedquestions+exactexperiment1refsavedrev1, butactualUI falselyreportsnewerlocaledits dueobjectpropertyorder. SourceusesexistingcanonicalGrowthJson forsemanticcontentfingerprints, preservesarray/value meaning. Added real survey+onboarding question/save/PDFregressions;23targeted and1368fullapp/11existing skips,type/lint0errors/buildPASS. Livefixedtypedform/remainingkinds/portfolio pending. Nooutreach/AI/sharing/measureddemand."
         }
       ],
       "claim": {
