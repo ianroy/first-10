@@ -12102,6 +12102,14 @@
         {
           "date": "2026-10-18",
           "text": "Serial phase4 source draft is underway on the only running worker; no DB/container actions. Root early review verified installed Zod UUID/datetime semantics and found UUID-version, Unicode-wrapped secret-boundary and invalid-offset parity cases; worker is adding explicit cross-layer regressions before freezing pins. Root corrected README/ProductSpec to distinguish live reviewed Marketing teacher copies from still-unfinished dedicated six-kind growth activities; no new persistence claim. Parent remains in progress."
+        },
+        {
+          "date": "2026-10-18",
+          "text": "Root serial review identified two concrete design gaps before pins:50-source two-stage PDF checks could consume104 shared-rate attempts before source loads, and ON DELETE CASCADE could remove reference edges while leaving dependent versions apparently eligible. Worker source now adds one bounded bulk-export check/rate attempt, service-only rate-neutral4KiB authority projection and immutable reference-count/digest metadata checked on every lineage walk; meaningful53-attempt and retained-source-deletion regressions are being built. Root also confirmed catalog convert_to is STABLE, catching a generated-column compilation issue; fixed-UTF8 immutable canonical digest wrapper required before execution. No candidate DB action. Await final reviewed source/fixture/harness pins; do not claim tested persistence yet."
+        },
+        {
+          "date": "2026-10-18",
+          "text": "Additional serial read-only audit found installed ICU und153.121 differs from Node Unicode17 on55 single-codepoint mappings despite0/504 contextual-Sigma mismatches. Full1,112,063 non-NUL scalar values compared. Approved source-only pinned Unicode17 option-key policy/data with context handling, preserving international duplicate-option semantics rather than reducing to ASCII; no author text changes. Durable docs/verification/guest-growth-unicode-20261018.json. Harness review also caught absent-cron query, missing schema-only26 singleton seed data and incomplete source version/port guards; corrections required before pins. Worker remains sole active writer; no candidate DB execution."
         }
       ],
       "claim": {

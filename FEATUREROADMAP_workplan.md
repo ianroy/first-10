@@ -97,7 +97,14 @@ resume_hint: >-
   never integrate it. CLS009 now exclusively reserves NEW guest27 from8828fb3 / real26.
   Draft/review SQL only before exact-pin approval; no DB actions authorized yet. Root
   early review found concrete UUID/date/Unicode boundary parity cases; regressions
-  are being added before pins. README/ProductSpec now clearly distinguish existing
+  are being added before pins. Additional review caught PDF rate exhaustion and
+  missing-source cascade eligibility; bulk checks and immutable lineage metadata are
+  being tested in source. Catalog-proven STABLE convert_to requires an immutable
+  fixed-UTF8 digest wrapper before generated-column execution. Read-only full Unicode
+  audit found55 ICU/Node17 mappings diverge; source now preserves full semantics with
+  a pinned Unicode17 option-key policy instead of weakening to ASCII. Guard/clone-state
+  fixes and final source gates/pins are pending. No candidate DB action.
+  README/ProductSpec now clearly distinguish existing
   reviewed Marketing copies from unfinished dedicated six-kind growth workflows. No complete
   funnel or physical deletion guarantee is claimed.
   Bounded public retrieval is approved and live, receipt83724f78 committed; source AI
