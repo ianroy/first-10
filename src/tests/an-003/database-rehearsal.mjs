@@ -294,7 +294,95 @@ try {
     "Actual scheduler success records required",
   );
   assert.equal(scalar("SELECT enabled FROM firstten_private.product_measurement_policy"), "f");
-  phase = "inactive, tampered, stale and failed proof rejection";
+  phase = "actual scheduled cancellation, rollback and recovery";
+  sql(
+    "CREATE SCHEMA an003_runtime;CREATE FUNCTION an003_runtime.cancel_delete()RETURNS trigger LANGUAGE plpgsql AS $$BEGIN RAISE EXCEPTION'Fictional isolated cancellation'USING ERRCODE='57014';END $$;CREATE TRIGGER an003_cancel BEFORE DELETE ON firstten_private.product_event_log FOR EACH ROW WHEN(OLD.event_id='c2600000-0000-4000-8000-000000000099')EXECUTE FUNCTION an003_runtime.cancel_delete();INSERT INTO firstten_private.product_event_log(event_id,event_name,environment,population,subject_ref,project_ref,measurement_choice_version,occurred_at,received_at,expires_at)VALUES('c2600000-0000-4000-8000-000000000099','project_created','test','synthetic',gen_random_uuid(),gen_random_uuid(),1,statement_timestamp()-interval'31 days',statement_timestamp()-interval'31 days',statement_timestamp()-interval'1 day');",
+  );
+  let actualFailed = false;
+  for (let attempt = 0; attempt < 40; attempt++) {
+    if (
+      Number(
+        scalar(
+          `SELECT count(*)FROM cron.job_run_details WHERE jobid=${job} AND status='failed'AND end_time IS NOT NULL`,
+        ),
+      ) > 0
+    ) {
+      actualFailed = true;
+      break;
+    }
+    await pause(500);
+  }
+  assert(actualFailed, "Actual scheduler must record cancellation failure");
+  assert.equal(
+    scalar(
+      "SELECT count(*)FROM firstten_private.product_event_log WHERE event_id='c2600000-0000-4000-8000-000000000099'",
+    ),
+    "1",
+    "Failed scheduled deletion rolls back",
+  );
+  assert.equal(
+    scalar("SELECT firstten_private.product_retention_ready()"),
+    "f",
+    "Actual failure blocks admission",
+  );
+  sql(
+    "DROP TRIGGER an003_cancel ON firstten_private.product_event_log;DROP FUNCTION an003_runtime.cancel_delete();DROP SCHEMA an003_runtime;",
+  );
+  let recovered = false;
+  for (let attempt = 0; attempt < 40; attempt++) {
+    if (scalar("SELECT firstten_private.product_retention_ready()") === "t") {
+      recovered = true;
+      break;
+    }
+    await pause(500);
+  }
+  assert(recovered, "A subsequent actual scheduled run must recover health");
+  assert.equal(
+    scalar(
+      "SELECT count(*)FROM firstten_private.product_event_log WHERE event_id='c2600000-0000-4000-8000-000000000099'",
+    ),
+    "0",
+    "Recovery physically removes expired row",
+  );
+  phase = "rollback-only malformed timestamp checks from healthy active actual baseline";
+  const mutations = [
+    "last_attempt_at=NULL",
+    "last_attempt_at=clock_timestamp()+interval'1 hour'",
+    "last_attempt_at=clock_timestamp()-interval'11 minutes'",
+    "last_drained_at=NULL",
+    "last_drained_at=clock_timestamp()+interval'1 hour'",
+    "last_drained_at=clock_timestamp()-interval'11 minutes'",
+    "last_run_id=NULL",
+  ];
+  for (const mutation of mutations) {
+    assert.equal(
+      scalar("SELECT firstten_private.product_retention_ready()"),
+      "t",
+      "Healthy actual baseline before synthetic check",
+    );
+    assert.equal(
+      scalar(
+        `BEGIN;UPDATE firstten_private.product_retention_state SET ${mutation};SELECT firstten_private.product_retention_ready();ROLLBACK;`,
+      ),
+      "f",
+      "Synthetic malformed state must fail closed: " + mutation,
+    );
+  }
+  for (const mutation of [
+    "start_time=NULL",
+    "start_time=clock_timestamp()+interval'1 hour'",
+    "end_time=clock_timestamp()+interval'1 hour'",
+    "end_time=clock_timestamp()-interval'11 minutes'",
+  ]) {
+    assert.equal(
+      scalar(
+        `BEGIN;UPDATE cron.job_run_details SET ${mutation} WHERE runid=(SELECT last_run_id FROM firstten_private.product_retention_state);SELECT firstten_private.product_retention_ready();ROLLBACK;`,
+      ),
+      "f",
+      "Synthetic malformed run must fail closed: " + mutation,
+    );
+  }
+  phase = "inactive and tampered identity checks";
   sql(`SELECT cron.alter_job(${job},active:=false);`);
   assert.equal(scalar("SELECT firstten_private.product_retention_ready()"), "f");
   sql(`SELECT cron.alter_job(${job},active:=true,command:='SELECT 1');`);
@@ -302,17 +390,14 @@ try {
   sql(
     `SELECT cron.alter_job(${job},active:=false,command:=firstten_private.retention_job_command());`,
   );
-  // Clone-only operational state aging/failure to exercise fail-closed health; never scheduler proof.
-  sql(
-    "UPDATE firstten_private.product_retention_state SET last_drained_at=clock_timestamp()-interval'11 minutes';",
-  );
-  assert.equal(scalar("SELECT firstten_private.product_retention_ready()"), "f");
   assert.equal(scalar("SELECT enabled FROM firstten_private.product_measurement_policy"), "f");
   console.log(
     JSON.stringify({
       phase: "passed",
       isolatedActualScheduledRuns: true,
       boundedBacklogObserved: true,
+      actualScheduledFailureAndRecovery: true,
+      syntheticMalformedProofChecks: 11,
       retainedUnexpiredRows: 1,
       otherJobUntouched: true,
       collectionEnabled: false,
