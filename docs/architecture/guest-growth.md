@@ -1,6 +1,6 @@
-# Guest growth artifacts: phase1 contract and implementation handoff
+# Guest growth artifacts: contract and pure UI/PDF candidate
 
-**Status: contract/design only.** CLS-009 preserves CLS-008's original all-core-activity obligation. The shipped seven-step Discovery and Marketing Lab studios do not yet provide these dedicated workflows. This phase defines structured data, validators, negative tests and the implementation sequence. It adds no database table, RPC, server function, route, editor, PDF adapter, teacher access, AI request or live capability. Migration25 remains exclusively AN-002; the coordinator must reserve and review a later additive migration before implementation.
+**Status: contracts and pure UI/PDF candidate; not mounted or persisted.** CLS-009 preserves CLS-008's original all-core-activity obligation. The shipped seven-step Discovery and Marketing Lab studios do not yet provide these dedicated workflows. Phase1 defines structured data and future server boundaries; phase2 adds controlled structured editors and actual PDF builders with no backend implementation. There is no new database table, RPC, server function, route, registered export mount, teacher access, AI request or live capability. The coordinator must reserve and review a later additive migration before backend implementation; no schema number is claimed by this candidate.
 
 ## The actual owner inventory and missing guest work
 
@@ -90,7 +90,7 @@ The coordinator must register every implemented kind adapter and verified guest/
 1. Review this contract and exact structured inventory; integrate only the three phase1 files. CLS-009 remains in progress; no parity completion claim.
 2. After AN-002 releases schema25, the coordinator reserves the next additive migration and expands one writer's scope for closed tables/RPCs and services. Preserve published21–25 byte-for-byte. Build an exact-pinned, independently reviewed disposable schema-only clone harness before any DB action.
 3. Prove genuine private/team/outsider/teacher boundaries, exact DTO/schema parity, reference scoping, saved history/replay/CAS, count/byte/revision caps, privacy reductions at cap, real overlapping lock races and late-expiry rollback. No mocked RLS claim.
-4. Build desktop editors with draft/unknown/self-reported labels and exact retry/conflict/scope/unsaved-work handling. Root owns shared join/teacher parents and official generated types.
+4. Integrate the pure phase2 desktop editor candidate only after real ports implement draft/unknown/self-reported labels and exact retry/conflict/scope/unsaved-work handling against actual authority. Root owns shared join/teacher parents and official generated types.
 5. Add every individual/portfolio/selected teacher PDF adapter and registry entry, fresh two-stage download authorization, actual page rendering and deliberate selected-copy UI. No raw interview attachment by an implicit adapter.
 6. Run combined checks, normal reviewed schema integration and live fictional save/reload/PDF/withdrawal/scope rehearsal. Preserve existing demo data, guest studios and choices. Only then update implemented capability documentation.
 
