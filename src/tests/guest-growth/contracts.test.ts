@@ -18,6 +18,8 @@ import {
   guestGrowthSelectionError,
   previewGuestGrowthSchema,
   guestGrowthChoiceSchema,
+  saveGuestGrowthChoiceSchema,
+  guestGrowthSubmissionHeaderSchema,
   confirmGuestGrowthSchema,
   guestGrowthTeacherPayloadSchema,
   readTeacherGrowthSubmissionSchema,
@@ -549,5 +551,135 @@ it("supports structured authored synthesis patterns, objections, best-fit hypoth
       ...d,
       proposedChanges: [{ ...d.proposedChanges[0], autoImplemented: true }],
     }).success,
+  ).toBe(false);
+});
+
+it("bounds the aggregate preview request in UTF-8 bytes after valid distinct selectors", () => {
+  const sections = [
+    "observations",
+    "patterns",
+    "objections",
+    "best_fit",
+    "interpretation",
+    "counterevidence",
+    "uncertainty",
+    "proposed_changes",
+    "next_test",
+    "review",
+  ] as const;
+  const input = {
+    csrf,
+    artifactId: id(1),
+    expectedRevision: 1,
+    assignmentId: id(8),
+    threadId: id(9),
+    requestId: id(10),
+    selections: sections.map((section) => ({
+      kind: "learning",
+      section,
+      excerpt: "x".repeat(6000),
+    })),
+    redactions: [],
+    reflection: {
+      title: "Review",
+      interpretation: "",
+      uncertainty: "",
+      decision: "",
+      nextAction: "",
+    },
+  };
+  expect(previewGuestGrowthSchema.safeParse(input).success).toBe(true);
+  const oversized = {
+    ...input,
+    selections: input.selections.map((s) => ({ ...s, excerpt: "😀".repeat(6000) })),
+  };
+  expect(new TextEncoder().encode(JSON.stringify(oversized)).length).toBeGreaterThan(
+    GUEST_GROWTH_LIMITS.requestBytes,
+  );
+  expect(previewGuestGrowthSchema.safeParse(oversized).success).toBe(false);
+  expect(
+    previewGuestGrowthSchema.safeParse({
+      ...oversized,
+      selections: oversized.selections.slice(0, 1),
+    }).success,
+  ).toBe(true);
+});
+it("rejects duplicate reviewed excerpt keys independently of the payload byte limit", () => {
+  const excerpt = {
+    key: "excerpt.1",
+    label: "Interpretation",
+    text: "One interpretation",
+    evidenceLabel: GUEST_GROWTH_EVIDENCE_LABEL,
+  };
+  const base = {
+    schemaVersion: 1,
+    resolverVersion: GUEST_GROWTH_RESOLVER_VERSION,
+    sourceKind: "guest_growth",
+    title: "Review",
+    interpretation: "",
+    uncertainty: "",
+    decision: "",
+    nextAction: "",
+    excerpts: [excerpt, { ...excerpt, text: "Different text" }],
+  };
+  expect(guestGrowthTeacherPayloadSchema.safeParse(base).success).toBe(false);
+  expect(
+    guestGrowthTeacherPayloadSchema.safeParse({
+      ...base,
+      excerpts: [excerpt, { ...excerpt, key: "excerpt.2" }],
+    }).success,
+  ).toBe(true);
+});
+it("accepts terminal privacy-reduction responses while reserving CAS increment room", () => {
+  const expected = Number.MAX_SAFE_INTEGER - 1;
+  const request = {
+    csrf,
+    artifactId: id(1),
+    choice: "withdrawn",
+    expectedRevision: expected,
+    requestId: id(20),
+  };
+  expect(saveGuestGrowthChoiceSchema.safeParse(request).success).toBe(true);
+  expect(
+    saveGuestGrowthChoiceSchema.safeParse({ ...request, expectedRevision: Number.MAX_SAFE_INTEGER })
+      .success,
+  ).toBe(false);
+  expect(saveGuestGrowthChoiceSchema.safeParse({ ...request, choice: "granted" }).success).toBe(
+    false,
+  );
+  expect(
+    guestGrowthChoiceSchema.safeParse({
+      sourceKind: "guest_growth",
+      artifactId: id(1),
+      choice: "withdrawn",
+      revision: expected + 1,
+    }).success,
+  ).toBe(true);
+  expect(
+    guestGrowthChoiceSchema.safeParse({
+      sourceKind: "guest_growth",
+      artifactId: id(1),
+      choice: "granted",
+      revision: expected + 1,
+    }).success,
+  ).toBe(false);
+  const withdrawn = {
+    id: id(1),
+    threadId: id(2),
+    classId: id(3),
+    assignmentId: id(4),
+    sourceType: "guest_growth",
+    version: 1,
+    audience: "teacher",
+    authorLabel: "Learner alias",
+    submittedAt: time,
+    grantState: "withdrawn",
+    grantRevision: Number.MAX_SAFE_INTEGER,
+    recipientEligible: false,
+    title: "Review",
+  };
+  expect(guestGrowthSubmissionHeaderSchema.safeParse(withdrawn).success).toBe(true);
+  expect(
+    guestGrowthSubmissionHeaderSchema.safeParse({ ...withdrawn, grantState: "active" }).success,
   ).toBe(false);
 });

@@ -57,11 +57,13 @@ const stage = z.union([z.literal(1), z.literal(2), z.literal(3)]);
 const laterStage = z.union([z.literal(2), z.literal(3)]);
 const audience = z.enum(["principal_private", "team_shared"]);
 const revision = z.number().int().min(1).max(GUEST_GROWTH_LIMITS.revisions);
-const permissionRevision = z
+// A CAS request must leave room for one increment; a returned terminal reduction may use MAX.
+const requestPermissionRevision = z
   .number()
   .int()
   .min(0)
   .max(Number.MAX_SAFE_INTEGER - 1);
+const permissionRevision = z.number().int().min(0).max(Number.MAX_SAFE_INTEGER);
 export const guestGrowthKindSchema = z.enum(GUEST_GROWTH_KINDS);
 const reference = <K extends "learning" | "experiment" | "pipeline_contact">(kind: K) =>
   z.object({ kind: z.literal(kind), artifactId: uuid, revision }).strict();
@@ -596,10 +598,23 @@ export const guestGrowthChoiceSchema = z
     choice,
     revision: permissionRevision,
   })
-  .strict();
+  .strict()
+  .refine(
+    (v) => v.revision < Number.MAX_SAFE_INTEGER || v.choice === "withdrawn",
+    "The terminal permission revision is reserved for withdrawal.",
+  );
 export const saveGuestGrowthChoiceSchema = scope
-  .extend({ artifactId: uuid, choice, expectedRevision: permissionRevision, requestId: uuid })
-  .strict();
+  .extend({
+    artifactId: uuid,
+    choice,
+    expectedRevision: requestPermissionRevision,
+    requestId: uuid,
+  })
+  .strict()
+  .refine(
+    (v) => v.expectedRevision < Number.MAX_SAFE_INTEGER - 1 || v.choice === "withdrawn",
+    "Only withdrawal may consume the last permission revision.",
+  );
 const selectBase = {
   excerpt: text(6000)
     .refine((v) => v.length > 0)
@@ -713,6 +728,11 @@ export const previewGuestGrowthSchema = scope
   })
   .strict()
   .superRefine((v, ctx) => {
+    if (jsonBytes(v) > GUEST_GROWTH_LIMITS.requestBytes)
+      ctx.addIssue({
+        code: "custom",
+        message: "This reviewed-copy request exceeds its UTF-8 byte bound.",
+      });
     if (
       new Set(
         v.selections.map((s) =>
@@ -743,10 +763,12 @@ const teacherPayloadBase = reflection
       .max(12),
   })
   .strict();
-export const guestGrowthTeacherPayloadSchema = teacherPayloadBase.refine(
-  (v) => jsonBytes(v) <= 40000,
-  "The reviewed payload exceeds its byte bound.",
-);
+export const guestGrowthTeacherPayloadSchema = teacherPayloadBase.superRefine((v, ctx) => {
+  if (jsonBytes(v) > 40000)
+    ctx.addIssue({ code: "custom", message: "The reviewed payload exceeds its byte bound." });
+  if (new Set(v.excerpts.map((e) => e.key)).size !== v.excerpts.length)
+    ctx.addIssue({ code: "custom", message: "Reviewed excerpt keys must be unique." });
+});
 export const guestGrowthPreviewSchema = z
   .object({
     id: uuid,
@@ -774,10 +796,16 @@ const submittedHeader = z
     title: text(120),
   })
   .strict();
-export const guestGrowthSubmissionHeaderSchema = submittedHeader;
+const terminalGrantReduction = (v: { grantRevision: number; grantState: "active" | "withdrawn" }) =>
+  v.grantRevision < Number.MAX_SAFE_INTEGER || v.grantState === "withdrawn";
+export const guestGrowthSubmissionHeaderSchema = submittedHeader.refine(
+  terminalGrantReduction,
+  "The terminal grant revision is reserved for withdrawal.",
+);
 export const guestGrowthSubmissionViewSchema = submittedHeader
   .extend({ payload: guestGrowthTeacherPayloadSchema })
-  .strict();
+  .strict()
+  .refine(terminalGrantReduction, "The terminal grant revision is reserved for withdrawal.");
 export const readGuestGrowthChoiceSchema = scope.extend({ artifactId: uuid }).strict();
 export const readGuestGrowthSubmissionSchema = scope.extend({ snapshotId: uuid }).strict();
 export const listGuestGrowthSubmissionsSchema = scope.extend({ cursor: uuid.optional() }).strict();
