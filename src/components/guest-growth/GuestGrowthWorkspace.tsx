@@ -984,27 +984,27 @@ function Workspace({ view, csrf, ports, fictional = false, onDirtyChange }: Prop
             teacher disclosure. Previously downloaded copies cannot be recalled after access ends.
           </p>
         </aside>
-        {portfolioPdf && (
-          <section
-            ref={portfolioPreview}
-            tabIndex={-1}
-            aria-label="Selected saved growth portfolio export"
-            className="min-w-0 scroll-mt-6 space-y-4 rounded-2xl border bg-card p-5 xl:col-span-2 focus-visible:outline focus-visible:outline-2 focus-visible:outline-primary"
-          >
-            <h3 className="text-xl font-bold">Review your selected saved portfolio</h3>
-            <p className="text-sm text-muted-foreground">
-              {portfolio.length} exact saved activities. Current local edits are excluded. Choose
-              sections and redactions, then review this private copy before downloading.
-            </p>
-            <ActivityPdfExport
-              key={portfolioSignature}
-              document={portfolioPdf}
-              permittedAudiences={guestGrowthExportAudiences(portfolioSources)}
-              authorizeDownload={() => authorize(portfolioSources, portfolioSignature, "portfolio")}
-            />
-          </section>
-        )}
       </div>
+      {portfolioPdf && (
+        <section
+          ref={portfolioPreview}
+          tabIndex={-1}
+          aria-label="Selected saved growth portfolio export"
+          className="min-w-0 scroll-mt-6 space-y-4 rounded-2xl border bg-card p-5 focus-visible:outline focus-visible:outline-2 focus-visible:outline-primary"
+        >
+          <h3 className="text-xl font-bold">Review your selected saved portfolio</h3>
+          <p className="text-sm text-muted-foreground">
+            {portfolio.length} exact saved activities. Current local edits are excluded. Choose
+            sections and redactions, then review this private copy before downloading.
+          </p>
+          <ActivityPdfExport
+            key={portfolioSignature}
+            document={portfolioPdf}
+            permittedAudiences={guestGrowthExportAudiences(portfolioSources)}
+            authorizeDownload={() => authorize(portfolioSources, portfolioSignature, "portfolio")}
+          />
+        </section>
+      )}
     </section>
   );
 }

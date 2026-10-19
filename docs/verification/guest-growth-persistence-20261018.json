@@ -405,7 +405,26 @@
       "typecheck": "passed",
       "lint": "0 errors,6 existing warnings",
       "build": "passed",
-      "live": "pending"
+      "live": "pending",
+      "finding": "Full-width row shared the sticky sidebar grid, so sidebar could overlap while scrolling. Final source puts portfolio region outside that grid; no authorization change."
+    },
+    "preservedEarlierStudios": {
+      "aiStopped": true,
+      "discovery": [
+        {
+          "audience": "principal_private",
+          "id": "6fcacd4a-a239-41f6-931b-077dfc96d28e",
+          "revision": 7
+        }
+      ],
+      "marketing": [
+        {
+          "audience": "principal_private",
+          "id": "8b819e65-43aa-41a8-b5be-93f3bd36286e",
+          "revision": 5
+        }
+      ],
+      "measurementDisabled": true
     }
   }
 }

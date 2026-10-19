@@ -56,7 +56,10 @@ resume_hint: >-
   and studioswitch/team browserproof. All6kinds now live saved+3pageindividualPDF,
   6activity15pageportfolio passed. Explicitblankteam7emptyfields verified, separate
   fictionalteamdraftrev2+2pageTeamPDF passed. Final fullwidthportfolio reviewlayout
-  polish passes13targeted/type/lint/build; deploy+visualproof next. Separate teacherprojection and fullparity remainunfinished;
+  polish passes13targeted/type/lint/build. Stickyoverlay caught inlivevisualreview;
+  moveportfolioregionoutsidestickygrid,type/buildpass; deploy+finalvisualproof next.
+  CLS009s2/s3/s4completeboundedsoftware; s5teacherprojectionnotstarted/s6inprogress.
+  OriginalDiscovery7/Marketing5metadata freshlyunchanged,AIstoptrue/collectionfalse. Separate teacherprojection and fullparity remainunfinished;
   schema28 is UNRESERVED. ParentCLS009/CLS008 remainunfinished, not redefined.
   Workerguest_marketing_handoff idle; root owns sharedintegration. EV001 remainsidle afterauthoritativecompleted+cleanworktree audit; its dormantclaim
   is retained because registryrequiresinprogressparent/s1claims, notbecause workisactive;

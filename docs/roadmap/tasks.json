@@ -12198,6 +12198,10 @@
         {
           "date": "2026-10-18",
           "text": "Livea5a1a5e all6structuredkinds saved/reopened withindividual3pagePDFs; typedsurveyoriginalrev1clean andthirdquestion savesrev2withoutfalsewarning. Exactlearning2->experiment1->survey2 metadata refs preserved. Sixactivityportfolio15pages includesalltitles/revisions/timedquestions, bothfreshbulkchecks. Explicitteamblankverified7emptyfields/no privatequestions; separatelyauthoredteamOnboardingrev2 delivered2pageTeamPDF. Hostedfictionalmetadata7realartifacts/6kindsbound toledger. Visualauditfound cramped sidebarportfolio preview; localizedfullwidthregion+focus/scroll reviewbutton sourcepasses13targeted/type/lint/build, livepending. Teacherprojection stillnotimplemented."
+        },
+        {
+          "date": "2026-10-18",
+          "text": "Mark s2/s3/s4 boundedmanualpersistence/editor/individual+portfolioPDF softwarecomplete withactualSQL+liveevidence; parentremainsinprogress because s5teacherselectedcopy notstarted ands6fullrole/releasegate incomplete. Discovery7/Marketing5freshmetadata unchanged,AIstopped/measurementdisabled. Finaldesktopvisualfix movesfullwidthportfolio outsidestickysidebargrid, preventingoverlay. Typecheck/buildpass; no DB/auth/sourcechange."
         }
       ],
       "claim": {
@@ -12227,21 +12231,36 @@
         },
         {
           "id": "CLS-009.s2",
-          "status": "in_progress",
+          "status": "complete",
           "instruction": "Implement bounded saved/reopen/CAS/idempotent services with exact request retry, cookie+CSRF authority, class→fresh principal→source lock order, post-write expiry rollback and documented count/byte/receipt caps. Use additive reviewed migrations; never edit published22–24 or reuse an unrelated activity identity.",
-          "notes": []
+          "notes": [
+            {
+              "date": "2026-10-18",
+              "text": "Bounded persistence complete: exact27 live local+hosted;3494SQL/17DTO/6overlaps/realcommit+expiry gates; genuine live7artifacts/6kinds; counts/policies/80legacytables preserved. Ledger guest-growth-persistence-20261018.json."
+            }
+          ]
         },
         {
           "id": "CLS-009.s3",
-          "status": "in_progress",
+          "status": "complete",
           "instruction": "Build desktop editors that distinguish authored hypotheses/plans, self-reported outcomes and completed interviews. Surveys are draft questions, not a hosted collection service. Referral/onboarding/outreach text stays unsent. No AI or automatic publication.",
-          "notes": []
+          "notes": [
+            {
+              "date": "2026-10-18",
+              "text": "Six structured desktop editors source-mounted and live fictional saved/reopened; realtyped survey/onboarding equality regressions, route/unload/access guards and explicitteamblank proof. No hostedcollection/sending/AI or observedoutcomes claim."
+            }
+          ]
         },
         {
           "id": "CLS-009.s4",
-          "status": "in_progress",
+          "status": "complete",
           "instruction": "Register an individual PDF for every new artifact/version and selected saved portfolios with genuine source scope, fresh authorization before generation/delivery and truthful unknown/draft labels. Raw private interviews cannot enter shared artifacts through an implicit adapter.",
-          "notes": []
+          "notes": [
+            {
+              "date": "2026-10-18",
+              "text": "SixnamedkindcheckedindividualPDFadapters andselectedportfolio coverage mounted. Live6individual3pageprivatePDFs,6activity15pageportfolio,2pageexplicitteamPDF withfreshauthorization. Rawprivatebodiesneverimported; selectedteacherPDFremains s5."
+            }
+          ]
         },
         {
           "id": "CLS-009.s5",
