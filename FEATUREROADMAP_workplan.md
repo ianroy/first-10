@@ -23,20 +23,21 @@ current_iteration: 5
 current_stage: P1_foundation_with_parallel_P2_and_R0
 status: in_progress
 last_task_done: CLS-005
-next_task: AN-003
+next_task: CLS-009
 next_parallel_wave: []
 execution_pace: slow_serial
-active_claims: [AN-003, CLS-009, EV-001]
+active_claims: [CLS-009, EV-001]
 research_gate: not_passed
 foundation_gate: not_passed
 realtime_go: pending
 last_updated: 2026-10-18
-last_documentation_update: "2026-10-18: User requested slow pace; workers safely idle, serial continuation. Growth transport and generation-history contracts integrated; managed-role27 candidate remains unverified."
+last_documentation_update: "2026-10-18: Managed history-index prerequisite proven with rollback; AN003 schema lease released. Slow serial work proceeds to guest persistence27; prior retention27 candidate superseded."
 resume_hint: >-
   Active goal: keep building every feasible authorized item, verify and commit/push/deploy.
   User requested SLOW pace: maximum1 worker, one task at a time, no new parallel wave.
-  All three existing workers finished safely and are idle; retained claims protect their
-  scopes until coordinator review/release. This is slower continuation, not a goal pause.
+  Only CLS009 may resume on one serial worker. EV001 remains idle with its contract
+  scope reserved. AN003 schema lease released after concrete managed-owner index
+  prerequisite; this is slower continuation, not a goal pause.
   Preserve $25 total OpenRouter cap and no other paid services. Latest usage check: 57%
   weekly allowance remains, zero reset credits available, ordinary usage permitted.
   Hosted and dedicated local55322 actual schema26; optional measurement remains disabled.
@@ -78,7 +79,7 @@ resume_hint: >-
   EV001 contracts/design integrated287dddd/8253d06 with63puretests; exact receipt
   intent/pointer checks retain valid newer-state replay. Storage/services/UI/PDF and
   trusted generation capture remain unfinished. Worker idle at user slow request.
-  AN003 now exclusively reserves additive27 after applied26. Actual isolated cron batches/failure/recovery and11
+  AN003 rollout is blocked; no schema lease remains. Actual isolated cron batches/failure/recovery and11
   malformed-proof checks passed with collectionoff and ownedcontainerabsence. Root found standalone fixturetransaction/global-suite incompatibility and fixed with
   test-only savepoints/readiness. Repeated actualcron and full1863SQL/3DTO/3race
   rehearsals pass/rollback/cleanupabsence. Exact26ee76 applied local and hosted,
@@ -89,8 +90,12 @@ resume_hint: >-
   settings visibility and then cron.job INSERT permissions. Every owned container was
   removed/absence verified. Candidate27/harness remain isolated at4ebac3d; never apply
   until actual nonsuper/libpq success. No local/hosted27 or production privilege changes.
-  Guestnextschema
-  remainsunreserved (willbe28). No complete
+  Root verified real managed ownership and index denial in rollback-only production
+  diagnostics. Managed-owner index provisioning or a fully bounded indexed-runid
+  redesign is required; no privilege widening. Fresh proof: no cron/extension/job,
+  collectionfalse/AIstoptrue. Unpublished isolated AN003 candidate27 is superseded;
+  never integrate it. CLS009 now exclusively reserves NEW guest27 from8828fb3 / real26.
+  Draft/review SQL only before exact-pin approval; no DB actions authorized yet. No complete
   funnel or physical deletion guarantee is claimed.
   Bounded public retrieval is approved and live, receipt83724f78 committed; source AI
   and sharing excluded. CTX reviewed-source AI adapter remains unfinished. All new AI

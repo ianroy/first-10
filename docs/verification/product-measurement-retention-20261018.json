@@ -1,6 +1,6 @@
 {
   "date": "2026-10-18",
-  "phase": "schema26_live_managed_role_candidate27_unverified_slow_serial_checkpoint",
+  "phase": "schema26_live_rollout_blocked_managed_history_index_owner",
   "sources": {
     "supabase/migrations/20261018026000_product_event_retention.sql": "ee76f1851cfe00d21d350f64200ad5c26848c9436e5298dc5619079565e8a4c1",
     "supabase/tests/an-002.sql": "479d52275b706cc2fbcd2de676ae15a284f750c8f0d0052e498bbec78dcd6dd2",
@@ -8,7 +8,9 @@
     "src/tests/an-002/races.mjs": "7bf2bd0338a19f91e2c8df0acd4aa49e643176f0ed98cad7c0f7d5427b03a10f",
     "src/tests/an-003/database-rehearsal.mjs": "2937ee07d49407a37500934191978865b92b9eea76e1f7491479561bad928ace",
     "src/tests/an-003/compatibility-rehearsal.mjs": "bd8233909181c49b7bee8746db2b9ce7099f49df78514ce18e58f90309ec0248",
-    "docs/architecture/measurement-retention-prepare.sql": "12db4f89fcb8b3d579aa314aee55cefd5a507f023a7dce3c1f9504968cb9ba65"
+    "docs/architecture/measurement-retention-prepare.sql": "12db4f89fcb8b3d579aa314aee55cefd5a507f023a7dce3c1f9504968cb9ba65",
+    "docs/architecture/measurement-retention-owner-diagnostic.sql": "20286fc54bc508a481fa6091e929e1a51f0205493f2a1e669c9f00d3911a1f63",
+    "docs/architecture/measurement-retention-index-diagnostic.sql": "0b7632f149f43946dd95482ee7486931b1cba9e084eaf1c1ab54610f51ffb1a6"
   },
   "isolatedScheduler": {
     "actualBatchesRemoved": [2000, 2000, 501],
@@ -125,7 +127,8 @@
     "sharedOrHostedMutation": false,
     "actualNonsuperScheduledSuccess": false,
     "existingProductionOperatorReadAllSettingsVerified": true,
-    "next": "Diagnose actual metadata privilege fidelity; independently review new pinned owned rehearsal before further execution. Do not infer success from implicit username alone."
+    "next": "Diagnose actual metadata privilege fidelity; independently review new pinned owned rehearsal before further execution. Do not infer success from implicit username alone.",
+    "reservation": "Released and superseded. Never integrate old27; guest27 now reserved. Any future retention patch needs a new forward version."
   },
   "executionPace": "slow_serial_user_requested",
   "rootCombinedAfterTransportAndContracts": {
@@ -138,5 +141,26 @@
     "existingLintWarnings": 6,
     "productionBuild": "pass",
     "newProviderCalls": 0
+  },
+  "managedOwnerDiagnostics": {
+    "transaction": "rollback_only_no_jobs",
+    "extensionOwner": "supabase_admin",
+    "jobOwner": "supabase_admin",
+    "historyOwner": "supabase_admin",
+    "operatorInManagedAdmin": false,
+    "operatorCanInsertJobs": false,
+    "operatorCanSelectJobs": true,
+    "operatorCanDeleteHistory": true,
+    "operatorCanUseHistoryOwner": false,
+    "indexOutcome": "managed_history_owner_required",
+    "jobCount": 0,
+    "freshRollbackVerified": {
+      "cronSchema": false,
+      "cronInstalled": false,
+      "jobId": null,
+      "collectionEnabled": false,
+      "aiStopped": true
+    },
+    "unblock": "Intended managed-owner index provisioning, or independently reviewed fully bounded indexed-runid redesign. No broader role grant or weakened collection gate."
   }
 }

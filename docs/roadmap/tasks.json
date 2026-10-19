@@ -12027,9 +12027,11 @@
         "src/lib/guest-growth.functions.ts",
         "src/components/guest-growth/**",
         "src/tests/guest-growth/**",
-        "docs/architecture/guest-growth.md"
+        "docs/architecture/guest-growth.md",
+        "supabase/migrations/20261018027000_guest_growth.sql",
+        "supabase/tests/cls-009.sql"
       ],
-      "exclusive_locks": ["guest-growth-integration"],
+      "exclusive_locks": ["guest-growth-integration", "database-schema"],
       "read_first": [
         "ProductSpec.md",
         "FEATUREROADMAP_workplan.md",
@@ -12092,12 +12094,16 @@
         {
           "date": "2026-10-18",
           "text": "Phase3 reviewed transport6f8112d + narrow authority correctiona118df9 integrated rootbc1a421/36c3688. Root82 focused tests pass. Cookie/CSRF/same-origin/no-store and fixed RPC adapters use only future strict4KiB get_guest_growth_authority projection; no full-session fallback. Class/team/principal generation fences invalidate stale delivery. Large supported assignment text never fetched; draft-only export also fails closed without real authority. Still UNMOUNTED; no SQL persistence/teacher adapter/coverage/live proof. Schema28 remains UNRESERVED pending AN003. User requested slow pace; worker idle/no new phase until serial coordinator review."
+        },
+        {
+          "date": "2026-10-18",
+          "text": "User slow_serial: only this one worker resumes. AN003 actual managed-owner index prerequisite recorded and schema lease released; its unpublished candidate27 is superseded, not integrated/applied. CLS009 exclusively reserves exact NEW27 supabase/migrations/20261018027000_guest_growth.sql from root8828fb3 / actual local+hosted26, preserving localCLIhistory03. Start new clean branch from8828fb3 in existing worktree. Phase4 SQL/fixture/harness DESIGN ONLY: genuine six-kind persistence, narrow authority projection, strict schema parity, fresh capability generations/deadline, private/team boundaries, exact CAS/idempotency/immutable revisions, bounded counts/bytes/receipts, same-scope retained refs. Keep source22–26 immutable. No DB/container/apply/parent/coverage/types actions before exact pins independently reviewed. Teacher copies remain separately gated; no raw guest record grant."
         }
       ],
       "claim": {
         "owner": "guest_marketing_handoff",
-        "branch": "codex/guest-growth-contracts-20261018",
-        "base_commit": "0ea9b74",
+        "branch": "codex/guest-growth-persistence-20261018",
+        "base_commit": "8828fb3",
         "worktree": "/private/tmp/first-ten-guest-marketing-handoff",
         "started_at": "2026-10-19T00:04:00Z",
         "lease_expires_at": "2026-10-19T04:00:00Z"
@@ -12326,7 +12332,7 @@
       "id": "AN-003",
       "title": "Verify bounded scheduled measurement retention",
       "phase": "P4",
-      "status": "in_progress",
+      "status": "blocked",
       "owner": "agent",
       "size": "M",
       "kind": "implementation",
@@ -12343,7 +12349,9 @@
         "src/tests/an-002/races.mjs",
         "docs/architecture/measurement-retention-prepare.sql",
         "supabase/migrations/20261018027000_product_retention_job_owner.sql",
-        "docs/architecture/measurement-retention-activate.sql"
+        "docs/architecture/measurement-retention-activate.sql",
+        "docs/architecture/measurement-retention-owner-diagnostic.sql",
+        "docs/architecture/measurement-retention-index-diagnostic.sql"
       ],
       "exclusive_locks": ["database-schema", "measurement-retention"],
       "read_first": [
@@ -12402,16 +12410,13 @@
         {
           "date": "2026-10-18",
           "text": "User requested slow pace: all workers stopped after safe checkpoints; no new parallel wave. Managed-role candidate27 a2c279d5 remains UNVERIFIED in isolated branch4ebac3d only and is not applied locally/hosted. Three actual owned-container attempts failed safely (bootstrap demotion, settings visibility, then pg_cron job-table INSERT permission); all containers removed/absence verified. Root confirmed existing production operator NOSUPER and pg_read_all_settings visibility; no production grants/settings changed. Local/hosted remain26, no job/extension/collection activated. Root must diagnose metadata privilege fidelity, review a new exact harness pin, and verify actual successful nonsuper libpq scheduling before27/apply. Keep lease reserved; worker idle."
+        },
+        {
+          "date": "2026-10-18",
+          "text": "Serial root diagnosis confirmed real production extension/job/history owner supabase_admin, operator lacks membership/INSERT-job but has SELECT-job/DELETE-history. Rolled-back exact CREATE INDEX returned managed_history_owner_required; both post-rollback checks confirm no cron namespace/extension/job, collectionfalse/AIstoptrue. Source grant_pg_cron_access hook revokes postgres job writes; old isolated installer mismatch explained its INSERT failure, but actual history-index owner requirement remains. Block rollout on managed-owner index provisioning OR reviewed bounded indexed-runid alternative; no grant, unbounded-scan weakening or fake schedule proof. Release database-schema lease; unpublished isolated candidate27 superseded and MUST NOT integrate. Guest may reserve new27 from real26; any future AN003 fix gets a later forward version."
         }
       ],
-      "claim": {
-        "owner": "finalization_audit",
-        "branch": "codex/measurement-retention-job-owner-20261018",
-        "base_commit": "6c76e5c",
-        "worktree": "/private/tmp/first-ten-measurement-retention",
-        "started_at": "2026-10-19T00:35:01Z",
-        "lease_expires_at": "2026-10-19T04:00:00Z"
-      },
+      "claim": null,
       "completion_evidence": [],
       "subtasks": [
         {
@@ -12434,9 +12439,14 @@
         },
         {
           "id": "AN-003.s4",
-          "status": "in_progress",
+          "status": "blocked",
           "instruction": "Root reviews exact pins, applies local/hosted serially, activates cleanup only after exact job inspection, verifies real scheduler execution and truthful health. Measurement activation remains a separate gate.",
-          "notes": []
+          "notes": [
+            {
+              "date": "2026-10-18",
+              "text": "Real managed-owner index prerequisite verified in rollback-only production transaction; no role widening. Root must obtain intended owner index provisioning or review an equivalent fully bounded PK-cursor design, then reserve a NEW forward version. Isolated candidate27 never integrated/applied and is superseded; do not cherry-pick it after guest27."
+            }
+          ]
         }
       ]
     },
