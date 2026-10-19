@@ -31,10 +31,13 @@ research_gate: not_passed
 foundation_gate: not_passed
 realtime_go: pending
 last_updated: 2026-10-18
-last_documentation_update: "2026-10-18: Exact27 and all6manualdesktopactivities/PDFs verifiedlive,15pageportfolio/2pageteamcopy,1368app tests. Selectedteacherprojection remains next; slowserial continues."
+last_documentation_update: "2026-10-18: User reconfirmed slow pace; one worker, serial review and release. Corrected the ProductSpec route summary to reflect the shipped third guest studio. Selected teacher projection remains source-only."
 resume_hint: >-
   Active goal: keep building feasible authorized items, verify, commit/push/deploy.
   User requested SLOW: maximum1 active worker, serial tasks, no new parallel wave.
+  Latest reconfirmation keeps that pace. The sole worker is implementing selected
+  teacher copies in source only; no new database or deployment action is authorized
+  before the exact source and disposable-test pins are independently reviewed.
   Previous turn made concrete progress: six reviewed sourcecommits integrated and
   3494strictSQL/17actualDTO/6trueblockedoverlaps/realcommit+expiry gates passed.
   CLS009 exact27 is now applied to dedicatedlocal55322 and hostedhdwnnuvqqkkpontcdbwa.
