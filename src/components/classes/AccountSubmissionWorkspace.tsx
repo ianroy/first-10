@@ -4,6 +4,7 @@ import { SavedConsentFields } from "@/components/ConsentFields";
 import { associateClassProject } from "@/lib/classes.functions";
 import { classMessage, type ClassAssignment, type ClassDetail } from "@/lib/classes";
 import { SubmissionPreview, type SubmissionSourceOption } from "./SubmissionPreview";
+import { SubmissionList } from "./SubmissionList";
 import type { ConsentScope } from "@/lib/consent";
 import { z } from "zod";
 const field = "mt-2 block min-h-11 w-full rounded-xl border bg-background p-3";
@@ -185,6 +186,9 @@ function SourceWorkspace({
   const [sourcePage, setSourcePage] = useState(0),
     [hasMoreSources, setHasMoreSources] = useState(false);
   const [openPrivacy, setOpenPrivacy] = useState<string | null>(null);
+  const [revision, setRevision] = useState<{ threadId: string; version: number } | null>(null),
+    [showVersions, setShowVersions] = useState(false),
+    [revisionRefresh, setRevisionRefresh] = useState(0);
   const alive = useRef(true),
     run = useRef(0);
   const load = async () => {
@@ -413,7 +417,11 @@ function SourceWorkspace({
         <select
           className={field}
           value={assignmentId}
-          onChange={(event) => setAssignmentId(event.target.value)}
+          onChange={(event) => {
+            setAssignmentId(event.target.value);
+            setRevision(null);
+            setShowVersions(false);
+          }}
         >
           <option value="">Choose an assignment</option>
           {published.map((a) => (
@@ -430,15 +438,54 @@ function SourceWorkspace({
         </p>
       )}
       {!busy && published.some((a) => a.id === assignmentId) && (
-        <SubmissionPreview
-          key={`${userId}:${projectId}:${assignmentId}:${generation}`}
-          scopeKey={`${userId}:${classId}:${projectId}:${generation}`}
-          classId={classId}
-          assignmentId={assignmentId}
-          source={{ type: "account_project", projectId }}
-          sourceOptions={options}
-          onSubmitted={onSubmitted}
-        />
+        <>
+          <button
+            className="min-h-11 font-semibold underline"
+            aria-expanded={showVersions}
+            onClick={() => setShowVersions((value) => !value)}
+          >
+            {showVersions ? "Hide previous versions" : "Revise a previous submission"}
+          </button>
+          {showVersions && (
+            <SubmissionList
+              scopeKey={`${userId}:${classId}:${projectId}`}
+              mode="author"
+              classId={classId}
+              assignmentId={assignmentId}
+              refreshKey={revisionRefresh}
+              onRevise={(view) => {
+                setRevision({ threadId: view.threadId, version: view.version });
+                setShowVersions(false);
+              }}
+            />
+          )}
+          {revision && (
+            <div role="status" className="rounded-xl border border-primary p-4 text-sm">
+              Revising the thread of version {revision.version}. Choose saved fields again and
+              review a new exact preview. Earlier copies and their access stay unchanged. If this
+              idea differs from the original, choose the original idea explicitly or start a
+              separate submission; the server will not attach another idea to this thread.
+              <button className="ml-3 min-h-11 underline" onClick={() => setRevision(null)}>
+                Cancel revision and start a separate submission
+              </button>
+            </div>
+          )}
+          <SubmissionPreview
+            key={`${userId}:${projectId}:${assignmentId}:${generation}:${revision?.threadId ?? "new"}`}
+            scopeKey={`${userId}:${classId}:${projectId}:${generation}`}
+            classId={classId}
+            assignmentId={assignmentId}
+            source={{ type: "account_project", projectId }}
+            sourceOptions={options}
+            {...(revision ? { threadId: revision.threadId } : {})}
+            onSubmitted={() => {
+              setRevision(null);
+              setGeneration((value) => value + 1);
+              setRevisionRefresh((value) => value + 1);
+              onSubmitted();
+            }}
+          />
+        </>
       )}
     </div>
   );

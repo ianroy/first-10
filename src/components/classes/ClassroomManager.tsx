@@ -36,14 +36,27 @@ export function ClassroomManager({ userId }: { userId: string }) {
   const [selected, setSelected] = useState<string | null>(null),
     [message, setMessage] = useState(""),
     [creating, setCreating] = useState(false);
-  const alive = useRef(true);
+  const [loading, setLoading] = useState(true),
+    [loaded, setLoaded] = useState(false);
+  const alive = useRef(true),
+    listEpoch = useRef(0);
   const refresh = async (more = false) => {
+    const run = ++listEpoch.current;
+    setLoading(true);
+    setMessage("");
     const result = await api.listMyClasses({ data: more && cursor ? { cursor } : {} });
-    if (!alive.current) return;
+    if (!alive.current || run !== listEpoch.current) return;
+    setLoading(false);
     if (result.ok) {
+      setLoaded(true);
       setItems((old) => (more ? [...old, ...result.data.items] : result.data.items));
       setCursor(result.data.nextCursor);
-    } else setMessage(classMessage(result.code));
+    } else {
+      setLoaded(false);
+      setItems([]);
+      setCursor(null);
+      setMessage(classMessage(result.code));
+    }
   };
   useEffect(() => {
     alive.current = true;
@@ -83,6 +96,9 @@ export function ClassroomManager({ userId }: { userId: string }) {
           reviewed versions. Teachers see reviewed submissions, never automatic private-note access.
           Class AI is disabled. Retention is requested, not automatic deletion.
         </div>
+        <a className="inline-flex min-h-11 items-center font-semibold underline" href="/workspace">
+          Return to your personal workspace
+        </a>
         {message && <p role="status">{message}</p>}
         {creating && (
           <ClassForm
@@ -97,7 +113,14 @@ export function ClassroomManager({ userId }: { userId: string }) {
         <div className="grid gap-6 xl:grid-cols-[250px_minmax(0,1fr)]">
           <nav aria-label="Your classes" className="space-y-3">
             <h2 className="font-bold">Your spaces</h2>
-            {items.length === 0 && (
+            <button
+              className="min-h-11 text-sm underline"
+              disabled={loading}
+              onClick={() => void refresh()}
+            >
+              {loading ? "Loading your classes…" : "Refresh your classes"}
+            </button>
+            {loaded && !loading && items.length === 0 && (
               <p className="text-sm text-muted-foreground">
                 Create a class, or accept a named class invitation. No personal idea is required.
               </p>
@@ -105,6 +128,7 @@ export function ClassroomManager({ userId }: { userId: string }) {
             {items.map((item) => (
               <button
                 key={item.id}
+                aria-pressed={selected === item.id}
                 className={
                   "block w-full rounded-xl border p-4 text-left " +
                   (selected === item.id ? "border-primary bg-secondary/50" : "bg-card")
@@ -126,7 +150,11 @@ export function ClassroomManager({ userId }: { userId: string }) {
               </button>
             ))}
             {cursor && (
-              <button className="min-h-11 underline" onClick={() => void refresh(true)}>
+              <button
+                disabled={loading}
+                className="min-h-11 underline"
+                onClick={() => void refresh(true)}
+              >
                 More classes
               </button>
             )}
@@ -141,6 +169,12 @@ export function ClassroomManager({ userId }: { userId: string }) {
                 setAuthorExport(null);
               }}
               onChanged={() => void refresh()}
+              onLeft={() => {
+                setSelected(null);
+                setAuthorRefresh((n) => n + 1);
+                setAuthorExport(null);
+                void refresh();
+              }}
             />
           ) : (
             <Card>
@@ -301,11 +335,13 @@ function ClassDetailPanel({
   userId,
   onChanged,
   onSubmitted,
+  onLeft,
 }: {
   classId: string;
   userId: string;
   onChanged: () => void;
   onSubmitted: () => void;
+  onLeft: () => void;
 }) {
   const [teacherExport, setTeacherExport] = useState<SubmissionView | null>(null);
   const [detail, setDetail] = useState<ClassDetail | null>(null),
@@ -317,25 +353,36 @@ function ClassDetailPanel({
     [grant, setGrant] = useState(""),
     [label, setLabel] = useState("Co-teacher"),
     [grantRevision, setGrantRevision] = useState(0);
-  const alive = useRef(true);
+  const [loading, setLoading] = useState(true);
+  const alive = useRef(true),
+    detailEpoch = useRef(0),
+    leaveIntent = useRef<{ revision: number; requestId: string } | null>(null);
   const refresh = async () => {
+    const run = ++detailEpoch.current;
     setTeacherExport(null);
+    setDetail(null);
+    setAssignments([]);
+    setMembers([]);
+    setLoading(true);
+    setMessage("");
     const result = await api.getClass({ data: { classId } });
-    if (!alive.current) return;
+    if (!alive.current || run !== detailEpoch.current) return;
     if (!result.ok) {
-      setDetail(null);
+      setLoading(false);
       setMessage(classMessage(result.code));
       return;
     }
-    setDetail(result.data);
     const read = await api.listAssignments({ data: { classId } });
-    if (!alive.current) return;
+    if (!alive.current || run !== detailEpoch.current) return;
     if (read.ok) setAssignments(read.data.items);
     else setMessage(classMessage(read.code));
     if (result.data.role !== "student") {
       const roster = await api.listClassMembers({ data: { classId } });
-      if (alive.current && roster.ok) setMembers(roster.data.items);
+      if (!alive.current || run !== detailEpoch.current) return;
+      if (roster.ok) setMembers(roster.data.items);
     }
+    setDetail(result.data);
+    setLoading(false);
   };
   useEffect(() => {
     alive.current = true;
@@ -348,6 +395,14 @@ function ClassDetailPanel({
     detail && !detail.archivedAt && new Date(detail.accessExpiresAt).getTime() > Date.now();
   return (
     <div className="space-y-6">
+      {loading && <p role="status">Checking current class access and assignments…</p>}
+      <button
+        disabled={loading || busy}
+        className="min-h-11 underline"
+        onClick={() => void refresh()}
+      >
+        {detail ? "Refresh selected class" : "Retry selected class"}
+      </button>
       {message && (
         <p role="status" className="rounded-xl border p-4">
           {message}
@@ -462,7 +517,9 @@ function ClassDetailPanel({
               ))}
               {assignments.length === 0 && (
                 <p className="text-sm text-muted-foreground">
-                  No visible assignments. Publish one to receive deliberately reviewed student work.
+                  {detail.role === "student"
+                    ? "No published assignments are available. Keep working privately until your teacher publishes one."
+                    : "No visible assignments. Publish one to receive deliberately reviewed student work."}
                 </p>
               )}
             </div>
@@ -471,13 +528,27 @@ function ClassDetailPanel({
             )}
           </Card>
           {detail.role === "student" && active && (
-            <AccountSubmissionWorkspace
-              userId={userId}
-              detail={detail}
-              assignments={assignments}
-              onAssociated={() => void refresh()}
-              onSubmitted={onSubmitted}
-            />
+            <>
+              <Card>
+                <h3 className="text-xl font-bold">What your teachers can see</h3>
+                <p className="mt-3 text-sm">
+                  Your chosen classroom alias and membership are visible to teaching staff. For a
+                  submitted version they can see its title, selected redacted excerpts, your
+                  interpretation, uncertainty, decision and next action, plus the assignment,
+                  version number and submission time. Connecting an idea shares no private notes or
+                  project access. Later private edits are not sent automatically.
+                </p>
+              </Card>
+              <fieldset disabled={busy} aria-busy={busy}>
+                <AccountSubmissionWorkspace
+                  userId={userId}
+                  detail={detail}
+                  assignments={assignments}
+                  onAssociated={() => void refresh()}
+                  onSubmitted={onSubmitted}
+                />
+              </fieldset>
+            </>
           )}
           {detail.role !== "student" && (
             <>
@@ -624,24 +695,41 @@ function ClassDetailPanel({
             </>
           )}
           {detail.role !== "owner" && detail.enrollment && (
-            <button
-              className="min-h-11 underline"
-              onClick={async () => {
-                const result = await api.leaveClass({
-                  data: {
-                    classId,
-                    expectedRevision: detail.enrollment!.revision,
-                    requestId: crypto.randomUUID(),
-                  },
-                });
-                if (!alive.current) return;
-                if (!result.ok) setMessage(classMessage(result.code));
-                await refresh();
-                onChanged();
-              }}
-            >
-              Leave this class
-            </button>
+            <div className="rounded-xl border p-5 text-sm">
+              <p>
+                Leaving ends your class access and deactivates this class’s idea connection. Your
+                private ideas and saved source work are kept. Your own submitted copies and the
+                ability to withdraw access remain below; downloaded copies cannot be recalled.
+              </p>
+              <button
+                disabled={busy}
+                className="min-h-11 underline"
+                onClick={async () => {
+                  if (busy) return;
+                  setBusy(true);
+                  if (leaveIntent.current?.revision !== detail.enrollment!.revision)
+                    leaveIntent.current = {
+                      revision: detail.enrollment!.revision,
+                      requestId: crypto.randomUUID(),
+                    };
+                  const result = await api.leaveClass({
+                    data: {
+                      classId,
+                      expectedRevision: detail.enrollment!.revision,
+                      requestId: leaveIntent.current.requestId,
+                    },
+                  });
+                  if (!alive.current) return;
+                  setBusy(false);
+                  if (result.ok) onLeft();
+                  else {
+                    setMessage(classMessage(result.code));
+                  }
+                }}
+              >
+                {busy ? "Leaving class…" : "Leave this class"}
+              </button>
+            </div>
           )}
         </>
       )}

@@ -20,6 +20,7 @@ type Props = {
   assignmentId?: string;
   refreshKey?: number;
   onExport?: (view: SubmissionView) => void;
+  onRevise?: (view: SubmissionView) => void;
 };
 export function SubmissionList(props: Props) {
   return (
@@ -29,7 +30,7 @@ export function SubmissionList(props: Props) {
     />
   );
 }
-function List({ mode, classId, assignmentId, refreshKey, onExport }: Props) {
+function List({ mode, classId, assignmentId, refreshKey, onExport, onRevise }: Props) {
   const [items, setItems] = useState<z.infer<typeof submissionHeaderSchema>[]>([]),
     [cursor, setCursor] = useState<string | null>(null);
   const [selected, setSelected] = useState<SubmissionView | null>(null),
@@ -64,7 +65,10 @@ function List({ mode, classId, assignmentId, refreshKey, onExport }: Props) {
     if (!alive.current || run !== epoch.current) return;
     setBusy(false);
     if (result.ok) {
-      setItems((old) => (more ? [...old, ...result.data.items] : result.data.items));
+      const eligible = result.data.items.filter(
+        (item) => !assignmentId || item.assignmentId === assignmentId,
+      );
+      setItems((old) => (more ? [...old, ...eligible] : eligible));
       setCursor(result.data.nextCursor);
     } else {
       setItems([]);
@@ -153,6 +157,49 @@ function List({ mode, classId, assignmentId, refreshKey, onExport }: Props) {
       {selected && (
         <div className="space-y-4 rounded-xl border p-5">
           <SubmissionPayloadView payload={selected.payload} />
+          {mode === "author" &&
+            onRevise &&
+            selected.sourceType === "account_project" &&
+            selected.classId === classId &&
+            selected.assignmentId === assignmentId && (
+              <div className="space-y-2 rounded-xl border p-4 text-sm">
+                <p>
+                  Start a fresh review using the idea explicitly connected above. The server must
+                  verify that it matches this submission’s original idea. A revision creates a new
+                  immutable version with separate recipient access; it never restores a withdrawn
+                  version or changes an earlier copy.
+                </p>
+                <button
+                  disabled={busy}
+                  className="min-h-11 font-semibold underline"
+                  onClick={async () => {
+                    const run = ++epoch.current;
+                    setBusy(true);
+                    const result = await getOwnSubmission({ data: { snapshotId: selected.id } });
+                    if (!alive.current || run !== epoch.current) return;
+                    setBusy(false);
+                    if (
+                      result.ok &&
+                      result.data.sourceType === "account_project" &&
+                      result.data.classId === classId &&
+                      result.data.assignmentId === assignmentId
+                    ) {
+                      setSelected(result.data);
+                      onRevise(result.data);
+                    } else {
+                      setSelected(null);
+                      setMessage(
+                        result.ok
+                          ? "This version does not belong to the selected class assignment."
+                          : submissionMessage(result.code),
+                      );
+                    }
+                  }}
+                >
+                  Start a new reviewed revision
+                </button>
+              </div>
+            )}
           {onExport && (
             <button
               disabled={busy}
