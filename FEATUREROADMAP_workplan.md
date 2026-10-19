@@ -26,7 +26,7 @@ last_task_done: CLS-005
 next_task: CLS-009
 next_parallel_wave: []
 execution_pace: slow_serial
-active_claims: [CLS-009]
+active_claims: [CLS-009, EV-001]
 research_gate: not_passed
 foundation_gate: not_passed
 realtime_go: pending
@@ -58,8 +58,8 @@ resume_hint: >-
   fictionalteamdraftrev2+2pageTeamPDF passed. Final fullwidthportfolio reviewlayout
   polish passes13targeted/type/lint/build; deploy+visualproof next. Separate teacherprojection and fullparity remainunfinished;
   schema28 is UNRESERVED. ParentCLS009/CLS008 remainunfinished, not redefined.
-  Workerguest_marketing_handoff idle; root owns sharedintegration. EV001 staleclaim
-  released afterauthoritativecompleted+cleanworktree audit; workeridle,
+  Workerguest_marketing_handoff idle; root owns sharedintegration. EV001 remainsidle afterauthoritativecompleted+cleanworktree audit; its dormantclaim
+  is retained because registryrequiresinprogressparent/s1claims, notbecause workisactive;
   contracts287dddd/8253d06 verified63tests; storage/UI/PDF/trustedcapture unfinished.
   Preserve $25totalOpenRouter/nootherpaidservices. AllnewAI dispatch globallystopped;
   $1carveout/accounting preserved, keyrotation/privacy/billing/successorquality unresolved.

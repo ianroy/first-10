@@ -5343,9 +5343,20 @@
         {
           "date": "2026-10-18",
           "text": "Slowserial reservationaudit: personal_workspace authoritativelycompleted/idle, worktreeclean atc7ce11d, contracts integrated287dddd/8253d06 with63tests. Release stale contract-only claim; parentstaysinprogress and allfuturestorage/UI/PDF work requiresfreshserialclaim. No worktree/history removal and no activewriter interrupted."
+        },
+        {
+          "date": "2026-10-18",
+          "text": "Registry requires a parentclaim while genuinepartial EV001/s1 remaininprogress. Attempted idle reservationrelease rejectedvalidation; restore exact dormantclaim ratherthan mislabelpartialwork notstarted/complete. Actual worker remainsauthoritativelycompleted/idle and serialexecution has onlyrootactive. This is bookkeepingreservation, not authorizationto resume."
         }
       ],
-      "claim": null,
+      "claim": {
+        "owner": "personal_workspace",
+        "branch": "codex/generation-history-contracts-20261018",
+        "base_commit": "e316d0c",
+        "worktree": "/private/tmp/first-ten-generation-history",
+        "started_at": "2026-10-19T00:23:16Z",
+        "lease_expires_at": "2026-10-19T04:00:00Z"
+      },
       "completion_evidence": [],
       "subtasks": [
         {
