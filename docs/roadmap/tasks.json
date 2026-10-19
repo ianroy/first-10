@@ -5138,6 +5138,10 @@
         {
           "date": "2026-10-18",
           "text": "Bounded software implementation complete after root integration e316d0c,15new/76focused tests,1174rootapp tests/11existing skips, type/lint/build pass. Explicit revision path uses fresh author copies, chosen assignment and existing server source binding; leave retry retains unsaved reasoning; refresh/revocation invalidates review. No new DB authority/AI. Ordinary-student live login/revision/leave and physicaldevice remain final REL001/002 checks; presenter teacher view is not relabeledstudentproof. Root truthful invitationcopyfix points to separateguestentry."
+        },
+        {
+          "date": "2026-10-18",
+          "text": "Livee5495dd Vercelsuccess; rootverified newworkspace-return/classlist controls, fictionalownerclassselect, immediateold-detailhide duringRefreshselectedclass andrestoredfreshview withbothreviewedDiscovery/Marketingcopies. Screenshotlive-classroom-refresh.png. Thisisownerrefreshproof; ordinary-studentrevision/leaveAuth andphysicaldevicechecks remain REL001/002."
         }
       ],
       "claim": null,
@@ -12328,7 +12332,9 @@
         "src/tests/an-003/**",
         "docs/architecture/measurement-retention.md",
         "supabase/tests/an-002.sql",
-        "src/tests/an-002/races.mjs"
+        "src/tests/an-002/races.mjs",
+        "docs/architecture/measurement-retention-prepare.sql",
+        "supabase/migrations/20261018027000_product_retention_job_owner.sql"
       ],
       "exclusive_locks": ["database-schema", "measurement-retention"],
       "read_first": [
@@ -12371,14 +12377,26 @@
         {
           "date": "2026-10-18",
           "text": "Actual exact-pinned isolated cron rehearsal passed:2000/2000/501 expired rows removed with true backlog/drain distinction; actual scheduled cancellation/row preservation/recovery;11 malformed-proof tests; auditedDTO; collectionoff; ownedcontainerabsence. Prior2failures preserved (imageVolumefield omitted, SQLtokenwhitespace), both safe/cleaned. Before integration root found nested standalone fixturetransaction incompatible with globalpolicy runner and oldAN002 readinessfixtures needing26proof. Expanded TESTONLY scope AN002SQL/races plus newAN003compatibilityharness; no oldpublishedmigration edits or actualsourceDB actions. Worker must prepare/re-pin before repeat isolatedruntime/fullstrictSQL+DTO+3races in owned schema-only clone. Root still applies local/hosted/types/schedule serially.26lease retained."
+        },
+        {
+          "date": "2026-10-18",
+          "text": "Worker6c76e5c integrated through rootb52e941. Root independently parsed rawTAP:1863assertions/0failures/0gaps/validplan/outerrollback;3actualDTOs+3trueoverlapraces. Repeated actualisolatedcron attempt4 afterSAVEPOINTfix passes batches2000/2000/501, actualfailure/rowpreservation/recovery and11independentmalformedchecks. Owncontainerandclonedbabsenceverified. Exact26ee76 applied dedicatedlocal55322/history03unchanged; no localcroninstalled, collectionoff, AIpolicyunchanged. Root now owns officialtypes/fullcombinedgates/hostedonly26apply and realcleanupjoboperations; hostedprereads showpostgres/GMT/pgcron1.6.4availablebutnotinstalled, collectionfalse/AIstoptrue.26schema lease retained until serial rollout boundary."
+        },
+        {
+          "date": "2026-10-18",
+          "text": "Normal hostedonly26/no seeds/roles dryrun and apply succeeded; hostedmetadata verifiesactual26/collectionfalse/AIstoptrue. Officialpublictypes26generated. Root1202app tests/11existing skips with4actualDTOsuites, type/full lint(0errors/6warnings)/Vercelbuild pass. Productioncron package1.6.4available/notinstalled; GMT/loggingon/currentDBpostgres/operatorpostgres, cronworkersOFF(libpq); actualprodverification remains required after inactiveprep. Rootprepared exact operatorfile docs/architecture/measurement-retention-prepare.sql SHA12db4f89 for independentreview; no jobprepared/activated yet. Durable docs/verification/product-measurement-retention-20261018.json."
+        },
+        {
+          "date": "2026-10-18",
+          "text": "Production exactinactiveprep12db failed transactionally: hostedpostgres is notsuperuser; pg_cron rejects explicitusername argument even when equalcurrentuser. Freshproof confirmsjobnotconfigured, collectionfalse/AIstoptrue; checkingextensionrollback. Primarypgcron job_metadata.c and Supabasepg-toolbelt docs confirm NULLusername uses currentcallerwithoutforeign-roleprivilege. Published/applied26 remainsbyteidentical. Reserve exactNEW27 AN003 helper-only additive fix, and source26guarded ownednetworknone managedrole rehearsal; no privilege grants/configchange. Worker preparespins BEFORE anyDBaction. Guestnextschema stillUNRESERVED, will be28 afterthisboundary. Rootopsfile remainsunexecuted successfully; actualprodcleanupnotclaimed."
         }
       ],
       "claim": {
         "owner": "finalization_audit",
         "branch": "codex/measurement-retention-20261018",
-        "base_commit": "edca13e",
+        "base_commit": "6c76e5c",
         "worktree": "/private/tmp/first-ten-measurement-retention",
-        "started_at": "2026-10-19T00:11:00Z",
+        "started_at": "2026-10-19T00:35:01Z",
         "lease_expires_at": "2026-10-19T04:00:00Z"
       },
       "completion_evidence": [],
@@ -12397,13 +12415,13 @@
         },
         {
           "id": "AN-003.s3",
-          "status": "in_progress",
+          "status": "complete",
           "instruction": "Prove real expired/unexpired/backlog/failure/stale states and actual scheduled receipts with verified container cleanup. Collection must stay disabled.",
           "notes": []
         },
         {
           "id": "AN-003.s4",
-          "status": "not_started",
+          "status": "in_progress",
           "instruction": "Root reviews exact pins, applies local/hosted serially, activates cleanup only after exact job inspection, verifies real scheduler execution and truthful health. Measurement activation remains a separate gate.",
           "notes": []
         }

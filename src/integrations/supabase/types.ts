@@ -1069,6 +1069,10 @@ export type Database = {
       };
       get_product_measurement_preference: { Args: Record<PropertyKey, never>; Returns: Json };
       get_product_measurement_retention_health: { Args: { p_request_id: string }; Returns: Json };
+      get_product_measurement_retention_health_v2: {
+        Args: { p_request_id: string };
+        Returns: Json;
+      };
       get_teacher_class_submission: {
         Args: { p_class_id: string; p_snapshot_id: string };
         Returns: Json;

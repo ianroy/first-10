@@ -1,0 +1,101 @@
+{
+  "date": "2026-10-18",
+  "phase": "schema26_applied_prepare_rolled_back_owner_patch_pending",
+  "sources": {
+    "supabase/migrations/20261018026000_product_event_retention.sql": "ee76f1851cfe00d21d350f64200ad5c26848c9436e5298dc5619079565e8a4c1",
+    "supabase/tests/an-002.sql": "479d52275b706cc2fbcd2de676ae15a284f750c8f0d0052e498bbec78dcd6dd2",
+    "supabase/tests/an-003.sql": "40d9774ccf574270db46c5ef81cb1a94b0f23ce27cdd8c6ad7b0522eb220c791",
+    "src/tests/an-002/races.mjs": "7bf2bd0338a19f91e2c8df0acd4aa49e643176f0ed98cad7c0f7d5427b03a10f",
+    "src/tests/an-003/database-rehearsal.mjs": "2937ee07d49407a37500934191978865b92b9eea76e1f7491479561bad928ace",
+    "src/tests/an-003/compatibility-rehearsal.mjs": "bd8233909181c49b7bee8746db2b9ce7099f49df78514ce18e58f90309ec0248",
+    "docs/architecture/measurement-retention-prepare.sql": "12db4f89fcb8b3d579aa314aee55cefd5a507f023a7dce3c1f9504968cb9ba65"
+  },
+  "isolatedScheduler": {
+    "actualBatchesRemoved": [2000, 2000, 501],
+    "remainingExpiredRows": [2501, 501, 0],
+    "drainedAtNullUntilFinalBatch": true,
+    "actualScheduledCancellationRecordedFailure": true,
+    "failedDeletionRolledBack": true,
+    "subsequentActualScheduledRunRecovered": true,
+    "independentMalformedProofChecks": 11,
+    "unexpiredRowsRetained": 1,
+    "unrelatedJobHistoryUntouched": true,
+    "collectionEnabled": false,
+    "ownedNetworkNoneContainerDroppedAndAbsenceVerified": true,
+    "latestRepeat": "attempt4 passed after SAVEPOINT fixture integration fix"
+  },
+  "compatibility": {
+    "tapAssertions": 1863,
+    "failures": 0,
+    "knownGaps": 0,
+    "validPlan": true,
+    "outerRollbackVerified": true,
+    "additionalRetentionAssertions": 12,
+    "explicitDenialBlocks": 3,
+    "actualDtoChecks": 3,
+    "observedOverlappingRaces": 3,
+    "syntheticReadinessMetadataRemoved": true,
+    "collectionResetDisabled": true,
+    "exactOwnedSchemaOnlyCloneDroppedAndAbsenceVerified": true,
+    "rootIndependentlyParsedRawTap": true
+  },
+  "priorFailures": [
+    "Attempt1: omitted image Config.Volumes versus explicit null; stopped before creation; accepted either absent representation while preserving actual mount checks.",
+    "Attempt2: SQL cast/THEN missing whitespace; owned isolated container removed and absence verified."
+  ],
+  "localApply": {
+    "exactMigrationApplied": true,
+    "port": 55322,
+    "actualSchema": 26,
+    "historyMarkerPreserved": "20261018003000",
+    "cronNotInstalled": true,
+    "collectionDisabled": true,
+    "aiPolicyUnchanged": true,
+    "officialPublicTypesGenerated": true
+  },
+  "hostedApply": {
+    "normalDryRunOnly26": true,
+    "seeds": [],
+    "roles": [],
+    "normalApplySucceeded": true,
+    "schema26Verified": true,
+    "collectionDisabled": true,
+    "aiStopped": true
+  },
+  "hostedPrerequisites": {
+    "operator": "postgres",
+    "database": "postgres",
+    "cronDatabase": "postgres",
+    "cronTimezone": "GMT",
+    "cronRunLogging": "on",
+    "cronWorkers": "off",
+    "availableCron": "1.6.4",
+    "installedCron": null
+  },
+  "rootApp": {
+    "passed": 1202,
+    "existingSkips": 11,
+    "passingFiles": 133,
+    "allFourActualDtoSuitesEnabled": true,
+    "typecheck": "pass",
+    "lintErrors": 0,
+    "existingLintWarnings": 6,
+    "vercelBuild": "pass"
+  },
+  "limitations": [
+    "Production preparation rolled back without installing cron or creating a job; additive managed-role compatibility patch27 is pending.",
+    "Production currently uses pg_cron libpq mode; isolated rehearsal used background workers. Observe actual production execution before claiming readiness.",
+    "No collection activation or full funnel; no signup/visit/session/attribution/guest/learning acceptance producers.",
+    "Eligibility expiry is not a physical-deletion SLA. Class/source retention remains separate."
+  ],
+  "productionPreparationAttempt": {
+    "scriptSha256": "12db4f89fcb8b3d579aa314aee55cefd5a507f023a7dce3c1f9504968cb9ba65",
+    "outcome": "transaction_rolled_back_explicit_username_requires_superuser",
+    "freshCronSchemaPresent": false,
+    "freshCronInstalled": false,
+    "freshJobId": null,
+    "collectionEnabled": false,
+    "aiStopped": true,
+    "next": "Additive27 selects implicit current operator with NULL username; independently test non-superuser before retry. No role privilege grant or global configuration change."
+  }
+}

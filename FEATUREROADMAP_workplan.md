@@ -35,8 +35,8 @@ resume_hint: >-
   Active goal: keep building every feasible authorized item, verify and commit/push/deploy.
   Preserve $25 total OpenRouter cap and no other paid services. Latest usage check: 57%
   weekly allowance remains, zero reset credits available, ordinary usage permitted.
-  Hosted and dedicated local55322 actual schema25; optional measurement remains disabled.
-  Local CLI history remains03 because04–25 were exact pinned SQL applies; actual schema
+  Hosted and dedicated local55322 actual schema26; optional measurement remains disabled.
+  Local CLI history remains03 because04–26 were exact pinned SQL applies; actual schema
   sentinels are recorded separately. Never rewrite that history or touch unrelated54322.
   Live6e7c581 includes guest studios, teacher copies, owner workspace and separate
   optional measurement choice. Live unknown0 -> withdrawn1 ACK/reload verified with
@@ -51,7 +51,7 @@ resume_hint: >-
   completion and WS007 combined owner/project gate complete:9 component journeys,
   5 guard tests,2actual DB owners/4same-name projects and4real archive races. Physical
   second device/fresh two-owner hosted Auth/offline checks remain final release gates.
-  Root1196app tests pass/11existing skips after unmounted growth UI/PDF and CLS005;
+  Root1202app tests pass/11existing skips after unmounted growth UI/PDF, CLS005 and26;
   typecheck/lint/build pass.6e7c581 CI and isolated RLS both successful.
   UI polish:
   class revision refresh remounts teacher lists and clears old exports; download success
@@ -69,12 +69,15 @@ resume_hint: >-
   revisions, visibility, leave/retry/draft preservation and class refresh checks. Live
   ordinary-student and physicaldevice remain REL001/002, not faked with presenterowner.
   EV001 worker now contracts/design only for reversible learning/outreach versions.
-  AN003 exclusively reserves26. Actual isolated cron batches/failure/recovery and11
-  malformed-proof checks passed with collectionoff and ownedcontainerabsence. Source25
-  and hosted25 unchanged. Root found standalone fixturetransaction/global-suite
-  incompatibility; test-only savepoint/readiness compatibility source now undergoing
-  exact-pinned sequential isolatedcron and fullSQL/DTO/3race rehearsals. Normal local/
-  hosted26 application, official types and livecleanup remain pending. No complete
+  AN003 now exclusively reserves additive27 after applied26. Actual isolated cron batches/failure/recovery and11
+  malformed-proof checks passed with collectionoff and ownedcontainerabsence. Root found standalone fixturetransaction/global-suite incompatibility and fixed with
+  test-only savepoints/readiness. Repeated actualcron and full1863SQL/3DTO/3race
+  rehearsals pass/rollback/cleanupabsence. Exact26ee76 applied local and hosted,
+  officialtypesgenerated. Productioninactiveprep failed safely becausepgcron explicitusername requires
+  superuser evenforcurrentrole. Reserve additive27 implicitcurrent-owner fix;26
+  immutable. No jobcreated, collectionfalse/AIstoptrue. Managednon-superrole isolated
+  rehearsal and then actualproductionlibpq verification pending. Guestnextschema
+  remainsunreserved (willbe28). No complete
   funnel or physical deletion guarantee is claimed.
   Bounded public retrieval is approved and live, receipt83724f78 committed; source AI
   and sharing excluded. CTX reviewed-source AI adapter remains unfinished. All new AI
