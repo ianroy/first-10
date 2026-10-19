@@ -52,7 +52,10 @@ assert(
 );
 const [imageInfo] = JSON.parse(docker(["image", "inspect", image]));
 assert.equal(imageInfo.Id, image);
-assert.equal(imageInfo.Config.Volumes, null, "No implicit source image volumes");
+assert(
+  imageInfo.Config.Volumes === null || imageInfo.Config.Volumes === undefined,
+  "No implicit source image volumes",
+);
 const readSource = (input) =>
   docker(
     [
