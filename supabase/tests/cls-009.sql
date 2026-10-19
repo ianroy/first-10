@@ -53,6 +53,8 @@ SELECT ok(NOT has_function_privilege(r,'public.get_guest_growth_authority(text)'
 SELECT ok(NOT has_function_privilege('authenticated','public.save_guest_growth_artifact(text,uuid,text,bigint,uuid,boolean,jsonb)','EXECUTE'),'account role cannot impersonate guest');
 SELECT ok(NOT has_function_privilege('service_role','firstten_private.normalize_guest_growth(jsonb)','EXECUTE'),'private validator is closed');
 SELECT ok(NOT has_function_privilege('service_role','firstten_private.guest_growth_hash(jsonb)','EXECUTE'),'private canonical hash stays closed to service role');
+SELECT ok(p.prosecdef AND p.proconfig=ARRAY['search_path=pg_catalog']AND pg_get_userbyid(p.proowner)='postgres','deferred completeness trigger has fixed trusted authority')FROM pg_proc p WHERE p.oid='firstten_private.guest_growth_edges_complete()'::regprocedure;
+SELECT ok(NOT has_function_privilege(r,'firstten_private.guest_growth_edges_complete()','EXECUTE'),'deferred trigger remains closed to '||r)FROM unnest(ARRAY['anon','authenticated','service_role'])r;
 CREATE FUNCTION firstten_policy_test.gg_require_admission(k text)RETURNS void LANGUAGE plpgsql AS $$
 DECLARE receipt jsonb;
 BEGIN

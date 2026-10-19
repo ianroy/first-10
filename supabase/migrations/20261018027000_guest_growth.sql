@@ -205,9 +205,11 @@ BEGIN
  OR NOT firstten_private.guest_growth_refs(d)@>jsonb_build_array(jsonb_build_object('kind',NEW.source_kind,'artifactId',NEW.source_id,'revision',NEW.source_revision))THEN RAISE EXCEPTION 'Invalid retained source edge' USING ERRCODE='23514';END IF;RETURN NEW;
 END $$;
 CREATE TRIGGER guest_growth_edge_scope BEFORE INSERT ON firstten_private.guest_growth_reference_edges FOR EACH ROW EXECUTE FUNCTION firstten_private.guest_growth_edge_scope();
-CREATE FUNCTION firstten_private.guest_growth_edges_complete()RETURNS trigger LANGUAGE plpgsql SET search_path=pg_catalog AS $$
+-- Deferred checks run after the service RPC returns; retain trusted trigger-only authority.
+CREATE FUNCTION firstten_private.guest_growth_edges_complete()RETURNS trigger LANGUAGE plpgsql SECURITY DEFINER SET search_path=pg_catalog AS $$
 BEGIN IF EXISTS(SELECT 1 FROM firstten_private.guest_growth_versions WHERE artifact_id=NEW.artifact_id AND revision=NEW.revision)AND
  (SELECT count(*)FROM firstten_private.guest_growth_reference_edges WHERE artifact_id=NEW.artifact_id AND revision=NEW.revision)<>jsonb_array_length(firstten_private.guest_growth_refs(NEW.document))THEN RAISE EXCEPTION 'Retained source edges incomplete' USING ERRCODE='23514';END IF;RETURN NULL;END $$;
+ALTER FUNCTION firstten_private.guest_growth_edges_complete()OWNER TO postgres;
 CREATE CONSTRAINT TRIGGER guest_growth_edges_complete AFTER INSERT ON firstten_private.guest_growth_versions DEFERRABLE INITIALLY DEFERRED FOR EACH ROW EXECUTE FUNCTION firstten_private.guest_growth_edges_complete();
 CREATE FUNCTION public.save_guest_growth_artifact(p_session text,p_artifact_id uuid,p_audience text,p_expected_revision bigint,p_mutation_id uuid,p_shared_confirmed boolean,p_document jsonb)RETURNS jsonb
 LANGUAGE plpgsql SECURITY DEFINER SET search_path=pg_catalog SET lock_timeout='5s' AS $$

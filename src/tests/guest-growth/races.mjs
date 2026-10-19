@@ -104,6 +104,48 @@ export async function growthRaces({ database, password }) {
       await s`INSERT INTO firstten_private.class_guest_sessions(class_id,team_id,principal_id,token_hash,expires_at)VALUES(${cid},${team},${principal},${hash(session)},clock_timestamp()+interval'1 hour')`;
       await s`INSERT INTO firstten_private.guest_capabilities(class_id,team_id,principal_id,kind,token_hash,max_uses,expires_at)VALUES(${cid},${team},${principal},'principal_recovery',${hash(recovery)},1,clock_timestamp()+interval'1 day')`;
     });
+    // A rollback-only SQL suite cannot prove deferred trigger execution at COMMIT.
+    // These controls commit through the real restricted caller before overlap races.
+    const commitSource = randomUUID(),
+      commitParent = randomUUID(),
+      incompleteParent = randomUUID(),
+      commitExperiment = {
+        ...JSON.parse(/gg_docs VALUES\('blank_experiment',true,'([^']+)'\)/.exec(text)[1]),
+        learningRefs: [{ kind: "learning", artifactId: commitSource, revision: 1 }],
+      };
+    await start(a);
+    assert.equal(result(await save(a, commitSource, 0, randomUUID())).ok, true);
+    await a`COMMIT`;
+    await start(a);
+    assert.equal(result(await save(a, commitParent, 0, randomUUID(), commitExperiment)).ok, true);
+    await a`COMMIT`;
+    assert.equal(
+      (
+        await admin`SELECT count(*)::int n FROM firstten_private.guest_growth_reference_edges WHERE artifact_id=${commitParent}AND source_id=${commitSource}AND source_revision=1`
+      )[0].n,
+      1,
+      "A reference-bearing service save must survive deferred COMMIT checks",
+    );
+    // Privileged test-only corruption omits a declared edge. The restricted caller's
+    // COMMIT must run the definer check and reject it, rather than bypassing integrity.
+    await admin`BEGIN`;
+    await admin`INSERT INTO firstten_private.guest_growth_artifacts(id,class_id,team_id,author_principal_id,kind,audience,current_revision)VALUES(${incompleteParent},${cid},${team},${principal},'experiment','principal_private',1)`;
+    await admin`INSERT INTO firstten_private.guest_growth_versions(artifact_id,revision,document)VALUES(${incompleteParent},1,${admin.json(commitExperiment)})`;
+    await admin`SET LOCAL ROLE service_role`;
+    await assert.rejects(
+      () => admin`COMMIT`,
+      (error) => error.code === "23514" && /Retained source edges incomplete/.test(error.message),
+      "Missing declared edge must fail at the real service-role commit boundary",
+    );
+    await admin`ROLLBACK`;
+    assert.equal(
+      (
+        await admin`SELECT count(*)::int n FROM firstten_private.guest_growth_artifacts WHERE id=${incompleteParent}`
+      )[0].n,
+      0,
+      "Rejected deferred commit must leave no artifact",
+    );
+    await admin`DELETE FROM firstten_private.guest_growth_artifacts WHERE id IN(${commitParent},${commitSource})`;
     const pa = await pid(a),
       pb = await pid(b),
       mutation = randomUUID();
@@ -281,6 +323,7 @@ export async function growthRaces({ database, password }) {
     assert.equal(waits.length, 6);
     return {
       actualBlockedOverlaps: waits.length,
+      deferredCommitControls: { validReferenceCommit: true, incompleteReferenceRollback: true },
       cases: [
         "stable retry",
         "stale CAS",
@@ -294,6 +337,7 @@ export async function growthRaces({ database, password }) {
   } finally {
     await a`ROLLBACK`.catch(() => {});
     await b`ROLLBACK`.catch(() => {});
+    await admin`ROLLBACK`.catch(() => {});
     if (pending) await pending.catch(() => {});
     await admin
       .unsafe(
