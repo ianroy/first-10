@@ -51,7 +51,7 @@ CREATE FUNCTION firstten_private.product_retention_ready()RETURNS boolean LANGUA
 DECLARE s firstten_private.product_retention_state;proof jsonb;
 BEGIN
  SELECT * INTO s FROM firstten_private.product_retention_state WHERE singleton;
- IF s.last_outcome<>'drained'OR s.last_drained_at IS NULL OR s.last_drained_at<clock_timestamp()-interval'10 minutes'OR s.last_drained_at>clock_timestamp()THEN RETURN false;END IF;
+ IF s.last_outcome IS DISTINCT FROM'drained'OR s.last_attempt_at IS NULL OR s.last_attempt_at<clock_timestamp()-interval'10 minutes'OR s.last_attempt_at>clock_timestamp()OR s.last_drained_at<s.last_attempt_at OR s.last_drained_at IS NULL OR s.last_drained_at<clock_timestamp()-interval'10 minutes'OR s.last_drained_at>clock_timestamp()THEN RETURN false;END IF;
  proof:=firstten_private.product_retention_schedule_proof();
  IF proof->>'configured'IS DISTINCT FROM'true'OR proof->>'active'IS DISTINCT FROM'true'OR proof->>'matches'IS DISTINCT FROM'true'OR proof->>'succeeded'IS DISTINCT FROM'true'OR(proof->>'runId')::bigint IS DISTINCT FROM s.last_run_id OR(proof->>'startedAt')IS NULL OR(proof->>'completedAt')IS NULL OR(proof->>'completedAt')::timestamptz<clock_timestamp()-interval'10 minutes'OR(proof->>'completedAt')::timestamptz>clock_timestamp()OR(proof->>'startedAt')::timestamptz>(proof->>'completedAt')::timestamptzTHEN RETURN false;END IF;
  IF(firstten_private.product_retention_history_backlog()->>'rowsCapped')::integer>0 THEN RETURN false;END IF;
