@@ -31,110 +31,45 @@ research_gate: not_passed
 foundation_gate: not_passed
 realtime_go: pending
 last_updated: 2026-10-18
-last_documentation_update: "2026-10-18: Slow serial guest persistence source integrated;3494SQL/17DTO/6overlaps/realcommit+expiry gates and1356combinedapp tests pass. Actualschema27 rollout,teacherprojection,mounts andliveproof remain."
+last_documentation_update: "2026-10-18: Exact27 local+hosted rollout and desktopgrowth/PDF source mounts pass1365app tests. Livebrowser gate and teacherprojection remain; slowserial continues."
 resume_hint: >-
-  Active goal: keep building every feasible authorized item, verify and commit/push/deploy.
-  User requested SLOW pace: maximum1 worker, one task at a time, no new parallel wave.
-  CLS009 phase4 source is integrated/verified; its worker is idle. Next serial gate is
-  actualschema27 rollout/officialtypes, followed by separate teacherprojection and
-  rootmount/coverage/liveproof. EV001 remains idle with its contract
-  scope reserved. AN003 schema lease released after concrete managed-owner index
-  prerequisite; this is slower continuation, not a goal pause.
-  Preserve $25 total OpenRouter cap and no other paid services. Latest usage check: 57%
-  weekly allowance remains, zero reset credits available, ordinary usage permitted.
-  Hosted and dedicated local55322 actual schema26; optional measurement remains disabled.
-  Local CLI history remains03 because04–26 were exact pinned SQL applies; actual schema
-  sentinels are recorded separately. Never rewrite that history or touch unrelated54322.
-  Live6e7c581 includes guest studios, teacher copies, owner workspace and separate
-  optional measurement choice. Live unknown0 -> withdrawn1 ACK/reload verified with
-  collection disabled throughout; no opt-in or collection activation attempted.
-  Fictional guest Discovery source revision7 and Marketing source revision5 are preserved.
-  Updated class instructions and published fictional $0 assignment reflect current features.
-  Live private marketing preview PDF3pages granted no access; explicit teacher version1
-  exported3pages, withdrawal denied stale teacher download and removed the row, private
-  withdrawn author PDF3pages remained. Fresh deliberate marketing version2 is active.
-  A fresh Discovery teacher example was submitted after class instructions changed.
-  WS003 live owner switch/resume/archive/restore/reload passes. WS006 audited atomic
-  completion and WS007 combined owner/project gate complete:9 component journeys,
-  5 guard tests,2actual DB owners/4same-name projects and4real archive races. Physical
-  second device/fresh two-owner hosted Auth/offline checks remain final release gates.
-  Root1296app tests pass/11existing skips after reviewed growth transport and EV001
-  contracts, with all4actualDTOsuites enabled; typecheck/lint/build pass. Latest03d0cca
-  Vercel success verified. Prior6e7c581 CI and isolated RLS both successful.
-  UI polish:
-  class revision refresh remounts teacher lists and clears old exports; download success
-  is tied to its exact source fingerprint. All three actual-SQL DTO suites were enabled.
-  CLS008 s2/s3 complete; s1 explicitly blocked on newCLS009 missing manual growth
-  artifacts, not redefined as two studios. CLS009 phase1 reviewed contracts integrated; pure six-kind desktop editors/PDF
-  candidates integrated1138dab/2acad91/abc6d40. Root viewed17portfolio pages; worker
-  inspected all34individual/portfolio pages and51focusedtests pass. Still unmounted:
-  server transport candidate integratedbc1a421/36c3688 with82focusedpasses. Future strict
-  4KiB authority projection, no full-session fallback; persistence/teacher projection/
-  coverage/live gates unfinished. No growth mount or schema28 reservation.
-  AN002 software7bcfb75 is integrated: opt-in owner-only measurement, defaultdisabled,
-  exact-pinned25fc798efd passed1863SQL/2actualDTOs/3races/rollback/cloneabsence. Root
-  Account mount and official types published; hosted25 and live choice/reload checks
-  succeeded. AN002 parent blocked on newAN003 retention and
-  AN004 remaining event producers. CLS005 bounded software complete: fresh author
-  revisions, visibility, leave/retry/draft preservation and class refresh checks. Live
-  ordinary-student and physicaldevice remain REL001/002, not faked with presenterowner.
-  EV001 contracts/design integrated287dddd/8253d06 with63puretests; exact receipt
-  intent/pointer checks retain valid newer-state replay. Storage/services/UI/PDF and
-  trusted generation capture remain unfinished. Worker idle at user slow request.
-  AN003 rollout is blocked; no schema lease remains. Actual isolated cron batches/failure/recovery and11
-  malformed-proof checks passed with collectionoff and ownedcontainerabsence. Root found standalone fixturetransaction/global-suite incompatibility and fixed with
-  test-only savepoints/readiness. Repeated actualcron and full1863SQL/3DTO/3race
-  rehearsals pass/rollback/cleanupabsence. Exact26ee76 applied local and hosted,
-  officialtypesgenerated. Productioninactiveprep failed safely becausepgcron explicitusername requires
-  superuser evenforcurrentrole. Reserve additive27 implicitcurrent-owner fix;26
-  immutable. No jobcreated, collectionfalse/AIstoptrue. Managednon-superrole isolated
-  rehearsal remains UNVERIFIED after3 safe isolated fixture failures: bootstrap demotion,
-  settings visibility and then cron.job INSERT permissions. Every owned container was
-  removed/absence verified. Candidate27/harness remain isolated at4ebac3d; never apply
-  until actual nonsuper/libpq success. No local/hosted27 or production privilege changes.
-  Root verified real managed ownership and index denial in rollback-only production
-  diagnostics. Managed-owner index provisioning or a fully bounded indexed-runid
-  redesign is required; no privilege widening. Fresh proof: no cron/extension/job,
-  collectionfalse/AIstoptrue. Unpublished isolated AN003 candidate27 is superseded;
-  never integrate it. CLS009 now exclusively reserves NEW guest27 from8828fb3 / real26.
-  Draft/review SQL only before exact-pin approval; no DB actions authorized yet. Root
-  early review found concrete UUID/date/Unicode boundary parity cases; regressions
-  are being added before pins. Additional review caught PDF rate exhaustion and
-  missing-source cascade eligibility; bulk checks and immutable lineage metadata are
-  being tested in source. Catalog-proven STABLE convert_to requires an immutable
-  fixed-UTF8 digest wrapper before generated-column execution. Read-only full Unicode
-  audit found55 ICU/Node17 mappings diverge; source now preserves full semantics with
-  a pinned Unicode17 option-key policy instead of weakening to ASCII. Guard/clone-state
-  fixes frozen in5773596;123focusedtests pass/17actualSQLskips. Worker idle. Root reviewed
-  all4exactpins and authorizes only guarded disposable schema-only clone trial on55322.
-  First trial caught uninitialized authority owner record; corrected7fb4. Second
-  clone trial passed authority/all6saves/private+team/CAS/replay/50source53attempt
-  export checks, then fixture hit deliberately closed privatehelper under service_role.
-  Thirdtrial also passed64/96artifact and2/8/32MiB caps, then fixture parent-team
-  deletion hit existing append-onlyMarketingaudit guard. Preserveguard; fixfixture
-  cleanup to growthrows only, leaveparent identities until outerROLLBACK. PRV002/003
-  record realdelete integrationlimit. Fourthtrial after fixturefix passes3490strictSQL/0fail/0gaps/validplan/outerrollback
-  and17actualDTOtests. FirstrealoverlapCOMMIT finds deferredtrigger losesprivate
-  schemaauthority afterprivilegedRPC returns; narrowfixedsearchpath triggerfixpending.
-  Sixthtrialceaed after narrowtrigger+taggedquery fixes PASS:3494strictSQL,17actualDTO,
-  6trueblockedoverlaps,validreferenceCOMMIT/incomplete23514rollback controls and
-  witnessedlateexpiryrollback. All6clones removed/sourceunchanged verified. Root
-  integrated6sourcecommitsfa78838..288873a;1356app tests/11existing skips withall5
-  actualDTOsuites enabled,type/lint0errors/build/migrationcheckpass. Workeridle. No live27/mount/teacher
-  projection/coverageclaim; sourceandhosted remainactual26.
-  README/ProductSpec now clearly distinguish existing
-  reviewed Marketing copies from unfinished dedicated six-kind growth workflows. No complete
-  funnel or physical deletion guarantee is claimed.
-  Bounded public retrieval is approved and live, receipt83724f78 committed; source AI
-  and sharing excluded. CTX reviewed-source AI adapter remains unfinished. All new AI
-  dispatch remains paused via global_stop after retirement/billing review; permanent
-  $1 carveout/accounting preserved. AI003 evaluation software verified; no paid evaluation
-  or quality promotion. AI005 account/privacy/billing/successor-quality gates blocked.
-  F009b isolated hosted preview blocked on verified Free eligibility or a supplied
-  isolated Free project; never create paid branches or repurpose unrelated projects.
-  Sharing, full team/class bundles, physical deletion, later guest/account continuity,
-  remaining growth artifacts and real research remain unfinished. Keep independent work
-  moving and preserve all exact evidence; do not mark the global goal complete early.
+  Active goal: keep building feasible authorized items, verify, commit/push/deploy.
+  User requested SLOW: maximum1 active worker, serial tasks, no new parallel wave.
+  Previous turn made concrete progress: six reviewed sourcecommits integrated and
+  3494strictSQL/17actualDTO/6trueblockedoverlaps/realcommit+expiry gates passed.
+  CLS009 exact27 is now applied to dedicatedlocal55322 and hostedhdwnnuvqqkkpontcdbwa.
+  All80existingtable counts and policy digests unchanged. LocalCLIhistory03 deliberately
+  preserved; hosted normalpush records27. Never repair that history or touch unrelated54322.
+  Fresh hosted catalog proves6service-onlyRPCs/4closedprivate tables/trusteddeferredtrigger.
+  Officialpublictypesgenerated from actuallocal27; no hand-editedgeneratedcontracts.
+  Desktop thirdstudio+6kind-specificindividualPDFs+selectedportfolio now source-mounted.
+  Lazyfirstopen/retaineddrafts across studios, aggregateaccess guard and route/unload
+  guards are tested. Root160focused/1365combinedapp tests pass/11existing skips, all5
+  actualDTOsuites enabled; type/lint0errors6existingwarnings/build/migrationcheck pass.
+  NEXT: push this passingmount then livefictional desktop save/reload/retainedversion/PDF
+  and studio-switch smoke. Separate teacherprojection and fullparity remainunfinished;
+  schema28 is UNRESERVED. ParentCLS009/CLS008 remainunfinished, not redefined.
+  Workerguest_marketing_handoff idle; root owns sharedintegration. EV001 workeridle,
+  contracts287dddd/8253d06 verified63tests; storage/UI/PDF/trustedcapture unfinished.
+  Preserve $25totalOpenRouter/nootherpaidservices. AllnewAI dispatch globallystopped;
+  $1carveout/accounting preserved, keyrotation/privacy/billing/successorquality unresolved.
+  Latest usagecheck57%weeklyremaining/zeroresetcredits. No new paidcalls.
+  Optionalmeasurement disabled; no retentionjob. AN003 blocked on managedowner history
+  index prerequisite proven withrollback. Unpublished oldretention27 candidate4ebac3d
+  is superseded: NEVER integrate/apply; any futurefix needslaternewforwardversion.
+  Sixgrowthclone trials preserved in guest-growth-persistence ledger; finalallpass and
+  everyclone absence/sourceunchanged verified. Initialbugs corrected, nothidden.
+  Existing parentdelete hits append-onlyMarketingaudit; PRV002/003 owns that separate
+  physicalretention limitation. No guardbypass or physicaldeletion claim.
+  Discoveryfictionalrev7/Marketingrev5 preserved; active deliberateMarketingteachercopyv2,
+  freshDiscoverycopy, privatepreview/withdrawal/teacherPDF denial previouslyverified.
+  WS003live switch/resume/archive/restore/reload and WS006/007boundedsoftware complete;
+  physicalseconddevice/freshordinaryhostedstudent/offline remainREL001/002 gates.
+  AN002initialopt-inchoice/producers shipped; fullfunnel blockedAN003+AN004, notclaimed.
+  Approvedboundedpublicretrievallive receipt83724f78; CTXsourceAI/sharing adapterexcluded.
+  F009b blockedverifiedFreeeligibility/isolatedFreeproject; neverpaidbranch/otherproject.
+  Realresearch, institutionalreview, broaderteacherfeedback/bundles, collaboration,
+  sharing and accountcontinuity remainunfinished. Keepglobalgoalactive.
 ```
 
 **Audit basis:** product source and documentation at `7006f87`, plus the concurrent team-credits commit `a2d69a3`, with repository research files rechecked. F-007 is now complete: [GitHub CI run 39092157827](https://github.com/ianroy/first-10/actions/runs/39092157827) succeeded for that commit. The earlier local typecheck, 17 tests, Vercel build and scoped lint results remain in history. Six existing lint warnings and generated `.vercel` scanning motivate OPS-001. A green code pipeline does not verify live auth, RLS, model quality, research outcomes or preview configuration.

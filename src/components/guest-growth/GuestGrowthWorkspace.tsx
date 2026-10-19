@@ -29,6 +29,12 @@ import {
 } from "@/lib/guest-growth/contracts";
 import {
   guestGrowthPortfolio,
+  guestGrowthLearningPdf,
+  guestGrowthExperimentPdf,
+  guestGrowthPipelinePdf,
+  guestGrowthSurveyPdf,
+  guestGrowthReferralPdf,
+  guestGrowthOnboardingPdf,
   guestGrowthExportAudiences,
   GUEST_GROWTH_TITLES,
   type GuestGrowthPdfSource,
@@ -52,6 +58,24 @@ type Props = {
 function pdfDocument(signature: string, title: string) {
   const [scope, sources] = JSON.parse(signature) as [GuestGrowthPdfScope, GuestGrowthPdfSource[]];
   try {
+    if (sources.length === 1) {
+      const source = sources[0]!;
+      const kind = source.state === "saved" ? source.record.kind : source.document.kind;
+      switch (kind) {
+        case "learning":
+          return guestGrowthLearningPdf(source, scope, title);
+        case "experiment":
+          return guestGrowthExperimentPdf(source, scope, title);
+        case "pipeline_contact":
+          return guestGrowthPipelinePdf(source, scope, title);
+        case "survey":
+          return guestGrowthSurveyPdf(source, scope, title);
+        case "referral":
+          return guestGrowthReferralPdf(source, scope, title);
+        case "onboarding":
+          return guestGrowthOnboardingPdf(source, scope, title);
+      }
+    }
     return sources.length ? guestGrowthPortfolio(sources, scope, title) : null;
   } catch {
     return null;

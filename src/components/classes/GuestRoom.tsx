@@ -3,6 +3,7 @@ import { Link } from "@tanstack/react-router";
 import { BrandLogo } from "@/components/BrandLogo";
 import { GuestMarketingWorkspace } from "@/components/guest-marketing/GuestMarketingWorkspace";
 import { GuestLearningWorkspace } from "@/components/guest/GuestLearningWorkspace";
+import { ConnectedGuestGrowthWorkspace } from "@/components/guest-growth/ConnectedGuestGrowthWorkspace";
 import {
   bootstrapGuestSession,
   enterGuestSpace,
@@ -34,17 +35,21 @@ export function GuestRoom() {
     [busy, setBusy] = useState(false),
     [message, setMessage] = useState(""),
     [reviewed, setReviewed] = useState(false),
-    [studio, setStudio] = useState<"discovery" | "marketing">("discovery");
+    [studio, setStudio] = useState<"discovery" | "marketing" | "growth">("discovery");
+  const [growthOpened, setGrowthOpened] = useState(false);
   const generation = useRef(0),
     alive = useRef(true),
     initialized = useRef(false),
     pendingLink = useRef(false);
-  const workspaceDirty = useRef({ discovery: false, marketing: false });
+  const workspaceDirty = useRef({ discovery: false, marketing: false, growth: false });
   const reportDirty = useCallback((dirty: boolean) => {
     workspaceDirty.current.discovery = dirty;
   }, []);
   const reportMarketingDirty = useCallback((dirty: boolean) => {
     workspaceDirty.current.marketing = dirty;
+  }, []);
+  const reportGrowthDirty = useCallback((dirty: boolean) => {
+    workspaceDirty.current.growth = dirty;
   }, []);
   const confirmAccessChange = () =>
     !Object.values(workspaceDirty.current).some(Boolean) ||
@@ -239,6 +244,7 @@ export function GuestRoom() {
                     [
                       ["discovery", "First conversations"],
                       ["marketing", "Next 50: $0 Marketing Lab"],
+                      ["growth", "Learning & growth activities"],
                     ] as const
                   ).map(([key, label]) => (
                     <button
@@ -246,7 +252,10 @@ export function GuestRoom() {
                       aria-pressed={studio === key}
                       aria-controls={`guest-${key}-studio`}
                       className={`min-h-12 rounded-xl border px-5 font-semibold ${studio === key ? "bg-primary text-primary-foreground" : "bg-background"}`}
-                      onClick={() => setStudio(key)}
+                      onClick={() => {
+                        if (key === "growth") setGrowthOpened(true);
+                        setStudio(key);
+                      }}
                     >
                       {label}
                     </button>
@@ -267,6 +276,15 @@ export function GuestRoom() {
                   onDirtyChange={reportMarketingDirty}
                 />
               </div>
+              {growthOpened && (
+                <div id="guest-growth-studio" hidden={studio !== "growth"}>
+                  <ConnectedGuestGrowthWorkspace
+                    view={view}
+                    csrf={csrf}
+                    onDirtyChange={reportGrowthDirty}
+                  />
+                </div>
+              )}
               <section className="rounded-2xl border bg-card p-6">
                 <h2 className="text-xl font-bold">Manage your access</h2>
                 <p className="mt-2 text-sm text-muted-foreground">

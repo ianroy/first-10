@@ -1,6 +1,69 @@
 /** Every new learning activity must register a named PDF adapter and explicit source boundary here. */
 export const ACTIVITY_EXPORT_COVERAGE = [
   {
+    id: "guest-growth-learning",
+    adapter: "guestGrowthLearningPdf",
+    source: "src/components/guest-growth/GuestGrowthWorkspace.tsx",
+    status: "mounted",
+    scope: "guest",
+    granularity:
+      "Each authored learning/synthesis, every pattern, limitation, proposed change and retained version; private/team scope and fresh exact authorization before PDF generation and delivery",
+  },
+  {
+    id: "guest-growth-experiment",
+    adapter: "guestGrowthExperimentPdf",
+    source: "src/components/guest-growth/GuestGrowthWorkspace.tsx",
+    status: "mounted",
+    scope: "guest",
+    granularity:
+      "Each experiment plan, criterion, unknown/zero quantities and separately reported result; exact retained references without linked bodies",
+  },
+  {
+    id: "guest-growth-pipeline",
+    adapter: "guestGrowthPipelinePdf",
+    source: "src/components/guest-growth/GuestGrowthWorkspace.tsx",
+    status: "mounted",
+    scope: "guest",
+    granularity:
+      "Each alias contact, fit, relationship, manually reported status/date/basis and uncertainty; no verified payment or automatic outreach claim",
+  },
+  {
+    id: "guest-growth-survey",
+    adapter: "guestGrowthSurveyPdf",
+    source: "src/components/guest-growth/GuestGrowthWorkspace.tsx",
+    status: "mounted",
+    scope: "guest",
+    granularity:
+      "Each unsent survey draft and individually selectable typed question/options/scales, purpose and permission reminder; no collected answers",
+  },
+  {
+    id: "guest-growth-referral",
+    adapter: "guestGrowthReferralPdf",
+    source: "src/components/guest-growth/GuestGrowthWorkspace.tsx",
+    status: "mounted",
+    scope: "guest",
+    granularity:
+      "Each unsent referral ask, recipient alias/role, fit criteria, builder disclosure, body and respectful exit; no sending or teacher grant",
+  },
+  {
+    id: "guest-growth-onboarding",
+    adapter: "guestGrowthOnboardingPdf",
+    source: "src/components/guest-growth/GuestGrowthWorkspace.tsx",
+    status: "mounted",
+    scope: "guest",
+    granularity:
+      "Each onboarding research draft, planned observation and individually selectable before/during/after question; no session tracking or collected responses",
+  },
+  {
+    id: "guest-growth-portfolio",
+    adapter: "guestGrowthPortfolio",
+    source: "src/components/guest-growth/GuestGrowthWorkspace.tsx",
+    status: "mounted",
+    scope: "guest",
+    granularity:
+      "Selected exact saved learning/growth revisions, at most50; all sources required, fresh bulk authorization before generation/delivery, no substitutions or silent omissions",
+  },
+  {
     id: "guest-marketing-submission-preview",
     adapter: "marketingPreviewActivities",
     source: "src/components/guest-marketing/ReviewedMarketingHandoff.tsx",

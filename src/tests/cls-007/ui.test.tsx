@@ -38,6 +38,18 @@ vi.mock("@/components/guest-marketing/GuestMarketingWorkspace", () => ({
     </section>
   ),
 }));
+vi.mock("@/components/guest-growth/ConnectedGuestGrowthWorkspace", () => ({
+  ConnectedGuestGrowthWorkspace: ({
+    onDirtyChange,
+  }: {
+    onDirtyChange?: (dirty: boolean) => void;
+  }) => (
+    <section>
+      <input aria-label="Guest growth draft" onChange={() => onDirtyChange?.(true)} />
+      <button onClick={() => onDirtyChange?.(false)}>Mark growth clean</button>
+    </section>
+  ),
+}));
 vi.mock("@/components/classes/TeacherGuestSubmissions", () => ({
   TeacherGuestSubmissions: () => <p>Reviewed guest versions only</p>,
 }));
@@ -132,6 +144,29 @@ afterEach(() => {
   vi.restoreAllMocks();
 });
 describe("no-account guest journey", () => {
+  it("opens growth lazily, preserves its draft across studio switches and aggregates its access guard", async () => {
+    h.bootstrap.mockResolvedValue({ ok: true, data: view, csrf: "a".repeat(64) });
+    const confirm = vi.spyOn(window, "confirm").mockReturnValue(false);
+    render(<GuestRoom />);
+    const open = await screen.findByRole("button", { name: "Learning & growth activities" });
+    expect(screen.queryByLabelText("Guest growth draft")).not.toBeInTheDocument();
+    fireEvent.click(open);
+    fireEvent.change(screen.getByLabelText("Guest growth draft"), {
+      target: { value: "Keep my next experiment" },
+    });
+    fireEvent.click(screen.getByRole("button", { name: "Next 50: $0 Marketing Lab" }));
+    fireEvent.click(screen.getByRole("button", { name: "Mark marketing clean" }));
+    fireEvent.click(screen.getByRole("button", { name: "End this browser session" }));
+    expect(h.manage).not.toHaveBeenCalled();
+    expect(confirm).toHaveBeenCalledOnce();
+    fireEvent.click(open);
+    expect(screen.getByLabelText("Guest growth draft")).toBeVisible();
+    expect(screen.getByLabelText("Guest growth draft")).toHaveValue("Keep my next experiment");
+    fireEvent.click(screen.getByRole("button", { name: "Mark growth clean" }));
+    fireEvent.click(screen.getByRole("button", { name: "Use another code" }));
+    expect(await screen.findByLabelText("Private code")).toBeVisible();
+    expect(confirm).toHaveBeenCalledOnce();
+  });
   it("strips public capability before requests and requires reviewed explicit entry without account fields", async () => {
     window.history.replaceState(null, "", `/join?ignored=1#entry=${"f".repeat(64)}`);
     h.bootstrap.mockImplementation(async () => {

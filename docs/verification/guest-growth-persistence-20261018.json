@@ -164,7 +164,7 @@
       }
     }
   ],
-  "status": "isolated_sql_dto_commit_race_gates_passed_unapplied",
+  "status": "schema27_and_desktop_source_integrated_live_browser_pending",
   "integration": {
     "sourceRootCommits": ["fa78838", "6dd018e", "194c063", "5fdda1d", "1a2cb77", "288873a"],
     "appTestsPassed": 1356,
@@ -187,5 +187,65 @@
     "teacherProjectionImplemented": false,
     "exportCoverageRegistered": false,
     "providerCalls": 0
+  },
+  "rollout": {
+    "local": {
+      "migrationSha256": "07e5107d78904b4a6d76b80b129a9909180b2064b5a39ff2bf24cec859be7625",
+      "applied": true,
+      "database": "dedicated55322",
+      "schemaVersion": 27,
+      "cliHistoryPreserved": "20261018003000",
+      "existingTablesVerified": 80,
+      "existingCountsUnchanged": true,
+      "existingPoliciesAndRetentionHelperUnchanged": true,
+      "scopeAndGrantSentinelsPassed": true,
+      "existingCountsSha256": "26f4e57ec25ebb57ea965b028f2125c41609771384c64b547e76067acda69672",
+      "flagsSha256": "ba608ad768163a6223563fda6adc0bdd6d279dea5c7184c6edce4f438ce5c88e"
+    },
+    "hosted": {
+      "migrationVersion": "20261018027000",
+      "onlyMigrationApplied": "20261018027000_guest_growth.sql",
+      "normalCliPush": true,
+      "existingTablesCompared": 80,
+      "existingCountsUnchanged": true,
+      "existingPoliciesUnchanged": true,
+      "existingCountsMd5": "25a0468bbfe56ccac7e50d64340ced97",
+      "policyMd5": "6a76edd6f142977a601ba7c3424b28f8",
+      "aiStopped": true,
+      "measurementDisabled": true,
+      "noRetentionJobCreated": true,
+      "publicRetrievalStillEnabled": true,
+      "officialPublicTypesGenerated": true,
+      "catalogSentinels": {
+        "aiStopped": true,
+        "deferredTriggerAuthority": true,
+        "measurementDisabled": true,
+        "privateTablesClosed": true,
+        "sixServiceRpcs": true
+      }
+    },
+    "growthUiMounted": true,
+    "typesGenerator": "OfficialCLI local actual27 public schema; localhost sslmode=disable only. Hosted API generated baseline compared; prior local generator semantics preserved."
+  },
+  "desktopIntegration": {
+    "focusedTestsPassed": 160,
+    "appTestsPassed": 1365,
+    "existingTestsSkipped": 11,
+    "appTestFilesPassed": 141,
+    "appTestFilesSkipped": 1,
+    "typecheck": "passed",
+    "lint": {
+      "errors": 0,
+      "existingWarnings": 6
+    },
+    "build": "passed",
+    "migrationCheck": "passed",
+    "studioMounted": true,
+    "kindSpecificPdfAdapters": 6,
+    "selectedPortfolioAdapter": true,
+    "lazyMountAndRetainedDrafts": true,
+    "routeUnloadAndAggregateAccessGuards": true,
+    "liveBrowserGate": "pending",
+    "teacherProjectionImplemented": false
   }
 }

@@ -5,6 +5,12 @@ import {
   guestGrowthActivities,
   guestGrowthPortfolio,
   guestGrowthExportAudiences,
+  guestGrowthLearningPdf,
+  guestGrowthExperimentPdf,
+  guestGrowthPipelinePdf,
+  guestGrowthSurveyPdf,
+  guestGrowthReferralPdf,
+  guestGrowthOnboardingPdf,
   type GuestGrowthPdfSource,
 } from "@/lib/guest-growth/pdf";
 import {
@@ -25,6 +31,22 @@ const freeze = (d: ActivityExportV1, audience: "owner" | "team" | "teacher" = "o
     },
     { allowedAudiences: [audience] },
   );
+it.each([
+  ["learning", guestGrowthLearningPdf],
+  ["experiment", guestGrowthExperimentPdf],
+  ["pipeline_contact", guestGrowthPipelinePdf],
+  ["survey", guestGrowthSurveyPdf],
+  ["referral", guestGrowthReferralPdf],
+  ["onboarding", guestGrowthOnboardingPdf],
+] as const)("binds the individual %s PDF to its exact structured kind", (kind, build) => {
+  const record = records().find((r) => r.kind === kind)!;
+  const source = { state: "saved" as const, record };
+  expect(build(source, scope, "Individual", time)).toEqual(
+    guestGrowthPortfolio([source], scope, "Individual", time),
+  );
+  const other = records().find((r) => r.kind !== kind)!;
+  expect(() => build({ state: "saved", record: other }, scope)).toThrow("selected activity kind");
+});
 it("covers the complete six-kind document inventory without losing structured values", () => {
   const sources: GuestGrowthPdfSource[] = records().map((record) => ({ state: "saved", record }));
   const d = guestGrowthPortfolio(sources, scope, "Fictional growth portfolio", time),

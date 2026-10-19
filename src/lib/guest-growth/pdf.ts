@@ -333,6 +333,55 @@ export function guestGrowthPortfolio(
     activities: offers.map((o) => o.activity),
   });
 }
+function individualGrowthPdf(
+  kind: GuestGrowthDocument["kind"],
+  value: GuestGrowthPdfSource,
+  scope: GuestGrowthPdfScope,
+  title: string,
+  capturedAt?: string,
+): ActivityExportV1 {
+  const source = guestGrowthPdfSourceSchema.parse(value);
+  const actual = source.state === "saved" ? source.record.kind : source.document.kind;
+  if (actual !== kind)
+    throw Error("This individual PDF does not match the selected activity kind.");
+  return guestGrowthPortfolio([source], scope, title, capturedAt);
+}
+export const guestGrowthLearningPdf = (
+  source: GuestGrowthPdfSource,
+  scope: GuestGrowthPdfScope,
+  title = "Learning & synthesis",
+  capturedAt?: string,
+) => individualGrowthPdf("learning", source, scope, title, capturedAt);
+export const guestGrowthExperimentPdf = (
+  source: GuestGrowthPdfSource,
+  scope: GuestGrowthPdfScope,
+  title = "Experiment",
+  capturedAt?: string,
+) => individualGrowthPdf("experiment", source, scope, title, capturedAt);
+export const guestGrowthPipelinePdf = (
+  source: GuestGrowthPdfSource,
+  scope: GuestGrowthPdfScope,
+  title = "Alias pipeline contact",
+  capturedAt?: string,
+) => individualGrowthPdf("pipeline_contact", source, scope, title, capturedAt);
+export const guestGrowthSurveyPdf = (
+  source: GuestGrowthPdfSource,
+  scope: GuestGrowthPdfScope,
+  title = "Feedback survey draft",
+  capturedAt?: string,
+) => individualGrowthPdf("survey", source, scope, title, capturedAt);
+export const guestGrowthReferralPdf = (
+  source: GuestGrowthPdfSource,
+  scope: GuestGrowthPdfScope,
+  title = "Referral ask draft",
+  capturedAt?: string,
+) => individualGrowthPdf("referral", source, scope, title, capturedAt);
+export const guestGrowthOnboardingPdf = (
+  source: GuestGrowthPdfSource,
+  scope: GuestGrowthPdfScope,
+  title = "Onboarding research draft",
+  capturedAt?: string,
+) => individualGrowthPdf("onboarding", source, scope, title, capturedAt);
 export function guestGrowthExportAudiences(
   sources: readonly GuestGrowthPdfSource[],
 ): readonly ("owner" | "team")[] {

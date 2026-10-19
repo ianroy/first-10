@@ -919,6 +919,10 @@ export type Database = {
         };
         Returns: Json;
       };
+      authorize_guest_growth_export: {
+        Args: { p_scope: Json; p_session: string; p_sources: Json };
+        Returns: Json;
+      };
       begin_public_context_retrieval: {
         Args: {
           p_actor: string;
@@ -1047,6 +1051,11 @@ export type Database = {
       };
       get_class: { Args: { p_class_id: string }; Returns: Json };
       get_founding_partner_counts: { Args: Record<PropertyKey, never>; Returns: Json };
+      get_guest_growth_authority: { Args: { p_session: string }; Returns: Json };
+      get_guest_growth_history: {
+        Args: { p_artifact_id: string; p_session: string };
+        Returns: Json;
+      };
       get_guest_learning_submission: {
         Args: { p_mode: string; p_session: string; p_snapshot_id: string };
         Returns: Json;
@@ -1093,6 +1102,10 @@ export type Database = {
       list_class_invitations: { Args: { p_class_id: string; p_cursor?: string }; Returns: Json };
       list_class_members: { Args: { p_class_id: string; p_cursor?: string }; Returns: Json };
       list_guest_entries: { Args: { p_class_id: string }; Returns: Json };
+      list_guest_growth_artifacts: {
+        Args: { p_cursor?: string; p_kind?: string; p_session: string };
+        Returns: Json;
+      };
       list_guest_learning_activities: { Args: { p_session: string }; Returns: Json };
       list_guest_learning_submissions: {
         Args: { p_cursor?: string; p_mode: string; p_session: string };
@@ -1129,6 +1142,10 @@ export type Database = {
         Returns: Json;
       };
       load_discovery_workspace: { Args: { p_project_id: string }; Returns: Json };
+      load_guest_growth_artifact: {
+        Args: { p_artifact_id: string; p_revision?: number; p_session: string };
+        Returns: Json;
+      };
       load_guest_learning_activity: {
         Args: { p_activity_id: string; p_session: string };
         Returns: Json;
@@ -1257,6 +1274,18 @@ export type Database = {
           p_survey?: Json;
         };
         Returns: undefined;
+      };
+      save_guest_growth_artifact: {
+        Args: {
+          p_artifact_id: string;
+          p_audience: string;
+          p_document: Json;
+          p_expected_revision: number;
+          p_mutation_id: string;
+          p_session: string;
+          p_shared_confirmed: boolean;
+        };
+        Returns: Json;
       };
       save_guest_learning_activity: {
         Args: {
