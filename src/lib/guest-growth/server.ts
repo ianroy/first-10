@@ -21,10 +21,9 @@ import {
 import {
   authorizeGuestGrowthExportSchema,
   historyGuestGrowthSchema,
-  growthRecordHash,
-  growthContextHash,
   canonicalGrowthJson,
   guestGrowthAuthorityReceiptSchema,
+  guestGrowthExportReceiptSchema,
   GUEST_GROWTH_AUTHORITY_BYTES,
   type GuestGrowthAuthority,
 } from "./transport";
@@ -50,7 +49,8 @@ const RPC = {
   history: "get_guest_growth_history",
   save: "save_guest_growth_artifact",
 } as const;
-type Rpc = (typeof RPC)[keyof typeof RPC] | "get_guest_growth_authority";
+type Rpc =
+  (typeof RPC)[keyof typeof RPC] | "get_guest_growth_authority" | "authorize_guest_growth_export";
 type Context = { session: string; signal: AbortSignal };
 async function rpc(name: Rpc, context: Context, args: Record<string, unknown> = {}) {
   context.signal.throwIfAborted();
@@ -148,6 +148,18 @@ export async function runGuestGrowth(operation: Operation, value: unknown): Prom
     const session = sessionToken();
     if (!session) return fail("NOT_FOUND");
     const context = { session, signal: AbortSignal.timeout(20000) };
+    if (operation === "authorize") {
+      const d = authorizeGuestGrowthExportSchema.parse(input.data);
+      const raw = await rpc("authorize_guest_growth_export", context, {
+        p_scope: d.scope,
+        p_sources: d.sources,
+      });
+      const denied = guestActivityFailureSchema.safeParse(raw);
+      if (denied.success) return fail(denied.data.code);
+      return guestGrowthExportReceiptSchema.safeParse(raw).success
+        ? { ok: true }
+        : fail("UNAVAILABLE");
+    }
     const view = await fresh(context);
     let data: GrowthData;
     switch (operation) {
@@ -220,33 +232,6 @@ export async function runGuestGrowth(operation: Operation, value: unknown): Prom
           throw new Denied("UNAVAILABLE");
         data = saved;
         break;
-      }
-      case "authorize": {
-        const d = authorizeGuestGrowthExportSchema.parse(input.data);
-        if (!sameScope(view, d.scope) || d.scope.contextHash !== (await growthContextHash(view)))
-          throw new Denied("CHANGED");
-        // At most50 sequential exact reads; no body-reference traversal or unsaved-text transmission.
-        for (const s of d.sources) {
-          if (s.state === "draft") continue;
-          const r = receipt(
-            guestGrowthRecordSchema,
-            await rpc(RPC.load, context, { p_artifact_id: s.artifactId, p_revision: s.revision }),
-          );
-          if (
-            !allowed(view, r) ||
-            r.id !== s.artifactId ||
-            r.revision !== s.revision ||
-            r.kind !== s.kind ||
-            r.audience !== s.audience ||
-            r.authorPrincipalId !== s.authorPrincipalId ||
-            (await growthRecordHash(r)) !== s.recordHash
-          )
-            throw new Denied("CHANGED");
-        }
-        const after = await fresh(context);
-        if (!sameAuthority(after, view) || d.scope.contextHash !== (await growthContextHash(after)))
-          throw new Denied("CHANGED");
-        return { ok: true };
       }
     }
     const after = await fresh(context);

@@ -336,39 +336,38 @@ async function proof() {
     ],
   };
 }
-it("authorizes the exact retained hash without dereferencing linked bodies or transmitting draft text", async () => {
+it("uses one closed bulk RPC per export phase without transmitting draft text or loading sources in transport", async () => {
   const input = await proof();
+  h.result.mockResolvedValue({ error: null, data: { ok: true } });
   expect(await runGuestGrowth("authorize", input)).toEqual({ ok: true });
-  expect(h.rpc.mock.calls.map((c) => c[0])).toEqual([
-    "get_guest_growth_authority",
-    "load_guest_growth_artifact",
-    "get_guest_growth_authority",
-  ]);
+  expect(h.rpc.mock.calls.map((c) => c[0])).toEqual(["authorize_guest_growth_export"]);
+  expect(h.rpc.mock.calls[0]![1]).toEqual({
+    p_session: session,
+    p_scope: input.scope,
+    p_sources: input.sources,
+  });
   expect(JSON.stringify(input)).not.toContain(record.document.title);
-  expect(
-    await runGuestGrowth("authorize", {
-      ...input,
-      sources: [{ state: "draft", localDraftId: id(997), kind: "learning" }],
-    }),
-  ).toEqual({ ok: true });
 });
-it("rejects stale PDF scope, duplicate proofs, wrong retained hashes and unsaved-text fields", async () => {
+it("forwards all50 exact descriptors for both export phases and never substitutes per-source calls", async () => {
   const input = await proof();
-  expect(
-    await runGuestGrowth("authorize", {
-      ...input,
-      scope: { ...input.scope, principalId: id(999) },
-    }),
-  ).toEqual({ ok: false, code: "CHANGED" });
+  const sources = Array.from({ length: 50 }, (_, i) => ({
+    ...input.sources[0],
+    artifactId: id(500 + i),
+  }));
+  h.result.mockResolvedValue({ error: null, data: { ok: true } });
+  expect(await runGuestGrowth("authorize", { ...input, sources })).toEqual({ ok: true });
+  expect(await runGuestGrowth("authorize", { ...input, sources })).toEqual({ ok: true });
+  expect(h.rpc.mock.calls.map((c) => c[0])).toEqual([
+    "authorize_guest_growth_export",
+    "authorize_guest_growth_export",
+  ]);
+  for (const call of h.rpc.mock.calls) expect(call[1].p_sources).toEqual(sources);
+});
+it("rejects duplicate and gratuitous payloads before bulk RPC, and honors scope/hash/stale-source denials", async () => {
+  const input = await proof();
   expect(
     await runGuestGrowth("authorize", { ...input, sources: [input.sources[0], input.sources[0]] }),
   ).toEqual({ ok: false, code: "INVALID_INPUT" });
-  expect(
-    await runGuestGrowth("authorize", {
-      ...input,
-      sources: [{ ...input.sources[0], recordHash: "0".repeat(64) }],
-    }),
-  ).toEqual({ ok: false, code: "CHANGED" });
   expect(
     await runGuestGrowth("authorize", {
       ...input,
@@ -377,23 +376,27 @@ it("rejects stale PDF scope, duplicate proofs, wrong retained hashes and unsaved
       ],
     }),
   ).toEqual({ ok: false, code: "INVALID_INPUT" });
+  expect(h.rpc).not.toHaveBeenCalled();
+  h.result.mockResolvedValue({ error: null, data: { ok: false, code: "CHANGED" } });
+  expect(
+    await runGuestGrowth("authorize", {
+      ...input,
+      scope: { ...input.scope, principalId: id(999) },
+    }),
+  ).toEqual({ ok: false, code: "CHANGED" });
+  expect(
+    await runGuestGrowth("authorize", {
+      ...input,
+      sources: [{ ...input.sources[0], recordHash: "0".repeat(64) }],
+    }),
+  ).toEqual({ ok: false, code: "CHANGED" });
 });
-it("withholds a PDF if printed team metadata changes while exact source reads are in flight", async () => {
-  const input = await proof();
-  let reads = 0;
-  h.result.mockImplementation((name: string) => ({
-    error: null,
-    data: {
-      ok: true,
-      data:
-        name === "get_guest_growth_authority"
-          ? ++reads === 1
-            ? authority
-            : { ...authority, teamAlias: "Changed team label" }
-          : record,
-    },
-  }));
-  expect(await runGuestGrowth("authorize", input)).toEqual({ ok: false, code: "CHANGED" });
+it("requires a strict bulk success receipt without accepting extra private data", async () => {
+  h.result.mockResolvedValue({ error: null, data: { ok: true, privateNotes: "unexpected" } });
+  expect(await runGuestGrowth("authorize", await proof())).toEqual({
+    ok: false,
+    code: "UNAVAILABLE",
+  });
 });
 
 it("does not fetch valid large unrelated class assignment bodies while resolving growth authority", async () => {
@@ -491,5 +494,5 @@ it("fails closed for draft-only PDF authority when the new projection RPC is mis
       sources: [{ state: "draft", localDraftId: id(444), kind: "learning" }],
     }),
   ).toEqual({ ok: false, code: "UNAVAILABLE" });
-  expect(h.rpc.mock.calls.map((c) => c[0])).toEqual(["get_guest_growth_authority"]);
+  expect(h.rpc.mock.calls.map((c) => c[0])).toEqual(["authorize_guest_growth_export"]);
 });

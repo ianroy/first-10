@@ -1,6 +1,7 @@
 import { z } from "zod";
 import { hasLikelySecret } from "@/lib/discovery";
 import { jsonBytes } from "@/lib/marketing-plan";
+import { growthOptionKey, growthOptionTrim } from "./option-case";
 import { secretSchema } from "@/lib/guest-spaces/contracts";
 
 /** Contract-only: no persistence, authorization, PDF mount or collection is enabled here. */
@@ -40,8 +41,24 @@ const uuid = z
   .uuid()
   .transform((v) => v.toLowerCase());
 const text = (n: number) =>
-  z.string().refine((v) => Array.from(v).length <= n, `Use at most ${n} characters.`);
-const instant = z.string().datetime({ offset: true });
+  z
+    .string()
+    .refine((v) => Array.from(v).length <= n, `Use at most ${n} characters.`)
+    .refine(
+      (v) =>
+        !v.includes("\u0000") &&
+        !Array.from(v).some(
+          (c) => c.length === 1 && c.charCodeAt(0) >= 0xd800 && c.charCodeAt(0) <= 0xdfff,
+        ),
+      "Use valid Unicode text without NUL characters.",
+    );
+const instant = z
+  .string()
+  .datetime({ offset: true })
+  .refine(
+    (v) => !v.startsWith("0000") && Number.isFinite(Date.parse(v)),
+    "Use a finite supported calendar instant.",
+  );
 const day = z
   .string()
   .regex(/^\d{4}-\d{2}-\d{2}$/)
@@ -170,7 +187,7 @@ export const guestGrowthSurveyQuestionSchema = z.discriminatedUnion("format", [
       ...questionBase,
       format: z.literal("single_choice"),
       options: z
-        .array(text(120).refine((v) => Boolean(v.trim())))
+        .array(text(120).refine((v) => Boolean(growthOptionTrim(v))))
         .min(2)
         .max(6),
     })
@@ -315,7 +332,8 @@ export const guestGrowthDocumentSchema = documentBase.superRefine((d, ctx) => {
       for (const q of d.questions)
         if (
           q.format === "single_choice" &&
-          new Set(q.options.map((v) => v.trim().toLowerCase())).size !== q.options.length
+          q.options.every((v) => Array.from(v).length <= 120) &&
+          new Set(q.options.map(growthOptionKey)).size !== q.options.length
         )
           fail("Question options must be distinct.");
   }
@@ -708,7 +726,7 @@ export function guestGrowthSelectionError(
 
 const reflection = z
   .object({
-    title: text(120).refine((v) => Boolean(v.trim())),
+    title: text(120).refine((v) => Boolean(growthOptionTrim(v))),
     interpretation: text(3000),
     uncertainty: text(2000),
     decision: text(2000),
@@ -723,7 +741,7 @@ export const previewGuestGrowthSchema = scope
     threadId: uuid,
     requestId: uuid,
     selections: z.array(guestGrowthSelectionSchema).min(1).max(12),
-    redactions: z.array(text(200).refine((v) => Boolean(v.trim()))).max(30),
+    redactions: z.array(text(200).refine((v) => Boolean(growthOptionTrim(v)))).max(30),
     reflection,
   })
   .strict()
