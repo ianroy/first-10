@@ -52,6 +52,7 @@ SELECT ok(NOT has_table_privilege(r,t,'SELECT,INSERT,UPDATE,DELETE'),'closed gro
 SELECT ok(NOT has_function_privilege(r,'public.get_guest_growth_authority(text)','EXECUTE'),'tiny authority denies direct '||r)FROM unnest(ARRAY['anon','authenticated'])r;
 SELECT ok(NOT has_function_privilege('authenticated','public.save_guest_growth_artifact(text,uuid,text,bigint,uuid,boolean,jsonb)','EXECUTE'),'account role cannot impersonate guest');
 SELECT ok(NOT has_function_privilege('service_role','firstten_private.normalize_guest_growth(jsonb)','EXECUTE'),'private validator is closed');
+SELECT ok(NOT has_function_privilege('service_role','firstten_private.guest_growth_hash(jsonb)','EXECUTE'),'private canonical hash stays closed to service role');
 CREATE FUNCTION firstten_policy_test.gg_require_admission(k text)RETURNS void LANGUAGE plpgsql AS $$
 DECLARE receipt jsonb;
 BEGIN
@@ -144,7 +145,10 @@ INSERT INTO firstten_policy_test.gg_results SELECT'history',public.get_guest_gro
 INSERT INTO firstten_policy_test.gg_results SELECT'list',public.list_guest_growth_artifacts(firstten_policy_test.gg_session('a'));
 INSERT INTO firstten_policy_test.gg_results SELECT'hash_record',public.load_guest_growth_artifact(firstten_policy_test.gg_session('a'),firstten_policy_test.gg_id(200),1);
 INSERT INTO firstten_policy_test.gg_results SELECT'denied',public.load_guest_growth_artifact(firstten_policy_test.gg_session('buddy'),firstten_policy_test.gg_id(101));
+-- Test-only private hash projection runs as the fixture owner; product service grants remain closed.
+RESET ROLE;
 INSERT INTO firstten_policy_test.gg_results SELECT'record_hashes',jsonb_object_agg(label,firstten_private.guest_growth_hash(result#>'{data,record}'))FROM firstten_policy_test.gg_results WHERE label IN('learning_save','experiment_save','pipeline_contact_save','survey_save','referral_save','onboarding_save');
+SET LOCAL ROLE service_role;
 SELECT'GUEST_GROWTH_DTO:'||(SELECT jsonb_object_agg(label,result)FROM firstten_policy_test.gg_results WHERE label IN('learning_save','experiment_save','pipeline_contact_save','survey_save','referral_save','onboarding_save','replay','authority','load','history','list','denied','export_spec','bulk_before','bulk_delivery','hash_record','record_hashes'))::text;
 RESET ROLE;
 -- Direct fixture fills are explicit superuser test setup, never a product API or fabricated account.
