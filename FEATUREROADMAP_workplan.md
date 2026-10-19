@@ -105,9 +105,16 @@ resume_hint: >-
   a pinned Unicode17 option-key policy instead of weakening to ASCII. Guard/clone-state
   fixes frozen in5773596;123focusedtests pass/17actualSQLskips. Worker idle. Root reviewed
   all4exactpins and authorizes only guarded disposable schema-only clone trial on55322.
-  First trial compiled27 in clone only, then SQL aborted at50-source setup; initial
-  authority assertion failed. Clone removed/source unchanged verified. Sole worker
-  diagnoses source-only before new reviewed pins. DTO/races not reached; no live27.
+  First trial caught uninitialized authority owner record; corrected7fb4. Second
+  clone trial passed authority/all6saves/private+team/CAS/replay/50source53attempt
+  export checks, then fixture hit deliberately closed privatehelper under service_role.
+  Thirdtrial also passed64/96artifact and2/8/32MiB caps, then fixture parent-team
+  deletion hit existing append-onlyMarketingaudit guard. Preserveguard; fixfixture
+  cleanup to growthrows only, leaveparent identities until outerROLLBACK. PRV002/003
+  record realdelete integrationlimit. Fourthtrial after fixturefix passes3490strictSQL/0fail/0gaps/validplan/outerrollback
+  and17actualDTOtests. FirstrealoverlapCOMMIT finds deferredtrigger losesprivate
+  schemaauthority afterprivilegedRPC returns; narrowfixedsearchpath triggerfixpending.
+  All4clones removed/source unchanged verified; fullraces unfinished. No live27/mount.
   README/ProductSpec now clearly distinguish existing
   reviewed Marketing copies from unfinished dedicated six-kind growth workflows. No complete
   funnel or physical deletion guarantee is claimed.

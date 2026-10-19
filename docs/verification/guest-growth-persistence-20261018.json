@@ -22,6 +22,74 @@
       "fixtureAbort": "Failed real50-source setup",
       "sourceOrHostedWrites": false,
       "providerCalls": 0
+    },
+    {
+      "pins": {
+        "MIGRATION": "6879efb9c55eb3370747c484e2716708811daea1ed42fd05b3e2a93f0243d3b1",
+        "HARNESS": "72700b604f55c11be0da927d0d7f91ed6e42d4b261cb380f1bf5fcb1b1ed7fb2",
+        "RACES": "d5ad1de98ef1caa441aa6b181eef21156b56dfa4e64668c7d4297089e9475a0d",
+        "SQL": "3a7609c5e694a21fb2c95b4e0fbcfee8daa91a2b2e9e5a2affc5ee134c9be5bc"
+      },
+      "database": "firstten_growth_test_1407d132320d",
+      "phase": "complete rollback SQL fixtures",
+      "creationAttempted": true,
+      "cleanupVerified": true,
+      "passed": false,
+      "sourceUnchanged": true,
+      "sourceCommit": "7fb4acba3e5776c248c642afbe1b658f4d7f1db4",
+      "date": "2026-10-18",
+      "result": "Migration compiled/applied clone only. Genuine authority,6kind saves,private/team access,CAS,stable replay and50-source53-attempt export assertions passed. Suite aborted at test-only record_hashes SELECT attempting private helper under service_role; retain closed production grants, correct fixture role. DTO/races not reached.",
+      "fixtureAbort": "permission denied for schema firstten_private in test-only record_hashes export",
+      "sourceOrHostedWrites": false,
+      "providerCalls": 0
+    },
+    {
+      "pins": {
+        "MIGRATION": "6879efb9c55eb3370747c484e2716708811daea1ed42fd05b3e2a93f0243d3b1",
+        "HARNESS": "72700b604f55c11be0da927d0d7f91ed6e42d4b261cb380f1bf5fcb1b1ed7fb2",
+        "RACES": "d5ad1de98ef1caa441aa6b181eef21156b56dfa4e64668c7d4297089e9475a0d",
+        "SQL": "8e07b99c17d12c615a3a384fe3c50e78736adae05842402e83157872ed94b9a9"
+      },
+      "database": "firstten_growth_test_82ece68b7226",
+      "phase": "complete rollback SQL fixtures",
+      "creationAttempted": true,
+      "cleanupVerified": true,
+      "passed": false,
+      "sourceUnchanged": true,
+      "sourceCommit": "d51ff84ad7422c1d0d20115f6e1c653468161681",
+      "date": "2026-10-18",
+      "result": "All guestauthority/saves/references/50-source export checks and64private/96team/2MiBprivate/8MiBteam/32MiBclass caps passed before fixture attempted parent team deletion. Existing append-only marketing_submission_audit guard denied cascading principal deletion. Keep disposable parent identities until outerROLLBACK; remove only owned growth fill rows. Never disable existing audit guard. Actual DTO/races not reached.",
+      "fixtureAbort": "Admin audit is append-only during test-owned parent team deletion",
+      "lastPassedAssertion": 3473,
+      "sourceOrHostedWrites": false,
+      "providerCalls": 0
+    },
+    {
+      "pins": {
+        "MIGRATION": "6879efb9c55eb3370747c484e2716708811daea1ed42fd05b3e2a93f0243d3b1",
+        "HARNESS": "72700b604f55c11be0da927d0d7f91ed6e42d4b261cb380f1bf5fcb1b1ed7fb2",
+        "RACES": "d5ad1de98ef1caa441aa6b181eef21156b56dfa4e64668c7d4297089e9475a0d",
+        "SQL": "e9c172c505d9246d8ed3738915744f9ccc94649dd51c4a0e9522e8b8c61fada6"
+      },
+      "database": "firstten_growth_test_61a2abde21b7",
+      "phase": "true overlapping separate-connection races",
+      "creationAttempted": true,
+      "cleanupVerified": true,
+      "passed": false,
+      "assertions": 3490,
+      "failures": [],
+      "sourceUnchanged": true,
+      "sourceCommit": "6a0d1253625988f1c25218bd8d54308510d425a7",
+      "date": "2026-10-18",
+      "result": "Complete strict3490SQL assertions passed,0failures/0known-gaps/validplan/outerrollback.17actualSQLDTO/hash-schema tests passed. First real overlapping race reached lockwait then COMMIT failed: deferred guest_growth_edges_complete trigger runs as service_role after privileged save returns, cannot access private schema. Narrow fixed-search-path trusted-owner trigger fix required; no service grants widen. Fullraces not completed.",
+      "actualDtoTestsPassed": 17,
+      "strictSqlValidPlan": true,
+      "strictSqlKnownGaps": 0,
+      "strictSqlOuterRollback": true,
+      "failure": "permission denied schema firstten_private on first race COMMIT",
+      "approvalReview": "First execution request timed out before start; permitted identical retry executed successfully to test failure",
+      "sourceOrHostedWrites": false,
+      "providerCalls": 0
     }
   ],
   "status": "source_candidate_actual_sql_failed_cleanup_verified"
