@@ -1,5 +1,22 @@
 -- Fictional rollback-only metadata/event fixtures. Production collection stays disabled.
 RESET ROLE;
+-- BEGIN_AN003_TEST_ONLY_READINESS_SETUP
+-- Fake unscheduled metadata for policy-unit assertions, never runtime scheduler proof.
+DO $fixture$
+BEGIN
+ IF to_regclass('firstten_private.product_retention_state')IS NOT NULL THEN
+  IF to_regnamespace('cron')IS NOT NULL THEN RAISE EXCEPTION'AN003 policy fixture refuses existing cron namespace';END IF;
+  CREATE TEMP TABLE an003_retention_original ON COMMIT PRESERVE ROWS AS SELECT * FROM firstten_private.product_retention_state;
+  CREATE SCHEMA cron;
+  COMMENT ON SCHEMA cron IS 'FIRSTTEN_AN003_TEST_ONLY_UNSCHEDULED_METADATA';
+  CREATE TABLE cron.job(jobid bigint PRIMARY KEY,jobname text,schedule text,command text,database text,username text,active boolean);
+  CREATE TABLE cron.job_run_details(jobid bigint,runid bigint PRIMARY KEY,job_pid integer,status text,start_time timestamptz,end_time timestamptz);
+  INSERT INTO cron.job VALUES(1,'firstten-owner-measurement-retention-v1','*/5 * * * *',firstten_private.retention_job_command(),current_database(),current_user,true);
+  INSERT INTO cron.job_run_details VALUES(1,1,NULL,'succeeded',clock_timestamp()-interval'1 second',clock_timestamp());
+  UPDATE firstten_private.product_retention_state SET job_id=1,job_name='firstten-owner-measurement-retention-v1',job_schedule='*/5 * * * *',job_database=current_database(),job_username=current_user,last_run_id=1,last_attempt_at=clock_timestamp()-interval'1 second',last_drained_at=clock_timestamp(),last_outcome='drained',removed_rows=0;
+ END IF;
+END $fixture$;
+-- END_AN003_TEST_ONLY_READINESS_SETUP
 INSERT INTO auth.users(id,aud,role,email,raw_app_meta_data,raw_user_meta_data)VALUES('c2500000-0000-4000-8000-000000000001','authenticated','authenticated','measurement-fixture@example.invalid','{"synthetic":true}','{}'),('c2500000-0000-4000-8000-000000000002','authenticated','authenticated','measurement-other@example.invalid','{}','{}');
 INSERT INTO firstten_policy_test.ids(label,id)VALUES('an_owner','c2500000-0000-4000-8000-000000000001'),('an_other','c2500000-0000-4000-8000-000000000002');
 SELECT ok(NOT(SELECT enabled FROM firstten_private.product_measurement_policy),'measurement begins disabled');
@@ -92,11 +109,13 @@ SELECT 'AN002_DTO:'||jsonb_build_object('preference',public.get_product_measurem
 RESET ROLE;
 SELECT ok(EXISTS(SELECT 1 FROM firstten_private.admin_audit WHERE request_id='c2500000-0000-4000-8000-000000000105'AND operation='funnel_snapshot'),'health response has an authoritative admin audit receipt');
 UPDATE firstten_private.product_measurement_policy SET last_purge_at=clock_timestamp()-interval'26 hours';
+DO $$BEGIN IF to_regclass('firstten_private.product_retention_state')IS NOT NULL THEN UPDATE firstten_private.product_retention_state SET last_drained_at=clock_timestamp()-interval'11 minutes';END IF;END $$;
 SET LOCAL ROLE authenticated;SELECT firstten_policy_test.set_actor('an_owner');
 INSERT INTO public.projects(id,user_id,name)VALUES('c2500000-0000-4000-8000-000000000017',auth.uid(),'Overdue collection is skipped');
 RESET ROLE;
 SELECT is((SELECT count(*)FROM firstten_private.product_event_log),0::bigint,'overdue cleanup stops new optional measurement');
 UPDATE firstten_private.product_measurement_policy SET last_purge_at=clock_timestamp();
+DO $$BEGIN IF to_regclass('firstten_private.product_retention_state')IS NOT NULL THEN UPDATE firstten_private.product_retention_state SET last_attempt_at=clock_timestamp()-interval'1 second',last_drained_at=clock_timestamp();END IF;END $$;
 SET LOCAL ROLE authenticated;SELECT firstten_policy_test.set_actor('an_owner');
 DELETE FROM public.projects WHERE id='c2500000-0000-4000-8000-000000000016';
 INSERT INTO public.projects(id,user_id,name)VALUES('c2500000-0000-4000-8000-000000000016',auth.uid(),'Recreated source after receipt expiry');
@@ -126,3 +145,15 @@ SELECT is((SELECT count(*)FROM firstten_private.product_measurement_preferences 
 DELETE FROM public.projects WHERE user_id='c2500000-0000-4000-8000-000000000002';
 DELETE FROM auth.users WHERE id='c2500000-0000-4000-8000-000000000002';
 UPDATE firstten_private.product_measurement_policy SET enabled=false,environment='development',instrumentation_start=NULL,purge_schedule_verified_at=NULL,purge_schedule_receipt=NULL;
+-- BEGIN_AN003_TEST_ONLY_READINESS_CLEANUP
+DO $fixture$
+BEGIN
+ IF to_regclass('pg_temp.an003_retention_original')IS NOT NULL THEN
+  IF obj_description(to_regnamespace('cron'),'pg_namespace')IS DISTINCT FROM'FIRSTTEN_AN003_TEST_ONLY_UNSCHEDULED_METADATA'OR EXISTS(SELECT 1 FROM pg_extension WHERE extname='pg_cron')THEN RAISE EXCEPTION'AN003 policy fixture refuses foreign cron cleanup';END IF;
+  DROP SCHEMA cron CASCADE;
+  DELETE FROM firstten_private.product_retention_state;
+  INSERT INTO firstten_private.product_retention_state SELECT * FROM pg_temp.an003_retention_original;
+  DROP TABLE pg_temp.an003_retention_original;
+ END IF;
+END $fixture$;
+-- END_AN003_TEST_ONLY_READINESS_CLEANUP

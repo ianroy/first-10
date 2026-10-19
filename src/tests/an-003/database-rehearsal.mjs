@@ -197,7 +197,7 @@ try {
   sql("INSERT INTO firstten_private.product_measurement_policy(singleton)VALUES(true);");
   phase = "candidate26 on isolated cluster only";
   sql(readFileSync(root + paths[0], "utf8"));
-  const fixtureResult = sql(readFileSync(root + paths[1], "utf8"));
+  const fixtureResult = sql("BEGIN;\n" + readFileSync(root + paths[1], "utf8") + "\nROLLBACK;");
   writeFileSync("/private/tmp/firstten-an003-sql-result.txt", fixtureResult);
   const dto = fixtureResult.split(/\r?\n/).filter((s) => s.startsWith("AN003_DTO:"));
   assert.equal(dto.length, 1);

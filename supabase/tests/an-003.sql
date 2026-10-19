@@ -1,5 +1,5 @@
 -- Run inside the isolated AN003 cluster only. Assertions are rolled back.
-BEGIN;
+SAVEPOINT an003_fixture;
 CREATE SCHEMA an003_test;
 CREATE FUNCTION an003_test.assert(p boolean,message text)RETURNS void LANGUAGE plpgsql AS $$BEGIN IF p IS DISTINCT FROM true THEN RAISE EXCEPTION'AN003 assertion failed: %',message;END IF;END $$;
 SELECT an003_test.assert(NOT(SELECT enabled FROM firstten_private.product_measurement_policy),'migration must not enable collection');
@@ -35,4 +35,5 @@ DO $$BEGIN
  BEGIN PERFORM public.get_product_measurement_retention_health_v2(gen_random_uuid());RAISE EXCEPTION'expected denial';EXCEPTION WHEN insufficient_privilege THEN NULL;END;
 END $$;
 SELECT an003_test.assert(NOT(SELECT enabled FROM firstten_private.product_measurement_policy),'test never enables collection');
-ROLLBACK;
+ROLLBACK TO SAVEPOINT an003_fixture;
+RELEASE SAVEPOINT an003_fixture;

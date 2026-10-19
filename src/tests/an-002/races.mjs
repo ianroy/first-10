@@ -1,6 +1,7 @@
 import assert from "node:assert/strict";
 import { randomUUID } from "node:crypto";
 import postgres from "postgres";
+import { readFileSync } from "node:fs";
 export async function measurementRaces({ database, password }) {
   assert.match(database, /^firstten_measurement_test_[a-f0-9]{10}$/);
   const opts = {
@@ -34,7 +35,25 @@ export async function measurementRaces({ database, password }) {
     }
     assert.fail("Expected competing sessions never overlapped");
   };
+  const fixture = readFileSync(
+    new URL("../../../supabase/tests/an-002.sql", import.meta.url),
+    "utf8",
+  );
+  const fixtureBlock = (name) => {
+    const match = fixture.match(
+      new RegExp(
+        "-- BEGIN_AN003_TEST_ONLY_READINESS_" +
+          name +
+          "\\n([\\s\\S]*?)-- END_AN003_TEST_ONLY_READINESS_" +
+          name,
+      ),
+    );
+    assert(match, "Missing reviewed readiness fixture block");
+    return match[1];
+  };
   try {
+    assert.equal((await admin`SELECT current_database()AS name`)[0].name, database);
+    await admin.unsafe(fixtureBlock("SETUP"));
     await admin`INSERT INTO auth.users(id,aud,role,email,raw_app_meta_data,raw_user_meta_data)VALUES(${actor},'authenticated','authenticated',${`measurement-race-${actor}@example.invalid`},'{"synthetic":true}','{}')`;
     await admin`UPDATE firstten_private.product_measurement_policy SET enabled=true,environment='test',instrumentation_start=clock_timestamp(),last_purge_at=clock_timestamp(),purge_schedule_verified_at=clock_timestamp(),purge_schedule_receipt=repeat('a',64)`;
     await start(a);
@@ -141,6 +160,11 @@ export async function measurementRaces({ database, password }) {
     );
   } finally {
     await Promise.allSettled([a`ROLLBACK`, b`ROLLBACK`]);
-    await Promise.all([admin.end(), a.end(), b.end()]);
+    try {
+      await admin`UPDATE firstten_private.product_measurement_policy SET enabled=false,environment='development',instrumentation_start=NULL,purge_schedule_verified_at=NULL,purge_schedule_receipt=NULL`;
+      await admin.unsafe(fixtureBlock("CLEANUP"));
+    } finally {
+      await Promise.all([admin.end(), a.end(), b.end()]);
+    }
   }
 }
