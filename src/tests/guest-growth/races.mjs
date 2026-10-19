@@ -37,11 +37,11 @@ export async function growthRaces({ database, password }) {
       await c`SET LOCAL ROLE service_role`;
     };
   const save = (c, id, expected, mutation, d = doc) =>
-    c`SELECT public.save_guest_growth_artifact(${session},${id},'principal_private',${expected},${mutation},false,${c.json(d)})AS result`;
+    c`SELECT public.save_guest_growth_artifact(${session},${id},'principal_private',${expected},${mutation},false,${c.json(d)}) AS result`;
   const waits = [];
   const blocked = async (pa, pb) => {
     for (let n = 0; n < 80; n++) {
-      if ((await admin`SELECT ${pa}::integer=ANY(pg_blocking_pids(${pb}))AS waiting`)[0].waiting) {
+      if ((await admin`SELECT ${pa}::integer=ANY(pg_blocking_pids(${pb})) AS waiting`)[0].waiting) {
         waits.push(true);
         return;
       }
@@ -49,7 +49,7 @@ export async function growthRaces({ database, password }) {
     }
     throw Error("No true overlapping lock wait observed");
   };
-  const pid = async (c) => (await c`SELECT pg_backend_pid()AS pid`)[0].pid;
+  const pid = async (c) => (await c`SELECT pg_backend_pid() AS pid`)[0].pid;
   const canonical = (v) =>
     v === null || typeof v !== "object"
       ? JSON.stringify(v)
@@ -61,7 +61,7 @@ export async function growthRaces({ database, password }) {
             .join(",")}}`;
   const exportSpec = async (id, revision) => {
     const row = (
-      await admin`SELECT firstten_private.guest_growth_authority(p)authority,firstten_private.guest_growth_hash(firstten_private.guest_growth_record(x,${revision}))record_hash,x.kind,x.audience,x.author_principal_id FROM public.class_guest_principals p CROSS JOIN firstten_private.guest_growth_artifacts x WHERE p.id=${principal}AND x.id=${id}`
+      await admin`SELECT firstten_private.guest_growth_authority(p) AS authority,firstten_private.guest_growth_hash(firstten_private.guest_growth_record(x,${revision})) AS record_hash,x.kind,x.audience,x.author_principal_id FROM public.class_guest_principals p CROSS JOIN firstten_private.guest_growth_artifacts x WHERE p.id=${principal} AND x.id=${id}`
     )[0];
     const v = row.authority,
       context = {
@@ -121,7 +121,7 @@ export async function growthRaces({ database, password }) {
     await a`COMMIT`;
     assert.equal(
       (
-        await admin`SELECT count(*)::int n FROM firstten_private.guest_growth_reference_edges WHERE artifact_id=${commitParent}AND source_id=${commitSource}AND source_revision=1`
+        await admin`SELECT count(*)::int n FROM firstten_private.guest_growth_reference_edges WHERE artifact_id=${commitParent} AND source_id=${commitSource} AND source_revision=1`
       )[0].n,
       1,
       "A reference-bearing service save must survive deferred COMMIT checks",
@@ -185,19 +185,19 @@ export async function growthRaces({ database, password }) {
     await b`COMMIT`;
     assert.equal(
       (
-        await admin`SELECT document->>'title' title FROM firstten_private.guest_growth_versions WHERE artifact_id=${artifact}AND revision=2`
+        await admin`SELECT document->>'title' title FROM firstten_private.guest_growth_versions WHERE artifact_id=${artifact} AND revision=2`
       )[0].title,
       "First concurrent edit",
     );
     // Recovery holds the same class fence while a previously issued capability waits.
     await a`BEGIN`;
-    await a`SELECT id FROM public.classes WHERE id=${cid}FOR UPDATE`;
+    await a`SELECT id FROM public.classes WHERE id=${cid} FOR UPDATE`;
     await start(b);
     const deniedMutation = randomUUID();
     pending = save(b, artifact, 2, deniedMutation).execute();
     await blocked(pa, pb);
     const recovered = result(
-      await a`SELECT public.exchange_guest_entry('principal_recovery',${recovery},'','',${"e".repeat(64)})AS result`,
+      await a`SELECT public.exchange_guest_entry('principal_recovery',${recovery},'','',${"e".repeat(64)}) AS result`,
     );
     assert.equal(recovered.ok, true);
     await a`COMMIT`;
@@ -236,7 +236,7 @@ export async function growthRaces({ database, password }) {
     await a`DELETE FROM firstten_private.guest_growth_artifacts WHERE id=${source}`;
     await start(b);
     pending =
-      b`SELECT public.authorize_guest_growth_export(${session},${b.json(dependencySpec.scope)},${b.json(dependencySpec.sources)})AS result`.execute();
+      b`SELECT public.authorize_guest_growth_export(${session},${b.json(dependencySpec.scope)},${b.json(dependencySpec.sources)}) AS result`.execute();
     await blocked(pa, pb);
     await a`COMMIT`;
     assert.equal(result(await pending).code, "CHANGED");
@@ -308,7 +308,7 @@ export async function growthRaces({ database, password }) {
     await a`UPDATE public.classes SET archived_at=clock_timestamp(),revision=revision+1 WHERE id=${cid}`;
     await start(b);
     pending =
-      b`SELECT public.authorize_guest_growth_export(${session},${b.json(closeSpec.scope)},${b.json(closeSpec.sources)})AS result`.execute();
+      b`SELECT public.authorize_guest_growth_export(${session},${b.json(closeSpec.scope)},${b.json(closeSpec.sources)}) AS result`.execute();
     await blocked(pa, pb);
     await a`COMMIT`;
     assert.equal(result(await pending).code, "NOT_FOUND");
