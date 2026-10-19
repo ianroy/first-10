@@ -164,5 +164,28 @@
       }
     }
   ],
-  "status": "isolated_sql_dto_commit_race_gates_passed_unapplied"
+  "status": "isolated_sql_dto_commit_race_gates_passed_unapplied",
+  "integration": {
+    "sourceRootCommits": ["fa78838", "6dd018e", "194c063", "5fdda1d", "1a2cb77", "288873a"],
+    "appTestsPassed": 1356,
+    "existingTestsSkipped": 11,
+    "appTestFilesPassed": 140,
+    "appTestFilesSkipped": 1,
+    "actualDtoSuitesEnabled": 5,
+    "typecheck": "passed",
+    "lint": {
+      "errors": 0,
+      "existingWarnings": 6
+    },
+    "productionBuild": "passed",
+    "migrationHistoryCheck": {
+      "passed": true,
+      "files": 29
+    },
+    "sourceAndHostedSchema": 26,
+    "growthUiMounted": false,
+    "teacherProjectionImplemented": false,
+    "exportCoverageRegistered": false,
+    "providerCalls": 0
+  }
 }

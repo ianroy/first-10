@@ -31,11 +31,13 @@ research_gate: not_passed
 foundation_gate: not_passed
 realtime_go: pending
 last_updated: 2026-10-18
-last_documentation_update: "2026-10-18: Managed history-index prerequisite proven with rollback; AN003 schema lease released. Slow serial work proceeds to guest persistence27; prior retention27 candidate superseded."
+last_documentation_update: "2026-10-18: Slow serial guest persistence source integrated;3494SQL/17DTO/6overlaps/realcommit+expiry gates and1356combinedapp tests pass. Actualschema27 rollout,teacherprojection,mounts andliveproof remain."
 resume_hint: >-
   Active goal: keep building every feasible authorized item, verify and commit/push/deploy.
   User requested SLOW pace: maximum1 worker, one task at a time, no new parallel wave.
-  Only CLS009 may resume on one serial worker. EV001 remains idle with its contract
+  CLS009 phase4 source is integrated/verified; its worker is idle. Next serial gate is
+  actualschema27 rollout/officialtypes, followed by separate teacherprojection and
+  rootmount/coverage/liveproof. EV001 remains idle with its contract
   scope reserved. AN003 schema lease released after concrete managed-owner index
   prerequisite; this is slower continuation, not a goal pause.
   Preserve $25 total OpenRouter cap and no other paid services. Latest usage check: 57%
@@ -117,7 +119,8 @@ resume_hint: >-
   Sixthtrialceaed after narrowtrigger+taggedquery fixes PASS:3494strictSQL,17actualDTO,
   6trueblockedoverlaps,validreferenceCOMMIT/incomplete23514rollback controls and
   witnessedlateexpiryrollback. All6clones removed/sourceunchanged verified. Root
-  integrates6sourcecommits thencombinedappgate; workeridle. No live27/mount/teacher
+  integrated6sourcecommitsfa78838..288873a;1356app tests/11existing skips withall5
+  actualDTOsuites enabled,type/lint0errors/build/migrationcheckpass. Workeridle. No live27/mount/teacher
   projection/coverageclaim; sourceandhosted remainactual26.
   README/ProductSpec now clearly distinguish existing
   reviewed Marketing copies from unfinished dedicated six-kind growth workflows. No complete
