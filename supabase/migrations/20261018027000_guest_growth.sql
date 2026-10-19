@@ -131,9 +131,9 @@ CREATE FUNCTION firstten_private.guest_growth_utf16(t text)RETURNS bigint LANGUA
 CREATE FUNCTION firstten_private.guest_growth_authority(p public.class_guest_principals)RETURNS jsonb LANGUAGE plpgsql VOLATILE SET search_path=pg_catalog AS $$
 DECLARE c public.classes;t public.class_teams;g public.class_guest_principals;r jsonb;
 BEGIN
- SELECT * INTO c FROM public.classes WHERE id=p.class_id AND archived_at IS NULL AND access_expires_at>clock_timestamp()AND EXISTS(SELECT 1 FROM auth.users WHERE id=c.user_id);
- SELECT * INTO t FROM public.class_teams WHERE id=p.team_id AND class_id=p.class_id AND archived_at IS NULL;
- SELECT * INTO g FROM public.class_guest_principals WHERE id=p.id AND class_id=p.class_id AND team_id=p.team_id AND revoked_at IS NULL;
+ SELECT live_class.* INTO c FROM public.classes AS live_class WHERE live_class.id=p.class_id AND live_class.archived_at IS NULL AND live_class.access_expires_at>clock_timestamp()AND EXISTS(SELECT 1 FROM auth.users AS owner_user WHERE owner_user.id=live_class.user_id);
+ SELECT live_team.* INTO t FROM public.class_teams AS live_team WHERE live_team.id=p.team_id AND live_team.class_id=p.class_id AND live_team.archived_at IS NULL;
+ SELECT live_principal.* INTO g FROM public.class_guest_principals AS live_principal WHERE live_principal.id=p.id AND live_principal.class_id=p.class_id AND live_principal.team_id=p.team_id AND live_principal.revoked_at IS NULL;
  IF c.id IS NULL OR t.id IS NULL OR g.id IS NULL THEN RETURN NULL;END IF;
  IF firstten_private.guest_growth_utf16(c.name)>120 OR firstten_private.guest_growth_utf16(t.alias)>80 OR firstten_private.guest_growth_utf16(g.alias)>80 THEN RETURN NULL;END IF;
  r:=jsonb_build_object('classId',c.id,'teamId',t.id,'principalId',g.id,'className',c.name,'teamAlias',t.alias,'principalAlias',g.alias,'accessExpiresAt',c.access_expires_at,'classRevision',c.revision,'teamGeneration',t.access_revision,'principalGeneration',g.access_revision);

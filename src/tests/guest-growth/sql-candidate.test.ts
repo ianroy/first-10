@@ -40,3 +40,21 @@ it("keeps every executable SQL corpus literal equal to the reviewed TypeScript s
   for (const v of growthSqlCorpus)
     expect(rows.get(v.label), v.label).toEqual({ valid: v.valid, document: v.document });
 });
+it("never reads an unassigned SELECT INTO target while resolving fresh authority rows", () => {
+  const body =
+    /guest_growth_authority\(p public\.class_guest_principals\)[\s\S]*?AS \$\$([\s\S]*?)END \$\$;/.exec(
+      migration,
+    )![1]!;
+  const selfReads = (source: string) =>
+    Array.from(source.matchAll(/SELECT\s+([\s\S]*?)\s+INTO\s+(\w+)\s+FROM\s+([\s\S]*?);/g)).filter(
+      (m) => new RegExp(`\\b${m[2]}\\.`).test(m[1] + " " + m[3]),
+    );
+  expect(Array.from(body.matchAll(/\bINTO\s+[ctg]\b/g))).toHaveLength(3);
+  expect(selfReads(body)).toEqual([]);
+  // Negative control reproduces the failed trial's uninitialized class-composite owner predicate.
+  expect(
+    selfReads(
+      "SELECT live_class.* INTO c FROM public.classes live_class WHERE EXISTS(SELECT 1 FROM auth.users WHERE id=c.user_id);",
+    ),
+  ).toHaveLength(1);
+});
