@@ -1,6 +1,6 @@
 {
   "date": "2026-10-18",
-  "phase": "schema_applied_ui_ready_collection_disabled",
+  "phase": "live_preference_verified_collection_disabled",
   "sourceCommit": "7bcfb75",
   "sources": {
     "supabase/migrations/20261018025000_product_event_capture.sql": "fc798efda3a426411c279a7cfef19c2a22dcc3b99b0b91010f354792428848cf",
@@ -42,11 +42,22 @@
     "existingLintWarnings": 6,
     "vercelBuild": "pass"
   },
-  "liveUi": "Pending publication of root Account mount and live preference/reload check.",
+  "liveUi": {
+    "defaultChoice": "unknown",
+    "defaultRevision": 0,
+    "collectionEnabled": false,
+    "fictionalPresenterChoiceSaved": "withdrawn",
+    "acknowledgedRevision": 1,
+    "reloadPreservedChoiceAndRevision": true,
+    "collectionStayedDisabled": true,
+    "noOptionalEnableAttempt": true,
+    "screenshot": "/private/tmp/first-ten-pdf-qa/live-measurement-disabled.png"
+  },
   "collection": "Disabled; no activation authorized by this receipt.",
   "remaining": [
     "AN003 actual scheduled cleanup and separately verified drained/backlog health. A bounded purge timestamp alone is not proof of fully drained or scheduled processing.",
     "AN004 remaining milestone producers; no public visits, sessions, signup, attribution, guest events, learning acceptance or funnel conversion implemented.",
     "Paid AI/account eligibility/model quality remain separate gates; no new provider calls."
-  ]
+  ],
+  "liveCommit": "6e7c581"
 }

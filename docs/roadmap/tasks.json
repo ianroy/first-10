@@ -4379,6 +4379,10 @@
         {
           "date": "2026-10-18",
           "text": "Exact25 fc798efd applied normally to hosted production, dedicated55322 actual schema also25/history03 preserved. Root1130app tests pass/11existing skips, type/lint/build pass; Account mount and official types ready to publish. Parent remains blocked on newAN003 operational scheduled/drained health and AN004 remaining event producers; not complete. Explicitly release schema25/generatedtypes/analytics integration locks; AN003 reserves26. No measurement collection enabled."
+        },
+        {
+          "date": "2026-10-18",
+          "text": "Root6e7c581 pushed and Vercel success. Actual live Account defaultunknown0/collectiondisabled, deliberately saved fictionalpresenterwithdrawn1, ACK and fullreload retainedchoice/revision, noenableattempt. Durable docs/verification/product-measurement-20261018.json. Parent remainsblockedAN003/004; livechoice doesnotcertifyscheduledcleanuporcompletefunnel."
         }
       ],
       "claim": null,
@@ -5072,7 +5076,7 @@
       "id": "CLS-005",
       "title": "Build student class participation and visibility controls",
       "phase": "P4",
-      "status": "not_started",
+      "status": "in_progress",
       "owner": "agent",
       "size": "S",
       "kind": "implementation",
@@ -5111,7 +5115,7 @@
       "metric": "Submission completion and visibility comprehension.",
       "rollback": "Disable class UI; preserve private work and withdrawal support.",
       "agent_notes": {
-        "starting_point": "No class/teacher role exists today. Enrollment and teacher progress visibility must not imply access to private project/interview records. Read dependency handoffs before editing; do not assume a planned service exists.",
+        "starting_point": "Existing classes, published assignments, owner project associations and reviewed selected copies are implemented. Inspect real source and prior CLS002/007 evidence; do not build duplicate participation surfaces or infer teacher private-note access.",
         "stop_and_report": "If a required contract, test environment, human observation, budget or permission is missing, record the specific blocker. Continue another ready task; do not fabricate data or widen the write scope.",
         "handoff": "Report changed files, base/result commit, exact checks and outcomes, artifact/source ids, residual risks and the next eligible task. Only the coordinator edits task status, shared generated files and the main roadmap.",
         "integration": "Use a clean task branch/worktree from the coordinator base. Commit only this write scope. Migrations, generated types, route tree, dependency locks and shared entry points are serialized by the coordinator; never hand-edit generated output."
@@ -5120,26 +5124,37 @@
         {
           "date": "2026-10-17",
           "text": "Scheduled by Iteration 5; no implementation or validation claimed."
+        },
+        {
+          "date": "2026-10-18",
+          "text": "Evidence-first audit reservation after WS003 complete. Much participation/reviewed-copy UI exists from CLS002/007; reconcile each original acceptance/subtask before adding duplicate features. Allowed existing task scope only, no schema/types/services modifications or DB/network actions. Add meaningful integrated UI checks and bounded actual gaps; root owns live browser/combined gates and status. Preserve private project/class/selected-copy boundaries."
         }
       ],
-      "claim": null,
+      "claim": {
+        "owner": "personal_workspace",
+        "branch": "codex/class-participation-20261018",
+        "base_commit": "6e7c581",
+        "worktree": "/private/tmp/first-ten-class-participation",
+        "started_at": "2026-10-19T00:13:00Z",
+        "lease_expires_at": "2026-10-19T04:00:00Z"
+      },
       "completion_evidence": [],
       "subtasks": [
         {
           "id": "CLS-005.s1",
-          "status": "not_started",
+          "status": "in_progress",
           "instruction": "Show enrolled classes, assignments and explicit associated-project selection.",
           "notes": []
         },
         {
           "id": "CLS-005.s2",
-          "status": "not_started",
+          "status": "in_progress",
           "instruction": "Provide preview/submit/revise/withdraw flows and explain teacher-visible metadata.",
           "notes": []
         },
         {
           "id": "CLS-005.s3",
-          "status": "not_started",
+          "status": "in_progress",
           "instruction": "Support leaving a class, invitation failures and return to the personal workspace.",
           "notes": []
         }
@@ -12030,6 +12045,10 @@
         {
           "date": "2026-10-18",
           "text": "Phase2 authorized scope is isolated desktop controlled editors, PDF builders and tests only over phase1 typed contracts. No network/persistence claims, migration/server/DB/container/shared join or coverage mounts. Schema26 reserved AN003. Root will supply async scope/save/load/history/export authority integration later; do not fake storage. Future backend version remains unreserved until26 boundary."
+        },
+        {
+          "date": "2026-10-18",
+          "text": "Phase1 reviewed and integratedfee5048/58e790b including independent review corrections;29rootfocusedtests pass and typecheck clean. Active phase2 remains controlleddesktop/PDF source only. AN003 retains sole schema26 lease."
         }
       ],
       "claim": {
@@ -12050,6 +12069,10 @@
             {
               "date": "2026-10-18",
               "text": "Phase1 worker94723d1 defines six strict structured kinds, refs and copy contracts;26focused tests pass. Root review/integration pending; pure contracts not database authority."
+            },
+            {
+              "date": "2026-10-18",
+              "text": "Worker94723d1+reviewfixaa96480 integrated rootfee5048/58e790b. Independent reviewer found aggregatepreviewbytebound/duplicateexcerptkeys/counterceiling; all three fixed with regressions. Root29focusedtests+typecheckpass. Purecontractscomplete; no persistence/mounted UI/PDF claim."
             }
           ]
         },
@@ -12316,9 +12339,9 @@
       "claim": {
         "owner": "finalization_audit",
         "branch": "codex/measurement-retention-20261018",
-        "base_commit": "7bcfb75",
-        "worktree": "/private/tmp/first-ten-analytics-capture",
-        "started_at": "2026-10-19T00:15:00Z",
+        "base_commit": "edca13e",
+        "worktree": "/private/tmp/first-ten-measurement-retention",
+        "started_at": "2026-10-19T00:11:00Z",
         "lease_expires_at": "2026-10-19T04:00:00Z"
       },
       "completion_evidence": [],

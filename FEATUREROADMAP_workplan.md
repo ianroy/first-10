@@ -24,8 +24,8 @@ current_stage: P1_foundation_with_parallel_P2_and_R0
 status: in_progress
 last_task_done: WS-007
 next_task: AN-003
-next_parallel_wave: [AN-003, CLS-009]
-active_claims: [AN-003, CLS-009]
+next_parallel_wave: [AN-003, CLS-009, CLS-005]
+active_claims: [AN-003, CLS-009, CLS-005]
 research_gate: not_passed
 foundation_gate: not_passed
 realtime_go: pending
@@ -38,7 +38,9 @@ resume_hint: >-
   Hosted and dedicated local55322 actual schema25; optional measurement remains disabled.
   Local CLI history remains03 because04–25 were exact pinned SQL applies; actual schema
   sentinels are recorded separately. Never rewrite that history or touch unrelated54322.
-  Livee590ff9 includes both guest studios and deliberate Marketing Lab teacher copies.
+  Live6e7c581 includes guest studios, teacher copies, owner workspace and separate
+  optional measurement choice. Live unknown0 -> withdrawn1 ACK/reload verified with
+  collection disabled throughout; no opt-in or collection activation attempted.
   Fictional guest Discovery source revision7 and Marketing source revision5 are preserved.
   Updated class instructions and published fictional $0 assignment reflect current features.
   Live private marketing preview PDF3pages granted no access; explicit teacher version1
@@ -49,7 +51,9 @@ resume_hint: >-
   completion and WS007 combined owner/project gate complete:9 component journeys,
   5 guard tests,2actual DB owners/4same-name projects and4real archive races. Physical
   second device/fresh two-owner hosted Auth/offline checks remain final release gates.
-  Root1130app tests pass/11existing skips, typecheck/lint/build pass after UI polish:
+  Root1159app tests pass/11existing skips after reviewed growth contracts; typecheck
+  passes. Root25 full lint/build passed;6e7c581 CI and isolated RLS both successful.
+  UI polish:
   class revision refresh remounts teacher lists and clears old exports; download success
   is tied to its exact source fingerprint. All three actual-SQL DTO suites were enabled.
   CLS008 s2/s3 complete; s1 explicitly blocked on newCLS009 missing manual growth
@@ -57,9 +61,10 @@ resume_hint: >-
   desktop editors/PDF builders. No persistence/mounted capability claimed.
   AN002 software7bcfb75 is integrated: opt-in owner-only measurement, defaultdisabled,
   exact-pinned25fc798efd passed1863SQL/2actualDTOs/3races/rollback/cloneabsence. Root
-  Account mount and official types ready; normal hosted25 application succeeded. Live
-  choice check awaits UI publication. AN002 parent blocked on newAN003 retention and
-  AN004 remaining event producers. AN003 exclusively reserves26, source/harness only
+  Account mount and official types published; hosted25 and live choice/reload checks
+  succeeded. AN002 parent blocked on newAN003 retention and
+  AN004 remaining event producers. CLS005 worker audits existing student participation
+  against original acceptance and fills actual UI/test gaps. AN003 exclusively reserves26, source/harness only
   until exact pin approval. No scheduled cleanup or complete funnel is claimed.
   Bounded public retrieval is approved and live, receipt83724f78 committed; source AI
   and sharing excluded. CTX reviewed-source AI adapter remains unfinished. All new AI
