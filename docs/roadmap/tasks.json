@@ -2251,7 +2251,7 @@
       "id": "AI-005",
       "title": "Per-kind low-cost model routing with bounded fallbacks",
       "phase": "P1",
-      "status": "blocked",
+      "status": "in_progress",
       "owner": "agent",
       "size": "S",
       "kind": "implementation",
@@ -2264,7 +2264,13 @@
         "docs/ai-model-policy.md",
         "src/tests/ai-005/**",
         "src/lib/ai/model-policy.test.ts",
-        "src/lib/ai.functions.test.ts"
+        "src/lib/ai.functions.test.ts",
+        "src/lib/ai/readiness.server.ts",
+        "src/lib/ai/readiness.functions.ts",
+        "src/components/admin/AIReadinessPanel.tsx",
+        "src/routes/_authenticated/admin.tsx",
+        "src/tests/desktop-routes/admin-page.test.tsx",
+        "docs/verification/live-ai-readiness-20261018.json"
       ],
       "exclusive_locks": ["ai-entrypoint"],
       "read_first": [
@@ -2313,9 +2319,28 @@
         {
           "date": "2026-10-18",
           "text": "ProductionAIglobal_stop readfalse then narrowlysettrue after verifiedretirement and unresolvedbillablebounds. Freshreadconfirmstrue. This stopsnewdispatchincludingfixedfictionalpractice; preservespermanent$1carveout, allpriorreservations/charges/provenance andsettlement. No keyread/providercall, noreplacementmodel/fallbackpromotion. Publicretrievalseparatepolicyremainsenabled. Reenableonlyafterfreshendpoint/privacy/budget/qualityreview."
+        },
+        {
+          "date": "2026-10-18",
+          "text": "User confirms production OpenRouter key replaced and explicitly prioritizes building everything needed for LIVE generation. Root is sole implementation worker after teacher-copy source checkpoint. Resume current eligibility/routing, actual runtime key readiness without copying unrelated secrets, privacy/account inspection, conservative total-budget bounds and synthetic per-kind evidence before activating product routes. Existing25USD cap/1USD carveout preserved. Readiness plumbing and deployment are authorized; key rotation is user-reported, not yet runtime-attested. Broad production-env plaintext pull was auto-review rejected; do not retry or indirectly extract unrelated secrets. Use only narrow in-runtime metadata or specifically scoped API credential path."
+        },
+        {
+          "date": "2026-10-18",
+          "text": "Root implemented operator-only in-runtime OpenRouter metadata check (fixed GET/no redirects/16KiB stream cap/no credential, label or upstream-body export), fresh database-admin authority and audit before/after, plus admin UI and exact standard Vertex3.1 candidate selector. Focused authorization/key/endpoint/legacy-admin tests and typecheck pass; combined/build gate pending final source. IMPORTANT: actual production has0 active platform admins, so this operator probe is not yet usable and no presenter flag is upgraded. Narrow Vercel metadata confirms OPENROUTER_API_KEY is Sensitive/runtime-only; no secret extracted or stored. User signed into OpenRouter; paid training and1percent data discount are off, but account/workspace-to-production-key mapping is unresolved (no key namedFirstTen in visible default workspace). Asked label/account only. No account settings changed and no paid calls."
+        },
+        {
+          "date": "2026-10-18",
+          "text": "Live-enablement foundation root gate PASS:1401app tests/11existing skips, all5actualDTO suites enabled, full typecheck, scoped lint0errors and production build. Key metadata/authorization/candidate tests are offline; no serving-key probe or paid generation was executed. Production read-only accounting: global_stop=true, general_enabled=false, general cap24USD, opening hold/review unset,0general operations,0enabled routes,4c fixed-demo reservations; preserve permanent1USD carveout. Next: confirm production key account/workspace and settings, implement reviewed successor/eval flow under generateAI without copying Sensitive credentials, retain/record all previous holds and complete per-kind actual-provider evidence before controlled activation. Guest-specific generation remains in scope after existing kinds, not implemented by this foundation."
         }
       ],
-      "claim": null,
+      "claim": {
+        "owner": "root",
+        "branch": "main",
+        "base_commit": "57cf8f6e0f7af665e7f490c74082afde6ba38a39",
+        "worktree": "/Users/ianroy/Library/CloudStorage/Dropbox/Apps by Ian/Babson AI Academy/First 10",
+        "started_at": "2026-10-19T02:43:22.705846+00:00",
+        "lease_expires_at": "2026-10-19T06:43:22.705846+00:00"
+      },
       "completion_evidence": [],
       "subtasks": [
         {
@@ -2326,13 +2351,13 @@
         },
         {
           "id": "AI-005.s2",
-          "status": "blocked",
+          "status": "in_progress",
           "instruction": "Set per-kind input/output limits and an explicit ordered fallback allowlist with maximum unit price.",
           "notes": []
         },
         {
           "id": "AI-005.s3",
-          "status": "blocked",
+          "status": "in_progress",
           "instruction": "Keep existing overrides compatible; record actual routed model and never silently escalate to an expensive model or broaden privacy policy.",
           "notes": []
         }
@@ -12219,6 +12244,10 @@
         {
           "date": "2026-10-18",
           "text": "Continued serial review of the live sole-worker draft found final eligibility must recheck expiry after metadata traversal, and private author get/withdraw must build results before final authority. SQL source-deletion regression must start from a freshly eligible copy rather than an already choice-invalidated one; ordinary-edit regression must change the selected observations and compare the original immutable teacher payload. Worker is correcting these and preserving unsaved optional excerpts. Human-readable structured preview/PDF presentation requested without changing canonical exact source/hash/substring rules. All candidate28 files remain source-only; no DB actions or final test claims."
+        },
+        {
+          "date": "2026-10-18",
+          "text": "User reprioritized LIVE generation. Sole worker stopped clean at source-only fa73603d19c359c8e1ebe69ab784425256ee5b70 in existing worktree.171 focused pass/29actualSQL skips; type/lint/format/syntax pass. Candidate28 UNAPPLIED/UNMOUNTED and never rehearsed. Actual20/50/50/2MiB/16MiB volume fixtures missing, privacy supersession/reconciliation UI review, independent pins review, SQL/DTO/races/expiry/COMMIT/cleanup and all shared/live gates remain. Preserve dormant claim; no worker active. Old exact pins are NOT trial approval. If AI work changes schema boundary, reserve a new forward version before resuming this candidate."
         }
       ],
       "claim": {
@@ -13086,6 +13115,7 @@
     "synthetic_ai_budget_usd": 1,
     "spend_note": "At this reconciliation cutoff no deployed provider trial is confirmed; AI-009 must record measured cost after the authorized request. The workshop reservation cap is separate from and within the owner’s total $25 limit.",
     "continuation_objective": "Owner explicitly requests continued building until every feasible authorized roadmap item is complete, verified and deployed; continue independent work around external blockers. No new time or token budget specified. Prior OpenRouter $25 total cap and no other paid services persist.",
-    "goal_control_note": "2026-10-18: fresh get_goal confirms active following user/app resumption. Continue full feasible roadmap across turns, retain actual completion/verification boundaries and $25 OpenRouter cap. Ordinary account usage available; no reset credits reported."
+    "goal_control_note": "2026-10-18: fresh get_goal confirms active following user/app resumption. Continue full feasible roadmap across turns, retain actual completion/verification boundaries and $25 OpenRouter cap. Ordinary account usage available; no reset credits reported.",
+    "live_generation_priority": "2026-10-18: User confirms production key replaced and asks to build everything needed to enable live generation. Root serial implementation; teacher-copy worker checkpointed/idle. No increased spending cap."
   }
 }

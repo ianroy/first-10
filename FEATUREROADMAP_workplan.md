@@ -23,60 +23,62 @@ current_iteration: 5
 current_stage: P1_foundation_with_parallel_P2_and_R0
 status: in_progress
 last_task_done: CLS-005
-next_task: CLS-009
+next_task: AI-005
 next_parallel_wave: []
 execution_pace: slow_serial
-active_claims: [CLS-009, EV-001]
+active_claims: [AI-005, CLS-009, EV-001]
 research_gate: not_passed
 foundation_gate: not_passed
 realtime_go: pending
 last_updated: 2026-10-18
-last_documentation_update: "2026-10-18: Serial review strengthened final-expiry and nonvacuous deletion/immutable-copy SQL controls; worker is implementing them. Candidate28 remains source-only; actual schema27."
+last_documentation_update: "2026-10-18: User prioritizes live generation and confirms key replacement; root claims AI-005, teacher-copy worker saved clean source-only checkpoint and is idle."
 resume_hint: >-
-  The goal remains active. The user's latest pace is SLOW: one worker, serial
-  implementation, review and release; no new parallel wave.
-  CLS-009 manual growth persistence and desktop/PDF subtasks s2/s3/s4 are complete
-  as bounded software. Exact migration27 is applied on dedicated local55322 and
-  hosted hdwnnuvqqkkpontcdbwa. All80 existing table counts and policy digests were
-  preserved. Local CLI history intentionally remains03; hosted normal push records27.
-  Never repair local history or touch the unrelated photo-to-3D database on54322.
-  Six structured kinds support private or explicitly blank-created team saves,
-  exact retained revisions, individual PDFs and selected portfolios. Final live
-  d5bcbf4 passed the full-width desktop review and15-page portfolio. Seven fictional
-  growth artifacts cover all six kinds. Discovery rev7 and Marketing rev5 remain
-  unchanged. Latest combined gate:1368 app tests pass,11 existing skips; typecheck,
-  lint with0 errors/6 existing warnings and production build pass. Actual SQL3494,
-  DTO17, six observed blocked overlaps, real commits and late-expiry rollback pass.
-  Evidence: docs/verification/guest-growth-persistence-20261018.json.
-  NEXT is s5 selected teacher copies, followed by s6 full role/release verification.
-  Sole worker guest_marketing_handoff uses codex/guest-growth-handoffs-20261018 in
-  /private/tmp/first-ten-guest-marketing-handoff from bf420c6. Exclusive new migration
-  20261018028000_guest_growth_handoffs.sql is SOURCE ONLY. Published22–27 stay
-  immutable. No DB/container/rehearsal/apply, shared mounts, coverage or generated
-  types changes before independent exact-pin review. Root owns shared integration.
-  Early review requires excluding private question IDs from teacher excerpts,
-  preserving exact thread identity and final-clock/fresh-role checks after result
-  construction AND metadata traversal. Actual SQL deletion/ordinary-edit controls
-  must independently prove fresh eligibility and immutable selected payloads. Guard
-  optional excerpt drafts; keep structured presentations readable without changing
-  exact canonical source/hash rules. New roster exposes metadata only, with publisher-only thread
-  IDs. Teacher copies require separate publisher choices, selected/redacted preview,
-  explicit grant, exact retained lineage, fresh recipient eligibility and withdrawal.
-  Parent CLS-009 and CLS-008 remain unfinished. EV-001 worker is idle after clean
-  completed audit; retain its dormant registry claim while partial task is in progress.
-  All new AI dispatch remains globally stopped. Preserve the25USD total OpenRouter
-  cap,1USD practice carveout/accounting and no other paid services. Key rotation,
-  privacy/billing and successor-model quality remain unresolved; no new paid calls.
-  Optional measurement is disabled with no retention job. AN-003 is blocked on the
-  verified managed-owner history-index prerequisite. Old unpublished retention27
-  candidate4ebac3d is superseded: never integrate/apply; future work needs a new version.
-  Existing parent deletion meets the inherited Marketing append-only audit guard;
-  PRV-002/003 owns that limitation. No physical-deletion or automated-retention claim.
-  Approved bounded public retrieval is live; its AI/sharing adapter remains unfinished.
-  Real research, institutional review, broader teacher feedback/bundles, collaboration,
-  account continuity, fresh ordinary student/physical-device/offline release gates and
-  free isolated preview eligibility remain outstanding. Continue feasible work without
-  inventing studies, demand, compliance, provider quality or full roadmap completion.
+  ACTIVE goal; user now explicitly prioritizes building everything needed to ENABLE
+  LIVE GENERATION. User confirms the production OpenRouter key has been replaced.
+  SLOW SERIAL: root is sole implementation worker on main, AI-005 claim recorded.
+  Teacher-copy worker stopped clean/idle at fa73603d in existing worktree. Its28
+  source is NOT integrated, applied, rehearsed or mounted. Preserve exact checkpoint;
+  missing volume fixtures/SQL/DTO/races/late-expiry/COMMIT/cleanup/privacy-UI/shared
+  integration/live gates remain. Pins alone are not trial approval. Keep dormant
+  CLS-009 and EV-001 claims; neither has an active worker.
+  First AI step is narrow in-runtime key-readiness and operator privacy/budget/model
+  review, followed by actual bounded synthetic per-kind generation and source/UI
+  integration. All calls remain under generateAI. Production global_stop=true was
+  freshly verified through read-only SQL after the user's availability question.
+  A broad vercel env pull was auto-review rejected for copying unrelated secrets;
+  do not retry or bypass. Prefer a narrow server metadata check using its existing
+  key in memory; no secret logging/exposure. OpenRouter privacy page is waiting for
+  user sign-in; user signed in and current Chrome tab is344873417, now keys page.
+  Paid training/1percent data discount are off. Default workspace has no FirstTen
+  key label; asked user to identify key label or switch workspace/account, never
+  paste secrets. No account settings changed. Narrow Vercel metadata confirms
+  production OPENROUTER_API_KEY is Sensitive/runtime-only; no secret extracted.
+  Actual production platform-admin count is0. New operator-only readiness probe
+  requires a genuine DB grant and is not usable yet; never auto-upgrade presenter.
+  Source adds bounded/audited runtime key check and exact standard Vertex3.1
+  candidate selector.1401app tests/11existing skips(all5actualDTOs),type/scopedlint/
+  productionbuild PASS. No live key probe, model quality or generation enablement
+  claim. Production has0general operations/0enabled routes,opening hold unset and
+  4c fixed-demo reservations. Ledger:docs/verification/live-ai-readiness-20261018.json.
+  No paid calls have been made in this transition.
+  Preserve25USD total OpenRouter cap, permanent1USD practice carveout and existing
+  holds/accounting. Key rotation is user-reported, not yet runtime-attested. Do not
+  reopen retiring2.5 route without review;3.1 Flash Lite is a candidate, not yet an
+  approved quality/privacy/billing result. Public catalog is not account attestation.
+  Actual schema remains27 local55322/hostedhdwnnuvqqkkpontcdbwa; localCLI03 deliberately
+  preserved. Never repair that history or touch unrelated54322. Published22–27 stay
+  immutable. Candidate teacher28 cannot be included in a production rollout until
+  its independent gates pass; if AI needs schema work, choose an explicit forward
+  ordering and supersede the unpublished candidate rather than applying it incidentally.
+  Six manual guest kinds and PDFs are live;1368app tests/11existing skips passed on
+  that source. Genuine7fictional growth artifacts, six individual PDFs/15pageportfolio
+  and explicit2page team PDF verified. Discovery7/Marketing5 preserved. See the
+  guest-growth-persistence-20261018 ledger. New teacher copies remain unfinished.
+  Optional measurement disabled/no retention job. AN-003 managed-owner index blocker
+  persists; old unpublished retention27 is superseded, never apply. Public retrieval
+  is live but its AI adapter is unfinished. Broader guest AI/discovery/marketing kinds,
+  institutional review, real research, teacher bundles and collaboration remain part
+  of the full objective. Never claim those completed from one passing AI demo.
 
 ```
 

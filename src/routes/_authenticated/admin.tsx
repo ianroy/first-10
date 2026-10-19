@@ -7,6 +7,7 @@ import { RequireProject } from "@/components/RequireProject";
 import { Button } from "@/components/ui/button";
 import { getAdminSnapshot } from "@/lib/admin.functions";
 import { PublicContextReadiness } from "@/components/admin/PublicContextReadiness";
+import { AIReadinessPanel } from "@/components/admin/AIReadinessPanel";
 
 export const Route = createFileRoute("/_authenticated/admin")({
   head: () => ({
@@ -106,6 +107,7 @@ function AdminPage({ projectId }: { projectId: string }) {
             </p>
           )}
           <PublicContextReadiness key={`${user.id}:${projectId}`} projectId={projectId} />
+          <AIReadinessPanel key={`ai:${user.id}`} />
           <Card>
             <div className="flex flex-wrap items-start justify-between gap-4">
               <div>

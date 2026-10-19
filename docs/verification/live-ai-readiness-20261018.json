@@ -1,0 +1,70 @@
+{
+  "date": "2026-10-18",
+  "status": "foundation_verified_generation_disabled",
+  "userAuthorization": {
+    "productionKeyReplaced": "user confirmed",
+    "liveGeneration": "explicitly requested",
+    "openRouterTotalCapUsd": 25,
+    "otherPaidServices": false
+  },
+  "productionReadOnlyEvidence": {
+    "globalStop": true,
+    "generalEnabled": false,
+    "generalCapMicro": 24000000,
+    "openingHoldMicro": null,
+    "openingReviewedAt": null,
+    "generalOperationCount": 0,
+    "enabledRouteCount": 0,
+    "demoReservedCents": 4,
+    "activePlatformAdminCount": 0,
+    "productionKeySensitiveRuntimeOnly": true
+  },
+  "controls": {
+    "credentialExtraction": false,
+    "metadataEndpoint": "https://openrouter.ai/api/v1/key",
+    "metadataRequestOnly": "fixed GET; no redirects; no prompts or generation; bounded16KiB streamed response",
+    "operatorAuthority": "fresh DB-backed platform-admin check and successful audit before and after metadata request",
+    "presenterElevatedToAdmin": false,
+    "probeLiveUsable": false,
+    "probeLimitation": "No genuine platform-admin grant exists; source check is not a runtime attestation."
+  },
+  "candidate": {
+    "model": "google/gemini-3.1-flash-lite",
+    "providerSlug": "google-vertex/global",
+    "kind": "review candidate, not enabled route",
+    "inputTokenCeiling": 1048576,
+    "billableOutputTokenCeiling": 65536,
+    "requestOutputTokenCeiling": 2500,
+    "promptMicroPerMillion": 250000,
+    "completionMicroPerMillion": 1500000,
+    "endpointSource": "https://openrouter.ai/api/v1/models/google/gemini-3.1-flash-lite/endpoints"
+  },
+  "accountReview": {
+    "signedInByUser": true,
+    "paidTrainingAllowed": false,
+    "onePercentDataDiscountAllowed": false,
+    "productionKeyWorkspaceMapping": "unverified; user asked to identify label/workspace without sharing credential",
+    "settingsChanged": false
+  },
+  "verification": {
+    "appTestsPassed": 1401,
+    "existingSkips": 11,
+    "actualDtoSuitesEnabled": 5,
+    "typecheck": "pass",
+    "scopedLint": "pass",
+    "productionBuild": "pass",
+    "paidCalls": 0
+  },
+  "unmet": [
+    "production-key account/workspace association",
+    "actual runtime key preflight and budget policy",
+    "endpoint-specific total-billing and privacy review",
+    "successor model integration and per-kind actual generation evaluation",
+    "reviewed opening hold, scoped allowances and controlled route activation",
+    "new guest/discovery/marketing generation kinds and end-to-end UI verification"
+  ],
+  "approvalReview": {
+    "broadProductionEnvironmentPull": "rejected before execution; do not retry or bypass",
+    "saferAlternative": "Narrow Vercel environment metadata only confirmed credential is Sensitive; no decrypted value retrieved or stored"
+  }
+}
