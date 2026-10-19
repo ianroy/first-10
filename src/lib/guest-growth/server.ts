@@ -2,7 +2,6 @@ import { getRequest } from "@tanstack/react-start/server";
 import { z } from "zod";
 import type { SupabaseClient } from "@supabase/supabase-js";
 import { privacy, sameOrigin, sessionToken, verifyCsrf } from "@/lib/guest-spaces/security.server";
-import { guestSessionDatabaseSchema, type GuestView } from "@/lib/guest-spaces/contracts";
 import {
   guestActivityFailureSchema,
   type GuestActivityFailure,
@@ -25,6 +24,9 @@ import {
   growthRecordHash,
   growthContextHash,
   canonicalGrowthJson,
+  guestGrowthAuthorityReceiptSchema,
+  GUEST_GROWTH_AUTHORITY_BYTES,
+  type GuestGrowthAuthority,
 } from "./transport";
 
 type Code = GuestActivityFailure["code"];
@@ -48,7 +50,7 @@ const RPC = {
   history: "get_guest_growth_history",
   save: "save_guest_growth_artifact",
 } as const;
-type Rpc = (typeof RPC)[keyof typeof RPC] | "get_guest_session";
+type Rpc = (typeof RPC)[keyof typeof RPC] | "get_guest_growth_authority";
 type Context = { session: string; signal: AbortSignal };
 async function rpc(name: Rpc, context: Context, args: Record<string, unknown> = {}) {
   context.signal.throwIfAborted();
@@ -60,18 +62,26 @@ async function rpc(name: Rpc, context: Context, args: Record<string, unknown> = 
     .rpc(name, { p_session: context.session, ...args })
     .abortSignal(AbortSignal.any([context.signal, AbortSignal.timeout(10000)]));
   context.signal.throwIfAborted();
-  if (result.error || jsonBytes(result.data) > (name === "get_guest_session" ? 262144 : 98304))
+  if (
+    result.error ||
+    jsonBytes(result.data) >
+      (name === "get_guest_growth_authority" ? GUEST_GROWTH_AUTHORITY_BYTES : 98304)
+  )
     throw new Denied("UNAVAILABLE");
   return result.data as unknown;
 }
 async function fresh(context: Context) {
-  const result = guestSessionDatabaseSchema.safeParse(await rpc("get_guest_session", context));
-  if (!result.success || Date.now() >= Date.parse(result.data.data.accessExpiresAt))
-    throw new Denied("NOT_FOUND");
+  const raw = await rpc("get_guest_growth_authority", context);
+  const result = guestGrowthAuthorityReceiptSchema.safeParse(raw);
+  if (!result.success) {
+    const denied = guestActivityFailureSchema.safeParse(raw);
+    throw new Denied(denied.success ? denied.data.code : "UNAVAILABLE");
+  }
+  if (Date.now() >= Date.parse(result.data.data.accessExpiresAt)) throw new Denied("NOT_FOUND");
   return result.data.data;
 }
 function sameScope(
-  a: GuestView,
+  a: GuestGrowthAuthority,
   b: { classId: string; teamId: string; principalId: string; accessExpiresAt: string },
 ) {
   return (
@@ -81,7 +91,15 @@ function sameScope(
     a.accessExpiresAt === b.accessExpiresAt
   );
 }
-function allowed(view: GuestView, h: z.infer<typeof guestGrowthHeaderSchema>) {
+function sameAuthority(a: GuestGrowthAuthority, b: GuestGrowthAuthority) {
+  return (
+    sameScope(a, b) &&
+    a.classRevision === b.classRevision &&
+    a.teamGeneration === b.teamGeneration &&
+    a.principalGeneration === b.principalGeneration
+  );
+}
+function allowed(view: GuestGrowthAuthority, h: z.infer<typeof guestGrowthHeaderSchema>) {
   return (
     h.classId === view.classId &&
     h.teamId === view.teamId &&
@@ -226,13 +244,13 @@ export async function runGuestGrowth(operation: Operation, value: unknown): Prom
             throw new Denied("CHANGED");
         }
         const after = await fresh(context);
-        if (!sameScope(after, view) || d.scope.contextHash !== (await growthContextHash(after)))
+        if (!sameAuthority(after, view) || d.scope.contextHash !== (await growthContextHash(after)))
           throw new Denied("CHANGED");
         return { ok: true };
       }
     }
     const after = await fresh(context);
-    if (!sameScope(after, view)) return fail("CHANGED");
+    if (!sameAuthority(after, view)) return fail("CHANGED");
     return { ok: true, data };
   } catch (error) {
     // Never reflect RPC messages, exception text, raw notes, cookie tokens or validation payloads.

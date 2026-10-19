@@ -2,6 +2,28 @@ import { z } from "zod";
 import { secretSchema } from "@/lib/guest-spaces/contracts";
 import { guestGrowthKindSchema, GUEST_GROWTH_LIMITS } from "./contracts";
 const uuid = z.string().uuid();
+/** Small genuine DB projection, never a class-assignment/session-body fetch. */
+export const GUEST_GROWTH_AUTHORITY_BYTES = 4096;
+const generation = z.number().int().min(1).max(Number.MAX_SAFE_INTEGER);
+export const guestGrowthAuthoritySchema = z
+  .object({
+    classId: uuid,
+    teamId: uuid,
+    principalId: uuid,
+    className: z.string().min(1).max(120),
+    teamAlias: z.string().min(1).max(80),
+    principalAlias: z.string().min(1).max(80),
+    accessExpiresAt: z.string().max(40).datetime({ offset: true }),
+    classRevision: generation,
+    teamGeneration: generation,
+    principalGeneration: generation,
+  })
+  .strict();
+export const guestGrowthAuthorityReceiptSchema = z
+  .object({ ok: z.literal(true), data: guestGrowthAuthoritySchema })
+  .strict();
+export type GuestGrowthAuthority = z.infer<typeof guestGrowthAuthoritySchema>;
+
 const saved = z
   .object({
     state: z.literal("saved"),

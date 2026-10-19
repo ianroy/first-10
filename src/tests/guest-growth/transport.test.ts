@@ -19,8 +19,26 @@ vi.mock("@tanstack/react-start/server", () => ({
 vi.mock("@/integrations/supabase/client.server", () => ({ supabaseAdmin: { rpc: h.rpc } }));
 import { runGuestGrowth } from "@/lib/guest-growth/server";
 import { issueCsrf } from "@/lib/guest-spaces/security.server";
-import { growthRecordHash } from "@/lib/guest-growth/transport";
+import {
+  guestGrowthAuthorityReceiptSchema,
+  GUEST_GROWTH_AUTHORITY_BYTES,
+  growthRecordHash,
+} from "@/lib/guest-growth/transport";
+import { guestViewSchema } from "@/lib/guest-spaces/contracts";
+import { jsonBytes } from "@/lib/marketing-plan";
 import { records, view, scope, id } from "./fixture";
+const authority = {
+  classId: view.classId,
+  teamId: view.teamId,
+  principalId: view.principalId,
+  className: view.className,
+  teamAlias: view.teamAlias,
+  principalAlias: view.principalAlias,
+  accessExpiresAt: view.accessExpiresAt,
+  classRevision: 1,
+  teamGeneration: 1,
+  principalGeneration: 1,
+};
 const record = records()[0]!;
 const header = (({ document: _document, ...value }) => value)(record);
 let csrf: string;
@@ -39,8 +57,8 @@ beforeEach(() => {
   h.cookies.set("__Host-firstten_guest", session);
   csrf = issueCsrf();
   h.result.mockImplementation((name: string) =>
-    name === "get_guest_session"
-      ? { error: null, data: { ok: true, data: view } }
+    name === "get_guest_growth_authority"
+      ? { error: null, data: { ok: true, data: authority } }
       : { error: null, data: { ok: true, data: record } },
   );
   h.rpc.mockImplementation((name: string, args: unknown) => ({
@@ -96,9 +114,9 @@ it("rejects oversized transport, forged authority and unknown input fields befor
 it("uses the cookie only for fixed RPC identity and checks current authority again before returning", async () => {
   expect(await load()).toEqual({ ok: true, data: record });
   expect(h.rpc.mock.calls.map((c) => c[0])).toEqual([
-    "get_guest_session",
+    "get_guest_growth_authority",
     "load_guest_growth_artifact",
-    "get_guest_session",
+    "get_guest_growth_authority",
   ]);
   expect(h.rpc.mock.calls[1]![1]).toEqual({
     p_session: session,
@@ -118,22 +136,22 @@ it.each([
 ])("refuses foreign, substituted and unknown-field records %#", async (value) => {
   h.result.mockImplementation((name: string) => ({
     error: null,
-    data: { ok: true, data: name === "get_guest_session" ? view : value },
+    data: { ok: true, data: name === "get_guest_growth_authority" ? authority : value },
   }));
   expect(await load()).toEqual({ ok: false, code: "UNAVAILABLE" });
 });
 it("fails closed if an RPC is absent or returns an oversized/unrecognized error payload", async () => {
   h.result.mockImplementation((name: string) =>
-    name === "get_guest_session"
-      ? { error: null, data: { ok: true, data: view } }
+    name === "get_guest_growth_authority"
+      ? { error: null, data: { ok: true, data: authority } }
       : { error: { message: "missing RPC private secret" }, data: null },
   );
   expect(await load()).toEqual({ ok: false, code: "UNAVAILABLE" });
   h.result.mockImplementation((name: string) => ({
     error: null,
     data:
-      name === "get_guest_session"
-        ? { ok: true, data: view }
+      name === "get_guest_growth_authority"
+        ? { ok: true, data: authority }
         : { ok: false, code: "CONFLICT", privateNotes: "x".repeat(100000) },
   }));
   expect(await load()).toEqual({ ok: false, code: "UNAVAILABLE" });
@@ -145,10 +163,10 @@ it("withholds output when scope or deadline changes after the source read", asyn
     data: {
       ok: true,
       data:
-        name === "get_guest_session"
+        name === "get_guest_growth_authority"
           ? ++reads === 1
-            ? view
-            : { ...view, principalId: id(999) }
+            ? authority
+            : { ...authority, principalId: id(999) }
           : record,
     },
   }));
@@ -158,8 +176,8 @@ it("withholds output when scope or deadline changes after the source read", asyn
     data: {
       ok: true,
       data:
-        name === "get_guest_session"
-          ? { ...view, accessExpiresAt: "2000-01-01T00:00:00Z" }
+        name === "get_guest_growth_authority"
+          ? { ...authority, accessExpiresAt: "2000-01-01T00:00:00Z" }
           : record,
     },
   }));
@@ -170,7 +188,10 @@ it("validates list filters and header uniqueness and immutable history scope", a
     error: null,
     data: {
       ok: true,
-      data: name === "get_guest_session" ? view : { items: [header, header], nextCursor: null },
+      data:
+        name === "get_guest_growth_authority"
+          ? authority
+          : { items: [header, header], nextCursor: null },
     },
   }));
   expect(await runGuestGrowth("list", { csrf })).toEqual({ ok: false, code: "UNAVAILABLE" });
@@ -178,7 +199,8 @@ it("validates list filters and header uniqueness and immutable history scope", a
     error: null,
     data: {
       ok: true,
-      data: name === "get_guest_session" ? view : { items: [header], nextCursor: null },
+      data:
+        name === "get_guest_growth_authority" ? authority : { items: [header], nextCursor: null },
     },
   }));
   expect(await runGuestGrowth("list", { csrf, kind: "experiment" })).toEqual({
@@ -194,8 +216,8 @@ it("validates list filters and header uniqueness and immutable history scope", a
     data: {
       ok: true,
       data:
-        name === "get_guest_session"
-          ? view
+        name === "get_guest_growth_authority"
+          ? authority
           : {
               artifactId: record.id,
               versions: [header, { ...header, revision: 1, audience: "team_shared" }],
@@ -221,7 +243,10 @@ it("passes stable CAS/retry IDs unchanged and preserves original acknowledged ve
     error: null,
     data: {
       ok: true,
-      data: name === "get_guest_session" ? view : { record, savedRevision: 2, replayed: false },
+      data:
+        name === "get_guest_growth_authority"
+          ? authority
+          : { record, savedRevision: 2, replayed: false },
     },
   }));
   expect(await runGuestGrowth("save", input)).toEqual({
@@ -240,8 +265,8 @@ it("passes stable CAS/retry IDs unchanged and preserves original acknowledged ve
     data: {
       ok: true,
       data:
-        name === "get_guest_session"
-          ? view
+        name === "get_guest_growth_authority"
+          ? authority
           : { record: { ...record, revision: 3 }, savedRevision: 2, replayed: true },
     },
   }));
@@ -259,8 +284,8 @@ it("refuses a same-revision substituted save body", async () => {
     data: {
       ok: true,
       data:
-        name === "get_guest_session"
-          ? view
+        name === "get_guest_growth_authority"
+          ? authority
           : {
               record: { ...record, document: { ...record.document, title: "changed" } },
               savedRevision: 2,
@@ -315,9 +340,9 @@ it("authorizes the exact retained hash without dereferencing linked bodies or tr
   const input = await proof();
   expect(await runGuestGrowth("authorize", input)).toEqual({ ok: true });
   expect(h.rpc.mock.calls.map((c) => c[0])).toEqual([
-    "get_guest_session",
+    "get_guest_growth_authority",
     "load_guest_growth_artifact",
-    "get_guest_session",
+    "get_guest_growth_authority",
   ]);
   expect(JSON.stringify(input)).not.toContain(record.document.title);
   expect(
@@ -361,12 +386,110 @@ it("withholds a PDF if printed team metadata changes while exact source reads ar
     data: {
       ok: true,
       data:
-        name === "get_guest_session"
+        name === "get_guest_growth_authority"
           ? ++reads === 1
-            ? view
-            : { ...view, teamAlias: "Changed team label" }
+            ? authority
+            : { ...authority, teamAlias: "Changed team label" }
           : record,
     },
   }));
   expect(await runGuestGrowth("authorize", input)).toEqual({ ok: false, code: "CHANGED" });
+});
+
+it("does not fetch valid large unrelated class assignment bodies while resolving growth authority", async () => {
+  const large = {
+    ...view,
+    instructions: "\u0000".repeat(4000),
+    assignments: Array.from({ length: 50 }, (_, i) => ({
+      id: id(2000 + i),
+      classId: view.classId,
+      title: `Assignment ${i}`,
+      instructions: "\u0000".repeat(8000),
+      dueAt: null,
+      state: "published",
+      revision: 1,
+      updatedAt: "2026-10-18T00:00:00Z",
+    })),
+  };
+  expect(guestViewSchema.safeParse(large).success).toBe(true);
+  expect(jsonBytes({ ok: true, data: large })).toBeGreaterThan(2400000);
+  h.result.mockImplementation((name: string) => ({
+    error: null,
+    data: {
+      ok: true,
+      data:
+        name === "get_guest_session"
+          ? large
+          : name === "get_guest_growth_authority"
+            ? authority
+            : record,
+    },
+  }));
+  expect(await load()).toEqual({ ok: true, data: record });
+  expect(h.rpc.mock.calls.map((c) => c[0])).toEqual([
+    "get_guest_growth_authority",
+    "load_guest_growth_artifact",
+    "get_guest_growth_authority",
+  ]);
+});
+it("accepts the projection's worst-case escaped labels within its declared bounded size", async () => {
+  const value = {
+    ...authority,
+    className: "\u0000".repeat(120),
+    teamAlias: "\u0000".repeat(80),
+    principalAlias: "\u0000".repeat(80),
+    classRevision: Number.MAX_SAFE_INTEGER,
+    teamGeneration: Number.MAX_SAFE_INTEGER,
+    principalGeneration: Number.MAX_SAFE_INTEGER,
+  };
+  const raw = { ok: true, data: value };
+  expect(guestGrowthAuthorityReceiptSchema.safeParse(raw).success).toBe(true);
+  expect(jsonBytes(raw)).toBeLessThan(GUEST_GROWTH_AUTHORITY_BYTES);
+  h.result.mockImplementation((name: string) => ({
+    error: null,
+    data: name === "get_guest_growth_authority" ? raw : { ok: true, data: record },
+  }));
+  expect(await load()).toEqual({ ok: true, data: record });
+});
+it.each(["classRevision", "teamGeneration", "principalGeneration"] as const)(
+  "withholds output when real authority %s changes during a read",
+  async (field) => {
+    let reads = 0;
+    h.result.mockImplementation((name: string) => ({
+      error: null,
+      data: {
+        ok: true,
+        data:
+          name === "get_guest_growth_authority"
+            ? ++reads === 1
+              ? authority
+              : { ...authority, [field]: 2 }
+            : record,
+      },
+    }));
+    expect(await load()).toEqual({ ok: false, code: "CHANGED" });
+  },
+);
+it("rejects authority extras and explicit denial before reading any growth source", async () => {
+  h.result.mockResolvedValue({
+    error: null,
+    data: { ok: true, data: { ...authority, assignments: [] } },
+  });
+  expect(await load()).toEqual({ ok: false, code: "UNAVAILABLE" });
+  expect(h.rpc.mock.calls.map((c) => c[0])).toEqual(["get_guest_growth_authority"]);
+  h.rpc.mockClear();
+  h.result.mockResolvedValue({ error: null, data: { ok: false, code: "NOT_FOUND" } });
+  expect(await load()).toEqual({ ok: false, code: "NOT_FOUND" });
+  expect(h.rpc.mock.calls.map((c) => c[0])).toEqual(["get_guest_growth_authority"]);
+});
+it("fails closed for draft-only PDF authority when the new projection RPC is missing, with no full-session fallback", async () => {
+  h.result.mockResolvedValue({ error: { message: "RPC not installed" }, data: null });
+  const input = await proof();
+  expect(
+    await runGuestGrowth("authorize", {
+      ...input,
+      sources: [{ state: "draft", localDraftId: id(444), kind: "learning" }],
+    }),
+  ).toEqual({ ok: false, code: "UNAVAILABLE" });
+  expect(h.rpc.mock.calls.map((c) => c[0])).toEqual(["get_guest_growth_authority"]);
 });
