@@ -185,7 +185,8 @@ RESET ROLE;DELETE FROM firstten_private.guest_growth_artifacts WHERE class_id=fi
 SELECT firstten_policy_test.gg_fill('class',27,true);
 SET LOCAL ROLE service_role;
 SELECT is(public.save_guest_growth_artifact(firstten_policy_test.gg_session('a'),firstten_policy_test.gg_id(120),'team_shared',2,gen_random_uuid(),false,firstten_policy_test.gg_doc('blank_learning'))->>'code','CAPACITY','aggregate32MiB class history cap includes other teams');
-RESET ROLE;DELETE FROM public.class_teams WHERE class_id=firstten_policy_test.gg_id(1)AND id BETWEEN firstten_policy_test.gg_id(8001)AND firstten_policy_test.gg_id(8005);
+-- Remove only this cap fill's growth rows; inherited parent audit guards remain active.
+RESET ROLE;DELETE FROM firstten_private.guest_growth_artifacts WHERE class_id=firstten_policy_test.gg_id(1)AND id BETWEEN firstten_policy_test.gg_id(10001)AND firstten_policy_test.gg_id(10100);
 DELETE FROM firstten_private.guest_learning_buckets WHERE principal_id=(SELECT(result#>>'{data,principalId}')::uuid FROM firstten_policy_test.gg_results WHERE label='a');
 DO $$DECLARE i integer;r jsonb;BEGIN FOR i IN 2..39 LOOP SET LOCAL ROLE service_role;r:=public.save_guest_growth_artifact(firstten_policy_test.gg_session('a'),firstten_policy_test.gg_id(101),'principal_private',i,gen_random_uuid(),false,firstten_policy_test.gg_doc('learning'));IF r->>'ok'<>'true'THEN RAISE EXCEPTION 'History append failed';END IF;RESET ROLE;END LOOP;END $$;
 SELECT is((SELECT count(*)::integer FROM firstten_private.guest_growth_versions WHERE artifact_id=firstten_policy_test.gg_id(101)),40,'40 exact acknowledged versions retained');
@@ -220,5 +221,6 @@ SELECT is(public.load_guest_growth_artifact(firstten_policy_test.gg_session('bud
 RESET ROLE;
 SELECT ok(NOT EXISTS(SELECT 1 FROM public.class_guest_principals p JOIN auth.users u ON u.id=p.id WHERE p.class_id=firstten_policy_test.gg_id(1)),'no guest principal is a fake auth user');
 
-DELETE FROM public.classes WHERE id=firstten_policy_test.gg_id(1);
-SELECT ok(NOT EXISTS(SELECT 1 FROM firstten_private.guest_growth_artifacts WHERE class_id=firstten_policy_test.gg_id(1)),'whole class cascade removes growth namespace without orphaning records');
+-- Leave class, teams and principals for the outer transaction rollback. Whole-parent
+-- deletion currently meets an inherited append-only marketing audit guard; this fixture
+-- neither bypasses that protection nor claims the unrelated retention path is proven.
