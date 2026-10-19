@@ -31,65 +31,50 @@ research_gate: not_passed
 foundation_gate: not_passed
 realtime_go: pending
 last_updated: 2026-10-18
-last_documentation_update: "2026-10-18: User reconfirmed slow pace; one worker, serial review and release. Corrected the ProductSpec route summary to reflect the shipped third guest studio. Selected teacher projection remains source-only."
+last_documentation_update: "2026-10-18: Slow serial source review identified question-ID, thread-identity and final-authorization corrections before teacher-copy testing. Condensed the resume cursor; actual schema remains27."
 resume_hint: >-
-  Active goal: keep building feasible authorized items, verify, commit/push/deploy.
-  User requested SLOW: maximum1 active worker, serial tasks, no new parallel wave.
-  Latest reconfirmation keeps that pace. The sole worker is implementing selected
-  teacher copies in source only; no new database or deployment action is authorized
-  before the exact source and disposable-test pins are independently reviewed.
-  Previous turn made concrete progress: six reviewed sourcecommits integrated and
-  3494strictSQL/17actualDTO/6trueblockedoverlaps/realcommit+expiry gates passed.
-  CLS009 exact27 is now applied to dedicatedlocal55322 and hostedhdwnnuvqqkkpontcdbwa.
-  All80existingtable counts and policy digests unchanged. LocalCLIhistory03 deliberately
-  preserved; hosted normalpush records27. Never repair that history or touch unrelated54322.
-  Fresh hosted catalog proves6service-onlyRPCs/4closedprivate tables/trusteddeferredtrigger.
-  Officialpublictypesgenerated from actuallocal27; no hand-editedgeneratedcontracts.
-  Desktop thirdstudio+6kind-specificindividualPDFs+selectedportfolio now source-mounted.
-  Lazyfirstopen/retaineddrafts across studios, aggregateaccess guard and route/unload
-  guards are tested. Root160focused/1365combinedapp tests pass/11existing skips, all5
-  actualDTOsuites enabled; type/lint0errors6existingwarnings/build/migrationcheck pass.
-  Live3669c9f savedfictionallearningrev1/2 andopenedretained1read-only. ActualPDF
-  review foundstale draft/revision selectionkeys; corrected exactfingerprintpicker
-  remount plusrealpicker draft/save1/save2/history1 test.1366app tests pass/11skips,
-  type/lint/buildpass. Livee983e7c reload/learning3pagePDF/linkedexperiment3pagePDF/
-  pipeline3pagePDF pass. Typed survey savedrev1 butJSONpropertyorder causedfalse
-  unsavedwarning; canonicalcontentcomparison fix withrealtypedUI regressions passes
-  1368app tests/11skips,type/lint/build. NEXT: deploycontentfix thenremainingkinds/portfolio
-  and studioswitch/team browserproof. All6kinds now live saved+3pageindividualPDF,
-  6activity15pageportfolio passed. Explicitblankteam7emptyfields verified, separate
-  fictionalteamdraftrev2+2pageTeamPDF passed. Final fullwidthportfolio reviewlayout
-  polish passes13targeted/type/lint/build. Stickyoverlay caught inlivevisualreview;
-  moveportfolioregionoutsidestickygrid,type/buildpass. Finald5bcbf4/Vercelsuccess
-  visualproofpasses:1321pxwide,focusedtop24px,nooverlay,repeated15pageportfolio
-  withall6titles/timings. NEXT: serialselectedteacherprojection undernewreviewed28.
-  CLS009s2/s3/s4completeboundedsoftware; s5sourcephaseinprogress/s6inprogress.
-  OriginalDiscovery7/Marketing5metadata freshlyunchanged,AIstoptrue/collectionfalse. Separate teacherprojection and fullparity remainunfinished;
-  schema28 exclusivelyreserved CLS009guest_growth_handoffs frombf420c6, sourceonly
-  beforeexactpinreview. No DB/container/rehearsal/apply/mount/coverage/types action yet. ParentCLS009/CLS008 remainunfinished, not redefined.
-  Workerguest_marketing_handoff nowsoleactiveworker forselectedteacherprojection28
-  SOURCEONLY on codex/guest-growth-handoffs-20261018; root owns sharedintegration. EV001 remainsidle afterauthoritativecompleted+cleanworktree audit; its dormantclaim
-  is retained because registryrequiresinprogressparent/s1claims, notbecause workisactive;
-  contracts287dddd/8253d06 verified63tests; storage/UI/PDF/trustedcapture unfinished.
-  Preserve $25totalOpenRouter/nootherpaidservices. AllnewAI dispatch globallystopped;
-  $1carveout/accounting preserved, keyrotation/privacy/billing/successorquality unresolved.
-  Latest usagecheck57%weeklyremaining/zeroresetcredits. No new paidcalls.
-  Optionalmeasurement disabled; no retentionjob. AN003 blocked on managedowner history
-  index prerequisite proven withrollback. Unpublished oldretention27 candidate4ebac3d
-  is superseded: NEVER integrate/apply; any futurefix needslaternewforwardversion.
-  Sixgrowthclone trials preserved in guest-growth-persistence ledger; finalallpass and
-  everyclone absence/sourceunchanged verified. Initialbugs corrected, nothidden.
-  Existing parentdelete hits append-onlyMarketingaudit; PRV002/003 owns that separate
-  physicalretention limitation. No guardbypass or physicaldeletion claim.
-  Discoveryfictionalrev7/Marketingrev5 preserved; active deliberateMarketingteachercopyv2,
-  freshDiscoverycopy, privatepreview/withdrawal/teacherPDF denial previouslyverified.
-  WS003live switch/resume/archive/restore/reload and WS006/007boundedsoftware complete;
-  physicalseconddevice/freshordinaryhostedstudent/offline remainREL001/002 gates.
-  AN002initialopt-inchoice/producers shipped; fullfunnel blockedAN003+AN004, notclaimed.
-  Approvedboundedpublicretrievallive receipt83724f78; CTXsourceAI/sharing adapterexcluded.
-  F009b blockedverifiedFreeeligibility/isolatedFreeproject; neverpaidbranch/otherproject.
-  Realresearch, institutionalreview, broaderteacherfeedback/bundles, collaboration,
-  sharing and accountcontinuity remainunfinished. Keepglobalgoalactive.
+  The goal remains active. The user's latest pace is SLOW: one worker, serial
+  implementation, review and release; no new parallel wave.
+  CLS-009 manual growth persistence and desktop/PDF subtasks s2/s3/s4 are complete
+  as bounded software. Exact migration27 is applied on dedicated local55322 and
+  hosted hdwnnuvqqkkpontcdbwa. All80 existing table counts and policy digests were
+  preserved. Local CLI history intentionally remains03; hosted normal push records27.
+  Never repair local history or touch the unrelated photo-to-3D database on54322.
+  Six structured kinds support private or explicitly blank-created team saves,
+  exact retained revisions, individual PDFs and selected portfolios. Final live
+  d5bcbf4 passed the full-width desktop review and15-page portfolio. Seven fictional
+  growth artifacts cover all six kinds. Discovery rev7 and Marketing rev5 remain
+  unchanged. Latest combined gate:1368 app tests pass,11 existing skips; typecheck,
+  lint with0 errors/6 existing warnings and production build pass. Actual SQL3494,
+  DTO17, six observed blocked overlaps, real commits and late-expiry rollback pass.
+  Evidence: docs/verification/guest-growth-persistence-20261018.json.
+  NEXT is s5 selected teacher copies, followed by s6 full role/release verification.
+  Sole worker guest_marketing_handoff uses codex/guest-growth-handoffs-20261018 in
+  /private/tmp/first-ten-guest-marketing-handoff from bf420c6. Exclusive new migration
+  20261018028000_guest_growth_handoffs.sql is SOURCE ONLY. Published22–27 stay
+  immutable. No DB/container/rehearsal/apply, shared mounts, coverage or generated
+  types changes before independent exact-pin review. Root owns shared integration.
+  Early review requires excluding private question IDs from teacher excerpts,
+  preserving exact thread identity and final-clock/fresh-role checks after result
+  construction. New source roster exposes metadata only, with publisher-only thread
+  IDs. Teacher copies require separate publisher choices, selected/redacted preview,
+  explicit grant, exact retained lineage, fresh recipient eligibility and withdrawal.
+  Parent CLS-009 and CLS-008 remain unfinished. EV-001 worker is idle after clean
+  completed audit; retain its dormant registry claim while partial task is in progress.
+  All new AI dispatch remains globally stopped. Preserve the25USD total OpenRouter
+  cap,1USD practice carveout/accounting and no other paid services. Key rotation,
+  privacy/billing and successor-model quality remain unresolved; no new paid calls.
+  Optional measurement is disabled with no retention job. AN-003 is blocked on the
+  verified managed-owner history-index prerequisite. Old unpublished retention27
+  candidate4ebac3d is superseded: never integrate/apply; future work needs a new version.
+  Existing parent deletion meets the inherited Marketing append-only audit guard;
+  PRV-002/003 owns that limitation. No physical-deletion or automated-retention claim.
+  Approved bounded public retrieval is live; its AI/sharing adapter remains unfinished.
+  Real research, institutional review, broader teacher feedback/bundles, collaboration,
+  account continuity, fresh ordinary student/physical-device/offline release gates and
+  free isolated preview eligibility remain outstanding. Continue feasible work without
+  inventing studies, demand, compliance, provider quality or full roadmap completion.
+
 ```
 
 **Audit basis:** product source and documentation at `7006f87`, plus the concurrent team-credits commit `a2d69a3`, with repository research files rechecked. F-007 is now complete: [GitHub CI run 39092157827](https://github.com/ianroy/first-10/actions/runs/39092157827) succeeded for that commit. The earlier local typecheck, 17 tests, Vercel build and scoped lint results remain in history. Six existing lint warnings and generated `.vercel` scanning motivate OPS-001. A green code pipeline does not verify live auth, RLS, model quality, research outcomes or preview configuration.
