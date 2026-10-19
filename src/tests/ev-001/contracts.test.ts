@@ -400,20 +400,187 @@ describe("CAS, immutable receipts and conservative retries", () => {
       replayed: true,
       receipt: {
         requestId: id(7),
-        operation: "append",
-        revisionAtCommit: 1,
+        operation: "select_current",
+        revisionAtCommit: 2,
         versionId: version.id,
       },
-      state,
+      state: { ...state, revision: 2 },
     };
-    expect(parseScopedGenerationMutation(result, scope, id(7))).toEqual(result);
-    expect(() => parseScopedGenerationMutation(result, scope, id(8))).toThrow(
-      /another workspace or request/,
-    );
+    const intent = { ...select, requestId: id(7) };
+    expect(parseScopedGenerationMutation(result, scope, intent)).toEqual(result);
     expect(() =>
-      parseScopedGenerationMutation(result, { ...scope, projectId: id(99) }, id(7)),
+      parseScopedGenerationMutation(result, scope, { ...intent, requestId: id(8) }),
+    ).toThrow(/another workspace or request/);
+    expect(() =>
+      parseScopedGenerationMutation(result, { ...scope, projectId: id(99) }, intent),
     ).toThrow(/another workspace or request/);
   });
+  it.each([
+    { operation: "clear_acceptance" as const, versionId: null },
+    { operation: "accept_current" as const, versionId: id(99) },
+    { operation: "select_current" as const, versionId: id(99) },
+  ])("rejects a same-commit $operation receipt that contradicts actual pointers", (action) => {
+    const result = {
+      ok: true,
+      replayed: false,
+      receipt: { requestId: select.requestId, ...action, revisionAtCommit: 2 },
+      state: { ...state, revision: 2 },
+    };
+    expect(generationMutationResultSchema.safeParse(result).success).toBe(false);
+    expect(() => parseScopedGenerationMutation(result, scope, { ...select, ...action })).toThrow();
+  });
+  it.each([
+    { operation: "clear_acceptance" as const, versionId: null },
+    { operation: "accept_current" as const, versionId: version.id },
+    { operation: "select_current" as const, versionId: version.id },
+  ])(
+    "allows a newer-state replay after $operation pointers legitimately changed again",
+    (action) => {
+      const later = { versionId: id(99), sequence: 2, bodyHash: "b".repeat(64) };
+      const result = {
+        ok: true,
+        replayed: true,
+        receipt: { requestId: select.requestId, ...action, revisionAtCommit: 2 },
+        state: { ...state, revision: 4, versionCount: 2, current: later, accepted: later },
+      };
+      expect(generationMutationResultSchema.parse(result)).toEqual(result);
+      expect(parseScopedGenerationMutation(result, scope, { ...select, ...action })).toEqual(
+        result,
+      );
+    },
+  );
+  it("matches a replay to operation, saved target and committed CAS revision even when state is newer", () => {
+    const result = {
+      ok: true,
+      replayed: true,
+      receipt: {
+        requestId: select.requestId,
+        operation: select.operation,
+        versionId: select.versionId,
+        revisionAtCommit: 2,
+      },
+      state: { ...state, revision: 5 },
+    };
+    for (const intent of [
+      { ...select, operation: "accept_current" as const },
+      { ...select, versionId: id(99) },
+      { ...select, expectedRevision: 2 },
+    ])
+      expect(() => parseScopedGenerationMutation(result, scope, intent)).toThrow(
+        /contradicts the requested/,
+      );
+  });
+  it("checks append select/retain intent and preserves the exact previous accepted pointer at commit", () => {
+    const next = { versionId: append.versionId, sequence: 2, bodyHash: "b".repeat(64) };
+    const result = {
+      ok: true,
+      replayed: false,
+      receipt: {
+        requestId: append.requestId,
+        operation: "append",
+        versionId: append.versionId,
+        revisionAtCommit: 2,
+      },
+      state: { ...state, revision: 2, versionCount: 2, current: next },
+    };
+    expect(parseScopedGenerationMutation(result, scope, append, state)).toEqual(result);
+    expect(() =>
+      parseScopedGenerationMutation(
+        { ...result, state: { ...result.state, current: pointer } },
+        scope,
+        append,
+        state,
+      ),
+    ).toThrow(/Append commit/);
+    expect(() =>
+      parseScopedGenerationMutation(
+        { ...result, state: { ...result.state, accepted: next } },
+        scope,
+        append,
+        state,
+      ),
+    ).toThrow(/Append commit/);
+    const retain = { ...append, current: "retain" as const };
+    const retainedResult = { ...result, state: { ...result.state, current: pointer } };
+    expect(parseScopedGenerationMutation(retainedResult, scope, retain, state)).toEqual(
+      retainedResult,
+    );
+    expect(() => parseScopedGenerationMutation(result, scope, retain, state)).toThrow(
+      /Append commit/,
+    );
+    // Newer work may have selected/accepted another saved version after this append.
+    const newer = {
+      ...result,
+      replayed: true,
+      state: { ...result.state, revision: 4, current: pointer, accepted: next },
+    };
+    expect(parseScopedGenerationMutation(newer, scope, append, state)).toEqual(newer);
+  });
+  it("rejects a foreign/stale baseline and unrelated pointer changes at an exact selection commit", () => {
+    const result = {
+      ok: true,
+      replayed: false,
+      receipt: {
+        requestId: select.requestId,
+        operation: select.operation,
+        versionId: select.versionId,
+        revisionAtCommit: 2,
+      },
+      state: { ...state, revision: 2 },
+    };
+    expect(parseScopedGenerationMutation(result, scope, select, state)).toEqual(result);
+    expect(() =>
+      parseScopedGenerationMutation(result, scope, select, {
+        ...state,
+        revision: 0,
+        versionCount: 0,
+        current: null,
+        accepted: null,
+      }),
+    ).toThrow(/baseline/);
+    expect(() =>
+      parseScopedGenerationMutation(result, scope, select, {
+        ...state,
+        scope: { ...scope, userId: id(99) },
+      }),
+    ).toThrow(/baseline/);
+    expect(() =>
+      parseScopedGenerationMutation(
+        { ...result, state: { ...result.state, accepted: null } },
+        scope,
+        select,
+        state,
+      ),
+    ).toThrow(/unrelated saved work/);
+  });
+  it.each([2, 4])(
+    "a pointer receipt at fresh revision %s cannot change its baseline stream kind or stage",
+    (freshRevision) => {
+      const result = {
+        ok: true,
+        replayed: freshRevision > 2,
+        receipt: {
+          requestId: select.requestId,
+          operation: select.operation,
+          versionId: select.versionId,
+          revisionAtCommit: 2,
+        },
+        state: { ...state, revision: freshRevision },
+      };
+      expect(parseScopedGenerationMutation(result, scope, select, state)).toEqual(result);
+      expect(() =>
+        parseScopedGenerationMutation(result, scope, select, { ...state, kind: "learning" }),
+      ).toThrow(/stream kind or stage/);
+      const learningBaseline = { ...state, kind: "learning" as const, stage: 2 as const };
+      const learningResult = {
+        ...result,
+        state: { ...result.state, kind: "learning" as const, stage: 3 as const },
+      };
+      expect(() =>
+        parseScopedGenerationMutation(learningResult, scope, select, learningBaseline),
+      ).toThrow(/stream kind or stage/);
+    },
+  );
 });
 
 describe("bounded history pages", () => {

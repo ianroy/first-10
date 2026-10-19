@@ -307,10 +307,27 @@ export const generationMutationResultSchema = z
     state: generationStateSchema,
   })
   .strict()
-  .refine(
-    (result) => result.state.revision >= result.receipt.revisionAtCommit,
-    "Fresh state cannot precede its operation receipt.",
-  );
+  .superRefine((result, ctx) => {
+    const { state, receipt } = result;
+    if (state.revision < receipt.revisionAtCommit)
+      ctx.addIssue({
+        code: "custom",
+        message: "Fresh state cannot precede its operation receipt.",
+      });
+    // Later work may legitimately move either pointer after this immutable receipt.
+    if (state.revision !== receipt.revisionAtCommit) return;
+    if (
+      (receipt.operation === "clear_acceptance" && state.accepted !== null) ||
+      (receipt.operation === "select_current" && state.current?.versionId !== receipt.versionId) ||
+      (receipt.operation === "accept_current" &&
+        (state.current?.versionId !== receipt.versionId ||
+          state.accepted?.versionId !== receipt.versionId))
+    )
+      ctx.addIssue({
+        code: "custom",
+        message: "Commit state contradicts its pointer operation receipt.",
+      });
+  });
 export const generationFailureSchema = z
   .object({
     ok: z.literal(false),
@@ -428,12 +445,74 @@ export function parseScopedGenerationHistory(
 export function parseScopedGenerationMutation(
   value: unknown,
   expected: z.infer<typeof generationScopeSchema>,
-  requestId: string,
+  intent: z.infer<typeof appendManualVersionSchema> | z.infer<typeof selectGenerationVersionSchema>,
+  baseline?: GenerationState,
 ) {
   const scope = generationScopeSchema.parse(expected);
-  const request = uuid.parse(requestId);
+  const request = z.union([appendManualVersionSchema, selectGenerationVersionSchema]).parse(intent);
   const result = generationMutationResultSchema.parse(value);
-  if (!sameScope(result.state.scope, scope) || result.receipt.requestId !== request)
+  if (
+    !sameScope(result.state.scope, scope) ||
+    request.projectId !== scope.projectId ||
+    request.streamId !== scope.streamId ||
+    result.receipt.requestId !== request.requestId
+  )
     throw new Error("Save receipt belongs to another workspace or request.");
+  const operation = "operation" in request ? request.operation : "append";
+  if (
+    result.receipt.operation !== operation ||
+    result.receipt.versionId !== request.versionId ||
+    result.receipt.revisionAtCommit !== request.expectedRevision + 1
+  )
+    throw new Error("Save receipt contradicts the requested operation, version or revision.");
+  const before = baseline === undefined ? undefined : generationStateSchema.parse(baseline);
+  if (before && (!sameScope(before.scope, scope) || before.revision !== request.expectedRevision))
+    throw new Error("Save baseline belongs to another workspace or revision.");
+  if (before && (before.kind !== result.state.kind || before.stage !== result.state.stage))
+    throw new Error("Save state changed the baseline stream kind or stage.");
+  if (!("operation" in request)) {
+    if (
+      result.state.kind !== request.document.kind ||
+      result.state.stage !== request.document.stage ||
+      (before &&
+        (before.kind !== request.document.kind ||
+          before.stage !== request.document.stage ||
+          (before.current?.versionId ?? null) !== request.parentVersionId))
+    )
+      throw new Error("Append does not match its stream or saved parent baseline.");
+    if (result.state.revision === result.receipt.revisionAtCommit) {
+      if (
+        (request.current === "select_new" &&
+          (result.state.current?.versionId !== request.versionId ||
+            result.state.current.sequence !== result.state.versionCount)) ||
+        (request.current === "retain" &&
+          (result.state.current?.versionId ?? null) !== request.parentVersionId) ||
+        (before &&
+          (result.state.versionCount !== before.versionCount + 1 ||
+            !samePointer(result.state.accepted, before.accepted) ||
+            (request.current === "retain" && !samePointer(result.state.current, before.current))))
+      )
+        throw new Error("Append commit contradicts its current or accepted pointer intent.");
+    }
+  } else if (before) {
+    if (request.operation === "accept_current" && before.current?.versionId !== request.versionId)
+      throw new Error("Acceptance must name the exact saved current baseline.");
+    if (
+      result.state.revision === result.receipt.revisionAtCommit &&
+      (result.state.versionCount !== before.versionCount ||
+        (request.operation === "select_current"
+          ? !samePointer(result.state.accepted, before.accepted)
+          : !samePointer(result.state.current, before.current)))
+    )
+      throw new Error("Pointer commit changed unrelated saved work.");
+  }
   return result;
+}
+function samePointer(a: GenerationState["current"], b: GenerationState["current"]) {
+  return a === null
+    ? b === null
+    : b !== null &&
+        a.versionId === b.versionId &&
+        a.sequence === b.sequence &&
+        a.bodyHash === b.bodyHash;
 }
