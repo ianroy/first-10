@@ -164,7 +164,7 @@
       }
     }
   ],
-  "status": "schema27_and_desktop_source_integrated_live_browser_pending",
+  "status": "live_bounded_manual_growth_and_pdf_gates_passed_teacher_projection_pending",
   "integration": {
     "sourceRootCommits": ["fa78838", "6dd018e", "194c063", "5fdda1d", "1a2cb77", "288873a"],
     "appTestsPassed": 1356,
@@ -272,7 +272,7 @@
       "bothFreshAuthorizationChecks": true,
       "screenshot": "/private/tmp/first-ten-pdf-qa/live-growth-learning-pdf.png"
     },
-    "otherKindsAndPortfolioLive": "passed; final desktop full-width preview layout verification pending",
+    "otherKindsAndPortfolioLive": "passed for all6individualprivate kinds, exact6activityportfolio andseparatelyauthoredteamcopy",
     "teacherProjection": "not implemented",
     "exportFixValidation": {
       "targetedTestsPassed": 21,
@@ -405,8 +405,17 @@
       "typecheck": "passed",
       "lint": "0 errors,6 existing warnings",
       "build": "passed",
-      "live": "pending",
-      "finding": "Full-width row shared the sticky sidebar grid, so sidebar could overlap while scrolling. Final source puts portfolio region outside that grid; no authorization change."
+      "live": "passed",
+      "finding": "Full-width row shared the sticky sidebar grid, so sidebar could overlap while scrolling. Final source puts portfolio region outside that grid; no authorization change.",
+      "commit": "d5bcbf4ec66866da62e9febe7f3c9da6383110a1",
+      "vercel": "success",
+      "reviewRegionWidthPixels": 1321,
+      "reviewRegionTopPixelsAfterExplicitButton": 24,
+      "focusMovedToReviewRegion": true,
+      "reviewRegionOutsideStickyGrid": true,
+      "screenshot": "/private/tmp/first-ten-pdf-qa/live-growth-portfolio-full-width.png",
+      "finalPortfolioPages": 15,
+      "allSixTitlesAndThreeTimingsVerified": true
     },
     "preservedEarlierStudios": {
       "aiStopped": true,

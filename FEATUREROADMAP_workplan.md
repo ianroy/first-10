@@ -31,7 +31,7 @@ research_gate: not_passed
 foundation_gate: not_passed
 realtime_go: pending
 last_updated: 2026-10-18
-last_documentation_update: "2026-10-18: Exact27 local+hosted rollout and desktopgrowth/PDF source mounts pass1365app tests. Livebrowser gate and teacherprojection remain; slowserial continues."
+last_documentation_update: "2026-10-18: Exact27 and all6manualdesktopactivities/PDFs verifiedlive,15pageportfolio/2pageteamcopy,1368app tests. Selectedteacherprojection remains next; slowserial continues."
 resume_hint: >-
   Active goal: keep building feasible authorized items, verify, commit/push/deploy.
   User requested SLOW: maximum1 active worker, serial tasks, no new parallel wave.
@@ -57,10 +57,12 @@ resume_hint: >-
   6activity15pageportfolio passed. Explicitblankteam7emptyfields verified, separate
   fictionalteamdraftrev2+2pageTeamPDF passed. Final fullwidthportfolio reviewlayout
   polish passes13targeted/type/lint/build. Stickyoverlay caught inlivevisualreview;
-  moveportfolioregionoutsidestickygrid,type/buildpass; deploy+finalvisualproof next.
+  moveportfolioregionoutsidestickygrid,type/buildpass. Finald5bcbf4/Vercelsuccess
+  visualproofpasses:1321pxwide,focusedtop24px,nooverlay,repeated15pageportfolio
+  withall6titles/timings. NEXT: serialselectedteacherprojection undernewreviewed28.
   CLS009s2/s3/s4completeboundedsoftware; s5teacherprojectionnotstarted/s6inprogress.
   OriginalDiscovery7/Marketing5metadata freshlyunchanged,AIstoptrue/collectionfalse. Separate teacherprojection and fullparity remainunfinished;
-  schema28 is UNRESERVED. ParentCLS009/CLS008 remainunfinished, not redefined.
+  schema28 is UNRESERVED untilthe nextclaimupdate. ParentCLS009/CLS008 remainunfinished, not redefined.
   Workerguest_marketing_handoff idle; root owns sharedintegration. EV001 remainsidle afterauthoritativecompleted+cleanworktree audit; its dormantclaim
   is retained because registryrequiresinprogressparent/s1claims, notbecause workisactive;
   contracts287dddd/8253d06 verified63tests; storage/UI/PDF/trustedcapture unfinished.
