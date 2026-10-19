@@ -128,6 +128,7 @@ function Workspace({ view, csrf, ports, fictional = false, onDirtyChange }: Prop
     [portfolio, setPortfolio] = useState<Saved[]>([]),
     [now, setNow] = useState(Date.now);
   const life = useRef({ alive: true, epoch: 0 }),
+    portfolioPreview = useRef<HTMLElement | null>(null),
     current = useRef(doc),
     pending = useRef<Save | null>(null),
     reporter = useRef(onDirtyChange);
@@ -967,14 +968,15 @@ function Workspace({ view, csrf, ports, fictional = false, onDirtyChange }: Prop
               </p>
             )}
             {portfolioPdf && (
-              <ActivityPdfExport
-                key={portfolioSignature}
-                document={portfolioPdf}
-                permittedAudiences={guestGrowthExportAudiences(portfolioSources)}
-                authorizeDownload={() =>
-                  authorize(portfolioSources, portfolioSignature, "portfolio")
-                }
-              />
+              <Button
+                variant="outline"
+                onClick={() => {
+                  portfolioPreview.current?.focus();
+                  portfolioPreview.current?.scrollIntoView({ block: "start" });
+                }}
+              >
+                Review selected portfolio
+              </Button>
             )}
           </div>
           <p className="px-2 text-xs leading-relaxed text-muted-foreground">
@@ -982,6 +984,26 @@ function Workspace({ view, csrf, ports, fictional = false, onDirtyChange }: Prop
             teacher disclosure. Previously downloaded copies cannot be recalled after access ends.
           </p>
         </aside>
+        {portfolioPdf && (
+          <section
+            ref={portfolioPreview}
+            tabIndex={-1}
+            aria-label="Selected saved growth portfolio export"
+            className="min-w-0 scroll-mt-6 space-y-4 rounded-2xl border bg-card p-5 xl:col-span-2 focus-visible:outline focus-visible:outline-2 focus-visible:outline-primary"
+          >
+            <h3 className="text-xl font-bold">Review your selected saved portfolio</h3>
+            <p className="text-sm text-muted-foreground">
+              {portfolio.length} exact saved activities. Current local edits are excluded. Choose
+              sections and redactions, then review this private copy before downloading.
+            </p>
+            <ActivityPdfExport
+              key={portfolioSignature}
+              document={portfolioPdf}
+              permittedAudiences={guestGrowthExportAudiences(portfolioSources)}
+              authorizeDownload={() => authorize(portfolioSources, portfolioSignature, "portfolio")}
+            />
+          </section>
+        )}
       </div>
     </section>
   );

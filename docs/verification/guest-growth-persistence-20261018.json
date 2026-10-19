@@ -272,7 +272,7 @@
       "bothFreshAuthorizationChecks": true,
       "screenshot": "/private/tmp/first-ten-pdf-qa/live-growth-learning-pdf.png"
     },
-    "otherKindsAndPortfolioLive": "pending",
+    "otherKindsAndPortfolioLive": "passed; final desktop full-width preview layout verification pending",
     "teacherProjection": "not implemented",
     "exportFixValidation": {
       "targetedTestsPassed": 21,
@@ -294,6 +294,19 @@
       "pipeline_contact": {
         "revision": 1,
         "pages": 3
+      },
+      "survey": {
+        "revision": 2,
+        "pages": 3
+      },
+      "referral": {
+        "revision": 1,
+        "pages": 3
+      },
+      "onboarding": {
+        "revision": 1,
+        "pages": 3,
+        "allThreePromptsAndBeforeDuringAfterPrinted": true
       }
     },
     "surveySaveFinding": "Typed two-question survey with exactexperiment1 reference savedrevision1. UI incorrectly reported newerlocaledits despite identical values because editor question object property order differed from parsed request. Source switches semantic fingerprints to existing canonicalGrowthJson; property/array/value equality preserved. Real survey+onboarding question/save/PDF regressions pass.",
@@ -301,6 +314,94 @@
       "targetedTestsPassed": 23,
       "combinedAppTestsPassed": 1368,
       "existingTestsSkipped": 11,
+      "typecheck": "passed",
+      "lint": "0 errors,6 existing warnings",
+      "build": "passed",
+      "live": "pending"
+    },
+    "contentEqualityFixLive": {
+      "commit": "a5a1a5e20ad8ff41712a6ba0fa86d87d78a862ce",
+      "vercel": "success",
+      "originalSurveyRevision1ReopenedClean": true,
+      "thirdNeutralQuestionSavedAsRevision2": true,
+      "noFalseUnsavedWarning": true,
+      "surveyPdfPages": 3
+    },
+    "sixActivityPortfolio": {
+      "exactSavedActivities": 6,
+      "allSixTitlesPresent": true,
+      "revisions1And2Preserved": true,
+      "beforeDuringAfterPrinted": true,
+      "pages": 15,
+      "bothFreshBulkChecksPassed": true,
+      "screenshotBeforeLayoutPolish": "/private/tmp/first-ten-pdf-qa/live-growth-portfolio.png"
+    },
+    "explicitTeamBlank": {
+      "allSevenFieldsInitiallyBlank": true,
+      "noPrivateQuestionsCopied": true,
+      "blankRevision": 1,
+      "separatelyAuthoredFictionalRevision": 2,
+      "pdfAudience": "team",
+      "pdfPages": 2,
+      "freshAuthorization": true
+    },
+    "hostedFixtureMetadata": {
+      "fixturePrincipals": 1,
+      "growth": [
+        {
+          "audience": "principal_private",
+          "currentRevision": 1,
+          "id": "41992dd0-5094-4e87-bfc8-3c6c09ac8bd3",
+          "kind": "experiment",
+          "retainedVersions": 1
+        },
+        {
+          "audience": "principal_private",
+          "currentRevision": 2,
+          "id": "61181819-a6be-4ace-8cfa-a886db3c4442",
+          "kind": "learning",
+          "retainedVersions": 2
+        },
+        {
+          "audience": "principal_private",
+          "currentRevision": 1,
+          "id": "da19152d-0326-483f-be04-3b7bd20d57aa",
+          "kind": "onboarding",
+          "retainedVersions": 1
+        },
+        {
+          "audience": "team_shared",
+          "currentRevision": 2,
+          "id": "259d4d8d-e7b8-4263-9450-f9c29ab1b235",
+          "kind": "onboarding",
+          "retainedVersions": 2
+        },
+        {
+          "audience": "principal_private",
+          "currentRevision": 1,
+          "id": "925465c9-cc0e-460b-a8dc-b7aa17852a89",
+          "kind": "pipeline_contact",
+          "retainedVersions": 1
+        },
+        {
+          "audience": "principal_private",
+          "currentRevision": 1,
+          "id": "c09ed751-f2ff-46ef-a8be-4afad0d811a7",
+          "kind": "referral",
+          "retainedVersions": 1
+        },
+        {
+          "audience": "principal_private",
+          "currentRevision": 2,
+          "id": "b03ae919-52a2-4a15-aa45-6b414a002c19",
+          "kind": "survey",
+          "retainedVersions": 2
+        }
+      ]
+    },
+    "portfolioLayoutFix": {
+      "sourceChange": "Move PDF review out of narrow sidebar into full-width accessible region; explicit review button focuses and scrolls to it",
+      "targetedUiTestsPassed": 13,
       "typecheck": "passed",
       "lint": "0 errors,6 existing warnings",
       "build": "passed",

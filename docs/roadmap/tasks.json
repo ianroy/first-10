@@ -5339,16 +5339,13 @@
         {
           "date": "2026-10-18",
           "text": "Phase1 contractsa068be9 and reviewfixc7ce11d integrated root287dddd/8253d06.63 pure tests worker pass; exact-commit pointer contradictions and mismatched request operation/version/revision/append intent rejected; newer-state replay allowed; baseline kind/stage/pointers remain immutable. No persistence/services/UI/AI/PDF change. Generation ledger has metadata, not recoverable old exact output; future trusted capture/legacy accepted projection/aggregate caps/real RLS and races remain gates. User requested slow pace; worker idle with scope reserved, no new phase."
+        },
+        {
+          "date": "2026-10-18",
+          "text": "Slowserial reservationaudit: personal_workspace authoritativelycompleted/idle, worktreeclean atc7ce11d, contracts integrated287dddd/8253d06 with63tests. Release stale contract-only claim; parentstaysinprogress and allfuturestorage/UI/PDF work requiresfreshserialclaim. No worktree/history removal and no activewriter interrupted."
         }
       ],
-      "claim": {
-        "owner": "personal_workspace",
-        "branch": "codex/generation-history-contracts-20261018",
-        "base_commit": "e316d0c",
-        "worktree": "/private/tmp/first-ten-generation-history",
-        "started_at": "2026-10-19T00:23:16Z",
-        "lease_expires_at": "2026-10-19T04:00:00Z"
-      },
+      "claim": null,
       "completion_evidence": [],
       "subtasks": [
         {
@@ -12186,6 +12183,10 @@
         {
           "date": "2026-10-18",
           "text": "Livee983e7c correctedpicker: reload/reopenlearningrev2 and3pagePDFpass; linkedexperimentrev1 andaliaspipeline rev1eachsave+3pagePDFpass. Survey2typedquestions+exactexperiment1refsavedrev1, butactualUI falselyreportsnewerlocaledits dueobjectpropertyorder. SourceusesexistingcanonicalGrowthJson forsemanticcontentfingerprints, preservesarray/value meaning. Added real survey+onboarding question/save/PDFregressions;23targeted and1368fullapp/11existing skips,type/lint0errors/buildPASS. Livefixedtypedform/remainingkinds/portfolio pending. Nooutreach/AI/sharing/measureddemand."
+        },
+        {
+          "date": "2026-10-18",
+          "text": "Livea5a1a5e all6structuredkinds saved/reopened withindividual3pagePDFs; typedsurveyoriginalrev1clean andthirdquestion savesrev2withoutfalsewarning. Exactlearning2->experiment1->survey2 metadata refs preserved. Sixactivityportfolio15pages includesalltitles/revisions/timedquestions, bothfreshbulkchecks. Explicitteamblankverified7emptyfields/no privatequestions; separatelyauthoredteamOnboardingrev2 delivered2pageTeamPDF. Hostedfictionalmetadata7realartifacts/6kindsbound toledger. Visualauditfound cramped sidebarportfolio preview; localizedfullwidthregion+focus/scroll reviewbutton sourcepasses13targeted/type/lint/build, livepending. Teacherprojection stillnotimplemented."
         }
       ],
       "claim": {
