@@ -37,8 +37,8 @@ function Acceptance({
       <h2 className="text-xl font-bold">Join as a student</h2>
       <p className="text-sm">
         Use a chosen classroom alias. Joining reveals class instructions and published assignments;
-        it shares no private project, interview notes or AI permission. Guest participation without
-        a personal account is not available yet.
+        it shares no private project, interview notes or AI permission. For account-free
+        participation, use your teacher’s separate guest entry link instead.
       </p>
       <form
         onSubmit={async (event) => {

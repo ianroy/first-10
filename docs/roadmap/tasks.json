@@ -4910,7 +4910,7 @@
       "size": "S",
       "kind": "implementation",
       "priority": 50,
-      "depends_on": ["CLS-002", "AN-002"],
+      "depends_on": ["CLS-002", "CLS-007"],
       "requires_decisions": [],
       "write_scope": [
         "src/lib/teacher.functions.ts",
@@ -4925,7 +4925,9 @@
         "ProductSpec.md",
         "FEATUREROADMAP_workplan.md",
         "docs/company-values.md",
-        "src/lib/data.ts"
+        "src/lib/data.ts",
+        "docs/analytics/event-contract.md",
+        "docs/architecture/guest-marketing-handoff.md"
       ],
       "goal": "Let teachers see authorized student activity and reviewed work.",
       "steps": [
@@ -4947,7 +4949,7 @@
       "metric": "Cross-class leakage and unauthorized feedback: zero.",
       "rollback": "Disable teacher projections and retain submitted versions for authorized recovery.",
       "agent_notes": {
-        "starting_point": "No class/teacher role exists today. Enrollment and teacher progress visibility must not imply access to private project/interview records. Read dependency handoffs before editing; do not assume a planned service exists.",
+        "starting_point": "Separate class purpose from optional product analytics. Existing real class/enrollment/published assignments and selected immutable account/guest submissions exist. Derive only already-authorized class metadata and eligible deliberate submissions; never join raw private activity/interview/project contents or use optional product telemetry as a teacher visibility grant. Feedback must target an exact eligible submitted version with fresh class role and audience checks.",
         "stop_and_report": "If a required contract, test environment, human observation, budget or permission is missing, record the specific blocker. Continue another ready task; do not fabricate data or widen the write scope.",
         "handoff": "Report changed files, base/result commit, exact checks and outcomes, artifact/source ids, residual risks and the next eligible task. Only the coordinator edits task status, shared generated files and the main roadmap.",
         "integration": "Use a clean task branch/worktree from the coordinator base. Commit only this write scope. Migrations, generated types, route tree, dependency locks and shared entry points are serialized by the coordinator; never hand-edit generated output."
@@ -4960,6 +4962,10 @@
         {
           "date": "2026-10-18",
           "text": "Guest model extension from FERPA-001 review: resolve account-only source assumptions before implementation."
+        },
+        {
+          "date": "2026-10-18",
+          "text": "Dependency audit: replace unrelated AN002 optional product-measurement prerequisite with actual guest classroom authority CLS007, retaining CLS002. Class participation/selected-copy feedback cannot require analytics opt-in or treat a telemetry preference as teacher access. Progress is strictly authorized enrollment/assignment/submission metadata with unknowns; no private activity counts or learning/demand inference. Any future optional usage rollup remains a separately gated producer/projection. Task still unimplemented and schema blocked by AN003 lease; no access broadened."
         }
       ],
       "claim": null,
@@ -5076,7 +5082,7 @@
       "id": "CLS-005",
       "title": "Build student class participation and visibility controls",
       "phase": "P4",
-      "status": "in_progress",
+      "status": "complete",
       "owner": "agent",
       "size": "S",
       "kind": "implementation",
@@ -5128,35 +5134,49 @@
         {
           "date": "2026-10-18",
           "text": "Evidence-first audit reservation after WS003 complete. Much participation/reviewed-copy UI exists from CLS002/007; reconcile each original acceptance/subtask before adding duplicate features. Allowed existing task scope only, no schema/types/services modifications or DB/network actions. Add meaningful integrated UI checks and bounded actual gaps; root owns live browser/combined gates and status. Preserve private project/class/selected-copy boundaries."
+        },
+        {
+          "date": "2026-10-18",
+          "text": "Bounded software implementation complete after root integration e316d0c,15new/76focused tests,1174rootapp tests/11existing skips, type/lint/build pass. Explicit revision path uses fresh author copies, chosen assignment and existing server source binding; leave retry retains unsaved reasoning; refresh/revocation invalidates review. No new DB authority/AI. Ordinary-student live login/revision/leave and physicaldevice remain final REL001/002 checks; presenter teacher view is not relabeledstudentproof. Root truthful invitationcopyfix points to separateguestentry."
         }
       ],
-      "claim": {
-        "owner": "personal_workspace",
-        "branch": "codex/class-participation-20261018",
-        "base_commit": "6e7c581",
-        "worktree": "/private/tmp/first-ten-class-participation",
-        "started_at": "2026-10-19T00:13:00Z",
-        "lease_expires_at": "2026-10-19T04:00:00Z"
-      },
-      "completion_evidence": [],
+      "claim": null,
+      "completion_evidence": [
+        "e32269a integrated as e316d0c; docs/qa/class-participation.md:15new tests/76focused; root1174passing/11existing skips with3actualDTOsuites, typecheck/lint/build pass; existing actual21/22/24 authority evidence preserved. Live ordinary-student/physicaldevice checks remain REL001/002."
+      ],
       "subtasks": [
         {
           "id": "CLS-005.s1",
-          "status": "in_progress",
+          "status": "complete",
           "instruction": "Show enrolled classes, assignments and explicit associated-project selection.",
-          "notes": []
+          "notes": [
+            {
+              "date": "2026-10-18",
+              "text": "Source and meaningful component checks reconciled against original instruction; existing authority source audited, no new role/schema/service. See docs/qa/class-participation.md for exact scope and outstanding live release checks."
+            }
+          ]
         },
         {
           "id": "CLS-005.s2",
-          "status": "in_progress",
+          "status": "complete",
           "instruction": "Provide preview/submit/revise/withdraw flows and explain teacher-visible metadata.",
-          "notes": []
+          "notes": [
+            {
+              "date": "2026-10-18",
+              "text": "Source and meaningful component checks reconciled against original instruction; existing authority source audited, no new role/schema/service. See docs/qa/class-participation.md for exact scope and outstanding live release checks."
+            }
+          ]
         },
         {
           "id": "CLS-005.s3",
-          "status": "in_progress",
+          "status": "complete",
           "instruction": "Support leaving a class, invitation failures and return to the personal workspace.",
-          "notes": []
+          "notes": [
+            {
+              "date": "2026-10-18",
+              "text": "Source and meaningful component checks reconciled against original instruction; existing authority source audited, no new role/schema/service. See docs/qa/class-participation.md for exact scope and outstanding live release checks."
+            }
+          ]
         }
       ]
     },
@@ -5255,7 +5275,7 @@
       "id": "EV-001",
       "title": "Preserve generated drafts and accepted learning versions",
       "phase": "P5",
-      "status": "not_started",
+      "status": "in_progress",
       "owner": "agent",
       "size": "S",
       "kind": "implementation",
@@ -5263,19 +5283,11 @@
       "depends_on": ["AI-002", "WS-002"],
       "requires_decisions": [],
       "write_scope": [
-        "supabase/migrations/**",
-        "src/lib/generation-history.functions.ts",
-        "src/lib/data.ts",
-        "src/routes/_authenticated/learnings.tsx",
-        "src/routes/_authenticated/outreach.tsx",
-        "src/tests/ev-001/**",
-        "src/lib/generation-history.functions.test.ts",
-        "src/lib/data.test.ts",
-        "src/routes/_authenticated/learnings.test.tsx",
-        "src/routes/_authenticated/outreach.test.tsx",
-        "supabase/tests/ev-001.sql"
+        "src/lib/generation-history/contracts.ts",
+        "src/tests/ev-001/contracts.test.ts",
+        "docs/architecture/generation-history.md"
       ],
-      "exclusive_locks": ["database-schema", "generated-types", "project-data-layer"],
+      "exclusive_locks": ["generation-history-contract"],
       "read_first": [
         "ProductSpec.md",
         "FEATUREROADMAP_workplan.md",
@@ -5311,14 +5323,25 @@
         {
           "date": "2026-10-17",
           "text": "Scheduled by Iteration 5; no implementation or validation claimed."
+        },
+        {
+          "date": "2026-10-18",
+          "text": "Phase1 contract/design-only reservation after CLS005 bounded software completion. Exact3files only; no schema/data layer/server/UI/types/DB actions until serialized scope expansion. Audit current atomic outreach save and immutable AI origin ledger instead of duplicating them; preserve accepted/manual/current data, permission/provenance and every-activity PDF obligations. AN003 exclusively holds26. No new generation/AI call or persistence feature is claimed from pure contracts."
         }
       ],
-      "claim": null,
+      "claim": {
+        "owner": "personal_workspace",
+        "branch": "codex/generation-history-contracts-20261018",
+        "base_commit": "e316d0c",
+        "worktree": "/private/tmp/first-ten-generation-history",
+        "started_at": "2026-10-19T00:23:16Z",
+        "lease_expires_at": "2026-10-19T04:00:00Z"
+      },
       "completion_evidence": [],
       "subtasks": [
         {
           "id": "EV-001.s1",
-          "status": "not_started",
+          "status": "in_progress",
           "instruction": "Version outreach and synthesis with parent revision, prompt/model/source metadata and explicit accepted state.",
           "notes": []
         },
@@ -11992,8 +12015,8 @@
       "depends_on": ["CLS-007", "CLS-002", "EXP-001", "MKT-003"],
       "requires_decisions": [],
       "write_scope": [
-        "src/lib/guest-growth/contracts.ts",
-        "src/lib/guest-growth/pdf.ts",
+        "src/lib/guest-growth/**",
+        "src/lib/guest-growth.functions.ts",
         "src/components/guest-growth/**",
         "src/tests/guest-growth/**",
         "docs/architecture/guest-growth.md"
@@ -12049,6 +12072,14 @@
         {
           "date": "2026-10-18",
           "text": "Phase1 reviewed and integratedfee5048/58e790b including independent review corrections;29rootfocusedtests pass and typecheck clean. Active phase2 remains controlleddesktop/PDF source only. AN003 retains sole schema26 lease."
+        },
+        {
+          "date": "2026-10-18",
+          "text": "Phase2 pure UI/PDF candidate fa320f7/3fef22a/ca3dbb0 ready:51focused tests/typecheck/scopedlint/format; all34PDFpages visuallychecked (6individual17pages+selectedportfolio17). Root review/integration pending; still unmounted/no persistence orteacherprojection. Phase3 scope expanded to genuine guest server transport/RPC adapters and meaningful denial/parser tests only. Exact schema27 remains UNRESERVED while AN003 holds26; no SQL/migration/DB/sourceparent/coverage/types edits. Use proposedclosedRPC names/contracts, freshcookie/CSRF scope, no browserauthority orfakeuserdata and failclosedmissingRPC. Root may reserve next schema after26 integration boundary."
+        },
+        {
+          "date": "2026-10-18",
+          "text": "Purephase2 integrated1138dab/2acad91/abc6d40; root visually reviewed all17portfolio pages/contact sheets. Combined1196app tests/11existing skips, type/full lint(0errors/6existingwarnings)/Vercelbuild pass. Every-activity builders are unmounted, no persistence/teacherprojection/registeredcoverageclaim. Serveradapterphase3 underway withoutSQL until26lease release."
         }
       ],
       "claim": {
@@ -12078,7 +12109,7 @@
         },
         {
           "id": "CLS-009.s2",
-          "status": "not_started",
+          "status": "in_progress",
           "instruction": "Implement bounded saved/reopen/CAS/idempotent services with exact request retry, cookie+CSRF authority, class→fresh principal→source lock order, post-write expiry rollback and documented count/byte/receipt caps. Use additive reviewed migrations; never edit published22–24 or reuse an unrelated activity identity.",
           "notes": []
         },
@@ -12295,7 +12326,9 @@
         "supabase/tests/an-003.sql",
         "src/lib/measurement-retention/**",
         "src/tests/an-003/**",
-        "docs/architecture/measurement-retention.md"
+        "docs/architecture/measurement-retention.md",
+        "supabase/tests/an-002.sql",
+        "src/tests/an-002/races.mjs"
       ],
       "exclusive_locks": ["database-schema", "measurement-retention"],
       "read_first": [
@@ -12334,6 +12367,10 @@
         {
           "date": "2026-10-18",
           "text": "Extracted the real unfinished operational retention gate from AN002; no fictional completion. Existing25 only records bounded purge attempts and no scheduled job. Reserve exact26; no27 schema writer until this lease released. Draft/test harness only before independent pin review; no DB/container/job actions yet."
+        },
+        {
+          "date": "2026-10-18",
+          "text": "Actual exact-pinned isolated cron rehearsal passed:2000/2000/501 expired rows removed with true backlog/drain distinction; actual scheduled cancellation/row preservation/recovery;11 malformed-proof tests; auditedDTO; collectionoff; ownedcontainerabsence. Prior2failures preserved (imageVolumefield omitted, SQLtokenwhitespace), both safe/cleaned. Before integration root found nested standalone fixturetransaction incompatible with globalpolicy runner and oldAN002 readinessfixtures needing26proof. Expanded TESTONLY scope AN002SQL/races plus newAN003compatibilityharness; no oldpublishedmigration edits or actualsourceDB actions. Worker must prepare/re-pin before repeat isolatedruntime/fullstrictSQL+DTO+3races in owned schema-only clone. Root still applies local/hosted/types/schedule serially.26lease retained."
         }
       ],
       "claim": {
@@ -12348,19 +12385,19 @@
       "subtasks": [
         {
           "id": "AN-003.s1",
-          "status": "in_progress",
+          "status": "complete",
           "instruction": "Add forward-only cleanup health with separate attempt/drained/scheduled timestamps, expiry indexes, bounded overlap-safe processing and closed aggregate status; never edit published25.",
           "notes": []
         },
         {
           "id": "AN-003.s2",
-          "status": "not_started",
+          "status": "complete",
           "instruction": "Install an exact uniquely named inactive database-local job with bounded job-specific run history; prove scheduled execution in a separately owned network-none cluster, never the live55322 cluster.",
           "notes": []
         },
         {
           "id": "AN-003.s3",
-          "status": "not_started",
+          "status": "in_progress",
           "instruction": "Prove real expired/unexpired/backlog/failure/stale states and actual scheduled receipts with verified container cleanup. Collection must stay disabled.",
           "notes": []
         },

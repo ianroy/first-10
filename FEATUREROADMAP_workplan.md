@@ -22,15 +22,15 @@ Statuses are `not_started`, `in_progress`, `blocked`, `complete`, `deferred`, `d
 current_iteration: 5
 current_stage: P1_foundation_with_parallel_P2_and_R0
 status: in_progress
-last_task_done: WS-007
+last_task_done: CLS-005
 next_task: AN-003
-next_parallel_wave: [AN-003, CLS-009, CLS-005]
-active_claims: [AN-003, CLS-009, CLS-005]
+next_parallel_wave: [AN-003, CLS-009, EV-001]
+active_claims: [AN-003, CLS-009, EV-001]
 research_gate: not_passed
 foundation_gate: not_passed
 realtime_go: pending
 last_updated: 2026-10-18
-last_documentation_update: "2026-10-18: Guest studios and teacher handoff through24 live; personal workspace and combined return gate verified; explicit growth parity and opt-in analytics continue."
+last_documentation_update: "2026-10-18: Student revision and leave recovery verified; unmounted guest growth UI/PDF candidate integrated; actual isolated retention passed and full policy compatibility continues."
 resume_hint: >-
   Active goal: keep building every feasible authorized item, verify and commit/push/deploy.
   Preserve $25 total OpenRouter cap and no other paid services. Latest usage check: 57%
@@ -51,21 +51,31 @@ resume_hint: >-
   completion and WS007 combined owner/project gate complete:9 component journeys,
   5 guard tests,2actual DB owners/4same-name projects and4real archive races. Physical
   second device/fresh two-owner hosted Auth/offline checks remain final release gates.
-  Root1159app tests pass/11existing skips after reviewed growth contracts; typecheck
-  passes. Root25 full lint/build passed;6e7c581 CI and isolated RLS both successful.
+  Root1196app tests pass/11existing skips after unmounted growth UI/PDF and CLS005;
+  typecheck/lint/build pass.6e7c581 CI and isolated RLS both successful.
   UI polish:
   class revision refresh remounts teacher lists and clears old exports; download success
   is tied to its exact source fingerprint. All three actual-SQL DTO suites were enabled.
   CLS008 s2/s3 complete; s1 explicitly blocked on newCLS009 missing manual growth
-  artifacts, not redefined as two studios. CLS009 phase1 contracts94723d1 ready for review; worker now builds isolated controlled
-  desktop editors/PDF builders. No persistence/mounted capability claimed.
+  artifacts, not redefined as two studios. CLS009 phase1 reviewed contracts integrated; pure six-kind desktop editors/PDF
+  candidates integrated1138dab/2acad91/abc6d40. Root viewed17portfolio pages; worker
+  inspected all34individual/portfolio pages and51focusedtests pass. Still unmounted:
+  server adapters in progress, persistence/teacher projection/coverage gates unfinished.
   AN002 software7bcfb75 is integrated: opt-in owner-only measurement, defaultdisabled,
   exact-pinned25fc798efd passed1863SQL/2actualDTOs/3races/rollback/cloneabsence. Root
   Account mount and official types published; hosted25 and live choice/reload checks
   succeeded. AN002 parent blocked on newAN003 retention and
-  AN004 remaining event producers. CLS005 worker audits existing student participation
-  against original acceptance and fills actual UI/test gaps. AN003 exclusively reserves26, source/harness only
-  until exact pin approval. No scheduled cleanup or complete funnel is claimed.
+  AN004 remaining event producers. CLS005 bounded software complete: fresh author
+  revisions, visibility, leave/retry/draft preservation and class refresh checks. Live
+  ordinary-student and physicaldevice remain REL001/002, not faked with presenterowner.
+  EV001 worker now contracts/design only for reversible learning/outreach versions.
+  AN003 exclusively reserves26. Actual isolated cron batches/failure/recovery and11
+  malformed-proof checks passed with collectionoff and ownedcontainerabsence. Source25
+  and hosted25 unchanged. Root found standalone fixturetransaction/global-suite
+  incompatibility; test-only savepoint/readiness compatibility source now undergoing
+  exact-pinned sequential isolatedcron and fullSQL/DTO/3race rehearsals. Normal local/
+  hosted26 application, official types and livecleanup remain pending. No complete
+  funnel or physical deletion guarantee is claimed.
   Bounded public retrieval is approved and live, receipt83724f78 committed; source AI
   and sharing excluded. CTX reviewed-source AI adapter remains unfinished. All new AI
   dispatch remains paused via global_stop after retirement/billing review; permanent
