@@ -12110,6 +12110,14 @@
         {
           "date": "2026-10-18",
           "text": "Additional serial read-only audit found installed ICU und153.121 differs from Node Unicode17 on55 single-codepoint mappings despite0/504 contextual-Sigma mismatches. Full1,112,063 non-NUL scalar values compared. Approved source-only pinned Unicode17 option-key policy/data with context handling, preserving international duplicate-option semantics rather than reducing to ASCII; no author text changes. Durable docs/verification/guest-growth-unicode-20261018.json. Harness review also caught absent-cron query, missing schema-only26 singleton seed data and incomplete source version/port guards; corrections required before pins. Worker remains sole active writer; no candidate DB execution."
+        },
+        {
+          "date": "2026-10-18",
+          "text": "Slow serial phase4 source frozen57735963ffa2e1ba0216c4f7213dc5a5a2c5ef2a; worker idle. Root independently reviewed source, four exact pins and guarded clone harness:123focused passes/17 actualSQL skips. Root now authorizes ONLY one exact-pinned disposable schema-only clone trial on dedicated55322; no source/hosted migration, scheduler, collection, provider or parent mount action. Pins migration058a0d2473d39a1fece0c9b5cb86acc954cc8c55bfde5ec18cc85fb2547e0d67; harness72700b604f55c11be0da927d0d7f91ed6e42d4b261cb380f1bf5fcb1b1ed7fb2; racesd5ad1de98ef1caa441aa6b181eef21156b56dfa4e64668c7d4297089e9475a0d; SQLcd137d66a23a28bddb1ba08fcef7cb7d4ef1b95d36496645759d33a0de602d2a. Actual compile/SQL/DTO/races/cleanup outcomes pending; no persistence completion claim."
+        },
+        {
+          "date": "2026-10-18",
+          "text": "Exact-pin5773596 disposable trial:27 compiled/applied only schema-only clone. Complete SQL suite aborted at fictional50-source setup; first3420 tiny-authority assertion failed despite3419 create_class success. DTOs/races not reached. Cleanup verified/clone absent/source26 flags+helper+history unchanged. Durable docs/verification/guest-growth-persistence-20261018.json. Sole worker resumes SOURCE-ONLY diagnosis and guarded fixture assertions; no retry until independently reviewed new pins. Live/source27 remains unapplied."
         }
       ],
       "claim": {

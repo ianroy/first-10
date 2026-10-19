@@ -103,7 +103,11 @@ resume_hint: >-
   fixed-UTF8 digest wrapper before generated-column execution. Read-only full Unicode
   audit found55 ICU/Node17 mappings diverge; source now preserves full semantics with
   a pinned Unicode17 option-key policy instead of weakening to ASCII. Guard/clone-state
-  fixes and final source gates/pins are pending. No candidate DB action.
+  fixes frozen in5773596;123focusedtests pass/17actualSQLskips. Worker idle. Root reviewed
+  all4exactpins and authorizes only guarded disposable schema-only clone trial on55322.
+  First trial compiled27 in clone only, then SQL aborted at50-source setup; initial
+  authority assertion failed. Clone removed/source unchanged verified. Sole worker
+  diagnoses source-only before new reviewed pins. DTO/races not reached; no live27.
   README/ProductSpec now clearly distinguish existing
   reviewed Marketing copies from unfinished dedicated six-kind growth workflows. No complete
   funnel or physical deletion guarantee is claimed.

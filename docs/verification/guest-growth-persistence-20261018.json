@@ -1,0 +1,28 @@
+{
+  "trials": [
+    {
+      "pins": {
+        "MIGRATION": "058a0d2473d39a1fece0c9b5cb86acc954cc8c55bfde5ec18cc85fb2547e0d67",
+        "HARNESS": "72700b604f55c11be0da927d0d7f91ed6e42d4b261cb380f1bf5fcb1b1ed7fb2",
+        "RACES": "d5ad1de98ef1caa441aa6b181eef21156b56dfa4e64668c7d4297089e9475a0d",
+        "SQL": "cd137d66a23a28bddb1ba08fcef7cb7d4ef1b95d36496645759d33a0de602d2a"
+      },
+      "database": "firstten_growth_test_58c110b8ef78",
+      "phase": "complete rollback SQL fixtures",
+      "creationAttempted": true,
+      "cleanupVerified": true,
+      "passed": false,
+      "sourceUnchanged": true,
+      "sourceCommit": "57735963ffa2e1ba0216c4f7213dc5a5a2c5ef2a",
+      "date": "2026-10-18",
+      "sourceBoundary": "Dedicated local55322 actual26; no source or hosted27 apply",
+      "result": "Migration compiled/applied to schema-only clone; complete SQL suite aborted at fictional50-source setup. First tiny-authority success assertion failed after create_class passed. All later dependent saves failed; no actual DTO or races executed. Diagnosis pending.",
+      "firstFailedAssertion": 3420,
+      "firstFailedDescription": "genuine tiny authority works",
+      "fixtureAbort": "Failed real50-source setup",
+      "sourceOrHostedWrites": false,
+      "providerCalls": 0
+    }
+  ],
+  "status": "source_candidate_actual_sql_failed_cleanup_verified"
+}
