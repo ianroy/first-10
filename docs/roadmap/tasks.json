@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "updated_at": "2026-10-18",
+  "updated_at": "2026-10-26",
   "iteration": 5,
   "max_parallel_agents": 1,
   "phases": [
@@ -2321,7 +2321,7 @@
       "rollback": "Pin a previously evaluated eligible model or disable the affected kind.",
       "agent_notes": {
         "starting_point": "Current gateway has four kinds, provider-requested JSON schema and JSON.parse; runtime validation, provenance, grounded context and spend control remain planned. Read dependency handoffs before editing; do not assume a planned service exists.",
-        "stop_and_report": "If a required contract, test environment, human observation, budget or permission is missing, record the specific blocker. Continue another ready task; do not fabricate data or widen the write scope.",
+        "stop_and_report": "Serving-account handoff remains pending. Automatic approval path recovered: fetch and Vercel metadata succeeded; fe3a9a2 READY. Preserve closed generation and budget holds; follow docs/ai-runtime-evaluation-plan.md.",
         "handoff": "Report changed files, base/result commit, exact checks and outcomes, artifact/source ids, residual risks and the next eligible task. Only the coordinator edits task status, shared generated files and the main roadmap.",
         "integration": "Use a clean task branch/worktree from the coordinator base. Commit only this write scope. Migrations, generated types, route tree, dependency locks and shared entry points are serialized by the coordinator; never hand-edit generated output."
       },
@@ -2381,6 +2381,14 @@
         {
           "date": "2026-10-19",
           "text": "Git staging requestedthroughrequire_escalated twice; automatic approval reviewerfailedatselected-modelcapacity beforeexecution, notunsafe-actiondetermination. No staging/commit/push/deploymentofv7occurred, nobypassattempted. Verifiedsource remainsuncommitted oncodex/live-generation-v7; productionstillab72f2e. Useraskedrestore revieweravailabilityorhandlecommit. This isseparatefromproductionOpenRouteraccount/workspacemismatch. Keepgoalactive; do notclaimv7live. Updatecursorbeforestop; preserveuserPDFuntracked."
+        },
+        {
+          "date": "2026-10-19",
+          "text": "Integration checkpoint after three consecutive goal turns encountering the same approval-review capacity/timeout condition. Prior turns made verified source progress; this turn ordinary commit fe3a9a23bf27953fc956bd44ca88848ba8d56eb9 was created and successfully pushed as a fast-forward to GitHub main. Its first push approval timed out before execution; one permitted same-path retry succeeded. Required clone rehearsal, deployment metadata and actual app-control observation then again failed reviewer model capacity before execution. Initial admin shell only was observed; deployment and generation verification remain unproven. Teacher candidate stays separate/local/uncommitted/unapplied/unmounted. OpenRouter account-to-serving-workspace handoff remains pending. No safe integration step can proceed without restored review availability/account access; do not bypass or mark tests as live evidence. Retain claims/checkpoints while goal is blocked; resume by verifying fe3 deployment, running the exact-pinned disposable trial and completing account/privacy/billing/model gates. Root updates goal to blocked, not complete."
+        },
+        {
+          "date": "2026-10-26",
+          "text": "User resumed. Normal-path Git fetch passed; HEAD/origin main fe3a9a2 and Vercel READY exact commit. Chrome workspace freshly verified as 8fb3fcfb-98fe-5695-a3a3-94f1067dac4e, still differs from previously serving 047cf11a-2bfd-5ce5-888a-2a4ddcd4bc14. Account-switch question pending. No paid call or activation. Temporary unapproved plan absent; regenerate when needed. Fresh blocker audit; previous three-turn count is historical."
         }
       ],
       "claim": {
@@ -12106,7 +12114,7 @@
       "id": "CLS-009",
       "title": "Complete manual guest growth activity parity",
       "phase": "P4",
-      "status": "in_progress",
+      "status": "blocked",
       "owner": "agent",
       "size": "M",
       "kind": "implementation",
@@ -12155,7 +12163,7 @@
       "rollback": "Hide new guest growth entry, retain existing22/23 studios and all saved records; no destructive downgrade.",
       "agent_notes": {
         "starting_point": "Genuine guest22/23/24 are shipped. Define the specific missing standalone learning/experiment, pipeline, survey/referral/onboarding artifacts; never equate generic text with structured parity. Start by reading current source and source-scoped export/submission boundaries. Contract-only phase cannot mutate schema or enable UI.",
-        "stop_and_report": "If a required contract, test environment, human observation, budget or permission is missing, record the specific blocker. Continue another ready task; do not fabricate data or widen the write scope.",
+        "stop_and_report": "Old temporary worktree source and uncommitted fixes are missing after cleanup. Recover committed fa73603d into persistent storage, reconstruct/review missing fixes and rerun all gates. Historical178 focused pass does not verify the older recovered checkpoint. Never use old pins or apply candidate28 incidentally.",
         "handoff": "Report changed files, base/result commit, exact checks and outcomes, artifact/source ids, residual risks and the next eligible task. Only the coordinator edits task status, shared generated files and the main roadmap.",
         "integration": "Use a clean task branch/worktree from the coordinator base. Commit only this write scope. Migrations, generated types, route tree, dependency locks and shared entry points are serialized by the coordinator; never hand-edit generated output."
       },
@@ -12311,6 +12319,14 @@
         {
           "date": "2026-10-19",
           "text": "Rootcontinuationcheckpoint: separatecapacityfixturesnowauthored; noorphanthreadonrefusedadmissionsourcefix; result-before-final-fencefixesforroster/choice. PrivacyUIreviewfounduncertaingrantblockedwithdrawal; fixedfreshrevisionreductions, exactwithdrawalretries, unrelatedpendingpreservation, removed-dependencyintentresolution, nondestructivechoicesrefresh/privatepreviewdiscard andtruthfulold-copyrecoverymessage.7newUIregressions;178focusedPASS/29actualSQLskips,typecheck/scopedlint/Nodeharness+race syntax/diffPASS. All5existingrenderedPDFpagesvisualreviewPASS/nofooterclipping; noPDFsourcechange. Exactreviewedclone-onlytrialrejectedBEFOREexecutionbyautomaticreviewermodelcapacity; noDB/containercreation/SQL/DTO/race/cleanup evidence. Gitstagingnewattempttimedoutbeforeexecution; OpenRouterbrowseroriginreviewalsocapacityfailedbeforeobservation; nobypass. Alllocalchangessaved/uncommittedinexistingcandidateworktree; no apply/integration/mount/deploy. Durableledger docs/verification/guest-growth-handoff-20261019.json includes6sourcehashes/logs/unmetgates. AIv7root1439testsource unchanged/unpublished; servingaccountmappingstillhumanpending. Rootsoleworker, otheragentsidle."
+        },
+        {
+          "date": "2026-10-19",
+          "text": "Integration checkpoint after three consecutive goal turns encountering the same approval-review capacity/timeout condition. Prior turns made verified source progress; this turn ordinary commit fe3a9a23bf27953fc956bd44ca88848ba8d56eb9 was created and successfully pushed as a fast-forward to GitHub main. Its first push approval timed out before execution; one permitted same-path retry succeeded. Required clone rehearsal, deployment metadata and actual app-control observation then again failed reviewer model capacity before execution. Initial admin shell only was observed; deployment and generation verification remain unproven. Teacher candidate stays separate/local/uncommitted/unapplied/unmounted. OpenRouter account-to-serving-workspace handoff remains pending. No safe integration step can proceed without restored review availability/account access; do not bypass or mark tests as live evidence. Retain claims/checkpoints while goal is blocked; resume by verifying fe3 deployment, running the exact-pinned disposable trial and completing account/privacy/billing/model gates. Root updates goal to blocked, not complete."
+        },
+        {
+          "date": "2026-10-26",
+          "text": "Recovery audit: temporary worktree has directories only; Git lists it prunable. No candidate source/test logs/PDFs remain. Committed fa73603d survives. October19 six-file WIP hashes cannot be reproduced from current disk; recover checkpoint and reimplement missing work. No database trial executed. Approval path now works for Git/Vercel; previous model-capacity blocker no longer describes current state."
         }
       ],
       "claim": {

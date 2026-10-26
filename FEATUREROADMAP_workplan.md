@@ -23,78 +23,54 @@ current_iteration: 5
 current_stage: P1_foundation_with_parallel_P2_and_R0
 status: in_progress
 last_task_done: CLS-005
-next_task: CLS-009
+next_task: AI-005
 next_parallel_wave: []
 execution_pace: slow_serial
 active_claims: [AI-005, CLS-009, EV-001]
 research_gate: not_passed
 foundation_gate: not_passed
 realtime_go: pending
-last_updated: 2026-10-19
-last_documentation_update: "2026-10-19: Root advanced classroom capacity/privacy source while AI account and approval-review capacity block publication, database rehearsal and browser checks."
+last_updated: 2026-10-26
+last_documentation_update: "2026-10-26: User resumed; approval-path fetch and deployment verification succeeded. OpenRouter workspace still mismatched. Temporary candidate files are missing; committed checkpoint remains recoverable."
 resume_hint: >-
-  ACTIVE goal. Latest priority: build everything needed to enable live generation.
-  The original 10-hour checkpoint was reported; further work remains authorized.
-  SLOW SERIAL: root is the only active implementation worker. All other agents are
-  completed/idle. Keep the reserved claims; do not launch a parallel wave.
-  AI work is saved but uncommitted on codex/live-generation-v7, currently ab72f2e.
-  It passes 1439 app tests with 11 existing skips, all 5 actual DTO suites,
-  typecheck, scoped lint and production build. Eight authored fictional cases use
-  generateAI, stable operation IDs, the existing ledger and strict grounded output.
-  expectedWorkspaceId remains null, so this new flow cannot dispatch. The retiring
-  marketing_demo entry point is closed; preserve its drafts, charges and $1 carveout.
-  Historical v1-v6 artifacts and v6 local-only/$0.90 paid guards are preserved.
-  Immutable current v7 fixtures must be superseded when bound source changes.
-  Prepared packet: /private/tmp/firstten-runtime-ai-v7-unapproved-plan.json.
-  It is unapproved and allows at most $4 within the existing $25 total.
-  The serving key was accepted on production ab72f2e: workspace
-  047cf11a-2bfd-5ce5-888a-2a4ddcd4bc14, $50 resetting limit, $49.9955416 remaining,
-  $0.0044584 reported usage, BYOK excluded. Chrome's signed-in Default Workspace
-  8fb3fcfb-98fe-5695-a3a3-94f1067dac4e differs. User was asked to switch accounts.
-  Never request, copy or export credentials. The visible privacy settings do not
-  attest the serving account. Matching privacy/logging/BYOK review is still needed.
-  The exact standard google-vertex/global Gemini 3.1 Flash Lite endpoint last had
-  catalog status -2. Recheck availability, prices and total billing bounds before
-  activation; do not silently substitute a provider, tier or region.
-  Last hosted read: global stop true, general disabled, $24 cap, opening hold null,
-  0 general operations, 0 enabled routes and 4 cents of old demo reservations.
-  Preserve the permanent $1 carveout, all holds and the $25 total; no other paid
-  services. Reconcile prior spending before setting an honest opening hold.
-  Read docs/ai-runtime-evaluation-plan.md for review, rehearsal, activation and
-  rollback. Existing owner kinds come first; guest/discovery/marketing AI still
-  needs separate kinds, source choices and scopes. Class AI stays off by default.
-  Root used the account wait to advance CLS-009 in the existing worktree
-  /private/tmp/first-ten-guest-marketing-handoff, based on fa73603d. Its uncommitted
-  source adds full row/UTF8 capacity fixtures, fixes orphan threads on refused
-  previews, moves roster/choice results before final fences, and fixes uncertain
-  grant/withdrawal UI handling. It passes 178 focused tests, with 29 actual-SQL
-  skips, typecheck, scoped lint, Node harness/race syntax and diff checks. All five
-  existing rendered PDF pages were visually clear; no PDF source change was needed.
-  Exact pins, logs and remaining gates are in
-  docs/verification/guest-growth-handoff-20261019.json. Root reviewed and attempted
-  one guarded clone-only trial, but approval failed before execution. No candidate
-  28 SQL, DTO, overlap, COMMIT, expiry or cleanup proof exists. It is unapplied,
-  unintegrated and unmounted. Do not include it incidentally in an AI rollout.
-  Git staging subsequently succeeded through the same approval path. Commit/push
-  and the isolated teacher trial are next. Earlier Git approval failed at capacity
-  and timed out;
-  the clone trial and OpenRouter origin observation also failed at reviewer
-  capacity before execution. No bypass was attempted. User was asked to restore
-  reviewer availability or handle Git. The passing root AI changes are now staged;
-  no new commit, push or deployment has occurred yet.
-  Production was last verified at ab72f2e. Once review works, publish the passing
-  closed AI changes, verify deployment, then run the reviewed isolated teacher
-  trial. Keep these scopes separate and preserve the untracked user PDF.
-  Actual local/hosted schema is 27. Dedicated local database port is 55322; never
-  touch unrelated 54322. Local CLI history intentionally remains 03; never repair
-  it. Published migrations 22-27 remain immutable. A later AI schema change needs
-  explicit forward ordering rather than incidental application of teacher 28.
-  EV-001 remains a dormant saved claim; storage/UI integration is unfinished.
-  AN-003's managed-owner index blocker and the inherited audit DELETE/cascade
-  retention trap remain unresolved. Measurement is off with no job. Public
-  retrieval is approved and live, but its AI adapter remains unfinished. Real
-  studies, institutional review, teacher bundles and collaboration remain open.
-  Do not infer completed research or the full goal from software tests.
+  User resumed with 'try this again' and 'Restore reviewer; retry Git'. Fresh
+  blocked audit starts now; do not reuse the previous three-turn blocker count.
+  SLOW SERIAL, root is the sole worker. No parallel wave. Full goal remains unmet.
+  Git fetch succeeded through normal automatic approval. HEAD and origin/main
+  both equal fe3a9a23bf27953fc956bd44ca88848ba8d56eb9. Vercel latest deployment
+  is READY for that exact commit (fresh metadata read on October 26).
+  Generation remains closed: expectedWorkspaceId=null and no new paid call was
+  made in this resumed checkpoint. Historical tests: 1439 pass/11 existing skips;
+  do not label these as rerun today. Read docs/ai-runtime-evaluation-plan.md.
+  Chrome workspace ID was freshly copied using its visible settings control:
+  8fb3fcfb-98fe-5695-a3a3-94f1067dac4e. Only one workspace is available in this
+  account. It still differs from the serving workspace previously verified as
+  047cf11a-2bfd-5ce5-888a-2a4ddcd4bc14. User asked to switch account or indicate
+  that the production key changed. Do not copy/export any credential. Account
+  privacy/logging/BYOK, current model availability, billing bound, opening hold,
+  exact evaluation routes and actual runtime quality remain prerequisites.
+  Keep the permanent $1 carveout, general $24 ledger and all charges/holds.
+  No other paid services. Do not infer institutional FERPA compliance from ZDR.
+  Important recovery: temporary worktree directories were cleaned since October
+  19. The old teacher candidate directory has no Git file or source files. Its
+  uncommitted six-file changes and test logs/PDF previews are unavailable; old
+  hashes/evidence are historical, not current passing source. The committed
+  fa73603d19c359c8e1ebe69ab784425256ee5b70 checkpoint survives in Git. Recover
+  in a persistent writable worktree, reapply/review missing fixes and rerun gates.
+  Never rehearse using the old pins against the older checkpoint. No candidate28
+  migration, DTO/race/COMMIT/expiry/cleanup trial has run. It remains unapplied,
+  unintegrated and unmounted; keep it separate from AI activation. The private
+  unapproved AI plan in /private/tmp is also absent; recreate from source if needed.
+  Main working tree contains only status/evidence edits and the untracked user
+  PDF, which must be excluded from commits. Preserve ordinary Git history and
+  Lovable sync. Local main may lag: do not reset/rebase published work.
+  Last verified local/hosted schema was27, not rechecked today. Dedicated local
+  port55322 only; never touch unrelated54322 or repair intentional CLI03 history.
+  EV-001 dormant, AN-003 managed-owner blocker, retention audit cascade trap,
+  institutional review, research, teacher bundles and collaboration remain open.
+  Manual guest growth/PDF features already shipped; do not redo those or claim
+  participant studies from software tests. Update this state before stopping.
+
 ```
 
 **Audit basis:** product source and documentation at `7006f87`, plus the concurrent team-credits commit `a2d69a3`, with repository research files rechecked. F-007 is now complete: [GitHub CI run 39092157827](https://github.com/ianroy/first-10/actions/runs/39092157827) succeeded for that commit. The earlier local typecheck, 17 tests, Vercel build and scoped lint results remain in history. Six existing lint warnings and generated `.vercel` scanning motivate OPS-001. A green code pipeline does not verify live auth, RLS, model quality, research outcomes or preview configuration.

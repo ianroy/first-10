@@ -1,6 +1,6 @@
 {
   "date": "2026-10-18",
-  "status": "closed_runtime_evaluation_verified_generation_disabled",
+  "status": "runtime_evaluation_deployed_generation_closed_account_review_pending",
   "userAuthorization": {
     "productionKeyReplaced": "user confirmed",
     "liveGeneration": "explicitly requested",
@@ -91,7 +91,7 @@
     "presenterCheck": "Free bounded serving-key metadata accepted under exact fictional-presenter permission; no admin role grant",
     "liveServingKeyMetadataVerified": true
   },
-  "updatedAt": "2026-10-19T04:01:58Z",
+  "updatedAt": "2026-10-26",
   "runtimeMetadata": {
     "credentialAccepted": true,
     "limitUsd": 50,
@@ -126,13 +126,40 @@
     "guide": "docs/ai-runtime-evaluation-plan.md"
   },
   "publication": {
-    "status": "staged_pending_commit",
+    "status": "committed_pushed_ready",
     "stagingExecuted": true,
-    "commitCreated": false,
-    "pushed": false,
-    "deployedV7": false,
-    "blocker": null,
-    "currentlyVerifiedProductionCommit": "ab72f2e56f5fb43c07e691a948b6d6fde57bbb74",
-    "approvalHistory": "Earlier staging attempts failed reviewer capacity/timeout before execution. A fresh same-path staging request succeeded on 2026-10-19; no bypass. Commit/push still pending."
+    "commitCreated": true,
+    "pushed": true,
+    "deployedV7": true,
+    "blocker": "Matching production OpenRouter account/privacy/billing/model evaluation remains pending",
+    "currentlyVerifiedProductionCommit": "fe3a9a23bf27953fc956bd44ca88848ba8d56eb9",
+    "approvalHistory": "Same-path Git staging, commit and fetch succeeded. First push approval timed out before execution; its one permitted retry executed and fast-forwarded origin/main from ab72f2e to fe3a9a2. No bypass or history rewrite.",
+    "commit": "fe3a9a23bf27953fc956bd44ca88848ba8d56eb9"
+  },
+  "goalBlockAudit": {
+    "consecutiveGoalTurns": 3,
+    "previousTurnsClassified": "progress: verified runtime source; then classroom capacity/privacy source",
+    "thisTurnClassified": "progress: ordinary commit and successful GitHub main push",
+    "repeatedCondition": "Automatic approval reviewer capacity/timeouts prevent required integration and runtime verification",
+    "currentTerminalEvidence": [
+      "Guarded clone trial rejected before execution",
+      "Vercel metadata query rejected before execution",
+      "First Ten admin control observation rejected before execution; initial shell only"
+    ],
+    "recovery": "Restore review availability; complete matching OpenRouter account handoff; resume exact verified checkpoints",
+    "completionClaim": false
+  },
+  "resume20261026": {
+    "userRequestedRetry": true,
+    "gitFetch": "pass through normal approval",
+    "headMatchesOriginMain": true,
+    "deploymentState": "READY",
+    "deploymentCommit": "fe3a9a23bf27953fc956bd44ca88848ba8d56eb9",
+    "chromeWorkspaceFresh": "8fb3fcfb-98fe-5695-a3a3-94f1067dac4e",
+    "workspaceMatch": false,
+    "productionKeyMetadataRechecked": false,
+    "paidCallsThisCheckpoint": 0,
+    "temporaryUnapprovedPlanPresent": false,
+    "historicalBlockAuditResetsOnResume": true
   }
 }

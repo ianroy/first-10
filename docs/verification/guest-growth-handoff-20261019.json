@@ -1,6 +1,6 @@
 {
-  "updatedAt": "2026-10-19T04:45:51Z",
-  "status": "source_only_verified_database_trial_not_executed",
+  "updatedAt": "2026-10-26",
+  "status": "temporary_wip_missing_committed_checkpoint_recoverable",
   "worktree": "/private/tmp/first-ten-guest-marketing-handoff",
   "branch": "codex/guest-growth-handoffs-20261018",
   "baseCommit": "fa73603d19c359c8e1ebe69ab784425256ee5b70",
@@ -59,7 +59,8 @@
     "actualDtoPass": null,
     "races": null,
     "cleanupVerification": null,
-    "rejection": "Automatic approval review failed at selected-model capacity before execution; not an unsafe-action determination; no bypass"
+    "rejection": "A fresh exact-pinned trial request again failed automatic-review model capacity before execution, even after Git publication recovered. No database/container action or bypass.",
+    "approvalAttempts": 2
   },
   "publication": {
     "committed": false,
@@ -67,11 +68,12 @@
     "integrated": false,
     "applied": false,
     "mounted": false,
-    "gitApproval": "A fresh same-path root staging request succeeded after earlier failures. This candidate worktree remains separate and uncommitted; database trial has not run."
+    "gitApproval": "Root AI evaluation commit fe3a9a2 was created and pushed to main through the normal approval path. This separate classroom candidate remains uncommitted/unintegrated/unapplied/unmounted."
   },
   "browser": {
     "observationExecuted": false,
-    "approvalFailure": "OpenRouter origin review failed model capacity; no alternate surface or indirect access attempted"
+    "approvalFailure": "OpenRouter origin review failed model capacity; no alternate surface or indirect access attempted",
+    "partialAppObservation": "New admin tab 344873423 opened with the initial application shell only; observing actual controls then failed automatic-review capacity. No deployment-version or runtime-control verification claimed."
   },
   "remaining": [
     "Actual SQL compilation, row/byte capacities and DTO parity",
@@ -79,5 +81,14 @@
     "Final independent integration review, official generated types and parent/coverage mounts",
     "Combined gates and genuine live desktop/submission/withdrawal/PDF verification",
     "Serving OpenRouter account/privacy/BYOK review and paid generation evaluation remain separate"
-  ]
+  ],
+  "goalStatus": "User resumed October26; serial recovery ongoing, full objective unmet",
+  "recovery20261026": {
+    "oldWorktreeGitFilePresent": false,
+    "candidateSourcePresent": false,
+    "temporaryLogsAndPreviewsPresent": false,
+    "recoverableCommittedCheckpoint": "fa73603d19c359c8e1ebe69ab784425256ee5b70",
+    "historicalWipHashesReproduced": false,
+    "required": "Restore checkpoint in persistent storage, reconstruct missing fixes, re-review pins and rerun gates; do not treat historical source-only checks as current source proof"
+  }
 }
