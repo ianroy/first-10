@@ -1,18 +1,10 @@
 {
   "updatedAt": "2026-10-26",
-  "status": "temporary_wip_missing_committed_checkpoint_recoverable",
-  "worktree": "/private/tmp/first-ten-guest-marketing-handoff",
-  "branch": "codex/guest-growth-handoffs-20261018",
+  "status": "recovered_committed_pushed_clone_trial_passed_unintegrated",
+  "worktree": "/Users/ianroy/.codex/visualizations/2026/10/18/01a14ce9-50fd-72c0-bdeb-b4094f99de41/guest-growth-recovery",
+  "branch": "codex/guest-growth-recovery-20261026",
   "baseCommit": "fa73603d19c359c8e1ebe69ab784425256ee5b70",
   "worker": "root; sole serial implementation worker",
-  "sourceFilesSha256": {
-    "src/components/guest-growth/ReviewedGrowthHandoff.tsx": "9570ba64b109e1180258c6cacc7fedfd9baff4b0ef19f87c45cb00c4d1a3f0be",
-    "src/tests/guest-growth/handoff/ui-handoff.test.tsx": "b6317324958f5011566042c81b722367906a9c4c1f3025eb36ce55cc417ab4fb",
-    "supabase/migrations/20261018028000_guest_growth_handoffs.sql": "062db356cf59443083ef6c71acb1c053ae125ceb9c2f20228f355a691e4bd340",
-    "supabase/tests/cls-009-handoff.sql": "aef2c4b8e3e8d9354f2ea246c7407c9d7995fc5092fc5578c5c4a7965015ba97",
-    "src/tests/guest-growth/handoff/database-rehearsal.mjs": "6644144d20ce5d5ebb94ae710c05f922127cbe939837173e5e7164fc6205d1be",
-    "src/tests/guest-growth/handoff/races.mjs": "131827f6d6e46e2ffbfe53c04d6ca8abf12267298120969ed31fae21514203a8"
-  },
   "changes": [
     "Full-size row/UTF8 volume fixtures authored in a separate fictional class",
     "Thread insertion deferred until all preview admission caps pass",
@@ -21,7 +13,78 @@
     "Source refresh retains form edits; old dependency intents remain resolvable; private preview discard explicit",
     "Recovered old copy never claims restored teacher access"
   ],
-  "verification": {
+  "capacityEvidence": {
+    "actualDatabaseProof": false,
+    "fixturesAuthored": [
+      "20 real versions + 21st refusal",
+      "50 real previews + exact retry + 51st refusal",
+      "50 real threads + existing-thread admission + 51st refusal",
+      "2MiB exact publisher stored bytes + final positive admission/refusals",
+      "16MiB exact class stored bytes with independent publisher headroom",
+      "Permission reductions at each cap and no orphan thread after class-cap refusal"
+    ],
+    "fillerLimit": "Trusted test-owned storage rows are not claimed as RPC-produced DTOs"
+  },
+  "approvedTrialScope": "One exact-pinned random schema-only disposable clone on dedicated local55322; source27/localCLI03 unchanged; no source/hosted28 application",
+  "publication": {
+    "committed": true,
+    "commit": "13ea602",
+    "pushed": true,
+    "integrated": false,
+    "applied": false,
+    "mounted": false,
+    "target": "Separate recovery branch; no main merge"
+  },
+  "browser": {
+    "observationExecuted": false,
+    "approvalFailure": "OpenRouter origin review failed model capacity; no alternate surface or indirect access attempted",
+    "partialAppObservation": "New admin tab 344873423 opened with the initial application shell only; observing actual controls then failed automatic-review capacity. No deployment-version or runtime-control verification claimed."
+  },
+  "remaining": [
+    "Reconstruct and run full row/UTF8 capacity fixtures",
+    "Independent integration review and merge against current main",
+    "Official generated types and individual PDF/parent mounts",
+    "Combined gates and actual desktop/submission/withdrawal/PDF verification",
+    "Serving-account privacy/billing review and actual paid model evaluation remain separate"
+  ],
+  "goalStatus": "User resumed; serial recovery progressed, full objective unmet",
+  "recovery20261026": {
+    "oldWorktreeGitFilePresent": false,
+    "candidateSourcePresent": false,
+    "temporaryLogsAndPreviewsPresent": false,
+    "recoverableCommittedCheckpoint": "fa73603d19c359c8e1ebe69ab784425256ee5b70",
+    "historicalWipHashesReproduced": false,
+    "required": "Restore checkpoint in persistent storage, reconstruct missing fixes, re-review pins and rerun gates; do not treat historical source-only checks as current source proof",
+    "persistentWorktree": "/Users/ianroy/.codex/visualizations/2026/10/18/01a14ce9-50fd-72c0-bdeb-b4094f99de41/guest-growth-recovery",
+    "reconstructed": [
+      "SQL final result fences",
+      "No orphan threads on refused preview",
+      "Unknown-grant permission reduction and exact retry preservation",
+      "Source refresh/private preview discard and truthful recovered-copy messaging"
+    ],
+    "sqlErrorsActuallyCaughtAndFixed": [
+      "CASE expression syntax",
+      "PLpgSQL variable/table alias collision"
+    ],
+    "missingHistoricalCapacityFixtures": true
+  },
+  "historicalSourceFilesSha256": {
+    "src/components/guest-growth/ReviewedGrowthHandoff.tsx": "9570ba64b109e1180258c6cacc7fedfd9baff4b0ef19f87c45cb00c4d1a3f0be",
+    "src/tests/guest-growth/handoff/ui-handoff.test.tsx": "b6317324958f5011566042c81b722367906a9c4c1f3025eb36ce55cc417ab4fb",
+    "supabase/migrations/20261018028000_guest_growth_handoffs.sql": "062db356cf59443083ef6c71acb1c053ae125ceb9c2f20228f355a691e4bd340",
+    "supabase/tests/cls-009-handoff.sql": "aef2c4b8e3e8d9354f2ea246c7407c9d7995fc5092fc5578c5c4a7965015ba97",
+    "src/tests/guest-growth/handoff/database-rehearsal.mjs": "6644144d20ce5d5ebb94ae710c05f922127cbe939837173e5e7164fc6205d1be",
+    "src/tests/guest-growth/handoff/races.mjs": "131827f6d6e46e2ffbfe53c04d6ca8abf12267298120969ed31fae21514203a8"
+  },
+  "sourceFilesSha256": {
+    "src/components/guest-growth/ReviewedGrowthHandoff.tsx": "014ca900b3a9b4c830b262e12f307c467e15d345721ccff2fe16147404b7dbaf",
+    "src/tests/guest-growth/handoff/ui-handoff.test.tsx": "4612267fa989ba627554af23a65c3d95004ecadb0ea7f16414cc5379fdf6662d",
+    "supabase/migrations/20261018028000_guest_growth_handoffs.sql": "a607b22afc329405da324acc3729af714e111494b4d80fd3531c30d3e0cee58c",
+    "supabase/tests/cls-009-handoff.sql": "fb9ff687eade50e300f4c780f9b6338b2f35bf5f23ea851c49792a52f3a36140",
+    "src/tests/guest-growth/handoff/database-rehearsal.mjs": "6644144d20ce5d5ebb94ae710c05f922127cbe939837173e5e7164fc6205d1be",
+    "src/tests/guest-growth/handoff/races.mjs": "131827f6d6e46e2ffbfe53c04d6ca8abf12267298120969ed31fae21514203a8"
+  },
+  "historicalVerification20261019": {
     "focusedPass": 178,
     "actualSqlSkips": 29,
     "typecheck": "pass",
@@ -38,20 +101,17 @@
       "folder": "/private/tmp/firstten-growth28-pdf-qa"
     }
   },
-  "capacityEvidence": {
-    "actualDatabaseProof": false,
-    "fixturesAuthored": [
-      "20 real versions + 21st refusal",
-      "50 real previews + exact retry + 51st refusal",
-      "50 real threads + existing-thread admission + 51st refusal",
-      "2MiB exact publisher stored bytes + final positive admission/refusals",
-      "16MiB exact class stored bytes with independent publisher headroom",
-      "Permission reductions at each cap and no orphan thread after class-cap refusal"
-    ],
-    "fillerLimit": "Trusted test-owned storage rows are not claimed as RPC-produced DTOs"
+  "verification": {
+    "date": "2026-10-26",
+    "focusedPass": 41,
+    "offlineActualSqlSkips": 12,
+    "separateActualDtoPass": 12,
+    "typecheck": "pass",
+    "scopedLint": "pass",
+    "diffCheck": "pass",
+    "pdfVisualReview": "Historical only; lost rendered artifacts not reverified today"
   },
-  "approvedTrialScope": "One exact-pinned random schema-only disposable clone on dedicated local55322; source27/localCLI03 unchanged; no source/hosted28 application",
-  "trial": {
+  "historicalTrial20261019": {
     "attemptedThroughApproval": true,
     "executed": false,
     "creationAttempted": false,
@@ -62,33 +122,27 @@
     "rejection": "A fresh exact-pinned trial request again failed automatic-review model capacity before execution, even after Git publication recovered. No database/container action or bypass.",
     "approvalAttempts": 2
   },
-  "publication": {
-    "committed": false,
-    "pushed": false,
-    "integrated": false,
-    "applied": false,
-    "mounted": false,
-    "gitApproval": "Root AI evaluation commit fe3a9a2 was created and pushed to main through the normal approval path. This separate classroom candidate remains uncommitted/unintegrated/unapplied/unmounted."
-  },
-  "browser": {
-    "observationExecuted": false,
-    "approvalFailure": "OpenRouter origin review failed model capacity; no alternate surface or indirect access attempted",
-    "partialAppObservation": "New admin tab 344873423 opened with the initial application shell only; observing actual controls then failed automatic-review capacity. No deployment-version or runtime-control verification claimed."
-  },
-  "remaining": [
-    "Actual SQL compilation, row/byte capacities and DTO parity",
-    "True overlap, real COMMIT, late expiry/rollback and clone cleanup/source-unchanged proof",
-    "Final independent integration review, official generated types and parent/coverage mounts",
-    "Combined gates and genuine live desktop/submission/withdrawal/PDF verification",
-    "Serving OpenRouter account/privacy/BYOK review and paid generation evaluation remain separate"
-  ],
-  "goalStatus": "User resumed October26; serial recovery ongoing, full objective unmet",
-  "recovery20261026": {
-    "oldWorktreeGitFilePresent": false,
-    "candidateSourcePresent": false,
-    "temporaryLogsAndPreviewsPresent": false,
-    "recoverableCommittedCheckpoint": "fa73603d19c359c8e1ebe69ab784425256ee5b70",
-    "historicalWipHashesReproduced": false,
-    "required": "Restore checkpoint in persistent storage, reconstruct missing fixes, re-review pins and rerun gates; do not treat historical source-only checks as current source proof"
+  "trial": {
+    "pins": {
+      "MIGRATION": "a607b22afc329405da324acc3729af714e111494b4d80fd3531c30d3e0cee58c",
+      "HARNESS": "6644144d20ce5d5ebb94ae710c05f922127cbe939837173e5e7164fc6205d1be",
+      "RACES": "131827f6d6e46e2ffbfe53c04d6ca8abf12267298120969ed31fae21514203a8",
+      "SQL": "fb9ff687eade50e300f4c780f9b6338b2f35bf5f23ea851c49792a52f3a36140"
+    },
+    "database": "firstten_growth_handoff_test_802284e43f23",
+    "phase": "true overlapping separate-connection races",
+    "creationAttempted": true,
+    "cleanupVerified": true,
+    "passed": true,
+    "assertions": 3575,
+    "failures": [],
+    "races": {
+      "actualBlockedOverlaps": 6,
+      "stableCommitReplay": true,
+      "sourceDeletionDenied": true,
+      "lateResultExpiryCases": 5,
+      "witnessedRollback": true
+    },
+    "sourceUnchanged": true
   }
 }

@@ -7,7 +7,7 @@ runtime evaluation implementation is closed by `expectedWorkspaceId: null`; it
 cannot dispatch until the actual account, privacy and billing review is complete.
 No paid call was made while building this successor workflow.
 
-The deployed metadata probe at `ab72f2e` reported workspace
+The deployed metadata probe was rechecked on 2026-10-26 and reported workspace
 `047cf11a-2bfd-5ce5-888a-2a4ddcd4bc14`, a $50 resetting key limit,
 $49.9955416 remaining and $0.0044584 reported usage, excluding BYOK spend.
 Chrome's signed-in Default Workspace is a different workspace. Its privacy settings
@@ -55,10 +55,10 @@ or proof of the correct account's logging settings.
 
 The [catalog](https://openrouter.ai/api/v1/models/google/gemini-3.1-flash-lite/endpoints)
 lists 1,048,576 input/context tokens and 65,536 completion tokens, with the reviewed
-standard prices of $0.25/$1.50 per million input/output tokens. The latest catalog
-inspection returned status `-2` for this exact endpoint, so the eligibility check
-correctly refuses it. Recheck availability before any activation; do not silently
-substitute a different endpoint.
+standard prices of $0.25/$1.50 per million input/output tokens. The 2026-10-26 public catalog inspection returned status `0` for this exact
+endpoint, and the unchanged `inspectLiveCandidateEndpoint` passed against that
+response. This supersedes the historical status `-2` observation. Eligibility can
+change: recheck before activation, without silently substituting an endpoint.
 
 The application conservatively reserves **$0.360448 per call** using the entire
 catalog input and output ceilings. Eight simultaneous maximum charges would be

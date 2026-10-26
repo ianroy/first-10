@@ -31,7 +31,7 @@ research_gate: not_passed
 foundation_gate: not_passed
 realtime_go: pending
 last_updated: 2026-10-26
-last_documentation_update: "2026-10-26: User resumed; approval-path fetch and deployment verification succeeded. OpenRouter workspace still mismatched. Temporary candidate files are missing; committed checkpoint remains recoverable."
+last_documentation_update: "2026-10-26: User resumed; approval-path fetch and deployment verification succeeded. OpenRouter workspace still mismatched. Recovered candidate pushed separately and passed disposable SQL/DTO/race trial."
 resume_hint: >-
   User resumed with 'try this again' and 'Restore reviewer; retry Git'. Fresh
   blocked audit starts now; do not reuse the previous three-turn blocker count.
@@ -51,17 +51,29 @@ resume_hint: >-
   exact evaluation routes and actual runtime quality remain prerequisites.
   Keep the permanent $1 carveout, general $24 ledger and all charges/holds.
   No other paid services. Do not infer institutional FERPA compliance from ZDR.
-  Important recovery: temporary worktree directories were cleaned since October
-  19. The old teacher candidate directory has no Git file or source files. Its
-  uncommitted six-file changes and test logs/PDF previews are unavailable; old
-  hashes/evidence are historical, not current passing source. The committed
-  fa73603d19c359c8e1ebe69ab784425256ee5b70 checkpoint survives in Git. Recover
-  in a persistent writable worktree, reapply/review missing fixes and rerun gates.
-  Never rehearse using the old pins against the older checkpoint. No candidate28
-  migration, DTO/race/COMMIT/expiry/cleanup trial has run. It remains unapplied,
-  unintegrated and unmounted; keep it separate from AI activation. The private
-  unapproved AI plan in /private/tmp is also absent; recreate from source if needed.
-  Main working tree contains only status/evidence edits and the untracked user
+  Recovery: temporary worktrees were cleaned since October19. The old WIP and
+  logs/PDFs are gone; original hashes/178-test count are historical. Recovered
+  fa73603d into persistent writable worktree
+  /Users/ianroy/.codex/visualizations/2026/10/18/01a14ce9-50fd-72c0-bdeb-b4094f99de41/guest-growth-recovery.
+  Reconstructed SQL final fences/deferred thread insertion and privacy UI intent
+  handling, with six new UI regressions. Actual clone trial exposed/fixed CASE
+  syntax and ambiguous alias errors. Third exact-pinned trial passed3575 SQL
+  assertions,12 actual DTO checks,6 real blocked overlaps,5 witnessed late-expiry
+  cases, cleanup and unchanged dedicated source27 verification. Focused offline
+  source checks41 pass/12 actual-SQL skips; typecheck/scoped lint/diff pass.
+  Saved commit13ea602 pushed to separate codex/guest-growth-recovery-20261026.
+  Not merged/applied/mounted. Full row/UTF8 capacity fixtures from lost WIP still
+  need rebuilding, then independent integration review, official generated types,
+  individual verified PDF mounts, combined checks and live desktop/PDF proof.
+  Read docs/verification/guest-growth-handoff-20261019.json for current pins and
+  distinguish current checks from historical ones. Never use old pins.
+  Fresh strict public catalog check passes status0 for the selected standard
+  Google endpoint. Free deployed key check still reports the expected production
+  workspace/$0.0044584 usage/$49.9955416 remaining/resetting/BYOK excluded.
+  No paid call or activation. Chrome account mismatch remains; user handoff pending.
+  Main checkpointcef087d was pushed and verified READY. Separate teacher branch
+  is backed up remotely; do not mistake its preview for live-product integration.
+  Main working tree contains only status/evidence/activation-guide edits and the untracked user
   PDF, which must be excluded from commits. Preserve ordinary Git history and
   Lovable sync. Local main may lag: do not reset/rebase published work.
   Last verified local/hosted schema was27, not rechecked today. Dedicated local

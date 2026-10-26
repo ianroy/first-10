@@ -157,9 +157,20 @@
     "deploymentCommit": "fe3a9a23bf27953fc956bd44ca88848ba8d56eb9",
     "chromeWorkspaceFresh": "8fb3fcfb-98fe-5695-a3a3-94f1067dac4e",
     "workspaceMatch": false,
-    "productionKeyMetadataRechecked": false,
+    "productionKeyMetadataRechecked": true,
     "paidCallsThisCheckpoint": 0,
     "temporaryUnapprovedPlanPresent": false,
-    "historicalBlockAuditResetsOnResume": true
+    "historicalBlockAuditResetsOnResume": true,
+    "currentServingWorkspace": "047cf11a-2bfd-5ce5-888a-2a4ddcd4bc14",
+    "currentReportedUsageUsd": 0.0044584,
+    "currentRemainingUsd": 49.9955416,
+    "currentKeyResetting": true,
+    "currentKeyIncludesByok": false,
+    "strictCatalogCheck": "pass",
+    "catalogStatus": 0,
+    "catalogEndpoint": "google-vertex/global",
+    "catalogModel": "google/gemini-3.1-flash-lite",
+    "checkpointCommit": "cef087d8af767443b61eaf28dcac28c592dd3d09",
+    "checkpointDeployment": "READY"
   }
 }
