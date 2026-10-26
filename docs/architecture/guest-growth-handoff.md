@@ -45,3 +45,33 @@ Before resuming: independently review source and exact pins; complete missing ca
 Focused guest-growth tests:171 pass/29 skipped (new handoff35 pass/12 actual-SQL skips; existing actual-SQL suite17 skips without its artifact). Project typecheck and scoped ESLint pass. Formatting, both Node harness/race syntax checks and diff checks pass. The fictional private-preview1page, withdrawn-author2page and teacher2page PDFs were rendered to PNG and inspected under `/private/tmp/firstten-growth28-pdf-qa`; readable structured content and withdrawn/teacher limits are visible. The preview's final content is close to the footer, so coordinator visual review remains a polish gate; these local test artifacts are not a live/PDF-coverage claim. No DB/container/rehearsal/provider/network/apply/mount/deploy action occurred.
 
 Immediate checkpoint limitations: SQL compilation, all new DTO fixtures/races/COMMIT/expiry/cleanup checks and capacity-volume assertions are unexecuted or missing as specified above. Unknown-result UI handling has unit coverage for exact retries and newer-form preservation, but privacy-choice supersession and refresh/reconciliation after a changed source still need review before mounting. The parent requested this unfinished source checkpoint explicitly so live-generation work can take the serial slot. Do not treat these four file hashes as approval to execute the harness.
+
+## Recovery checkpoint, 2026-10-26
+
+The temporary worktree was cleaned while the session was paused. This persistent
+worktree recovers committed `fa73603d`; the October 19 uncommitted hashes and
+178-test checkpoint cannot be reproduced from that older commit and are not
+claimed as current evidence.
+
+Reconstructed fixes defer thread creation until preview admission succeeds,
+construct source-roster and choice results before the final scope fence, and keep
+permission reductions available after unknown grant results. Withdrawal retries
+retain their operation IDs and current CAS revision. Unrelated unknown grants
+remain resolvable, including after a source leaves the current dependency graph.
+Source-choice refresh and private-preview discard preserve form edits. Recovering
+an old, ineligible copy never claims restored teacher access.
+
+The first actual disposable rehearsal exposed a CASE syntax error; the second
+exposed a PL/pgSQL variable/table-alias collision. Both were fixed in this
+unapplied candidate. The third trial passed 3,575 SQL assertions, actual SQL DTO
+parity, six witnessed blocked overlaps and five late-result expiry cases, with
+clone cleanup and unchanged source27 verified. Exact pins and all three receipts
+are in `docs/verification/guest-growth-recovery-*-trial-20261026.json`.
+
+Focused source checks: 41 passing tests, 12 skipped actual-SQL tests in the offline
+run; the dedicated rehearsal separately ran the actual DTO suite. Typecheck and
+scoped lint passed. These are new checks, not the lost historical test count.
+Full row/UTF8 capacity fixtures from the lost WIP still need reconstruction;
+actual mounts, official type generation, independent integration review, combined
+checks and desktop/PDF verification remain. No source/hosted migration28 was
+applied, and neither guest nor teacher controls are mounted in the product.

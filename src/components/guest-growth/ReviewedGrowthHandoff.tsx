@@ -85,6 +85,7 @@ function Handoff({ view, csrf, record, dirty, onDraftChange }: Props) {
     [copy, setCopy] = useState<GrowthSubmissionView | null>(null);
   const state = useRef({ alive: true, epoch: 0 }),
     pendingChoice = useRef<Parameters<typeof saveGrowthChoice>[0]["data"] | null>(null),
+    pendingReductions = useRef<Record<string, Parameters<typeof saveGrowthChoice>[0]["data"]>>({}),
     pendingPreview = useRef<{
       basis: string;
       data: Parameters<typeof previewGrowthSubmission>[0]["data"];
@@ -120,7 +121,27 @@ function Handoff({ view, csrf, record, dirty, onDraftChange }: Props) {
       affirmChoice ||
       preview,
     ),
-    guard = formDirty || busy || uncertain;
+    guard =
+      formDirty ||
+      busy ||
+      uncertain ||
+      Boolean(
+        pendingChoice.current ||
+        pendingPreview.current ||
+        pendingConfirm.current ||
+        withdrawal.current ||
+        Object.keys(pendingReductions.current).length,
+      );
+  const syncUncertain = () =>
+    setUncertain(
+      Boolean(
+        pendingChoice.current ||
+        pendingPreview.current ||
+        pendingConfirm.current ||
+        withdrawal.current ||
+        Object.keys(pendingReductions.current).length,
+      ),
+    );
   useEffect(() => {
     onDraftChange(guard);
   }, [guard, onDraftChange]);
@@ -130,6 +151,7 @@ function Handoff({ view, csrf, record, dirty, onDraftChange }: Props) {
     const epoch = ++scope.epoch;
     if (
       pendingChoice.current ||
+      Object.keys(pendingReductions.current).length ||
       pendingPreview.current ||
       pendingConfirm.current ||
       withdrawal.current
@@ -175,38 +197,90 @@ function Handoff({ view, csrf, record, dirty, onDraftChange }: Props) {
   }, [basis]);
   const expired = () => Date.now() >= Date.parse(view.accessExpiresAt);
   const safe = (epoch: number) => state.current.alive && state.current.epoch === epoch;
-  async function changeChoice(restrict: boolean) {
-    const selectedSource = roster?.sources.find((s) => s.artifactId === sourceChoice);
-    if (!record || !selectedSource || busy || expired() || (!restrict && !affirmChoice)) return;
-    const candidate = {
-      csrf,
-      artifactId: selectedSource.artifactId,
-      choice: restrict ? ("withdrawn" as const) : ("granted" as const),
-      expectedRevision: selectedSource.choiceRevision,
-      requestId: crypto.randomUUID(),
-    };
-    const input = pendingChoice.current ?? candidate;
-    if (input.artifactId !== sourceChoice || (restrict && input.choice !== "withdrawn")) {
+  async function refreshSources() {
+    if (!record || busy || expired()) return;
+    const epoch = ++state.current.epoch;
+    setBusy(true);
+    const r = await getGrowthHandoffSources({
+      data: { csrf, artifactId: record.id, revision: record.revision },
+    }).catch(() => ({ ok: false, code: "UNAVAILABLE" }) as const);
+    if (!safe(epoch)) return;
+    setBusy(false);
+    setPreview(null);
+    setAffirm(false);
+    if (!r.ok) {
+      setRoster(null);
+      setMessage(guestActivityMessage(r.code));
+      return;
+    }
+    setRoster(r.data);
+    setMessage("Source choices refreshed. Your form edits and unconfirmed operations remain.");
+  }
+  async function changeChoice(restrict: boolean, artifactId = sourceChoice) {
+    const selectedSource = roster?.sources.find((s) => s.artifactId === artifactId);
+    if (!record || busy || expired()) return;
+    if (
+      !restrict &&
+      (Object.keys(pendingReductions.current).length || (!pendingChoice.current && !affirmChoice))
+    )
+      return;
+    if (!restrict && pendingChoice.current && pendingChoice.current.artifactId !== artifactId) {
       setMessage("Resolve the pending choice before starting another operation.");
       return;
     }
-    pendingChoice.current = input;
+    if (!restrict && !pendingChoice.current && !selectedSource) return;
     const epoch = ++state.current.epoch;
     setBusy(true);
     setMessage("");
+    let input = restrict ? pendingReductions.current[artifactId] : pendingChoice.current;
+    if (!input && restrict) {
+      // A permission reduction needs the current CAS revision, even after an unknown grant.
+      const fresh = await readGrowthChoice({ data: { csrf, artifactId } }).catch(
+        () => ({ ok: false, code: "UNAVAILABLE" }) as const,
+      );
+      if (!safe(epoch)) return;
+      if (!fresh.ok) {
+        setBusy(false);
+        setMessage(guestActivityMessage(fresh.code));
+        return;
+      }
+      input = {
+        csrf,
+        artifactId,
+        choice: "withdrawn",
+        expectedRevision: fresh.data.revision,
+        requestId: crypto.randomUUID(),
+      };
+      pendingReductions.current[artifactId] = input;
+    } else if (!input) {
+      input = {
+        csrf,
+        artifactId,
+        choice: "granted",
+        expectedRevision: selectedSource!.choiceRevision,
+        requestId: crypto.randomUUID(),
+      };
+      pendingChoice.current = input;
+    }
     const result = await saveGrowthChoice({ data: input }).catch(
       () => ({ ok: false, code: "UNAVAILABLE" }) as const,
     );
     if (!safe(epoch)) return;
     setBusy(false);
     if (!result.ok) {
-      setUncertain(result.code === "UNAVAILABLE");
-      if (result.code !== "UNAVAILABLE") pendingChoice.current = null;
+      if (result.code !== "UNAVAILABLE") {
+        if (restrict) delete pendingReductions.current[artifactId];
+        else pendingChoice.current = null;
+      }
+      syncUncertain();
       setMessage(guestActivityMessage(result.code));
       return;
     }
-    pendingChoice.current = null;
-    setUncertain(false);
+    if (restrict) {
+      delete pendingReductions.current[artifactId];
+      if (pendingChoice.current?.artifactId === artifactId) pendingChoice.current = null;
+    } else pendingChoice.current = null;
+    syncUncertain();
     if (result.data.artifactId === record.id) setChoice(result.data);
     setRoster((old) =>
       old
@@ -265,13 +339,13 @@ function Handoff({ view, csrf, record, dirty, onDraftChange }: Props) {
     if (!safe(epoch)) return;
     setBusy(false);
     if (!result.ok) {
-      setUncertain(result.code === "UNAVAILABLE");
       if (result.code !== "UNAVAILABLE") pendingPreview.current = null;
+      syncUncertain();
       setMessage(guestActivityMessage(result.code));
       return;
     }
     pendingPreview.current = null;
-    setUncertain(false);
+    syncUncertain();
     thread.current[sent.data.assignmentId] = result.data.threadId;
     if (latest.current !== sent.basis) {
       setMessage(
@@ -308,13 +382,13 @@ function Handoff({ view, csrf, record, dirty, onDraftChange }: Props) {
     if (!safe(epoch)) return;
     setBusy(false);
     if (!result.ok) {
-      setUncertain(result.code === "UNAVAILABLE");
       if (result.code !== "UNAVAILABLE") pendingConfirm.current = null;
+      syncUncertain();
       setMessage(guestActivityMessage(result.code));
       return;
     }
     pendingConfirm.current = null;
-    setUncertain(false);
+    syncUncertain();
     setCopy(result.data);
     setPreview(null);
     setAffirm(false);
@@ -331,7 +405,9 @@ function Handoff({ view, csrf, record, dirty, onDraftChange }: Props) {
       });
     }
     setMessage(
-      "Exact selected copy submitted. The teacher receives this immutable version; your other artifact material remains private.",
+      result.data.recipientEligible
+        ? "Exact selected copy submitted. The teacher receives this immutable version; your other artifact material remains private."
+        : "Earlier exact copy recovered. Teacher access is unavailable; this retry does not restore access.",
     );
   }
   async function refresh(more = false) {
@@ -380,13 +456,13 @@ function Handoff({ view, csrf, record, dirty, onDraftChange }: Props) {
     if (!safe(epoch)) return;
     setBusy(false);
     if (!r.ok) {
-      setUncertain(r.code === "UNAVAILABLE");
       if (r.code !== "UNAVAILABLE") withdrawal.current = null;
+      syncUncertain();
       setMessage(guestActivityMessage(r.code));
       return;
     }
     withdrawal.current = null;
-    setUncertain(false);
+    syncUncertain();
     setItems((old) => old.map((v) => (v.id === snapshotId ? r.data : v)));
     setCopy(null);
     setMessage(
@@ -465,7 +541,11 @@ function Handoff({ view, csrf, record, dirty, onDraftChange }: Props) {
           <div className="flex flex-wrap gap-3">
             <Button
               disabled={
-                !sourceChoice || busy || (!affirmChoice && !pendingChoice.current) || expired()
+                !sourceChoice ||
+                busy ||
+                Object.keys(pendingReductions.current).length > 0 ||
+                (!affirmChoice && !pendingChoice.current) ||
+                expired()
               }
               onClick={() => void changeChoice(false)}
             >
@@ -481,6 +561,32 @@ function Handoff({ view, csrf, record, dirty, onDraftChange }: Props) {
               Withdraw reported sharing choice
             </Button>
           </div>
+          <Button
+            variant="outline"
+            disabled={busy || expired()}
+            onClick={() => void refreshSources()}
+          >
+            Refresh source choices
+          </Button>
+          {pendingChoice.current && pendingChoice.current.artifactId !== sourceChoice && (
+            <Button
+              variant="outline"
+              disabled={busy || expired() || Object.keys(pendingReductions.current).length > 0}
+              onClick={() => void changeChoice(false, pendingChoice.current!.artifactId)}
+            >
+              Retry prior exact reported choice
+            </Button>
+          )}
+          {Object.keys(pendingReductions.current).map((artifactId) => (
+            <Button
+              key={artifactId}
+              variant="outline"
+              disabled={busy || expired()}
+              onClick={() => void changeChoice(true, artifactId)}
+            >
+              Retry exact sharing withdrawal — {artifactId}
+            </Button>
+          ))}
           <GuestSelect label="Growth assignment" value={assignment} onChange={setAssignment}>
             <option value="">Choose a published assignment</option>
             {view.assignments
@@ -609,6 +715,23 @@ function Handoff({ view, csrf, record, dirty, onDraftChange }: Props) {
         <p role="status" className="rounded-xl border p-3 text-sm">
           {message}
         </p>
+      )}
+      {pendingPreview.current && !pendingConfirm.current && (
+        <Button
+          variant="outline"
+          disabled={busy}
+          onClick={() => {
+            pendingPreview.current = null;
+            setPreview(null);
+            setAffirm(false);
+            syncUncertain();
+            setMessage(
+              "Private preview discarded. No teacher access was granted; your form edits remain.",
+            );
+          }}
+        >
+          Discard unconfirmed private preview
+        </Button>
       )}
       {uncertain && pendingConfirm.current && (
         <Button variant="outline" disabled={busy || expired()} onClick={() => void confirm()}>

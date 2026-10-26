@@ -89,7 +89,7 @@ BEGIN
 END $$;
 CREATE FUNCTION firstten_private.growth_handoff_finish(p_session text,p public.class_guest_principals,authority jsonb,p_assignment uuid DEFAULT NULL)RETURNS void LANGUAGE plpgsql SET search_path=pg_catalog AS $$
 BEGIN
- IF(firstten_private.resolve_guest(p_session)).id IS DISTINCT FROM p.id OR authority IS NULL OR CASE WHEN p_assignment IS NULL THEN firstten_private.guest_growth_authority(p) ELSE firstten_private.growth_publication_authority(p,p_assignment) END IS DISTINCT FROM authority THEN RAISE EXCEPTION 'Growth handoff scope ended' USING ERRCODE='PGX02';END IF;
+ IF(firstten_private.resolve_guest(p_session)).id IS DISTINCT FROM p.id OR authority IS NULL OR (CASE WHEN p_assignment IS NULL THEN firstten_private.guest_growth_authority(p) ELSE firstten_private.growth_publication_authority(p,p_assignment) END) IS DISTINCT FROM authority THEN RAISE EXCEPTION 'Growth handoff scope ended' USING ERRCODE='PGX02';END IF;
 END $$;
 -- Metadata-only exact graph. No source body is read by this resolver or teacher eligibility.
 CREATE FUNCTION firstten_private.growth_handoff_manifest(p public.class_guest_principals,a firstten_private.guest_growth_artifacts,r integer,require_choice boolean DEFAULT true)RETURNS jsonb LANGUAGE plpgsql SET search_path=pg_catalog AS $$
@@ -112,14 +112,15 @@ BEGIN
  RETURN jsonb_build_object('resolverVersion','guest-growth-v1','artifactId',a.id,'revision',r,'publisher',p.id,'sources',items);
 END $$;
 CREATE FUNCTION public.get_guest_growth_handoff_sources(p_session text,p_artifact_id uuid,p_revision integer)RETURNS jsonb LANGUAGE plpgsql SECURITY DEFINER SET search_path=pg_catalog SET lock_timeout='5s' AS $$
-DECLARE p public.class_guest_principals;a firstten_private.guest_growth_artifacts;g jsonb;m jsonb;
+DECLARE p public.class_guest_principals;a firstten_private.guest_growth_artifacts;g jsonb;m jsonb;result jsonb;
 BEGIN
  p:=firstten_private.lock_guest_learning(p_session);IF p.id IS NULL THEN RETURN jsonb_build_object('ok',false,'code','NOT_FOUND');END IF;
  IF NOT firstten_private.guest_learning_rate(p.id)THEN RETURN jsonb_build_object('ok',false,'code','RATE_LIMITED');END IF;
  g:=firstten_private.guest_growth_authority(p);SELECT x.* INTO a FROM firstten_private.guest_growth_artifacts x WHERE x.id=p_artifact_id FOR SHARE;
  m:=firstten_private.growth_handoff_manifest(p,a,p_revision,false);IF m IS NULL THEN RETURN jsonb_build_object('ok',false,'code','NOT_FOUND');END IF;
+ result:=jsonb_build_object('ok',true,'data',m||jsonb_build_object('threads',(SELECT coalesce(jsonb_agg(jsonb_build_object('assignmentId',assignment_id,'threadId',id)ORDER BY id),'[]'::jsonb)FROM firstten_private.growth_submission_threads WHERE principal_id=p.id AND artifact_id=a.id)));
  PERFORM firstten_private.growth_handoff_finish(p_session,p,g);
- RETURN jsonb_build_object('ok',true,'data',m||jsonb_build_object('threads',(SELECT coalesce(jsonb_agg(jsonb_build_object('assignmentId',assignment_id,'threadId',id)ORDER BY id),'[]'::jsonb)FROM firstten_private.growth_submission_threads WHERE principal_id=p.id AND artifact_id=a.id)));
+ RETURN result;
 EXCEPTION WHEN SQLSTATE'PGX02'THEN RETURN jsonb_build_object('ok',false,'code','NOT_FOUND');END $$;
 -- Exact section projections intentionally exclude reference bodies and hidden/private interview data.
 CREATE FUNCTION firstten_private.growth_handoff_section(d jsonb,item jsonb)RETURNS jsonb LANGUAGE plpgsql IMMUTABLE SET search_path=pg_catalog AS $$
@@ -144,14 +145,17 @@ END $$;
 
 CREATE FUNCTION public.get_guest_growth_sharing_choice(p_session text,p_artifact_id uuid)RETURNS jsonb
 LANGUAGE plpgsql SECURITY DEFINER SET search_path=pg_catalog SET lock_timeout='5s' AS $$
-DECLARE p public.class_guest_principals;a firstten_private.guest_growth_artifacts;
+DECLARE p public.class_guest_principals;a firstten_private.guest_growth_artifacts;g jsonb;result jsonb;
 BEGIN
  p:=firstten_private.lock_guest_learning(p_session);IF p.id IS NULL THEN RETURN jsonb_build_object('ok',false,'code','NOT_FOUND');END IF;
  IF NOT firstten_private.guest_learning_rate(p.id)THEN RETURN jsonb_build_object('ok',false,'code','RATE_LIMITED');END IF;
+ g:=firstten_private.guest_growth_authority(p);
  SELECT * INTO a FROM firstten_private.guest_growth_artifacts WHERE id=p_artifact_id;
- IF NOT firstten_private.guest_growth_access(a,p)OR(firstten_private.resolve_guest(p_session)).id IS NULL THEN RETURN jsonb_build_object('ok',false,'code','NOT_FOUND');END IF;
- RETURN jsonb_build_object('ok',true,'data',firstten_private.growth_choice_view(a.id,p.id));
-END $$;
+ IF NOT firstten_private.guest_growth_access(a,p)THEN RETURN jsonb_build_object('ok',false,'code','NOT_FOUND');END IF;
+ result:=jsonb_build_object('ok',true,'data',firstten_private.growth_choice_view(a.id,p.id));
+ PERFORM firstten_private.growth_handoff_finish(p_session,p,g);
+ RETURN result;
+EXCEPTION WHEN SQLSTATE'PGX02'THEN RETURN jsonb_build_object('ok',false,'code','NOT_FOUND');END $$;
 CREATE FUNCTION public.save_guest_growth_sharing_choice(p_session text,p_artifact_id uuid,p_choice text,p_expected_revision bigint,p_request_id uuid)RETURNS jsonb LANGUAGE plpgsql SECURITY DEFINER SET search_path=pg_catalog SET lock_timeout='5s' AS $$
 DECLARE p public.class_guest_principals;a firstten_private.guest_growth_artifacts;c firstten_private.growth_submission_choices;op firstten_private.growth_submission_operations;hash text;g jsonb;
 BEGIN
@@ -215,7 +219,7 @@ BEGIN
 END $$;
 CREATE FUNCTION public.preview_guest_growth_submission(p_session text,p_document jsonb)RETURNS jsonb
 LANGUAGE plpgsql SECURITY DEFINER SET search_path=pg_catalog SET lock_timeout='5s' AS $$
-DECLARE p public.class_guest_principals;a firstten_private.guest_growth_artifacts;t firstten_private.growth_submission_threads;preview firstten_private.growth_submission_previews;authority jsonb;built jsonb;binding text;tid uuid;rid uuid;aid uuid;pid uuid;result jsonb;
+DECLARE p public.class_guest_principals;a firstten_private.guest_growth_artifacts;t firstten_private.growth_submission_threads;preview firstten_private.growth_submission_previews;authority jsonb;built jsonb;binding text;tid uuid;rid uuid;aid uuid;pid uuid;result jsonb;new_thread boolean:=false;
 BEGIN
  p:=firstten_private.lock_guest_learning(p_session);IF p.id IS NULL THEN RETURN jsonb_build_object('ok',false,'code','NOT_FOUND');END IF;
  IF NOT firstten_private.guest_learning_rate(p.id)THEN RETURN jsonb_build_object('ok',false,'code','RATE_LIMITED');END IF;
@@ -230,7 +234,8 @@ BEGIN
  IF t.id IS NOT NULL AND t.id<>tid THEN RETURN jsonb_build_object('ok',false,'code','CHANGED');END IF;
  IF t.id IS NULL THEN
   IF(SELECT count(*)FROM firstten_private.growth_submission_threads WHERE principal_id=p.id)>=50 THEN RETURN jsonb_build_object('ok',false,'code','CAPACITY');END IF;
-  INSERT INTO firstten_private.growth_submission_threads(id,class_id,team_id,principal_id,artifact_id,assignment_id)VALUES(tid,p.class_id,p.team_id,p.id,pid,aid)RETURNING * INTO t;
+  -- Defer insertion until admission passes; refused previews must not leave empty threads.
+  new_thread:=true;t.id:=tid;t.last_version:=0;
  END IF;
  binding:=encode(sha256(convert_to(jsonb_build_object('authority',authority,'manifest',built->'manifest','payload',built->'payload','version',t.last_version)::text,'UTF8')),'hex');
  SELECT * INTO preview FROM firstten_private.growth_submission_previews WHERE thread_id=t.id AND request_id=rid;
@@ -242,6 +247,9 @@ BEGIN
   IF t.last_version>=20 OR(SELECT count(*)FROM firstten_private.growth_submission_audit WHERE principal_id=p.id)>=5000 OR(SELECT count(*)FROM firstten_private.growth_submission_previews WHERE thread_id=t.id)>=50 THEN RETURN jsonb_build_object('ok',false,'code','CAPACITY');END IF;
   binding:=encode(sha256(convert_to(jsonb_build_object('authority',authority,'manifest',built->'manifest','payload',built->'payload','version',t.last_version)::text,'UTF8')),'hex');
   IF NOT firstten_private.growth_publication_bytes(p.id,p.class_id,octet_length((built->'payload')::text)+octet_length((built->'manifest')::text)+octet_length(p_document::text))THEN RETURN jsonb_build_object('ok',false,'code','CAPACITY');END IF;
+  IF new_thread THEN
+   INSERT INTO firstten_private.growth_submission_threads(id,class_id,team_id,principal_id,artifact_id,assignment_id)VALUES(tid,p.class_id,p.team_id,p.id,pid,aid)RETURNING * INTO t;
+  END IF;
   INSERT INTO firstten_private.growth_submission_previews(thread_id,request_id,specification,binding_hash,manifest,payload,expected_version,expires_at)VALUES(t.id,rid,p_document,binding,built->'manifest',built->'payload',t.last_version,least(clock_timestamp()+interval'10 minutes',(authority->>'accessExpiresAt')::timestamptz))RETURNING * INTO preview;
   INSERT INTO firstten_private.growth_submission_audit(principal_id,class_id,thread_id,operation,request_id)VALUES(p.id,p.class_id,t.id,'preview',rid);
  END IF;
@@ -341,7 +349,7 @@ BEGIN
  IF p_snapshot_id IS NULL OR p_request_id IS NULL THEN RETURN jsonb_build_object('ok',false,'code','INVALID_INPUT');END IF;
  SELECT s.* INTO v FROM firstten_private.growth_submission_versions s JOIN firstten_private.growth_submission_threads t ON t.id=s.thread_id WHERE s.id=p_snapshot_id AND t.principal_id=p.id AND t.class_id=p.class_id AND t.team_id=p.team_id;
  IF v.id IS NULL THEN RETURN jsonb_build_object('ok',false,'code','NOT_FOUND');END IF;
- IF EXISTS(SELECT 1 FROM firstten_private.growth_submission_grants g JOIN firstten_private.growth_submission_versions x ON x.id=g.snapshot_id JOIN firstten_private.growth_submission_threads t ON t.id=x.thread_id WHERE t.principal_id=p.id AND g.withdrawal_request_id=p_request_id AND g.snapshot_id<>v.id)THEN RETURN jsonb_build_object('ok',false,'code','IDEMPOTENCY_CONFLICT');END IF;
+ IF EXISTS(SELECT 1 FROM firstten_private.growth_submission_grants prior_grant JOIN firstten_private.growth_submission_versions x ON x.id=prior_grant.snapshot_id JOIN firstten_private.growth_submission_threads t ON t.id=x.thread_id WHERE t.principal_id=p.id AND prior_grant.withdrawal_request_id=p_request_id AND prior_grant.snapshot_id<>v.id)THEN RETURN jsonb_build_object('ok',false,'code','IDEMPOTENCY_CONFLICT');END IF;
  SELECT x.* INTO g FROM firstten_private.growth_submission_grants x WHERE x.snapshot_id=v.id FOR UPDATE;
  IF g.state='active'THEN UPDATE firstten_private.growth_submission_grants SET state='withdrawn',revision=revision+1,withdrawn_at=clock_timestamp(),withdrawal_request_id=p_request_id WHERE snapshot_id=v.id;END IF;
  result:=jsonb_build_object('ok',true,'data',firstten_private.growth_submission_view(v,false));

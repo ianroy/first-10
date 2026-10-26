@@ -1,0 +1,14 @@
+{
+  "pins": {
+    "MIGRATION": "23db7fcbed2e877d66d3662606e7f59d1dce5693c9ae40a560fcdaebba96331e",
+    "HARNESS": "6644144d20ce5d5ebb94ae710c05f922127cbe939837173e5e7164fc6205d1be",
+    "RACES": "131827f6d6e46e2ffbfe53c04d6ca8abf12267298120969ed31fae21514203a8",
+    "SQL": "fb9ff687eade50e300f4c780f9b6338b2f35bf5f23ea851c49792a52f3a36140"
+  },
+  "database": "firstten_growth_handoff_test_13f5cbb98147",
+  "phase": "apply exact28 to empty clone only",
+  "creationAttempted": true,
+  "cleanupVerified": true,
+  "passed": false,
+  "sourceUnchanged": true
+}

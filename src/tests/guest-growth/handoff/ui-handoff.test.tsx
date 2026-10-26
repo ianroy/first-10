@@ -210,3 +210,152 @@ it("keeps a handoff draft while an ordinary saved source revision changes", asyn
   expect(screen.getByLabelText("Submission title")).toHaveValue("Preserve my interpretation");
   await waitFor(() => expect(changed).toHaveBeenLastCalledWith(true));
 });
+
+it("withdraws with a fresh revision after an uncertain grant instead of replaying it", async () => {
+  h.saveChoice.mockResolvedValueOnce({ ok: false, code: "UNAVAILABLE" });
+  mount();
+  await screen.findByText("granted");
+  fireEvent.click(screen.getByLabelText(/I may submit selected authored/));
+  fireEvent.click(screen.getByRole("button", { name: "Save reported sharing eligibility" }));
+  await screen.findByRole("button", { name: "Retry exact reported choice" });
+  h.choice.mockResolvedValueOnce({
+    ok: true,
+    data: { sourceKind: "guest_growth", artifactId: record.id, choice: "granted", revision: 4 },
+  });
+  h.saveChoice.mockResolvedValueOnce({
+    ok: true,
+    data: { sourceKind: "guest_growth", artifactId: record.id, choice: "withdrawn", revision: 5 },
+  });
+  fireEvent.click(screen.getByRole("button", { name: "Withdraw reported sharing choice" }));
+  await screen.findByText(/Reported sharing choice withdrawn/);
+  expect(h.saveChoice.mock.calls[1]![0].data).toMatchObject({
+    artifactId: record.id,
+    choice: "withdrawn",
+    expectedRevision: 4,
+  });
+  expect(h.saveChoice.mock.calls[1]![0].data.requestId).not.toBe(
+    h.saveChoice.mock.calls[0]![0].data.requestId,
+  );
+  expect(screen.queryByRole("button", { name: "Retry exact reported choice" })).toBeNull();
+});
+it("retries an unknown withdrawal with the same operation identity and blocks grants", async () => {
+  mount();
+  await screen.findByText("granted");
+  h.saveChoice.mockResolvedValueOnce({ ok: false, code: "UNAVAILABLE" });
+  fireEvent.click(screen.getByRole("button", { name: "Withdraw reported sharing choice" }));
+  const retry = await screen.findByRole("button", { name: /Retry exact sharing withdrawal/ });
+  const reads = h.choice.mock.calls.length;
+  fireEvent.click(screen.getByLabelText(/I may submit selected authored/));
+  expect(screen.getByRole("button", { name: "Save reported sharing eligibility" })).toBeDisabled();
+  h.saveChoice.mockResolvedValueOnce({
+    ok: true,
+    data: { sourceKind: "guest_growth", artifactId: record.id, choice: "withdrawn", revision: 2 },
+  });
+  fireEvent.click(retry);
+  await screen.findByText(/Reported sharing choice withdrawn/);
+  expect(h.saveChoice.mock.calls[1]![0]).toEqual(h.saveChoice.mock.calls[0]![0]);
+  expect(h.choice).toHaveBeenCalledTimes(reads);
+});
+it("refreshes source choices and discards an unknown private preview without dropping form edits", async () => {
+  h.preview.mockResolvedValueOnce({ ok: false, code: "UNAVAILABLE" });
+  mount();
+  await screen.findByText("granted");
+  fireEvent.click(screen.getByLabelText("observations"));
+  fireEvent.change(screen.getByLabelText("Submission title"), {
+    target: { value: "Keep this draft" },
+  });
+  fireEvent.click(screen.getByRole("button", { name: "Preview selected growth copy" }));
+  await screen.findByRole("button", { name: "Discard unconfirmed private preview" });
+  fireEvent.click(screen.getByRole("button", { name: "Refresh source choices" }));
+  await screen.findByText(/Source choices refreshed/);
+  expect(screen.getByLabelText("Submission title")).toHaveValue("Keep this draft");
+  fireEvent.click(screen.getByRole("button", { name: "Discard unconfirmed private preview" }));
+  await screen.findByText(/Private preview discarded/);
+  expect(screen.getByLabelText("Submission title")).toHaveValue("Keep this draft");
+  expect(h.confirm).not.toHaveBeenCalled();
+});
+it("does not claim restored teacher access when an exact submission retry recovers an ineligible copy", async () => {
+  h.confirm.mockResolvedValueOnce({ ok: false, code: "UNAVAILABLE" });
+  mount();
+  await prepare();
+  fireEvent.click(
+    screen.getByLabelText(
+      "I reviewed this exact copy and grant current class teachers access to it.",
+    ),
+  );
+  fireEvent.click(screen.getByRole("button", { name: "Submit this exact teacher copy" }));
+  await screen.findByRole("button", { name: "Retry prior exact submission (new edits remain)" });
+  h.confirm.mockResolvedValueOnce({
+    ok: true,
+    data: { ...copy, recipientEligible: false, grantState: "withdrawn", grantRevision: 2 },
+  });
+  fireEvent.click(
+    screen.getByRole("button", { name: "Retry prior exact submission (new edits remain)" }),
+  );
+  await screen.findByText(/Earlier exact copy recovered. Teacher access is unavailable/);
+  expect(h.confirm.mock.calls[1]![0]).toEqual(h.confirm.mock.calls[0]![0]);
+});
+
+it("preserves an unrelated unknown grant when withdrawing another source", async () => {
+  const dependency = { ...roster.sources[0]!, artifactId: id(88) };
+  h.roster.mockResolvedValue({
+    ok: true,
+    data: { ...roster, sources: [...roster.sources, dependency] },
+  });
+  h.saveChoice.mockResolvedValueOnce({ ok: false, code: "UNAVAILABLE" });
+  mount();
+  await screen.findByText("granted");
+  fireEvent.click(screen.getByLabelText(/I may submit selected authored/));
+  fireEvent.click(screen.getByRole("button", { name: "Save reported sharing eligibility" }));
+  await screen.findByRole("button", { name: "Retry exact reported choice" });
+  fireEvent.change(screen.getByLabelText("Exact retained source for reported choice"), {
+    target: { value: dependency.artifactId },
+  });
+  h.choice.mockResolvedValueOnce({
+    ok: true,
+    data: {
+      sourceKind: "guest_growth",
+      artifactId: dependency.artifactId,
+      choice: "granted",
+      revision: 3,
+    },
+  });
+  h.saveChoice.mockResolvedValueOnce({
+    ok: true,
+    data: {
+      sourceKind: "guest_growth",
+      artifactId: dependency.artifactId,
+      choice: "withdrawn",
+      revision: 4,
+    },
+  });
+  fireEvent.click(screen.getByRole("button", { name: "Withdraw reported sharing choice" }));
+  await screen.findByText(/Reported sharing choice withdrawn/);
+  fireEvent.click(screen.getByRole("button", { name: "Retry prior exact reported choice" }));
+  await waitFor(() => expect(h.saveChoice).toHaveBeenCalledTimes(3));
+  expect(h.saveChoice.mock.calls[2]![0]).toEqual(h.saveChoice.mock.calls[0]![0]);
+});
+it("keeps an unknown source grant resolvable after that source leaves the current graph", async () => {
+  const dependency = { ...roster.sources[0]!, artifactId: id(89) };
+  h.roster.mockResolvedValueOnce({
+    ok: true,
+    data: { ...roster, sources: [...roster.sources, dependency] },
+  });
+  h.saveChoice.mockResolvedValueOnce({ ok: false, code: "UNAVAILABLE" });
+  mount();
+  await screen.findByText("granted");
+  fireEvent.change(screen.getByLabelText("Exact retained source for reported choice"), {
+    target: { value: dependency.artifactId },
+  });
+  fireEvent.click(screen.getByLabelText(/I may submit selected authored/));
+  fireEvent.click(screen.getByRole("button", { name: "Save reported sharing eligibility" }));
+  await screen.findByRole("button", { name: "Retry exact reported choice" });
+  fireEvent.click(screen.getByRole("button", { name: "Refresh source choices" }));
+  await screen.findByText(/Source choices refreshed/);
+  fireEvent.change(screen.getByLabelText("Exact retained source for reported choice"), {
+    target: { value: record.id },
+  });
+  fireEvent.click(screen.getByRole("button", { name: "Retry prior exact reported choice" }));
+  await waitFor(() => expect(h.saveChoice).toHaveBeenCalledTimes(2));
+  expect(h.saveChoice.mock.calls[1]![0]).toEqual(h.saveChoice.mock.calls[0]![0]);
+});
