@@ -14,7 +14,7 @@
     "Recovered old copy never claims restored teacher access"
   ],
   "capacityEvidence": {
-    "actualDatabaseProof": false,
+    "actualDatabaseProof": true,
     "fixturesAuthored": [
       "20 real versions + 21st refusal",
       "50 real previews + exact retry + 51st refusal",
@@ -23,12 +23,13 @@
       "16MiB exact class stored bytes with independent publisher headroom",
       "Permission reductions at each cap and no orphan thread after class-cap refusal"
     ],
-    "fillerLimit": "Trusted test-owned storage rows are not claimed as RPC-produced DTOs"
+    "fillerLimit": "Trusted test-owned storage rows are not claimed as RPC-produced DTOs",
+    "currentEvidence": "Final October26 exact-pinned clone trial:3603 assertions; positive final publisher/class RPC admissions, refusals, reductions and no orphan thread; current pins in trial"
   },
   "approvedTrialScope": "One exact-pinned random schema-only disposable clone on dedicated local55322; source27/localCLI03 unchanged; no source/hosted28 application",
   "publication": {
     "committed": true,
-    "commit": "13ea602",
+    "commit": "fe37c90",
     "pushed": true,
     "integrated": false,
     "applied": false,
@@ -41,7 +42,6 @@
     "partialAppObservation": "New admin tab 344873423 opened with the initial application shell only; observing actual controls then failed automatic-review capacity. No deployment-version or runtime-control verification claimed."
   },
   "remaining": [
-    "Reconstruct and run full row/UTF8 capacity fixtures",
     "Independent integration review and merge against current main",
     "Official generated types and individual PDF/parent mounts",
     "Combined gates and actual desktop/submission/withdrawal/PDF verification",
@@ -66,7 +66,8 @@
       "CASE expression syntax",
       "PLpgSQL variable/table alias collision"
     ],
-    "missingHistoricalCapacityFixtures": true
+    "missingHistoricalCapacityFixtures": false,
+    "capacityFixturesReconstructedAndVerified": true
   },
   "historicalSourceFilesSha256": {
     "src/components/guest-growth/ReviewedGrowthHandoff.tsx": "9570ba64b109e1180258c6cacc7fedfd9baff4b0ef19f87c45cb00c4d1a3f0be",
@@ -80,7 +81,7 @@
     "src/components/guest-growth/ReviewedGrowthHandoff.tsx": "014ca900b3a9b4c830b262e12f307c467e15d345721ccff2fe16147404b7dbaf",
     "src/tests/guest-growth/handoff/ui-handoff.test.tsx": "4612267fa989ba627554af23a65c3d95004ecadb0ea7f16414cc5379fdf6662d",
     "supabase/migrations/20261018028000_guest_growth_handoffs.sql": "a607b22afc329405da324acc3729af714e111494b4d80fd3531c30d3e0cee58c",
-    "supabase/tests/cls-009-handoff.sql": "fb9ff687eade50e300f4c780f9b6338b2f35bf5f23ea851c49792a52f3a36140",
+    "supabase/tests/cls-009-handoff.sql": "7d5eaa95ae598300ff58655e2382ce0e812496c47d356042b5d68fe9738bd16d",
     "src/tests/guest-growth/handoff/database-rehearsal.mjs": "6644144d20ce5d5ebb94ae710c05f922127cbe939837173e5e7164fc6205d1be",
     "src/tests/guest-growth/handoff/races.mjs": "131827f6d6e46e2ffbfe53c04d6ca8abf12267298120969ed31fae21514203a8"
   },
@@ -127,14 +128,14 @@
       "MIGRATION": "a607b22afc329405da324acc3729af714e111494b4d80fd3531c30d3e0cee58c",
       "HARNESS": "6644144d20ce5d5ebb94ae710c05f922127cbe939837173e5e7164fc6205d1be",
       "RACES": "131827f6d6e46e2ffbfe53c04d6ca8abf12267298120969ed31fae21514203a8",
-      "SQL": "fb9ff687eade50e300f4c780f9b6338b2f35bf5f23ea851c49792a52f3a36140"
+      "SQL": "7d5eaa95ae598300ff58655e2382ce0e812496c47d356042b5d68fe9738bd16d"
     },
-    "database": "firstten_growth_handoff_test_802284e43f23",
+    "database": "firstten_growth_handoff_test_3a580e26ec8a",
     "phase": "true overlapping separate-connection races",
     "creationAttempted": true,
     "cleanupVerified": true,
     "passed": true,
-    "assertions": 3575,
+    "assertions": 3603,
     "failures": [],
     "races": {
       "actualBlockedOverlaps": 6,

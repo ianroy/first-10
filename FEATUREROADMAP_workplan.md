@@ -31,7 +31,7 @@ research_gate: not_passed
 foundation_gate: not_passed
 realtime_go: pending
 last_updated: 2026-10-26
-last_documentation_update: "2026-10-26: User resumed; approval-path fetch and deployment verification succeeded. OpenRouter workspace still mismatched. Recovered candidate pushed separately and passed disposable SQL/DTO/race trial."
+last_documentation_update: "2026-10-26: Git pushes/deployment verified; classroom recovery and full capacity trial passed3603 assertions and pushed separately. OpenRouter account switch remains pending."
 resume_hint: >-
   User resumed with 'try this again' and 'Restore reviewer; retry Git'. Fresh
   blocked audit starts now; do not reuse the previous three-turn blocker count.
@@ -57,13 +57,14 @@ resume_hint: >-
   /Users/ianroy/.codex/visualizations/2026/10/18/01a14ce9-50fd-72c0-bdeb-b4094f99de41/guest-growth-recovery.
   Reconstructed SQL final fences/deferred thread insertion and privacy UI intent
   handling, with six new UI regressions. Actual clone trial exposed/fixed CASE
-  syntax and ambiguous alias errors. Third exact-pinned trial passed3575 SQL
+  syntax and ambiguous alias errors. Final exact-pinned trial passed3603 SQL
   assertions,12 actual DTO checks,6 real blocked overlaps,5 witnessed late-expiry
   cases, cleanup and unchanged dedicated source27 verification. Focused offline
   source checks41 pass/12 actual-SQL skips; typecheck/scoped lint/diff pass.
-  Saved commit13ea602 pushed to separate codex/guest-growth-recovery-20261026.
-  Not merged/applied/mounted. Full row/UTF8 capacity fixtures from lost WIP still
-  need rebuilding, then independent integration review, official generated types,
+  Saved commitfe37c90 pushed to separate codex/guest-growth-recovery-20261026.
+  Not merged/applied/mounted. Full row/UTF8 capacity fixtures are reconstructed
+  and verified, including actual final positive admissions, refusals and reductions.
+  Remaining: independent integration review, official generated types,
   individual verified PDF mounts, combined checks and live desktop/PDF proof.
   Read docs/verification/guest-growth-handoff-20261019.json for current pins and
   distinguish current checks from historical ones. Never use old pins.
@@ -71,7 +72,7 @@ resume_hint: >-
   Google endpoint. Free deployed key check still reports the expected production
   workspace/$0.0044584 usage/$49.9955416 remaining/resetting/BYOK excluded.
   No paid call or activation. Chrome account mismatch remains; user handoff pending.
-  Main checkpointcef087d was pushed and verified READY. Separate teacher branch
+  Main checkpoint78a4d53 was pushed and verified READY. Separate teacher branch
   is backed up remotely; do not mistake its preview for live-product integration.
   Main working tree contains only status/evidence/activation-guide edits and the untracked user
   PDF, which must be excluded from commits. Preserve ordinary Git history and

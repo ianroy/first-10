@@ -12167,7 +12167,7 @@
       "rollback": "Hide new guest growth entry, retain existing22/23 studios and all saved records; no destructive downgrade.",
       "agent_notes": {
         "starting_point": "Genuine guest22/23/24 are shipped. Define the specific missing standalone learning/experiment, pipeline, survey/referral/onboarding artifacts; never equate generic text with structured parity. Start by reading current source and source-scoped export/submission boundaries. Contract-only phase cannot mutate schema or enable UI.",
-        "stop_and_report": "Recovered and separately pushed13ea602; actual clone SQL/DTO/races passed. Reconstruct missing full capacity fixtures next, then independent integration review, official type generation, parent/individual PDF mounts and combined/live checks. Not applied or mounted. Current pins/evidence in guest-growth-handoff-20261019 ledger; historical WIP/178-test count unavailable.",
+        "stop_and_report": "Recovered and separately pushed fe37c90; exact clone SQL/full row+UTF8 capacities/actual DTO/races passed3603 assertions. Next independent integration review, official type generation, parent/individual PDF mounts and combined/live checks. Not applied or mounted. Current evidence in guest-growth-handoff-20261019 ledger.",
         "handoff": "Report changed files, base/result commit, exact checks and outcomes, artifact/source ids, residual risks and the next eligible task. Only the coordinator edits task status, shared generated files and the main roadmap.",
         "integration": "Use a clean task branch/worktree from the coordinator base. Commit only this write scope. Migrations, generated types, route tree, dependency locks and shared entry points are serialized by the coordinator; never hand-edit generated output."
       },
@@ -12335,6 +12335,10 @@
         {
           "date": "2026-10-26",
           "text": "Recovered fa73603d in persistent worktree and reconstructed SQL/privacy fixes with six UI regressions. First actual clone trial caught CASE syntax, second alias ambiguity; fixed both. Third exact-pinned disposable trial passed3575 SQL assertions,12 actual DTO tests,6 blocked overlaps,5 witnessed expiry/rollback cases; cleanup/source27 unchanged passed. Offline focused41pass/12SQLskips,type/lint/diff pass. Commit13ea602 pushed to separate recovery branch, unmerged/unapplied/unmounted. Full row/UTF8 capacity reconstruction and integration/live gates remain."
+        },
+        {
+          "date": "2026-10-26",
+          "text": "Full capacity reconstruction verified and pushed fe37c90 on separate recovery branch. Final exact-pinned clone trial3603 assertions,12actualDTO tests,6realblockedoverlaps,5witnessedlateexpiry/rollbackcases; cleanup/source27 unchanged passed.20realversions,50realpreviews,50realthreads,exact2MiBpublisher/16MiBclassUTF8bytes,actualfinalpositiveRPCadmissions/refusals/reductions/noorphansthreads. Bounded trustedfictional fillerrows explicitlynotclaimedasRPCDTOs. Integration/mount/typegen/livegates remain."
         }
       ],
       "claim": {
