@@ -71,7 +71,13 @@ are in `docs/verification/guest-growth-recovery-*-trial-20261026.json`.
 Focused source checks: 41 passing tests, 12 skipped actual-SQL tests in the offline
 run; the dedicated rehearsal separately ran the actual DTO suite. Typecheck and
 scoped lint passed. These are new checks, not the lost historical test count.
-Full row/UTF8 capacity fixtures from the lost WIP still need reconstruction;
-actual mounts, official type generation, independent integration review, combined
+The reconstructed full row/UTF8 capacity fixtures now pass in the final exact-pinned
+trial: 3,603 assertions, 12 actual DTO tests, the same six witnessed overlaps and
+five expiry/rollback cases, with cleanup/source unchanged verified. They materialize
+20 real versions, 50 real previews, 50 real threads, exact 2MiB publisher and16MiB
+class storage, positive final RPC admissions, refusals and permission reductions.
+Bounded fictional filler storage rows are explicitly not claimed as RPC DTOs.
+The final receipt is `docs/verification/guest-growth-recovery-final-capacity-trial-20261026.json`.
+Actual mounts, official type generation, independent integration review, combined
 checks and desktop/PDF verification remain. No source/hosted migration28 was
 applied, and neither guest nor teacher controls are mounted in the product.

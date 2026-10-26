@@ -1,0 +1,23 @@
+{
+  "pins": {
+    "MIGRATION": "a607b22afc329405da324acc3729af714e111494b4d80fd3531c30d3e0cee58c",
+    "HARNESS": "6644144d20ce5d5ebb94ae710c05f922127cbe939837173e5e7164fc6205d1be",
+    "RACES": "131827f6d6e46e2ffbfe53c04d6ca8abf12267298120969ed31fae21514203a8",
+    "SQL": "7d5eaa95ae598300ff58655e2382ce0e812496c47d356042b5d68fe9738bd16d"
+  },
+  "database": "firstten_growth_handoff_test_3a580e26ec8a",
+  "phase": "true overlapping separate-connection races",
+  "creationAttempted": true,
+  "cleanupVerified": true,
+  "passed": true,
+  "assertions": 3603,
+  "failures": [],
+  "races": {
+    "actualBlockedOverlaps": 6,
+    "stableCommitReplay": true,
+    "sourceDeletionDenied": true,
+    "lateResultExpiryCases": 5,
+    "witnessedRollback": true
+  },
+  "sourceUnchanged": true
+}

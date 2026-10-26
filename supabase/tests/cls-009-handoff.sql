@@ -87,5 +87,141 @@ RESET ROLE;
 -- New audit relation allows legitimate DELETE/cascades; old24 incompatibility is not modified.
 DELETE FROM firstten_private.growth_submission_audit WHERE principal_id=firstten_policy_test.gh_id(3);
 SELECT is((SELECT count(*)::integer FROM firstten_private.growth_submission_audit WHERE principal_id=firstten_policy_test.gh_id(3)),0,'new audit DELETE does not reproduce inherited cascade trap');
+-- Independent capacity class: never changes the original survey/deletion fixture.
+RESET ROLE;
+INSERT INTO public.classes(id,user_id,name,mode,access_expires_at)VALUES(firstten_policy_test.gh_id(10000),firstten_policy_test.id('owner_a'),'Fictional capacity recovery','class',clock_timestamp()+interval'1 day');
+INSERT INTO public.class_teams(id,class_id,issued_by,alias)VALUES(firstten_policy_test.gh_id(10001),firstten_policy_test.gh_id(10000),firstten_policy_test.id('owner_a'),'Fictional capacity team');
+INSERT INTO public.assignments(id,class_id,user_id,last_editor_id,title,state)VALUES(firstten_policy_test.gh_id(10002),firstten_policy_test.gh_id(10000),firstten_policy_test.id('owner_a'),firstten_policy_test.id('owner_a'),'Fictional capacity review','published');
+INSERT INTO public.class_guest_principals(id,class_id,team_id,issued_by,alias)SELECT firstten_policy_test.gh_id(10010+n),firstten_policy_test.gh_id(10000),firstten_policy_test.gh_id(10001),firstten_policy_test.id('owner_a'),'Fictional capacity author '||n FROM generate_series(1,14)n;
+INSERT INTO firstten_private.class_guest_sessions(class_id,team_id,principal_id,token_hash,expires_at)SELECT firstten_policy_test.gh_id(10000),firstten_policy_test.gh_id(10001),firstten_policy_test.gh_id(10010+n),firstten_private.guest_hash(firstten_policy_test.gh_session('cap-'||n)),clock_timestamp()+interval'1 hour'FROM generate_series(1,14)n;
+CREATE FUNCTION firstten_policy_test.gh_cap_spec(artifact integer,thread integer)RETURNS jsonb LANGUAGE sql STABLE AS $$SELECT firstten_policy_test.gh_spec(3)||jsonb_build_object('artifactId',firstten_policy_test.gh_id(artifact),'expectedRevision',1,'threadId',firstten_policy_test.gh_id(thread),'assignmentId',firstten_policy_test.gh_id(10002))$$;
+-- Isolate storage-cap behavior from rate limits using only these test-owned principals.
+CREATE FUNCTION firstten_policy_test.gh_cap_reset_rate(n integer)RETURNS void LANGUAGE sql SECURITY DEFINER SET search_path=pg_catalog AS $$DELETE FROM firstten_private.guest_learning_buckets WHERE principal_id=firstten_policy_test.gh_id(10010+n)$$;
+GRANT EXECUTE ON FUNCTION firstten_policy_test.gh_cap_spec(integer,integer),firstten_policy_test.gh_cap_reset_rate(integer)TO service_role;
+SET LOCAL ROLE service_role;
+DO $$DECLARE n integer;r jsonb;s text;BEGIN FOR n IN 1..14 LOOP
+ s:=firstten_policy_test.gh_session('cap-'||n);
+ r:=public.save_guest_growth_artifact(s,firstten_policy_test.gh_id(11000+n),'principal_private',0,gen_random_uuid(),false,firstten_policy_test.gh_doc('pipeline_contact'));
+ IF r->>'ok'IS DISTINCT FROM'true'THEN RAISE EXCEPTION 'Capacity source setup failed: %',r->>'code';END IF;
+ r:=public.save_guest_growth_sharing_choice(s,firstten_policy_test.gh_id(11000+n),'granted',0,gen_random_uuid());
+ IF r->>'ok'IS DISTINCT FROM'true'THEN RAISE EXCEPTION 'Capacity choice setup failed: %',r->>'code';END IF;
+END LOOP;END $$;
+-- Twenty actual immutable versions, followed by refusal and a still-available reduction.
+DO $$DECLARE n integer;p jsonb;r jsonb;s text:=firstten_policy_test.gh_session('cap-1');BEGIN FOR n IN 1..20 LOOP
+ p:=public.preview_guest_growth_submission(s,firstten_policy_test.gh_cap_spec(11001,12001));
+ IF p->>'ok'IS DISTINCT FROM'true'THEN RAISE EXCEPTION 'Version preview % failed: %',n,p->>'code';END IF;
+ r:=public.confirm_guest_growth_submission(s,(p#>>'{data,id}')::uuid,p#>>'{data,hash}',gen_random_uuid(),true);
+ IF r->>'ok'IS DISTINCT FROM'true'OR(r#>>'{data,version}')::integer<>n THEN RAISE EXCEPTION 'Version % failed: %',n,r->>'code';END IF;
+END LOOP;
+ INSERT INTO firstten_policy_test.gh_results VALUES('cap_version_last',r);
+END $$;
+SELECT is(public.preview_guest_growth_submission(firstten_policy_test.gh_session('cap-1'),firstten_policy_test.gh_cap_spec(11001,12001))->>'code','CAPACITY','twenty real versions refuse a twenty-first');
+SELECT is(public.withdraw_guest_growth_submission(firstten_policy_test.gh_session('cap-1'),firstten_policy_test.gh_snapshot('cap_version_last'),gen_random_uuid())->>'ok','true','version capacity preserves explicit recipient withdrawal');
+SELECT is(public.save_guest_growth_sharing_choice(firstten_policy_test.gh_session('cap-1'),firstten_policy_test.gh_id(11001),'withdrawn',1,gen_random_uuid())->>'ok','true','version capacity preserves source reduction');
+-- Fifty actual previews: same-request recovery works; a new preview is refused.
+DO $$DECLARE n integer;p jsonb;spec jsonb;s text:=firstten_policy_test.gh_session('cap-2');BEGIN FOR n IN 1..50 LOOP
+ spec:=firstten_policy_test.gh_cap_spec(11002,12002);p:=public.preview_guest_growth_submission(s,spec);
+ IF p->>'ok'IS DISTINCT FROM'true'THEN RAISE EXCEPTION 'Preview % failed: %',n,p->>'code';END IF;
+END LOOP;
+ INSERT INTO firstten_policy_test.gh_results VALUES('cap_preview_spec',spec),('cap_preview_last',p);
+END $$;
+SELECT is(public.preview_guest_growth_submission(firstten_policy_test.gh_session('cap-2'),(SELECT result FROM firstten_policy_test.gh_results WHERE label='cap_preview_spec'))#>>'{data,id}',firstten_policy_test.gh_snapshot('cap_preview_last')::text,'fifty real previews retain exact-request recovery');
+SELECT is(public.preview_guest_growth_submission(firstten_policy_test.gh_session('cap-2'),firstten_policy_test.gh_cap_spec(11002,12002))->>'code','CAPACITY','fifty real previews refuse a fifty-first');
+INSERT INTO firstten_policy_test.gh_results SELECT'cap_preview_confirm',public.confirm_guest_growth_submission(firstten_policy_test.gh_session('cap-2'),firstten_policy_test.gh_snapshot('cap_preview_last'),(SELECT result#>>'{data,hash}'FROM firstten_policy_test.gh_results WHERE label='cap_preview_last'),gen_random_uuid(),true);
+SELECT is((SELECT result->>'ok'FROM firstten_policy_test.gh_results WHERE label='cap_preview_confirm'),'true','preview capacity still permits confirmation of existing preview');
+SELECT is(public.save_guest_growth_sharing_choice(firstten_policy_test.gh_session('cap-2'),firstten_policy_test.gh_id(11002),'withdrawn',1,gen_random_uuid())->>'ok','true','preview capacity preserves source reduction');
+-- Fifty actual artifact/assignment threads, each admitted through the actual RPC.
+DO $$DECLARE n integer;r jsonb;s text:=firstten_policy_test.gh_session('cap-3');BEGIN FOR n IN 1..51 LOOP
+ PERFORM firstten_policy_test.gh_cap_reset_rate(3);
+ r:=public.save_guest_growth_artifact(s,firstten_policy_test.gh_id(13000+n),'principal_private',0,gen_random_uuid(),false,firstten_policy_test.gh_doc('pipeline_contact'));
+ IF r->>'ok'IS DISTINCT FROM'true'THEN RAISE EXCEPTION 'Thread source % failed: %',n,r->>'code';END IF;
+ r:=public.save_guest_growth_sharing_choice(s,firstten_policy_test.gh_id(13000+n),'granted',0,gen_random_uuid());
+ IF r->>'ok'IS DISTINCT FROM'true'THEN RAISE EXCEPTION 'Thread choice % failed: %',n,r->>'code';END IF;
+ r:=public.preview_guest_growth_submission(s,firstten_policy_test.gh_cap_spec(13000+n,14000+n));
+ IF n<=50 AND r->>'ok'IS DISTINCT FROM'true'THEN RAISE EXCEPTION 'Thread % failed: %',n,r->>'code';END IF;
+ IF n=51 AND r->>'code'IS DISTINCT FROM'CAPACITY'THEN RAISE EXCEPTION 'Thread51 not refused';END IF;
+END LOOP;END $$;
+SELECT is(public.preview_guest_growth_submission(firstten_policy_test.gh_session('cap-3'),firstten_policy_test.gh_cap_spec(13001,14001))->>'ok','true','fifty real threads allow another preview on an existing thread');
+SELECT is(public.save_guest_growth_sharing_choice(firstten_policy_test.gh_session('cap-3'),firstten_policy_test.gh_id(13001),'withdrawn',1,gen_random_uuid())->>'ok','true','thread capacity preserves source reduction');
+RESET ROLE;
+SELECT is((SELECT count(*)::integer FROM firstten_private.growth_submission_versions v JOIN firstten_private.growth_submission_threads t ON t.id=v.thread_id WHERE t.principal_id=firstten_policy_test.gh_id(10011)),20,'twenty real versions were stored');
+SELECT is((SELECT count(*)::integer FROM firstten_private.growth_submission_previews p JOIN firstten_private.growth_submission_threads t ON t.id=p.thread_id WHERE t.principal_id=firstten_policy_test.gh_id(10012)),50,'fifty real previews were stored');
+SELECT is((SELECT count(*)::integer FROM firstten_private.growth_submission_threads WHERE principal_id=firstten_policy_test.gh_id(10013)),50,'fifty real threads were stored without orphan51');
+-- A refused first preview must not create an orphan thread at the audit capacity.
+INSERT INTO firstten_private.growth_submission_audit(principal_id,class_id,operation,request_id)SELECT firstten_policy_test.gh_id(10014),firstten_policy_test.gh_id(10000),'choice',gen_random_uuid()FROM generate_series(1,5000-(SELECT count(*)FROM firstten_private.growth_submission_audit WHERE principal_id=firstten_policy_test.gh_id(10014)));
+SET LOCAL ROLE service_role;
+SELECT is(public.preview_guest_growth_submission(firstten_policy_test.gh_session('cap-4'),firstten_policy_test.gh_cap_spec(11004,12004))->>'code','CAPACITY','first preview refuses full audit capacity');
+SELECT is(public.save_guest_growth_sharing_choice(firstten_policy_test.gh_session('cap-4'),firstten_policy_test.gh_id(11004),'withdrawn',1,gen_random_uuid())->>'ok','true','audit capacity preserves source reduction');
+RESET ROLE;
+SELECT is((SELECT count(*)::integer FROM firstten_private.growth_submission_threads WHERE principal_id=firstten_policy_test.gh_id(10014)),0,'refused first preview leaves no orphan thread');
+
+-- UTF8 storage limits use test-owned filler rows, never claimed as RPC-produced DTOs.
+-- Every field respects the authored reflection length limits. Real final RPCs prove refusal.
+RESET ROLE;
+CREATE FUNCTION firstten_policy_test.gh_cap_bytes(n integer DEFAULT NULL)RETURNS bigint LANGUAGE sql STABLE SET search_path=pg_catalog AS $$
+ WITH stored AS(SELECT t.principal_id,octet_length(p.payload::text)+octet_length(p.manifest::text)+octet_length(p.specification::text)bytes FROM firstten_private.growth_submission_previews p JOIN firstten_private.growth_submission_threads t ON t.id=p.thread_id WHERE t.class_id=firstten_policy_test.gh_id(10000)
+ UNION ALL SELECT t.principal_id,octet_length(v.payload::text)+octet_length(v.manifest::text)+octet_length(v.authority::text)FROM firstten_private.growth_submission_versions v JOIN firstten_private.growth_submission_threads t ON t.id=v.thread_id WHERE t.class_id=firstten_policy_test.gh_id(10000))
+ SELECT coalesce(sum(bytes),0)::bigint FROM stored WHERE n IS NULL OR principal_id=firstten_policy_test.gh_id(10010+n)
+$$;
+CREATE FUNCTION firstten_policy_test.gh_cap_fill(n integer,target bigint)RETURNS void LANGUAGE plpgsql SET search_path=pg_catalog AS $$
+DECLARE template firstten_private.growth_submission_previews;spec jsonb;payload jsonb;empty_spec jsonb;empty_payload jsonb;f text;slot integer;limit_chars integer;delta bigint;take integer;base bigint;remaining bigint;rows integer;i integer;desired bigint;pad text;
+BEGIN
+ IF n NOT BETWEEN 5 AND 12 OR target>2097152 OR target<0 THEN RAISE EXCEPTION 'Fixture-only bounds';END IF;
+ SELECT p.* INTO STRICT template FROM firstten_private.growth_submission_previews p JOIN firstten_private.growth_submission_threads t ON t.id=p.thread_id WHERE t.principal_id=firstten_policy_test.gh_id(10010+n)ORDER BY p.id LIMIT 1;
+ empty_spec:=template.specification;empty_payload:=template.payload;
+ FOREACH f IN ARRAY ARRAY['interpretation','uncertainty','decision','nextAction']LOOP
+  empty_spec:=jsonb_set(empty_spec,ARRAY['reflection',f],'""');empty_payload:=jsonb_set(empty_payload,ARRAY[f],'""');
+ END LOOP;
+ base:=octet_length(empty_spec::text)+octet_length(empty_payload::text)+octet_length(template.manifest::text);
+ remaining:=target-firstten_policy_test.gh_cap_bytes(n);
+ rows:=ceil(remaining::numeric/(base+54000))::integer;
+ IF rows NOT BETWEEN 1 AND 49 OR remaining<rows*base THEN RAISE EXCEPTION 'Invalid filler partition';END IF;
+ FOR i IN 1..rows LOOP
+  desired:=remaining/(rows-i+1);delta:=desired-base;spec:=empty_spec;payload:=empty_payload;
+  FOR slot IN 1..8 LOOP
+   f:=(ARRAY['interpretation','uncertainty','decision','nextAction'])[(slot-1)%4+1];limit_chars:=CASE WHEN f='interpretation'THEN 3000 ELSE 2000 END;
+   take:=least(delta,limit_chars*3)::integer;pad:=repeat('界',take/3)||repeat('x',take%3);delta:=delta-take;
+   IF slot<=4 THEN spec:=jsonb_set(spec,ARRAY['reflection',f],to_jsonb(pad));ELSE payload:=jsonb_set(payload,ARRAY[f],to_jsonb(pad));END IF;
+  END LOOP;
+  IF delta<>0 OR octet_length(spec::text)+octet_length(payload::text)+octet_length(template.manifest::text)<>desired THEN RAISE EXCEPTION 'Exact UTF8 partition failed';END IF;
+  -- Spec request IDs retain the same textual UUID width; these are storage rows only.
+  spec:=jsonb_set(spec,'{requestId}',to_jsonb(gen_random_uuid()::text));
+  INSERT INTO firstten_private.growth_submission_previews(thread_id,request_id,specification,binding_hash,manifest,payload,expected_version,expires_at)VALUES(template.thread_id,gen_random_uuid(),spec,repeat('c',64),template.manifest,payload,0,clock_timestamp()+interval'10 minutes');
+  remaining:=remaining-desired;
+ END LOOP;
+ IF remaining<>0 OR firstten_policy_test.gh_cap_bytes(n)<>target THEN RAISE EXCEPTION 'Exact publisher byte target not reached';END IF;
+END $$;
+-- Create the first genuine preview, then materialize the publisher's exact 2MiB.
+INSERT INTO firstten_policy_test.gh_results SELECT'cap_bytes_first',public.preview_guest_growth_submission(firstten_policy_test.gh_session('cap-5'),firstten_policy_test.gh_cap_spec(11005,12005));
+SELECT is((SELECT result->>'ok'FROM firstten_policy_test.gh_results WHERE label='cap_bytes_first'),'true','positive byte-cap setup uses real preview');
+SELECT firstten_policy_test.gh_cap_fill(5,2097152-(SELECT octet_length(p.payload::text)+octet_length(p.manifest::text)+octet_length(p.specification::text)FROM firstten_private.growth_submission_previews p WHERE p.id=firstten_policy_test.gh_snapshot('cap_bytes_first')));
+SET LOCAL ROLE service_role;
+SELECT is(public.preview_guest_growth_submission(firstten_policy_test.gh_session('cap-5'),firstten_policy_test.gh_cap_spec(11005,12005))->>'ok','true','real preview fills exact final publisher headroom');
+RESET ROLE;
+SELECT is(firstten_policy_test.gh_cap_bytes(5),2097152::bigint,'publisher storage is exactly2MiB UTF8');
+SELECT ok(firstten_private.growth_publication_bytes(firstten_policy_test.gh_id(10015),firstten_policy_test.gh_id(10000),0)AND NOT firstten_private.growth_publication_bytes(firstten_policy_test.gh_id(10015),firstten_policy_test.gh_id(10000),1),'publisher exact-byte boundary admits zero and refuses one byte');
+SET LOCAL ROLE service_role;
+SELECT is(public.preview_guest_growth_submission(firstten_policy_test.gh_session('cap-5'),firstten_policy_test.gh_cap_spec(11005,12005))->>'code','CAPACITY','real new preview refuses full publisher bytes');
+SELECT is(public.confirm_guest_growth_submission(firstten_policy_test.gh_session('cap-5'),firstten_policy_test.gh_snapshot('cap_bytes_first'),(SELECT result#>>'{data,hash}'FROM firstten_policy_test.gh_results WHERE label='cap_bytes_first'),gen_random_uuid(),true)->>'code','CAPACITY','real confirmation refuses full publisher bytes');
+SELECT is(public.save_guest_growth_sharing_choice(firstten_policy_test.gh_session('cap-5'),firstten_policy_test.gh_id(11005),'withdrawn',1,gen_random_uuid())->>'ok','true','publisher byte cap preserves source reduction');
+RESET ROLE;
+-- Fill six more publishers to2MiB and the eighth to the exact class remainder.
+DO $$DECLARE n integer;p jsonb;target bigint;BEGIN FOR n IN 6..12 LOOP
+ p:=public.preview_guest_growth_submission(firstten_policy_test.gh_session('cap-'||n),firstten_policy_test.gh_cap_spec(11000+n,12000+n));
+ IF p->>'ok'IS DISTINCT FROM'true'THEN RAISE EXCEPTION 'Class byte positive preview failed: %',p->>'code';END IF;
+ target:=least(2097152,16777216-firstten_policy_test.gh_cap_bytes()+firstten_policy_test.gh_cap_bytes(n)-(SELECT octet_length(p.payload::text)+octet_length(p.manifest::text)+octet_length(p.specification::text)FROM firstten_private.growth_submission_previews p WHERE p.id=firstten_policy_test.gh_snapshot('cap_bytes_first')));
+ PERFORM firstten_policy_test.gh_cap_fill(n,target);
+END LOOP;END $$;
+SET LOCAL ROLE service_role;
+SELECT is(public.preview_guest_growth_submission(firstten_policy_test.gh_session('cap-13'),firstten_policy_test.gh_cap_spec(11013,12013))->>'ok','true','real first preview fills exact final class headroom');
+RESET ROLE;
+SELECT is(firstten_policy_test.gh_cap_bytes(),16777216::bigint,'class storage is exactly16MiB UTF8');
+SELECT ok(firstten_private.growth_publication_bytes(firstten_policy_test.gh_id(10024),firstten_policy_test.gh_id(10000),0)AND NOT firstten_private.growth_publication_bytes(firstten_policy_test.gh_id(10024),firstten_policy_test.gh_id(10000),1),'class exact-byte boundary with independent publisher headroom');
+SET LOCAL ROLE service_role;
+SELECT is(public.preview_guest_growth_submission(firstten_policy_test.gh_session('cap-14'),firstten_policy_test.gh_cap_spec(11014,12014))->>'code','CAPACITY','real first preview refuses full class bytes');
+SELECT is(public.save_guest_growth_sharing_choice(firstten_policy_test.gh_session('cap-14'),firstten_policy_test.gh_id(11014),'withdrawn',1,gen_random_uuid())->>'ok','true','class byte cap preserves source reduction');
+RESET ROLE;
+SELECT is((SELECT count(*)::integer FROM firstten_private.growth_submission_threads WHERE principal_id=firstten_policy_test.gh_id(10024)),0,'class byte refusal leaves no orphan thread');
+
 SELECT 'GUEST_GROWTH_HANDOFF_DTO:'||(SELECT jsonb_object_agg(label,result)FROM firstten_policy_test.gh_results WHERE label IN('roster','preview_learning','preview_experiment','preview_pipeline_contact','preview_survey','preview_referral','preview_onboarding','copy_learning','copy_experiment','copy_pipeline_contact','copy_survey','copy_referral','copy_onboarding','author','teacher','teacher_list','withdrawn'))::text;
 -- Parent identities remain until outer rollback; no deletion-service promise or old audit bypass.
