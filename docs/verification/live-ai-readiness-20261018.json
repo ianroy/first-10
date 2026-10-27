@@ -91,7 +91,7 @@
     "presenterCheck": "Free bounded serving-key metadata accepted under exact fictional-presenter permission; no admin role grant",
     "liveServingKeyMetadataVerified": true
   },
-  "updatedAt": "2026-10-26",
+  "updatedAt": "2026-10-27",
   "runtimeMetadata": {
     "credentialAccepted": true,
     "limitUsd": 50,
@@ -172,5 +172,28 @@
     "catalogModel": "google/gemini-3.1-flash-lite",
     "checkpointCommit": "cef087d8af767443b61eaf28dcac28c592dd3d09",
     "checkpointDeployment": "READY"
+  },
+  "resume20261027": {
+    "userReportedAccountSwitch": true,
+    "browser": "Google Chrome Person 1",
+    "workspaceAfterPageReload": "8fb3fcfb-98fe-5695-a3a3-94f1067dac4e",
+    "currentServingWorkspace": "047cf11a-2bfd-5ce5-888a-2a4ddcd4bc14",
+    "workspaceMatch": false,
+    "credentialAccepted": true,
+    "reportedUsageUsd": 0.0044584,
+    "remainingUsd": 49.9955416,
+    "keyLimitUsd": 50,
+    "resetting": true,
+    "includesByok": false,
+    "strictLiveCandidateInspector": "pass",
+    "generationEnabled": false,
+    "newPaidCalls": 0,
+    "accountSettingsChanged": false,
+    "credentialsCopiedOrExported": false,
+    "privateUnapprovedPlan": "/private/tmp/firstten-runtime-ai-v7-unapproved-20261027.json",
+    "planApproved": false,
+    "latestVerifiedDeployment": "14aa516c0886ca44641d23382a511e812acb4aa1",
+    "deploymentState": "READY",
+    "handoff": "Asked user to switch Chrome Person 1 or identify a different browser/replacement-key path; no account email recorded in public repository"
   }
 }

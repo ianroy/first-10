@@ -30,23 +30,24 @@ active_claims: [AI-005, CLS-009, EV-001]
 research_gate: not_passed
 foundation_gate: not_passed
 realtime_go: pending
-last_updated: 2026-10-26
-last_documentation_update: "2026-10-26: Git pushes/deployment verified; classroom recovery and full capacity trial passed3603 assertions and pushed separately. OpenRouter account switch remains pending."
+last_updated: 2026-10-27
+last_documentation_update: "2026-10-27: User reports account switch; refreshed Chrome and deployed key still show different workspaces. Strict model check passes; eight-case unapproved packet recreated. No activation or paid calls."
 resume_hint: >-
   User resumed with 'try this again' and 'Restore reviewer; retry Git'. Fresh
   blocked audit starts now; do not reuse the previous three-turn blocker count.
   SLOW SERIAL, root is the sole worker. No parallel wave. Full goal remains unmet.
   Git fetch succeeded through normal automatic approval. HEAD and origin/main
-  both equal fe3a9a23bf27953fc956bd44ca88848ba8d56eb9. Vercel latest deployment
-  is READY for that exact commit (fresh metadata read on October 26).
+  matched14aa516c0886ca44641d23382a511e812acb4aa1 at verification. Vercel deployment
+  is READY for that exact commit (fresh metadata read on October27).
   Generation remains closed: expectedWorkspaceId=null and no new paid call was
   made in this resumed checkpoint. Historical tests: 1439 pass/11 existing skips;
   do not label these as rerun today. Read docs/ai-runtime-evaluation-plan.md.
-  Chrome workspace ID was freshly copied using its visible settings control:
+  On October27 user reported switching to production account. After page reload,
+  Chrome Person1 workspace ID still freshly copied from its visible control:
   8fb3fcfb-98fe-5695-a3a3-94f1067dac4e. Only one workspace is available in this
   account. It still differs from the serving workspace previously verified as
-  047cf11a-2bfd-5ce5-888a-2a4ddcd4bc14. User asked to switch account or indicate
-  that the production key changed. Do not copy/export any credential. Account
+  047cf11a-2bfd-5ce5-888a-2a4ddcd4bc14. User asked which browser was switched and
+  to switch Chrome Person1 or choose a replacement-key path. Do not copy/export any credential. Account
   privacy/logging/BYOK, current model availability, billing bound, opening hold,
   exact evaluation routes and actual runtime quality remain prerequisites.
   Keep the permanent $1 carveout, general $24 ledger and all charges/holds.
@@ -72,7 +73,9 @@ resume_hint: >-
   Google endpoint. Free deployed key check still reports the expected production
   workspace/$0.0044584 usage/$49.9955416 remaining/resetting/BYOK excluded.
   No paid call or activation. Chrome account mismatch remains; user handoff pending.
-  Main checkpoint78a4d53 was pushed and verified READY. Separate teacher branch
+  Recreated private unapproved eight-case plan at
+  /private/tmp/firstten-runtime-ai-v7-unapproved-20261027.json. It is not approval.
+  Main checkpoint14aa516 was pushed and verified READY. Separate teacher branch
   is backed up remotely; do not mistake its preview for live-product integration.
   Main working tree contains only status/evidence/activation-guide edits and the untracked user
   PDF, which must be excluded from commits. Preserve ordinary Git history and

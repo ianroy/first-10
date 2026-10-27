@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "updated_at": "2026-10-26",
+  "updated_at": "2026-10-27",
   "iteration": 5,
   "max_parallel_agents": 1,
   "phases": [
@@ -2393,6 +2393,10 @@
         {
           "date": "2026-10-26",
           "text": "Checkpointcef087d pushed and verified Vercel READY. Actual deployed free key probe still accepts serving workspace047cf11a with usage0.0044584,49.9955416remaining,resetting50limit,BYOKexcluded. Strict public catalog inspector nowpasses standardgoogle-vertex/global Gemini3.1FlashLite status0 at unchangedbounds/prices. Chrome account remainsdifferent8fb3fcfb; user account-switch handoff pending. No paidcall/activation."
+        },
+        {
+          "date": "2026-10-27",
+          "text": "User reports switching accounts. After a Chrome Person 1 page reload and visible copy-workspace-ID action, browser workspace is still 8fb3fcfb; fresh deployed free credential check still reports 047cf11a. Account email used only for private handoff, not stored here. No settings or credentials changed. Asked which browser was switched and to switch the correct Chrome profile or choose a replacement-key path. Strict public candidate inspector passes; private unapproved eight-case packet recreated for October 27 (maximum $4 within $25). Vercel 14aa516 READY. No paid calls or activation. Account/privacy/BYOK/billing/model-quality gates remain."
         }
       ],
       "claim": {
@@ -2401,7 +2405,7 @@
         "base_commit": "f071a8ffd43e76619bf1af79fc9dd7efa7461c99",
         "worktree": "/Users/ianroy/Library/CloudStorage/Dropbox/Apps by Ian/Babson AI Academy/First 10",
         "started_at": "2026-10-19T02:43:22.705846+00:00",
-        "lease_expires_at": "2026-10-26T17:30:00Z"
+        "lease_expires_at": "2026-10-27T18:30:00Z"
       },
       "completion_evidence": [],
       "subtasks": [
